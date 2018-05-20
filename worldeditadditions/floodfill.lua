@@ -16,6 +16,15 @@ function Queue.enqueue(queue, value)
 	queue[new_last] = value
 end
 
+function Queue.contains(queue, value)
+	for i=queue.first,queue.last do
+		if queue[i] == value then
+			return true
+		end
+	end
+	return false
+end
+
 function Queue.is_empty(queue)
 	return queue.first > queue.last
 end
@@ -34,6 +43,17 @@ end
 
 -------------------------------------------------------------------------------
 
+-- These really should be in a utilities file, but Lua is being stupid and preventing access to it (and minetest is also being stupid, as we can't modularise our code the way you ought to be able to - or at least the documentation on dofile() is so poor I've no idea at this point)
+local function vector2string(v)
+	return "(" .. v.x ..", " .. v.y ..", " .. v.z ..")"
+end
+
+local clock = os.clock
+function sleep(n)  -- seconds
+  local t0 = clock()
+  while clock() - t0 <= n do end
+end
+
 
 function worldedit.floodfill(start_pos, radius, replace_node)
 	-- Calculate the area we want to modify
@@ -42,8 +62,8 @@ function worldedit.floodfill(start_pos, radius, replace_node)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2) -- Just in case
 	
 	minetest.log("action", "radius: " .. radius)
-	minetest.log("action", "pos1: (" .. pos1.x .. ", " .. pos1.y .. ", " .. pos1.z .. ")")
-	minetest.log("action", "pos2: (" .. pos2.x .. ", " .. pos2.y .. ", " .. pos2.z .. ")")
+	minetest.log("action", "pos1: " .. vector2string(pos1))
+	minetest.log("action", "pos2: " .. vector2string(pos2))
 	
 	-- Fetch the nodes in the specified area
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
@@ -70,24 +90,36 @@ function worldedit.floodfill(start_pos, radius, replace_node)
 		-- Replace this node
 		data[cur] = replace_id
 		count = count + 1
-			
+		
 		-- Check all the nearby nodes
 		-- We don't need to go upwards here, since we're filling in lake-style
-		if data[cur + 1] == search_id then -- +X
-			Queue.enqueue(remaining_nodes, cur + 1)
+		local xplus = cur + 1 -- +X
+		if data[xplus] == search_id and not Queue.contains(remaining_nodes, xplus) then
+			-- minetest.log("action", "[floodfill] [+X] index " .. xplus .. " is a " .. data[xplus] .. ", searching for a " .. search_id)
+			Queue.enqueue(remaining_nodes, xplus)
 		end
-		if data[cur - 1] == search_id then -- -X
-			Queue.enqueue(remaining_nodes, cur - 1)
+		local xminus = cur - 1 -- -X
+		if data[xminus] == search_id and not Queue.contains(remaining_nodes, xminus) then
+			-- minetest.log("action", "[floodfill] [-X] index " .. xminus .. " is a " .. data[xminus] .. ", searching for a " .. search_id)
+			Queue.enqueue(remaining_nodes, xminus)
 		end
-		if data[cur + area.zstride] == search_id then -- +Z
-			Queue.enqueue(remaining_nodes, cur + area.zstride)
+		local zplus = cur + area.zstride -- +Z
+		if data[zplus] == search_id and not Queue.contains(remaining_nodes, zplus) then
+			-- minetest.log("action", "[floodfill] [+Z] index " .. zplus .. " is a " .. data[zplus] .. ", searching for a " .. search_id)
+			Queue.enqueue(remaining_nodes, zplus)
 		end
-		if data[cur - area.zstride] == search_id then -- -Z
-			Queue.enqueue(remaining_nodes, cur - area.zstride)
+		local zminus = cur - area.zstride -- -Z
+		if data[zminus] == search_id and not Queue.contains(remaining_nodes, zminus) then
+			-- minetest.log("action", "[floodfill] [-Z] index " .. zminus .. " is a " .. data[zminus] .. ", searching for a " .. search_id)
+			Queue.enqueue(remaining_nodes, zminus)
 		end
-		if data[cur - area.ystride] == search_id then -- -Y
-			Queue.enqueue(remaining_nodes, cur - area.ystride)
+		local yminus = cur - area.ystride -- -Y
+		if data[yminus] == search_id and not Queue.contains(remaining_nodes, yminus)  then
+			-- minetest.log("action", "[floodfill] [-Y] index " .. yminus .. " is a " .. data[yminus] .. ", searching for a " .. search_id)
+			Queue.enqueue(remaining_nodes, yminus)
 		end
+		
+		count = count + 1
 	end
 	
 	-- Save the modified nodes back to disk & return
