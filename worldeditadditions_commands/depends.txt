@@ -1,1 +1,2 @@
 worldeditadditions
+worldedit_commands
