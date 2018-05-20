@@ -28,7 +28,6 @@ minetest.register_chatcommand("/floodfill", {
 	params = "<replace_node> [<radius>]",
 	description = "Floods all connected nodes of the same type starting at pos1 with <replace_node>, in a box-shape with a radius of <radius>, which defaults to 50.",
 	privs = { worldedit = true },
-	-- TODO: Integrate will the safe_region feature of regular worldedit
 	func = safe_region(function(name, params_text)
 		local replace_node, radius = parse_params_floodfill(params_text)
 		

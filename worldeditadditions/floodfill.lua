@@ -68,8 +68,6 @@ function worldedit.floodfill(start_pos, radius, replace_node)
 	while Queue.is_empty(remaining_nodes) == false do
 		local cur = Queue.dequeue(remaining_nodes)
 		
-		-- TODO: Check distance from start_pos
-		
 		-- Replace this node
 		data[cur] = replace_id
 		count = count + 1
