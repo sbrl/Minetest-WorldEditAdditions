@@ -12,17 +12,23 @@ minetest.register_chatcommand("/floodfill", {
 	-- TODO: Integrate will the safe_region feature of regular worldedit
 	func = function(name, params_text)
 		local found, _, replace_node, radius = params_text:find("([a-z:_\\-]+)%s+([0-9]+)")
+		
 		if found == nil then
 			found, _, replace_node = params_text:find("([a-z:_\\-]+)")
-			radius = 50
+			radius = 25
 		end
 		if found == nil then
 			replace_node = "default:water_source"
 		end
+		radius = tonumber(radius)
+		
+		replace_node = worldedit.normalize_nodename(replace_node)
+		
+		minetest.log("action", "Floodfill settings - node: " .. replace_node .. ", radius: " .. radius)
 		
 		local nodes_replaced = worldedit.floodfill(worldedit.pos1[name], radius, replace_node)
 		
 		worldedit.player_notify(name, nodes_replaced .. " replaced")
-		minetest.log("action", name .. "used floodfill at (" .. worldedit.pos1.x .. "," .. worldedit.pos1.y .. "," .. worldedit.pos1.z .. "), replacing " .. nodes_replaced .. " nodes")
+		minetest.log("action", name .. "used floodfill at (" .. worldedit.pos1[name].x .. "," .. worldedit.pos1[name].y .. "," .. worldedit.pos1[name].z .. "), replacing " .. nodes_replaced .. " nodes")
 	end
 })

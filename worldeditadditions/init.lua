@@ -5,4 +5,4 @@
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs
 
-worldedit.floodfill = require "floodfill"
+dofile(minetest.get_modpath("worldeditadditions") .. "/floodfill.lua")

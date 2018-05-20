@@ -1,20 +1,52 @@
 --- Flood-fill command for complex lakes etc.
 -- @module worldeditadditions.floodfill
 
-local Queue = require "queue"
+-------------------------------------------------------------------------------
+--- A Queue implementation, taken & adapted from https://www.lua.org/pil/11.4.html
+-- @submodule worldeditadditions.utils.queue
 
-local function floodfill(start_pos, radius, replace_node)
+local Queue = {}
+function Queue.new()
+	return { first = 0, last = -1 }
+end
+
+function Queue.enqueue(queue, value)
+	local new_last = queue.last + 1
+	queue.last = new_last
+	queue[new_last] = value
+end
+
+function Queue.is_empty(queue)
+	return queue.first > queue.last
+end
+
+function Queue.dequeue(queue)
+	local first = queue.first
+	if Queue.is_empty(queue) then
+		error("Error: The queue is empty!")
+	end
+	
+	local value = queue[first]
+	queue[first] = nil -- Help the garbage collector out
+	queue.first = first + 1
+	return value
+end
+
+-------------------------------------------------------------------------------
+
+
+function worldedit.floodfill(start_pos, radius, replace_node)
 	-- Calculate the area we want to modify
-	local pos1, pos2 = centre_pos
-	pos1.x = pos1.x - radius
-	pos1.z = pos1.z - radius
-	pos2.x = pos2.x + radius
-	pos2.y = pos2.y + radius
-	pos2.z = pos2.z + radius
+	local pos1 = vector.add(start_pos, { x = radius, y = 0, z = radius })
+	local pos2 = vector.subtract(start_pos, { x = radius, y = radius, z = radius })
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2) -- Just in case
 	
+	minetest.log("action", "radius: " .. radius)
+	minetest.log("action", "pos1: (" .. pos1.x .. ", " .. pos1.y .. ", " .. pos1.z .. ")")
+	minetest.log("action", "pos2: (" .. pos2.x .. ", " .. pos2.y .. ", " .. pos2.z .. ")")
+	
 	-- Fetch the nodes in the specified area
-	local manip, area = worldedit.manip_helpers.init()
+	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
 	
 	-- Setup for the floodfill operation itself
@@ -22,6 +54,8 @@ local function floodfill(start_pos, radius, replace_node)
 	
 	local search_id = data[start_pos_index]
 	local replace_id = minetest.get_content_id(replace_node)
+	
+	minetest.log("action", "ids: " .. search_id .. " -> " .. replace_id)
 	
 	local count = 0
 	local remaining_nodes = Queue.new()
