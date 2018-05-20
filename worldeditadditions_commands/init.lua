@@ -24,11 +24,10 @@ minetest.register_chatcommand("/floodfill", {
 		
 		replace_node = worldedit.normalize_nodename(replace_node)
 		
-		minetest.log("action", "Floodfill settings - node: " .. replace_node .. ", radius: " .. radius)
-		
+		local start_time = os.clock()
 		local nodes_replaced = worldedit.floodfill(worldedit.pos1[name], radius, replace_node)
 		
-		worldedit.player_notify(name, nodes_replaced .. " replaced")
-		minetest.log("action", name .. "used floodfill at (" .. worldedit.pos1[name].x .. "," .. worldedit.pos1[name].y .. "," .. worldedit.pos1[name].z .. "), replacing " .. nodes_replaced .. " nodes")
+		worldedit.player_notify(name, nodes_replaced .. " nodes replaced in " .. (os.clock() - start_time) .. "s")
+		minetest.log("action", name .. " used floodfill at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. nodes_replaced .. " nodes in " .. (os.clock() - start_time) .. "s")
 	end
 })

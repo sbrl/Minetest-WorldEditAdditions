@@ -5,4 +5,7 @@
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs
 
+worldeditadditions = {}
+
+dofile(minetest.get_modpath("worldeditadditions") .. "/utils.lua")
 dofile(minetest.get_modpath("worldeditadditions") .. "/floodfill.lua")
