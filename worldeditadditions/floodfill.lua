@@ -47,7 +47,9 @@ function worldedit.floodfill(start_pos, radius, replace_node)
 	-- Calculate the area we want to modify
 	local pos1 = vector.add(start_pos, { x = radius, y = 0, z = radius })
 	local pos2 = vector.subtract(start_pos, { x = radius, y = radius, z = radius })
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2) -- Just in case
+	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	-- pos2 will always have the highest co-ordinates now
+	
 	
 	-- Fetch the nodes in the specified area
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
