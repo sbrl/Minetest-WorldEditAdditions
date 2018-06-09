@@ -1,6 +1,8 @@
 # Minetest-WorldEditAdditions
 > Extra tools and commands to extend WorldEdit for Minetest
 
+If you can dream of it, it probably belongs here!
+
 ## Current commands:
 **Quick Reference:**
 
@@ -47,3 +49,13 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 //hollowellipsoid 10 5 15 glass
 //hollowellipsoid 21 11 41 stone
 ```
+
+## Contributing
+Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
+
+Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc.
+
+## License
+This mod is licensed under the _Mozilla Public License 2.0_, a copy of which (along with a helpful summary as to what you can and can't do with it) can be found in the `LICENSE` file in this repository.
+
+If you'd like to do something that the license prohibits, please get in touch as it's possible we can negotiate something.
