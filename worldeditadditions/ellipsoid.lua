@@ -7,16 +7,18 @@ function worldedit.ellipsoid(position, radius, target_node)
 	
 	-- Fetch the nodes in the specified area
 	-- OPTIMIZE: We should be able to calculate a more efficient box-area here
-	local manip, area = worldedit.manip_helpers.init_radius(pos1, math.max(radius.x, radius.y, radius.z))
+	local manip, area = worldedit.manip_helpers.init_radius(position, math.max(radius.x, radius.y, radius.z))
 	local data = manip:get_data()
 	
 	local node_id = minetest.get_content_id(target_node)
 	local node_id_air = minetest.get_content_id("air")
 	
-	local offset_x, offset_y, offset_z = pos.x - area.MinEdge.x, pos.y - area.MinEdge.y
+	local offset_x, offset_y, offset_z = position.x - area.MinEdge.x, position.y - area.MinEdge.y
 	local stride_z, stride_y = area.zstride, area.ystride
 	
-	local idx_z_base = pos.z - area.MinEdge.z -- initial z offset
+	local count = 0 -- The number of nodes replaced
+	
+	local idx_z_base = position.z - area.MinEdge.z -- initial z offset
 	for z = -radius.z, radius.z do
 		
 		local idx_y_base = idx_z_base
@@ -30,6 +32,7 @@ function worldedit.ellipsoid(position, radius, target_node)
 					math.abs(y - position.y) < radius.y and
 					math.ans(z - position.x) < radius.x then
 					data[i] = node_id
+					count = count + 1
 				end
 				
 				
@@ -46,5 +49,5 @@ function worldedit.ellipsoid(position, radius, target_node)
 	-- Save the modified nodes back to disk & return
 	worldedit.manip_helpers.finish(manip, data)
 	
-	return changes
+	return count
 end

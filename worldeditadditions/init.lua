@@ -10,3 +10,4 @@ worldeditadditions = {}
 dofile(minetest.get_modpath("worldeditadditions") .. "/utils.lua")
 dofile(minetest.get_modpath("worldeditadditions") .. "/floodfill.lua")
 dofile(minetest.get_modpath("worldeditadditions") .. "/overlay.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/ellipsoid.lua")
