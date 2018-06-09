@@ -84,6 +84,7 @@ minetest.register_chatcommand("/overlay", {
 	end, function(name, params_text)
 		if not worldedit.normalize_nodename(params_text) then
 			worldedit.player_notify(name, "Error: Invalid node name '" .. params_text .. "'.")
+			return 0
 		end
 		
 		local pos1 = worldedit.pos1[name]
@@ -116,7 +117,13 @@ local function parse_params_ellipsoid(params_text)
 		z = tonumber(radius_z)
 	}
 	
+	minetest.log("action", "Radius x: " .. radius_x)
+	minetest.log("action", "Radius y: " .. radius_y)
+	minetest.log("action", "Radius z: " .. radius_z)
+	
+	minetest.log("action", "Raw target node: " .. replace_node)
 	replace_node = worldedit.normalize_nodename(replace_node)
+	minetest.log("action", "Normalised target node: " .. replace_node)
 	
 	return replace_node, radius
 end
@@ -145,8 +152,9 @@ minetest.register_chatcommand("/ellipsoid", {
 		minetest.log("action", name .. " used //ellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 	end, function(name, params_text)
 		local target_node, radius = parse_params_ellipsoid(params_text)
-		if target_node == nil or radius == nil then
+		if not target_node or not radius then
 			worldedit.player_notify(name, "Error: Invalid input '" .. params_text .. "'. Try '/help /ellipsoid' to learn how to use this command.")
+			return 0
 		end
 		
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
