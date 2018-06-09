@@ -117,13 +117,7 @@ local function parse_params_ellipsoid(params_text)
 		z = tonumber(radius_z)
 	}
 	
-	minetest.log("action", "Radius x: " .. radius_x)
-	minetest.log("action", "Radius y: " .. radius_y)
-	minetest.log("action", "Radius z: " .. radius_z)
-	
-	minetest.log("action", "Raw target node: " .. replace_node)
 	replace_node = worldedit.normalize_nodename(replace_node)
-	minetest.log("action", "Normalised target node: " .. replace_node)
 	
 	return replace_node, radius
 end
@@ -145,11 +139,45 @@ minetest.register_chatcommand("/ellipsoid", {
 		end
 		
 		local start_time = os.clock()
-		local replaced = worldedit.ellipsoid(worldedit.pos1[name], radius, target_node)
+		local replaced = worldedit.ellipsoid(worldedit.pos1[name], radius, target_node, false)
 		local time_taken = os.clock() - start_time
 		
 		worldedit.player_notify(name, replaced .. " nodes replaced in " .. time_taken .. "s")
 		minetest.log("action", name .. " used //ellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+	end, function(name, params_text)
+		local target_node, radius = parse_params_ellipsoid(params_text)
+		if not target_node or not radius then
+			worldedit.player_notify(name, "Error: Invalid input '" .. params_text .. "'. Try '/help /ellipsoid' to learn how to use this command.")
+			return 0
+		end
+		
+		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
+	end)
+})
+
+-- TODO: This duplicates a lot of code. Perhaps we can trim it down a bit?
+minetest.register_chatcommand("/hollowellipsoid", {
+	params = "<rx> <ry> <rz> <replace_node>",
+	description = "Creates a 3D hollow ellipsoid with a radius of (rx, ry, rz) at pos1, filled with <replace_node>.",
+	privs = { worldedit = true },
+	func = safe_region(function(name, params_text)
+		local target_node, radius = parse_params_ellipsoid(params_text)
+		
+		if not target_node then
+			worldedit.player_notify(name, "Error: Invalid node name.")
+			return false
+		end
+		if not radius then
+			worldedit.player_notify(name, "Error: Invalid radius(es).")
+			return false
+		end
+		
+		local start_time = os.clock()
+		local replaced = worldedit.ellipsoid(worldedit.pos1[name], radius, target_node, true)
+		local time_taken = os.clock() - start_time
+		
+		worldedit.player_notify(name, replaced .. " nodes replaced in " .. time_taken .. "s")
+		minetest.log("action", name .. " used //hollowellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 	end, function(name, params_text)
 		local target_node, radius = parse_params_ellipsoid(params_text)
 		if not target_node or not radius then

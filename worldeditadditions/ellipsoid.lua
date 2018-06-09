@@ -1,9 +1,13 @@
 --- Overlap command. Places a specified node on top of 
 -- @module worldeditadditions.overlay
 
-function worldedit.ellipsoid(position, radius, target_node)
+function worldedit.ellipsoid(position, radius, target_node, hollow)
 	-- position = { x, y, z }
-	
+	local hollow_inner_radius = {
+		x = radius.x - 1,
+		y = radius.y - 1,
+		z = radius.z - 1
+	}
 	
 	-- Fetch the nodes in the specified area
 	-- OPTIMIZE: We should be able to calculate a more efficient box-area here
@@ -30,11 +34,24 @@ function worldedit.ellipsoid(position, radius, target_node)
 				
 				-- If we're inside the ellipse, then fill it in
 				local x_comp, y_comp, z_comp = x/radius.x, y/radius.y, z/radius.z
-				if x_comp*x_comp + y_comp*y_comp + z_comp*z_comp <= 1 then
+				local ellipsoid_dist = x_comp*x_comp + y_comp*y_comp + z_comp*z_comp
+				if ellipsoid_dist <= 1 then
+					local place_ok = not hollow;
 					
-					data[i] = node_id
-					count = count + 1
+					if not place_ok then
+						-- It must be hollow! Do some additional calculations.
+						local hx_comp = x/hollow_inner_radius.x
+						local hy_comp = y/hollow_inner_radius.y
+						local hz_comp = z/hollow_inner_radius.z
+						
+						-- It's only ok to place it if it's outside our inner ellipse
+						place_ok = hx_comp*hx_comp + hy_comp*hy_comp + hz_comp*hz_comp >= 1
+					end
 					
+					if place_ok then
+						data[i] = node_id
+						count = count + 1
+					end
 				end
 				
 				
