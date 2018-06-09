@@ -2,6 +2,12 @@
 > Extra tools and commands to extend WorldEdit for Minetest
 
 ## Current commands:
+**Quick Reference:**
+
+ - `//floodfill [<replace_node> [<radius>]]`
+ - `//overlay <node_name>`
+ - `//ellipsoid <rx> <ry> <rz> <node_name>`
+ - `//hollowellipsoid <rx> <ry> <rz> <node_name>`
 
 ### `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
@@ -23,4 +29,21 @@ Note that all-air columns are skipped - so if you experience issues with it not 
 //overlay grass
 //overlay glass
 //overlay grass_with_dirt
+```
+
+### `//ellipsoid <rx> <ry> <rz> <node_name>`
+Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
+
+```
+//ellipsoid 10 5 15 ice
+//ellipsoid 3 5 10 dirt
+//ellipsoid 20 10 40 air
+```
+
+### `//hollowellipsoid <rx> <ry> <rz> <node_name>`
+Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works the same way as `//ellipsoid` does.
+
+```
+//hollowellipsoid 10 5 15 glass
+//hollowellipsoid 21 11 41 stone
 ```
