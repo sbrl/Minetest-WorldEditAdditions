@@ -19,7 +19,7 @@ function worldedit.ellipsoid(position, radius, target_node)
 	
 	local count = 0 -- The number of nodes replaced
 	
-	local idx_z_base = area:index(position.x, position.y, position.z) -- initial z offset
+	local idx_z_base = area:index(position.x - radius.x, position.y - radius.y, position.z - radius.z) -- initial z offset
 	for z = -radius.z, radius.z do
 		
 		local idx_y_base = idx_z_base
