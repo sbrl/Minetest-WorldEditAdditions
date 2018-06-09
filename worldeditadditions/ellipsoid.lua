@@ -29,19 +29,12 @@ function worldedit.ellipsoid(position, radius, target_node)
 			for x = -radius.x, radius.x do
 				
 				-- If we're inside the ellipse, then fill it in
-				if math.abs(z) <= radius.z and
-				   math.abs(y) <= radius.y and
-				   math.abs(x) <= radius.x and
-				   worldeditadditions.vector.lengthsquared({ x = x, y = y, z = z }) < radius_distance_sq then
+				if (x/radius.x)*(x/radius.x) + (y/radius.y)*(y/radius.y) + (z/radius.z)*(z/radius.z) <= 1 then
+
+
 					data[i] = node_id
 					count = count + 1
-				else
-					
-					minetest.log("action", "x: " .. x .. ", radius.x: " .. radius.x)
-					minetest.log("action", "y: " .. y .. ", radius.y: " .. radius.y)
-					minetest.log("action", "z: " .. z .. ", radius.z: " .. radius.z)
-					minetest.log("action", "***")
-					
+				
 				end
 				
 				
