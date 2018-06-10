@@ -50,6 +50,23 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 //hollowellipsoid 21 11 41 stone
 ```
 
+### `//torus <major_radius > <minor_radius> <node_name>`
+Creates a solid torus at position 1 with the specified major and minor radii. The major radius is the distance from the centre of the torus to the centre of the circle bit, and the minor radius is the radius of the circle bit.
+
+```
+//torus 10 5 15 ice
+//torus 3 5 10 dirt
+//torus 20 10 40 air
+```
+
+### `//hollowtorus <rx> <ry> <rz> <node_name>`
+Creates a hollow torus at position 1 with the radius `(rx, ry, rz)`. Works the same way as `//torus` does.
+
+```
+//hollowtorus 10 5 15 glass
+//hollowtorus 21 11 41 stone
+```
+
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
 

@@ -18,8 +18,6 @@ function worldedit.ellipsoid(position, radius, target_node, hollow)
 	local node_id_air = minetest.get_content_id("air")
 	
 	local stride_z, stride_y = area.zstride, area.ystride
-	-- TODO:  This won't work, because we need to vary the calculation we use this in based on what part of the ellipsoid we're working on / in, not compare to a static value
-	local radius_distance_sq = worldeditadditions.vector.lengthsquared(radius)
 	
 	local count = 0 -- The number of nodes replaced
 	
