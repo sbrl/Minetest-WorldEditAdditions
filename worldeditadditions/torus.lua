@@ -4,7 +4,7 @@
 function worldedit.torus(position, major_radius, minor_radius, target_node, hollow)
 	-- position = { x, y, z }
 	local total_radius = major_radius + minor_radius
-	local inner_minor_radius = minor_radius - 1.75
+	local inner_minor_radius = minor_radius - 2
 	local major_radius_sq = major_radius*major_radius
 	local minor_radius_sq = minor_radius*minor_radius
 	local inner_minor_radius_sq = inner_minor_radius*inner_minor_radius
