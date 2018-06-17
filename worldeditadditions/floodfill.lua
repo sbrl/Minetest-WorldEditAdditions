@@ -120,6 +120,3 @@ function worldedit.floodfill(start_pos, radius, replace_node)
 	
 	return count
 end
-
-
-return floodfill
