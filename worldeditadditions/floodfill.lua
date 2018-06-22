@@ -62,6 +62,10 @@ function worldedit.floodfill(start_pos, radius, replace_node)
 	local replace_id = minetest.get_content_id(replace_node)
 	local radius_sq = radius*radius
 	
+	if search_id == replace_id then
+		return false
+	end
+	
 	local count = 0
 	local remaining_nodes = Queue.new()
 	Queue.enqueue(remaining_nodes, start_pos_index)

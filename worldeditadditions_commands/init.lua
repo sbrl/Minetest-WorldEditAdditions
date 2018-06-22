@@ -43,14 +43,28 @@ minetest.register_chatcommand("/floodfill", {
 			return false
 		end
 		
+		if not worldedit.pos1[name] then
+			worldedit.player_notify(name, "Error: No pos1 defined.")
+			return false
+		end
+		
 		local start_time = os.clock()
 		local nodes_replaced = worldedit.floodfill(worldedit.pos1[name], radius, replace_node)
 		local time_taken = os.clock() - start_time
+		
+		if nodes_replaced == false then
+			worldedit.player_notify(name, "Error: The search node is the same as the replace node.")
+			return false
+		end
 		
 		worldedit.player_notify(name, nodes_replaced .. " nodes replaced in " .. time_taken .. "s")
 		minetest.log("action", name .. " used //floodfill at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. nodes_replaced .. " nodes in " .. time_taken .. "s")
 	end, function(name, params_text)
 		local replace_node, radius = parse_params_floodfill(params_text)
+		
+		if not worldedit.pos1[name] then
+			return 0 -- The actual command will send the error message to the client
+		end
 		-- Volume of a hemisphere
 		return math.ceil(((4 * math.pi * (tonumber(radius) ^ 3)) / 3) / 2)
 	end)
