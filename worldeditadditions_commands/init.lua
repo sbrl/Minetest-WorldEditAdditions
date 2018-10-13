@@ -5,6 +5,8 @@
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs
 
+dofile(minetest.get_modpath("worldeditadditions_commands").."/multi.lua")
+
 local safe_region, check_region, reset_pending = dofile(minetest.get_modpath("worldedit_commands") .. "/safe.lua")
 
 

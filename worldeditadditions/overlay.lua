@@ -1,4 +1,4 @@
---- Overlap command. Places a specified node on top of 
+--- Overlap command. Places a specified node on top of each column.
 -- @module worldeditadditions.overlay
 
 function worldedit.overlay(pos1, pos2, target_node)
