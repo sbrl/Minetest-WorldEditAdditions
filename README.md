@@ -62,11 +62,20 @@ Creates a solid torus at position 1 with the specified major and minor radii. Th
 ```
 
 ### `//hollowtorus <major_radius> <minor_radius> <node_name>`
-Creates a hollow torus at position 1 with the radius `(rx, ry, rz)`. Works the same way as `//torus` does.
+Creates a hollow torus at position 1 with the radius major and minor radii. Works the same way as `//torus` does.
 
 ```
-//hollowtorus 10 5 15 glass
-//hollowtorus 21 11 41 stone
+//hollowtorus 10 5 glass
+//hollowtorus 21 11 stone
+```
+
+### `//multi <command_a> <command_b> <command_c> .....`
+Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but does work with others too. Don't forget a space between commands!
+
+```
+//multi //1 //2 //shift z -10 //sphere 5 sand //shift z 20 //ellipsoid 5 3 5 ice
+//multi //1 //hollowtorus 30 5 stone //hollowtorus 20 3 dirt //torus 10 2 dirt_with_grass
+//multi /time 7:00 //1 outset h 20 //outset v 5 //overlay dirt_with_grass //1 //sphere 8 air //shift down 1 //floodfill //reset
 ```
 
 ## Contributing
