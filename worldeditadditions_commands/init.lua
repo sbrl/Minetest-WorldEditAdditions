@@ -17,6 +17,7 @@ local safe_region, check_region, reset_pending = dofile(minetest.get_modpath("wo
 -- ██      ███████  ██████   ██████  ██████  ██      ██ ███████ ███████
 
 local function parse_params_floodfill(params_text)
+	if not params_text then params_text = "" end
 	local found, _, replace_node, radius = params_text:find("([a-z:_\\-]+)%s+([0-9]+)")
 	
 	if found == nil then
