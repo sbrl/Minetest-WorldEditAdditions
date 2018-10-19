@@ -48,7 +48,7 @@ minetest.register_chatcommand("/multi", {
 			if not found then command_name = command end
 			command_name = trim(command_name)
 			
-			worldedit.player_notify(name, "Executing #"..i..": "..command.." ("..command_name..")")
+			worldedit.player_notify(name, "Executing #"..i..": "..command)
 			
 			local cmd = minetest.chatcommands[command_name]
 			if not cmd then
