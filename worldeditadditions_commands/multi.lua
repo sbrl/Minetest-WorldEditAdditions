@@ -36,9 +36,14 @@ minetest.register_chatcommand("/multi", {
 	description = "Executes multiple chat commands in sequence.",
 	privs = { worldedit = true },
 	func = function(name, params_text)
+		
+		local i = 1 -- For feedback only
+		local master_start_time = os.clock()
+		local times = {}
+		
 		-- Things start at 1, not 0 in Lua :-(
-		local i = 0
 		for command in explode(" /", string.sub(params_text, 2)) do
+			local start_time = os.clock()
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
 			if not found then command_name = command end
 			command_name = trim(command_name)
@@ -50,13 +55,23 @@ minetest.register_chatcommand("/multi", {
 				return false, "Error: "..command_name.." isn't a valid command."
 			end
 			if not minetest.check_player_privs(name, cmd.privs) then
-				return false, "Your privileges are insufficient."
+				return false, "Your privileges are insufficient to execute one or more commands in that list."
 			end
 			
 			minetest.log("action", name.." runs "..command)
 			cmd.func(name, args)
 			
+			times[#times + 1] = (os.clock() - start_time) * 1000
 			i = i + 1
 		end
+		
+		local total_time = (os.clock() - master_start_time) * 1000
+		local done_message = string.format("Executed %d commands in %.2fms (", #times, total_time)
+		for j=1,#times do
+			done_message = done_message..string.format("%.2fms, ", times[j])
+		end
+		done_message = string.sub(done_message, 0, string.len(done_message) - 2)..")"
+		
+		worldedit.player_notify(name, done_message)
 	end
 })
