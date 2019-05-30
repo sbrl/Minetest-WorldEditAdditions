@@ -3,6 +3,8 @@
 
 If you can dream of it, it probably belongs here!
 
+![Screenshot](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/screenshot.png)
+
 ## Current commands:
 **Quick Reference:**
 
