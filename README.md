@@ -15,8 +15,10 @@ If you can dream of it, it probably belongs here!
  - `//torus <major_radius> <minor_radius> <node_name>`
  - `//hollowtorus <major_radius> <minor_radius> <node_name>`
  - `//multi <command_a> <command_b> .....`
+ - `//yy`
+ - `//nn`
 
-### `//floodfill [<replace_node> [<radius>]]`
+### `//floodfill [<replace_node> [<radius>]]` {#floodfill}
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
 
 ```
