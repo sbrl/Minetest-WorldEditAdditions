@@ -8,17 +8,17 @@ If you can dream of it, it probably belongs here!
 ## Current commands:
 **Quick Reference:**
 
- - `//floodfill [<replace_node> [<radius>]]`
- - `//overlay <node_name>`
- - `//ellipsoid <rx> <ry> <rz> <node_name>`
- - `//hollowellipsoid <rx> <ry> <rz> <node_name>`
- - `//torus <major_radius> <minor_radius> <node_name>`
- - `//hollowtorus <major_radius> <minor_radius> <node_name>`
- - `//multi <command_a> <command_b> .....`
- - `//yy`
- - `//nn`
+ - [`//floodfill [<replace_node> [<radius>]]`](#floodfill-replace_node-radius-floodfill)
+ - [`//overlay <node_name>`](#overlay-node_name)
+ - [`//ellipsoid <rx> <ry> <rz> <node_name>`](#ellipsoid-rx-ry-rz-node_name)
+ - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](#hollowellipsoid-rx-ry-rz-node_name)
+ - [`//torus <major_radius> <minor_radius> <node_name>`](#torus-major_radius-minor_radius-node_name)
+ - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](#hollowtorus-major_radius-minor_radius-node_name)
+ - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
+ - [`//yy`](#yy)
+ - [`//nn`](#nn)
 
-### `//floodfill [<replace_node> [<radius>]]` {#floodfill}
+### `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
 
 ```
@@ -80,6 +80,20 @@ Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but
 //multi //1 //2 //shift z -10 //sphere 5 sand //shift z 20 //ellipsoid 5 3 5 ice
 //multi //1 //hollowtorus 30 5 stone //hollowtorus 20 3 dirt //torus 10 2 dirt_with_grass
 //multi /time 7:00 //1 outset h 20 //outset v 5 //overlay dirt_with_grass //1 //sphere 8 air //shift down 1 //floodfill //reset
+```
+
+### `//yy`
+Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command.
+
+```
+//yy
+```
+
+### `//nn`
+Prevents the execution of a command if it could potentially affect a large number of nodes and take a while. Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command.
+
+```
+//nn
 ```
 
 ## Contributing
