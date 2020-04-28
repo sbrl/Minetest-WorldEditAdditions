@@ -14,6 +14,7 @@ If you can dream of it, it probably belongs here!
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](#hollowellipsoid-rx-ry-rz-node_name)
  - [`//torus <major_radius> <minor_radius> <node_name>`](#torus-major_radius-minor_radius-node_name)
  - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](#hollowtorus-major_radius-minor_radius-node_name)
+ - [`//maze <replace_node> [<seed>]`](#maze-replace_node-seed)
  - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
  - [`//yy`](#yy)
  - [`//nn`](#nn)
@@ -71,6 +72,16 @@ Creates a hollow torus at position 1 with the radius major and minor radii. Work
 ```
 //hollowtorus 10 5 glass
 //hollowtorus 21 11 stone
+```
+
+### `//maze <replace_node> [<seed>]`
+Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
+
+A seed can optionally be provided, which will cause the same maze to be generated every time (otherwise `os.time()` is used to dynamically set the seed).
+
+```
+//maze ice
+//maze stone 1234
 ```
 
 ### `//multi <command_a> <command_b> <command_c> .....`
