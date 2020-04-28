@@ -90,7 +90,7 @@ Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but
 ```
 //multi //1 //2 //shift z -10 //sphere 5 sand //shift z 20 //ellipsoid 5 3 5 ice
 //multi //1 //hollowtorus 30 5 stone //hollowtorus 20 3 dirt //torus 10 2 dirt_with_grass
-//multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //sphere 8 air //shift down 1 //floodfill //reset
+//multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //2 //sphere 8 air //shift down 1 //floodfill //reset
 ```
 
 ### `//yy`
