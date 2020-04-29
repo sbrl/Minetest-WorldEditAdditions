@@ -16,7 +16,7 @@ function printspace(space, w, h)
 end
 
 function generate_maze(seed, width, height)
-	minetest.log("action", "width: "..width..", height: "..height)
+	-- minetest.log("action", "width: "..width..", height: "..height)
 	math.randomseed(seed) -- seed the random number generator with the system clock
 
 	width = width - 1
@@ -112,7 +112,7 @@ function worldedit.maze(pos1, pos2, target_node, seed)
 		y = (pos2.y - pos1.y) + 1,
 		z = (pos2.z - pos1.z) + 1
 	}
-	minetest.log("action", "extent: ("..extent.x..", "..extent.y..", "..extent.z..")")
+	-- minetest.log("action", "extent: ("..extent.x..", "..extent.y..", "..extent.z..")")
 	
 	if extent.x == 0 or extent.y == 0 or extent.z == 0 then
 		minetest.log("info", "[worldeditadditions/maze] error: either x, y, or z of the extent was zero")
@@ -133,7 +133,7 @@ function worldedit.maze(pos1, pos2, target_node, seed)
 	minetest.log("action", "Generating "..extent.x.."x"..extent.z.." maze (depth "..extent.z..") from pos1 " .. worldeditadditions.vector.tostring(pos1).." to pos2 "..worldeditadditions.vector.tostring(pos2))
 
 	local maze = generate_maze(seed, extent.z, extent.x) -- x &   need to be the opposite way around to how we index it
-	printspace(maze, extent.z, extent.x)
+	-- printspace(maze, extent.z, extent.x)
 
 	-- z y x is the preferred loop order, but that isn't really possible here
 
@@ -145,8 +145,8 @@ function worldedit.maze(pos1, pos2, target_node, seed)
 				if maze_x < 0 then maze_x = 0 end
 				if maze_z < 0 then maze_z = 0 end
 				
-				minetest.log("action", "x: "..x..", y: "..y..", z: "..z..", pos x: "..maze_x..", pos z: "..maze_z)
-				minetest.log("action", "value: "..maze[maze_x][maze_z])
+				-- minetest.log("action", "x: "..x..", y: "..y..", z: "..z..", pos x: "..maze_x..", pos z: "..maze_z)
+				-- minetest.log("action", "value: "..maze[maze_x][maze_z])
 				
 				if maze[maze_x][maze_z] == "#" then
 					data[area:index(x, y, z)] = node_id_target
