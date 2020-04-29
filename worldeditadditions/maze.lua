@@ -114,8 +114,8 @@ function worldedit.maze(pos1, pos2, target_node, seed)
 	}
 	-- minetest.log("action", "extent: ("..extent.x..", "..extent.y..", "..extent.z..")")
 	
-	if extent.x == 0 or extent.y == 0 or extent.z == 0 then
-		minetest.log("info", "[worldeditadditions/maze] error: either x, y, or z of the extent was zero")
+	if extent.x < 3 or extent.y < 3 or extent.z < 1 then
+		minetest.log("info", "[worldeditadditions/maze] error: either x, y of the extent were less than 3, or z of the extent was less than 1")
 		return 0
 	end
 
