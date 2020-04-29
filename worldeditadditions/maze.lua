@@ -58,7 +58,7 @@ function generate_maze(seed, width, height)
 		if #directions > 0 then
 			-- we still have somewhere that we can go
 			--print("This node is not a dead end yet.")
-			local curdirnum = math.random(0, #directions)
+			local curdirnum = math.random(1, #directions)
 			local curdir = string.sub(directions, curdirnum, curdirnum)
 			if curdir == "u" then
 				world[cy - 1][cx] = " "
