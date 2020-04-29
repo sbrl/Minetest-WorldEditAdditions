@@ -22,7 +22,7 @@ end
 start_time = os.clock()
 
 function generate_maze3d(seed, width, height, depth)
-	print("Generating maze "..width.."x"..height.."x"..depth)
+	-- print("Generating maze "..width.."x"..height.."x"..depth)
 	math.randomseed(seed) -- seed the random number generator with the system clock
 
 	width = width - 1
@@ -70,7 +70,7 @@ function generate_maze3d(seed, width, height, depth)
 			directions = directions .. "r"
 		end
         
-		print("Currently at ("..cx..", "..cy..", "..cz..") - directions: "..directions)
+		-- print("Currently at ("..cx..", "..cy..", "..cz..") - directions: "..directions)
         
 		--print("radar output: '" .. directions .. "' (length: " .. #directions .. "), curnode: " .. curnode)
 		if #directions > 0 then
@@ -79,7 +79,7 @@ function generate_maze3d(seed, width, height, depth)
 			local curdirnum = math.random(1, #directions)
 			local curdir = string.sub(directions, curdirnum, curdirnum)
             
-            print("Picked direction '"..curdir.."' (index "..curdirnum..")")
+            -- print("Picked direction '"..curdir.."' (index "..curdirnum..")")
             
             if curdir == "+" then
                 world[cz + 1][cy][cx] = " "
@@ -108,7 +108,7 @@ function generate_maze3d(seed, width, height, depth)
 			end
             
             
-    		print("Now at ("..cx..", "..cy..", "..cz..") ")
+    		-- print("Now at ("..cx..", "..cy..", "..cz..") ")
             
 			table.insert(nodes, { x = cx, y = cy, z = cz })
 		else
@@ -148,7 +148,7 @@ function worldedit.maze3d(pos1, pos2, target_node, seed)
 		y = (pos2.y - pos1.y) + 1,
 		z = (pos2.z - pos1.z) + 1
 	}
-	minetest.log("action", "extent: ("..extent.x..", "..extent.y..", "..extent.z..")")
+	-- minetest.log("action", "extent: ("..extent.x..", "..extent.y..", "..extent.z..")")
 	
 	if extent.x < 3 or extent.y < 3 or extent.z < 3 then
 		minetest.log("info", "[worldeditadditions/maze] error: either x, y, or z of the extent were less than 3")
@@ -169,7 +169,7 @@ function worldedit.maze3d(pos1, pos2, target_node, seed)
 	minetest.log("action", "Generating "..extent.x.."x"..extent.z.."x"..extent.z.." 3d maze from pos1 " .. worldeditadditions.vector.tostring(pos1).." to pos2 "..worldeditadditions.vector.tostring(pos2))
 
 	local maze = generate_maze3d(seed, extent.z, extent.y, extent.x) -- x &   need to be the opposite way around to how we index it
-	printspace3d(maze, extent.z, extent.y, extent.x)
+	-- printspace3d(maze, extent.z, extent.y, extent.x)
 
 	-- z y x is the preferred loop order, but that isn't really possible here
 
@@ -183,8 +183,8 @@ function worldedit.maze3d(pos1, pos2, target_node, seed)
 				if maze_y < 0 then maze_y = 0 end
 				if maze_z < 0 then maze_z = 0 end
 				
-				minetest.log("action", "x: "..x..", y: "..y..", z: "..z..", pos x: "..maze_x..", pos z: "..maze_z)
-				minetest.log("action", "value: "..maze[maze_x][maze_y][maze_z])
+				-- minetest.log("action", "x: "..x..", y: "..y..", z: "..z..", pos x: "..maze_x..", pos z: "..maze_z)
+				-- minetest.log("action", "value: "..maze[maze_x][maze_y][maze_z])
 				
 				if maze[maze_x][maze_y][maze_z] == "#" then
 					data[area:index(x, y, z)] = node_id_target
