@@ -22,7 +22,9 @@ end
 start_time = os.clock()
 
 function generate_maze3d(seed, width, height, depth)
-	-- print("Generating maze "..width.."x"..height.."x"..depth)
+	start_time = os.clock()
+	
+	print("Generating maze "..width.."x"..height.."x"..depth)
 	math.randomseed(seed) -- seed the random number generator with the system clock
 
 	width = width - 1
@@ -52,7 +54,6 @@ function generate_maze3d(seed, width, height, depth)
 		local directions = "" -- the different directions we can move in
         if cz - 2 > 0 and world[cz - 2][cy][cx] == "#" then
             directions = directions .. "-"
-            -- print("cz: "..cz..", cz - 2: "..(cz-2)..", here: '"..world[cz][cy][cx].."', there: '"..world[cz - 2][cy][cx].."'")
         end
         if cz + 2 < depth and world[cz + 2][cy][cx] == "#" then
             directions = directions .. "+"
@@ -69,17 +70,15 @@ function generate_maze3d(seed, width, height, depth)
 		if cx + 2 < width and world[cz][cy][cx + 2] == "#" then
 			directions = directions .. "r"
 		end
-        
-		-- print("Currently at ("..cx..", "..cy..", "..cz..") - directions: "..directions)
+		
+		-- If this is 1 or less, then we will switch our attention to another candidate node after moving
+		local shift_attention = math.random(0, 3)
         
 		--print("radar output: '" .. directions .. "' (length: " .. #directions .. "), curnode: " .. curnode)
 		if #directions > 0 then
 			-- we still have somewhere that we can go
-			--print("This node is not a dead end yet.")
 			local curdirnum = math.random(1, #directions)
 			local curdir = string.sub(directions, curdirnum, curdirnum)
-            
-            -- print("Picked direction '"..curdir.."' (index "..curdirnum..")")
             
             if curdir == "+" then
                 world[cz + 1][cy][cx] = " "
@@ -107,32 +106,24 @@ function generate_maze3d(seed, width, height, depth)
 				cx = cx + 2
 			end
             
-            
-    		-- print("Now at ("..cx..", "..cy..", "..cz..") ")
-            
 			table.insert(nodes, { x = cx, y = cy, z = cz })
 		else
-			-- print("The node at " .. curnode .. " is a dead end.")
 			table.remove(nodes, curnode)
+		end
+		
+		if #directions == 0 or shift_attention <= 1 then
 			if #nodes > 0 then
-				--print("performing teleport.");
 				curnode = math.random(1, #nodes)
-				--print("New node: " .. curnode)
-				-- print("Nodes table: ")
-				-- print_r(nodes)
+				
 				cx = nodes[curnode]["x"]
 				cy = nodes[curnode]["y"]
                 cz = nodes[curnode]["z"]
-			else
-				--print("Maze generation complete, no teleportation necessary.")
 			end
 		end
-		-- io.read("*l")
-		-- print("\n\n\n\n\n\n\n\n\n")
-		-- printspace(world, width + 1, height + 1, depth + 1)
-		
 	end
-
+	
+	end_time = os.clock()
+	
 	return world
 end
 
