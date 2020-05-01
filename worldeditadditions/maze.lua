@@ -54,10 +54,11 @@ function generate_maze(seed, width, height)
 		if cx + 2 < width and world[cy][cx + 2] == "#" then
 			directions = directions .. "r"
 		end
-		--print("radar output: '" .. directions .. "' (length: " .. #directions .. "), curnode: " .. curnode)
+		
+		local shift_attention = math.random(0, 9)
+        
 		if #directions > 0 then
 			-- we still have somewhere that we can go
-			--print("This node is not a dead end yet.")
 			local curdirnum = math.random(1, #directions)
 			local curdir = string.sub(directions, curdirnum, curdirnum)
 			if curdir == "u" then
@@ -82,19 +83,17 @@ function generate_maze(seed, width, height)
 		else
 			--print("The node at " .. curnode .. " is a dead end.")
 			table.remove(nodes, curnode)
+			-- No need to do anything else here, since #directions == 0 will cause a teleport - see below
+		end
+		
+		if #directions == 0 or shift_attention <= 1 then
 			if #nodes > 0 then
 				--print("performing teleport.");
 				curnode = math.random(1, #nodes)
-				--print("New node: " .. curnode)
-				-- print("Nodes table: ")
-				-- print_r(nodes)
 				cx = nodes[curnode]["x"]
 				cy = nodes[curnode]["y"]
-			else
-				--print("Maze generation complete, no teleportation necessary.")
 			end
 		end
-		--printspace(world, width, height)
 	end
 
 	return world
