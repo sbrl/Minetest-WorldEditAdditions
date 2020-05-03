@@ -119,6 +119,7 @@ local function generate_maze3d(seed, width, height, depth, path_length, path_wid
 	                for ix = cx,cx+(path_width-1) do
 	                    for iy = cy,cy+path_length+(path_width-1) do
 	                        world[iz][iy][ix] = " "
+							-- print("[tunnel/d] ("..ix..", "..iy..", "..iz..")")
 	                    end
 	                end
 				end
