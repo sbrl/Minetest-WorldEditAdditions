@@ -27,7 +27,7 @@ local function generate_maze3d(seed, width, height, depth, path_length, path_wid
     if not path_width then path_width = 1 end
 	if not path_depth then path_depth = 1 end
 	
-	-- print("Generating maze "..width.."x"..height.."x"..depth)
+	print("Generating maze "..width.."x"..height.."x"..depth.." | path: length "..path_length.." width "..path_width.." depth "..path_depth)
 	math.randomseed(seed) -- seed the random number generator with the system clock
 
 	local world = {}
@@ -93,7 +93,7 @@ local function generate_maze3d(seed, width, height, depth, path_length, path_wid
                 -- world[cz + 2][cy][cx] = " "
                 cz = cz + path_length
             elseif curdir == "-" then
-				for iz = cz,cz-path_length do
+				for iz = cz-path_length,cz do
 					for ix = cx,cx+(path_width-1) do
 						for iy = cy,cy+(path_width-1) do
 							world[iz][iy][ix] = " "
