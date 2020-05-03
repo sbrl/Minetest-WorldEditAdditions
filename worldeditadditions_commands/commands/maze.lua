@@ -6,7 +6,7 @@ local we_c = worldeditadditions_commands
 -- ██  ██  ██ ██   ██  ███    ██
 -- ██      ██ ██   ██ ███████ ███████
 
-local function parse_params_maze(params_text)
+local function parse_params_maze(params_text, is_3d)
 	if not params_text then
 		return nil, nil, nil, nil
 	end
@@ -17,6 +17,11 @@ local function parse_params_maze(params_text)
 	local seed = os.time()
 	local path_length = 2
 	local path_width = 1
+	local path_depth = 1
+	
+	local param_index_seed = 4
+	if is_3d then param_index_seed = 5 end
+	
 	
 	if #parts >= 2 then
 		path_length = tonumber(parts[2])
@@ -24,13 +29,16 @@ local function parse_params_maze(params_text)
 	if #parts >= 3 then
 		path_width = tonumber(parts[3])
 	end
-	if #parts >= 4 then
-		seed = tonumber(parts[4])
+	if #parts >= 4 and is_3d then
+		path_depth = tonumber(parts[4])
+	end
+	if #parts >= param_index_seed then
+		seed = tonumber(parts[param_index_seed])
 	end
 	
 	replace_node = worldedit.normalize_nodename(replace_node)
 	
-	return replace_node, seed, path_length, path_width
+	return replace_node, seed, path_length, path_width, path_depth
 end
 
 minetest.register_chatcommand("/maze", {
@@ -80,11 +88,11 @@ minetest.register_chatcommand("/maze", {
 -- ██      ██ ██   ██ ███████ ███████     ██████  ██████
 
 minetest.register_chatcommand("/maze3d", {
-	params = "<replace_node> [<seed>]",
-	description = "Generates a 3d maze covering the currently selected area (must be at least 3x3x3) with replace_node as the walls. Optionally takes a (integer) seed.",
+	params = "<replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]",
+	description = "Generates a 3d maze covering the currently selected area (must be at least 3x3x3) with replace_node as the walls. Optionally takes a (integer) seed and the path length, width, and depth (see the documentation in the worldeditadditions README for more information).",
 	privs = { worldedit = true },
 	func = we_c.safe_region(function(name, params_text)
-		local replace_node, seed, has_seed = parse_params_maze(params_text)
+		local replace_node, seed, path_length, path_width, path_depth = parse_params_maze(params_text)
 		
 		if not replace_node then
 			worldedit.player_notify(name, "Error: Invalid node name.")
@@ -97,7 +105,7 @@ minetest.register_chatcommand("/maze3d", {
 		if not seed then seed = os.time() end
 		
 		local start_time = os.clock()
-		local replaced = worldedit.maze3d(worldedit.pos1[name], worldedit.pos2[name], replace_node, seed)
+		local replaced = worldeditadditions.maze3d(worldedit.pos1[name], worldedit.pos2[name], replace_node, seed, path_length, path_width, path_depth)
 		local time_taken = os.clock() - start_time
 		
 		worldedit.player_notify(name, replaced .. " nodes replaced in " .. time_taken .. "s")

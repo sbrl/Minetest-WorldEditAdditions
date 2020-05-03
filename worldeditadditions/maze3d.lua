@@ -21,14 +21,14 @@ end
 -- Initialise the world
 start_time = os.clock()
 
-function generate_maze3d(seed, width, height, depth)
-	start_time = os.clock()
+local function generate_maze3d(seed, width, height, depth, path_length, path_width, path_depth)
 	
-	print("Generating maze "..width.."x"..height.."x"..depth)
+    if not path_length then path_length = 2 end
+    if not path_width then path_width = 1 end
+	if not path_depth then path_depth = 1 end
+	
+	-- print("Generating maze "..width.."x"..height.."x"..depth)
 	math.randomseed(seed) -- seed the random number generator with the system clock
-
-	width = width - 1
-	height = height - 1
 
 	local world = {}
 	for z = 0, depth, 1 do
@@ -52,22 +52,22 @@ function generate_maze3d(seed, width, height, depth)
 		--print("Nodes left: " .. #nodes)
 
 		local directions = "" -- the different directions we can move in
-        if cz - 2 > 0 and world[cz - 2][cy][cx] == "#" then
+        if cz - path_length > 0 and world[cz - path_length][cy][cx] == "#" then
             directions = directions .. "-"
         end
-        if cz + 2 < depth and world[cz + 2][cy][cx] == "#" then
+        if cz + path_length < depth-path_depth and world[cz + path_length][cy][cx] == "#" then
             directions = directions .. "+"
         end
-		if cy - 2 > 0 and world[cz][cy - 2][cx] == "#" then
+		if cy - path_length > 0 and world[cz][cy - path_length][cx] == "#" then
 			directions = directions .. "u"
 		end
-		if cy + 2 < height and world[cz][cy + 2][cx] == "#" then
+		if cy + path_length < height-path_width and world[cz][cy + path_length][cx] == "#" then
 			directions = directions .. "d"
 		end
-		if cx - 2 > 0 and world[cz][cy][cx - 2] == "#" then
+		if cx - path_length > 0 and world[cz][cy][cx - path_length] == "#" then
 			directions = directions .. "l"
 		end
-		if cx + 2 < width and world[cz][cy][cx + 2] == "#" then
+		if cx + path_length < width-path_width and world[cz][cy][cx + path_length] == "#" then
 			directions = directions .. "r"
 		end
 		
@@ -79,31 +79,74 @@ function generate_maze3d(seed, width, height, depth)
 			-- we still have somewhere that we can go
 			local curdirnum = math.random(1, #directions)
 			local curdir = string.sub(directions, curdirnum, curdirnum)
+			
             
             if curdir == "+" then
-                world[cz + 1][cy][cx] = " "
-                world[cz + 2][cy][cx] = " "
-                cz = cz + 2
+				for iz = cz,cz+path_length+(path_depth-1) do
+					for ix = cx,cx+(path_width-1) do
+						for iy = cy,cy+(path_width-1) do
+							world[iz][iy][ix] = " "
+						end
+					end
+				end
+                -- world[cz + 1][cy][cx] = " "
+                -- world[cz + 2][cy][cx] = " "
+                cz = cz + path_length
             elseif curdir == "-" then
-                world[cz - 1][cy][cx] = " "
-                world[cz - 2][cy][cx] = " "
-                cz = cz - 2
+				for iz = cz,cz-path_length do
+					for ix = cx,cx+(path_width-1) do
+						for iy = cy,cy+(path_width-1) do
+							world[iz][iy][ix] = " "
+						end
+					end
+				end
+                -- world[cz - 1][cy][cx] = " "
+                -- world[cz - 2][cy][cx] = " "
+                cz = cz - path_length
             elseif curdir == "u" then
-				world[cz][cy - 1][cx] = " "
-				world[cz][cy - 2][cx] = " "
-				cy = cy - 2
+				for iz = cz,cz+(path_depth-1) do
+	                for ix = cx,cx+(path_width-1) do
+	                    for iy = cy-path_length,cy do
+	                        world[iz][iy][ix] = " "
+	                    end
+	                end
+				end
+				-- world[cz][cy - 1][cx] = " "
+				-- world[cz][cy - 2][cx] = " "
+				cy = cy - path_length
 			elseif curdir == "d" then
-				world[cz][cy + 1][cx] = " "
-				world[cz][cy + 2][cx] = " "
-				cy = cy + 2
+				for iz = cz,cz+(path_depth-1) do
+	                for ix = cx,cx+(path_width-1) do
+	                    for iy = cy,cy+path_length+(path_width-1) do
+	                        world[iz][iy][ix] = " "
+	                    end
+	                end
+				end
+				-- world[cz][cy + 1][cx] = " "
+				-- world[cz][cy + 2][cx] = " "
+				cy = cy + path_length
 			elseif curdir == "l" then
-				world[cz][cy][cx - 1] = " "
-				world[cz][cy][cx - 2] = " "
-				cx = cx - 2
+				for iz = cz,cz+(path_depth-1) do
+	                for iy = cy,cy+(path_width-1) do
+	                    for ix = cx-path_length,cx do
+	                        world[iz][iy][ix] = " "
+	                    end
+	                end
+				end
+				-- world[cz][cy][cx - 1] = " "
+				-- world[cz][cy][cx - 2] = " "
+				cx = cx - path_length
 			elseif curdir == "r" then
-				world[cz][cy][cx + 1] = " "
-				world[cz][cy][cx + 2] = " "
-				cx = cx + 2
+				for iz = cz,cz+(path_depth-1) do
+	                for iy = cy,cy+(path_width-1) do
+	                    for ix = cx,cx+path_length+(path_width-1) do
+	                        world[iz][iy][ix] = " "
+	                    end
+	                end
+				end
+				-- world[cz][cy][cx + 1] = " "
+				-- world[cz][cy][cx + 2] = " "
+				cx = cx + path_length
 			end
             
 			table.insert(nodes, { x = cx, y = cy, z = cz })
@@ -122,14 +165,12 @@ function generate_maze3d(seed, width, height, depth)
 		end
 	end
 	
-	end_time = os.clock()
-	
 	return world
 end
 
 -- local world = maze(os.time(), width, height)
 
-function worldedit.maze3d(pos1, pos2, target_node, seed)
+function worldeditadditions.maze3d(pos1, pos2, target_node, seed, path_length, path_width, path_depth)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
@@ -159,7 +200,7 @@ function worldedit.maze3d(pos1, pos2, target_node, seed)
 
 	minetest.log("action", "Generating "..extent.x.."x"..extent.z.."x"..extent.z.." 3d maze from pos1 " .. worldeditadditions.vector.tostring(pos1).." to pos2 "..worldeditadditions.vector.tostring(pos2))
 
-	local maze = generate_maze3d(seed, extent.z, extent.y, extent.x) -- x &   need to be the opposite way around to how we index it
+	local maze = generate_maze3d(seed, extent.z, extent.y, extent.x, path_length, path_width, path_depth) -- x & z need to be the opposite way around to how we index it
 	-- printspace3d(maze, extent.z, extent.y, extent.x)
 
 	-- z y x is the preferred loop order, but that isn't really possible here
