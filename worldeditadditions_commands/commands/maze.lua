@@ -46,7 +46,7 @@ minetest.register_chatcommand("/maze", {
 	description = "Generates a maze covering the currently selected area (must be at least 3x3 on the x,z axes) with replace_node as the walls. Optionally takes a (integer) seed and the path length and width (see the documentation in the worldeditadditions README for more information).",
 	privs = { worldedit = true },
 	func = we_c.safe_region(function(name, params_text)
-		local replace_node, seed, path_length, path_width = parse_params_maze(params_text)
+		local replace_node, seed, path_length, path_width = parse_params_maze(params_text, false)
 		
 		if not replace_node then
 			worldedit.player_notify(name, "Error: Invalid node name.")
@@ -92,7 +92,7 @@ minetest.register_chatcommand("/maze3d", {
 	description = "Generates a 3d maze covering the currently selected area (must be at least 3x3x3) with replace_node as the walls. Optionally takes a (integer) seed and the path length, width, and depth (see the documentation in the worldeditadditions README for more information).",
 	privs = { worldedit = true },
 	func = we_c.safe_region(function(name, params_text)
-		local replace_node, seed, path_length, path_width, path_depth = parse_params_maze(params_text)
+		local replace_node, seed, path_length, path_width, path_depth = parse_params_maze(params_text, true)
 		
 		if not replace_node then
 			worldedit.player_notify(name, "Error: Invalid node name.")
