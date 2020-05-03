@@ -14,7 +14,7 @@ If you can dream of it, it probably belongs here!
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](#hollowellipsoid-rx-ry-rz-node_name)
  - [`//torus <major_radius> <minor_radius> <node_name>`](#torus-major_radius-minor_radius-node_name)
  - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](#hollowtorus-major_radius-minor_radius-node_name)
- - [`//maze <replace_node> [<seed>]`](#maze-replace_node-seed)
+ - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](#maze-replace_node-seed)
  - [`//maze3d <replace_node> [<seed>]`](#maze3d-replace_node-seed)
  - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
  - [`//yy`](#yy)
@@ -75,14 +75,23 @@ Creates a hollow torus at position 1 with the radius major and minor radii. Work
 //hollowtorus 21 11 stone
 ```
 
-### `//maze <replace_node> [<seed>]`
+### `//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`
 Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
 
 Requires the currently selected area to be at least 3x3x3.
 
+The optional `path_length` and `path_width` arguments require additional explanation. When generating a maze, a multi-headed random walk is performed. When the generator decides to move forwards from a point, it does so `path_length` nodes at a time.
+
+`path_width` is easier to explain. It's basically the number of nodes wide the path generated is.
+
+Note that `path_width` must always be at least 1 less than the `path_height` in order to operate normally.
+
+The last example below shows how to set the path length and width:
+
 ```
 //maze ice
 //maze stone 1234
+//maze dirt 56789 4 2
 ```
 
 ### `//maze3d <replace_node> [<seed>]`

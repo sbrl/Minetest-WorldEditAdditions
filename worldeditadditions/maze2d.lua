@@ -2,10 +2,11 @@
 -- Algorithm origin: https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html
 -- @module worldeditadditions.maze
 
+
 ----------------------------------
 -- function to print out the world
 ----------------------------------
-function printspace(space, w, h)
+local function printspace(space, w, h)
 	for y = 0, h - 1, 1 do
 		local line = ""
 		for x = 0, w - 1, 1 do
@@ -15,7 +16,12 @@ function printspace(space, w, h)
 	end
 end
 
-function generate_maze(seed, width, height)
+local function generate_maze(seed, width, height, path_length, path_width)
+	start_time = os.clock()
+	
+    if not path_length then path_length = 2 end
+    if not path_width then path_width = 1 end
+    
 	-- minetest.log("action", "width: "..width..", height: "..height)
 	math.randomseed(seed) -- seed the random number generator with the system clock
 
@@ -29,7 +35,7 @@ function generate_maze(seed, width, height)
 			world[y][x] = "#"
 		end
 	end
-
+    
 	-- do a random walk to create pathways
 	local nodes = {} -- the nodes left that we haven't investigated
 	local curnode = 1 -- the node we are currently operating on
@@ -37,53 +43,63 @@ function generate_maze(seed, width, height)
 	table.insert(nodes, { x = cx, y = cy })
 	world[cy][cx] = " "
 	while #nodes > 0 do
-		-- io.write("Nodes left: " .. curnode .. "\r")
-		--print("Nodes left: " .. #nodes)
-		--print("Currently at (" .. cx .. ", " .. cy .. ")")
-
+		
 		local directions = "" -- the different directions we can move
-		if cy - 2 > 0 and world[cy - 2][cx] == "#" then
+		if cy - path_length > 0 and world[cy - path_length][cx] == "#" then
 			directions = directions .. "u"
 		end
-		if cy + 2 < height and world[cy + 2][cx] == "#" then
+		if cy + path_length < height-path_width and world[cy + path_length][cx] == "#" then
 			directions = directions .. "d"
 		end
-		if cx - 2 > 0 and world[cy][cx - 2] == "#" then
+		if cx - path_length > 0 and world[cy][cx - path_length] == "#" then
 			directions = directions .. "l"
 		end
-		if cx + 2 < width and world[cy][cx + 2] == "#" then
+		if cx + path_length < width-path_width and world[cy][cx + path_length] == "#" then
 			directions = directions .. "r"
 		end
 		
 		local shift_attention = math.random(0, 9)
-        
+		
 		if #directions > 0 then
 			-- we still have somewhere that we can go
+			--print("This node is not a dead end yet.")
 			local curdirnum = math.random(1, #directions)
 			local curdir = string.sub(directions, curdirnum, curdirnum)
 			if curdir == "u" then
-				world[cy - 1][cx] = " "
-				world[cy - 2][cx] = " "
-				cy = cy - 2
+                for ix = cx,cx+(path_width-1) do
+                    for iy = cy-path_length,cy do
+                        world[iy][ix] = " "
+                    end
+                end
+				cy = cy - path_length
 			elseif curdir == "d" then
-				world[cy + 1][cx] = " "
-				world[cy + 2][cx] = " "
-				cy = cy + 2
+                for ix = cx,cx+path_width-1 do
+                    for iy = cy,cy+path_length+(path_width-1) do
+                        world[iy][ix] = " "
+                    end
+                end
+				cy = cy + path_length
 			elseif curdir == "l" then
-				world[cy][cx - 1] = " "
-				world[cy][cx - 2] = " "
-				cx = cx - 2
+                for iy = cy,cy+path_width-1 do
+                    for ix = cx-path_length,cx do
+                        world[iy][ix] = " "
+                    end
+                end
+				cx = cx - path_length
 			elseif curdir == "r" then
-				world[cy][cx + 1] = " "
-				world[cy][cx + 2] = " "
-				cx = cx + 2
+                for iy = cy,cy+(path_width-1) do
+                    for ix = cx,cx+path_length+(path_width-1) do
+                        world[iy][ix] = " "
+                    end
+                end
+				cx = cx + path_length
 			end
-
-			table.insert(nodes, { x = cx, y = cy })
+			
+			if #directions > 1 then
+				table.insert(nodes, { x = cx, y = cy })
+			end
 		else
-			--print("The node at " .. curnode .. " is a dead end.")
 			table.remove(nodes, curnode)
-			-- No need to do anything else here, since #directions == 0 will cause a teleport - see below
 		end
 		
 		if #directions == 0 or shift_attention <= 1 then
@@ -95,26 +111,27 @@ function generate_maze(seed, width, height)
 			end
 		end
 	end
-
-	return world
+    
+	end_time = os.clock()
+	return world --, (end_time - start_time) * 1000
 end
 
 -- local world = maze(os.time(), width, height)
 
-function worldedit.maze(pos1, pos2, target_node, seed)
+function worldeditadditions.maze2d(pos1, pos2, target_node, seed, path_length, path_width)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- getExtent() returns the number of nodes in the VoxelArea, which might be larger than we actually asked for
 	local extent = {
-		x = (pos2.x - pos1.x) + 1,
-		y = (pos2.y - pos1.y) + 1,
-		z = (pos2.z - pos1.z) + 1
+		x = (pos2.x - pos1.x) + 1, path_length, path_width,
+		y = (pos2.y - pos1.y) + 1, -- not a dimension passed to the maze generator itself
+		z = (pos2.z - pos1.z) + 1, path_length, path_width
 	}
 	-- minetest.log("action", "extent: ("..extent.x..", "..extent.y..", "..extent.z..")")
 	
-	if extent.x < 3 or extent.y < 3 or extent.z < 1 then
-		minetest.log("info", "[worldeditadditions/maze] error: either x, y of the extent were less than 3, or z of the extent was less than 1")
+	if extent.x < 3 or extent.y < 1 or extent.z < 3 then
+		minetest.log("error", "[worldeditadditions/maze] error: either x, y of the extent were less than 3, or z of the extent was less than 1")
 		return 0
 	end
 
@@ -125,20 +142,21 @@ function worldedit.maze(pos1, pos2, target_node, seed)
 	local node_id_air = minetest.get_content_id("air")
 	local node_id_target = minetest.get_content_id(target_node)
 
-	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
-	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
+	-- print("pos1: ", worldeditadditions.vector.tostring(pos1))
+	-- print("pos2: ", worldeditadditions.vector.tostring(pos2))
 
 
-	minetest.log("action", "Generating "..extent.x.."x"..extent.z.." maze (depth "..extent.z..") from pos1 " .. worldeditadditions.vector.tostring(pos1).." to pos2 "..worldeditadditions.vector.tostring(pos2))
+	-- minetest.log("action", "Generating "..extent.x.."x"..extent.z.." maze (depth "..extent.z..") from pos1 " .. worldeditadditions.vector.tostring(pos1).." to pos2 "..worldeditadditions.vector.tostring(pos2))
+	-- print("path_width: "..path_width..", path_length: "..path_length)
 
-	local maze = generate_maze(seed, extent.z, extent.x) -- x &   need to be the opposite way around to how we index it
+	local maze = generate_maze(seed, extent.z, extent.x, path_length, path_width) -- x &   need to be the opposite way around to how we index it
 	-- printspace(maze, extent.z, extent.x)
 
 	-- z y x is the preferred loop order, but that isn't really possible here
 
-	for z = pos2.z, pos1.z, - 1 do
-		for x = pos2.x, pos1.x, - 1 do
-			for y = pos2.y, pos1.y, - 1 do
+	for z = pos2.z, pos1.z, -1 do
+		for x = pos2.x, pos1.x, -1 do
+			for y = pos2.y, pos1.y, -1 do
 				local maze_x = (x - pos1.x) -- - 1
 				local maze_z = (z - pos1.z) -- - 1
 				if maze_x < 0 then maze_x = 0 end

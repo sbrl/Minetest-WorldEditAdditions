@@ -15,6 +15,7 @@ dofile(we_c.modpath.."/multi.lua")
 we_c.safe_region, we_c.check_region, we_c.reset_pending
 	= dofile(we_c.modpath.."/safe.lua")
 
+dofile(we_c.modpath.."/utils/strings.lua")
 dofile(we_c.modpath.."/commands/floodfill.lua")
 dofile(we_c.modpath.."/commands/overlay.lua")
 dofile(we_c.modpath.."/commands/ellipsoid.lua")
