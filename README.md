@@ -15,7 +15,7 @@ If you can dream of it, it probably belongs here!
  - [`//torus <major_radius> <minor_radius> <node_name>`](#torus-major_radius-minor_radius-node_name)
  - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](#hollowtorus-major_radius-minor_radius-node_name)
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](#maze-replace_node-seed)
- - [`//maze3d <replace_node> [<seed>]`](#maze3d-replace_node-seed)
+ - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
  - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
  - [`//yy`](#yy)
  - [`//nn`](#nn)
@@ -80,9 +80,9 @@ Generates a maze using replace_node as the walls and air as the paths. Uses [an 
 
 Requires the currently selected area to be at least 3x3x3.
 
-The optional `path_length` and `path_width` arguments require additional explanation. When generating a maze, a multi-headed random walk is performed. When the generator decides to move forwards from a point, it does so `path_length` nodes at a time.
+The optional `path_length` and `path_width` arguments require additional explanation. When generating a maze, a multi-headed random walk is performed. When the generator decides to move forwards from a point, it does so `path_length` nodes at a time. `path_length` defaults to `2`.
 
-`path_width` is easier to explain. It's basically the number of nodes wide the path generated is.
+`path_width` is easier to explain. It defaults to `1`, and is basically the number of nodes wide the path generated is.
 
 Note that `path_width` must always be at least 1 less than the `path_height` in order to operate normally.
 
@@ -90,18 +90,22 @@ The last example below shows how to set the path length and width:
 
 ```
 //maze ice
-//maze stone 1234
-//maze dirt 56789 4 2
+//maze stone 2 1 1234
+//maze dirt 4 2 56789
 ```
 
-### `//maze3d <replace_node> [<seed>]`
+### `//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`
 Same as `//maze`, but adapted for 3d - has all the same properties. Note that currently there's no way to adjust the height of the passageways generated (you'll need to scale the generated maze afterwards).
 
 Requires the currently selected area to be at least 3x3 on the x and z axes.
 
+The optional `path_depth` parameter defaults to `1` and allows customisation of the height of the paths generated.
+
 ```
-//maze glass
-//maze bush_leaves 12345
+//maze3d glass
+//maze3d bush_leaves 2 1 1 12345
+//maze3d dirt 4 2 2
+//maze3d stone 6 3 3 54321
 ```
 
 ### `//multi <command_a> <command_b> <command_c> .....`
