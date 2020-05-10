@@ -34,6 +34,9 @@ local function parse_params_maze(params_text, is_3d)
 	end
 	if #parts >= param_index_seed then
 		seed = tonumber(parts[param_index_seed])
+		if not seed then
+			return false, "Error: Invalid seed value (seeds may only be integers)."
+		end
 	end
 	
 	replace_node = worldedit.normalize_nodename(replace_node)
@@ -55,19 +58,10 @@ worldedit.register_command("maze", {
 		return success, replace_node, seed, path_length, path_width
 	end,
 	nodes_needed = function(name)
-		local pos1 = worldedit.pos1[name]
-		local pos2 = worldedit.pos2[name]
-		pos1, pos2 = worldedit.sort_pos(pos1, pos2)
-		
-		worldedit.player_notify(name, "nodes: "..(pos2.x - pos1.x)..", "..(pos2.y - pos1.y)..", "..(pos2.z - pos1.z))
-		return (pos2.x - pos1.x) * (pos2.y - pos1.y) * (pos2.z - pos1.z)
+		-- Note that we could take in additional parameters from the return value of parse (minue the success bool there), but we don't actually need them here
+		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, replace_node, seed, path_length, path_width)
-		if not replace_node then
-			worldedit.player_notify(name, "Error: Invalid node name.")
-			return false
-		end
-		
 		local start_time = os.clock()
 		local replaced = worldeditadditions.maze2d(worldedit.pos1[name], worldedit.pos2[name], replace_node, seed, path_length, path_width)
 		local time_taken = os.clock() - start_time
@@ -85,45 +79,25 @@ worldedit.register_command("maze", {
 -- ██  ██  ██ ██   ██  ███    ██               ██ ██   ██
 -- ██      ██ ██   ██ ███████ ███████     ██████  ██████
 
-minetest.register_chatcommand("/maze3d", {
+worldedit.register_command("maze3d", {
 	params = "<replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]",
 	description = "Generates a 3d maze covering the currently selected area (must be at least 3x3x3) with replace_node as the walls. Optionally takes a (integer) seed and the path length, width, and depth (see the documentation in the worldeditadditions README for more information).",
 	privs = { worldedit = true },
-	func = we_c.safe_region(function(name, params_text)
-		local replace_node, seed, path_length, path_width, path_depth = parse_params_maze(params_text, true)
-		
-		if not replace_node then
-			worldedit.player_notify(name, "Error: Invalid node name.")
-			return false
-		end
-		if not seed and has_seed then
-			worldedit.player_notify(name, "Error: Invalid seed.")
-			return false
-		end
-		if not seed then seed = os.time() end
-		
+	requre_pos = 2,
+	parse = function(params_text)
+		local values = {parse_params_maze(params_text, true)}
+		return unpack(values)
+	end,
+	nodes_needed = function(name)
+		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
+	end,
+	func = function(name, replace_node, seed, path_length, path_width, path_depth)
 		local start_time = os.clock()
 		local replaced = worldeditadditions.maze3d(worldedit.pos1[name], worldedit.pos2[name], replace_node, seed, path_length, path_width, path_depth)
 		local time_taken = os.clock() - start_time
 		
-		worldedit.player_notify(name, replaced .. " nodes replaced in " .. time_taken .. "s")
+		
 		minetest.log("action", name .. " used //maze at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-	end, function(name, params_text)
-		local replace_node, seed, has_seed = parse_params_maze(params_text)
-		if not params_text then params_text = "" end
-		
-		if not replace_node then
-			worldedit.player_notify(name, "Error: Invalid input '" .. params_text .. "' (specifically the replace node). Try '/help /maze3d' to learn how to use this command.")
-			return 0
-		end
-		if not seed and has_seed then
-			worldedit.player_notify(name, "Error: Invalid input '" .. params_text .. "' (specifically the seed). Try '/help /maze3d' to learn how to use this command.")
-			return 0
-		end
-		
-		local pos1 = worldedit.pos1[name]
-		local pos2 = worldedit.pos2[name]
-		
-		return (pos2.x - pos1.x) * (pos2.y - pos1.y) * (pos1.z - pos2.z)
-	end)
+		return true, replaced .. " nodes replaced in " .. time_taken .. "s"
+	end
 })
