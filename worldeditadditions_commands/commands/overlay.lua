@@ -1,41 +1,31 @@
-local we_c = worldeditadditions_commands
-
 --  ██████  ██    ██ ███████ ██████  ██       █████  ██    ██
 -- ██    ██ ██    ██ ██      ██   ██ ██      ██   ██  ██  ██
 -- ██    ██ ██    ██ █████   ██████  ██      ███████   ████
 -- ██    ██  ██  ██  ██      ██   ██ ██      ██   ██    ██
 --  ██████    ████   ███████ ██   ██ ███████ ██   ██    ██
-
-minetest.register_chatcommand("/overlay", {
+worldedit.register_command("overlay", {
 	params = "<replace_node>",
 	description = "Places <replace_node> in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with <replace_node>.",
 	privs = { worldedit = true },
-	func = we_c.safe_region(function(name, params_text)
+	require_pos = 2,
+	parse = function(params_text)
 		local target_node = worldedit.normalize_nodename(params_text)
-		
 		if not target_node then
-			worldedit.player_notify(name, "Error: Invalid node name.")
-			return false
+			return false, "Error: Invalid node name"
 		end
-		
+		return true, target_node
+	end,
+	nodes_needed = function(name)
+		-- //overlay only modifies up to 1 node per column in the selected region
+		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
+		return (pos2.x - pos1.x) * (pos2.y - pos1.y)
+	end,
+	func = function(name, target_node)
 		local start_time = os.clock()
-		local changes = worldedit.overlay(worldedit.pos1[name], worldedit.pos2[name], target_node)
+		local changes = worldeditadditions.overlay(worldedit.pos1[name], worldedit.pos2[name], target_node)
 		local time_taken = os.clock() - start_time
 		
-		worldedit.player_notify(name, changes.updated .. " nodes replaced and " .. changes.skipped_columns .. " columns skipped in " .. time_taken .. "s")
 		minetest.log("action", name .. " used //overlay at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.updated .. " nodes and skipping " .. changes.skipped_columns .. " columns in " .. time_taken .. "s")
-	end, function(name, params_text)
-		if not worldedit.normalize_nodename(params_text) then
-			worldedit.player_notify(name, "Error: Invalid node name '" .. params_text .. "'.")
-			return 0
-		end
-		
-		local pos1 = worldedit.pos1[name]
-		local pos2 = worldedit.pos2[name]
-		pos1, pos2 = worldedit.sort_pos(pos1, pos2)
-		
-		local vol = vector.subtract(pos2, pos1)
-		
-		return vol.x*vol.z
-	end)
+		return true, changes.updated .. " nodes replaced and " .. changes.skipped_columns .. " columns skipped in " .. time_taken .. "s"
+	end
 })

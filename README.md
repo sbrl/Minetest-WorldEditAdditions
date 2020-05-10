@@ -140,6 +140,7 @@ WorldEditAdditions requires that the `worldedit` mod is installed as a dependenc
 ### I get an error saying that `worldedit.register_command()` is not a function
 This is probably because your version of `worldedit` is too old. Try updating it. Specifically the `worldedit.register_command()` function was only added to `worldedit` in December 2019.
 
+
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
 

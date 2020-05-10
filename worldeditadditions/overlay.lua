@@ -1,7 +1,7 @@
 --- Overlap command. Places a specified node on top of each column.
 -- @module worldeditadditions.overlay
 
-function worldedit.overlay(pos1, pos2, target_node)
+function worldeditadditions.overlay(pos1, pos2, target_node)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
