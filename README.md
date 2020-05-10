@@ -84,7 +84,7 @@ The optional `path_length` and `path_width` arguments require additional explana
 
 `path_width` is easier to explain. It defaults to `1`, and is basically the number of nodes wide the path generated is.
 
-Note that `path_width` must always be at least 1 less than the `path_height` in order to operate normally.
+Note that `path_width` must always be at least 1 less than the `path_length` in order to operate normally.
 
 The last example below shows how to set the path length and width:
 
