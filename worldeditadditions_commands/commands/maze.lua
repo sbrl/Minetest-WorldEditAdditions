@@ -55,12 +55,12 @@ worldedit.register_command("maze", {
 		return success, replace_node, seed, path_length, path_width
 	end,
 	nodes_needed = function(name)
-		worldedit.player_notify(name, "Called nodes_needed")
 		local pos1 = worldedit.pos1[name]
 		local pos2 = worldedit.pos2[name]
 		pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 		
-		return (pos2.x - pos1.x) * (pos2.y - pos1.y) * (pos1.z - pos2.z)
+		worldedit.player_notify(name, "nodes: "..(pos2.x - pos1.x)..", "..(pos2.y - pos1.y)..", "..(pos2.z - pos1.z))
+		return (pos2.x - pos1.x) * (pos2.y - pos1.y) * (pos2.z - pos1.z)
 	end,
 	func = function(name, replace_node, seed, path_length, path_width)
 		if not replace_node then
