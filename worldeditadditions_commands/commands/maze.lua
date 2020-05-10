@@ -76,7 +76,7 @@ worldedit.register_command("maze", {
 		local replaced = worldeditadditions.maze2d(worldedit.pos1[name], worldedit.pos2[name], replace_node, seed, path_length, path_width)
 		local time_taken = os.clock() - start_time
 		
-		minetest.log("action", name .. " used //maze at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+		minetest.log("action", name .. " used //maze at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. " - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 		return true, replaced .. " nodes replaced in " .. time_taken .. "s"
 	end
 })
@@ -107,7 +107,7 @@ worldedit.register_command("maze3d", {
 		local time_taken = os.clock() - start_time
 		
 		
-		minetest.log("action", name .. " used //maze at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+		minetest.log("action", name .. " used //maze3d at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. " - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 		return true, replaced .. " nodes replaced in " .. time_taken .. "s"
 	end
 })
