@@ -12,8 +12,8 @@ function worldeditadditions.overlay(pos1, pos2, target_node)
 	local node_id_air = minetest.get_content_id("air")
 	local node_id_target = minetest.get_content_id(target_node)
 	
-	minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
-	minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
+	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
+	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
 	
 	-- z y x is the preferred loop order, but that isn't really possible here
 	

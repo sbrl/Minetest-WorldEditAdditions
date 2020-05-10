@@ -1,7 +1,7 @@
 --- Overlap command. Places a specified node on top of 
 -- @module worldeditadditions.overlay
 
-function worldedit.torus(position, major_radius, minor_radius, target_node, hollow)
+function worldeditadditions.torus(position, major_radius, minor_radius, target_node, hollow)
 	-- position = { x, y, z }
 	local total_radius = major_radius + minor_radius
 	local inner_minor_radius = minor_radius - 2

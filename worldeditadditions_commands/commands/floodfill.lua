@@ -36,7 +36,7 @@ worldedit.register_command("floodfill", {
 	end,
 	func = function(name, replace_node, radius)
 		local start_time = os.clock()
-		local nodes_replaced = worldedit.floodfill(worldedit.pos1[name], radius, replace_node)
+		local nodes_replaced = worldeditadditions.floodfill(worldedit.pos1[name], radius, replace_node)
 		local time_taken = os.clock() - start_time
 		
 		if nodes_replaced == false then

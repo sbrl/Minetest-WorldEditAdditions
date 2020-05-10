@@ -1,7 +1,7 @@
 --- Overlap command. Places a specified node on top of 
 -- @module worldeditadditions.overlay
 
-function worldedit.ellipsoid(position, radius, target_node, hollow)
+function worldeditadditions.ellipsoid(position, radius, target_node, hollow)
 	-- position = { x, y, z }
 	local hollow_inner_radius = {
 		x = radius.x - 1,

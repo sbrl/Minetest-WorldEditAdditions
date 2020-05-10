@@ -42,7 +42,7 @@ worldedit.register_command("torus", {
 	end,
 	func = function(name, target_node, major_radius, minor_radius)
 		local start_time = os.clock()
-		local replaced = worldedit.torus(worldedit.pos1[name], major_radius, minor_radius, target_node, false)
+		local replaced = worldeditadditions.torus(worldedit.pos1[name], major_radius, minor_radius, target_node, false)
 		local time_taken = os.clock() - start_time
 		
 		minetest.log("action", name .. " used //torus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
@@ -65,7 +65,7 @@ worldedit.register_command("hollowtorus", {
 	end,
 	func = function(name, target_node, major_radius, minor_radius)
 		local start_time = os.clock()
-		local replaced = worldedit.torus(worldedit.pos1[name], major_radius, minor_radius, target_node, true)
+		local replaced = worldeditadditions.torus(worldedit.pos1[name], major_radius, minor_radius, target_node, true)
 		local time_taken = os.clock() - start_time
 		
 		minetest.log("action", name .. " used //hollowtorus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")

@@ -43,7 +43,7 @@ end
 
 -------------------------------------------------------------------------------
 
-function worldedit.floodfill(start_pos, radius, replace_node)
+function worldeditadditions.floodfill(start_pos, radius, replace_node)
 	-- Calculate the area we want to modify
 	local pos1 = vector.add(start_pos, { x = radius, y = 0, z = radius })
 	local pos2 = vector.subtract(start_pos, { x = radius, y = radius, z = radius })
