@@ -112,8 +112,8 @@ local function generate_maze(seed, width, height, path_length, path_width)
 		end
 	end
     
-	end_time = os.clock()
-	return world --, (end_time - start_time) * 1000
+	local end_time = os.clock()
+	return world, (end_time - start_time) * 1000
 end
 
 -- local world = maze(os.time(), width, height)
