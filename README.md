@@ -131,6 +131,15 @@ Prevents the execution of a command if it could potentially affect a large numbe
 //nn
 ```
 
+## Troubleshooting
+If you're experiencing issues with this mod, try checking this FAQ before opening an issue.
+
+### I get an error saying that worldedit isn't installed
+WorldEditAdditions requires that the `worldedit` mod is installed as a dependency. Install it and then try launching Minetest (or the `minetest-server`) again.
+
+### I get an error saying that `worldedit.register_command()` is not a function
+This is probably because your version of `worldedit` is too old. Try updating it. Specifically the `worldedit.register_command()` function was only added to `worldedit` in December 2019.
+
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
 
