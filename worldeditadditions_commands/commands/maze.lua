@@ -44,8 +44,18 @@ local function parse_params_maze(params_text, is_3d)
 	if not replace_node then
 		return false, "Error: Invalid node name for replace_node"
 	end
+	if not path_length or path_length < 1 then
+		return false, "Error: Invalid path length (it must be a positive integer)"
+	end
+	if not path_width or path_width < 1 then
+		return false, "Error: Invalid path width (it must be a positive integer)"
+	end
+	if not path_depth or path_depth < 1 then
+		return false, "Error: Invalid path depth (it must be a positive integer)"
+	end
 	
-	return true, replace_node, seed, path_length, path_width, path_depth
+	-- We unconditionally math.floor here because when we tried to test for it directly it was unreliable
+	return true, replace_node, seed, math.floor(path_length), math.floor(path_width), math.floor(path_depth)
 end
 
 worldedit.register_command("maze", {
