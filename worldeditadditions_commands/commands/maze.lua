@@ -8,7 +8,7 @@ local we_c = worldeditadditions_commands
 
 local function parse_params_maze(params_text, is_3d)
 	if not params_text then
-		return nil, nil, nil, nil
+		return false, "No arguments specified"
 	end
 	
 	local parts = we_c.split(params_text, "%s+", false)
