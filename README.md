@@ -172,7 +172,14 @@ Contributions are welcome! Please state in your pull request(s) that you release
 
 Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc.
 
+## WorldEditAdditions around the web
+Are you using WorldEditAdditions for a project? Open an issue and I'll add your project to the below list!
+
+ - _(None that I'm aware of yet!)_
+
 ## License
 This mod is licensed under the _Mozilla Public License 2.0_, a copy of which (along with a helpful summary as to what you can and can't do with it) can be found in the `LICENSE` file in this repository.
 
 If you'd like to do something that the license prohibits, please get in touch as it's possible we can negotiate something.
+
+If WorldEditAdditions has helped you out in a project, please consider adding a little sign in a corner of your project saying so :-)
