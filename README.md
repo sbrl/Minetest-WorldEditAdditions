@@ -18,6 +18,7 @@ If you can dream of it, it probably belongs here!
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
  - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
  - [`//walls <replace_node>`](#walls-replace_node)
+ - [`//count`](#count)
  - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
  - [`//n`](#n)
@@ -138,6 +139,13 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 //walls dirt
 //walls stone
 //walls goldblock
+```
+
+### `//count`
+Counts all the nodes in the defined region and returns the result along with calculated percentages (note that if the chat window used a monospace font, the returned result would be a perfect table. If someone has a ~~hack~~ solution to make the columns line up neatly, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) :D)
+
+```
+//count
 ```
 
 ### `//multi <command_a> <command_b> <command_c> .....`
