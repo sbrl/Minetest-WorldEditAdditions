@@ -26,6 +26,8 @@ dofile(we_c.modpath.."/commands/ellipsoid.lua")
 dofile(we_c.modpath.."/commands/torus.lua")
 dofile(we_c.modpath.."/commands/maze.lua")
 
+dofile(we_c.modpath.."/commands/walls.lua")
+
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
 if minetest.get_modpath("bonemeal") then
 	dofile(we_c.modpath.."/commands/bonemeal.lua")

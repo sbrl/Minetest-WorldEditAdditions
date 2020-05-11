@@ -15,4 +15,6 @@ dofile(minetest.get_modpath("worldeditadditions") .. "/torus.lua")
 dofile(minetest.get_modpath("worldeditadditions") .. "/maze2d.lua")
 dofile(minetest.get_modpath("worldeditadditions") .. "/maze3d.lua")
 
+dofile(minetest.get_modpath("worldeditadditions") .. "/walls.lua")
+
 dofile(minetest.get_modpath("worldeditadditions") .. "/bonemeal.lua")

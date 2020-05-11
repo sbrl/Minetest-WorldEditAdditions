@@ -17,6 +17,7 @@ If you can dream of it, it probably belongs here!
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](#maze-replace_node-seed)
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
  - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
+ - [`//walls <replace_node>`](#walls-replace_node)
  - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
  - [`//n`](#n)
@@ -128,6 +129,15 @@ For example, a chance number of 2 would mean a 50% chance that any given eligibl
 //bonemeal 4
 //bonemeal 1 10
 //bonemeal 2 15
+```
+
+### `//walls <replace_node>`
+Creates vertical walls of `<replace_node>` around the inside edges of the defined region.
+
+```
+//walls dirt
+//walls stone
+//walls goldblock
 ```
 
 ### `//multi <command_a> <command_b> <command_c> .....`
