@@ -17,8 +17,8 @@ If you can dream of it, it probably belongs here!
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](#maze-replace_node-seed)
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
  - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
- - [`//yy`](#yy)
- - [`//nn`](#nn)
+ - [`//y`](#y)
+ - [`//n`](#n)
 
 ### `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
@@ -108,6 +108,27 @@ The optional `path_depth` parameter defaults to `1` and allows customisation of 
 //maze3d stone 6 3 3 54321
 ```
 
+### `//bonemeal [<strength> [<chance>]]`
+Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and outut a message to the server log).
+
+Bonemeals all eligible nodes in the current region. An eligible node is one that has an air node directly above it - note that just because a node is eligible doesn't mean to say that something will actually happen when the `bonemeal` mod bonemeals it.
+
+Optionally takes a strength value (that's passed to `bonemeal:on_use()`, the method in the `bonemeal` mod that is called to actually do the bonemealing). The strength value is a positive integer from 1 to 4 (i.e. 1, 2, 3, or 4) - the default is 1 (the lowest strength).
+
+I observe that a higher strength value gives a higher chance that something will actually grow. In the case of soil or sand nodes, I observe that it increases the area of effect of a single bonemeal action (thus at higher strengths generally you'll probably want a higher chance number - see below). See the [`bonemeal` mod README](https://notabug.org/TenPlus1/bonemeal) for more information.
+
+Also optionally takes a chance number. This is the chance that an eligible node will actually get bonemealed, and is a positive integer that defaults to 1. The chance number represents a 1-in-{number} chance to bonemeal any given eligible node, where {number} is the chance number. In other words, the higher the chance number the lower the chance that a node will be bonemealed.
+
+For example, a chance number of 2 would mean a 50% chance that any given eligible node will get bonemealed. A chance number of 16 would be a 6.25% chance, and a chance number of 25 would be 2%.
+
+```
+//bonemeal
+//bonemeal 3 25
+//bonemeal 4
+//bonemeal 1 10
+//bonemeal 2 15
+```
+
 ### `//multi <command_a> <command_b> <command_c> .....`
 Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but does work with others too. Don't forget a space between commands!
 
@@ -117,18 +138,22 @@ Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but
 //multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //2 //sphere 8 air //shift down 1 //floodfill //reset
 ```
 
-### `//yy`
-Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command.
+### `//y`
+Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
+
+<!-- Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command. -->
 
 ```
-//yy
+//y
 ```
 
-### `//nn`
-Prevents the execution of a command if it could potentially affect a large number of nodes and take a while. Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command.
+### `//n`
+Prevents the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
+
+<!-- Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command. -->
 
 ```
-//nn
+//n
 ```
 
 ## Troubleshooting
