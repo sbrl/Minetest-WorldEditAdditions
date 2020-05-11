@@ -6,15 +6,19 @@
 -- @author Starbeamrainbowlabs
 
 worldeditadditions = {}
+worldeditadditions.modpath = minetest.get_modpath("worldeditadditions")
+dofile(worldeditadditions.modpath.."/utils/strings.lua")
+dofile(worldeditadditions.modpath.."/utils/numbers.lua")
 
-dofile(minetest.get_modpath("worldeditadditions") .. "/utils.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/floodfill.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/overlay.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/ellipsoid.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/torus.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/maze2d.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/maze3d.lua")
+dofile(worldeditadditions.modpath.."/utils.lua")
+dofile(worldeditadditions.modpath.."/lib/floodfill.lua")
+dofile(worldeditadditions.modpath.."/lib/overlay.lua")
+dofile(worldeditadditions.modpath.."/lib/ellipsoid.lua")
+dofile(worldeditadditions.modpath.."/lib/torus.lua")
+dofile(worldeditadditions.modpath.."/lib/walls.lua")
+dofile(worldeditadditions.modpath.."/lib/maze2d.lua")
+dofile(worldeditadditions.modpath.."/lib/maze3d.lua")
 
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/walls.lua")
+dofile(worldeditadditions.modpath.."/lib/count.lua")
 
-dofile(minetest.get_modpath("worldeditadditions") .. "/lib/bonemeal.lua")
+dofile(worldeditadditions.modpath.."/lib/bonemeal.lua")

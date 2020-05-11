@@ -15,7 +15,7 @@ worldedit.register_command("bonemeal", {
 			params_text = "1"
 		end
 		
-		local parts = we_c.split(params_text, "%s+", false)
+		local parts = worldeditadditions.split(params_text, "%s+", false)
 		
 		local strength = 1
 		local chance = 1
@@ -52,7 +52,7 @@ worldedit.register_command("bonemeal", {
 			-- nodes_bonemealed is an error message here because success == false
 			return success, nodes_bonemealed
 		end
-		local percentage = we_c.round((nodes_bonemealed / candidates)*100, 2)
+		local percentage = worldeditadditions.round((nodes_bonemealed / candidates)*100, 2)
 		local time_taken = os.clock() - start_time
 		
 		minetest.log("action", name .. " used //bonemeal at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken.."s")

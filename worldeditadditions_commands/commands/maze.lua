@@ -11,7 +11,7 @@ local function parse_params_maze(params_text, is_3d)
 		return false, "No arguments specified"
 	end
 	
-	local parts = we_c.split(params_text, "%s+", false)
+	local parts = worldeditadditions.split(params_text, "%s+", false)
 	
 	local replace_node = parts[1]
 	local seed = os.time()

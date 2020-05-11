@@ -10,9 +10,6 @@ local we_c = worldeditadditions_commands
 
 we_c.modpath = minetest.get_modpath("worldeditadditions_commands")
 
-dofile(we_c.modpath.."/utils/strings.lua")
-dofile(we_c.modpath.."/utils/numbers.lua")
-
 dofile(we_c.modpath.."/multi.lua")
 
 -- We no longer need our own implementation of safe_region thanks to @sfan5's
@@ -24,9 +21,10 @@ dofile(we_c.modpath.."/commands/floodfill.lua")
 dofile(we_c.modpath.."/commands/overlay.lua")
 dofile(we_c.modpath.."/commands/ellipsoid.lua")
 dofile(we_c.modpath.."/commands/torus.lua")
+dofile(we_c.modpath.."/commands/walls.lua")
 dofile(we_c.modpath.."/commands/maze.lua")
 
-dofile(we_c.modpath.."/commands/walls.lua")
+dofile(we_c.modpath.."/commands/count.lua")
 
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
 if minetest.get_modpath("bonemeal") then
