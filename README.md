@@ -16,6 +16,7 @@ If you can dream of it, it probably belongs here!
  - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](#hollowtorus-major_radius-minor_radius-node_name)
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](#maze-replace_node-seed)
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
+ - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
  - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
  - [`//n`](#n)
