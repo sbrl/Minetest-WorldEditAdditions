@@ -8,13 +8,13 @@
 worldeditadditions = {}
 
 dofile(minetest.get_modpath("worldeditadditions") .. "/utils.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/floodfill.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/overlay.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/ellipsoid.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/torus.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/maze2d.lua")
-dofile(minetest.get_modpath("worldeditadditions") .. "/maze3d.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/floodfill.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/overlay.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/ellipsoid.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/torus.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/maze2d.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/maze3d.lua")
 
-dofile(minetest.get_modpath("worldeditadditions") .. "/walls.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/walls.lua")
 
-dofile(minetest.get_modpath("worldeditadditions") .. "/bonemeal.lua")
+dofile(minetest.get_modpath("worldeditadditions") .. "/lib/bonemeal.lua")
