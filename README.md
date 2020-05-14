@@ -5,8 +5,7 @@ If you can dream of it, it probably belongs here!
 
 ![Screenshot](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/screenshot.png)
 
-## Current commands:
-**Quick Reference:**
+## Quick Command Reference
 
  - [`//floodfill [<replace_node> [<radius>]]`](#floodfill-replace_node-radius-floodfill)
  - [`//overlay <node_name>`](#overlay-node_name)
@@ -23,6 +22,9 @@ If you can dream of it, it probably belongs here!
  - [`//multi <command_a> <command_b> ....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
  - [`//n`](#n)
+
+
+## Detailed Explanations
 
 ### `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
