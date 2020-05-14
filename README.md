@@ -18,7 +18,7 @@ If you can dream of it, it probably belongs here!
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
  - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
  - [`//walls <replace_node>`](#walls-replace_node)
- - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`]
+ - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/#replacemix-target_node-chance-replace_node_a-chance_a-replace_node_b-chance_b-replace_node_n-chance_n-)
  - [`//count`](#count)
  - [`//multi <command_a> <command_b> ....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
