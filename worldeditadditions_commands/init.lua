@@ -23,6 +23,7 @@ dofile(we_c.modpath.."/commands/ellipsoid.lua")
 dofile(we_c.modpath.."/commands/torus.lua")
 dofile(we_c.modpath.."/commands/walls.lua")
 dofile(we_c.modpath.."/commands/maze.lua")
+dofile(we_c.modpath.."/commands/replacemix.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 

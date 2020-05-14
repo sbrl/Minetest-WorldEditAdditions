@@ -16,6 +16,7 @@ dofile(worldeditadditions.modpath.."/lib/overlay.lua")
 dofile(worldeditadditions.modpath.."/lib/ellipsoid.lua")
 dofile(worldeditadditions.modpath.."/lib/torus.lua")
 dofile(worldeditadditions.modpath.."/lib/walls.lua")
+dofile(worldeditadditions.modpath.."/lib/replacemix.lua")
 dofile(worldeditadditions.modpath.."/lib/maze2d.lua")
 dofile(worldeditadditions.modpath.."/lib/maze3d.lua")
 

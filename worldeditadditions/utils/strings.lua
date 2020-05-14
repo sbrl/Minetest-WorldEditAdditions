@@ -73,7 +73,27 @@ function worldeditadditions.str_padstart(str, len, char)
     return string.rep(char, len - #str) .. str
 end
 
-function worldeditadditions.make_ascii_table(data)
+--- Turns an associative node_id → count table into a human-readable list.
+-- Works well with worldeditadditions.make_ascii_table().
+function worldeditadditions.node_distribution_to_list(distribution, nodes_total)
+	local distribution_data = {}
+	for node_id, count in pairs(distribution) do
+		table.insert(distribution_data, {
+			count,
+			tostring(worldeditadditions.round((count / nodes_total) * 100, 2)).."%",
+			minetest.get_name_from_content_id(node_id)
+		})
+	end
+	return distribution_data
+end
+
+--- Makes a human-readable table of data.
+-- Data should be a 2D array - i.e. a table of tables. The nested tables should
+-- contain a list of items for a single row.
+-- If total is specified, then a grand total is printed at the bottom - this is
+-- useful when you want to print a node list - works well with
+-- worldeditadditions.node_distribution_to_list().
+function worldeditadditions.make_ascii_table(data, total)
 	local extra_padding = 2
 	local result = {}
 	local max_lengths = {}
@@ -92,6 +112,11 @@ function worldeditadditions.make_ascii_table(data)
 			row_result[#row_result + 1] = worldeditadditions.str_padend(tostring(row[i]), max_lengths[i], " ")
 		end
 		result[#result+1] = table.concat(row_result, "")
+	end
+	
+	if total then
+		result[#result+1] = string.rep("=", 6 + #tostring(total) + 6).."\n"..
+		"Total "..total.." nodes\n"
 	end
 	
 	-- TODO: Add multi-column support here

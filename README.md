@@ -18,8 +18,9 @@ If you can dream of it, it probably belongs here!
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
  - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
  - [`//walls <replace_node>`](#walls-replace_node)
+ - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`]
  - [`//count`](#count)
- - [`//multi <command_a> <command_b> .....`](#multi-command_a-command_b-command_c-)
+ - [`//multi <command_a> <command_b> ....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
  - [`//n`](#n)
 
@@ -139,6 +140,55 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 //walls dirt
 //walls stone
 //walls goldblock
+```
+
+### `//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...`
+Replaces a given node with a random mix of other nodes. Functions like `//mix`.
+
+This command is best explained with examples:
+
+```
+//replacemix dirt stone
+```
+
+The above functions just like `//replace` - nothing special going on here. It replaces all `dirt` nodes with `stone`.
+
+Let's make it more interesting:
+
+```
+//replacemix dirt 5 stone
+```
+
+The above replaces 1 in every 5 `dirt` nodes with `stone`. Let's get even fancier:
+
+```
+//replacemix stone stone_with_diamond stone_with_gold
+```
+
+The above replaces `stone` nodes with a random mix of `stone_with_diamond` and `stone_with_gold` nodes. But wait - there's more!
+
+```
+//replacemix stone stone_with_diamond stone_with_gold 4
+```
+
+The above replaces `stone` nodes with a random mix of `stone_with_diamond` and `stone_with_gold` nodes as before, but this time in the ratio 1:4 (i.e. for every `stone_with_diamond` node there will be 4 `stone_with_gold` nodes). Note that the `1` for `stone_with_diamond` is implicit there.
+
+If we wanted to put all of the above features together into a single command, then we might do this:
+
+```
+//replacemix dirt 3 sandstone 10 dry_dirt cobble 2
+```
+
+The above replaces 1 in 3 `dirt` nodes with a mix of `sandstone`, `dry_dirt`, and `cobble` nodes in the ratio 10:1:2. Awesome!
+
+Here are all the above examples together:
+
+```
+//replacemix dirt stone
+//replacemix dirt 5 stone
+//replacemix stone stone_with_diamond stone_with_gold
+//replacemix stone stone_with_diamond stone_with_gold 4
+//replacemix dirt 3 sandstone 10 dry_dirt cobble 2
 ```
 
 ### `//count`
