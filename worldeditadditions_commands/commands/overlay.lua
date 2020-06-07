@@ -4,25 +4,24 @@
 -- ██    ██  ██  ██  ██      ██   ██ ██      ██   ██    ██
 --  ██████    ████   ███████ ██   ██ ███████ ██   ██    ██
 worldedit.register_command("overlay", {
-	params = "<replace_node>",
-	description = "Places <replace_node> in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with <replace_node>.",
+	params = "<replace_node_a> [<chance_a>] <replace_node_b> [<chance_b>] [<replace_node_N> [<chance_N>]] ...",
+	description = "Places <replace_node_a> in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with <replace_node_a>. Optionally supports a mix of nodes and chances, as in //mix and //replacemix.",
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
-		local target_node = worldedit.normalize_nodename(params_text)
-		if not target_node then
-			return false, "Error: Invalid node name"
-		end
-		return true, target_node
+		local success, node_list = worldeditadditions.parse_weighted_nodes(
+			worldeditadditions.split(params_text, "%s+", false)
+		)
+		return success, node_list
 	end,
 	nodes_needed = function(name)
 		-- //overlay only modifies up to 1 node per column in the selected region
 		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
 		return (pos2.x - pos1.x) * (pos2.y - pos1.y)
 	end,
-	func = function(name, target_node)
+	func = function(name, node_list)
 		local start_time = os.clock()
-		local changes = worldeditadditions.overlay(worldedit.pos1[name], worldedit.pos2[name], target_node)
+		local changes = worldeditadditions.overlay(worldedit.pos1[name], worldedit.pos2[name], node_list)
 		local time_taken = os.clock() - start_time
 		
 		minetest.log("action", name .. " used //overlay at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.updated .. " nodes and skipping " .. changes.skipped_columns .. " columns in " .. time_taken .. "s")

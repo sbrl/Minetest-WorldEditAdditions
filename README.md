@@ -8,7 +8,7 @@ If you can dream of it, it probably belongs here!
 ## Quick Command Reference
 
  - [`//floodfill [<replace_node> [<radius>]]`](#floodfill-replace_node-radius-floodfill)
- - [`//overlay <node_name>`](#overlay-node_name)
+ - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](#overlay-node_name)
  - [`//ellipsoid <rx> <ry> <rz> <node_name>`](#ellipsoid-rx-ry-rz-node_name)
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](#hollowellipsoid-rx-ry-rz-node_name)
  - [`//torus <major_radius> <minor_radius> <node_name>`](#torus-major_radius-minor_radius-node_name)
@@ -35,18 +35,24 @@ Floods all connected nodes of the same type starting at _pos1_ with <replace_nod
 //floodfill glass 25
 ```
 
-### `//overlay <node_name>`
-Places <replace_node> in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with <replace_node>.
+### `//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`
+Places `<node_name_a>` in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with `<node_name_a>`. Optionally supports a mix of node names and chances, as `//mix` (WorldEdit) and `//replacemix` (WorldEditAdditions) does.
 
 Will also work in caves, as it scans columns of nodes from top to bottom, skipping every non-air node until it finds one - and only then will it start searching for a node to place the target node on top of.
 
 Note that all-air columns are skipped - so if you experience issues with it not overlaying correctly, try `//expand down 1` to add an extra node's space to your defined region.
 
+Note also that columns without any air nodes in them at all are also skipped, so try `//expand y 1` to add an extra layer to your defined region.
+
 ```
 //overlay grass
 //overlay glass
 //overlay grass_with_dirt
+//overlay grass_with_dirt 10 dirt
+//overlay grass_with_dirt 10 dirt 2 sand 1
+//overlay sandstone dirt 2 sand 5
 ```
+
 
 ### `//ellipsoid <rx> <ry> <rz> <node_name>`
 Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.

@@ -73,6 +73,10 @@ function worldeditadditions.str_padstart(str, len, char)
     return string.rep(char, len - #str) .. str
 end
 
+function worldeditadditions.string_starts(str,start)
+   return string.sub(str,1,string.len(start))==start
+end
+
 --- Turns an associative node_id → count table into a human-readable list.
 -- Works well with worldeditadditions.make_ascii_table().
 function worldeditadditions.node_distribution_to_list(distribution, nodes_total)
@@ -121,4 +125,49 @@ function worldeditadditions.make_ascii_table(data, total)
 	
 	-- TODO: Add multi-column support here
 	return table.concat(result, "\n")
+end
+
+
+
+function worldeditadditions.parse_weighted_nodes(parts)
+	local MODE_EITHER = 1
+	local MODE_NODE = 2
+	
+	local result = {}
+	local mode = MODE_NODE
+	local last_node_name = nil
+	for i, part in ipairs(parts) do
+		print("i: "..i..", part: "..part)
+		if mode == MODE_NODE then
+			print("mode: node");
+			local next = worldedit.normalize_nodename(part)
+			if not next then
+				return false, "Error: Invalid node name '"..part.."'"
+			end
+			last_node_name = next
+			mode = MODE_EITHER
+		elseif mode == MODE_EITHER then
+			print("mode: either");
+			local chance = tonumber(part)
+			if not chance then
+				local node_name = worldedit.normalize_nodename(part)
+				if not node_name then
+					return false, "Error: Invalid number '"..chance.."'"
+				end
+				if last_node_name then
+					result[last_node_name] = 1
+				end
+				last_node_name = node_name
+				mode = MODE_EITHER
+			else
+				result[last_node_name] = math.floor(chance)
+				mode = MODE_NODE
+			end
+		end
+	end
+	if last_node_name then
+		result[last_node_name] = 1
+	end
+	
+	return true, result
 end

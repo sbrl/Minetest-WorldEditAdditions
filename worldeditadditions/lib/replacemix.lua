@@ -22,18 +22,10 @@ function worldeditadditions.replacemix(pos1, pos2, target_node, target_node_chan
 	local distribution = {}
 	
 	-- Generate the list of node ids
-	local node_ids_replace = {}
+	local node_ids_replace, node_ids_replace_count = worldeditadditions.make_weighted(replacements)
 	for node_name, weight in pairs(replacements) do
-		local next_id = minetest.get_content_id(node_name)
-		for i = 1, weight do
-			table.insert(
-				node_ids_replace,
-				next_id
-			)
-		end
-		distribution[next_id] = 0
+		distribution[minetest.get_content_id(node_name)] = 0
 	end
-	local node_ids_replace_count = #node_ids_replace
 	
 	for i in area:iterp(pos1, pos2) do
 		

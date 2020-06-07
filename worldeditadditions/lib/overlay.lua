@@ -1,7 +1,7 @@
 --- Overlap command. Places a specified node on top of each column.
 -- @module worldeditadditions.overlay
 
-function worldeditadditions.overlay(pos1, pos2, target_node)
+function worldeditadditions.overlay(pos1, pos2, node_weights)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
@@ -10,7 +10,9 @@ function worldeditadditions.overlay(pos1, pos2, target_node)
 	local data = manip:get_data()
 	
 	local node_id_air = minetest.get_content_id("air")
-	local node_id_target = minetest.get_content_id(target_node)
+	local node_id_ignore = minetest.get_content_id("ignore")
+	
+	local node_ids, node_ids_count = worldeditadditions.make_weighted(node_weights)
 	
 	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
 	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
@@ -24,16 +26,26 @@ function worldeditadditions.overlay(pos1, pos2, target_node)
 			local placed_node = false
 			
 			for y = pos2.y, pos1.y, -1 do
-				if data[area:index(x, y, z)] ~= node_id_air then
+				local i = area:index(x, y, z)
+				
+				local is_air = data[i] == node_id_air
+				if not is_air then -- wielded_light nodes are airlike too
+					local this_node_name = minetest.get_name_from_content_id(data[i])
+					is_air = is_air or worldeditadditions.string_starts(this_node_name, "wielded_light")
+				end
+				local is_ignore = data[i] == node_id_ignore
+				
+				if not is_air and not is_ignore then
 					if found_air then
+						local new_id = node_ids[math.random(node_ids_count)]
 						-- We've found an air block previously, so it must be above us
 						-- Replace the node above us with the target block
-						data[area:index(x, y + 1, z)] = node_id_target
+						data[area:index(x, y + 1, z)] = new_id
 						changes.updated = changes.updated + 1
 						placed_node = true
 						break -- Move on to the next column
 					end
-				else
+				elseif not is_ignore then
 					found_air = true
 				end
 			end
