@@ -47,5 +47,5 @@ function worldeditadditions.conv.kernel_gaussian(dimension, sigma)
 		kernel[k] = kernel[k] / sum
 	end
 	
-	return kernel
+	return true, kernel
 end
