@@ -79,7 +79,5 @@ function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 		end
 	end
 	
-	worldeditadditions.print_2d(heightmap, (pos2.z - pos1.z) + 1)
-	
 	return heightmap
 end
