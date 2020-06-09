@@ -86,9 +86,14 @@ end
 -- @param	tbl		number[]	The ZERO-indexed list of numbers
 -- @param	width	number		The width of 2D array.
 function worldeditadditions.print_2d(tbl, width)
+	local display_width = 1
+	for _i,value in pairs(tbl) do
+		display_width = math.max(display_width, #tostring(value))
+	end
+	display_width = display_width + 2
 	local next = {}
 	for i=0, #tbl do
-		table.insert(next, tbl[i])
+		table.insert(next, worldeditadditions.str_padstart(tostring(tbl[i]), display_width))
 		if #next == width then
 			print(table.concat(next, "\t"))
 			next = {}

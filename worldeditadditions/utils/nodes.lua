@@ -63,20 +63,23 @@ function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 		for x = pos1.x, pos2.x, 1 do
 			local found_node = false
 			-- Scan each column top to bottom
-			for y = pos2.y, pos1.y, -1 do
+			for y = pos2.y+1, pos1.y, -1 do
 				local i = area:index(x, y, z)
 				if not worldeditadditions.is_airlike(data[i]) then
 					-- It's the first non-airlike node in this column
-					heightmap[hi] = pos1.y - y
+					-- Start heightmap values from 1 (i.e. there's at least 1 node in the column)
+					heightmap[hi] = (y - pos1.y) + 1 
 					found_node = true
 					break
 				end
 			end
 			
 			if not found_node then heightmap[hi] = -1 end
-			i = i + 1
+			hi = hi + 1
 		end
 	end
+	
+	worldeditadditions.print_2d(heightmap, (pos2.z - pos1.z) + 1)
 	
 	return heightmap
 end

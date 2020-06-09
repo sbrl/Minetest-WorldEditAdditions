@@ -66,10 +66,10 @@ function worldeditadditions.convolve(pos1, pos2, kernel, kernel_size)
 			local hi = z*heightmap_size[1] + x
 			local diff = heightmap_conv[hi] - heightmap[hi]
 			
-			
 			-- Lua doesn't have a continue statement :-/
 			if diff ~= 0 then
-				local node_id = data[area:index(pos1.x + x, pos1.y + heightmap[hi], pos1.z + z)]
+				-- We subtract one because the heightmap starts at 1 (i.e. 1 = 1 node in the column), but the selected region is inclusive
+				local node_id = data[area:index(pos1.x + x, pos1.y + (heightmap[hi] - 1), pos1.z + z)]
 				if diff > 0 then
 					stats.added = stats.added + diff
 					for y = pos1.y + heightmap[hi], pos1.y + heightmap_conv[hi], 1 do
