@@ -1,5 +1,3 @@
-local we_c = worldeditadditions_commands
-
 --  ██████  ██████  ██    ██ ███    ██ ████████
 -- ██      ██    ██ ██    ██ ████   ██    ██
 -- ██      ██    ██ ██    ██ ██ ██  ██    ██
@@ -29,7 +27,7 @@ worldedit.register_command("count", {
 		local time_taken = os.clock() - start_time
 		
 		
-		minetest.log("action", name.." used //count at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos1[name])..", counting "..total.." nodes in "..time_taken.."s")
+		minetest.log("action", name.." used //count at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", counting "..total.." nodes in "..time_taken.."s")
 		return true, result
 	end
 })
