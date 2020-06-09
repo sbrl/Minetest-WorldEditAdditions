@@ -12,7 +12,7 @@ dofile(worldeditadditions.modpath.."/lib/conv/convolve.lua")
 -- @param	width	number	The width of the kernel to create (must be an odd integer).
 -- @param	height	number	The height of the kernel to create (must be an odd integer).
 -- @param	arg		number	The argument to pass when creating the kernel. Currently only used by gaussian kernel as the sigma value.
-function worldeditadditions.get_kernel(name, width, height, arg)
+function worldeditadditions.get_conv_kernel(name, width, height, arg)
 	if width % 2 ~= 1 then
 		return false, "Error: The width must be an odd integer.";
 	end
@@ -33,6 +33,8 @@ function worldeditadditions.get_kernel(name, width, height, arg)
 		local success, result = worldeditadditions.conv.kernel_gaussian(width, arg)
 		return success, result
 	end
+	
+	return false, "Error: Unknown kernel. Valid values: box, pascal, gaussian"
 end
 
 

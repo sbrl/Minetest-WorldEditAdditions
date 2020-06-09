@@ -24,6 +24,7 @@ dofile(we_c.modpath.."/commands/torus.lua")
 dofile(we_c.modpath.."/commands/walls.lua")
 dofile(we_c.modpath.."/commands/maze.lua")
 dofile(we_c.modpath.."/commands/replacemix.lua")
+dofile(we_c.modpath.."/commands/convolve.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 
@@ -31,5 +32,5 @@ dofile(we_c.modpath.."/commands/count.lua")
 if minetest.get_modpath("bonemeal") then
 	dofile(we_c.modpath.."/commands/bonemeal.lua")
 else
-	minetest.log("action", "[WorldEditAdditions] bonemeal mod not detected: //bonemeal command not registered")
+	minetest.log("action", "[WorldEditAdditions] bonemeal mod not detected: //bonemeal command not registered (if you see this message and you're using an alternative mod that provides bonemeal, please get in touch by opening an issue)")
 end
