@@ -73,9 +73,30 @@ function worldeditadditions.str_padstart(str, len, char)
     return string.rep(char, len - #str) .. str
 end
 
+--- Equivalent to string.startsWith in JS
+-- @param	str		string	The string to operate on
+-- @param	start	number	The start string to look for
+-- @returns	bool	Whether start is present at the beginning of str
 function worldeditadditions.string_starts(str,start)
    return string.sub(str,1,string.len(start))==start
 end
+
+--- Prints a 2d array of numbers formatted like a JS TypedArray (e.g. like a manip node list or a convolutional kernel)
+-- In other words, the numbers should be formatted as a single flat array.
+-- @param	tbl		number[]	The ZERO-indexed list of numbers
+-- @param	width	number		The width of 2D array.
+function worldeditadditions.print_2d(tbl, width)
+	local next = {}
+	for i=0, #tbl do
+		table.insert(next, tbl[i])
+		if #next == width then
+			print(table.concat(next, "\t"))
+			next = {}
+		end
+	end
+end
+
+
 
 --- Turns an associative node_id → count table into a human-readable list.
 -- Works well with worldeditadditions.make_ascii_table().
@@ -127,8 +148,9 @@ function worldeditadditions.make_ascii_table(data, total)
 	return table.concat(result, "\n")
 end
 
-
-
+--- Parses a list of strings as a list of weighted nodes - e.g. like in the //mix command.
+-- @param	parts	string[]	The list of strings to parse (try worldeditadditions.split)
+-- @returns	table	A table in the form node_name => weight.
 function worldeditadditions.parse_weighted_nodes(parts)
 	local MODE_EITHER = 1
 	local MODE_NODE = 2
