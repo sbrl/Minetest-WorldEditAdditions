@@ -95,7 +95,7 @@ function worldeditadditions.print_2d(tbl, width)
 	for i=0, #tbl do
 		table.insert(next, worldeditadditions.str_padstart(tostring(tbl[i]), display_width))
 		if #next == width then
-			print(table.concat(next, "\t"))
+			print(table.concat(next, ""))
 			next = {}
 		end
 	end
