@@ -3,7 +3,7 @@
 
 -- explode(seperator, string)
 -- From http://lua-users.org/wiki/SplitJoin
-function explode(delim, str)
+local function explode(delim, str)
 	local ll, is_done
 	local delim_length = string.len(delim)
 	ll = 0
@@ -27,13 +27,13 @@ function explode(delim, str)
 end
 
 -- From http://lua-users.org/wiki/StringTrim
-function trim(s)
+local function trim(s)
    return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
 minetest.register_chatcommand("/multi", {
-	params = "//<command_a> <args> //<command_b> <args> .....",
-	description = "Executes multiple chat commands in sequence.",
+	params = "/<command_a> <args> //<command_b> <args> /<command_c> <args>.....",
+	description = "Executes multiple chat commands in sequence. Just prepend a list of space-separated chat commands with //multi, and you're good to go! The forward slashes at the beginning of each chat command must be the same as if you were executing it normally.",
 	privs = { worldedit = true },
 	func = function(name, params_text)
 		

@@ -5,7 +5,7 @@
 --  ██████  ██████  ██   ████   ████    ██████  ███████  ████   ███████
 worldedit.register_command("convolve", {
 	params = "<kernel> [<width>[,<height>]] [<sigma>]",
-	description = "Advanced version of //smooth from we_env. Convolves over the defined region with the given kernel. Possible kernels: box, pascal, gaussian. The width & height (if specified) must be odd integers. If the height is not specified, it defaults to the width. gaussian should give the smoothest result, but the width & height must be identical. The sigma value is only applicable to gaussian kernels.",
+	description = "Advanced version of //smooth from we_env. Convolves over the defined region with the given kernel. Possible kernels: box, pascal, gaussian. The width & height (if specified) must be odd integers. If the height is not specified, it defaults to the width. gaussian should give the smoothest result, but the width & height must be identical. The sigma value is only applicable to gaussian kernels, and can be thought of as the 'smoothness' to apply.",
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
@@ -72,3 +72,6 @@ worldedit.register_command("convolve", {
 		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes"
 	end
 })
+
+worldedit.alias_command("smoothadv", "convolve")
+worldedit.alias_command("conv", "convolve")

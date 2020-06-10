@@ -199,6 +199,34 @@ Here are all the above examples together:
 //replacemix dirt 3 sandstone 10 dry_dirt cobble 2
 ```
 
+### `//convolve <kernel> [<width>[,<height>]] [<sigma>]`
+Advanced version of `//smooth` from we_env, and so far the _only_ WorldEditAdditions command to have any aliases (`//smoothadv` and `//conv`).
+
+Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain. 
+
+Possible kernels:
+
+Kernel			| Description
+----------------|------------------------------
+[`box`](https://en.wikipedia.org/wiki/Box_blur)		| A simple uniform box blur.
+`pascal`		| A kernel derived from the odd layers of [Pascal's Triangle](https://en.wikipedia.org/wiki/Pascal%27s_triangle). Slightly less smooth than a Gaussian blur.
+[`gaussian`](https://en.wikipedia.org/wiki/Gaussian_blur)	| The default. A Gaussian blur - should give the smoothest result, and also the most customisable - see below.
+
+If you can think of any other convolutional filters that would be useful, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new). The code backing this command is very powerful and flexible, so adding additional convolutional filters should be pretty trivial.
+
+The width and height (if specified) refer to the dimensions of the kernel and must be odd integers and are separated by a single comma (and _no_ space). If the height is not specified, it defaults to the width. If using the `gaussian` kernel, the width and height must be identical. Larger kernels are slower, but produce a more smoothed effect and take more nearby nodes into account for every column. Defaults to a 5x5 kernel.
+
+The sigma value is only applicable to the `gaussian` kernel, and can be thought of as the 'smoothness' to apply. Greater values result in more smoothing. Default: 2
+
+```
+//convolve
+//convolve box 7
+//convolve pascal 11,3
+//convolve gaussian 7
+//convolve gaussian 9 10
+//convolve gaussian 5 0.2
+```
+
 ### `//count`
 Counts all the nodes in the defined region and returns the result along with calculated percentages (note that if the chat window used a monospace font, the returned result would be a perfect table. If someone has a ~~hack~~ solution to make the columns line up neatly, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) :D)
 
