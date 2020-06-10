@@ -155,8 +155,10 @@ end
 
 --- Parses a list of strings as a list of weighted nodes - e.g. like in the //mix command.
 -- @param	parts	string[]	The list of strings to parse (try worldeditadditions.split)
+-- @param	as_list	bool		If true, then table.insert() successive { node = string, weight = number } subtables when parsing instead of populating as an associative array.
 -- @returns	table	A table in the form node_name => weight.
-function worldeditadditions.parse_weighted_nodes(parts)
+function worldeditadditions.parse_weighted_nodes(parts, as_list)
+	if as_list == nil then as_list = false end
 	local MODE_EITHER = 1
 	local MODE_NODE = 2
 	
@@ -177,23 +179,31 @@ function worldeditadditions.parse_weighted_nodes(parts)
 			print("mode: either");
 			local chance = tonumber(part)
 			if not chance then
+				print("not a chance, trying a node name")
 				local node_name = worldedit.normalize_nodename(part)
 				if not node_name then
 					return false, "Error: Invalid number '"..chance.."'"
 				end
 				if last_node_name then
-					result[last_node_name] = 1
+					if as_list then table.insert(result, { node = last_node_name, weight = 1 })
+					else result[last_node_name] = 1 end
 				end
 				last_node_name = node_name
 				mode = MODE_EITHER
 			else
-				result[last_node_name] = math.floor(chance)
+				print("it's a chance: ", chance, "for", last_node_name)
+				chance = math.floor(chance)
+				if as_list then table.insert(result, { node = last_node_name, weight = chance })
+				else result[last_node_name] = chance end
+				last_node_name = nil
 				mode = MODE_NODE
 			end
 		end
 	end
 	if last_node_name then
-		result[last_node_name] = 1
+		print("caught trailing node name: ", last_node_name)
+		if as_list then table.insert(result, { node = last_node_name, weight = 1 })
+		else result[last_node_name] = 1 end
 	end
 	
 	return true, result

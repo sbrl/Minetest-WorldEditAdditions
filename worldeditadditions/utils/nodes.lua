@@ -6,10 +6,23 @@ function worldeditadditions.make_weighted(tbl)
 		local next_id = minetest.get_content_id(node_name)
 		print("[make_weighted] seen "..node_name.." @ weight "..weight.." → id "..next_id)
 		for i = 1, weight do
-			table.insert(
-				result,
-				next_id
-			)
+			table.insert(result, next_id)
+		end
+	end
+	return result, #result
+end
+
+--- Unwinds a list of { node = string, weight = number } tables into a list of node ids.
+-- The node ids will be repeated multiple times according to their weights
+-- (e.g. an entry with a weight of 2 will be repeated twice).
+-- @param	list		table[]		The list to unwind.
+-- @return	number[],number			The unwound list of node ids, follows by the number of node ids in total.
+function worldeditadditions.unwind_node_list(list)
+	local result = {}
+	for i,item in ipairs(list) do
+		local node_id = minetest.get_content_id(item.node)
+		for i = 1, item.weight do
+			table.insert(result, node_id)
 		end
 	end
 	return result, #result
@@ -38,6 +51,10 @@ function worldeditadditions.is_airlike(id)
 	-- Check for membership of the airlike group
 	local airlike_value = minetest.get_item_group(name, "airlike")
 	if airlike_value ~= nil and airlike_value > 0 then
+		return true
+	end
+	-- Just in case
+	if worldeditadditions.string_starts(this_node_name, "wielded_light") then
 		return true
 	end
 	-- Just in case

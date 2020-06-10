@@ -69,7 +69,7 @@ worldedit.register_command("convolve", {
 		
 		
 		minetest.log("action", name.." used //convolve at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", adding "..stats.added.." nodes and removing "..stats.removed.." nodes in "..time_taken.."s")
-		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes"
+		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes in " .. time_taken .. "s"
 	end
 })
 

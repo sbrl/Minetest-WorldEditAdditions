@@ -1,7 +1,7 @@
 --- Overlap command. Places a specified node on top of each column.
 -- @module worldeditadditions.overlay
 
-function worldeditadditions.overlay(pos1, pos2, node_weights)
+function worldeditadditions.layers(pos1, pos2, node_weights)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
@@ -11,41 +11,37 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 	
 	local node_id_ignore = minetest.get_content_id("ignore")
 	
-	local node_ids, node_ids_count = worldeditadditions.make_weighted(node_weights)
+	local node_ids, node_ids_count = worldeditadditions.unwind_node_list(node_weights)
 	
 	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
 	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
-	
+	for i,v in ipairs(node_ids) do
+		print("[layer] i", i, "node id", v)
+	end
 	-- z y x is the preferred loop order, but that isn't really possible here
 	
-	local changes = { updated = 0, skipped_columns = 0 }
+	local changes = { replaced = 0, skipped_columns = 0 }
 	for z = pos2.z, pos1.z, -1 do
 		for x = pos2.x, pos1.x, -1 do
-			local found_air = false
+			local next_index = 1 -- We use table.insert() in make_weighted
 			local placed_node = false
 			
 			for y = pos2.y, pos1.y, -1 do
 				local i = area:index(x, y, z)
 				
 				local is_air = worldeditadditions.is_airlike(data[i])
-				if not is_air then -- wielded_light nodes are airlike too
-					local this_node_name = minetest.get_name_from_content_id(data[i])
-					is_air = is_air or worldeditadditions.string_starts(this_node_name, "wielded_light")
-				end
 				local is_ignore = data[i] == node_id_ignore
 				
 				if not is_air and not is_ignore then
-					if found_air then
-						local new_id = node_ids[math.random(node_ids_count)]
-						-- We've found an air block previously, so it must be above us
-						-- Replace the node above us with the target block
-						data[area:index(x, y + 1, z)] = new_id
-						changes.updated = changes.updated + 1
-						placed_node = true
-						break -- Move on to the next column
+					-- It's not an airlike node or something else odd
+					data[i] = node_ids[next_index]
+					next_index = next_index + 1
+					changes.replaced = changes.replaced + 1
+					
+					-- If we're done replacing nodes in this column, move to the next one
+					if next_index > #node_ids then
+						break
 					end
-				elseif not is_ignore then
-					found_air = true
 				end
 			end
 			
@@ -54,7 +50,6 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 			end
 		end
 	end
-	
 	
 	-- Save the modified nodes back to disk & return
 	worldedit.manip_helpers.finish(manip, data)

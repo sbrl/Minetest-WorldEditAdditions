@@ -210,7 +210,7 @@ Here are all the above examples together:
 ```
 
 ### `//convolve <kernel> [<width>[,<height>]] [<sigma>]`
-Advanced version of `//smooth` from we_env, and so far the _only_ WorldEditAdditions command to have any aliases (`//smoothadv` and `//conv`).
+Advanced version of `//smooth` from we_env, and one of the few WorldEditAdditions commands to have any aliases (`//smoothadv` and `//conv`).
 
 Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain. 
 

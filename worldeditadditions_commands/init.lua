@@ -19,6 +19,7 @@ dofile(we_c.modpath.."/multi.lua")
 
 dofile(we_c.modpath.."/commands/floodfill.lua")
 dofile(we_c.modpath.."/commands/overlay.lua")
+dofile(we_c.modpath.."/commands/layers.lua")
 dofile(we_c.modpath.."/commands/ellipsoid.lua")
 dofile(we_c.modpath.."/commands/torus.lua")
 dofile(we_c.modpath.."/commands/walls.lua")
