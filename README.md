@@ -18,6 +18,7 @@ If you can dream of it, it probably belongs here!
  - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
  - [`//walls <replace_node>`](#walls-replace_node)
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](#replacemix-target_node-chance-replace_node_a-chance_a-replace_node_b-chance_b-replace_node_n-chance_n-)
+ - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](#convolve-kernel-widthheight-sigma)
  - [`//count`](#count)
  - [`//multi <command_a> <command_b> ....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
