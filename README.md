@@ -7,19 +7,20 @@ If you can dream of it, it probably belongs here!
 
 ## Quick Command Reference
 
- - [`//floodfill [<replace_node> [<radius>]]`](#floodfill-replace_node-radius-floodfill)
- - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
+ - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
+ - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](#convolve-kernel-widthheight-sigma)
+ - [`//count`](#count)
  - [`//ellipsoid <rx> <ry> <rz> <node_name>`](#ellipsoid-rx-ry-rz-node_name)
+ - [`//floodfill [<replace_node> [<radius>]]`](#floodfill-replace_node-radius-floodfill)
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](#hollowellipsoid-rx-ry-rz-node_name)
- - [`//torus <major_radius> <minor_radius> <node_name>`](#torus-major_radius-minor_radius-node_name)
  - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](#hollowtorus-major_radius-minor_radius-node_name)
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](#maze-replace_node-seed)
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](#maze3d-replace_node-seed)
- - [`//bonemeal [<strength> [<chance>]]`](#bonemeal-strength-chance)
- - [`//walls <replace_node>`](#walls-replace_node)
+ - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](#replacemix-target_node-chance-replace_node_a-chance_a-replace_node_b-chance_b-replace_node_n-chance_n-)
- - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](#convolve-kernel-widthheight-sigma)
- - [`//count`](#count)
+ - [`//torus <major_radius> <minor_radius> <node_name>`](#torus-major_radius-minor_radius-node_name)
+ - [`//walls <replace_node>`](#walls-replace_node)
+
  - [`//multi <command_a> <command_b> ....`](#multi-command_a-command_b-command_c-)
  - [`//y`](#y)
  - [`//n`](#n)
