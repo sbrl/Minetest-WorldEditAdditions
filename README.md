@@ -226,7 +226,7 @@ If you can think of any other convolutional filters that would be useful, please
 
 The width and height (if specified) refer to the dimensions of the kernel and must be odd integers and are separated by a single comma (and _no_ space). If the height is not specified, it defaults to the width. If using the `gaussian` kernel, the width and height must be identical. Larger kernels are slower, but produce a more smoothed effect and take more nearby nodes into account for every column. Defaults to a 5x5 kernel.
 
-The sigma value is only applicable to the `gaussian` kernel, and can be thought of as the 'smoothness' to apply. Greater values result in more smoothing. Default: 2
+The sigma value is only applicable to the `gaussian` kernel, and can be thought of as the 'smoothness' to apply. Greater values result in more smoothing. Default: 2. See the [Gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur) page on Wikipedia for some pictures showing the effect of the sigma value.
 
 ```
 //convolve
