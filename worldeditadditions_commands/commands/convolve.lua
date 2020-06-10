@@ -9,9 +9,7 @@ worldedit.register_command("convolve", {
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
-		if not params_text or params_text == "" then
-			return false, "Error: No arguments specified"
-		end
+		if not params_text then params_text = "" end
 		
 		local parts = worldeditadditions.split(params_text, "%s+", false)
 		
@@ -20,7 +18,7 @@ worldedit.register_command("convolve", {
 		local height = 5
 		local sigma = nil
 		
-		if #parts >= 1 then
+		if #parts >= 1 and #parts[1] > 0 then
 			kernel_name = parts[1]
 		end
 		if #parts >= 2 then
@@ -31,7 +29,7 @@ worldedit.register_command("convolve", {
 				return false, "Error: Invalid width (it must be a positive odd integer)."
 			end
 			if #parts_dimension >= 2 then
-				height = tonumber(parts[2])
+				height = tonumber(parts_dimension[2])
 				if not height then
 					return false, "Error: Invalid height (it must be a positive odd integer)."
 				end
