@@ -63,6 +63,17 @@ Note also that columns without any air nodes in them at all are also skipped, so
 //overlay sandstone dirt 2 sand 5
 ```
 
+### `//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
+Finds the first non-air node in each column and works downwards, replacing non-air nodes with a defined list of nodes in sequence. Like WorldEdit for Minecraft's `//naturalize` command. Speaking of, this command has `//naturalise` and `//naturalize` as aliases. Defaults to 1 layer of grass followed by 3 layers of dirt.
+
+The list of nodes has a form similar to that of a chance list you might find in `//replacemix`, `//overlay`, or `//mix` - see the examples below. If the numberr of layers isn't specified, `1` is assumed (i.e. a single layer).
+
+```
+//layers dirt_with_grass dirt 3
+//layers sand 5 sandstone 4 desert_stone 2
+//layers brick stone 3
+//layers cobble 2 dirt
+```
 
 ### `//ellipsoid <rx> <ry> <rz> <node_name>`
 Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
@@ -131,7 +142,7 @@ The optional `path_depth` parameter defaults to `1` and allows customisation of 
 ```
 
 ### `//bonemeal [<strength> [<chance>]]`
-Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and outut a message to the server log).
+Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and outut a message to the server log). Alias: `//flora`.
 
 Bonemeals all eligible nodes in the current region. An eligible node is one that has an air node directly above it - note that just because a node is eligible doesn't mean to say that something will actually happen when the `bonemeal` mod bonemeals it.
 
