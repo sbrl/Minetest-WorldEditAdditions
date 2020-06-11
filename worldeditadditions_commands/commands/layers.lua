@@ -31,6 +31,3 @@ worldedit.register_command("layers", {
 		return true, changes.replaced .. " nodes replaced and " .. changes.skipped_columns .. " columns skipped in " .. time_taken .. "s"
 	end
 })
-
-worldedit.alias_command("naturalise", "layers")
-worldedit.alias_command("naturalize", "layers")

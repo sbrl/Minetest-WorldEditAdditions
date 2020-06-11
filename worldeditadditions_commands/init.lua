@@ -35,3 +35,12 @@ if minetest.get_modpath("bonemeal") then
 else
 	minetest.log("action", "[WorldEditAdditions] bonemeal mod not detected: //bonemeal command not registered (if you see this message and you're using an alternative mod that provides bonemeal, please get in touch by opening an issue)")
 end
+
+
+worldedit.alias_command("smoothadv", "convolve")
+worldedit.alias_command("conv", "convolve")
+
+worldedit.alias_command("naturalise", "layers")
+worldedit.alias_command("naturalize", "layers")
+
+worldedit.alias_command("flora", "bonemeal")

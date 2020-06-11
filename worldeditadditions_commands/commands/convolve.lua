@@ -72,6 +72,3 @@ worldedit.register_command("convolve", {
 		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes in " .. time_taken .. "s"
 	end
 })
-
-worldedit.alias_command("smoothadv", "convolve")
-worldedit.alias_command("conv", "convolve")

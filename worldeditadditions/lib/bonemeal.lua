@@ -59,5 +59,3 @@ function worldeditadditions.bonemeal(pos1, pos2, strength, chance)
 	
 	return true, nodes_bonemealed, candidates
 end
-
-worldedit.alias_command("flora", "bonemeal")
