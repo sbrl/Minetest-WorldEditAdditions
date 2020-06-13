@@ -305,6 +305,8 @@ Are you using WorldEditAdditions for a project? Open an issue and I'll add your 
 ## License
 This mod is licensed under the _Mozilla Public License 2.0_, a copy of which (along with a helpful summary as to what you can and can't do with it) can be found in the `LICENSE` file in this repository.
 
+All textures however are licenced under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (Creative Commons Attribution Share-Alike International 4.0).
+
 If you'd like to do something that the license prohibits, please get in touch as it's possible we can negotiate something.
 
 If WorldEditAdditions has helped you out in a project, please consider adding a little sign in a corner of your project saying so :-)
