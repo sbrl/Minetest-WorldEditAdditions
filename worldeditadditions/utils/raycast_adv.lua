@@ -14,32 +14,53 @@ function worldeditadditions.raycast(player, maxdist, skip_liquid)
 	local player_pos = player:getpos()
 	player_pos.y = player_pos.y + 1.5 -- Calculate from the eye position
 	
+	local divisor = 5
 	for i = 1, maxdist do
-		local j = i / 10
+		local j = i / divisor
 		
 		cur_pos.x = (look_dir.x*j) + player_pos.x
 		cur_pos.y = (look_dir.y*j) + player_pos.y
 		cur_pos.z = (look_dir.z*j) + player_pos.z
 		
-		local found_node = false
 		
-		local node = minetest.get_node_or_nil(cur_pos)
-		if node ~= nil then
-			local node_id = minetest.get_content_id(node.name)
-			local is_air = worldeditadditions.is_airlike(node_id)
+		local node_pos = {
+			x = math.floor(0.5+cur_pos.x),
+			y = math.floor(0.5+cur_pos.y),
+			z = math.floor(0.5+cur_pos.z)
+		}
+		
+		-- Don't bother if this is the same position we were looking at before
+		if not (node_pos.x == math.floor(0.5+look_dir.x*(j-divisor))
+			and node_pos.y == math.floor(0.5+look_dir.y*(j-divisor))
+			and node_pos.z == math.floor(0.5+look_dir.z*(j-divisor))) then
 			
-			-- ignore = unloaded chunks, as far as I can tell
-			if node_id == node_id_ignore then
-				return nil
-			end
+			local found_node = false
 			
-			if is_air == false then
-				if skip_liquid == true then
-					return cur_pos, node_id
-				elseif worldeditadditions.is_liquidlike(node_id) == true then
-					return cur_pos, node_id
+			local node = minetest.get_node_or_nil(node_pos)
+			if node ~= nil then
+				local node_id = minetest.get_content_id(node.name)
+				local is_air = worldeditadditions.is_airlike(node_id)
+				print("[raycast] Scanning "..worldeditadditions.vector.tostring(cur_pos)..", i: "..i..", j: "..j..", found", node.name, "is_air", is_air)
+				
+				-- ignore = unloaded chunks, as far as I can tell
+				if node_id == node_id_ignore then
+					print("[raycast] found ignore, returning nil")
+					return nil
+				end
+				
+				if is_air == false then
+					if skip_liquid == false then
+						return node_pos, node_id
+					else
+						local is_liquid = worldeditadditions.is_liquidlike(node_id)
+						print("[raycast] is_liquid ", is_liquid)
+						if is_liquid == false then
+							return node_pos, node_id
+						end
+					end
 				end
 			end
+			
 		end
 	end
 	
