@@ -32,7 +32,7 @@ local node_id_air = minetest.get_content_id("air")
 local node_id_ignore = minetest.get_content_id("ignore")
 
 --- Determines whether the given node/content id is an airlike node or not.
--- @param	id		number	The content/node id to  check.
+-- @param	id		number	The content/node id to check.
 -- @return	bool	Whether the given node/content id is an airlike node or not.
 function worldeditadditions.is_airlike(id)
 	--  Do a fast check against air and ignore
@@ -42,13 +42,13 @@ function worldeditadditions.is_airlike(id)
 		return false
 	end
 	
-	local name = minetest.get_name_from_content_id(id)
 	-- If the node isn't registered, then it might not be an air node
 	if not minetest.registered_nodes[id] then return false end
 	if minetest.registered_nodes[id].sunlight_propagates == true then
 		return true
 	end
 	-- Check for membership of the airlike group
+	local name = minetest.get_name_from_content_id(id)
 	local airlike_value = minetest.get_item_group(name, "airlike")
 	if airlike_value ~= nil and airlike_value > 0 then
 		return true
@@ -59,6 +59,20 @@ function worldeditadditions.is_airlike(id)
 	end
 	-- Just in case
 	return false
+end
+
+--- Determines whether the given node/content id is a liquid-ish node or not.
+-- @param	id		number	The content/node id to check.
+-- @return	bool	Whether the given node/content id is a liquid-ish node or not.
+function worldeditadditions.is_liquidlike(id)
+	if id == node_id_ignore then return false end
+	if not minetest.registered_nodes[id] then return  false end
+	
+	local liquidtype = minetest.registered_nodes[id].liquidtype
+	
+	if liquidtype == nil or liquidtype == "none" then return false end
+	-- If it's not none, then it has to be a liquid as the only other values are source and flowing
+	return true
 end
 
 --- Given a manip object and associates, generates a 2D x/z heightmap.
