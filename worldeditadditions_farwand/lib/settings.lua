@@ -2,7 +2,7 @@
 -- @param	name	The name of the player to ensure has a settings object.
 local function settings_init(name)
 	if worldeditadditions.farwand.player_data[name] == nil then
-		print("[settings_init] ", worldeditadditions.farwand.player_data)
+		minetest.log("INFO", "Initialising settings for "..name)
 		worldeditadditions.farwand.player_data[name] = {
 			maxdist = 1000,
 			skip_liquid = true

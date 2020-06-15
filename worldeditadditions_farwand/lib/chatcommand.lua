@@ -26,7 +26,6 @@ minetest.register_chatcommand("/farwand", {
 	func = function(name, params_text)
 		if name == nil then return end
 		local success, key, value = parse_params_farwand(params_text)
-		print("[/farwand] ", success, key, value)
 		if success == false then
 			worldedit.player_notify(name, key)
 			return

@@ -40,11 +40,9 @@ function worldeditadditions.raycast(player, maxdist, skip_liquid)
 			if node ~= nil then
 				local node_id = minetest.get_content_id(node.name)
 				local is_air = worldeditadditions.is_airlike(node_id)
-				print("[raycast] Scanning "..worldeditadditions.vector.tostring(cur_pos)..", i: "..i..", j: "..j..", found", node.name, "is_air", is_air)
 				
 				-- ignore = unloaded chunks, as far as I can tell
 				if node_id == node_id_ignore then
-					print("[raycast] found ignore, returning nil")
 					return nil
 				end
 				
@@ -53,7 +51,6 @@ function worldeditadditions.raycast(player, maxdist, skip_liquid)
 						return node_pos, node_id
 					else
 						local is_liquid = worldeditadditions.is_liquidlike(node_id)
-						print("[raycast] is_liquid ", is_liquid)
 						if is_liquid == false then
 							return node_pos, node_id
 						end
