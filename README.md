@@ -23,6 +23,7 @@ If you can dream of it, it probably belongs here!
 
 ### Terrain
  - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
+ - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](#convolve-kernel-widthheight-sigma)
 
 ### Statistics
