@@ -35,6 +35,7 @@ If you can dream of it, it probably belongs here!
 
 ### Tools
  - [WorldEditAdditions Far Wand](#far-wand)
+ - [`//farwand skip_liquid (true|false) | maxdist <number>`](#farwand-skip_liquid-truefalse--maxdist-number)
 
 ## Detailed Explanations
 
