@@ -33,6 +33,8 @@ If you can dream of it, it probably belongs here!
  - [`//y`](#y)
  - [`//n`](#n)
 
+### Tools
+ - [WorldEditAdditions Far Wand](#far-wand)
 
 ## Detailed Explanations
 
@@ -282,6 +284,37 @@ Prevents the execution of a command if it could potentially affect a large numbe
 //n
 ```
 
+
+### Far Wand
+The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/worldeditadditions_farwand/textures/worldeditadditions_farwand.png)
+
+It functions very similarly to the regular WorldEdit wand, except that it has a _much_ longer range - which can be very useful for working on large-scale terrain for example. It also comes with an associated command to control it.
+
+### `//farwand skip_liquid (true|false) | maxdist <number>`
+This command helps control the behaviour of the [WorldEditAdditions far wand](#far-wand). Calling it without any arguments shows the current status:
+
+```
+//farwand
+```
+
+You can decide whether you can select liquids or not like so:
+
+```
+//farwand skip_liquid true
+//farwand skip_liquid false
+```
+
+You can change the maximum range with the `maxdist` subcommand:
+
+```
+//farwand maxdist 1000
+//farwand maxdist 200
+//farwand maxdist 9999
+```
+
+Note that the number there isn't in blocks (because hard maths). It is however proportional to the distance the wand will raycast looks for nodes, so a higher value will result in it raycasting further.
+
+
 ## Troubleshooting
 If you're experiencing issues with this mod, try checking this FAQ before opening an issue.
 
@@ -296,6 +329,7 @@ This is probably because your version of `worldedit` is too old. Try updating it
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
 
 Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc.
+
 
 ## WorldEditAdditions around the web
 Are you using WorldEditAdditions for a project? Open an issue and I'll add your project to the below list!
