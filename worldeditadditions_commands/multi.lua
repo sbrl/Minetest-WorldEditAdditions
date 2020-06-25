@@ -66,12 +66,20 @@ minetest.register_chatcommand("/multi", {
 		end
 		
 		local total_time = (os.clock() - master_start_time) * 1000
-		local done_message = string.format("Executed %d commands in %.2fms (", #times, total_time)
+		local done_message = {}
+		table.insert(done_message,
+			string.format("Executed %d commands in %s (",
+				#times,
+				worldeditadditions.human_time(total_time)
+			)
+		)
+		local message_parts = {}
 		for j=1,#times do
-			done_message = done_message..string.format("%.2fms, ", times[j])
+			table.insert(message_parts, worldeditadditions.human_time(times[j]))
 		end
-		done_message = string.sub(done_message, 0, string.len(done_message) - 2)..")"
+		table.insert(done_message, table.concat(message_parts, ", "))
+		table.insert(done_message, ")")
 		
-		worldedit.player_notify(name, done_message)
+		worldedit.player_notify(name, table.concat(done_message, ""))
 	end
 })

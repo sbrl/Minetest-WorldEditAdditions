@@ -63,14 +63,14 @@ end
 --- Pads str to length len with char from right
 -- @source https://snipplr.com/view/13092/strlpad--pad-string-to-the-left
 function worldeditadditions.str_padend(str, len, char)
-    if char == nil then char = ' ' end
-    return str .. string.rep(char, len - #str)
+	if char == nil then char = ' ' end
+	return str .. string.rep(char, len - #str)
 end
 --- Pads str to length len with char from left
 -- Adapted from the above
 function worldeditadditions.str_padstart(str, len, char)
-    if char == nil then char = ' ' end
-    return string.rep(char, len - #str) .. str
+	if char == nil then char = ' ' end
+	return string.rep(char, len - #str) .. str
 end
 
 --- Equivalent to string.startsWith in JS
@@ -207,4 +207,31 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list)
 	end
 	
 	return true, result
+end
+
+--- Converts a float milliseconds into a human-readable string.
+-- Ported from PHP human_time from Pepperminty Wiki: https://github.com/sbrl/Pepperminty-Wiki/blob/fa81f0d/core/05-functions.php#L82-L104
+-- @param	ms		float	The number of milliseconds to convert.
+-- @return	string	A human-readable string representing the input ms.
+function worldeditadditions.human_time(ms)
+	local tokens = {
+		{ 31536000 * 1000, 'year' },
+		{ 2592000 * 1000, 'month' },
+		{ 604800 * 1000, 'week' },
+		{ 86400 * 1000, 'day' },
+		{ 3600 * 1000, 'hr' },
+		{ 60 * 1000, 'min' },
+		{ 1 * 1000, 's' },
+		{ 1, 'ms'}
+	}
+	
+	for _,pair in pairs(tokens) do
+		if ms > pair[1] or pair[2] == "ms" then
+			local unit = pair[2]
+			if ms > 60 * 1000 and math.floor(ms / pair[1]) > 1 then
+				unit = unit.."s"
+			end
+			return string.format("%.2f", ms / pair[1])..unit
+		end
+	end
 end
