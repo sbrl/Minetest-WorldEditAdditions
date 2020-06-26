@@ -1,4 +1,5 @@
-
+-- Test command:
+--	//multi //fp set1 1330 60 5455 //fp set2 1355 35 5430 //subdivide 10 10 10 fixlight //y
 local function will_trigger_saferegion(name, cmd_name, args)
 	if not worldedit.registered_commands[cmd_name] then return nil, "Error: That worldedit command could not be found (perhaps it hasn't been upgraded to worldedit.register_command() yet?)" end
 	local def = worldedit.registered_commands[cmd_name]
@@ -63,6 +64,10 @@ worldedit.register_command("subdivide", {
 			return false, "Error: Your privileges are unsufficient to run '"..cmd_name.."'."
 		end
 		
+		chunk_size.x = chunk_size.x - 1 -- WorldEdit regions are inclusive
+		chunk_size.y = chunk_size.y - 1 -- WorldEdit regions are inclusive
+		chunk_size.z = chunk_size.z - 1 -- WorldEdit regions are inclusive
+		
 		worldedit.player_notify(name, worldeditadditions.vector.tostring(pos1).." - "..worldeditadditions.vector.tostring(pos2).." chunk size: "..worldeditadditions.vector.tostring(chunk_size))
 		local i = 1
 		local chunks_total = math.ceil((pos2.x - pos1.x) / chunk_size.x)
@@ -70,20 +75,28 @@ worldedit.register_command("subdivide", {
 			* math.ceil((pos2.z - pos1.z) / chunk_size.z)
 		
 		local time_chunks = {}
-		for z = pos2.z, pos1.z, -chunk_size.z do
-			for y = pos2.y, pos1.y, -chunk_size.y do
-				for x = pos2.x, pos1.x, -chunk_size.x do
+		for z = pos2.z, pos1.z, -(chunk_size.z + 1) do
+			for y = pos2.y, pos1.y, -(chunk_size.y + 1) do
+				for x = pos2.x, pos1.x, -(chunk_size.x + 1) do
 					local c_pos2 = { x = x, y = y, z = z }
 					local c_pos1 = {
 						x = x - chunk_size.x,
 						y = y - chunk_size.y,
 						z = z - chunk_size.z
 					}
-					if c_pos1.x < pos1.x then c_pos1.x = pos1.x end
-					if c_pos1.y < pos1.y then c_pos1.y = pos1.y end
-					if c_pos1.z < pos1.z then c_pos1.z = pos1.z end
-					
-					
+					print("c1", worldeditadditions.vector.tostring(c_pos1), "c2", worldeditadditions.vector.tostring(c_pos2), "volume", worldedit.volume(c_pos1, c_pos2))
+					if c_pos1.x < pos1.x then
+						print("clamping c1.x", c_pos1.x, "to", pos1.x)
+						c_pos1.x = pos1.x
+					end
+					if c_pos1.y < pos1.y then
+						print("clamping c1.y", c_pos1.y, "to", pos1.y)
+						c_pos1.y = pos1.y
+					end
+					if c_pos1.z < pos1.z then
+						print("clamping c1.z", c_pos1.z, "to", pos1.z)
+						c_pos1.z = pos1.z
+					end
 					
 					local time_this = os.clock()
 					worldedit.pos1[name] = c_pos1
