@@ -88,6 +88,6 @@ worldedit.register_command("replacemix", {
 		
 		minetest.log("action", name .. " used //replacemix at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. changed.." nodes (out of "..nodes_total.." nodes) in "..time_taken.."s")
 		
-		return true, distribution_table..changed.." out of "..candidates.." (~"..percentage_replaced.."%) candidates replaced in "..time_taken.."s"
+		return true, distribution_table..changed.." out of "..candidates.." (~"..percentage_replaced.."%) candidates replaced in "..worldeditadditions.human_time(time_taken)
 	end
 })

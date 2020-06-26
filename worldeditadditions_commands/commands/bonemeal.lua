@@ -54,8 +54,10 @@ worldedit.register_command("bonemeal", {
 		end
 		local percentage = worldeditadditions.round((nodes_bonemealed / candidates)*100, 2)
 		local time_taken = worldeditadditions.get_ms_time() - start_time
+		-- Avoid nan% - since if there aren't any candidates then nodes_bonemealed will be 0 too
+		if candidates == 0 then percentage = 0 end
 		
 		minetest.log("action", name .. " used //bonemeal at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken.."s")
-		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..time_taken.."s"
+		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..worldeditadditions.human_time(time_taken)
 	end
 })

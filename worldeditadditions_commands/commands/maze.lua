@@ -1,11 +1,5 @@
 local we_c = worldeditadditions_commands
 
--- ███    ███  █████  ███████ ███████
--- ████  ████ ██   ██    ███  ██
--- ██ ████ ██ ███████   ███   █████
--- ██  ██  ██ ██   ██  ███    ██
--- ██      ██ ██   ██ ███████ ███████
-
 local function parse_params_maze(params_text, is_3d)
 	if not params_text then
 		return false, "No arguments specified"
@@ -58,6 +52,14 @@ local function parse_params_maze(params_text, is_3d)
 	return true, replace_node, seed, math.floor(path_length), math.floor(path_width), math.floor(path_depth)
 end
 
+
+
+-- ███    ███  █████  ███████ ███████
+-- ████  ████ ██   ██    ███  ██
+-- ██ ████ ██ ███████   ███   █████
+-- ██  ██  ██ ██   ██  ███    ██
+-- ██      ██ ██   ██ ███████ ███████
+
 worldedit.register_command("maze", {
 	params = "<replace_node> [<path_length> [<path_width> [<seed>]]]",
 	description = "Generates a maze covering the currently selected area (must be at least 3x3 on the x,z axes) with replace_node as the walls. Optionally takes a (integer) seed and the path length and width (see the documentation in the worldeditadditions README for more information).",
@@ -77,7 +79,7 @@ worldedit.register_command("maze", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //maze at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. " - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. time_taken .. "s"
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
 	end
 })
 
@@ -108,6 +110,6 @@ worldedit.register_command("maze3d", {
 		
 		
 		minetest.log("action", name .. " used //maze3d at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. " - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. time_taken .. "s"
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
 	end
 })

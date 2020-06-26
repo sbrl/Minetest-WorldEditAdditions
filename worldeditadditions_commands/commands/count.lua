@@ -27,7 +27,7 @@ worldedit.register_command("count", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name.." used //count at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", counting "..total.." nodes in "..time_taken.."s")
+		minetest.log("action", name.." used //count at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", counting "..total.." nodes in "..worldeditadditions.human_time(time_taken))
 		return true, result
 	end
 })

@@ -1,8 +1,8 @@
---  ██████  ██    ██ ███████ ██████  ██       █████  ██    ██
--- ██    ██ ██    ██ ██      ██   ██ ██      ██   ██  ██  ██
--- ██    ██ ██    ██ █████   ██████  ██      ███████   ████
--- ██    ██  ██  ██  ██      ██   ██ ██      ██   ██    ██
---  ██████    ████   ███████ ██   ██ ███████ ██   ██    ██
+-- ██     ██  █████  ██      ██      ███████
+-- ██     ██ ██   ██ ██      ██      ██
+-- ██  █  ██ ███████ ██      ██      ███████
+-- ██ ███ ██ ██   ██ ██      ██           ██
+--  ███ ███  ██   ██ ███████ ███████ ███████
 worldedit.register_command("walls", {
 	params = "<replace_node>",
 	description = "Creates vertical walls of <replace_node> around the inside edges of the defined region.",
@@ -29,6 +29,6 @@ worldedit.register_command("walls", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //walls from "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." to "..worldeditadditions.vector.tostring(worldedit.pos1[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. time_taken .. "s"
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
 	end
 })
