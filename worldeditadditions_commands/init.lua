@@ -29,6 +29,8 @@ dofile(we_c.modpath.."/commands/convolve.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 
+dofile(we_c.modpath.."/commands/subdivide.lua")
+
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
 if minetest.get_modpath("bonemeal") then
 	dofile(we_c.modpath.."/commands/bonemeal.lua")
