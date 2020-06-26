@@ -35,9 +35,9 @@ worldedit.register_command("floodfill", {
 		return math.ceil(((4 * math.pi * (tonumber(radius) ^ 3)) / 3) / 2)
 	end,
 	func = function(name, replace_node, radius)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		local nodes_replaced = worldeditadditions.floodfill(worldedit.pos1[name], radius, replace_node)
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		if nodes_replaced == false then
 			return false, "Error: The search node is the same as the replace node."

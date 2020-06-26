@@ -23,9 +23,9 @@ worldedit.register_command("layers", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, node_list)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		local changes = worldeditadditions.layers(worldedit.pos1[name], worldedit.pos2[name], node_list)
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //layers at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.replaced .. " nodes and skipping " .. changes.skipped_columns .. " columns in " .. time_taken .. "s")
 		return true, changes.replaced .. " nodes replaced and " .. changes.skipped_columns .. " columns skipped in " .. time_taken .. "s"

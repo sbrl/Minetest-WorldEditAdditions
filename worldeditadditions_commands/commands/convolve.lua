@@ -50,7 +50,7 @@ worldedit.register_command("convolve", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, kernel_name, kernel_width, kernel_height, sigma)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		
 		print("[exec] kernel_width", kernel_width, "kernel_height", kernel_height)
 		local success, kernel = worldeditadditions.get_conv_kernel(kernel_name, kernel_width, kernel_height, sigma)
@@ -65,7 +65,7 @@ worldedit.register_command("convolve", {
 			kernel, kernel_size
 		)
 		
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		
 		minetest.log("action", name.." used //convolve at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", adding "..stats.added.." nodes and removing "..stats.removed.." nodes in "..time_taken.."s")

@@ -24,9 +24,9 @@ worldedit.register_command("walls", {
 		return worldedit.volume(pos1, pos2) - worldedit.volume(pos1, pos3)
 	end,
 	func = function(name, target_node)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		local success, replaced = worldeditadditions.walls(worldedit.pos1[name], worldedit.pos2[name], target_node)
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //walls from "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." to "..worldeditadditions.vector.tostring(worldedit.pos1[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 		return true, replaced .. " nodes replaced in " .. time_taken .. "s"

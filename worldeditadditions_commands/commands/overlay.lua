@@ -20,9 +20,9 @@ worldedit.register_command("overlay", {
 		return (pos2.x - pos1.x) * (pos2.y - pos1.y)
 	end,
 	func = function(name, node_list)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		local changes = worldeditadditions.overlay(worldedit.pos1[name], worldedit.pos2[name], node_list)
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //overlay at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.updated .. " nodes and skipping " .. changes.skipped_columns .. " columns in " .. time_taken .. "s")
 		return true, changes.updated .. " nodes replaced and " .. changes.skipped_columns .. " columns skipped in " .. time_taken .. "s"

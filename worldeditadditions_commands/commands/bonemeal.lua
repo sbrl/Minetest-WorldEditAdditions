@@ -46,14 +46,14 @@ worldedit.register_command("bonemeal", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name]) / 2
 	end,
 	func = function(name, strength, chance)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		local success, nodes_bonemealed, candidates = worldeditadditions.bonemeal(worldedit.pos1[name], worldedit.pos2[name], strength, chance)
 		if not success then
 			-- nodes_bonemealed is an error message here because success == false
 			return success, nodes_bonemealed
 		end
 		local percentage = worldeditadditions.round((nodes_bonemealed / candidates)*100, 2)
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //bonemeal at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken.."s")
 		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..time_taken.."s"

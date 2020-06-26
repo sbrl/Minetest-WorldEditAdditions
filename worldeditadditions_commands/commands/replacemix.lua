@@ -64,7 +64,7 @@ worldedit.register_command("replacemix", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, target_node, target_node_chance, replace_nodes)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		
 		local success, changed, candidates, distribution = worldeditadditions.replacemix(
 			worldedit.pos1[name], worldedit.pos2[name],
@@ -83,7 +83,7 @@ worldedit.register_command("replacemix", {
 			changed
 		)
 		
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		
 		minetest.log("action", name .. " used //replacemix at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. changed.." nodes (out of "..nodes_total.." nodes) in "..time_taken.."s")

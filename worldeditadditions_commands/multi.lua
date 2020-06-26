@@ -38,12 +38,12 @@ minetest.register_chatcommand("/multi", {
 	func = function(name, params_text)
 		
 		local i = 1 -- For feedback only
-		local master_start_time = os.clock()
+		local master_start_time = worldeditadditions.get_ms_time()
 		local times = {}
 		
 		-- Things start at 1, not 0 in Lua :-(
 		for command in explode(" /", string.sub(params_text, 2)) do
-			local start_time = os.clock()
+			local start_time = worldeditadditions.get_ms_time()
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
 			if not found then command_name = command end
 			command_name = trim(command_name)
@@ -61,11 +61,11 @@ minetest.register_chatcommand("/multi", {
 			minetest.log("action", name.." runs "..command)
 			cmd.func(name, args)
 			
-			times[#times + 1] = (os.clock() - start_time) * 1000
+			times[#times + 1] = (worldeditadditions.get_ms_time() - start_time) * 1000
 			i = i + 1
 		end
 		
-		local total_time = (os.clock() - master_start_time) * 1000
+		local total_time = (worldeditadditions.get_ms_time() - master_start_time) * 1000
 		local done_message = {}
 		table.insert(done_message,
 			string.format("Executed %d commands in %s (",

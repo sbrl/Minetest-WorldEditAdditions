@@ -43,9 +43,9 @@ worldedit.register_command("ellipsoid", {
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
 	end,
 	func = function(name, target_node, radius)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		local replaced = worldeditadditions.ellipsoid(worldedit.pos1[name], radius, target_node, false)
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //ellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 		return true, replaced .. " nodes replaced in " .. time_taken .. "s"
@@ -66,9 +66,9 @@ worldedit.register_command("hollowellipsoid", {
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
 	end,
 	func = function(name, target_node, radius)
-		local start_time = os.clock()
+		local start_time = worldeditadditions.get_ms_time()
 		local replaced = worldeditadditions.ellipsoid(worldedit.pos1[name], radius, target_node, true)
-		local time_taken = os.clock() - start_time
+		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //hollowellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 		return true, replaced .. " nodes replaced in " .. time_taken .. "s"

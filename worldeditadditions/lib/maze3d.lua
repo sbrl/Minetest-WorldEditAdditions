@@ -19,7 +19,7 @@ function printspace3d(space, w, h, d)
 end
 
 -- Initialise the world
-start_time = os.clock()
+start_time = worldeditadditions.get_ms_time()
 
 local function generate_maze3d(seed, width, height, depth, path_length, path_width, path_depth)
 	
