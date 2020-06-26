@@ -33,6 +33,7 @@ If you can dream of it, it probably belongs here!
 
 ### Extras
  - [`//multi <command_a> <command_b> ....`](#multi-command_a-command_b-command_c-)
+ - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](#subdivide-size_x-size_y-size_z-cmd_name-args)
  - [`//y`](#y)
  - [`//n`](#n)
 
