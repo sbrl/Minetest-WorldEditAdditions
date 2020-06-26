@@ -19,6 +19,20 @@ local function will_trigger_saferegion(name, cmd_name, args)
 	return false
 end
 
+-- Counts the number of chunks in the given area.
+-- TODO: Do the maths properly here instead of using a loop - the loop is *very* inefficient - especially for large areas
+local function count_chunks(pos1, pos2, chunk_size)
+	local count = 0
+	for z = pos2.z, pos1.z, -chunk_size.z do
+		for y = pos2.y, pos1.y, -chunk_size.y do
+			for x = pos2.x, pos1.x, -chunk_size.x do
+				count = count + 1
+			end
+		end
+	end
+	return count
+end
+
 worldedit.register_command("subdivide", {
 	params = "<size_x> <size_y> <size_z> <command> <params>",
 	description = "Subdivides the given worldedit area into chunks and runs a worldedit command multiple times to cover the defined region. Note that the given command must NOT be prepended with any forward slashes - just like //cubeapply.",
@@ -69,12 +83,15 @@ worldedit.register_command("subdivide", {
 		end
 		
 		local i = 1
-		local chunks_total = math.ceil((pos2.x - pos1.x) / (chunk_size.x - 1))
-			* math.ceil((pos2.y - pos1.y) / (chunk_size.y - 1))
-			* math.ceil((pos2.z - pos1.z) / (chunk_size.z - 1))
+		-- local chunks_total = math.ceil((pos2.x - pos1.x) / (chunk_size.x - 1))
+		-- 	* math.ceil((pos2.y - pos1.y) / (chunk_size.y - 1))
+		-- 	* math.ceil((pos2.z - pos1.z) / (chunk_size.z - 1))
+		local chunks_total = count_chunks(pos1, pos2, chunk_size)
+		
+		local msg_prefix = "[ subdivide | "..table.concat({cmd_name, args}, " ").." ] "
 		
 		worldedit.player_notify(name,
-			"[ subdivide | "..cmd_name.." "..args.." ] Starting - "
+			msg_prefix.."Starting - "
 			-- ..wea.vector.tostring(pos1).." - "..wea.vector.tostring(pos2)
 			.." chunk size: "..wea.vector.tostring(chunk_size)
 			..", "..chunks_total.." chunks total"
@@ -121,7 +138,7 @@ worldedit.register_command("subdivide", {
 					-- Send updates every 2 seconds, and after the first 3 chunks are done
 					if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or i == 3 then
 						worldedit.player_notify(name,
-							"[ //subdivide "..cmd_name.." "..args.." ] "
+							msg_prefix
 							..i.." / "..chunks_total.." (~"
 							..string.format("%.2f", (i / chunks_total) * 100).."%) complete | "
 							.."last chunk: "..wea.human_time(time_this)
@@ -142,6 +159,6 @@ worldedit.register_command("subdivide", {
 		
 		
 		minetest.log("action", name.." used //subdivide at "..wea.vector.tostring(pos1).." - "..wea.vector.tostring(pos2)..", with "..i.." chunks and "..worldedit.volume(pos1, pos2).." total nodes in "..time_total.."s")
-		return true, "[ subdivide | "..cmd_name.." "..args.." ] "..i.." chunks processed in "..wea.human_time(time_total)
+		return true, msg_prefix.."Complete: "..i.." chunks processed in "..wea.human_time(time_total)
 	end
 })
