@@ -75,6 +75,10 @@ worldedit.register_command("subdivide", {
 		local time_total = worldeditadditions.get_ms_time()
 		
 		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
+		pos1 = worldeditadditions.shallowcopy(pos1)
+		pos2 = worldeditadditions.shallowcopy(pos2)
+		-- TODO: Need to clone pos1 & pos2 here, because pass-by-reference
+		-- TODO: We should clone further down too, just in case
 		local volume = worldedit.volume(pos1, pos2)
 		
 		local cmd = worldedit.registered_commands[cmd_name]
