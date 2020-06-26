@@ -1,21 +1,16 @@
 
 local function will_trigger_saferegion(name, cmd_name, args)
-	if not worldedit.registered_commands[cmd_name] then return nil end
-	if not worldedit.registered_commands[cmd_name].nodes_needed then return false end
-	local success, result = worldedit.registered_commands[cmd_name].nodes_needed(name, args)
-	-- BUG: nodes_needed here is returning nil for some reason:
-	--[[
-	ServerError: AsyncErr: ServerThread::run Lua: Runtime error from mod '' in callback on_chat_message(): ...tions/worldeditadditions_commands/commands/subdivide.lua:7: attempt to compare number with nil
-	stack traceback:
-		...tions/worldeditadditions_commands/commands/subdivide.lua:7: in function 'will_trigger_saferegion'
-		...tions/worldeditadditions_commands/commands/subdivide.lua:85: in function 'func'
-		...worldmods/Minetest-WorldEdit/worldedit_commands/init.lua:48: in function 'callback'
-		...worldmods/Minetest-WorldEdit/worldedit_commands/safe.lua:30: in function 'func'
-		...WorldEditAdditions/worldeditadditions_commands/multi.lua:62: in function 'func'
-		/usr/share/minetest/builtin/game/chat.lua:69: in function </usr/share/minetest/builtin/game/chat.lua:48>
-		/usr/share/minetest/builtin/game/register.lua:429: in function </usr/share/minetest/builtin/game/register.lua:413>
-	]]--
-	if not success then return nil end
+	if not worldedit.registered_commands[cmd_name] then return nil, "Error: That worldedit command could not be found (perhaps it hasn't been upgraded to worldedit.register_command() yet?)" end
+	local def = worldedit.registered_commands[cmd_name]
+	if not def.parse then return nil, "Error: No parse method found (this is a bug)." end
+	
+	local parsed = {def.parse(args)}
+	local parse_success = table.remove(parsed, 1)
+	if not success then return nil, table.remove(parsed, 1) end
+	
+	if not def.nodes_needed then return false end
+	local success, result = def.nodes_needed(name, unpack(parsed))
+	if not success then return nil, result end
 	if result > 10000 then return true end
 	return false
 end
