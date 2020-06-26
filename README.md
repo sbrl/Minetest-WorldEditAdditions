@@ -261,6 +261,22 @@ Counts all the nodes in the defined region and returns the result along with cal
 //count
 ```
 
+### `//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`
+Splits the current WorldEdit region into `(<size_x>, <size_y>, <size_z>)` sized chunks, and run `//<cmd_name> <args>` over each chunk. 
+
+Sometimes, we want to run a single command on a truly vast area. Usually, this results in running out of memory. If this was you, then this command is just what you need! It should be able to handle any sized region - the only limit is your patience for command to complete.....
+
+Note that this command only works with WorldEdit commands, and only those which require 2 points (e.g. `//torus` only requires a single point, so it wouldn't work very well - but `//set` or `//clearcut` would).
+
+Note also that `<cmd_name>` should _not_ be prefixed with _any_ forward  slashes - see the examples below.
+
+**Warning:** Once started, this command cannot be stopped without restarting your server! This is the case with all WorldEdit commands, but it's worth a special mention here.
+
+```
+//subdivide 10 10 10 set dirt
+//subdivice 25 25 25 fixlight
+```
+
 ### `//multi <command_a> <command_b> <command_c> .....`
 Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but does work with others too. Don't forget a space between commands!
 
