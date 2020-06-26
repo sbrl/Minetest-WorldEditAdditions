@@ -61,11 +61,11 @@ minetest.register_chatcommand("/multi", {
 			minetest.log("action", name.." runs "..command)
 			cmd.func(name, args)
 			
-			times[#times + 1] = (worldeditadditions.get_ms_time() - start_time) * 1000
+			times[#times + 1] = (worldeditadditions.get_ms_time() - start_time)
 			i = i + 1
 		end
 		
-		local total_time = (worldeditadditions.get_ms_time() - master_start_time) * 1000
+		local total_time = (worldeditadditions.get_ms_time() - master_start_time)
 		local done_message = {}
 		table.insert(done_message,
 			string.format("Executed %d commands in %s (",

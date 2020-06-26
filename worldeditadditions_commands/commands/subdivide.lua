@@ -62,20 +62,29 @@ worldedit.register_command("subdivide", {
 		
 		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
 		local volume = worldedit.volume(pos1, pos2)
+		
 		local cmd = worldedit.registered_commands[cmd_name]
 		if not minetest.check_player_privs(name, cmd.privs) then
 			return false, "Error: Your privileges are unsufficient to run '"..cmd_name.."'."
 		end
 		
+		local i = 1
+		local chunks_total = math.ceil((pos2.x - pos1.x) / (chunk_size.x - 1))
+			* math.ceil((pos2.y - pos1.y) / (chunk_size.y - 1))
+			* math.ceil((pos2.z - pos1.z) / (chunk_size.z - 1))
+		
+		worldedit.player_notify(name,
+			"[ subdivide | "..cmd_name.." "..args.." ] Starting - "
+			-- ..wea.vector.tostring(pos1).." - "..wea.vector.tostring(pos2)
+			.." chunk size: "..wea.vector.tostring(chunk_size)
+			..", "..chunks_total.." chunks total"
+			.." ("..volume.." nodes)"
+		)
+		
 		chunk_size.x = chunk_size.x - 1 -- WorldEdit regions are inclusive
 		chunk_size.y = chunk_size.y - 1 -- WorldEdit regions are inclusive
 		chunk_size.z = chunk_size.z - 1 -- WorldEdit regions are inclusive
 		
-		worldedit.player_notify(name, wea.vector.tostring(pos1).." - "..wea.vector.tostring(pos2).." chunk size: "..wea.vector.tostring(chunk_size))
-		local i = 1
-		local chunks_total = math.ceil((pos2.x - pos1.x) / chunk_size.x)
-			* math.ceil((pos2.y - pos1.y) / chunk_size.y)
-			* math.ceil((pos2.z - pos1.z) / chunk_size.z)
 		
 		local time_last_msg = worldeditadditions.get_ms_time()
 		local time_chunks = {}
@@ -94,25 +103,28 @@ worldedit.register_command("subdivide", {
 					if c_pos1.z < pos1.z then c_pos1.z = pos1.z end
 					
 					local time_this = worldeditadditions.get_ms_time()
+					worldedit.player_notify_suppress(name)
 					worldedit.pos1[name] = c_pos1
 					worldedit.pos2[name] = c_pos2
 					cmd.func(name, args)
 					if will_trigger_saferegion(name, cmd_name, args) then
 						minetest.chatcommands["/y"].func()
 					end
+					worldedit.player_notify_unsuppress(name)
 					time_this = worldeditadditions.get_ms_time() - time_this
 					table.insert(time_chunks, time_this)
 					
 					local time_average = wea.average(time_chunks)
 					local eta = (chunks_total - i) * time_average
+					print("eta", eta, "time_average", time_average, "chunks_left", chunks_total - i)
 					
-					if worldeditadditions.get_ms_time() - time_last_msg > 5 * 1000 then
+					-- Send updates every 2 seconds, and after the first 3 chunks are done
+					if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or i == 3 then
 						worldedit.player_notify(name,
 							"[ //subdivide "..cmd_name.." "..args.." ] "
 							..i.." / "..chunks_total.." (~"
 							..string.format("%.2f", (i / chunks_total) * 100).."%) complete | "
-							.."this chunk: "..wea.human_time(time_this)
-							.."("..worldedit.volume(c_pos1, c_pos2).." nodes)"
+							.."last chunk: "..wea.human_time(time_this)
 							..", average: "..wea.human_time(time_average)
 							..", ETA: ~"..wea.human_time(eta)
 						)
@@ -123,12 +135,13 @@ worldedit.register_command("subdivide", {
 				end
 			end
 		end
+		i = i - 1
 		worldedit.pos1[name] = pos1
 		worldedit.pos2[name] = pos2
 		time_total = worldeditadditions.get_ms_time() - time_total
 		
 		
 		minetest.log("action", name.." used //subdivide at "..wea.vector.tostring(pos1).." - "..wea.vector.tostring(pos2)..", with "..i.." chunks and "..worldedit.volume(pos1, pos2).." total nodes in "..time_total.."s")
-		return true, "/subdivide complete"
+		return true, "[ subdivide | "..cmd_name.." "..args.." ] "..i.." chunks processed in "..wea.human_time(time_total)
 	end
 })

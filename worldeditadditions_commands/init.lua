@@ -10,6 +10,9 @@ local we_c = worldeditadditions_commands
 
 we_c.modpath = minetest.get_modpath("worldeditadditions_commands")
 
+dofile(we_c.modpath.."/player_notify_suppress.lua")
+
+
 dofile(we_c.modpath.."/multi.lua")
 
 -- We no longer need our own implementation of safe_region thanks to @sfan5's
