@@ -7,7 +7,7 @@ It's about time I started a changelog! This will serve from now on as the master
  - Far wand: Notify player when setting pos1 and pos2
  - Make timings more accurate (use `minetest.get_us_time()` instead of `os.clock()`)
  - Add _experimental_ `//subdivide` command
- - Attempt to fix a crash on startup due to a dependency issue
+ - Attempt to fix a crash on startup due to a dependency issue (#21)
 
 
 
