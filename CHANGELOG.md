@@ -8,3 +8,29 @@ It's about time I started a changelog! This will serve from now on as the master
  - Make timings more accurate (use `minetest.get_us_time()` instead of `os.clock()`)
  - Add _experimental_ `//subdivide` command
  - Attempt to fix a crash on startup due to a dependency issue
+
+
+
+## Release text template
+The text below is used as a template when making releases.
+
+--------
+
+INTRO
+
+See below for instructions on how to update.
+
+CHANGELOG HERE
+
+
+## Updating
+Updating depends on how you installed WorldEditAdditions.
+
+ - UI in Minetest: There should be an update button for you to click in the mod menu
+ - ContentDB: Download the latest update from [here](https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/)
+ - Git: `cd` to the WorldEditAdditions directory and run `git pull`
+
+After installing the update, don't forget to restart your client and / or server.
+
+
+--------
