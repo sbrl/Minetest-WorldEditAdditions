@@ -65,14 +65,14 @@ end
 -- @param	id		number	The content/node id to check.
 -- @return	bool	Whether the given node/content id is a liquid-ish node or not.
 function worldeditadditions.is_liquidlike(id)
-	print("[is_liquidlike]")
+	-- print("[is_liquidlike]")
 	if id == node_id_ignore then return false end
 	
 	local node_name = minetest.get_name_from_content_id(id)
 	if node_name == nil or not minetest.registered_nodes[node_name] then return false end
 	
 	local liquidtype = minetest.registered_nodes[node_name].liquidtype
-	print("[is_liquidlike]", "id", id, "liquidtype", liquidtype)
+	-- print("[is_liquidlike]", "id", id, "liquidtype", liquidtype)
 	
 	if liquidtype == nil or liquidtype == "none" then return false end
 	-- If it's not none, then it has to be a liquid as the only other values are source and flowing
