@@ -39,7 +39,7 @@ local function step(params)
 	
 	local cmd = minetest.chatcommands[params.cmd_name]
 	
-	minetest.log("action", params.name.." runs "..full_cmd.." (time "..tostring(params.i).." of "..tostring(times)..")")
+	minetest.log("action", params.name.." runs "..full_cmd.." (time "..tostring(params.i).." of "..tostring(params.count)..")")
 	cmd.func(params.name, params.args)
 	
 	
