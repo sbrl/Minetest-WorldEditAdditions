@@ -33,6 +33,7 @@ If you can dream of it, it probably belongs here!
 
 ### Extras
  - [`//multi <command_a> <command_b> ....`](#multi-command_a-command_b-command_c-)
+ - [`//many <times> <command>`]()
  - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](#subdivide-size_x-size_y-size_z-cmd_name-args) **experimental**
  - [`//y`](#y)
  - [`//n`](#n)
@@ -286,6 +287,17 @@ Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but
 //multi //1 //hollowtorus 30 5 stone //hollowtorus 20 3 dirt //torus 10 2 dirt_with_grass
 //multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //2 //sphere 8 air //shift down 1 //floodfill //reset
 ```
+
+### `//many <times> <command>`
+Executes a single chat command many times in a row. Uses `minetest.after()` to yield to the main server thread to allow other things to happen at the same time, so technically you could have multiple `//many` calls going at once (but multithreading support is out of reach, so only a single one will be executing at the same time).
+
+Note that this isn't necessarily limited to executing WorldEdit / WorldEditAdditions commands. Combine with `//multi` (see above) execute multiple commands at once for even more power and flexibility!
+
+```
+//many 10 //bonemeal 3 100
+//many 100 //multi //1 //2 //outset 20 //set dirt
+```
+
 
 ### `//y`
 Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.

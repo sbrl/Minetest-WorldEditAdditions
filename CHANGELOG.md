@@ -2,6 +2,10 @@
 It's about time I started a changelog! This will serve from now on as the master changelog for WorldEditAdditions.
 
 
+## v1.9 (unreleased)
+ - Add `//many` for executing a command many times in a row
+
+
 ## v1.8: The Quality of Life Update (17th July 2020)
  - Update `//multi` to display human readable times (e.g. `2.11mins` instead of `126600ms`)
  - Far wand: Notify player when setting pos1 and pos2

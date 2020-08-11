@@ -14,6 +14,7 @@ dofile(we_c.modpath.."/player_notify_suppress.lua")
 
 
 dofile(we_c.modpath.."/multi.lua")
+dofile(we_c.modpath.."/many.lua")
 
 -- We no longer need our own implementation of safe_region thanks to @sfan5's
 -- suggestion in issue #5 - yay!
