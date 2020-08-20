@@ -11,6 +11,7 @@ dofile(worldeditadditions.modpath.."/utils/strings.lua")
 dofile(worldeditadditions.modpath.."/utils/numbers.lua")
 dofile(worldeditadditions.modpath.."/utils/nodes.lua")
 dofile(worldeditadditions.modpath.."/utils/tables.lua")
+dofile(worldeditadditions.modpath.."/utils/terrain.lua")
 dofile(worldeditadditions.modpath.."/utils/raycast_adv.lua") -- For the farwand
 
 dofile(worldeditadditions.modpath.."/utils.lua")
