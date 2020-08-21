@@ -16,12 +16,12 @@ end
 -- This method does *not* mutate.
 -- @param	v	Vector	The vector to calculate from.
 -- @return	Vector		A new normalised vector.
-function worldeditadditions.vector.normalise(v)
-	local length = math.sqrt(worldeditadditions.lengthsquared(v))
+function worldeditadditions.vector.normalize(v)
+	local length = math.sqrt(worldeditadditions.vector.lengthsquared(v))
 	return {
-		x = x / length,
-		y = y / length,
-		z = z / length
+		x = v.x / length,
+		y = v.y / length,
+		z = v.z / length
 	}
 end
 

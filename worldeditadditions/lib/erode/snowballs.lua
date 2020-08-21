@@ -1,32 +1,3 @@
---[[
-2D erosion algorithm based on snowballs
-Note that this *mutates* the given heightmap.
-@source https://jobtalle.com/simulating_hydraulic_erosion.html
-
-]]--
-function worldeditadditions.erode.snowballs(heightmap, heightmap_size, params)
-	-- Apply the default settings
-	worldeditadditions.table_apply({
-		rate_deposit = 0.03,
-		rate_erosion = 0.04,
-		friction = 0.07,
-		speed = 0.15,
-		radius = 0.8,
-		snowball_max_steps = 80,
-		scale_iterations = 0.04,
-		drops_per_cell = 0.4,
-		snowball_count = 50000
-	}, params)
-	
-	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
-	
-	for i = 1, params.snowball_count do
-		snowball(
-			heightmap, normals, heightmap_size,
-			{ x = math.random() }
-		)
-	end
-end
 
 local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 	local offset = { -- Random jitter - apparently helps to avoid snowballs from entrenching too much
@@ -70,5 +41,35 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 	-- something like .141592671 of a node
 	for i,v in ipairs(heightmap) do
 		heightmap[i] = math.floor(heightmap[i] + 0.5)
+	end
+end
+
+--[[
+2D erosion algorithm based on snowballs
+Note that this *mutates* the given heightmap.
+@source https://jobtalle.com/simulating_hydraulic_erosion.html
+
+]]--
+function worldeditadditions.erode.snowballs(heightmap, heightmap_size, params)
+	-- Apply the default settings
+	worldeditadditions.table_apply({
+		rate_deposit = 0.03,
+		rate_erosion = 0.04,
+		friction = 0.07,
+		speed = 0.15,
+		radius = 0.8,
+		snowball_max_steps = 80,
+		scale_iterations = 0.04,
+		drops_per_cell = 0.4,
+		snowball_count = 50000
+	}, params)
+	
+	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
+	
+	for i = 1, params.snowball_count do
+		snowball(
+			heightmap, normals, heightmap_size,
+			{ x = math.random() }
+		)
 	end
 end

@@ -86,6 +86,7 @@ end
 -- @param	tbl		number[]	The ZERO-indexed list of numbers
 -- @param	width	number		The width of 2D array.
 function worldeditadditions.print_2d(tbl, width)
+	print("==== count: "..#tbl..", width:"..width.." ====")
 	local display_width = 1
 	for _i,value in pairs(tbl) do
 		display_width = math.max(display_width, #tostring(value))
@@ -207,6 +208,32 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list)
 	end
 	
 	return true, result
+end
+
+function worldeditadditions.parse_map(params_text)
+	local result = {}
+	local parts = worldeditadditions.split(params_text, "%s+", false)
+	
+	local last_key = nil
+	for i, part in ipairs(parts) do
+		if i % 2 == 1 then
+			-- Try converting to a number to see if it works
+			local part_converted = tonumber(part)
+			if as_number == nil then part_converted = part end
+			result[last_key] = part
+		else
+			last_key = part
+		end
+	end
+	return true, result
+end
+
+function worldeditadditions.map_stringify(map)
+	local result = {}
+	for key, value in pairs(map) do
+		table.insert(key.."\t"..value)
+	end
+	return table.concat(result, "\n")
 end
 
 --- Converts a float milliseconds into a human-readable string.

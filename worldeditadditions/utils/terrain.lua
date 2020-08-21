@@ -45,9 +45,10 @@ end
 -- @param	heightmap_size	int[]	The size of the heightmap in the form [ z, x ]
 -- @return	Vector[]		The calculated normal map, in the same form as the input heightmap. Each element of the array is a 3D Vector (i.e. { x, y, z }) representing a normal.
 function worldeditadditions.calculate_normals(heightmap, heightmap_size)
+	print("heightmap_size: "..heightmap_size[1].."x"..heightmap_size[0])
 	local result = {}
-	for z = heightmap_size[0], 0, -1 do
-		for x = heightmap_size[1], 0, -1 do
+	for z = heightmap_size[0]-1, 0, -1 do
+		for x = heightmap_size[1]-1, 0, -1 do
 			-- Algorithm ref https://stackoverflow.com/a/13983431/1460422
 			-- Also ref Vector.mjs, which I implemented myself (available upon request)
 			local hi = z*heightmap_size[1] + x
@@ -57,9 +58,14 @@ function worldeditadditions.calculate_normals(heightmap, heightmap_size)
 			local left = heightmap[hi]
 			local right = heightmap[hi]
 			if z - 1 > 0 then up = heightmap[(z-1)*heightmap_size[1] + x] end
-			if z + 1 < heightmap_size[1] then down = heightmap[(z+1)*heightmap_size[1] + x] end
+			if z + 1 < heightmap_size[0]-1 then down = heightmap[(z+1)*heightmap_size[1] + x] end
 			if x - 1 > 0 then left = heightmap[z*heightmap_size[1] + (x-1)] end
-			if x + 1 < heightmap_size[0] then right = heightmap[z*heightmap_size[1] + (x+1)] end
+			if x + 1 < heightmap_size[1]-1 then right = heightmap[z*heightmap_size[1] + (x+1)] end
+			
+			print("[normals] UP	| index", (z-1)*heightmap_size[1] + x, "z", z, "z-1", z - 1, "up", up, "limit", 0)
+			print("[normals] DOWN	| index", (z+1)*heightmap_size[1] + x, "z", z, "z+1", z + 1, "down", down, "limit", heightmap_size[1]-1)
+			print("[normals] LEFT	| index", z*heightmap_size[1] + (x-1), "x", x, "x-1", x - 1, "left", left, "limit", 0)
+			print("[normals] RIGHT	| index", z*heightmap_size[1] + (x+1), "x", x, "x+1", x + 1, "right", right, "limit", heightmap_size[1]-1)
 			
 			result[hi] = worldeditadditions.vector.normalize({
 				x = left - right,
@@ -69,4 +75,48 @@ function worldeditadditions.calculate_normals(heightmap, heightmap_size)
 		end
 	end
 	return result
+end
+
+function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heightmap_old, heightmap_new, heightmap_size)
+	local stats = { added = 0, removed = 0 }
+	local node_id_air = minetest.get_content_id("air")
+	
+	for z = heightmap_size[0], 0, -1 do
+		for x = heightmap_size[1], 0, -1 do
+			local hi = z*heightmap_size[1] + x
+			
+			local height_old = heightmap[hi]
+			local height_new = heightmap_new[hi]
+			-- print("[conv/save] hi", hi, "height_old", heightmap[hi], "height_new", heightmap_new[hi], "z", z, "x", x, "pos1.y", pos1.y)
+			
+			-- Lua doesn't have a continue statement :-/
+			if height_old == height_new then
+				-- noop
+			elseif height_new < height_old then
+				stats.removed = stats.removed + (height_old - height_new)
+				local y = height_new
+				while y < height_old do
+					local ci = area:index(pos1.x + x, pos1.y + y, pos1.z + z)
+					-- print("[conv/save] remove at y", y, "→", pos1.y + y, "current:", minetest.get_name_from_content_id(data[ci]))
+					data[ci] = node_id_air
+					y = y + 1
+				end
+			else -- height_new > height_old
+				-- We subtract one because the heightmap starts at 1 (i.e. 1 = 1 node in the column), but the selected region is inclusive
+				local node_id = data[area:index(pos1.x + x, pos1.y + (height_old - 1), pos1.z + z)]
+				-- print("[conv/save] filling with ", node_id, "→", minetest.get_name_from_content_id(node_id))
+				
+				stats.added = stats.added + (height_new - height_old)
+				local y = height_old
+				while y < height_new do
+					local ci = area:index(pos1.x + x, pos1.y + y, pos1.z + z)
+					-- print("[conv/save] add at y", y, "→", pos1.y + y, "current:", minetest.get_name_from_content_id(data[ci]))
+					data[ci] = node_id
+					y = y + 1
+				end
+			end
+		end
+	end
+	
+	return true, stats
 end
