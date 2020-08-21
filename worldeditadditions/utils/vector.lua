@@ -8,6 +8,7 @@ end
 -- @param	v	Vector	The vector to operate on
 -- @return	number		The length of the given vector squared
 function worldeditadditions.vector.lengthsquared(v)
+	if not v.y then return v.x*v.x + v.z*v.z end
 	return v.x*v.x + v.y*v.y + v.z*v.z
 end
 
@@ -18,6 +19,10 @@ end
 -- @return	Vector		A new normalised vector.
 function worldeditadditions.vector.normalize(v)
 	local length = math.sqrt(worldeditadditions.vector.lengthsquared(v))
+	if not v.y then return {
+		x = v.x / length,
+		z = v.z / length
+	} end
 	return {
 		x = v.x / length,
 		y = v.y / length,

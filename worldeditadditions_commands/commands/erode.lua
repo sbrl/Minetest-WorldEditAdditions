@@ -1,8 +1,8 @@
---  ██████  ██    ██ ███████ ██████  ██       █████  ██    ██
--- ██    ██ ██    ██ ██      ██   ██ ██      ██   ██  ██  ██
--- ██    ██ ██    ██ █████   ██████  ██      ███████   ████
--- ██    ██  ██  ██  ██      ██   ██ ██      ██   ██    ██
---  ██████    ████   ███████ ██   ██ ███████ ██   ██    ██
+-- ███████ ██████   ██████  ██████  ███████
+-- ██      ██   ██ ██    ██ ██   ██ ██
+-- █████   ██████  ██    ██ ██   ██ █████
+-- ██      ██   ██ ██    ██ ██   ██ ██
+-- ███████ ██   ██  ██████  ██████  ███████
 worldedit.register_command("erode", {
 	params = "[<snowballs|...> [<key_1> [<vaue_1>]] [<key_2> [<value_2>]] ...]",
 	description = "Runs the specified erosion algorithm over the given defined region. This may occur in 2d or 3d. Currently implemented algorithms: snowballs (default;2d hydraulic-like). Also optionally takes an arbitrary set of key - value pairs representing parameters to pass to the algorithm. See the full documentation for details.",
@@ -35,6 +35,7 @@ worldedit.register_command("erode", {
 			worldedit.pos1[name], worldedit.pos2[name],
 			algorithm, params
 		)
+		if not success then return success, stats end
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //erode "..algorithm.." at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", adding " .. stats.added .. " nodes and removing " .. stats.removed .. " nodes in " .. time_taken .. "s")

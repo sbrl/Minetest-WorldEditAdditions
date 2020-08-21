@@ -16,12 +16,12 @@ function worldeditadditions.conv.convolve(heightmap, heightmap_size, matrix, mat
 	local border_size = {}
 	border_size[0] = (matrix_size[0]-1) / 2		-- height
 	border_size[1] = (matrix_size[1]-1) / 2		-- width
-	print("[convolve] matrix_size", matrix_size[0], matrix_size[1])
-	print("[convolve] border_size", border_size[0], border_size[1])
-	print("[convolve] heightmap_size: ", heightmap_size[0], heightmap_size[1])
-	
-	print("[convolve] z: from", (heightmap_size[0]-border_size[0]) - 1, "to", border_size[0], "step", -1)
-	print("[convolve] x: from", (heightmap_size[1]-border_size[1]) - 1, "to", border_size[1], "step", -1)
+	-- print("[convolve] matrix_size", matrix_size[0], matrix_size[1])
+	-- print("[convolve] border_size", border_size[0], border_size[1])
+	-- print("[convolve] heightmap_size: ", heightmap_size[0], heightmap_size[1])
+	-- 
+	-- print("[convolve] z: from", (heightmap_size[0]-border_size[0]) - 1, "to", border_size[0], "step", -1)
+	-- print("[convolve] x: from", (heightmap_size[1]-border_size[1]) - 1, "to", border_size[1], "step", -1)
 	
 	-- Convolve over only the bit that allows us to use the full convolution matrix
 	for z = (heightmap_size[0]-border_size[0]) - 1, border_size[0], -1 do

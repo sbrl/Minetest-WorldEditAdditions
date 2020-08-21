@@ -216,7 +216,7 @@ function worldeditadditions.parse_map(params_text)
 	
 	local last_key = nil
 	for i, part in ipairs(parts) do
-		if i % 2 == 1 then
+		if i % 2 == 0 then -- Lua starts at 1 :-/
 			-- Try converting to a number to see if it works
 			local part_converted = tonumber(part)
 			if as_number == nil then part_converted = part end
