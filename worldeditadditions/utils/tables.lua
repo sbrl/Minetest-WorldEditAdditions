@@ -21,10 +21,7 @@ end
 -- @param	source	table	The source to take values from
 -- @param	target	table	The target to write values to
 function worldeditadditions.table_apply(source, target)
-	print("[table_apply] start")
 	for key, value in pairs(source) do
-		print("[table_apply] Applying", key, "=", value)
 		target[key] = value
 	end
-	print("[table_apply] end")
 end

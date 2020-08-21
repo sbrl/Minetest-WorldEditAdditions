@@ -31,14 +31,14 @@ worldedit.register_command("erode", {
 	end,
 	func = function(name, algorithm, params)
 		local start_time = worldeditadditions.get_ms_time()
-		local success, stats = worldeditadditions.erode.run(
+		local success, msg, stats = worldeditadditions.erode.run(
 			worldedit.pos1[name], worldedit.pos2[name],
 			algorithm, params
 		)
-		if not success then return success, stats end
+		if not success then return success, msg end
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //erode "..algorithm.." at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", adding " .. stats.added .. " nodes and removing " .. stats.removed .. " nodes in " .. time_taken .. "s")
-		return true, stats.added .. " nodes added and " .. stats.removed .. " nodes removed in " .. worldeditadditions.human_time(time_taken)
+		return true, msg.."\n"..stats.added .. " nodes added and " .. stats.removed .. " nodes removed in " .. worldeditadditions.human_time(time_taken)
 	end
 })

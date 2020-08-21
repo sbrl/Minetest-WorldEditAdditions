@@ -84,14 +84,13 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		init_velocity = 0.25,
 		scale_iterations = 0.04,
 		maxdiff = 0.4,
-		count = 50000
+		count = 25000
 	}
 	-- Apply the default settings
 	worldeditadditions.table_apply(params_custom, params)
 	
-	print("[erode/snowballs] params: ")
-	print(worldeditadditions.map_stringify(params))
-	
+	-- print("[erode/snowballs] params: ")
+	-- print(worldeditadditions.map_stringify(params))
 	
 	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
 	
@@ -111,7 +110,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		if not success then return false, "Error: Failed at snowball "..i..":"..steps end
 	end
 	
-	print("[snowballs] "..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps, averaged ~"..worldeditadditions.average(stats_steps).."")
+	-- print("[snowballs] "..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps, averaged ~"..worldeditadditions.average(stats_steps).."")
 	
 	-- Round everything to the nearest int, since you can't really have
 	-- something like .141592671 of a node
@@ -130,14 +129,16 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		end
 	end
 	
-	local success, matrix = worldeditadditions.get_conv_kernel("gaussian", 3, 3)
-	if not success then return success, matrix end
-	matrix_size = {} matrix_size[0] = 3 matrix_size[1] = 3
-	worldeditadditions.conv.convolve(
-		heightmap, heightmap_size,
-		matrix,
-		matrix_size
-	)
+	if not params.noconv then
+		local success, matrix = worldeditadditions.get_conv_kernel("gaussian", 3, 3)
+		if not success then return success, matrix end
+		matrix_size = {} matrix_size[0] = 3 matrix_size[1] = 3
+		worldeditadditions.conv.convolve(
+			heightmap, heightmap_size,
+			matrix,
+			matrix_size
+		)
+	end
 	
-	return true, params.count.." snowballs simulated"
+	return true, ""..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps (average ~"..worldeditadditions.average(stats_steps)..")"
 end

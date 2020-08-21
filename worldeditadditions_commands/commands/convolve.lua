@@ -23,7 +23,6 @@ worldedit.register_command("convolve", {
 		end
 		if #parts >= 2 then
 			local parts_dimension = worldeditadditions.split(parts[2], ",%s*", false)
-			print("[convolve] [str]width", parts_dimension[1], "[str]height", parts_dimension[2])
 			width = tonumber(parts_dimension[1])
 			if not width then
 				return false, "Error: Invalid width (it must be a positive odd integer)."
@@ -52,7 +51,6 @@ worldedit.register_command("convolve", {
 	func = function(name, kernel_name, kernel_width, kernel_height, sigma)
 		local start_time = worldeditadditions.get_ms_time()
 		
-		print("[exec] kernel_width", kernel_width, "kernel_height", kernel_height)
 		local success, kernel = worldeditadditions.get_conv_kernel(kernel_name, kernel_width, kernel_height, sigma)
 		if not success then return success, kernel end
 		

@@ -20,23 +20,21 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 	
 	-- print("[erode.run] algorithm: "..algorithm..", params:");
 	-- print(worldeditadditions.map_stringify(params))
-	worldeditadditions.print_2d(heightmap, heightmap_size[1])
-	
+	-- worldeditadditions.print_2d(heightmap, heightmap_size[1])
+	local success, msg, stats
 	if algorithm == "snowballs" then
-		local success, msg = worldeditadditions.erode.snowballs(heightmap, heightmap_eroded, heightmap_size, region_height, params)
+		success, msg = worldeditadditions.erode.snowballs(heightmap, heightmap_eroded, heightmap_size, region_height, params)
 		if not success then return success, msg end
 	else
 		return false, "Error: Unknown algorithm '"..algorithm.."'. Currently implemented algorithms: snowballs (2d; hydraulic-like). Ideas for algorithms to implement are welcome!"
 	end
 	
-	local success, stats = worldeditadditions.apply_heightmap_changes(
+	success, stats = worldeditadditions.apply_heightmap_changes(
 		pos1, pos2, area, data,
 		heightmap, heightmap_eroded, heightmap_size
 	)
 	if not success then return success, stats end
 	worldedit.manip_helpers.finish(manip, data)
 	
-	print("[erode] stats")
-	print(worldeditadditions.map_stringify(stats))
-	return true, stats
+	return true, msg, stats
 end

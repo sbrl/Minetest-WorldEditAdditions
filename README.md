@@ -290,7 +290,8 @@ velocity_hist_count	| `float`	| 3					| The number of previous history values to
 init_velocity		| `float`	| 0.25				| The maximum random initial velocity of a snowball for each component of the velocity vector.
 scale_iterations	| `float`	| 0.04				| How much to scale erosion by as time goes on. Higher values mean that any given snowball will erode more later on as more steps pass.
 maxdiff				| `float`	| 0.4				| The maximum difference in height (between 0 and 1) that is acceptable as a percentage of the defined region's height.
-count				| `float`	| 50000				| The number of snowballs to simulate.
+count				| `float`	| 25000				| The number of snowballs to simulate.
+noconv				| any		| n/a				| When set to any value, disables to automatic 3x3 gaussian convolution.
 
 If you find any good combinations of these parameters, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or a PR!) and let me know! I'll include good combinations here.
 
