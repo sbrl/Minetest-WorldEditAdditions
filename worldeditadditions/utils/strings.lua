@@ -231,7 +231,7 @@ end
 function worldeditadditions.map_stringify(map)
 	local result = {}
 	for key, value in pairs(map) do
-		table.insert(key.."\t"..value)
+		table.insert(result, key.."\t"..value)
 	end
 	return table.concat(result, "\n")
 end

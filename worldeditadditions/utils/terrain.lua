@@ -62,16 +62,18 @@ function worldeditadditions.calculate_normals(heightmap, heightmap_size)
 			if x - 1 > 0 then left = heightmap[z*heightmap_size[1] + (x-1)] end
 			if x + 1 < heightmap_size[1]-1 then right = heightmap[z*heightmap_size[1] + (x+1)] end
 			
-			print("[normals] UP	| index", (z-1)*heightmap_size[1] + x, "z", z, "z-1", z - 1, "up", up, "limit", 0)
-			print("[normals] DOWN	| index", (z+1)*heightmap_size[1] + x, "z", z, "z+1", z + 1, "down", down, "limit", heightmap_size[1]-1)
-			print("[normals] LEFT	| index", z*heightmap_size[1] + (x-1), "x", x, "x-1", x - 1, "left", left, "limit", 0)
-			print("[normals] RIGHT	| index", z*heightmap_size[1] + (x+1), "x", x, "x+1", x + 1, "right", right, "limit", heightmap_size[1]-1)
+			-- print("[normals] UP	| index", (z-1)*heightmap_size[1] + x, "z", z, "z-1", z - 1, "up", up, "limit", 0)
+			-- print("[normals] DOWN	| index", (z+1)*heightmap_size[1] + x, "z", z, "z+1", z + 1, "down", down, "limit", heightmap_size[1]-1)
+			-- print("[normals] LEFT	| index", z*heightmap_size[1] + (x-1), "x", x, "x-1", x - 1, "left", left, "limit", 0)
+			-- print("[normals] RIGHT	| index", z*heightmap_size[1] + (x+1), "x", x, "x+1", x + 1, "right", right, "limit", heightmap_size[1]-1)
 			
 			result[hi] = worldeditadditions.vector.normalize({
 				x = left - right,
 				y = 2, -- Z & Y are flipped
 				z = down - up
 			})
+			
+			-- print("[normals] at "..hi.." ("..x..", "..z..") normal "..worldeditadditions.vector.tostring(result[hi]))
 		end
 	end
 	return result
@@ -85,9 +87,9 @@ function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heig
 		for x = heightmap_size[1], 0, -1 do
 			local hi = z*heightmap_size[1] + x
 			
-			local height_old = heightmap[hi]
+			local height_old = heightmap_old[hi]
 			local height_new = heightmap_new[hi]
-			-- print("[conv/save] hi", hi, "height_old", heightmap[hi], "height_new", heightmap_new[hi], "z", z, "x", x, "pos1.y", pos1.y)
+			-- print("[conv/save] hi", hi, "height_old", heightmap_old[hi], "height_new", heightmap_new[hi], "z", z, "x", x, "pos1.y", pos1.y)
 			
 			-- Lua doesn't have a continue statement :-/
 			if height_old == height_new then
