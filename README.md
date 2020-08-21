@@ -257,14 +257,14 @@ The sigma value is only applicable to the `gaussian` kernel, and can be thought 
 //convolve gaussian 5 0.2
 ```
 
-## `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+#### `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
 Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
 
 Currently implemented algorithms:
 
 Algorithm	| Mode	| Description
 ------------|-------|-------------------
-`snowballs`	| 2D	| The default. Simulates snowballs rolling across the terrain, eroding & depositing material. Then runs a 3x3 gaussian kernel over the result (i.e. like the `//conv` / `//smoothadv` command).
+`snowballs`	| 2D	| The default - based on [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html). Simulates snowballs rolling across the terrain, eroding & depositing material. Then runs a 3x3 gaussian kernel over the result (i.e. like the `//conv` / `//smoothadv` command).
 
 Usage examples:
 
@@ -276,7 +276,8 @@ Usage examples:
 
 Each of the algorithms above have 1 or more parameters that they support. These are detailed below.
 
-### Parameters: snowballs
+### Algorithm: `snowballs`
+Based on the algorithm detailed in [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html) ([direct link to the source code](https://github.com/jobtalle/HydraulicErosion/blob/master/js/archipelago/island/terrain/erosionHydraulic.js)), devised by [Job Talle](https://jobtalle.com/).
 
 Parameter			| Type		| Default Value		| Description
 --------------------|-----------|-------------------|------------------------
