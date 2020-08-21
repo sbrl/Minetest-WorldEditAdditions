@@ -27,6 +27,7 @@ If you can dream of it, it probably belongs here!
  - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
  - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](#convolve-kernel-widthheight-sigma)
+ - [`//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](#erode-snowballs-key_1-value_1-key_2-value_2-) **experimental**
 
 ### Statistics
  - [`//count`](#count)
@@ -53,7 +54,7 @@ Floods all connected nodes of the same type starting at _pos1_ with <replace_nod
 //floodfill glass 25
 ```
 
-### `//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`
+### `//overlay <node_name_a> [<chance[<snowballs|...> [<key_1> [<vaue_1>]] [<key_2> [<value_2>]] ...]_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`
 Places `<node_name_a>` in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with `<node_name_a>`. Optionally supports a mix of node names and chances, as `//mix` (WorldEdit) and `//replacemix` (WorldEditAdditions) does.
 
 Will also work in caves, as it scans columns of nodes from top to bottom, skipping every non-air node until it finds one - and only then will it start searching for a node to place the target node on top of.
@@ -255,6 +256,43 @@ The sigma value is only applicable to the `gaussian` kernel, and can be thought 
 //convolve gaussian 9 10
 //convolve gaussian 5 0.2
 ```
+
+## `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
+
+Currently implemented algorithms:
+
+Algorithm	| Mode	| Description
+------------|-------|-------------------
+`snowballs`	| 2D	| The default. Simulates snowballs rolling across the terrain, eroding & depositing material. Then runs a 3x3 gaussian kernel over the result (i.e. like the `//conv` / `//smoothadv` command).
+
+Usage examples:
+
+```
+//erode
+//erode snowballs
+//erode snowballs count 25000
+```
+
+Each of the algorithms above have 1 or more parameters that they support. These are detailed below.
+
+### Parameters: snowballs
+
+Parameter			| Type		| Default Value		| Description
+--------------------|-----------|-------------------|------------------------
+rate_deposit		| `float`	| 0.03				| The rate at which snowballs will deposit material
+rate_erosion		| `float`	| 0.04				| The rate at which snowballs will erode material
+friction			| `float`	| 0.07				| More friction slows snowballs down more.
+speed				| `float`	| 1					| Speed multiplier to apply to snowballs at each step.
+max_steps			| `float`	| 80				| The maximum number of steps to simulate each snowball for.
+velocity_hist_count	| `float`	| 3					| The number of previous history values to average when detecting whether a snowball has stopped or not
+init_velocity		| `float`	| 0.25				| The maximum random initial velocity of a snowball for each component of the velocity vector.
+scale_iterations	| `float`	| 0.04				| How much to scale erosion by as time goes on. Higher values mean that any given snowball will erode more later on as more steps pass.
+maxdiff				| `float`	| 0.4				| The maximum difference in height (between 0 and 1) that is acceptable as a percentage of the defined region's height.
+count				| `float`	| 50000				| The number of snowballs to simulate.
+
+If you find any good combinations of these parameters, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or a PR!) and let me know! I'll include good combinations here.
+
 
 ### `//count`
 Counts all the nodes in the defined region and returns the result along with calculated percentages (note that if the chat window used a monospace font, the returned result would be a perfect table. If someone has a ~~hack~~ solution to make the columns line up neatly, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) :D)
