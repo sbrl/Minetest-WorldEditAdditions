@@ -11,7 +11,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 
 
 ## Table of Contents
- - [Quick Command Reference](#quick-command-reference)
+ - [Quick Command Reference](#quick-command-reference) (including links to detailed explanations)
  - [Using the Far Wand](#far-wand)
  - [Troubleshooting](#troubleshooting)
  - [Contributing](#contributing)
