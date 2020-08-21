@@ -27,7 +27,7 @@ If you can dream of it, it probably belongs here!
  - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
  - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](#convolve-kernel-widthheight-sigma)
- - [`//erode [<snowballs|...> [<key_1> [<vaue_1>]] [<key_2> [<value_2>]] ...]`](#) **experimental**
+ - [`//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](#erode-snowballs-key_1-value_1-key_2-value_2-) **experimental**
 
 ### Statistics
  - [`//count`](#count)
@@ -257,7 +257,7 @@ The sigma value is only applicable to the `gaussian` kernel, and can be thought 
 //convolve gaussian 5 0.2
 ```
 
-## `//erode [<snowballs|...> [<key_1> [<vaue_1>]] [<key_2> [<value_2>]] ...]`
+## `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
 Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
 
 Currently implemented algorithms:
