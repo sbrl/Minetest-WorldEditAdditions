@@ -18,6 +18,7 @@ dofile(worldeditadditions.modpath.."/utils/raycast_adv.lua") -- For the farwand
 dofile(worldeditadditions.modpath.."/lib/floodfill.lua")
 dofile(worldeditadditions.modpath.."/lib/overlay.lua")
 dofile(worldeditadditions.modpath.."/lib/layers.lua")
+dofile(worldeditadditions.modpath.."/lib/fillcaves.lua")
 dofile(worldeditadditions.modpath.."/lib/ellipsoid.lua")
 dofile(worldeditadditions.modpath.."/lib/torus.lua")
 dofile(worldeditadditions.modpath.."/lib/walls.lua")
