@@ -5,6 +5,7 @@ It's about time I started a changelog! This will serve from now on as the master
 ## v1.9 (unreleased)
  - Add `//many` for executing a command many times in a row
  - Add **experimental** `//erode` command
+ - Add `//fillcaves` command - fills in all air nodes beneath non air-nodes
 
 
 ## v1.8: The Quality of Life Update (17th July 2020)

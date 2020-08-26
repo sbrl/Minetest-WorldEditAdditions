@@ -38,6 +38,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 ### Terrain
  - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
  - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
+ - [`//fillcaves [<node_name>]`](#fillcaves-node_name)
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](#convolve-kernel-widthheight-sigma)
  - [`//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](#erode-snowballs-key_1-value_1-key_2-value_2-) **experimental**
 
@@ -94,6 +95,15 @@ The list of nodes has a form similar to that of a chance list you might find in 
 //layers sand 5 sandstone 4 desert_stone 2
 //layers brick stone 3
 //layers cobble 2 dirt
+```
+
+### `//fillcaves [<node_name>]`
+Fills in all airlike nodes beneath non airlike nodes, which gives the effect of filling in caves. Defaults to filling in with stone, but this can be customised.
+
+```
+//fillcaves
+//fillcaves dirt
+//fillcaves brick
 ```
 
 ### `//ellipsoid <rx> <ry> <rz> <node_name>`
