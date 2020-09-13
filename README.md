@@ -12,8 +12,8 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 
 ## Table of Contents
  - [Quick Command Reference](#quick-command-reference) (including links to detailed explanations)
- - [Using the Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#far-wand)
- - [Detailed Chat Command Explanations](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md)
+ - [Using the Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#far-wand)
+ - [Detailed Chat Command Explanations](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md)
  - [Troubleshooting](#troubleshooting)
  - [Contributing](#contributing)
  - [WorldEditAdditions around the web](#worldeditadditions-around-the-web)
@@ -21,42 +21,42 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 
 
 ## Quick Command Reference
-The detailed explanations have moved! Check them out [here](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md), or click the links below.
+The detailed explanations have moved! Check them out [here](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md), or click the links below.
 
 ### Geometry
- - [`//ellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#ellipsoid-rx-ry-rz-node_name)
- - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#hollowellipsoid-rx-ry-rz-node_name)
- - [`//torus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#torus-major_radius-minor_radius-node_name)
- - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#hollowtorus-major_radius-minor_radius-node_name)
- - [`//walls <replace_node>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#walls-replace_node)
- - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#maze-replace_node-seed)
- - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#maze3d-replace_node-seed)
+ - [`//ellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#ellipsoid-rx-ry-rz-node_name)
+ - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#hollowellipsoid-rx-ry-rz-node_name)
+ - [`//torus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#torus-major_radius-minor_radius-node_name)
+ - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#hollowtorus-major_radius-minor_radius-node_name)
+ - [`//walls <replace_node>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#walls-replace_node)
+ - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#maze-replace_node-seed)
+ - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#maze3d-replace_node-seed)
 
 ### Misc
- - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#bonemeal-strength-chance)
- - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#replacemix-target_node-chance-replace_node_a-chance_a-replace_node_b-chance_b-replace_node_n-chance_n-)
- - [`//floodfill [<replace_node> [<radius>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#floodfill-replace_node-radius-floodfill)
+ - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#bonemeal-strength-chance)
+ - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#replacemix-target_node-chance-replace_node_a-chance_a-replace_node_b-chance_b-replace_node_n-chance_n-)
+ - [`//floodfill [<replace_node> [<radius>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#floodfill-replace_node-radius-floodfill)
 
 ### Terrain
- - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
- - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
- - [`//fillcaves [<node_name>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#fillcaves-node_name)
- - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#convolve-kernel-widthheight-sigma)
- - [`//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#erode-snowballs-key_1-value_1-key_2-value_2-) **experimental**
+ - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
+ - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
+ - [`//fillcaves [<node_name>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#fillcaves-node_name)
+ - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#convolve-kernel-widthheight-sigma)
+ - [`//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#erode-snowballs-key_1-value_1-key_2-value_2-) **experimental**
 
 ### Statistics
- - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#count)
+ - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#count)
 
 ### Extras
- - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
- - [`//many <times> <command>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#many-times-command) (coming soon in v1.9!)
- - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#subdivide-size_x-size_y-size_z-cmd_name-args) **experimental**
- - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#y)
- - [`//n`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#n)
+ - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
+ - [`//many <times> <command>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#many-times-command) (coming soon in v1.9!)
+ - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#subdivide-size_x-size_y-size_z-cmd_name-args) **experimental**
+ - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#y)
+ - [`//n`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#n)
 
 ### Tools
- - [WorldEditAdditions Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#far-wand)
- - [`//farwand skip_liquid (true|false) | maxdist <number>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/docs/Chat-Command-Reference.md#farwand-skip_liquid-truefalse--maxdist-number)
+ - [WorldEditAdditions Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#far-wand)
+ - [`//farwand skip_liquid (true|false) | maxdist <number>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#farwand-skip_liquid-truefalse--maxdist-number)
 
 
 ## Troubleshooting
