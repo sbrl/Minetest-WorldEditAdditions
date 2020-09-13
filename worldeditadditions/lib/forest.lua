@@ -24,7 +24,7 @@ function worldeditadditions.forest(pos1, pos2, sapling_weights)
 		for x = pos2.x, pos1.x, -1 do
 			for y = pos2.y, pos1.y, -1 do
 				local i = area:index(x, y, z)
-				if not groups_cache[data[i]] then
+				if not group_cache[data[i]] then
 					group_cache[data[i]] = worldeditadditions.is_sapling(data[i])
 				end
 				
@@ -38,7 +38,7 @@ function worldeditadditions.forest(pos1, pos2, sapling_weights)
 						)
 						
 						local new_id_at_pos = minetest.get_content_id(minetest.get_node({ z = z, y = y, x = x }).name)
-						if not groups_cache[new_id_at_pos] then
+						if not group_cache[new_id_at_pos] then
 							group_cache[new_id_at_pos] = worldeditadditions.is_sapling(new_id_at_pos)
 						end
 						if not group_cache[new_id_at_pos] then
@@ -64,7 +64,7 @@ function worldeditadditions.forest(pos1, pos2, sapling_weights)
 		for x = pos2.x, pos1.x, -1 do
 			for y = pos2.y, pos1.y, -1 do
 				local i = area:index(x, y, z)
-				if not groups_cache[data[i]] then
+				if not group_cache[data[i]] then
 					group_cache[data[i]] = worldeditadditions.is_sapling(data[i])
 				end
 				
