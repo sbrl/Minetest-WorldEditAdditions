@@ -157,8 +157,9 @@ end
 --- Parses a list of strings as a list of weighted nodes - e.g. like in the //mix command.
 -- @param	parts	string[]	The list of strings to parse (try worldeditadditions.split)
 -- @param	as_list	bool		If true, then table.insert() successive { node = string, weight = number } subtables when parsing instead of populating as an associative array.
+-- @param	func_normalise	callable	If specified, the given function will be used to normalise node names instead of worldedit.normalize_nodename. A single argument is passed containing the un-normalised node name, and the return value is assumed to be the normalised node name.
 -- @returns	table	A table in the form node_name => weight.
-function worldeditadditions.parse_weighted_nodes(parts, as_list)
+function worldeditadditions.parse_weighted_nodes(parts, as_list, func_normalise)
 	if as_list == nil then as_list = false end
 	local MODE_EITHER = 1
 	local MODE_NODE = 2
@@ -170,7 +171,9 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list)
 		print("i: "..i..", part: "..part)
 		if mode == MODE_NODE then
 			print("mode: node");
-			local next = worldedit.normalize_nodename(part)
+			local next
+			if not func_normalise then next = worldedit.normalize_nodename(part)
+			else next = func_normalise(part) end
 			if not next then
 				return false, "Error: Invalid node name '"..part.."'"
 			end
@@ -181,7 +184,10 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list)
 			local chance = tonumber(part)
 			if not chance then
 				print("not a chance, trying a node name")
-				local node_name = worldedit.normalize_nodename(part)
+				local node_name
+				if not func_normalise then node_name = worldedit.normalize_nodename(part)
+				else node_name = func_normalise(part) end
+				
 				if not node_name then
 					return false, "Error: Invalid number '"..chance.."'"
 				end

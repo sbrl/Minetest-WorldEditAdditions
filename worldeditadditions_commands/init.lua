@@ -34,6 +34,7 @@ dofile(we_c.modpath.."/commands/convolve.lua")
 dofile(we_c.modpath.."/commands/erode.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
+dofile(we_c.modpath.."/commands/forestaliases.lua")
 
 dofile(we_c.modpath.."/commands/subdivide.lua")
 

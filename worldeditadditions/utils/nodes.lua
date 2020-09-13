@@ -28,65 +28,12 @@ function worldeditadditions.unwind_node_list(list)
 	return result, #result
 end
 
-local node_id_air = minetest.get_content_id("air")
-local node_id_ignore = minetest.get_content_id("ignore")
-
---- Determines whether the given node/content id is an airlike node or not.
--- It is recommended that the result of this function be cached.
--- @param	id		number	The content/node id to check.
--- @return	bool	Whether the given node/content id is an airlike node or not.
-function worldeditadditions.is_airlike(id)
-	--  Do a fast check against air and ignore
-	if id == node_id_air then
-		return true
-	elseif id == node_id_ignore then -- ignore = not loaded yet IIRC (so it could be anything)
-		return false
+function worldeditadditions.registered_nodes_by_group(group)
+	local result = {}
+	for name, def in pairs(minetest.registered_nodes) do
+		if def.groups[group] then
+			result[#result+1] = name
+		end
 	end
-	
-	-- If the node isn't registered, then it might not be an air node
-	if not minetest.registered_nodes[id] then return false end
-	if minetest.registered_nodes[id].sunlight_propagates == true then
-		return true
-	end
-	-- Check for membership of the airlike group
-	local name = minetest.get_name_from_content_id(id)
-	local airlike_value = minetest.get_item_group(name, "airlike")
-	if airlike_value ~= nil and airlike_value > 0 then
-		return true
-	end
-	-- Just in case
-	if worldeditadditions.string_starts(this_node_name, "wielded_light") then
-		return true
-	end
-	-- Just in case
-	return false
-end
-
---- Determines whether the given node/content id is a liquid-ish node or not.
--- It is recommended that the result of this function be cached.
--- @param	id		number	The content/node id to check.
--- @return	bool	Whether the given node/content id is a liquid-ish node or not.
-function worldeditadditions.is_liquidlike(id)
-	-- print("[is_liquidlike]")
-	if id == node_id_ignore then return false end
-	
-	local node_name = minetest.get_name_from_content_id(id)
-	if node_name == nil or not minetest.registered_nodes[node_name] then return false end
-	
-	local liquidtype = minetest.registered_nodes[node_name].liquidtype
-	-- print("[is_liquidlike]", "id", id, "liquidtype", liquidtype)
-	
-	if liquidtype == nil or liquidtype == "none" then return false end
-	-- If it's not none, then it has to be a liquid as the only other values are source and flowing
-	return true
-end
-
---- Determines whether the given node/content id is a sapling or not.
--- Nodes with the "sapling" group are considered saplings.
--- It is recommended that the result of this function be cached.
--- @param	id		number	The content/node id to check.
--- @return	bool	Whther the given node/content id is a sapxling or not.
-function worldeditadditions.is_sapling(id)
-	local node_name = minetest.get_name_from_content_id(data[i])
-	return minetest.get_item_group(node_name, "sapling") ~= 0
+	return result
 end
