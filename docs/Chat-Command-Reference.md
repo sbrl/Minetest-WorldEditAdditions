@@ -4,6 +4,7 @@ This is the full chat command reference for WorldEditAdditions. Having trouble f
 
 Other useful links:
 
+ - [WorldEditAdditions quick reference](https://github.com/sbrl/Minetest-WorldEditAdditions#quick-command-reference)
  - [WorldEdit Chat Command Reference](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md)
  - [`we_env`](https://github.com/sfan5/we_env#readme)
 
