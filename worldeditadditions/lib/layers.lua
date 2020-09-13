@@ -1,5 +1,5 @@
 --- Overlap command. Places a specified node on top of each column.
--- @module worldeditadditions.overlay
+-- @module worldeditadditions.layers
 
 function worldeditadditions.layers(pos1, pos2, node_weights)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)

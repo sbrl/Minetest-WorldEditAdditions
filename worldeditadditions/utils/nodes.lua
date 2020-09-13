@@ -32,6 +32,7 @@ local node_id_air = minetest.get_content_id("air")
 local node_id_ignore = minetest.get_content_id("ignore")
 
 --- Determines whether the given node/content id is an airlike node or not.
+-- It is recommended that the result of this function be cached.
 -- @param	id		number	The content/node id to check.
 -- @return	bool	Whether the given node/content id is an airlike node or not.
 function worldeditadditions.is_airlike(id)
@@ -62,6 +63,7 @@ function worldeditadditions.is_airlike(id)
 end
 
 --- Determines whether the given node/content id is a liquid-ish node or not.
+-- It is recommended that the result of this function be cached.
 -- @param	id		number	The content/node id to check.
 -- @return	bool	Whether the given node/content id is a liquid-ish node or not.
 function worldeditadditions.is_liquidlike(id)
@@ -77,4 +79,14 @@ function worldeditadditions.is_liquidlike(id)
 	if liquidtype == nil or liquidtype == "none" then return false end
 	-- If it's not none, then it has to be a liquid as the only other values are source and flowing
 	return true
+end
+
+--- Determines whether the given node/content id is a sapling or not.
+-- Nodes with the "sapling" group are considered saplings.
+-- It is recommended that the result of this function be cached.
+-- @param	id		number	The content/node id to check.
+-- @return	bool	Whther the given node/content id is a sapxling or not.
+function worldeditadditions.is_sapling(id)
+	local node_name = minetest.get_name_from_content_id(data[i])
+	return minetest.get_item_group(node_name, "sapling") ~= 0
 end
