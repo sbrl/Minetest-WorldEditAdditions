@@ -32,7 +32,6 @@ dofile(we_c.modpath.."/commands/maze.lua")
 dofile(we_c.modpath.."/commands/replacemix.lua")
 dofile(we_c.modpath.."/commands/convolve.lua")
 dofile(we_c.modpath.."/commands/erode.lua")
-dofile(we_c.modpath.."/commands/forest.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 dofile(we_c.modpath.."/commands/saplingaliases.lua")
@@ -42,8 +41,9 @@ dofile(we_c.modpath.."/commands/subdivide.lua")
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
 if minetest.get_modpath("bonemeal") then
 	dofile(we_c.modpath.."/commands/bonemeal.lua")
+	dofile(we_c.modpath.."/commands/forest.lua")
 else
-	minetest.log("action", "[WorldEditAdditions] bonemeal mod not detected: //bonemeal command not registered (if you see this message and you're using an alternative mod that provides bonemeal, please get in touch by opening an issue)")
+	minetest.log("action", "[WorldEditAdditions] bonemeal mod not detected: //bonemeal and //forest commands not registered (if you see this message and you're using an alternative mod that provides bonemeal, please get in touch by opening an issue)")
 end
 
 
