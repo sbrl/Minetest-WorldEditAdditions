@@ -46,7 +46,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 ### Flora
  - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#bonemeal-strength-chance)
  - [`//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#forest-density-sapling_a-chance_a-sapling_b-chance_b-sapling_N-chance_N-)
- - [`//saplingaliases [aliases|all_saplings]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#saplingaliases-aliases-all_saplings)
+ - [`//saplingaliases [aliases|all_saplings]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#saplingaliases-aliasesall_saplings)
 
 ### Statistics
  - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#count)
