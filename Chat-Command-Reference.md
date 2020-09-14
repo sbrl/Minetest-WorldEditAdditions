@@ -60,7 +60,7 @@ Saplings are placed with [`//overlay`](#overlay-node_name_a-chance_a-node_name_b
 Currently, the following mods are known to have aliases registered:
 
  - `default`
- - [`moretrees`](https://content.minetest.net/packages/VanessaE/moretrees/) (warning: these saplings don't appear to work very well with the `bonemeal` mod - assistance in debugging this would be very helpful)
+ - [`moretrees`](https://content.minetest.net/packages/VanessaE/moretrees/) (warning: these saplings don't appear to work very well this command - assistance in debugging this would be very helpful)
  - [`cool_trees`](https://content.minetest.net/packages/runs/cool_trees/)
 
 ```
