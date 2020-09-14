@@ -98,6 +98,6 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 	stats.attempts_avg = worldeditadditions.average(stats.attempts)
 	
 	-- Save the modified nodes back to disk & return
-	--worldedit.manip_helpers.finish(manip, data)
+	worldedit.manip_helpers.finish(manip, data)
 	return true, stats
 end
