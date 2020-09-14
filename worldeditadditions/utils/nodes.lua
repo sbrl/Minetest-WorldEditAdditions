@@ -4,7 +4,7 @@ function worldeditadditions.make_weighted(tbl)
 	local result = {}
 	for node_name, weight in pairs(tbl) do
 		local next_id = minetest.get_content_id(node_name)
-		print("[make_weighted] seen "..node_name.." @ weight "..weight.." → id "..next_id)
+		-- print("[make_weighted] seen "..node_name.." @ weight "..weight.." → id "..next_id)
 		for i = 1, weight do
 			table.insert(result, next_id)
 		end
@@ -34,6 +34,15 @@ function worldeditadditions.registered_nodes_by_group(group)
 		if def.groups[group] then
 			result[#result+1] = name
 		end
+	end
+	return result
+end
+
+--- Turns a node_name → weight table into a list of { node_name, weight } tables.
+function worldeditadditions.weighted_to_list(node_weights)
+	local result = {}
+	for node_name, weight in pairs(node_weights) do
+		table.insert(result, { node_name, weight })
 	end
 	return result
 end

@@ -168,9 +168,9 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list, func_normalise)
 	local mode = MODE_NODE
 	local last_node_name = nil
 	for i, part in ipairs(parts) do
-		print("i: "..i..", part: "..part)
+		-- print("i: "..i..", part: "..part)
 		if mode == MODE_NODE then
-			print("mode: node");
+			-- print("mode: node");
 			local next
 			if not func_normalise then next = worldedit.normalize_nodename(part)
 			else next = func_normalise(part) end
@@ -180,10 +180,10 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list, func_normalise)
 			last_node_name = next
 			mode = MODE_EITHER
 		elseif mode == MODE_EITHER then
-			print("mode: either");
+			-- print("mode: either");
 			local chance = tonumber(part)
 			if not chance then
-				print("not a chance, trying a node name")
+				-- print("not a chance, trying a node name")
 				local node_name
 				if not func_normalise then node_name = worldedit.normalize_nodename(part)
 				else node_name = func_normalise(part) end
@@ -198,7 +198,7 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list, func_normalise)
 				last_node_name = node_name
 				mode = MODE_EITHER
 			else
-				print("it's a chance: ", chance, "for", last_node_name)
+				-- print("it's a chance: ", chance, "for", last_node_name)
 				chance = math.floor(chance)
 				if as_list then table.insert(result, { node = last_node_name, weight = chance })
 				else result[last_node_name] = chance end
@@ -208,7 +208,7 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list, func_normalise)
 		end
 	end
 	if last_node_name then
-		print("caught trailing node name: ", last_node_name)
+		-- print("caught trailing node name: ", last_node_name)
 		if as_list then table.insert(result, { node = last_node_name, weight = 1 })
 		else result[last_node_name] = 1 end
 	end

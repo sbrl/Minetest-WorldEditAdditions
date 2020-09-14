@@ -25,14 +25,15 @@ if minetest.get_modpath("default") then
 		{ "default:emergent_jungle_sapling", "jungle_emergent" },
 		{ "default:acacia_sapling", "acacia" },
 		{ "default:acacia_bush_sapling", "acacia_bush" },
-		{ "default:blueberry_bush_sapling", "blueberry_bush" }
+		{ "default:blueberry_bush_sapling", "blueberry_bush" },
+		-- { "default:large_cactus_seedling", "cactus" } -- Can't be bonemealed yet, but I'd guess it will be implemented eventually. It's not in the sapling category, so we won't detect it for bonemealing anyway
 	})
 end
 
 if minetest.get_modpath("moretrees") then
 	worldeditadditions.register_sapling_alias_many({
 		{ "moretrees:spruce_sapling_ongen", "spruce" },
-		{ "moretrees:rubber_tree_sapling_ongen", "rubbe" },
+		{ "moretrees:rubber_tree_sapling_ongen", "rubber" },
 		{ "moretrees:beech_sapling_ongen", "beech" },
 		{ "moretrees:jungletree_sapling_ongen", "jungle_moretrees" },
 		{ "moretrees:fir_sapling_ongen", "fir" },
@@ -41,7 +42,7 @@ if minetest.get_modpath("moretrees") then
 		{ "moretrees:poplar_small_sapling_ongen", "poplar_small" },
 		{ "moretrees:apple_tree_sapling_ongen", "apple" },
 		{ "moretrees:birch_sapling_ongen", "birch" },
-		{ "moretrees:palm_sapling_ongen", "palm" },
+		{ "moretrees:palm_sapling_ongen", "palm_moretrees" },
 		{ "moretrees:date_palm_sapling_ongen", "palm_date" },
 		{ "moretrees:sequoia_sapling_ongen", "sequoia" },
 		{ "moretrees:oak_sapling_ongen", "oak_moretrees" },
@@ -57,7 +58,7 @@ end
 --  ██████  ██████   ██████  ███████ ███████ ██    ██   ██ ███████ ███████ ███████
 
 if minetest.get_modpath("lemontree") then
-	worldeditadditions.register_sapling_alias("lemontree:sapling", "lemontree")
+	worldeditadditions.register_sapling_alias("lemontree:sapling", "lemon")
 end
 if minetest.get_modpath("pineapple") then
 	worldeditadditions.register_sapling_alias("pineapple:sapling", "pineapple")
@@ -72,10 +73,10 @@ if minetest.get_modpath("birch") then
 	worldeditadditions.register_sapling_alias("birch:sapling", "birch")
 end
 if minetest.get_modpath("cherrytree") then
-	worldeditadditions.register_sapling_alias("cherrytree:sapling", "cherrytree")
+	worldeditadditions.register_sapling_alias("cherrytree:sapling", "cherry")
 end
 if minetest.get_modpath("clementinetree") then
-	worldeditadditions.register_sapling_alias("clementinetree:sapling", "clementinetree")
+	worldeditadditions.register_sapling_alias("clementinetree:sapling", "clementine")
 end
 if minetest.get_modpath("ebony") then
 	worldeditadditions.register_sapling_alias("ebony:sapling", "ebony")
@@ -102,5 +103,5 @@ if minetest.get_modpath("mahogany") then
 	worldeditadditions.register_sapling_alias("mahogany:sapling", "mahogany")
 end
 if minetest.get_modpath("chestnuttree") then
-	worldeditadditions.register_sapling_alias("chestnuttree:sapling", "chestnuttree")
+	worldeditadditions.register_sapling_alias("chestnuttree:sapling", "chestnut")
 end

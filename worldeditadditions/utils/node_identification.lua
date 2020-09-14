@@ -57,13 +57,13 @@ end
 -- @param	id		number	The content/node id to check.
 -- @return	bool	Whther the given node/content id is a sapxling or not.
 function worldeditadditions.is_sapling(id)
-	local node_name = minetest.get_name_from_content_id(data[i])
+	local node_name = minetest.get_name_from_content_id(id)
 	return minetest.get_item_group(node_name, "sapling") ~= 0
 end
 
 local sapling_aliases = {}
 function worldeditadditions.register_sapling_alias(sapling_node_name, alias)
-	if sapling_aliases[sapling_node_name] then
+	if sapling_aliases[sapling_node_name] ~= nil then
 		return false, "Error: An alias against the node name '"..sapling_node_name.."' already exists."
 	end
 	sapling_aliases[alias] = sapling_node_name

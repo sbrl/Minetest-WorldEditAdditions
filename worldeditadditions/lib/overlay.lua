@@ -18,7 +18,7 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 	
 	-- z y x is the preferred loop order, but that isn't really possible here
 	
-	local changes = { updated = 0, skipped_columns = 0 }
+	local changes = { updated = 0, skipped_columns = 0, placed = {} }
 	for z = pos2.z, pos1.z, -1 do
 		for x = pos2.x, pos1.x, -1 do
 			local found_air = false
@@ -28,10 +28,8 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 				local i = area:index(x, y, z)
 				
 				local is_air = worldeditadditions.is_airlike(data[i])
-				if not is_air then -- wielded_light nodes are airlike too
-					local this_node_name = minetest.get_name_from_content_id(data[i])
-					is_air = is_air or worldeditadditions.string_starts(this_node_name, "wielded_light")
-				end
+				-- wielded_light is now handled by worldeditadditions.is_airlike
+				
 				local is_ignore = data[i] == node_id_ignore
 				
 				if not is_air and not is_ignore then
@@ -42,6 +40,10 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 						data[area:index(x, y + 1, z)] = new_id
 						changes.updated = changes.updated + 1
 						placed_node = true
+						if not changes.placed[new_id] then
+							changes.placed[new_id] = 0
+						end
+						changes.placed[new_id] = changes.placed[new_id] + 1
 						break -- Move on to the next column
 					end
 				elseif not is_ignore then

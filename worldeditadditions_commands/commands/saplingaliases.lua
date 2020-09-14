@@ -17,6 +17,7 @@ minetest.register_chatcommand("/saplingaliases", {
 			for node_name, alias in pairs(aliases) do
 				table.insert(display, { node_name, alias })
 			end
+			table.sort(display, function(a, b) return a[2] < b[2] end)
 			table.insert(msg, worldeditadditions.make_ascii_table(display))
 		elseif params_text == "all_saplings" then
 			local results = worldeditadditions.registered_nodes_by_group("sapling")
