@@ -53,7 +53,7 @@ Plants and grows saplings to generate a forest. A density value is optionally ta
 
 The density defaults to 1, acts like a multiplier, and is not affected by the chances of all saplings listed (e.g. you can have a sapling with a chance of 1-in-50, and the overall density of the forest will be unaffected). For example, 2 results in a forest twice as dense as the default, and 0.5 a forest half as dense as the default density.
 
-The tree types are provided as a list of names and weights, just like [`//overlay`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-), `//mix`, `//layers`, etc. Unlike the aforementioned commands however, `//forest` has an additional layer of alias resolution to ease the process of determining what the name of the sapling is you want to use to generate forests with. See [`//saplingaliases`](#saplingaliases-aliasesall_saplings) for more details.
+The tree types are provided as a list of names and 1-in-N chances, just like [`//overlay`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-), `//mix`, `//layers`, etc. Unlike the aforementioned commands however, `//forest` has an additional layer of alias resolution to ease the process of determining what the name of the sapling is you want to use to generate forests with. See [`//saplingaliases`](#saplingaliases-aliasesall_saplings) for more details.
 
 Saplings are placed with [`//overlay`](#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-) and grown using the same method that's used by the `//bonemeal` command. Up to 100 attempts are made to grow placed saplings. If all of those attempts fail (success is determined by whether the sapling is still present or not), the sapling is removed and the failure counter is incremented.
 
@@ -63,14 +63,24 @@ Currently, the following mods are known to have aliases registered:
  - [`moretrees`](https://content.minetest.net/packages/VanessaE/moretrees/) (warning: these saplings don't appear to work very well this command - assistance in debugging this would be very helpful)
  - [`cool_trees`](https://content.minetest.net/packages/runs/cool_trees/)
 
+If you like, you can also reference the full name of a sapling node instead. The only requirements for saplings to be supported by this mod are:
+
+1. It can be bonemealed
+2. It has the `sapling` group
+
+For example, the first 2 examples below are functionally equivalent.
+
 ```
 //forest aspen
+//forest default:aspen_sapling
 //forest 2 oak 3 aspen pine
 //forest 0.5 acacia
 ```
 
 ### `//saplingaliases [aliases|all_saplings]`
-Lists all the currently registered sapling aliases in alphabetical order. Optionally take  a single parameter, which is the operating mode. Current implemented operating modes:
+Lists all the currently registered sapling aliases in alphabetical order. These aliases can be used in the 
+
+Optionally takes a single parameter, which is the operating mode. Current implemented operating modes:
 
 Mode			| Description
 ----------------|----------------------
