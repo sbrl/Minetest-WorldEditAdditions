@@ -7,6 +7,7 @@ It's about time I started a changelog! This will serve from now on as the master
  - Add **experimental** `//erode` command
  - Add `//fillcaves` command - fills in all air nodes beneath non air-nodes
  - Add `//forest` command for quickly generating forests
+ - Fix some minor bugs and edge cases
 
 
 ## v1.8: The Quality of Life Update (17th July 2020)
