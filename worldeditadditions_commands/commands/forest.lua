@@ -25,6 +25,7 @@ worldedit.register_command("forest", {
 				)
 			end
 		)
+		if not success then return success, sapling_list end
 		return success, density, sapling_list
 	end,
 	nodes_needed = function(name)
