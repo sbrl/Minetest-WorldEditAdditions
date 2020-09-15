@@ -189,7 +189,7 @@ function worldeditadditions.parse_weighted_nodes(parts, as_list, func_normalise)
 				else node_name = func_normalise(part) end
 				
 				if not node_name then
-					return false, "Error: Invalid number '"..chance.."'"
+					return false, "Error: Invalid number '"..tostring(part).."'"
 				end
 				if last_node_name then
 					if as_list then table.insert(result, { node = last_node_name, weight = 1 })
