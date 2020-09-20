@@ -9,6 +9,7 @@ It's about time I started a changelog! This will serve from now on as the master
  - Add `//forest` command for quickly generating forests
  - Fix some minor bugs and edge cases
  - `//subdivide`: Print status update when completing the last chunk
+ - `//count`: Optimise by removing nested `for` loops
 
 
 ## v1.8: The Quality of Life Update (17th July 2020)

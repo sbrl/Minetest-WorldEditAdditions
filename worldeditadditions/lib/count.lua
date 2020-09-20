@@ -16,16 +16,11 @@ function worldeditadditions.count(pos1, pos2)
 	
 	-- z y x is the preferred loop order (because CPU cache I'd guess, since then we're iterating linearly through the data array)
 	local counts = {}
-	for z = pos2.z, pos1.z, -1 do
-		for y = pos2.y, pos1.y, -1 do
-			for x = pos2.x, pos1.x, -1 do
-				local next = data[area:index(x, y, z)]
-				if not counts[next] then
-					counts[next] = 0
-				end
-				counts[next] = counts[next] + 1
-			end
+	for i in area:iterp(pos1, pos2) do
+		if not counts[data[i]] then
+			counts[data[i]] = 0
 		end
+		counts[data[i]] = counts[data[i]] + 1
 	end
 	
 	local total = worldedit.volume(pos1, pos2)
