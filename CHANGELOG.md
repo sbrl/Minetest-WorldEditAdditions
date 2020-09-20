@@ -2,7 +2,7 @@
 It's about time I started a changelog! This will serve from now on as the master changelog for WorldEditAdditions.
 
 
-## v1.9 (unreleased)
+## v1.9: The Nature Update (20th September 2020)
  - Add `//many` for executing a command many times in a row
  - Add **experimental** `//erode` command
  - Add `//fillcaves` command - fills in all air nodes beneath non air-nodes
