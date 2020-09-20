@@ -37,6 +37,7 @@ dofile(we_c.modpath.."/commands/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/meta/multi.lua")
 dofile(we_c.modpath.."/commands/meta/many.lua")
 dofile(we_c.modpath.."/commands/meta/subdivide.lua")
+dofile(we_c.modpath.."/commands/meta/ellipsoidapply.lua")
 
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
 if minetest.get_modpath("bonemeal") then

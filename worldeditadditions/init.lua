@@ -35,3 +35,5 @@ dofile(worldeditadditions.modpath.."/lib/count.lua")
 
 dofile(worldeditadditions.modpath.."/lib/bonemeal.lua")
 dofile(worldeditadditions.modpath.."/lib/forest.lua")
+
+dofile(worldeditadditions.modpath.."/lib/ellipsoidapply.lua")

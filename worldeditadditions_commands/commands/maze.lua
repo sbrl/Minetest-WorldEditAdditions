@@ -95,7 +95,7 @@ worldedit.register_command("maze3d", {
 	params = "<replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]",
 	description = "Generates a 3d maze covering the currently selected area (must be at least 3x3x3) with replace_node as the walls. Optionally takes a (integer) seed and the path length, width, and depth (see the documentation in the worldeditadditions README for more information).",
 	privs = { worldedit = true },
-	requre_pos = 2,
+	require_pos = 2,
 	parse = function(params_text)
 		local values = {parse_params_maze(params_text, true)}
 		return unpack(values)
