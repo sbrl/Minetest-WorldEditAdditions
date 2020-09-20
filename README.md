@@ -14,6 +14,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
  - [Quick Command Reference](#quick-command-reference) (including links to detailed explanations)
  - [Using the Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#far-wand)
  - [Detailed Chat Command Explanations](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md)
+ - [Chat Command Cookbook](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Cookbook.md)
  - [Troubleshooting](#troubleshooting)
  - [Contributing](#contributing)
  - [WorldEditAdditions around the web](#worldeditadditions-around-the-web)
