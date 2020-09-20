@@ -1,6 +1,12 @@
 # WorldEditAdditions Cookbook
 This file contains a number of useful commands that WorldEditAdditions users have discovered and found useful. They do not necessarily have to contain _WorldEditAdditions_ commands - pure _WorldEdit_ commands are fine too.
 
+See also:
+
+- [WorldEditAdditions Chat Command Cookbook](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Cookbook.md)
+- [WorldEdit Chat Command Reference](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md)
+
+
 ## Fix lighting
 ```
 //multi //1 //2 //outset 50 //fixlight //y
