@@ -6,7 +6,7 @@ It's about time I started a changelog! This will serve from now on as the master
  - Add `//many` for executing a command many times in a row
  - Add **experimental** `//erode` command
  - Add `//fillcaves` command - fills in all air nodes beneath non air-nodes
- - Add `//forest` command for quickly generating forests
+ - Add `//forest` command for quickly generating forests, and `//saplingaliases` to compliment it
  - Add `//ellipsoidapply`: Like `//cubeapply`, but clips the result to an ellipsoid that is the size of the defined region.
  - Fix some minor bugs and edge cases
  - `//subdivide`: Print status update when completing the last chunk
