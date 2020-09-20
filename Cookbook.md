@@ -3,7 +3,8 @@ This file contains a number of useful commands that WorldEditAdditions users hav
 
 See also:
 
-- [WorldEditAdditions Chat Command Cookbook](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Cookbook.md)
+- [Quick Command Reference](https://github.com/sbrl/Minetest-WorldEditAdditions/tree/master#quick-command-reference)
+- [WorldEditAdditions Detailed Chat Command Explanations](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md)
 - [WorldEdit Chat Command Reference](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md)
 
 
