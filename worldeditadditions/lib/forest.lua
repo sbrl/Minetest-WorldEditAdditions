@@ -61,7 +61,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 								stats.placed[node_id] = 0
 							end
 							stats.placed[node_id] = stats.placed[node_id] + 1
-							print("incrementing id", node_id, "to", stats.placed[node_id])
+							-- print("incrementing id", node_id, "to", stats.placed[node_id])
 							break
 						end
 					end

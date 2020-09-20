@@ -51,10 +51,13 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 ### Statistics
  - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#count)
 
-### Extras
+### Meta
  - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
  - [`//many <times> <command>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#many-times-command) (coming soon in v1.9!)
  - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#subdivide-size_x-size_y-size_z-cmd_name-args) **experimental**
+ - [`//ellipsoidapply <command_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#ellipsoidapply-command_name-args)
+
+### Extras
  - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#y)
  - [`//n`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#n)
 

@@ -86,7 +86,7 @@ minetest.register_chatcommand("/many", {
 		
 		local count, cmd_name, args = params_text:match("^(%d+)%s([^%s]+)%s(.+)$")
 		if not count then return false, "Error: Invalid syntax" end
-		print("[many] count", count, "cmd_name", cmd_name, "args", args)
+		-- print("[many] count", count, "cmd_name", cmd_name, "args", args)
 		
 		count = tonumber(count)
 		cmd_name = trim(cmd_name):sub(2) -- Things start at 1, not 0 in Lua :-(

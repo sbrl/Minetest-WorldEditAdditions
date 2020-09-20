@@ -15,9 +15,9 @@ function worldeditadditions.layers(pos1, pos2, node_weights)
 	
 	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
 	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
-	for i,v in ipairs(node_ids) do
-		print("[layer] i", i, "node id", v)
-	end
+	-- for i,v in ipairs(node_ids) do
+	-- 	print("[layer] i", i, "node id", v)
+	-- end
 	-- z y x is the preferred loop order, but that isn't really possible here
 	
 	local changes = { replaced = 0, skipped_columns = 0 }

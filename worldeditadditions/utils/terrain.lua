@@ -45,7 +45,7 @@ end
 -- @param	heightmap_size	int[]	The size of the heightmap in the form [ z, x ]
 -- @return	Vector[]		The calculated normal map, in the same form as the input heightmap. Each element of the array is a 3D Vector (i.e. { x, y, z }) representing a normal.
 function worldeditadditions.calculate_normals(heightmap, heightmap_size)
-	print("heightmap_size: "..heightmap_size[1].."x"..heightmap_size[0])
+	-- print("heightmap_size: "..heightmap_size[1].."x"..heightmap_size[0])
 	local result = {}
 	for z = heightmap_size[0]-1, 0, -1 do
 		for x = heightmap_size[1]-1, 0, -1 do

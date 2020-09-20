@@ -357,6 +357,17 @@ Note that this isn't necessarily limited to executing WorldEdit / WorldEditAddit
 //many 100 //multi //1 //2 //outset 20 //set dirt
 ```
 
+### `//ellipsoidapply <command_name> <args>`
+Executes the given command, and then clips the result to the largest ellipsoid that will fit inside the defined region. The specified command must obviously take 2 positions - so for example `//set`, `//replacemix`, and `//maze3d` will work, but `//sphere`, `//torus`, and `//floodfill` won't.
+
+```
+//ellipsoidapply set dirt
+//ellipsoidapply maze3d dirt 4 2 2
+//ellipsoidapply erode
+//ellipsoidapply replacemix sand bakedclay:red bakedclay:orange
+//ellipsoidapply layers desert_sand sand 2 desert_sandstone 4 sandstone 10
+```
+
 
 ### `//y`
 Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.

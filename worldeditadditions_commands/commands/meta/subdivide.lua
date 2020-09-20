@@ -133,7 +133,7 @@ worldedit.register_command("subdivide", {
 					
 					local time_average = wea.average(time_chunks)
 					local eta = (chunks_total - i) * time_average
-					print("eta", eta, "time_average", time_average, "chunks_left", chunks_total - i)
+					-- print("eta", eta, "time_average", time_average, "chunks_left", chunks_total - i)
 					
 					-- Send updates every 2 seconds, and after the first 3 chunks are done
 					if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or i == 3 or i == chunks_total then
