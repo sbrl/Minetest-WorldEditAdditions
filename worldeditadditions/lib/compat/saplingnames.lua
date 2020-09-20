@@ -37,16 +37,33 @@ if minetest.get_modpath("moretrees") then
 		{ "moretrees:beech_sapling_ongen", "beech" },
 		{ "moretrees:jungletree_sapling_ongen", "jungle_moretrees" },
 		{ "moretrees:fir_sapling_ongen", "fir" },
-		{ "moretrees:willow_sapling_ongen", "willow" },
+		{ "moretrees:willow_sapling_ongen", "willow_moretrees" },
 		{ "moretrees:poplar_sapling_ongen", "poplar" },
 		{ "moretrees:poplar_small_sapling_ongen", "poplar_small" },
 		{ "moretrees:apple_tree_sapling_ongen", "apple" },
-		{ "moretrees:birch_sapling_ongen", "birch" },
+		{ "moretrees:birch_sapling_ongen", "birch_moretrees" },
 		{ "moretrees:palm_sapling_ongen", "palm_moretrees" },
 		{ "moretrees:date_palm_sapling_ongen", "palm_date" },
 		{ "moretrees:sequoia_sapling_ongen", "sequoia" },
 		{ "moretrees:oak_sapling_ongen", "oak_moretrees" },
 		{ "moretrees:cedar_sapling_ongen", "cedar" }
+	})
+end
+
+if minetest.get_modpath("ethereal") then
+	worldeditadditions.register_sapling_alias_many({
+		{ "ethereal:mushroom_sapling", "mushroom" },
+		{ "ethereal:sakura_sapling", "sakura" },
+		{ "ethereal:birch_sapling", "birch" },
+		{ "ethereal:yellow_tree_sapling", "yellow_tree" },
+		{ "ethereal:willow_sapling", "willow_ethereal" },
+		{ "ethereal:redwood_sapling", "redwood" },
+		{ "ethereal:palm_sapling", "palm_ethereal" },
+		{ "ethereal:frost_tree_sapling", "frost" },
+		{ "ethereal:banana_tree_sapling", "banana" },
+		{ "ethereal:orange_tree_sapling", "orange" },
+		{ "ethereal:bamboo_sprout", "bamboo_ethereal" },
+		{ "ethereal:big_tree_sapling", "big" }
 	})
 end
 
