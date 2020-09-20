@@ -46,17 +46,17 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 
 ### Flora
  - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#bonemeal-strength-chance)
- - [`//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#forest-density-sapling_a-chance_a-sapling_b-chance_b-sapling_N-chance_N-)
- - [`//saplingaliases [aliases|all_saplings]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#saplingaliases-aliasesall_saplings)
+ - [`//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#forest-density-sapling_a-chance_a-sapling_b-chance_b-sapling_N-chance_N-) _(new in v1.9)_
+ - [`//saplingaliases [aliases|all_saplings]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#saplingaliases-aliasesall_saplings) _(new in v1.9)_
 
 ### Statistics
  - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#count)
 
 ### Meta
  - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
- - [`//many <times> <command>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#many-times-command) (coming soon in v1.9!)
+ - [`//many <times> <command>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#many-times-command) _(new in v1.9)_
  - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#subdivide-size_x-size_y-size_z-cmd_name-args) **experimental**
- - [`//ellipsoidapply <command_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#ellipsoidapply-command_name-args)
+ - [`//ellipsoidapply <command_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#ellipsoidapply-command_name-args) _(new in v1.9)_
 
 ### Extras
  - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#y)
@@ -89,7 +89,7 @@ Please also make sure that the logic for every new command has it's own file. Fo
 ## WorldEditAdditions around the web
 Are you using WorldEditAdditions for a project? Open an issue and I'll add your project to the below list!
 
- - _(None that I'm aware of yet!)_
+ - _(None that I'm aware of yet! Open an issue or get in touch and I'll link to your project (-:)_
 
 ## License
 This mod is licensed under the _Mozilla Public License 2.0_, a copy of which (along with a helpful summary as to what you can and can't do with it) can be found in the `LICENSE` file in this repository.
