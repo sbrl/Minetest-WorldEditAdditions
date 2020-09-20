@@ -1,5 +1,8 @@
---- Overlap command. Places a specified node on top of 
--- @module worldeditadditions.overlay
+-- ███████ ██      ██      ██ ██████  ███████ ███████
+-- ██      ██      ██      ██ ██   ██ ██      ██
+-- █████   ██      ██      ██ ██████  ███████ █████
+-- ██      ██      ██      ██ ██           ██ ██
+-- ███████ ███████ ███████ ██ ██      ███████ ███████
 
 function worldeditadditions.ellipsoid(position, radius, target_node, hollow)
 	-- position = { x, y, z }
