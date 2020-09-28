@@ -27,10 +27,7 @@ local function parse_params_maze(params_text, is_3d)
 		path_depth = tonumber(parts[4])
 	end
 	if #parts >= param_index_seed then
-		seed = tonumber(parts[param_index_seed])
-		if not seed then
-			return false, "Error: Invalid seed value (seeds may only be integers)."
-		end
+		seed = worldeditadditions.makeseed(parts[param_index_seed])
 	end
 	
 	replace_node = worldedit.normalize_nodename(replace_node)
