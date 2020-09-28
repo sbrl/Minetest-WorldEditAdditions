@@ -140,5 +140,5 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		)
 	end
 	
-	return true, ""..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps (average ~"..worldeditadditions.average(stats_steps)..")"
+	return true, ""..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps (averaged ~"..worldeditadditions.average(stats_steps).." steps)"
 end

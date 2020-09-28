@@ -95,9 +95,7 @@ local function generate_maze(seed, width, height, path_length, path_width)
 				cx = cx + path_length
 			end
 			
-			if #directions > 1 then
-				table.insert(nodes, { x = cx, y = cy })
-			end
+			table.insert(nodes, { x = cx, y = cy })
 		else
 			table.remove(nodes, curnode)
 		end
