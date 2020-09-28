@@ -148,12 +148,15 @@ The optional `path_length` and `path_width` arguments require additional explana
 
 Note that `path_width` must always be at least 1 less than the `path_length` in order to operate normally.
 
+Note also that since WorldEditAdditions v1.10, the seed doesn't have to be a number (but it can't contain spaces due to the parsing algorithm used). Non-numbers are hashed to a number using a simple (non-crypto-safe) hashing algorithm.
+
 The last example below shows how to set the path length and width:
 
 ```
 //maze ice
 //maze stone 2 1 1234
 //maze dirt 4 2 56789
+//maze glass 2 1 minetestiscool
 ```
 
 ### `//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`
