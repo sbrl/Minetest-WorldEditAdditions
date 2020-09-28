@@ -2,6 +2,11 @@
 It's about time I started a changelog! This will serve from now on as the master changelog for WorldEditAdditions.
 
 
+## v1.10 (unreleased)
+ - `//maze`: Fix some parts of generated mazes staying solid
+ - `//maze`, `//maze3d`: Allow non-number seeds (existing seeds aren't affected - they will still produce identical output)
+
+
 ## v1.9: The Nature Update (20th September 2020)
  - Add `//many` for executing a command many times in a row
  - Add **experimental** `//erode` command
