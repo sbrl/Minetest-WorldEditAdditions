@@ -6,6 +6,8 @@ It's about time I started a changelog! This will serve from now on as the master
  - `//maze`: Fix some parts of generated mazes staying solid
  - `//maze`, `//maze3d`: Allow non-number seeds (existing seeds aren't affected - they will still produce identical output)
  - `//many`: Improve format of progress messages, add ETA
+ - `//subdivide`: Make asynchronous, and use `minetest.emerge_area()` to ensure areas are loaded before executing on a subdivision chunk
+     - This will ensure that `//subdivide`ing enormous regions should now function as expected. Want to level an entire rainforest with `//subdivide` and `//clearcut`? Now you can! :D
 
 
 ## v1.9: The Nature Update (20th September 2020)
