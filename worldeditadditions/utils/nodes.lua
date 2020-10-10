@@ -86,5 +86,5 @@ function worldeditadditions.emerge_area(pos1, pos2, callback, callback_state)
 		callback = callback,
 		callback_state = callback_state
 	}
-	minetest.emerge_area(pos1, pos2, emerge_callback, states)
+	minetest.emerge_area(pos1, pos2, emerge_callback, state)
 end

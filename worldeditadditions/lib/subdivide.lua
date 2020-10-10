@@ -50,13 +50,13 @@ local function subdivide_step_complete(state)
 end
 
 local function subdivide_step_beforeload(state)
-	state.cpos.z = state.cpos.z - (chunk_size.z + 1)
+	state.cpos.z = state.cpos.z - (state.chunk_size.z + 1)
 	if state.cpos.z <= state.pos1.z then
 		state.cpoz.z = state.pos2.z
-		state.cpos.y = state.cpos.y - (chunk_size.y + 1)
+		state.cpos.y = state.cpos.y - (state.chunk_size.y + 1)
 		if state.cpos.y <= state.pos1.y then
 			state.cpos.y = state.pos2.y
-			state.cpos.x = state.cpos.x - (chunk_size.x + 1)
+			state.cpos.x = state.cpos.x - (state.chunk_size.x + 1)
 			if state.cpos.x <= state.pos1.x then
 				subdivide_step_complete(state)
 				return

@@ -84,7 +84,7 @@ worldedit.register_command("subdivide", {
 		local msg_prefix = "[ subdivide | "..table.concat({cmd_name, args}, " ").." ] "
 		local time_last_msg = wea.get_ms_time()
 		
-		wea.subdivide(cpos1, cpos2, chunk_size, function(bpos1, bpos2, stats)
+		wea.subdivide(pos1, pos2, chunk_size, function(cpos1, cpos2, stats)
 			-- Called on every subblock
 			if stats.chunks_completed == 0 then
 				worldedit.player_notify(name, string.format(
