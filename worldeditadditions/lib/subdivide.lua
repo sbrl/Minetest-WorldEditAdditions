@@ -31,7 +31,7 @@ local function make_stats_obj(state)
 		chunks_total = state.chunks_total,
 		chunks_completed = state.chunks_completed,
 		chunk_size = state.chunk_size,
-		volume_nodes = stats.volume_nodes,
+		volume_nodes = state.volume_nodes,
 		emerge = state.stats_emerge,
 		times = state.times,
 		eta = state.eta,
@@ -52,7 +52,7 @@ end
 local function subdivide_step_beforeload(state)
 	state.cpos.z = state.cpos.z - (state.chunk_size.z + 1)
 	if state.cpos.z <= state.pos1.z then
-		state.cpoz.z = state.pos2.z
+		state.cpos.z = state.pos2.z
 		state.cpos.y = state.cpos.y - (state.chunk_size.y + 1)
 		if state.cpos.y <= state.pos1.y then
 			state.cpos.y = state.pos2.y
@@ -76,8 +76,9 @@ local function subdivide_step_beforeload(state)
 	if state.cpos1.z < state.pos1.z then state.cpos1.z = state.pos1.z end
 	
 	state.times.emerge_last = wea.get_ms_time()
-	worldeditadditions.emerge_area(state.pos1, state.pos2, subdivide_step_afterload, state)
+	worldeditadditions.emerge_area(state.pos1, state.pos2, state.__afterload, state)
 end
+
 local function subdivide_step_afterload(state_emerge, state_ours)
 	state_ours.times.emerge_last = wea.get_ms_time() - state_ours.times.emerge_last
 	table.insert(state_ours.times.emerge, state_ours.times.emerge_last)
@@ -104,7 +105,7 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 		state_ours.emerge_overhead = total_emerge / total_steps
 	end
 	
-	minetest.after(0, subdivide_step_beforeload, state_ours)
+	minetest.after(0, state_ours.__beforeload, state_ours)
 end
 
 --- Calls the given callback function once for each block in the defined area.
@@ -156,7 +157,10 @@ function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock,
 		-- The number of chunks processed so far
 		chunks_completed = 0,
 		callback_subblock = callback_subblock,
-		callback_complete = callback_complete
+		callback_complete = callback_complete,
+		
+		__beforeload = subdivide_step_beforeload,
+		__afterload = subdivide_step_afterload
 	}
 	
 	subdivide_step_beforeload(state)
