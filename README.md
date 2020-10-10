@@ -79,6 +79,9 @@ This is probably because your version of `worldedit` is too old. Try updating it
 ### I get a crash on  startup saying `attempt to call field 'alias_command' (a nil value)`
 Please update to v1.8+. There was a bug in earlier versions that caused a race condition that sometimes resulted in this crash.
 
+### Why don't the [moretrees](https://content.minetest.net/packages/VanessaE/moretrees/) trees work with `//forest`?
+As far as I can tell, the saplings provided by the [`moretrees` mod](https://content.minetest.net/packages/VanessaE/moretrees/) don't properly interact with bonemeal from the [bonemeal mod](https://content.minetest.net/packages/TenPlus1/bonemeal/), which WorldEditAdditions uses to grow trees. As far as I can tell WorldEditAdditions has everything in place needed to support them, but until applying bonemeal to `moretrees` saplings results in a tree rather than waiting for one to grow over time, WorldEditAdditions will always fail to place trees provided by the `moretrees` mod, unfortunately.
+
 
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
