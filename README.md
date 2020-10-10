@@ -76,7 +76,7 @@ WorldEditAdditions requires that the `worldedit` mod is installed as a dependenc
 ### I get an error saying that `worldedit.register_command()` is not a function
 This is probably because your version of `worldedit` is too old. Try updating it. Specifically the `worldedit.register_command()` function was only added to `worldedit` in December 2019.
 
-### I get a crash on  startup saying `attempt to call field 'alias_command' (a nil value)`
+### I get a crash on startup saying `attempt to call field 'alias_command' (a nil value)`
 Please update to v1.8+. There was a bug in earlier versions that caused a race condition that sometimes resulted in this crash.
 
 ### Why don't the [moretrees](https://content.minetest.net/packages/VanessaE/moretrees/) trees work with `//forest`?
