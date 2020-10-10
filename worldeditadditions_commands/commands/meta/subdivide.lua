@@ -22,7 +22,9 @@ end
 local function emerge_stats_tostring(tbl_emerge)
 	local result = {}
 	for key,value in pairs(tbl_emerge) do
-		table.insert(result, string.format("%s=%d", key, value))
+		if value > 0 then
+			table.insert(result, string.format("%s=%d", key, value))
+		end
 	end
 	return table.concat(result, ", ")
 end
@@ -99,6 +101,7 @@ worldedit.register_command("subdivide", {
 			worldedit.player_notify_suppress(name)
 			worldedit.pos1[name] = cpos1
 			worldedit.pos2[name] = cpos2
+			worldedit.marker_update(name)
 			cmd.func(name, args)
 			if will_trigger_saferegion(name, cmd_name, args) then
 				minetest.chatcommands["/y"].func()
@@ -121,8 +124,12 @@ worldedit.register_command("subdivide", {
 				time_last_msg = wea.get_ms_time()
 			end
 		end, function(_, _, stats)
+			worldedit.pos1[name] = pos1
+			worldedit.pos2[name] = pos2
+			worldedit.marker_update(name)
+			
 			-- Called on completion
-			minetest.log("action", string.format("%s used //subdivide at %s - %s, with $d chunks and %d total nodes in %s",
+			minetest.log("action", string.format("%s used //subdivide at %s - %s, with %d chunks and %d total nodes in %s",
 				name,
 				wea.vector.tostring(pos1),
 				wea.vector.tostring(pos2),
@@ -130,15 +137,16 @@ worldedit.register_command("subdivide", {
 				stats.volume_nodes,
 				wea.human_time(stats.times.total)
 			))
-			return true, string.format(
+			worldedit.player_notify(name, string.format(
 				"%sComplete: %d chunks processed in %s (%.2f%% emerge overhead, emerge totals: %s)",
 				msg_prefix,
 				stats.chunks_completed,
-				wea.human_time(stats.time.total),
+				wea.human_time(stats.times.total),
 				stats.emerge_overhead * 100,
 				emerge_stats_tostring(stats.emerge)
-			)
+			))
 		end)
 		
+		return true
 	end
 })

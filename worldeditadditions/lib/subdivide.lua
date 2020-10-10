@@ -51,13 +51,13 @@ end
 
 local function subdivide_step_beforeload(state)
 	state.cpos.z = state.cpos.z - (state.chunk_size.z + 1)
-	if state.cpos.z <= state.pos1.z then
+	if state.cpos.z < state.pos1.z then
 		state.cpos.z = state.pos2.z
 		state.cpos.y = state.cpos.y - (state.chunk_size.y + 1)
-		if state.cpos.y <= state.pos1.y then
+		if state.cpos.y < state.pos1.y then
 			state.cpos.y = state.pos2.y
 			state.cpos.x = state.cpos.x - (state.chunk_size.x + 1)
-			if state.cpos.x <= state.pos1.x then
+			if state.cpos.x < state.pos1.x then
 				subdivide_step_complete(state)
 				return
 			end
@@ -125,6 +125,7 @@ end
 -- @param	{function}	callback	The callback to call upon completion.
 function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock, callback_complete)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	local chunks_total = count_chunks(pos1, pos2, chunk_size)
 	
 	chunk_size.x = chunk_size.x - 1 -- WorldEdit regions are inclusive
 	chunk_size.y = chunk_size.y - 1 -- WorldEdit regions are inclusive
@@ -132,7 +133,8 @@ function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock,
 	
 	local state = {
 		pos1 = pos1, pos2 = pos2,
-		cpos = { x = pos2.x, y = pos2.y, z = pos2.z },
+		-- Note that we start 1 over on the Z axis because we increment *before* calling the callback, so if we don't fiddle it here, we'll miss the first chunk
+		cpos = { x = pos2.x, y = pos2.y, z = pos2.z + chunk_size.z + 1 },
 		-- The size of a single subblock
 		chunk_size = chunk_size,
 		-- The total number of nodes in the defined region
@@ -153,7 +155,7 @@ function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock,
 		-- The percentage of the total time spent so far waiting for Minetest to emerge blocks. Updated every step.
 		emerge_overhead = 0,
 		-- The total number of chunks
-		chunks_total = count_chunks(pos1, pos2, chunk_size),
+		chunks_total = chunks_total,
 		-- The number of chunks processed so far
 		chunks_completed = 0,
 		callback_subblock = callback_subblock,
