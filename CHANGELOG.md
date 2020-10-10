@@ -1,5 +1,5 @@
 # WorldEditAdditions Changelog
-It's about time I started a changelog! This will serve from now on as the master changelog for WorldEditAdditions.
+It's about time I started a changelog! This will serve from now on as the main changelog for WorldEditAdditions.
 
 
 ## v1.10 (unreleased)
