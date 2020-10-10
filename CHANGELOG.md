@@ -5,6 +5,7 @@ It's about time I started a changelog! This will serve from now on as the master
 ## v1.10 (unreleased)
  - `//maze`: Fix some parts of generated mazes staying solid
  - `//maze`, `//maze3d`: Allow non-number seeds (existing seeds aren't affected - they will still produce identical output)
+ - `//many`: Improve format of progress messages, add ETA
 
 
 ## v1.9: The Nature Update (20th September 2020)

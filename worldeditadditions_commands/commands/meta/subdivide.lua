@@ -136,14 +136,22 @@ worldedit.register_command("subdivide", {
 					-- print("eta", eta, "time_average", time_average, "chunks_left", chunks_total - i)
 					
 					-- Send updates every 2 seconds, and after the first 3 chunks are done
+					print("[DEBUG]",
+					i, chunks_total,
+					(i / chunks_total) * 100,
+					wea.human_time(time_this),
+					wea.human_time(time_average),
+					"eta", eta, "[human]", wea.human_time(eta), "end")
 					if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or i == 3 or i == chunks_total then
 						worldedit.player_notify(name,
-							msg_prefix
-							..i.." / "..chunks_total.." (~"
-							..string.format("%.2f", (i / chunks_total) * 100).."%) complete | "
-							.."last chunk: "..wea.human_time(time_this)
-							..", average: "..wea.human_time(time_average)
-							..", ETA: ~"..wea.human_time(eta)
+							string.format("%s%d / %d (~%.2f%%) complete | last chunk: %s, average: %s, ETA: ~%s",
+								msg_prefix,
+								i, chunks_total,
+								(i / chunks_total) * 100,
+								wea.human_time(time_this),
+								wea.human_time(time_average),
+								wea.human_time(eta)
+							)
 						)
 						time_last_msg = worldeditadditions.get_ms_time()
 					end

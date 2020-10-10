@@ -35,7 +35,14 @@ local function step(params)
 	local start_time = worldeditadditions.get_ms_time()
 	
 	local full_cmd = params.cmd_name.." "..params.args
-	worldedit.player_notify(params.name, "[ many ] [ /"..full_cmd.." ] "..(params.i + 1).." / "..params.count.." (~"..worldeditadditions.round(((params.i + 1) / params.count)*100, 2).."%)")
+	worldedit.player_notify(params.name, string.format("[ many | /%s ] %d / %d (~%.2f%%) complete | last: %s, average: %s, ETA: ~%s",
+		full_cmd,
+		(params.i + 1), params.count,
+		((params.i + 1) / params.count)*100,
+		worldeditadditions.human_time(params.times[#params.times] or 0),
+		worldeditadditions.human_time(worldeditadditions.average(params.times)),
+		worldeditadditions.human_time(worldeditadditions.eta(params.times, params.count))
+	))
 	
 	local cmd = minetest.chatcommands[params.cmd_name]
 	
@@ -43,7 +50,7 @@ local function step(params)
 	cmd.func(params.name, params.args)
 	
 	
-	params.times[#params.times + 1] = (worldeditadditions.get_ms_time() - start_time)
+	table.insert(params.times, worldeditadditions.get_ms_time() - start_time)
 	
 	params.i = params.i + 1
 	if params.i < params.count then
@@ -52,7 +59,7 @@ local function step(params)
 		local total_time = (worldeditadditions.get_ms_time() - params.master_start_time)
 		local done_message = {}
 		table.insert(done_message,
-			string.format("Executed '"..full_cmd.."' %d times in %s (~%s / time",
+			string.format("Executed '"..full_cmd.."' %d times in %s (~%s / time)",
 				#params.times,
 				worldeditadditions.human_time(total_time),
 				worldeditadditions.human_time(
