@@ -10,14 +10,19 @@ function worldeditadditions.hypotenuse(x1, y1, x2, y2)
 	return math.sqrt(xSquare + ySquare);
 end
 
-
-function worldeditadditions.average(list)
-	if #list == 0 then return 0 end 
+function worldeditadditions.sum(list)
+    if #list == 0 then return 0 end
 	local sum = 0
 	for i,value in ipairs(list) do
 		sum = sum + value
 	end
-	return sum / #list
+    return sum
+end
+
+
+function worldeditadditions.average(list)
+	if #list == 0 then return 0 end 
+	return worldeditadditions.sum(list) / #list
 end
 
 --- Returns the minetest.get_us_time() in ms

@@ -19,18 +19,12 @@ local function will_trigger_saferegion(name, cmd_name, args)
 	return false
 end
 
--- Counts the number of chunks in the given area.
--- TODO: Do the maths properly here instead of using a loop - the loop is *very* inefficient - especially for large areas
-local function count_chunks(pos1, pos2, chunk_size)
-	local count = 0
-	for z = pos2.z, pos1.z, -chunk_size.z do
-		for y = pos2.y, pos1.y, -chunk_size.y do
-			for x = pos2.x, pos1.x, -chunk_size.x do
-				count = count + 1
-			end
-		end
+local function emerge_stats_tostring(tbl_emerge)
+	local result = {}
+	for key,value in pairs(tbl_emerge) do
+		table.insert(result, string.format("%s=%d", key, value))
 	end
-	return count
+	return table.concat(result, ", ")
 end
 
 worldedit.register_command("subdivide", {
@@ -72,95 +66,79 @@ worldedit.register_command("subdivide", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, chunk_size, cmd_name, args)
-		local time_total = worldeditadditions.get_ms_time()
+		local time_total = wea.get_ms_time()
 		
 		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
 		local volume = worldedit.volume(pos1, pos2)
 		
 		local cmd = worldedit.registered_commands[cmd_name]
+		-- Note that we don't need to check for //multi privileges, as it does it at runtime
 		if not minetest.check_player_privs(name, cmd.privs) then
 			return false, "Error: Your privileges are unsufficient to run '"..cmd_name.."'."
 		end
 		
-		local i = 1
 		-- local chunks_total = math.ceil((pos2.x - pos1.x) / (chunk_size.x - 1))
 		-- 	* math.ceil((pos2.y - pos1.y) / (chunk_size.y - 1))
 		-- 	* math.ceil((pos2.z - pos1.z) / (chunk_size.z - 1))
-		local chunks_total = count_chunks(pos1, pos2, chunk_size)
 		
 		local msg_prefix = "[ subdivide | "..table.concat({cmd_name, args}, " ").." ] "
+		local time_last_msg = wea.get_ms_time()
 		
-		worldedit.player_notify(name,
-			msg_prefix.."Starting - "
-			-- ..wea.vector.tostring(pos1).." - "..wea.vector.tostring(pos2)
-			.." chunk size: "..wea.vector.tostring(chunk_size)
-			..", "..chunks_total.." chunks total"
-			.." ("..volume.." nodes)"
-		)
-		
-		chunk_size.x = chunk_size.x - 1 -- WorldEdit regions are inclusive
-		chunk_size.y = chunk_size.y - 1 -- WorldEdit regions are inclusive
-		chunk_size.z = chunk_size.z - 1 -- WorldEdit regions are inclusive
-		
-		
-		local time_last_msg = worldeditadditions.get_ms_time()
-		local time_chunks = {}
-		for z = pos2.z, pos1.z, -(chunk_size.z + 1) do
-			for y = pos2.y, pos1.y, -(chunk_size.y + 1) do
-				for x = pos2.x, pos1.x, -(chunk_size.x + 1) do
-					local c_pos2 = { x = x, y = y, z = z }
-					local c_pos1 = {
-						x = x - chunk_size.x,
-						y = y - chunk_size.y,
-						z = z - chunk_size.z
-					}
-					-- print("c1", wea.vector.tostring(c_pos1), "c2", wea.vector.tostring(c_pos2), "volume", worldedit.volume(c_pos1, c_pos2))
-					if c_pos1.x < pos1.x then c_pos1.x = pos1.x end
-					if c_pos1.y < pos1.y then c_pos1.y = pos1.y end
-					if c_pos1.z < pos1.z then c_pos1.z = pos1.z end
-					
-					local time_this = worldeditadditions.get_ms_time()
-					worldedit.player_notify_suppress(name)
-					worldedit.pos1[name] = c_pos1
-					worldedit.pos2[name] = c_pos2
-					cmd.func(name, args)
-					if will_trigger_saferegion(name, cmd_name, args) then
-						minetest.chatcommands["/y"].func()
-					end
-					worldedit.player_notify_unsuppress(name)
-					time_this = worldeditadditions.get_ms_time() - time_this
-					table.insert(time_chunks, time_this)
-					
-					local time_average = wea.average(time_chunks)
-					local eta = (chunks_total - i) * time_average
-					-- print("eta", eta, "time_average", time_average, "chunks_left", chunks_total - i)
-					
-					-- Send updates every 2 seconds, and after the first 3 chunks are done
-					if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or i == 3 or i == chunks_total then
-						worldedit.player_notify(name,
-							string.format("%s%d / %d (~%.2f%%) complete | last chunk: %s, average: %s, ETA: ~%s",
-								msg_prefix,
-								i, chunks_total,
-								(i / chunks_total) * 100,
-								wea.human_time(time_this),
-								wea.human_time(time_average),
-								wea.human_time(eta)
-							)
-						)
-						time_last_msg = worldeditadditions.get_ms_time()
-					end
-					
-					i = i + 1
-				end
+		wea.subdivide(cpos1, cpos2, chunk_size, function(bpos1, bpos2, stats)
+			-- Called on every subblock
+			if stats.chunks_completed == 0 then
+				worldedit.player_notify(name, string.format(
+					"%sStarting - chunk size: %s, %d chunks total (%d nodes)",
+					msg_prefix,
+					wea.vector.tostring(stats.chunk_size),
+					stats.chunks_total,
+					stats.volume_nodes
+				))
 			end
-		end
-		i = i - 1
-		worldedit.pos1[name] = pos1
-		worldedit.pos2[name] = pos2
-		time_total = worldeditadditions.get_ms_time() - time_total
+			
+			worldedit.player_notify_suppress(name)
+			worldedit.pos1[name] = cpos1
+			worldedit.pos2[name] = cpos2
+			cmd.func(name, args)
+			if will_trigger_saferegion(name, cmd_name, args) then
+				minetest.chatcommands["/y"].func()
+			end
+			worldedit.player_notify_unsuppress(name)
+			
+			-- Send updates every 2 seconds, and after the first 3 chunks are done
+			if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or i == 3 or i == stats.chunks_total then
+				worldedit.player_notify(name,
+					string.format("%s%d / %d (~%.2f%%) complete | last chunk: %s, average: %s, %.2f%% emerge overhead, ETA: ~%s",
+						msg_prefix,
+						stats.chunks_completed, stats.chunks_total,
+						(stats.chunks_completed / stats.chunks_total) * 100,
+						wea.human_time(stats.times.step_last),
+						wea.human_time(wea.average(stats.times.steps)),
+						stats.emerge_overhead * 100,
+						wea.human_time(stats.eta)
+					)
+				)
+				time_last_msg = wea.get_ms_time()
+			end
+		end, function(_, _, stats)
+			-- Called on completion
+			minetest.log("action", string.format("%s used //subdivide at %s - %s, with $d chunks and %d total nodes in %s",
+				name,
+				wea.vector.tostring(pos1),
+				wea.vector.tostring(pos2),
+				stats.chunks_completed,
+				stats.volume_nodes,
+				wea.human_time(stats.times.total)
+			))
+			return true, string.format(
+				"%sComplete: %d chunks processed in %s (%.2f%% emerge overhead, emerge totals: %s)",
+				msg_prefix,
+				stats.chunks_completed,
+				wea.human_time(stats.time.total),
+				stats.emerge_overhead * 100,
+				emerge_stats_tostring(stats.emerge)
+			)
+		end)
 		
-		
-		minetest.log("action", name.." used //subdivide at "..wea.vector.tostring(pos1).." - "..wea.vector.tostring(pos2)..", with "..i.." chunks and "..worldedit.volume(pos1, pos2).." total nodes in "..time_total.."s")
-		return true, msg_prefix.."Complete: "..i.." chunks processed in "..wea.human_time(time_total)
 	end
 })
