@@ -33,3 +33,12 @@ The following brushes together can make large-scale terrain sculpting easy:
 //brush cubeapply 50 fixlight
 //brush cubeapply 50 layers dirt_with_grass dirt 3 stone 10
 ```
+
+## En-mass Foliage clearing
+Clearing large amounts of foliage is easy!
+
+```
+//many 25 //multi //clearcut //y //shift x 10
+```
+
+Adjust the numbers (and direction in the `//shift` command) to match your scenario.
