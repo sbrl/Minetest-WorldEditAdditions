@@ -2,7 +2,7 @@
 It's about time I started a changelog! This will serve from now on as the main changelog for WorldEditAdditions.
 
 
-## v1.10 (unreleased)
+## v1.10 (16th January 2021)
  - `//maze`: Fix some parts of generated mazes staying solid
  - `//maze`, `//maze3d`: Allow non-number seeds (existing seeds aren't affected - they will still produce identical output)
  - `//many`: Improve format of progress messages, add ETA
