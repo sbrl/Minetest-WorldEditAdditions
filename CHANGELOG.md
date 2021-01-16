@@ -8,6 +8,7 @@ It's about time I started a changelog! This will serve from now on as the main c
  - `//many`: Improve format of progress messages, add ETA
  - `//subdivide`: Make asynchronous, and use `minetest.emerge_area()` to ensure areas are loaded before executing on a subdivision chunk
      - This will ensure that `//subdivide`ing enormous regions should now function as expected. Want to level an entire rainforest with `//subdivide` and `//clearcut`? Now you can! :D
+ - Add `//line` for drawing simple lines
 
 
 ## v1.9: The Nature Update (20th September 2020)

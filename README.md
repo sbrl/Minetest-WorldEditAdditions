@@ -30,6 +30,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//torus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#torus-major_radius-minor_radius-node_name)
  - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#hollowtorus-major_radius-minor_radius-node_name)
  - [`//walls <replace_node>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#walls-replace_node)
+ - [`//line [<replace_node> [<radius>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#line-replace_node-radius)
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#maze-replace_node-seed)
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#maze3d-replace_node-seed)
 

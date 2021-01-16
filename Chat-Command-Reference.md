@@ -137,6 +137,20 @@ Creates a hollow torus at position 1 with the radius major and minor radii. Work
 //hollowtorus 21 11 stone
 ```
 
+### `//line [<replace_node> [<radius>]]`
+Draw a line from position 1 to position 2, optionally with a given thickness.
+
+The radius can be tought fo as the thickness of the line, and is defined as the distance from a given node to an imaginary line from pos1 to pos2. Defaults to drawing with dirt and a radius of 1.
+
+Floating-point values are fully supported for the radius.
+
+```
+//line
+//line stone
+//line sandstone 3
+//line glass 0.5
+```
+
 ### `//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`
 Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
 
