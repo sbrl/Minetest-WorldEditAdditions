@@ -29,6 +29,7 @@ dofile(worldeditadditions.modpath.."/lib/walls.lua")
 dofile(worldeditadditions.modpath.."/lib/replacemix.lua")
 dofile(worldeditadditions.modpath.."/lib/maze2d.lua")
 dofile(worldeditadditions.modpath.."/lib/maze3d.lua")
+dofile(worldeditadditions.modpath.."/lib/hollow.lua")
 dofile(worldeditadditions.modpath.."/lib/conv/conv.lua")
 dofile(worldeditadditions.modpath.."/lib/erode/erode.lua")
 

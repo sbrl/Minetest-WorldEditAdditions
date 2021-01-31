@@ -31,6 +31,7 @@ dofile(we_c.modpath.."/commands/maze.lua")
 dofile(we_c.modpath.."/commands/replacemix.lua")
 dofile(we_c.modpath.."/commands/convolve.lua")
 dofile(we_c.modpath.."/commands/erode.lua")
+dofile(we_c.modpath.."/commands/hollow.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 dofile(we_c.modpath.."/commands/saplingaliases.lua")
