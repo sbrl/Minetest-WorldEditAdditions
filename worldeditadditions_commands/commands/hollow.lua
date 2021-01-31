@@ -17,7 +17,7 @@ worldedit.register_command("hollow", {
 			return false, "Error: Unrecognised number '"..params_text.."'."
 		end
 		
-		return success, wall_thickness
+		return true, wall_thickness
 	end,
 	nodes_needed = function(name, wall_thickness)
 		-- //overlay only modifies up to 1 node per column in the selected region
