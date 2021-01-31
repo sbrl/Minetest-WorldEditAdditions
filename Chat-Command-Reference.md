@@ -164,7 +164,7 @@ Note that all air-like nodes are also left alone.
 ## `//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`
 Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html) (see also [this post that has lots of eye candy :D](https://starbeamrainbowlabs.com/blog/article.php?article=posts/429-lua-blender-mazes.html)). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
 
-Requires the currently selected area to be at least 3x3x3.
+Requires the currently selected area to be at least 3x3 on the x and z axes respectively.
 
 The optional `path_length` and `path_width` arguments require additional explanation. When generating a maze, a multi-headed random walk is performed. When the generator decides to move forwards from a point, it does so `path_length` nodes at a time. `path_length` defaults to `2`.
 
@@ -186,7 +186,7 @@ The last example below shows how to set the path length and width:
 ## `//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`
 Same as `//maze`, but adapted for 3d - has all the same properties. Note that currently there's no way to adjust the height of the passageways generated (you'll need to scale the generated maze afterwards).
 
-Requires the currently selected area to be at least 3x3 on the x and z axes.
+Requires the currently selected area to be at least 3x3x3.
 
 The optional `path_depth` parameter defaults to `1` and allows customisation of the height of the paths generated.
 
