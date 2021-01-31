@@ -10,7 +10,7 @@ Other useful links:
  - [`we_env`](https://github.com/sfan5/we_env#readme)
 
 
-### `//floodfill [<replace_node> [<radius>]]`
+## `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
 
 ```
@@ -19,7 +19,7 @@ Floods all connected nodes of the same type starting at _pos1_ with <replace_nod
 //floodfill glass 25
 ```
 
-### `//overlay <node_name_a> [<chance[<snowballs|...> [<key_1> [<vaue_1>]] [<key_2> [<value_2>]] ...]_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`
+## `//overlay <node_name_a> [<chance[<snowballs|...> [<key_1> [<vaue_1>]] [<key_2> [<value_2>]] ...]_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`
 Places `<node_name_a>` in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with `<node_name_a>`. Optionally supports a mix of node names and chances, as `//mix` (WorldEdit) and `//replacemix` (WorldEditAdditions) does.
 
 Will also work in caves, as it scans columns of nodes from top to bottom, skipping every non-air node until it finds one - and only then will it start searching for a node to place the target node on top of.
@@ -37,7 +37,7 @@ Note also that columns without any air nodes in them at all are also skipped, so
 //overlay sandstone dirt 2 sand 5
 ```
 
-### `//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
+## `//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
 Finds the first non-air node in each column and works downwards, replacing non-air nodes with a defined list of nodes in sequence. Like WorldEdit for Minecraft's `//naturalize` command, and also similar to [`we_env`'s `//populate`](https://github.com/sfan5/we_env). Speaking of, this command has `//naturalise` and `//naturalize` as aliases. Defaults to 1 layer of grass followed by 3 layers of dirt.
 
 The list of nodes has a form similar to that of a chance list you might find in `//replacemix`, `//overlay`, or `//mix` - see the examples below. If the numberr of layers isn't specified, `1` is assumed (i.e. a single layer).
@@ -49,7 +49,7 @@ The list of nodes has a form similar to that of a chance list you might find in 
 //layers cobble 2 dirt
 ```
 
-### `//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`
+## `//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`
 Plants and grows saplings to generate a forest. A density value is optionally taken, which controls the overall density of the forest that is generated. The `bonemeal` mod is required - just like for the [`//bonemeal`](#bonemeal-strength-chance) command.
 
 The density defaults to 1, acts like a multiplier, and is not affected by the chances of all saplings listed (e.g. you can have a sapling with a chance of 1-in-50, and the overall density of the forest will be unaffected). For example, 2 results in a forest twice as dense as the default, and 0.5 a forest half as dense as the default density.
@@ -78,7 +78,7 @@ For example, the first 2 examples below are functionally equivalent.
 //forest 0.5 acacia
 ```
 
-### `//saplingaliases [aliases|all_saplings]`
+## `//saplingaliases [aliases|all_saplings]`
 Lists all the currently registered sapling aliases in alphabetical order. These aliases can be used in the 
 
 Optionally takes a single parameter, which is the operating mode. Current implemented operating modes:
@@ -95,7 +95,7 @@ Mode			| Description
 ```
 
 
-### `//fillcaves [<node_name>]`
+## `//fillcaves [<node_name>]`
 Fills in all airlike nodes beneath non airlike nodes, which gives the effect of filling in caves. Defaults to filling in with stone, but this can be customised.
 
 ```
@@ -104,7 +104,7 @@ Fills in all airlike nodes beneath non airlike nodes, which gives the effect of 
 //fillcaves brick
 ```
 
-### `//ellipsoid <rx> <ry> <rz> <node_name>`
+## `//ellipsoid <rx> <ry> <rz> <node_name>`
 Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
 
 ```
@@ -113,7 +113,7 @@ Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
 //ellipsoid 20 10 40 air
 ```
 
-### `//hollowellipsoid <rx> <ry> <rz> <node_name>`
+## `//hollowellipsoid <rx> <ry> <rz> <node_name>`
 Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works the same way as `//ellipsoid` does.
 
 ```
@@ -121,7 +121,7 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 //hollowellipsoid 21 11 41 stone
 ```
 
-### `//torus <major_radius> <minor_radius> <node_name>`
+## `//torus <major_radius> <minor_radius> <node_name>`
 Creates a solid torus at position 1 with the specified major and minor radii. The major radius is the distance from the centre of the torus to the centre of the circle bit, and the minor radius is the radius of the circle bit.
 
 ```
@@ -129,7 +129,7 @@ Creates a solid torus at position 1 with the specified major and minor radii. Th
 //torus 5 3 meselamp
 ```
 
-### `//hollowtorus <major_radius> <minor_radius> <node_name>`
+## `//hollowtorus <major_radius> <minor_radius> <node_name>`
 Creates a hollow torus at position 1 with the radius major and minor radii. Works the same way as `//torus` does.
 
 ```
@@ -137,7 +137,7 @@ Creates a hollow torus at position 1 with the radius major and minor radii. Work
 //hollowtorus 21 11 stone
 ```
 
-### `//line [<replace_node> [<radius>]]`
+## `//line [<replace_node> [<radius>]]`
 Draw a line from position 1 to position 2, optionally with a given thickness.
 
 The radius can be tought fo as the thickness of the line, and is defined as the distance from a given node to an imaginary line from pos1 to pos2. Defaults to drawing with dirt and a radius of 1.
@@ -151,7 +151,7 @@ Floating-point values are fully supported for the radius.
 //line glass 0.5
 ```
 
-### `//hollow [<wall_thickness>]`
+## `//hollow [<wall_thickness>]`
 Replaces nodes inside the defined region with air, but leaving a given number of nodes near the outermost edges alone. In other words, it makes the defined region hollow, while leaving walls around the edges of a given thickness (defaulting to a wall thickness of 1).
 
 Note that all air-like nodes are also left alone.
@@ -161,7 +161,7 @@ Note that all air-like nodes are also left alone.
 //hollow 2
 ```
 
-### `//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`
+## `//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`
 Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
 
 Requires the currently selected area to be at least 3x3x3.
@@ -183,7 +183,7 @@ The last example below shows how to set the path length and width:
 //maze glass 2 1 minetestiscool
 ```
 
-### `//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`
+## `//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`
 Same as `//maze`, but adapted for 3d - has all the same properties. Note that currently there's no way to adjust the height of the passageways generated (you'll need to scale the generated maze afterwards).
 
 Requires the currently selected area to be at least 3x3 on the x and z axes.
@@ -197,7 +197,7 @@ The optional `path_depth` parameter defaults to `1` and allows customisation of 
 //maze3d stone 6 3 3 54321
 ```
 
-### `//bonemeal [<strength> [<chance>]]`
+## `//bonemeal [<strength> [<chance>]]`
 Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and outut a message to the server log). Alias: `//flora`.
 
 Bonemeals all eligible nodes in the current region. An eligible node is one that has an air node directly above it - note that just because a node is eligible doesn't mean to say that something will actually happen when the `bonemeal` mod bonemeals it.
@@ -218,7 +218,7 @@ For example, a chance number of 2 would mean a 50% chance that any given eligibl
 //bonemeal 2 15
 ```
 
-### `//walls <replace_node>`
+## `//walls <replace_node>`
 Creates vertical walls of `<replace_node>` around the inside edges of the defined region.
 
 ```
@@ -227,7 +227,7 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 //walls goldblock
 ```
 
-### `//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...`
+## `//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...`
 Replaces a given node with a random mix of other nodes. Functions like `//mix`.
 
 This command is best explained with examples:
@@ -276,7 +276,7 @@ Here are all the above examples together:
 //replacemix dirt 3 sandstone 10 dry_dirt cobble 2
 ```
 
-### `//convolve <kernel> [<width>[,<height>]] [<sigma>]`
+## `//convolve <kernel> [<width>[,<height>]] [<sigma>]`
 Advanced version of `//smooth` from we_env, and one of the few WorldEditAdditions commands to have any aliases (`//smoothadv` and `//conv`).
 
 Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain. 
@@ -304,7 +304,7 @@ The sigma value is only applicable to the `gaussian` kernel, and can be thought 
 //convolve gaussian 5 0.2
 ```
 
-#### `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+### `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
 Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
 
 Currently implemented algorithms:
@@ -323,7 +323,7 @@ Usage examples:
 
 Each of the algorithms above have 1 or more parameters that they support. These are detailed below.
 
-### Algorithm: `snowballs`
+## Algorithm: `snowballs`
 Based on the algorithm detailed in [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html) ([direct link to the source code](https://github.com/jobtalle/HydraulicErosion/blob/master/js/archipelago/island/terrain/erosionHydraulic.js)), devised by [Job Talle](https://jobtalle.com/).
 
 Parameter			| Type		| Default Value		| Description
@@ -343,14 +343,14 @@ noconv				| any		| n/a				| When set to any value, disables to automatic 3x3 gau
 If you find any good combinations of these parameters, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or a PR!) and let me know! I'll include good combinations here.
 
 
-### `//count`
+## `//count`
 Counts all the nodes in the defined region and returns the result along with calculated percentages (note that if the chat window used a monospace font, the returned result would be a perfect table. If someone has a ~~hack~~ solution to make the columns line up neatly, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) :D)
 
 ```
 //count
 ```
 
-### `//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`
+## `//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`
 Splits the current WorldEdit region into `(<size_x>, <size_y>, <size_z>)` sized chunks, and run `//<cmd_name> <args>` over each chunk. 
 
 Sometimes, we want to run a single command on a truly vast area. Usually, this results in running out of memory. If this was you, then this command is just what you need! It should be able to handle any sized region - the only limit is your patience for command to complete.....
@@ -366,7 +366,7 @@ Note also that `<cmd_name>` should _not_ be prefixed with _any_ forward  slashes
 //subdivice 25 25 25 fixlight
 ```
 
-### `//multi <command_a> <command_b> <command_c> .....`
+## `//multi <command_a> <command_b> <command_c> .....`
 Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but does work with others too. Don't forget a space between commands!
 
 ```
@@ -375,7 +375,7 @@ Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but
 //multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //2 //sphere 8 air //shift down 1 //floodfill //reset
 ```
 
-### `//many <times> <command>`
+## `//many <times> <command>`
 Executes a single chat command many times in a row. Uses `minetest.after()` to yield to the main server thread to allow other things to happen at the same time, so technically you could have multiple `//many` calls going at once (but multithreading support is out of reach, so only a single one will be executing at the same time).
 
 Note that this isn't necessarily limited to executing WorldEdit / WorldEditAdditions commands. Combine with `//multi` (see above) execute multiple commands at once for even more power and flexibility!
@@ -385,7 +385,7 @@ Note that this isn't necessarily limited to executing WorldEdit / WorldEditAddit
 //many 100 //multi //1 //2 //outset 20 //set dirt
 ```
 
-### `//ellipsoidapply <command_name> <args>`
+## `//ellipsoidapply <command_name> <args>`
 Executes the given command, and then clips the result to the largest ellipsoid that will fit inside the defined region. The specified command must obviously take 2 positions - so for example `//set`, `//replacemix`, and `//maze3d` will work, but `//sphere`, `//torus`, and `//floodfill` won't.
 
 ```
@@ -397,7 +397,7 @@ Executes the given command, and then clips the result to the largest ellipsoid t
 ```
 
 
-### `//y`
+## `//y`
 Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
 
 <!-- Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command. -->
@@ -406,7 +406,7 @@ Confirms the execution of a command if it could potentially affect a large numbe
 //y
 ```
 
-### `//n`
+## `//n`
 Prevents the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
 
 <!-- Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command. -->
@@ -416,12 +416,12 @@ Prevents the execution of a command if it could potentially affect a large numbe
 ```
 
 
-### Far Wand
+## Far Wand
 The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/worldeditadditions_farwand/textures/worldeditadditions_farwand.png)
 
 It functions very similarly to the regular WorldEdit wand, except that it has a _much_ longer range - which can be very useful for working on large-scale terrain for example. It also comes with an associated command to control it.
 
-### `//farwand skip_liquid (true|false) | maxdist <number>`
+## `//farwand skip_liquid (true|false) | maxdist <number>`
 This command helps control the behaviour of the [WorldEditAdditions far wand](#far-wand). Calling it without any arguments shows the current status:
 
 ```
