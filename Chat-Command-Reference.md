@@ -162,7 +162,7 @@ Note that all air-like nodes are also left alone.
 ```
 
 ## `//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`
-Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html) (see also [this post that has lots of eye candy :D](https://starbeamrainbowlabs.com/blog/article.php?article=posts/429-lua-blender-mazes.html)). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
+Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html) (see also [this post of mine that has lots of eye candy :D](https://starbeamrainbowlabs.com/blog/article.php?article=posts/429-lua-blender-mazes.html)). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
 
 Requires the currently selected area to be at least 3x3 on the x and z axes respectively.
 
