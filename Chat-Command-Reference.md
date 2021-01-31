@@ -151,6 +151,16 @@ Floating-point values are fully supported for the radius.
 //line glass 0.5
 ```
 
+### `//hollow [<wall_thickness>]`
+Replaces nodes inside the defined region with air, but leaving a given number of nodes near the outermost edges alone. In other words, it makes the defined region hollow, while leaving walls around the edges of a given thickness (defaulting to a wall thickness of 1).
+
+Note that all air-like nodes are also left alone.
+
+```
+//hollow
+//hollow 2
+```
+
 ### `//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`
 Generates a maze using replace_node as the walls and air as the paths. Uses [an algorithm of my own devising](https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html). It is guaranteed that you can get from every point to every other point in generated mazes, and there are no loops.
 

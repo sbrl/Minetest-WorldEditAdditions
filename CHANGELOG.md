@@ -5,6 +5,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 ## v1.11 (unreleased)
  - `//count`: Make numbers human-readable
      - Tip: Use a monospace font for the chat window, and the columns will be aligned!
+ - Add `//hollow` for hollowing out areas (a step towards parity with Minecraft WorldEdit)
 
 
 ## v1.10 (16th January 2021)
