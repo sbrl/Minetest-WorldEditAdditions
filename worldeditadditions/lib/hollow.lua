@@ -15,7 +15,8 @@ function worldeditadditions.hollow(pos1, pos2, wall_thickness)
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
 	
-	local node_id_ignore = minetest.get_content_id("air")
+	local node_id_ignore = minetest.get_content_id("ignore")
+	local node_id_air = minetest.get_content_id("air")
 	
 	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
 	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
