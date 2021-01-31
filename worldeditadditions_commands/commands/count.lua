@@ -19,7 +19,11 @@ worldedit.register_command("count", {
 	func = function(name)
 		local start_time = worldeditadditions.get_ms_time()
 		
-		local success, counts, total = worldeditadditions.count(worldedit.pos1[name], worldedit.pos2[name], target_node)
+		local success, counts, total = worldeditadditions.count(
+			worldedit.pos1[name], worldedit.pos2[name],
+			true
+		)
+		
 		local result = worldeditadditions.make_ascii_table(counts).."\n"..
 			string.rep("=", 6 + #tostring(total) + 6).."\n"..
 			"Total "..total.." nodes\n"

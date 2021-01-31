@@ -6,7 +6,7 @@
 -- ██      ██    ██ ██    ██ ██ ██  ██    ██
 -- ██      ██    ██ ██    ██ ██  ██ ██    ██
 --  ██████  ██████   ██████  ██   ████    ██
-function worldeditadditions.count(pos1, pos2)
+function worldeditadditions.count(pos1, pos2, do_human_counts)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
@@ -34,6 +34,12 @@ function worldeditadditions.count(pos1, pos2)
 		})
 	end
 	table.sort(results, function(a, b) return a[1] < b[1] end)
+	
+	if do_human_counts then
+		for key,item in pairs(results) do
+			item[1] = worldeditadditions.human_size(item[1], 2)
+		end
+	end
 	
 	-- Save the modified nodes back to disk & return
 	-- No need to save - this function doesn't actually change anything
