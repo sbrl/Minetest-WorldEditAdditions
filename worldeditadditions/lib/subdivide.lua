@@ -6,18 +6,21 @@
 local wea = worldeditadditions
 
 -- Counts the number of chunks in the given area.
--- TODO: Do the maths properly here instead of using a loop - the loop is *very* inefficient - especially for large areas
+-- Maths is now done properly. Values from this new implementation were tested
+-- with 1000 random pos1, pos2, and chunk_size combinations and found to be identical.
 local function count_chunks(pos1, pos2, chunk_size)
-	local count = 0
-	for z = pos2.z, pos1.z, -chunk_size.z do
-		for y = pos2.y, pos1.y, -chunk_size.y do
-			for x = pos2.x, pos1.x, -chunk_size.x do
-				count = count + 1
-			end
-		end
-	end
-	return count
+	-- Assume pos1 & pos2 are sorted
+	local dimensions = {
+		x = pos2.x - pos1.x + 1,
+		y = pos2.y - pos1.y + 1,
+		z = pos2.z - pos1.z + 1,
+	}
+	-- print("[new] dimensions", dimensions.x, dimensions.y, dimensions.z)
+	return math.ceil(dimensions.x / chunk_size.x)
+		* math.ceil(dimensions.y / chunk_size.y)
+		* math.ceil(dimensions.z / chunk_size.z)
 end
+
 
 local function merge_stats(a, b)
 	for key,value in pairs(a) do
