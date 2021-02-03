@@ -7,6 +7,8 @@ It's about time I started a changelog! This will serve from now on as the main c
      - Tip: Use a monospace font for the chat window, and the columns will be aligned!
  - Add `//hollow` for hollowing out areas (a step towards parity with Minecraft WorldEdit)
  - `//subdivide`: Improve performance of initial chunk counting algorithm - it should get started on the job _much_ quicker now (especially on large regions)
+ - `//subdivide`: Fix performance & memory usage of metrics over time on large regions
+     - No more slowdowns over time with a large number of chunks!
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
 
 

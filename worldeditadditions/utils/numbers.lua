@@ -21,6 +21,7 @@ end
 
 
 function worldeditadditions.average(list)
+    print("[DEBUG] averaging "..#list.." numbers")
 	if #list == 0 then return 0 end 
 	return worldeditadditions.sum(list) / #list
 end
@@ -32,7 +33,10 @@ function worldeditadditions.get_ms_time()
 end
 
 function worldeditadditions.eta(existing_times, times_total_count)
-    local average = worldeditadditions.average(existing_times)
+    print("[DEBUG] eta got "..#existing_times.." numbers")
+    local average = worldeditadditions.average(
+        worldeditadditions.table_get_last(existing_times, 25)
+    )
     local times_left = times_total_count - #existing_times
     if times_left == 0 then return 0 end
     return average * times_left

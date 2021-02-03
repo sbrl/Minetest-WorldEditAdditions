@@ -85,6 +85,10 @@ end
 local function subdivide_step_afterload(state_emerge, state_ours)
 	state_ours.times.emerge_last = wea.get_ms_time() - state_ours.times.emerge_last
 	table.insert(state_ours.times.emerge, state_ours.times.emerge_last)
+	if #state_ours.times.emerge > 25 then
+		state_ours.times.emerge = wea.table_get_last(state_ours.times.emerge, 25)
+	end
+	state_ours.times.emerge_total = state_ours.times.emerge_total + state_ours.times.emerge_last
 	
 	merge_stats(state_emerge.stats, state_ours.stats_emerge)
 	
@@ -100,12 +104,14 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 	
 	state_ours.times.step_last = wea.get_ms_time() - state_ours.times.step_start_abs
 	table.insert(state_ours.times.steps, state_ours.times.step_last)
+	if #state_ours.times.steps > 25 then
+		state_ours.times.steps = wea.table_get_last(state_ours.times.steps, 25)
+	end
+	state_ours.times.steps_total = state_ours.times.steps_total + state_ours.times.step_last
 	state_ours.times.step_start_abs = wea.get_ms_time()
 	state_ours.eta = wea.eta(state_ours.times.steps, state_ours.chunks_total)
 	if state_ours.chunks_completed > 0 then
-		local total_steps = wea.sum(state_ours.times.steps)
-		local total_emerge = wea.sum(state_ours.times.emerge)
-		state_ours.emerge_overhead = total_emerge / total_steps
+		state_ours.emerge_overhead = state_ours.times.emerge_total / state_ours.times.steps_total
 	end
 	
 	minetest.after(0, state_ours.__beforeload, state_ours)
@@ -145,8 +151,10 @@ function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock,
 		stats_emerge = {},
 		times = {
 			-- Total time per step
+			steps_total = 0,
 			steps = {}, step_last = 0, step_start_abs = wea.get_ms_time(),
 			-- Time per step spent on mineteest.emerge_area()
+			emerge_total = 0,
 			emerge = {}, emerge_last = 0,
 			-- Timme per step spent running the callback
 			callback = {}, callback_last = 0,
