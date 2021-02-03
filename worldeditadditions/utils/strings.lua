@@ -247,6 +247,7 @@ end
 -- @param	ms		float	The number of milliseconds to convert.
 -- @return	string	A human-readable string representing the input ms.
 function worldeditadditions.human_time(ms)
+	if type(ms) ~= "number" then return "unknown" end
 	local tokens = {
 		{ 31536000 * 1000, 'year' },
 		{ 2592000 * 1000, 'month' },
