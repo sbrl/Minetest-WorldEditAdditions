@@ -57,7 +57,6 @@ local function emerge_callback(pos, action, num_calls_remaining, state)
 	state.loaded_blocks = state.loaded_blocks + 1
 	
 	if state.loaded_blocks == state.total then
-		print("[DEBUG] after", state.callback)
 		state.callback(state, state.callback_state)
 	else
 		if action == minetest.EMERGE_CANCELLED then
@@ -87,6 +86,5 @@ function worldeditadditions.emerge_area(pos1, pos2, callback, callback_state)
 		callback = callback,
 		callback_state = callback_state
 	}
-	print("[DEBUG] before", state.callback)
 	minetest.emerge_area(pos1, pos2, emerge_callback, state)
 end
