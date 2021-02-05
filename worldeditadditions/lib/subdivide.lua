@@ -79,7 +79,7 @@ local function subdivide_step_beforeload(state)
 	if state.cpos1.z < state.pos1.z then state.cpos1.z = state.pos1.z end
 	
 	state.times.emerge_last = wea.get_ms_time()
-	worldeditadditions.emerge_area(state.pos1, state.pos2, state.__afterload, state)
+	worldeditadditions.emerge_area(state.cpos1, state.cpos2, state.__afterload, state)
 end
 
 local function subdivide_step_afterload(state_emerge, state_ours)
