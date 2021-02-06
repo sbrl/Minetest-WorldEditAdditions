@@ -120,7 +120,7 @@ worldedit.register_command("subdivide", {
 						msg_prefix,
 						stats.chunks_completed, stats.chunks_total,
 						(stats.chunks_completed / stats.chunks_total) * 100,
-						wea.human_time(stats.times.step_last),
+						wea.human_time(math.floor(stats.times.step_last)), -- the time is an integer anyway because precision
 						wea.human_time(wea.average(stats.times.steps)),
 						stats.emerge_overhead * 100,
 						wea.human_time(stats.eta)
