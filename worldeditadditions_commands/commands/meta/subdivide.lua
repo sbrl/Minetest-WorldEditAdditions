@@ -10,7 +10,7 @@ local function will_trigger_saferegion(name, cmd_name, args)
 	
 	local parsed = {def.parse(args)}
 	local parse_success = table.remove(parsed, 1)
-	if not success then return nil, table.remove(parsed, 1) end
+	if not parse_success then return nil, table.remove(parsed, 1) end
 	
 	if not def.nodes_needed then return false end
 	local success, result = def.nodes_needed(name, unpack(parsed))
