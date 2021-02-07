@@ -32,10 +32,11 @@ function worldeditadditions.get_ms_time()
 end
 
 function worldeditadditions.eta(existing_times, times_total_count)
+    local max = 100
     local average = worldeditadditions.average(
-        worldeditadditions.table_get_last(existing_times, 100)
+        worldeditadditions.table_get_last(existing_times, max)
     )
-    local times_left = times_total_count - #existing_times
+    local times_left = times_total_count - math.min(100, #existing_times)
     if times_left == 0 then return 0 end
     return average * times_left
 end
