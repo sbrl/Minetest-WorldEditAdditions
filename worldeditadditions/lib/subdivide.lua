@@ -94,6 +94,8 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 	
 	merge_stats(state_emerge.stats, state_ours.stats_emerge)
 	
+	state_ours.chunks_completed = state_ours.chunks_completed + 1
+	
 	local callback_last = wea.get_ms_time()
 	state_ours.callback_subblock(
 		state_ours.cpos1,
@@ -102,7 +104,6 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 	)
 	state_ours.times.callback_last = wea.get_ms_time() - callback_last
 	table.insert(state_ours.times.callback, state_ours.times.callback_last)
-	state_ours.chunks_completed = state_ours.chunks_completed + 1
 	
 	state_ours.times.step_last = wea.get_ms_time() - state_ours.times.step_start_abs
 	table.insert(state_ours.times.steps, state_ours.times.step_last)

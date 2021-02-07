@@ -88,7 +88,7 @@ worldedit.register_command("subdivide", {
 		
 		wea.subdivide(pos1, pos2, chunk_size, function(cpos1, cpos2, stats)
 			-- Called on every subblock
-			if stats.chunks_completed == 0 then
+			if stats.chunks_completed == 1 then
 				local chunk_size_display = {
 					x = stats.chunk_size.x + 1,
 					y = stats.chunk_size.y + 1,
