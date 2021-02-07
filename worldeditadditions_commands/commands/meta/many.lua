@@ -26,11 +26,6 @@ local function explode(delim, str)
 	end
 end
 
--- From http://lua-users.org/wiki/StringTrim
-local function trim(s)
-   return (s:gsub("^%s*(.-)%s*$", "%1"))
-end
-
 local function step(params)
 	local start_time = worldeditadditions.get_ms_time()
 	
@@ -96,11 +91,16 @@ minetest.register_chatcommand("/many", {
 		local times = {}
 		
 		local count, cmd_name, args = params_text:match("^(%d+)%s([^%s]+)%s(.+)$")
-		if not count then return false, "Error: Invalid syntax" end
+		if not count then
+			count, cmd_name = params_text:match("^(%d+)%s([^%s]+)$")
+			if not count then return false, "Error: Invalid syntax" end
+		end
+		if not args then args = "" end
+		args = worldeditadditions.trim(args)
 		-- print("[many] count", count, "cmd_name", cmd_name, "args", args)
 		
 		count = tonumber(count)
-		cmd_name = trim(cmd_name):sub(2) -- Things start at 1, not 0 in Lua :-(
+		cmd_name = worldeditadditions.trim(cmd_name):sub(2) -- Things start at 1, not 0 in Lua :-(
 		
 		-- Check the command we're going to execute
 		local cmd = minetest.chatcommands[cmd_name]

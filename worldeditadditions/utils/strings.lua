@@ -301,3 +301,8 @@ function worldeditadditions.makeseed(str)
     end
     return result
 end
+
+-- From http://lua-users.org/wiki/StringTrim
+function worldeditadditions.trim(s)
+   return (s:gsub("^%s*(.-)%s*$", "%1"))
+end
