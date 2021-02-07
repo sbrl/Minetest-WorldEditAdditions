@@ -84,7 +84,7 @@ local function subdivide_step_beforeload(state)
 end
 
 local function subdivide_step_afterload(state_emerge, state_ours)
-	print("[AFTER_EMERGE] c1", wea.vector.tostring(state_ours.cpos1), "c2", wea.vector.tostring(state_ours.cpos2), "volume", worldedit.volume(state.cpos1, state.cpos2))
+	print("[AFTER_EMERGE] c1", wea.vector.tostring(state_ours.cpos1), "c2", wea.vector.tostring(state_ours.cpos2), "volume", worldedit.volume(state_ours.cpos1, state_ours.cpos2))
 	state_ours.times.emerge_last = wea.get_ms_time() - state_ours.times.emerge_last
 	table.insert(state_ours.times.emerge, state_ours.times.emerge_last)
 	if #state_ours.times.emerge > 25 then
