@@ -359,6 +359,8 @@ Note that this command only works with WorldEdit commands, and only those which 
 
 Note also that `<cmd_name>` should _not_ be prefixed with _any_ forward  slashes - see the examples below.
 
+While other server commands can be executed while a `//subdivide` is running, `//subdivide` manipulates your player's defined region when running. This has the side-effect that you can check on where it has got up to with `//p get` for example - but means that attempting to change your pos1 & pos2 manually will have no effect until the `//subdivide` completes.
+
 **Warning:** Once started, this command cannot be stopped without restarting your server! This is the case with all WorldEdit commands, but it's worth a special mention here.
 
 ```

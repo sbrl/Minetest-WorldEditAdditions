@@ -114,7 +114,7 @@ worldedit.register_command("subdivide", {
 			worldedit.player_notify_unsuppress(name)
 			
 			-- Send updates every 2 seconds, and after the first 3 chunks are done
-			if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or i == 3 or i == stats.chunks_total then
+			if worldeditadditions.get_ms_time() - time_last_msg > 2 * 1000 or stats.chunks_completed == 3 or stats.chunks_completed == stats.chunks_total then
 				worldedit.player_notify(name,
 					string.format("%s%d / %d (~%.2f%%) complete | last chunk: %s, average: %s, %.2f%% emerge overhead, ETA: ~%s",
 						msg_prefix,
