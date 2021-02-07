@@ -8,8 +8,8 @@ It's about time I started a changelog! This will serve from now on as the main c
  - Add `//hollow` for hollowing out areas (a step towards parity with Minecraft WorldEdit)
  - `//subdivide`: Improve performance of initial chunk counting algorithm - it should get started on the job _much_ quicker now (especially on large regions)
  - `//subdivide`: Fix a bug where the entire defined region was emerged all at once instead of in chunks
- - `//subdivide`: Fix performance & memory usage of metrics over time on large regions
-     - No more slowdowns over time with a large number of chunks!
+ - `//subdivide`: Fix performance & memory usage issues
+     - If you encounter any other issues with it over large areas (particularly 2000x150x2000 and larger), please let me know
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
 
 
