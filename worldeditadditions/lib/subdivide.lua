@@ -73,16 +73,18 @@ local function subdivide_step_beforeload(state)
 		y = state.cpos.y - state.chunk_size.y,
 		z = state.cpos.z - state.chunk_size.z
 	}
-	-- print("c1", wea.vector.tostring(c_pos1), "c2", wea.vector.tostring(c_pos2), "volume", worldedit.volume(c_pos1, c_pos2))
 	if state.cpos1.x < state.pos1.x then state.cpos1.x = state.pos1.x end
 	if state.cpos1.y < state.pos1.y then state.cpos1.y = state.pos1.y end
 	if state.cpos1.z < state.pos1.z then state.cpos1.z = state.pos1.z end
 	
 	state.times.emerge_last = wea.get_ms_time()
+	
+	print("[BEFORE_EMERGE] c1", wea.vector.tostring(state.cpos1), "c2", wea.vector.tostring(state.cpos2), "volume", worldedit.volume(state.cpos1, state.cpos2))
 	worldeditadditions.emerge_area(state.cpos1, state.cpos2, state.__afterload, state)
 end
 
 local function subdivide_step_afterload(state_emerge, state_ours)
+	print("[AFTER_EMERGE] c1", wea.vector.tostring(state_ours.cpos1), "c2", wea.vector.tostring(state_ours.cpos2), "volume", worldedit.volume(state.cpos1, state.cpos2))
 	state_ours.times.emerge_last = wea.get_ms_time() - state_ours.times.emerge_last
 	table.insert(state_ours.times.emerge, state_ours.times.emerge_last)
 	if #state_ours.times.emerge > 25 then
