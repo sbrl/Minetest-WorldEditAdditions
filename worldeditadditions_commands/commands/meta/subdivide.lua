@@ -13,8 +13,8 @@ local function will_trigger_saferegion(name, cmd_name, args)
 	if not parse_success then return nil, table.remove(parsed, 1) end
 	
 	if not def.nodes_needed then return false end
-	local success, result = def.nodes_needed(name, unpack(parsed))
-	if not success then return nil, result end
+	local result = def.nodes_needed(name, unpack(parsed))
+	if not result then return nil, result end
 	if result > 10000 then return true end
 	return false
 end
@@ -109,7 +109,7 @@ worldedit.register_command("subdivide", {
 			worldedit.marker_update(name)
 			cmd.func(name, args)
 			if will_trigger_saferegion(name, cmd_name, args) then
-				minetest.chatcommands["/y"].func()
+				minetest.chatcommands["/y"].func(name)
 			end
 			worldedit.player_notify_unsuppress(name)
 			
