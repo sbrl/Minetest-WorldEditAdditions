@@ -83,7 +83,7 @@ worldedit.register_command("subdivide", {
 		-- 	* math.ceil((pos2.y - pos1.y) / (chunk_size.y - 1))
 		-- 	* math.ceil((pos2.z - pos1.z) / (chunk_size.z - 1))
 		
-		local msg_prefix = "[ subdivide | "..table.concat({cmd_name, args}, " ").." ] "
+		local msg_prefix = "[ subdivide | "..wea.trim(table.concat({cmd_name, args}, " ")).." ] "
 		local time_last_msg = wea.get_ms_time()
 		
 		wea.subdivide(pos1, pos2, chunk_size, function(cpos1, cpos2, stats)
