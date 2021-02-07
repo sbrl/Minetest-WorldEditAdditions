@@ -41,7 +41,11 @@ local function step(params)
 		((params.i + 1) / params.count)*100,
 		worldeditadditions.human_time(params.times[#params.times] or 0),
 		worldeditadditions.human_time(worldeditadditions.average(params.times)),
-		worldeditadditions.human_time(worldeditadditions.eta(params.times, params.count))
+		worldeditadditions.human_time(worldeditadditions.eta(
+			params.times,
+			params.i,
+			params.count
+		))
 	))
 	
 	local cmd = minetest.chatcommands[params.cmd_name]

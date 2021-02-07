@@ -111,7 +111,11 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 	end
 	state_ours.times.steps_total = state_ours.times.steps_total + state_ours.times.step_last
 	state_ours.times.step_start_abs = wea.get_ms_time()
-	state_ours.eta = wea.eta(state_ours.times.steps, state_ours.chunks_total)
+	state_ours.eta = wea.eta(
+		state_ours.times.steps,
+		state_ours.chunks_completed,
+		state_ours.chunks_total
+	)
 	if state_ours.chunks_completed > 0 then
 		state_ours.emerge_overhead = state_ours.times.emerge_total / state_ours.times.steps_total
 	end

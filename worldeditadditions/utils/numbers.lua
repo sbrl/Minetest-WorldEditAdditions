@@ -31,12 +31,12 @@ function worldeditadditions.get_ms_time()
 	return minetest.get_us_time() / 1000
 end
 
-function worldeditadditions.eta(existing_times, times_total_count)
+function worldeditadditions.eta(existing_times, done_count, total_count)
     local max = 100
     local average = worldeditadditions.average(
         worldeditadditions.table_get_last(existing_times, max)
     )
-    local times_left = times_total_count - math.min(100, #existing_times)
+    local times_left = total_count - done_count
     if times_left == 0 then return 0 end
     return average * times_left
 end
