@@ -7,7 +7,7 @@ If you can dream of it, it probably belongs here!
 
 ![Screenshot](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/screenshot.png)
 
-_(Do you have a cool build that you used WorldEditAdditions to build? [Get in touch](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) and I'll feature you screenshot here!)_
+_(Do you have a cool build that you used WorldEditAdditions to build? [Get in touch](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) and I'll feature your screenshot here!)_
 
 
 ## Table of Contents
