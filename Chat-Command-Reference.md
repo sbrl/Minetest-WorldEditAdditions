@@ -79,7 +79,7 @@ For example, the first 2 examples below are functionally equivalent.
 ```
 
 ## `//saplingaliases [aliases|all_saplings]`
-Lists all the currently registered sapling aliases in alphabetical order. These aliases can be used in the 
+Lists all the currently registered sapling aliases in alphabetical order. These aliases can be used in the `//forest` subcommand.
 
 Optionally takes a single parameter, which is the operating mode. Current implemented operating modes:
 
