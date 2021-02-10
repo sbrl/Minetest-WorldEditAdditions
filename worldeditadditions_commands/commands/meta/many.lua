@@ -1,7 +1,7 @@
 --- Executes multiple worldedit commands in sequence.
 -- @module worldeditadditions.multi
 
--- explode(seperator, string)
+-- explode(separator, string)
 -- From http://lua-users.org/wiki/SplitJoin
 local function explode(delim, str)
 	local ll, is_done
