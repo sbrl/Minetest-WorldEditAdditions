@@ -140,7 +140,7 @@ Creates a hollow torus at position 1 with the radius major and minor radii. Work
 ## `//line [<replace_node> [<radius>]]`
 Draw a line from position 1 to position 2, optionally with a given thickness.
 
-The radius can be tought fo as the thickness of the line, and is defined as the distance from a given node to an imaginary line from pos1 to pos2. Defaults to drawing with dirt and a radius of 1.
+The radius can be thought of as the thickness of the line, and is defined as the distance from a given node to an imaginary line from pos1 to pos2. Defaults to drawing with dirt and a radius of 1.
 
 Floating-point values are fully supported for the radius.
 
@@ -198,7 +198,7 @@ The optional `path_depth` parameter defaults to `1` and allows customisation of 
 ```
 
 ## `//bonemeal [<strength> [<chance>]]`
-Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and outut a message to the server log). Alias: `//flora`.
+Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and output a message to the server log). Alias: `//flora`.
 
 Bonemeals all eligible nodes in the current region. An eligible node is one that has an air node directly above it - note that just because a node is eligible doesn't mean to say that something will actually happen when the `bonemeal` mod bonemeals it.
 

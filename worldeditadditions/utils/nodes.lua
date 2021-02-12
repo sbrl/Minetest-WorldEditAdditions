@@ -1,5 +1,5 @@
 --- Makes an associative table of node_name => weight into a list of node ids.
--- Node names with a heigher weight are repeated more times.
+-- Node names with a higher weight are repeated more times.
 function worldeditadditions.make_weighted(tbl)
 	local result = {}
 	for node_name, weight in pairs(tbl) do
