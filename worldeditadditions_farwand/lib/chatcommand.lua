@@ -21,7 +21,7 @@ end
 
 minetest.register_chatcommand("/farwand", {
 	params = "skip_liquid (true|false) | maxdist <number>",
-	description = "Configures your worldeditadditions farwand tool on a per-player basis. skip_liquid configures whether liquids will be skipped when raycasting. maxdist configues the maximum distance to raycast looking for a suitable node (default: 1000, but while higher values mean that it will search further, it's not an exact number of nodes that will be searched)",
+	description = "Configures your worldeditadditions farwand tool on a per-player basis. skip_liquid configures whether liquids will be skipped when raycasting. maxdist configures the maximum distance to raycast looking for a suitable node (default: 1000, but while higher values mean that it will search further, it's not an exact number of nodes that will be searched)",
 	privs = { worldedit = true },
 	func = function(name, params_text)
 		if name == nil then return end

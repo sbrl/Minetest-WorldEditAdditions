@@ -55,7 +55,7 @@ end
 -- Nodes with the "sapling" group are considered saplings.
 -- It is recommended that the result of this function be cached.
 -- @param	id		number	The content/node id to check.
--- @return	bool	Whther the given node/content id is a sapxling or not.
+-- @return	bool	Whether the given node/content id is a sapling or not.
 function worldeditadditions.is_sapling(id)
 	local node_name = minetest.get_name_from_content_id(id)
 	return minetest.get_item_group(node_name, "sapling") ~= 0
