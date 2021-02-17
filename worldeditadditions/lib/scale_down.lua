@@ -27,15 +27,14 @@ function worldeditadditions.scale_down(pos1, pos2, scale, direction)
 	print("[DEBUG] scale_down", worldeditadditions.vector.tostring(scale_down))
 	local size = vector.subtract(pos2, pos1)
 	
+	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
 	local data_copy = worldeditadditions.shallowcopy(data)
 	
 	local node_id_air = minetest.get_content_id("air")
 	
 	
-	local count = 0 -- The number of nodes replaced
-	
-	local stats = { updated = 0, scale = scale_down }
+	local stats = { updated = 0, scale = "scale_down" }
 	-- Zero out the area we're scaling down into
 	for i in area:iterp(pos1, pos2) do
 		data_copy[i] = node_id_air
