@@ -17,8 +17,8 @@ worldedit.register_command("scale", {
 		local anchor = vector.new(1, 1, 1)
 		
 		if #parts == 2 then
-			if parts[1] ~= "x" or parts[1] ~= "y" or parts[1] ~= "z"
-			 	or parts[1] ~= "-x" or parts[1] ~= "-y" or parts[1] ~= "-z" then
+			if not (parts[1] == "x" or parts[1] == "y" or parts[1] == "z"
+			 	or parts[1] == "-x" or parts[1] == "-y" or parts[1] == "-z") then
 				return false, "Error: Got 2 arguments, but the first doesn't look like the name of an axis."
 			end
 			local axis = parts[1]

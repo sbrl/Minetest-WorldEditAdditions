@@ -1,3 +1,4 @@
+local wea = worldeditadditions
 -- ███████  ██████  █████  ██      ███████         ██    ██ ██████
 -- ██      ██      ██   ██ ██      ██              ██    ██ ██   ██
 -- ███████ ██      ███████ ██      █████           ██    ██ ██████
@@ -19,19 +20,21 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 		return false, "Error: One of the components of the anchor vector was 0 (anchor components should either be greater than or less than 0 to indicate the anchor to scale in.)"
 	end
 	
-	local size = vector.subtract(pos2, pos1)
+	local size = vector.add(vector.subtract(pos2, pos1), 1)
 	
 	local pos1_big = vector.new(pos1)
 	local pos2_big = vector.new(pos2)
 	
-	if anchor.x < 1 then pos1_big.x = pos1_big.x - size.x
-	else pos2_big.x = pos2_big.x + size.x end
-	if anchor.y < 1 then pos1_big.y = pos1_big.y - size.y
-	else pos2_big.y = pos2_big.y + size.y end
-	if anchor.z < 1 then pos1_big.z = pos1_big.z - size.z
-	else pos2_big.z = pos2_big.z + size.z end
+	if anchor.x < 1 then pos1_big.x = pos1_big.x - (size.x * (scale.x - 1))
+	else pos2_big.x = pos2_big.x + (size.x * (scale.x - 1)) end
+	if anchor.y < 1 then pos1_big.y = pos1_big.y - (size.y * (scale.y - 1))
+	else pos2_big.y = pos2_big.y + (size.y * (scale.y - 1)) end
+	if anchor.z < 1 then pos1_big.z = pos1_big.z - (size.z * (scale.z - 1))
+	else pos2_big.z = pos2_big.z + (size.z * (scale.z - 1)) end
 	
+	local size_big = vector.add(vector.subtract(pos2_big, pos1_big), 1)
 	
+	print("scale_up: scaling "..wea.vector.tostring(pos1).." to "..wea.vector.tostring(pos2).." (volume "..worldedit.volume(pos1, pos2).."; size "..wea.vector.tostring(size)..") to "..wea.vector.tostring(pos1_big).." to "..wea.vector.tostring(pos2_big).." (volume "..worldedit.volume(pos1_big, pos2_big).."; size "..wea.vector.tostring(size_big)..")")
 	
 	local manip_small, area_small = worldedit.manip_helpers.init(pos1, pos2)
 	local manip_big, area_big = worldedit.manip_helpers.init(pos1_big, pos2_big)
@@ -40,33 +43,35 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 	
 	local node_id_air = minetest.get_content_id("air")
 	
-	local kern_volume = math.abs(scale.x) * math.abs(scale.y) * math.abs(scale.z)
-	
 	local changes = { updated = 0, scale = "scale_up" }
 	for z = pos2.z, pos1.z, -1 do
 		for y = pos2.y, pos1.y, -1 do
 			for x = pos2.x, pos1.x, -1 do
 				local posi_rel = vector.subtract({ x = x, y = y, z = z }, pos1)
 				
-				local kern_anchor = vector.add(
-					pos1_big,
-					vector.cross(
-						vector.add(posi_rel, 1),
-						scale
-					)
+				local kern_anchor = {
+					x = pos1_big.x + (posi_rel.x * scale.x) + (scale.x - 1),
+					y = pos1_big.y + (posi_rel.y * scale.y) + (scale.y - 1),
+					z = pos1_big.z + (posi_rel.z * scale.z) + (scale.z - 1)
+				}
+				
+				print(
+					"posi", wea.vector.tostring(vector.new(x, y, z)),
+					"posi_rel", wea.vector.tostring(posi_rel),
+					"kern_anchor", wea.vector.tostring(kern_anchor)
 				)
 				
 				local source_val = data_source[area_small:index(x, y, z)]
 				
-				for kz = kern_anchor.z, kern_anchor.z - scale.z, -1 do
-					for ky = kern_anchor.y, kern_anchor.y - scale.y, -1 do
-						for kx = kern_anchor.x, kern_anchor.x - scale.x, -1 do
+				for kz = kern_anchor.z, kern_anchor.z - scale.z + 1, -1 do
+					for ky = kern_anchor.y, kern_anchor.y - scale.y + 1, -1 do
+						for kx = kern_anchor.x, kern_anchor.x - scale.x + 1, -1 do
 							data_target[area_big:index(kx, ky, kz)] = source_val
+							changes.updated = changes.updated + 1
 						end
 					end
 				end
 				
-				changes.updated = changes.updated + kern_volume
 			end
 		end
 	end
