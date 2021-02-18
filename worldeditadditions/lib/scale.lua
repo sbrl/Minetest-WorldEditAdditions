@@ -49,6 +49,8 @@ function worldeditadditions.scale(pos1, pos2, scale, anchor)
 		pos2 = stats.pos2
 	end
 	
+	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	
 	stats_total.pos1 = pos1
 	stats_total.pos2 = pos2
 	

@@ -43,8 +43,18 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 	
 	local node_id_air = minetest.get_content_id("air")
 	
+	local pos1_small = vector.new(pos1)
+	local pos2_small = vector.new(pos2)
 	
-	local stats = { updated = 0, scale = scale_down, pos1 = pos1, pos2 = vector.add(pos1, size_small) }
+	if anchor.x < 1 then pos1_small.x = pos2_small.x - size_small.x
+	else pos2_small.x = pos1_small.x + size_small.x end
+	if anchor.y < 1 then pos1_small.y = pos2_small.y - size_small.y
+	else pos2_small.y = pos1_small.y + size_small.y end
+	if anchor.z < 1 then pos1_small.z = pos2_small.z - size_small.z
+	else pos2_small.z = pos1_small.z + size_small.z end
+	
+	
+	local stats = { updated = 0, scale = scale_down, pos1 = pos1_small, pos2 = pos2_small }
 	-- Zero out the area we're scaling down into
 	for i in area:iterp(pos1, pos2) do
 		data_copy[i] = node_id_air
