@@ -3,6 +3,8 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 
 ## v1.11 (unreleased)
+ - Add `//scale` (currently **experimental**)
+     - Scale operations that scale up and down at the same time are split into 2 separate operations automatically (scaling up is always performed first)
  - `//count`: Make numbers human-readable
      - Tip: Use a monospace font for the chat window, and the columns will be aligned!
  - Add `//hollow` for hollowing out areas (a step towards parity with Minecraft WorldEdit)
