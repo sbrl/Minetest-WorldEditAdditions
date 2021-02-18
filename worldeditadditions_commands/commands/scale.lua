@@ -14,7 +14,7 @@ worldedit.register_command("scale", {
 		local parts = worldeditadditions.split(params_text, "%s+", false)
 		
 		local scale = vector.new(1, 1, 1)
-		local direction = vector.new(1, 1, 1)
+		local anchor = vector.new(1, 1, 1)
 		
 		if #parts == 2 then
 			if parts[1] ~= "x" or parts[1] ~= "y" or parts[1] ~= "z"
@@ -27,7 +27,7 @@ worldedit.register_command("scale", {
 			
 			if axis:sub(1, 1) == "-" then
 				axis = axis:sub(2, 2)
-				direction[axis] = -1
+				anchor[axis] = -1
 			end
 			
 			scale[axis] = factor
@@ -54,40 +54,44 @@ worldedit.register_command("scale", {
 		if #parts == 6 then
 			local val = tonumber(parts[4])
 			if not val then return false, "Error: x axis anchor wasn't a number." end
-			direction.x = val
+			anchor.x = val
 			val = tonumber(parts[5])
 			if not val then return false, "Error: y axis anchor wasn't a number." end
-			direction.y = val
+			anchor.y = val
 			val = tonumber(parts[6])
 			if not val then return false, "Error: z axis anchor wasn't a number." end
-			direction.z = val
+			anchor.z = val
 		end
 		
 		if scale.x == 0 then return false, "Error: x scale factor was 0" end
 		if scale.y == 0 then return false, "Error: y scale factor was 0" end
 		if scale.z == 0 then return false, "Error: z scale factor was 0" end
 		
-		if direction.x == 0 then return false, "Error: x axis anchor was 0" end
-		if direction.y == 0 then return false, "Error: y axis anchor was 0" end
-		if direction.z == 0 then return false, "Error: z axis anchor was 0" end
+		if anchor.x == 0 then return false, "Error: x axis anchor was 0" end
+		if anchor.y == 0 then return false, "Error: y axis anchor was 0" end
+		if anchor.z == 0 then return false, "Error: z axis anchor was 0" end
 		
-		return true, scale, direction
+		return true, scale, anchor
 	end,
-	nodes_needed = function(name, scale, direction)
+	nodes_needed = function(name, scale, anchor)
 		local volume = worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 		local factor = math.ceil(math.abs(scale.x))
 			* math.ceil(math.abs(scale.y))
 			* math.ceil(math.abs(scale.z))
 		return volume * factor
 	end,
-	func = function(name, scale, direction)
+	func = function(name, scale, anchor)
+		print("initial scale: "..worldeditadditions.vector.tostring(scale)..", anchor: "..worldeditadditions.vector.tostring(anchor))
+		
+		
 		local start_time = worldeditadditions.get_ms_time()
 		
-		local success, stats = worldeditadditions.scale(pos1, pos2, scale, direction)
+		local success, stats = worldeditadditions.scale(
+			worldedit.pos1[name],
+			worldedit.pos2[name],
+			scale, anchor
+		)
 		if not success then return success, stats end
-		
-		-- TODO read stats here
-		
 		
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		

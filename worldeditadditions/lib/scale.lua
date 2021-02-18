@@ -1,13 +1,13 @@
 
---- Scales the defined region by the given scale factor in the given directions.
+--- Scales the defined region by the given scale factor in the given anchors.
 -- Scale factor vectors containing both scale up and scale down operations are
 -- split into 2 different scale operations automatically.
 -- @param	pos1		Vector	Position 1 of the defined region,
 -- @param	pos2		Vector	Position 2 of the defined region.
 -- @param	scale		Vector	The scale factor - as a vector - by which to scale (values between -1 and 1 are considered a scale down operation).
--- @param	direction	Vector	The direction to scale in - as a vector. e.g. { x = -1, y = 1, z = -1 } would mean scale in the negative x, positive y, and nevative z directions.
+-- @param	anchor	Vector	The anchor to scale in - as a vector. e.g. { x = -1, y = 1, z = -1 } would mean scale in the negative x, positive y, and negative z directions.
 -- @return	boolean, string|table	Whether the operation was successful or not. If not, then an error messagea as a string is also passed. If it was, then a statistics object is returned instead.
-function worldeditadditions.scale(pos1, pos2, scale, direction)
+function worldeditadditions.scale(pos1, pos2, scale, anchor)
 	if scale.x == 0 or scale.y == 0 or scale.z == 0 then
 		return false, "A component of the scale factoro was 0."
 	end
@@ -27,14 +27,14 @@ function worldeditadditions.scale(pos1, pos2, scale, direction)
 	
 	local success, stats
 	if scale_up.x ~= 1 or scale_up.y ~= 1 or scale_up.z ~= 1 then
-		success, stats = worldeditadditions.scale_up(pos1, pos2, scale_up, direction)
+		success, stats = worldeditadditions.scale_up(pos1, pos2, scale_up, anchor)
 		if not success then return success, stats end
 		stats_total.updated = stats.updated
 		stats_total.operations = stats_total.operations + 1
 		stats_total.scale_down = stats.scale
 	end
 	if scale_down.x ~= 1 or scale_down.y ~= 1 or scale_down.z ~= 1 then
-		success, stats = worldeditadditions.scale_down(pos1, pos2, scale_down, direction)
+		success, stats = worldeditadditions.scale_down(pos1, pos2, scale_down, anchor)
 		if not success then return success, stats end
 		stats_total.updated = stats_total.updated + stats.updated
 		stats_total.operations = stats_total.operations + 1
