@@ -34,7 +34,7 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 	
 	local size_big = vector.add(vector.subtract(pos2_big, pos1_big), 1)
 	
-	print("scale_up: scaling "..wea.vector.tostring(pos1).." to "..wea.vector.tostring(pos2).." (volume "..worldedit.volume(pos1, pos2).."; size "..wea.vector.tostring(size)..") to "..wea.vector.tostring(pos1_big).." to "..wea.vector.tostring(pos2_big).." (volume "..worldedit.volume(pos1_big, pos2_big).."; size "..wea.vector.tostring(size_big)..")")
+	-- print("scale_up: scaling "..wea.vector.tostring(pos1).." to "..wea.vector.tostring(pos2).." (volume "..worldedit.volume(pos1, pos2).."; size "..wea.vector.tostring(size)..") to "..wea.vector.tostring(pos1_big).." to "..wea.vector.tostring(pos2_big).." (volume "..worldedit.volume(pos1_big, pos2_big).."; size "..wea.vector.tostring(size_big)..")")
 	
 	local manip_small, area_small = worldedit.manip_helpers.init(pos1, pos2)
 	local manip_big, area_big = worldedit.manip_helpers.init(pos1_big, pos2_big)
@@ -43,7 +43,7 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 	
 	local node_id_air = minetest.get_content_id("air")
 	
-	local changes = { updated = 0, scale = "scale_up" }
+	local stats = { updated = 0, scale = scale, pos1 = pos1_big, pos2 = pos2_big }
 	for z = pos2.z, pos1.z, -1 do
 		for y = pos2.y, pos1.y, -1 do
 			for x = pos2.x, pos1.x, -1 do
@@ -55,11 +55,11 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 					z = pos1_big.z + (posi_rel.z * scale.z) + (scale.z - 1)
 				}
 				
-				print(
-					"posi", wea.vector.tostring(vector.new(x, y, z)),
-					"posi_rel", wea.vector.tostring(posi_rel),
-					"kern_anchor", wea.vector.tostring(kern_anchor)
-				)
+				-- print(
+				-- 	"posi", wea.vector.tostring(vector.new(x, y, z)),
+				-- 	"posi_rel", wea.vector.tostring(posi_rel),
+				-- 	"kern_anchor", wea.vector.tostring(kern_anchor)
+				-- )
 				
 				local source_val = data_source[area_small:index(x, y, z)]
 				
@@ -67,7 +67,7 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 					for ky = kern_anchor.y, kern_anchor.y - scale.y + 1, -1 do
 						for kx = kern_anchor.x, kern_anchor.x - scale.x + 1, -1 do
 							data_target[area_big:index(kx, ky, kz)] = source_val
-							changes.updated = changes.updated + 1
+							stats.updated = stats.updated + 1
 						end
 					end
 				end
@@ -79,5 +79,5 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 	-- Save the region back to disk & return
 	worldedit.manip_helpers.finish(manip_big, data_target)
 	
-	return true, changes
+	return true, stats
 end

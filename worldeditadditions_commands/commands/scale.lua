@@ -1,3 +1,22 @@
+local function parse_scale_component(val)
+	local result = tonumber(val)
+	if result then return true, result end
+	if string.find(val, "/") then
+		local parts = worldeditadditions.split(val, "/", true)
+		local a = tonumber(parts[1])
+		local b = tonumber(parts[2])
+		if not b then return false, "Invalid number after the forward slash in scale component." end
+		if not a then return false, "Invalid number before the forward slash in scale component." end
+		return true, a / b
+	end
+	if string.find(val, "%%") then
+		local part = tonumber(string.sub(val, 1, -2))
+		if not part then return false, "We thought a scale component was a percentage, but failed to parse percentage as number." end
+		return true, part / 100
+	end
+	return false, "Failed to parse scale component (unrecognised format - we support things like '3', '0.5', '1/10', or '33%' without quotes)."
+end
+
 -- ███████  ██████  █████  ██      ███████
 -- ██      ██      ██   ██ ██      ██
 -- ███████ ██      ███████ ██      █████
@@ -22,8 +41,8 @@ worldedit.register_command("scale", {
 				return false, "Error: Got 2 arguments, but the first doesn't look like the name of an axis."
 			end
 			local axis = parts[1]
-			local factor = tonumber(parts[2])
-			if not factor then return false, "Error: Invalid scale factor." end
+			local success, factor = parse_scale_component(parts[2])
+			if not success then return success, "Error: Invalid scale factor. Details: "..factor end
 			
 			if axis:sub(1, 1) == "-" then
 				axis = axis:sub(2, 2)
@@ -32,19 +51,21 @@ worldedit.register_command("scale", {
 			
 			scale[axis] = factor
 		elseif #parts >= 3 then
-			local val = tonumber(parts[1])
-			if not val then return false, "Error: x axis scale factor wasn't a number." end
+			local success, val = parse_scale_component(parts[1])
+			if not success then return false, "Error: x axis scale factor wasn't a number. Details: "..val end
 			scale.x = val
-			val = tonumber(parts[2])
-			if not val then return false, "Error: y axis scale factor wasn't a number." end
+			
+			success, val = parse_scale_component(parts[2])
+			if not success then return false, "Error: y axis scale factor wasn't a number. Details: "..val end
 			scale.y = val
-			val = tonumber(parts[3])
-			if not val then return false, "Error: z axis scale factor wasn't a number." end
+			
+			success, val = parse_scale_component(parts[3])
+			if not success then return false, "Error: z axis scale factor wasn't a number. Details: "..val end
 			scale.z = val
 		else
-			local val = tonumber(parts[1])
-			if not val then
-				return false, "Error: scale factor wasn't a number."
+			local success, val = parse_scale_component(parts[1])
+			if not success then
+				return false, "Error: scale factor wasn't a number. Details: "..val
 			end
 			scale.x = val
 			scale.y = val
@@ -92,6 +113,10 @@ worldedit.register_command("scale", {
 			scale, anchor
 		)
 		if not success then return success, stats end
+		
+		worldedit.pos1[name] = stats.pos1
+		worldedit.pos2[name] = stats.pos2
+		worldedit.marker_update(name)
 		
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		

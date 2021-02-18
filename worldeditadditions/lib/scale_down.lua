@@ -24,8 +24,18 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 		y = math.floor(1 / scale.y),
 		z = math.floor(1 / scale.z)
 	}
-	print("[DEBUG] scale_down", worldeditadditions.vector.tostring(scale_down))
 	local size = vector.subtract(pos2, pos1)
+	print("[DEBUG] scale_down", worldeditadditions.vector.tostring(scale_down), "size", size)
+	
+	if size.x < scale_down.x or size.y < scale_down.y or size.z < scale.z then
+		return false, "Error: Area isn't big enough to apply scale down by "..worldeditadditions.vector.tostring(scale).."."
+	end
+	
+	local size_small = {
+		x = math.floor(size.x / scale_down.x),
+		y = math.floor(size.y / scale_down.y),
+		z = math.floor(size.z / scale_down.z)
+	}
 	
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
@@ -34,7 +44,7 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 	local node_id_air = minetest.get_content_id("air")
 	
 	
-	local stats = { updated = 0, scale = "scale_down" }
+	local stats = { updated = 0, scale = scale_down, pos1 = pos1, pos2 = vector.add(pos1, size_small) }
 	-- Zero out the area we're scaling down into
 	for i in area:iterp(pos1, pos2) do
 		data_copy[i] = node_id_air
@@ -48,8 +58,14 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 			for x = pos2.x, pos1.x, -1 do
 				local posi_rel = vector.subtract({ x = x, y = y, z = z }, pos1)
 				
-				local posi_copy = worldeditadditions.shallowcopy(posi_rel)
-				posi_copy = vector.floor(vector.divide(scale_down))
+				-- local posi_copy = worldeditadditions.shallowcopy(posi_rel)
+				-- posi_copy = vector.floor(vector.divide(posi_rel/*, scale_down*/))
+				
+				local posi_copy = {
+					x = math.floor(posi_rel.x / scale_down.x),
+					y = math.floor(posi_rel.y / scale_down.y),
+					z = math.floor(posi_rel.z / scale_down.z)
+				}
 				
 				if anchor.x < 0 then posi_copy.x = size.x - posi_copy.x end
 				if anchor.y < 0 then posi_copy.y = size.y - posi_copy.y end
@@ -73,5 +89,5 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 	-- Save the modified nodes back to disk & return
 	worldedit.manip_helpers.finish(manip, data_copy)
 	
-	return true, changes
+	return true, stats
 end
