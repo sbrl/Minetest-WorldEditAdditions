@@ -14,6 +14,9 @@ Name							| Description
 
 Additionally, every command should be implemented in its own file. This helps keep things organised and files short.
 
+Don't forget to update `init.lua` to `dofile()` the new file(s) you create in each submod :-)
+
+
 ## Guidelines
 When actually implementing stuff, here are a few guidelines that I recommend to summarise everything:
 
