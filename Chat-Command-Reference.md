@@ -227,6 +227,88 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 //walls goldblock
 ```
 
+## `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
+Advanced version of [`//stretch` from WorldEdit](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#stretch-stretchx-stretchy-stretchz) that can scale both up and down at the same time by transparently splitting it into 2 different operations. Scaling up is *always* done before scaling down.
+
+Although the syntax looks complicated, it's really quite simple. The key concept to understand is that of the scale factor. It refers to how much the defined region should be scaled up or down by, and can be specified in multiple different ways:
+
+Scale Factor    | Meaning
+----------------|---------------------
+1               | Don't scale at all.
+0.5             | Scale down by 50%
+2               | Scale up by 2x, doubling the size
+5               | Scale up by 5x, quintupling the size
+20%             | Scale down to 30% of the original size
+1/3             | Scale down to 1 third of original size
+
+In short, you can specify the scale factor directly, as a percentage, or as 1 number divided by another number.
+
+**Note:** `//scale` always scales in the _positive direction_ by default. This can be changed however - see below.
+
+With this in mind, there are 3 forms that you can tell `//scale` how you want to scale the defined region:
+
+### Single Axis
+If you just need to scale a single axis, you can tell `//scale` that like so:
+
+```
+//scale <axis> <scale_factor>
+```
+
+To give a concrete example:
+
+```
+//scale y 2
+```
+
+The above will scale the defined region in the positive y direction by 2 times, doubling the height. If you want to scale in the opposite direction, do this:
+
+```
+//scale -y 2
+```
+
+This will scale in the _negative_ y direction by 2 times (again, doubling the height). Some more examples:
+
+```
+//scale z 50%
+//scale -x 1/3
+```
+
+### All axes
+To scale on all axes at once, `//scale` takes the shortcut syntax of specifying a single scale factor:
+
+```
+//scale 2
+//scale 200%
+```
+
+Both of the above will scale the defined region up by 2 times in all directions.
+
+### Multiple scale factors
+If you want to specify different scale factors for difference axes, then `//scale` also supports a third syntax. Here's an example:
+
+```
+//scale 2 3 4
+```
+
+This will scale the defined region by 2x in the positive x, 3x in the positive y, and 4x in the positive z. As these are all scale factors, we can also use the syntax described above to scale up and down in the same operation:
+
+```
+//scale 50% 2 1/4 
+```
+
+This will first scale in the positive y by 2x. Once that operation is completed, it will scale down to 50% size in the positive x and down to 25% size in the positive z. Note that if you want to scale down first and then scale up, you'll need to execute 2 separate commands.
+
+If you want to change the anchor point of the scaling operation too, `//scale` supports a final syntax like so:
+
+```
+//scale 50% 2 1/4 1 -1 1
+```
+
+By adding 3 extra numbers for the x, y, and z axes respectively, we can control the direction `//scale` performs the scaling operation. A value of 1 or greater indicates the positive direction of the axis, and a value of -1 or less indicates the negative direction of the axis. I recommend by [worldedit_hud_helper](https://content.minetest.net/packages/Starbeamrainbowlabs/worldedit_hud_helper/) mod for easily determining which direction is which.
+
+So in the above example, we scale in the positive x and z directions, and the negative y direction.
+
+
 ## `//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...`
 Replaces a given node with a random mix of other nodes. Functions like `//mix`.
 
@@ -304,7 +386,7 @@ The sigma value is only applicable to the `gaussian` kernel, and can be thought 
 //convolve gaussian 5 0.2
 ```
 
-### `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+## `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
 Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
 
 Currently implemented algorithms:
@@ -323,7 +405,7 @@ Usage examples:
 
 Each of the algorithms above have 1 or more parameters that they support. These are detailed below.
 
-## Algorithm: `snowballs`
+### Algorithm: `snowballs`
 Based on the algorithm detailed in [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html) ([direct link to the source code](https://github.com/jobtalle/HydraulicErosion/blob/master/js/archipelago/island/terrain/erosionHydraulic.js)), devised by [Job Talle](https://jobtalle.com/).
 
 Parameter			| Type		| Default Value		| Description
@@ -340,7 +422,7 @@ maxdiff				| `float`	| 0.4				| The maximum difference in height (between 0 and 
 count				| `float`	| 25000				| The number of snowballs to simulate.
 noconv				| any		| n/a				| When set to any value, disables to automatic 3x3 gaussian convolution.
 
-If you find any good combinations of these parameters, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or a PR!) and let me know! I'll include good combinations here.
+If you find any good combinations of these parameters, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or a PR!) and let me know! I'll include good combinations here, and possibly add a presets feature too.
 
 
 ## `//count`
