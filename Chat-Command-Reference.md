@@ -9,6 +9,8 @@ Other useful links:
  - [WorldEdit Chat Command Reference](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md)
  - [`we_env`](https://github.com/sfan5/we_env#readme)
 
+**Note:** If anything in this reference isn't clear, that's a bug. Please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or even better a PR improving it) to let me know precisely which bit you don't understand and why.
+
 
 ## `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
