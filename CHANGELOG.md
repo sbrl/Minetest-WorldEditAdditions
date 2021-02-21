@@ -11,6 +11,7 @@ It's about time I started a changelog! This will serve from now on as the main c
  - `//subdivide`: Improve performance of initial chunk counting algorithm - it should get started on the job _much_ quicker now (especially on large regions)
  - `//subdivide`: Fix a bug where the entire defined region was emerged all at once instead of in chunks
  - `//subdivide`: Fix performance & memory usage issues
+     - Fix passing arguments to the command being executed
      - If you encounter any other issues with it over large areas (particularly 2000x150x2000 and larger), please let me know
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
  - `//many` can now be used with commands with no arguments.

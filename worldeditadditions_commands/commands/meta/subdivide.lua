@@ -79,6 +79,10 @@ worldedit.register_command("subdivide", {
 			return false, "Error: Your privileges are unsufficient to run '"..cmd_name.."'."
 		end
 		
+		if cmd.require_pos ~= 2 then
+			return false, "Error: The WorldEdit command '"..cmd_name.."' does not take 2 region markers, so can't be executed using //subdivide."
+		end
+		
 		-- local chunks_total = math.ceil((pos2.x - pos1.x) / (chunk_size.x - 1))
 		-- 	* math.ceil((pos2.y - pos1.y) / (chunk_size.y - 1))
 		-- 	* math.ceil((pos2.z - pos1.z) / (chunk_size.z - 1))
@@ -86,6 +90,12 @@ worldedit.register_command("subdivide", {
 		local msg_prefix = "[ subdivide | "..wea.trim(table.concat({cmd_name, args}, " ")).." ] "
 		local time_last_msg = wea.get_ms_time()
 		
+		local cmd_args_parsed = {cmd.parse(args)}
+		local success = table.remove(cmd_args_parsed, 1)
+		if not success then
+			return false, cmd_name..": "..(parsed[1] or "invalid usage")
+		end
+			
 		wea.subdivide(pos1, pos2, chunk_size, function(cpos1, cpos2, stats)
 			-- Called on every subblock
 			if stats.chunks_completed == 1 then
@@ -107,7 +117,7 @@ worldedit.register_command("subdivide", {
 			worldedit.pos1[name] = cpos1
 			worldedit.pos2[name] = cpos2
 			worldedit.marker_update(name)
-			cmd.func(name, args)
+			cmd.func(name, unpack(cmd_args_parsed))
 			if will_trigger_saferegion(name, cmd_name, args) then
 				minetest.chatcommands["/y"].func(name)
 			end
