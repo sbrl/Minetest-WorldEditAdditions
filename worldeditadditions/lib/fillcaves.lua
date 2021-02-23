@@ -27,7 +27,7 @@ function worldeditadditions.fillcaves(pos1, pos2, node_name)
 			for y = pos2.y, pos1.y, -1 do
 				local i = area:index(x, y, z)
 				
-				local is_air = worldeditadditions.is_airlike(data[i])
+				local is_air = worldeditadditions.is_airlike(data[i]) or worldeditadditions.is_liquidlike(data[i])
 				local is_ignore = data[i] == node_id_ignore
 				
 				-- If the previous node was air and this one isn't, then we've found the top level
