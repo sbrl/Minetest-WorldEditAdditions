@@ -20,7 +20,7 @@ function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 			-- Scan each column top to bottom
 			for y = pos2.y+1, pos1.y, -1 do
 				local i = area:index(x, y, z)
-				if not worldeditadditions.is_airlike(data[i]) then
+				if not (worldeditadditions.is_airlike(data[i]) or worldeditadditions.is_liquidlike(data[i])) then
 					-- It's the first non-airlike node in this column
 					-- Start heightmap values from 1 (i.e. there's at least 1 node in the column)
 					heightmap[hi] = (y - pos1.y) + 1 

@@ -15,7 +15,8 @@ It's about time I started a changelog! This will serve from now on as the main c
      - If you encounter any other issues with it over large areas (particularly 2000x150x2000 and larger), please let me know
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
  - `//many` can now be used with commands with no arguments.
- - `//fillcaves`: Treat liquids as air when filling caves in
+ - `//conv`, `//erode`, `//fillcaves`: Treat liquids as air
+
 
 ## v1.10 (16th January 2021)
  - `//maze`: Fix some parts of generated mazes staying solid
