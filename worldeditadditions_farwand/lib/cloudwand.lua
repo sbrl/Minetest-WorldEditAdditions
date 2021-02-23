@@ -26,6 +26,8 @@ local function clear_points(name, pos)
 	worldedit.pos2[name] = nil
 	worldedit.marker_update(name)
 	worldedit.set_pos[name] = nil
+	
+	worldedit.player_notify(name, "Region cleared")
 end
 
 minetest.register_tool(":worldeditadditions:cloudwand", {
