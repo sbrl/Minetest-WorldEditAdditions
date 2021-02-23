@@ -16,6 +16,7 @@ It's about time I started a changelog! This will serve from now on as the main c
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
  - `//many` can now be used with commands with no arguments.
  - `//conv`, `//erode`, `//fillcaves`: Treat liquids as air
+ - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#cloud-wand)
 
 
 ## v1.10 (16th January 2021)
