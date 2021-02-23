@@ -530,3 +530,10 @@ You can change the maximum range with the `maxdist` subcommand:
 ```
 
 Note that the number there isn't in blocks (because hard maths). It is however proportional to the distance the wand will raycast looks for nodes, so a higher value will result in it raycasting further.
+
+## Cloud Wand
+The cloud wand (`worldeditadditions:cloudwand`) is a another variant the above _Far Wand_. It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/worldeditadditions_farwand/textures/worldeditadditions_cloudwand.png)
+
+Unlike the other 2 wands, this wand functions in an additive manner. Left-click on a node to expand the currently defined region (creating a new one if one isn't defined already) to include that node. Right click to clear the currently defined region.
+
+It has the range of the _Far Wand_ mentioned above too, so you can select nodes from a great distance. It also abides by preferences set via the `//farwand` chat command.
