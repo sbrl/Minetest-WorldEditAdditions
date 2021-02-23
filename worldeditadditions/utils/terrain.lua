@@ -82,6 +82,7 @@ end
 function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heightmap_old, heightmap_new, heightmap_size)
 	local stats = { added = 0, removed = 0 }
 	local node_id_air = minetest.get_content_id("air")
+	local node_id_ignore = minetest.get_content_id("ignore")
 	
 	for z = heightmap_size[0], 0, -1 do
 		for x = heightmap_size[1], 0, -1 do
@@ -95,12 +96,23 @@ function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heig
 			if height_old == height_new then
 				-- noop
 			elseif height_new < height_old then
+				local node_id_replace = data[area:index(
+					pos1.x + x,
+					pos1.y + height_old + 1,
+					pos1.z + z
+				)]
+				-- Unlikely, but if it can happen, it *will* happen.....
+				if node_id_replace == node_id_ignore then
+					node_id_replace = node_id_air
+				end
 				stats.removed = stats.removed + (height_old - height_new)
 				local y = height_new
 				while y < height_old do
 					local ci = area:index(pos1.x + x, pos1.y + y, pos1.z + z)
 					-- print("[conv/save] remove at y", y, "→", pos1.y + y, "current:", minetest.get_name_from_content_id(data[ci]))
-					data[ci] = node_id_air
+					if data[ci] ~= node_id_ignore then
+						data[ci] = node_id_replace
+					end
 					y = y + 1
 				end
 			else -- height_new > height_old
@@ -113,7 +125,9 @@ function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heig
 				while y < height_new do
 					local ci = area:index(pos1.x + x, pos1.y + y, pos1.z + z)
 					-- print("[conv/save] add at y", y, "→", pos1.y + y, "current:", minetest.get_name_from_content_id(data[ci]))
-					data[ci] = node_id
+					if data[ci] ~= node_id_ignore then
+						data[ci] = node_id
+					end
 					y = y + 1
 				end
 			end
