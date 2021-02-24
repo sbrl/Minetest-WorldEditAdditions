@@ -1,3 +1,8 @@
+-- ███████  █████  ██████  ██      ██ ███    ██  ██████   █████  ██      ██  █████  ███████ ███████ ███████
+-- ██      ██   ██ ██   ██ ██      ██ ████   ██ ██       ██   ██ ██      ██ ██   ██ ██      ██      ██
+-- ███████ ███████ ██████  ██      ██ ██ ██  ██ ██   ███ ███████ ██      ██ ███████ ███████ █████   ███████
+--      ██ ██   ██ ██      ██      ██ ██  ██ ██ ██    ██ ██   ██ ██      ██ ██   ██      ██ ██           ██
+-- ███████ ██   ██ ██      ███████ ██ ██   ████  ██████  ██   ██ ███████ ██ ██   ██ ███████ ███████ ███████
 minetest.register_chatcommand("/saplingaliases", {
 	params = "[aliases|all_saplings]",
 	description = "Lists all the currently registered sapling aliases (default). A single argument is taken as the mode of operation. Current modes: aliases (default; as described previously), all_saplings (lists all node names with the group \"sapling\")",
@@ -7,9 +12,9 @@ minetest.register_chatcommand("/saplingaliases", {
 		if params_text == "" or not params_text then
 			params_text = "aliases"
 		end
-		
+
 		local msg = {}
-		
+
 		if params_text == "aliases" then
 			table.insert(msg, "Currently registered aliases:\n")
 			local aliases = worldeditadditions.get_all_sapling_aliases()

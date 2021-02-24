@@ -35,12 +35,18 @@ dofile(we_c.modpath.."/commands/hollow.lua")
 dofile(we_c.modpath.."/commands/scale.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
-dofile(we_c.modpath.."/commands/saplingaliases.lua")
 
 dofile(we_c.modpath.."/commands/meta/multi.lua")
 dofile(we_c.modpath.."/commands/meta/many.lua")
 dofile(we_c.modpath.."/commands/meta/subdivide.lua")
 dofile(we_c.modpath.."/commands/meta/ellipsoidapply.lua")
+
+-- dofile(we_c.modpath.."/commands/selectors/scol.lua")
+dofile(we_c.modpath.."/commands/selectors/srect.lua")
+-- dofile(we_c.modpath.."/commands/selectors/scube.lua")
+
+dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
+dofile(we_c.modpath.."/commands/extra/basename.lua")
 
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
 if minetest.get_modpath("bonemeal") then
