@@ -8,7 +8,9 @@ worldedit.register_command("basename", {
 	description = "Returns the base name of nodes that use a given alias.",
 	privs = {worldedit = true},
   parse = function(params_text)
-    params_text = params_text or "air"
+    if params_text == "" or not params_text then
+    	return false, "Node not specified."
+    end
     return true, params_text
 	end,
 	func = function(name, params_text)
