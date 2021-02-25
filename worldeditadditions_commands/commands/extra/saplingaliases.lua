@@ -12,9 +12,9 @@ minetest.register_chatcommand("/saplingaliases", {
 		if params_text == "" or not params_text then
 			params_text = "aliases"
 		end
-
+		
 		local msg = {}
-
+		
 		if params_text == "aliases" then
 			table.insert(msg, "Currently registered aliases:\n")
 			local aliases = worldeditadditions.get_all_sapling_aliases()

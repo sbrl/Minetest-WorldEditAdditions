@@ -16,7 +16,7 @@ worldedit.register_command("forest", {
 			density = tonumber(match_start)
 			params_text = params_text:sub(#match_start + 1) -- everything starts at 1 in Lua :-/
 		end
-
+		
 		local success, sapling_list = worldeditadditions.parse_weighted_nodes(
 			worldeditadditions.split(params_text, "%s+", false),
 			false,
@@ -43,11 +43,11 @@ worldedit.register_command("forest", {
 		)
 		if not success then return success, stats end
 		local time_taken = worldeditadditions.human_time(worldeditadditions.get_ms_time() - start_time)
-
+		
 		local distribution_display = worldeditadditions.make_ascii_table(
 			worldeditadditions.node_distribution_to_list(stats.placed, stats.successes)
 		)
-
+		
 		minetest.log("action", name.." used //forest at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", "..stats.successes.." trees placed, averaging "..stats.attempts_avg.." growth attempts / tree and "..stats.failures.." failed attempts in "..time_taken)
 		return true, distribution_display.."\n=========================\n"..stats.successes.." trees placed, averaging "..stats.attempts_avg.." growth attempts / tree and "..stats.failures.." failed attempts in "..time_taken
 	end
