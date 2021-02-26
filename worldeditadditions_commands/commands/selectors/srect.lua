@@ -3,20 +3,22 @@
 -- ███████ ██████  █████   ██         ██
 --      ██ ██   ██ ██      ██         ██
 -- ███████ ██   ██ ███████  ██████    ██
--- lua parse_params_srect("10")
 -- local -- TODO: set this to local once development is finished
 function parse_params_srect(params_text)
-	local find, _, sn1, ax1, sn2, ax2, len = params_text:find("([+-]?)([xyz]?)%s*([+-]?)([xyz]?)%s*(%d*)")
+	local wea = worldeditadditions
+	local find = wea.split(params_text, "%s", false)
+	local ax1, ax2, len = find[1], find[2], find[table.maxn(find)]
 	
-	-- If ax1 is nil set to player facing dir
-	if ax1 == "" then ax1 = "get"
-	else ax1 = {tonumber(sn1..1),string.lower(ax1)}
+	-- If ax1 is bad set to player facing dir
+	if ax1 == len  or not ax1:match('[xyz]') then ax1 = "get"
+	else ax1 = {wea.getsign(ax1, "int"),ax1:gsub('-?',''):sub(1,1)}
 	end
-	-- If ax2 is nil set to +y
-	if ax2 == "" then ax2 = "y" end
-	ax2 = {tonumber(sn2..1),string.lower(ax2)}
+	-- If ax2 is bad set to +y
+	if not ax2 or ax2 == len or not ax2:match('[xyz]') then ax2 = "y" end
+	ax2 = {wea.getsign(ax2, "int"),ax2:gsub('-?',''):sub(1,1)}
 	
 	len = tonumber(len)
+	-- If len == nill cancel the operation
 	if len == nil then
 		return false, "No length specified."
 	end
@@ -36,17 +38,16 @@ worldedit.register_command("srect", {
 		if axis1 == "get" then axis1 = worldeditadditions.player_axis2d(name) end
 		
 		local pos1 = worldedit.pos1[name]
-		local p2 = {["x"] = pos1.x,["y"] = pos1.y,["z"] = pos1.z}
+		local p2 = vector.new(pos1)
 		
 		p2[axis1[2]] = p2[axis1[2]] + tonumber(len) * axis1[1]
 		p2[axis2[2]] = p2[axis2[2]] + tonumber(len) * axis2[1]
 		
 		worldedit.pos2[name] = p2
 		worldedit.mark_pos2(name)
-		worldedit.player_notify(name, "position 2 set to " .. minetest.pos_to_string(p2))
+		return true, "position 2 set to " .. minetest.pos_to_string(p2)
 	end,
 })
 
 -- Tests
--- params_text = "-x z 13"
--- params_text = "-x a 13"
+-- /multi //fp set1 -63 19 -20 //srect 5
