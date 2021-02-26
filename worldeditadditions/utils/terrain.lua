@@ -7,7 +7,7 @@
 -- @param	manip	VoxelManip	The VoxelManip object.
 -- @param	area	area		The associated area object.
 -- @param	data	table		The associated data object.
--- @return	table	The ZERO-indexed heightmap data (as 1 single flat array).
+-- @return	table,table			The ZERO-indexed heightmap data (as 1 single flat array), followed by the size of the heightmap in the form { 0 = size_z, 1 = size_x }.
 function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 	-- z y x (in reverse for little-endian machines) is the preferred loop order, but that isn't really possible here
 	
@@ -34,7 +34,12 @@ function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 		end
 	end
 	
-	return heightmap
+	local heightmap_size = {
+		z = (pos2.z - pos1.z) + 1,
+		x = (pos2.x - pos1.x) + 1
+	}
+	
+	return heightmap, heightmap_size
 end
 
 --- Calculates a normal map for the given heightmap.
@@ -45,27 +50,27 @@ end
 -- @param	heightmap_size	int[]	The size of the heightmap in the form [ z, x ]
 -- @return	Vector[]		The calculated normal map, in the same form as the input heightmap. Each element of the array is a 3D Vector (i.e. { x, y, z }) representing a normal.
 function worldeditadditions.calculate_normals(heightmap, heightmap_size)
-	-- print("heightmap_size: "..heightmap_size[1].."x"..heightmap_size[0])
+	-- print("heightmap_size: "..heightmap_size.x.."x"..heightmap_size.z)
 	local result = {}
-	for z = heightmap_size[0]-1, 0, -1 do
-		for x = heightmap_size[1]-1, 0, -1 do
+	for z = heightmap_size.z-1, 0, -1 do
+		for x = heightmap_size.x-1, 0, -1 do
 			-- Algorithm ref https://stackoverflow.com/a/13983431/1460422
 			-- Also ref Vector.mjs, which I implemented myself (available upon request)
-			local hi = z*heightmap_size[1] + x
+			local hi = z*heightmap_size.x + x
 			-- Default to this pixel's height
 			local up = heightmap[hi]
 			local down = heightmap[hi]
 			local left = heightmap[hi]
 			local right = heightmap[hi]
-			if z - 1 > 0 then up = heightmap[(z-1)*heightmap_size[1] + x] end
-			if z + 1 < heightmap_size[0]-1 then down = heightmap[(z+1)*heightmap_size[1] + x] end
-			if x - 1 > 0 then left = heightmap[z*heightmap_size[1] + (x-1)] end
-			if x + 1 < heightmap_size[1]-1 then right = heightmap[z*heightmap_size[1] + (x+1)] end
+			if z - 1 > 0 then up = heightmap[(z-1)*heightmap_size.x + x] end
+			if z + 1 < heightmap_size.z-1 then down = heightmap[(z+1)*heightmap_size.x + x] end
+			if x - 1 > 0 then left = heightmap[z*heightmap_size.x + (x-1)] end
+			if x + 1 < heightmap_size.x-1 then right = heightmap[z*heightmap_size.x + (x+1)] end
 			
-			-- print("[normals] UP	| index", (z-1)*heightmap_size[1] + x, "z", z, "z-1", z - 1, "up", up, "limit", 0)
-			-- print("[normals] DOWN	| index", (z+1)*heightmap_size[1] + x, "z", z, "z+1", z + 1, "down", down, "limit", heightmap_size[1]-1)
-			-- print("[normals] LEFT	| index", z*heightmap_size[1] + (x-1), "x", x, "x-1", x - 1, "left", left, "limit", 0)
-			-- print("[normals] RIGHT	| index", z*heightmap_size[1] + (x+1), "x", x, "x+1", x + 1, "right", right, "limit", heightmap_size[1]-1)
+			-- print("[normals] UP	| index", (z-1)*heightmap_size.x + x, "z", z, "z-1", z - 1, "up", up, "limit", 0)
+			-- print("[normals] DOWN	| index", (z+1)*heightmap_size.x + x, "z", z, "z+1", z + 1, "down", down, "limit", heightmap_size.x-1)
+			-- print("[normals] LEFT	| index", z*heightmap_size.x + (x-1), "x", x, "x-1", x - 1, "left", left, "limit", 0)
+			-- print("[normals] RIGHT	| index", z*heightmap_size.x + (x+1), "x", x, "x+1", x + 1, "right", right, "limit", heightmap_size.x-1)
 			
 			result[hi] = worldeditadditions.vector.normalize({
 				x = left - right,
@@ -84,9 +89,9 @@ function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heig
 	local node_id_air = minetest.get_content_id("air")
 	local node_id_ignore = minetest.get_content_id("ignore")
 	
-	for z = heightmap_size[0], 0, -1 do
-		for x = heightmap_size[1], 0, -1 do
-			local hi = z*heightmap_size[1] + x
+	for z = heightmap_size.z, 0, -1 do
+		for x = heightmap_size.x, 0, -1 do
+			local hi = z*heightmap_size.x + x
 			
 			local height_old = heightmap_old[hi]
 			local height_new = heightmap_new[hi]
