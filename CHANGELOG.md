@@ -17,6 +17,7 @@ It's about time I started a changelog! This will serve from now on as the main c
  - `//many` can now be used with commands with no arguments.
  - `//conv`, `//erode`, `//fillcaves`: Treat liquids as air
  - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#cloud-wand)
+ - `//conv`, `//erode`: minor refactoring to improve code clarity
 
 
 ## v1.10: The tidyup update (16th January 2021)
