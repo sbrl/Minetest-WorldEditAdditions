@@ -51,10 +51,10 @@ function worldeditadditions.getsign(str, type)
 			return false, "Error: Unknown type '"..type.."'."
 		end
 		if str:sub(1, 1) == "-" then
-				if type == "int" then return -1
-				else return "-" end
+				if type == "int" then return true, -1
+				else return true, "-" end
 		else
-				if type == "int" then return 1
-				else return "+" end
+				if type == "int" then return true, 1
+				else return true, "+" end
 		end
 end
