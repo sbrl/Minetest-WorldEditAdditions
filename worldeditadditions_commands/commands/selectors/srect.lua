@@ -11,11 +11,15 @@ function parse_params_srect(params_text)
 	
 	-- If ax1 is bad set to player facing dir
 	if ax1 == len  or not ax1:match('[xyz]') then ax1 = "get"
-	else ax1 = {wea.getsign(ax1, "int"),ax1:gsub('[^xyz]',''):sub(1,1)}
+		local success, value = wea.getsign(ax1, "int")
+		if not success then return success, value end
+	else ax1 = { value, ax1:gsub('[^xyz]',''):sub(1,1) }
 	end
 	-- If ax2 is bad set to +y
 	if not ax2 or ax2 == len or not ax2:match('[xyz]') then ax2 = "y" end
-	ax2 = {wea.getsign(ax2, "int"),ax2:gsub('[^xyz]',''):sub(1,1)}
+	local success, value = wea.getsign(ax2, "int")
+	if not success then return success, value end
+	ax2 = { value, ax2:gsub('[^xyz]',''):sub(1,1) }
 	
 	len = tonumber(len)
 	-- If len == nill cancel the operation
