@@ -58,3 +58,7 @@ function worldeditadditions.getsign(str, type)
 				else return true, "+" end
 		end
 end
+
+-- For Testing:
+-- worldeditadditions = {}
+-- print(worldeditadditions.getsign('-y'))

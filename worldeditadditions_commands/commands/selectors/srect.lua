@@ -41,8 +41,7 @@ worldedit.register_command("srect", {
 	func = function(name, axis1, axis2, len)
 		if axis1 == "get" then axis1 = worldeditadditions.player_axis2d(name) end
 		
-		local pos1 = worldedit.pos1[name]
-		local p2 = vector.new(pos1)
+		local p2 = vector.new(worldedit.pos1[name])
 		
 		p2[axis1[2]] = p2[axis1[2]] + tonumber(len) * axis1[1]
 		p2[axis2[2]] = p2[axis2[2]] + tonumber(len) * axis2[1]
