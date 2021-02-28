@@ -11,9 +11,11 @@ function parse_params_srect(params_text)
 	
 	-- If ax1 is bad set to player facing dir
 	if ax1 == len  or not ax1:match('[xyz]') then ax1 = "get"
+	else
 		local success, value = wea.getsign(ax1, "int")
-		if not success then return success, value end
-	else ax1 = { value, ax1:gsub('[^xyz]',''):sub(1,1) }
+		if not success then return success, value
+		else ax1 = { value, ax1:gsub('[^xyz]',''):sub(1,1) }
+		end
 	end
 	-- If ax2 is bad set to +y
 	if not ax2 or ax2 == len or not ax2:match('[xyz]') then ax2 = "y" end
@@ -54,3 +56,9 @@ worldedit.register_command("srect", {
 
 -- Tests
 -- /multi //fp set1 -63 19 -20 //srect 5
+-- /multi //fp set1 -63 19 -20 //srect z 5
+-- /multi //fp set1 -63 19 -20 //srect a z 5
+-- /multi //fp set1 -63 19 -20 //srect z a 5
+-- /multi //fp set1 -63 19 -20 //srect -z 5
+-- /multi //fp set1 -63 19 -20 //srect a -x 5
+-- /multi //fp set1 -63 19 -20 //srect -x -a 5
