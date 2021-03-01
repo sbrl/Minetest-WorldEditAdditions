@@ -2,6 +2,9 @@
 It's about time I started a changelog! This will serve from now on as the main changelog for WorldEditAdditions.
 
 
+## v1.12 (unreleased)
+ - Add `//srect` (_select rectangle_) - thanks, @VorTechnix!
+
 ## v1.11: The big data update (25th January 2021)
  - Add `//scale` (currently **experimental**)
      - Scale operations that scale up and down at the same time are split into 2 separate operations automatically (scaling up is always performed first)
@@ -17,7 +20,7 @@ It's about time I started a changelog! This will serve from now on as the main c
  - `//many` can now be used with commands with no arguments.
  - `//conv`, `//erode`, `//fillcaves`: Treat liquids as air
  - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#cloud-wand)
- - `//conv`, `//erode`: minor refactoring to improve code clarity
+ - `//conv`, `//erode`: Minor refactoring to improve code clarity
 
 
 ## v1.10: The tidyup update (16th January 2021)
