@@ -28,7 +28,6 @@ worldedit.register_command("scale", {
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
-		print("[DEBUG//scale] got params_text '"..params_text.."'")
 		if not params_text then params_text = "" end
 		
 		local parts = worldeditadditions.split(params_text, "%s+", false)

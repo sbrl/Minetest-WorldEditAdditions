@@ -9,9 +9,10 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
 	
-	local heightmap_size = {}
-	heightmap_size[0] = (pos2.z - pos1.z) + 1
-	heightmap_size[1] = (pos2.x - pos1.x) + 1
+	local heightmap_size = {
+		z = (pos2.z - pos1.z) + 1,
+		x = (pos2.x - pos1.x) + 1
+	}
 	
 	local region_height = (pos2.y - pos1.y) + 1
 	
@@ -20,7 +21,7 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 	
 	-- print("[erode.run] algorithm: "..algorithm..", params:");
 	-- print(worldeditadditions.map_stringify(params))
-	-- worldeditadditions.print_2d(heightmap, heightmap_size[1])
+	-- worldeditadditions.print_2d(heightmap, heightmap_size.x)
 	local success, msg, stats
 	if algorithm == "snowballs" then
 		success, msg = worldeditadditions.erode.snowballs(heightmap, heightmap_eroded, heightmap_size, region_height, params)

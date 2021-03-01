@@ -13,6 +13,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 ## Table of Contents
  - [Quick Command Reference](#quick-command-reference) (including links to detailed explanations)
  - [Using the Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#far-wand)
+ - [Using the Cloud Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#cloud-wand)
  - [Detailed Chat Command Explanations](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md)
  - [Chat Command Cookbook](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Cookbook.md)
  - [Troubleshooting](#troubleshooting)
@@ -38,7 +39,8 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 ### Misc
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#replacemix-target_node-chance-replace_node_a-chance_a-replace_node_b-chance_b-replace_node_n-chance_n-)
  - [`//floodfill [<replace_node> [<radius>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#floodfill-replace_node-radius-floodfill)
- - [`//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#scale-axis-scale_factor--factor_x-factor_y-factor_z-anchor_x-anchor_y-anchor_z)
+ - [`//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#scale-axis-scale_factor--factor_x-factor_y-factor_z-anchor_x-anchor_y-anchor_z) **experimental**
+ - [`//srect [<axis1> [<axis2>]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#srect-axis1-axis2-length)
 
 ### Terrain
  - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)

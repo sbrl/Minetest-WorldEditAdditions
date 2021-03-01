@@ -18,18 +18,18 @@ function worldeditadditions.conv.convolve(heightmap, heightmap_size, matrix, mat
 	border_size[1] = (matrix_size[1]-1) / 2		-- width
 	-- print("[convolve] matrix_size", matrix_size[0], matrix_size[1])
 	-- print("[convolve] border_size", border_size[0], border_size[1])
-	-- print("[convolve] heightmap_size: ", heightmap_size[0], heightmap_size[1])
+	-- print("[convolve] heightmap_size: ", heightmap_size.z, heightmap_size.x)
 	-- 
-	-- print("[convolve] z: from", (heightmap_size[0]-border_size[0]) - 1, "to", border_size[0], "step", -1)
-	-- print("[convolve] x: from", (heightmap_size[1]-border_size[1]) - 1, "to", border_size[1], "step", -1)
+	-- print("[convolve] z: from", (heightmap_size.z-border_size[0]) - 1, "to", border_size[0], "step", -1)
+	-- print("[convolve] x: from", (heightmap_size.x-border_size[1]) - 1, "to", border_size[1], "step", -1)
 	
 	-- Convolve over only the bit that allows us to use the full convolution matrix
-	for z = (heightmap_size[0]-border_size[0]) - 1, border_size[0], -1 do
-		for x = (heightmap_size[1]-border_size[1]) - 1, border_size[1], -1 do
+	for z = (heightmap_size.z-border_size[0]) - 1, border_size[0], -1 do
+		for x = (heightmap_size.x-border_size[1]) - 1, border_size[1], -1 do
 			local total = 0
 			
 			
-			local hi = (z * heightmap_size[1]) + x
+			local hi = (z * heightmap_size.x) + x
 			-- print("[convolve/internal] z", z, "x", x, "hi", hi)
 			
 			-- No continue statement in Lua :-/
@@ -40,7 +40,7 @@ function worldeditadditions.conv.convolve(heightmap, heightmap_size, matrix, mat
 						local cz = z + (mz - border_size[0])
 						local cx = x + (mx - border_size[1])
 						
-						local i = (cz * heightmap_size[1]) + cx
+						local i = (cz * heightmap_size.x) + cx
 						
 						-- A value of -1 = nothing in this column (so we should ignore it)
 						if heightmap[i] ~= -1 then

@@ -2,7 +2,10 @@
 It's about time I started a changelog! This will serve from now on as the main changelog for WorldEditAdditions.
 
 
-## v1.11 (unreleased)
+## v1.12 (unreleased)
+ - Add `//srect` (_select rectangle_) - thanks, @VorTechnix!
+
+## v1.11: The big data update (25th January 2021)
  - Add `//scale` (currently **experimental**)
      - Scale operations that scale up and down at the same time are split into 2 separate operations automatically (scaling up is always performed first)
  - `//count`: Make numbers human-readable
@@ -15,8 +18,12 @@ It's about time I started a changelog! This will serve from now on as the main c
      - If you encounter any other issues with it over large areas (particularly 2000x150x2000 and larger), please let me know
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
  - `//many` can now be used with commands with no arguments.
+ - `//conv`, `//erode`, `//fillcaves`: Treat liquids as air
+ - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#cloud-wand)
+ - `//conv`, `//erode`: Minor refactoring to improve code clarity
 
-## v1.10 (16th January 2021)
+
+## v1.10: The tidyup update (16th January 2021)
  - `//maze`: Fix some parts of generated mazes staying solid
  - `//maze`, `//maze3d`: Allow non-number seeds (existing seeds aren't affected - they will still produce identical output)
  - `//many`: Improve format of progress messages, add ETA

@@ -18,11 +18,11 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 	for i = 1, params.max_steps do
 		local x = pos.x
 		local z = pos.z
-		local hi = math.floor(z+0.5)*heightmap_size[1] + math.floor(x+0.5)
+		local hi = math.floor(z+0.5)*heightmap_size.x + math.floor(x+0.5)
 		-- Stop if we go out of bounds
 		if x < 0 or z < 0
-			or x >= heightmap_size[1]-1 or z >= heightmap_size[0]-1 then
-			-- print("[snowball] hit edge; stopping at ("..x..", "..z.."), (bounds @ "..(heightmap_size[1]-1)..", "..(heightmap_size[0]-1)..")", "x", x, "/", heightmap_size[1]-1, "z", z, "/", heightmap_size[0]-1)
+			or x >= heightmap_size.x-1 or z >= heightmap_size.z-1 then
+			-- print("[snowball] hit edge; stopping at ("..x..", "..z.."), (bounds @ "..(heightmap_size.x-1)..", "..(heightmap_size.z-1)..")", "x", x, "/", heightmap_size.x-1, "z", z, "/", heightmap_size.z-1)
 			return true, i
 		end
 		
@@ -100,8 +100,8 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		local success, steps = snowball(
 			heightmap, normals, heightmap_size,
 			{
-				x = math.random() * (heightmap_size[1] - 1),
-				z = math.random() * (heightmap_size[0] - 1)
+				x = math.random() * (heightmap_size.x - 1),
+				z = math.random() * (heightmap_size.z - 1)
 			},
 			params
 		)

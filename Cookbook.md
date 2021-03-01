@@ -42,3 +42,29 @@ Clearing large amounts of foliage is easy!
 ```
 
 Adjust the numbers (and direction in the `//shift` command) to match your scenario.
+
+
+## Flower Field
+Make a flower field with no grass.
+
+```
+//overlay air 20 flowers:geranium 1 
+```
+
+Adjust the air value to change flower density.
+
+```
+//overlay air 80 flowers:rose 1 flowers:tulip 1 flowers:dandelion_yellow 1 flowers:chrysanthemum_green 1 flowers:geranium 1 flowers:viola 1 flowers:dandelion_white 1 flowers:tulip_black 1
+```
+
+When working with many types of flowers the air values need to be higher to compensate. The best equation for the air value that I've found is `<desired spacing> * <sum of flower probabilities>`.
+
+
+## Grass Field
+Make a grass field
+
+```
+//overlay air 36 default:grass_2 2 default:grass_3 2 default:grass_4 1 default:grass_5 1
+```
+
+Adjust the air value to change grass density. As with flower field the best equation for the air value is `<desired spacing> * <sum of flower probabilities>`.
