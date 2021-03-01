@@ -482,6 +482,15 @@ Executes the given command, and then clips the result to the largest ellipsoid t
 //ellipsoidapply layers desert_sand sand 2 desert_sandstone 4 sandstone 10
 ```
 
+## `//srect [<axis1> [<axis2>]] <length>`
+Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
+
+```
+//srect x z 10
+//srect 3
+//srect -z y 25
+```
+
 
 ## `//y`
 Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
