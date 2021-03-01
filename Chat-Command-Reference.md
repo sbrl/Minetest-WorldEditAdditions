@@ -491,6 +491,30 @@ Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from 
 //srect -z y 25
 ```
 
+## `//sstack`
+Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
+
+```
+//sstack
+```
+
+## `//spush`
+Pushes the currently defined region onto your per-user selection stack. Does not otherwise alter the defined region.
+
+If the stack is full (currently the limit is set to 100 regions in the stack), then it will complain at you but otherwise will have no effect.
+
+Note that pos2 does _not_ need to be defined in order to use this. if it isn't defined, then a pos2 of `nil` will be pushed onto the stack instead.
+
+```
+//spush
+```
+
+## `//spop`
+Pops a selection off your per-user selection stack and applies it to the currently defined region. If pos2 from the item popped from the stack is nil, then pos2 is explicitly unset. If the stack is empty, this has no effect.
+
+```
+//spop
+```
 
 ## `//y`
 Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
