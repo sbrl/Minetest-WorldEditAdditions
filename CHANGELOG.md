@@ -1,6 +1,7 @@
 # WorldEditAdditions Changelog
 It's about time I started a changelog! This will serve from now on as the main changelog for WorldEditAdditions.
 
+Note to self: See the bottom of this file for the release template text.
 
 ## v1.12 (unreleased)
  - Add `//srect` (_select rectangle_) - thanks, @VorTechnix!
