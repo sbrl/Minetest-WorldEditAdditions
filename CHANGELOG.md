@@ -5,6 +5,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 ## v1.12 (unreleased)
  - Add `//srect` (_select rectangle_) - thanks, @VorTechnix!
  - Add `//spush`, `//spop`, and `//sstack`
+ - `//overlay`: Don't place nodes above water
 
 
 ## v1.11: The big data update (25th January 2021)

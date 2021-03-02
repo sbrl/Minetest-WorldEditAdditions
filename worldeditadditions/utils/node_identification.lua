@@ -44,7 +44,7 @@ function worldeditadditions.is_liquidlike(id)
 	if node_name == nil or not minetest.registered_nodes[node_name] then return false end
 	
 	local liquidtype = minetest.registered_nodes[node_name].liquidtype
-	-- print("[is_liquidlike]", "id", id, "liquidtype", liquidtype)
+	-- print("[is_liquidlike]", "id", id, "name", node_name, "liquidtype", liquidtype)
 	
 	if liquidtype == nil or liquidtype == "none" then return false end
 	-- If it's not none, then it has to be a liquid as the only other values are source and flowing
