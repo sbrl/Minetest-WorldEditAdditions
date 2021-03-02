@@ -1,6 +1,7 @@
 worldeditadditions.vector = {}
 
 function worldeditadditions.vector.tostring(v)
+	if not v then return "(nil)" end
 	return "(" .. v.x ..", " .. v.y ..", " .. v.z ..")"
 end
 
