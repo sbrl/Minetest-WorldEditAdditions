@@ -9,31 +9,26 @@ worldedit.register_command("scol", {
 	privs = {worldedit=true},
 	require_pos = 1,
 	parse = function(params_text)
-		local wea = worldeditadditions
+		local wea, vec, tmp = worldeditadditions, vector.new(0, 0, 0), {}
 		local find = wea.split(params_text, "%s", false)
-		local ax1, len = find[1], find[table.maxn(find)]
+		local ax1, sn1, len = (tostring(find[1]):match('[xyz]') or "g"):sub(1,1), wea.getsign(find[1]), find[table.maxn(find)]
 		
-		-- If ax1 is bad set to player facing dir
-		if ax1 == len  or not ax1:match('[xyz]') then ax1 = "get"
-		else ax1 = { wea.getsign(ax1), ax1:gsub('[^xyz]', ''):sub(1, 1) } end
-		
-		len = tonumber(len)
+		tmp.len = tonumber(len)
 		-- If len == nill cancel the operation
-		if len == nil then
-			return false, "No length specified."
-		end
+		if tmp.len == nil then return false, "No length specified." end
+		-- If ax1 is bad send "get" order
+		if ax1 == "g" then tmp.get = true
+		else vec[ax1] = sn1 * tmp.len end
 		
-		return true, ax1, len
+		return true, vec, tmp
 	end,
-	func = function(name, axis1, len)
-		if axis1 == "get" then
-			ax1, dir = worldedit.player_axis(name)
-			axis1 = {dir,ax1}
+	func = function(name, vec, tmp)
+		if tmp.get then
+			local ax, dir = worldeditadditions.player_axis2d(name)
+			vec[ax] = tmp.len * dir
 		end
 		
-		local p2 = vector.new(worldedit.pos1[name])
-		p2[axis1[2]] = p2[axis1[2]] + tonumber(len) * axis1[1]
-		
+		local p2 = vector.add(vec,worldedit.pos1[name])
 		worldedit.pos2[name] = p2
 		worldedit.mark_pos2(name)
 		return true, "position 2 set to " .. minetest.pos_to_string(p2)

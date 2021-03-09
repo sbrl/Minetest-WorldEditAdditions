@@ -30,7 +30,7 @@ worldedit.register_command("srect", {
 			vec[ax] = tmp.len * dir
 		end
 		
-		p2 = vector.add(vec,worldedit.pos1[name])
+		local p2 = vector.add(vec,worldedit.pos1[name])
 		worldedit.pos2[name] = p2
 		worldedit.mark_pos2(name)
 		return true, "position 2 set to " .. minetest.pos_to_string(p2)
