@@ -35,7 +35,7 @@ end
 -- Warning: This MUTATES the given vector!
 -- @param	v	Vector	The vector to operate on
 function worldeditadditions.vector.floor(v)
-	v.x = math.floor(v.x)
+	if v.x then v.x = math.floor(v.x) end
 	-- Some vectors are 2d, but on the x / z axes
 	if v.y then v.y = math.floor(v.y) end
 	-- Some vectors are 2d
