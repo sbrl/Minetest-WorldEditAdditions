@@ -42,21 +42,12 @@ function worldeditadditions.eta(existing_times, done_count, total_count)
 end
 
 --- Returns the sign (+ or -) at the beginning of a string if present.
--- @param    str        string    Input string.
--- @param    type    string    The type of value to return. Valid values: "string" (default), "int"
--- @return    string|int        Returns the sign string or signed multiplier (1|-1).
-function worldeditadditions.getsign(str, type)
-		if not type then type = "string" end
-		if not (type == "string" or type == "int") then
-			return false, "Error: Unknown type '"..type.."'."
-		end
-		if str:sub(1, 1) == "-" then
-				if type == "int" then return true, -1
-				else return true, "-" end
-		else
-				if type == "int" then return true, 1
-				else return true, "+" end
-		end
+-- @param	src	string|int	Input string.
+-- @return	string|int	Returns the signed multiplier (1|-1).
+function worldeditadditions.getsign(src)
+	if type(src) == "number" then return src < 0 and -1 or 1
+	elseif type(src) ~= "string" then return 1
+	else return src:match('-') and -1 or 1 end
 end
 
 -- For Testing:
