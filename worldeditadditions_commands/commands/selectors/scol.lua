@@ -15,7 +15,7 @@ worldedit.register_command("scol", {
 		
 		tmp.len = tonumber(len)
 		-- If len == nill cancel the operation
-		if tmp.len == nil then return false, "No length specified." end
+		if not tmp.len then return false, "No length specified." end
 		-- If ax1 is bad send "get" order
 		if ax1 == "g" then tmp.get = true
 		else vec[ax1] = sn1 * tmp.len end

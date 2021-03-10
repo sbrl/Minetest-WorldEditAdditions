@@ -43,7 +43,7 @@ dofile(we_c.modpath.."/commands/meta/ellipsoidapply.lua")
 
 dofile(we_c.modpath.."/commands/selectors/scol.lua")
 dofile(we_c.modpath.."/commands/selectors/srect.lua")
--- dofile(we_c.modpath.."/commands/selectors/scube.lua")
+dofile(we_c.modpath.."/commands/selectors/scube.lua")
 dofile(we_c.modpath.."/commands/selectors/sstack.lua")
 dofile(we_c.modpath.."/commands/selectors/spush.lua")
 dofile(we_c.modpath.."/commands/selectors/spop.lua")

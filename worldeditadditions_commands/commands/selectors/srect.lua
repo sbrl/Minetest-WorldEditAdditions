@@ -11,23 +11,26 @@ worldedit.register_command("srect", {
 	parse = function(params_text)
 		local wea, vec, tmp = worldeditadditions, vector.new(0, 0, 0), {}
 		local find = wea.split(params_text, "%s", false)
-		local ax1, ax2 = (tostring(find[1]):match('[xyz]') or "g"):sub(1,1), (tostring(find[2]):match('[xyz]') or "y"):sub(1,1)
+		local ax1, ax2 = (tostring(find[1]):match('[xyz]') or "g"):sub(1,1), (tostring(find[2]):match('[xyz]') or "g"):sub(1,1)
 		local sn1, sn2, len  = wea.getsign(find[1]), wea.getsign(find[2]), find[table.maxn(find)]
 		
 		tmp.len = tonumber(len)
 		-- If len == nill cancel the operation
-		if tmp.len == nil then return false, "No length specified." end
-		-- If ax1 is bad send "get" order
+		if not tmp.len then return false, "No length specified." end
+		-- If axis is bad send "get" order
 		if ax1 == "g" then tmp.get = true
 		else vec[ax1] = sn1 * tmp.len end
-		vec[ax2] = sn2 * tmp.len
+		if ax2 == "g" then tmp.get = true
+		else vec[ax2] = sn2 * tmp.len end
 		
+		tmp.axes = ax1..","..ax2
 		return true, vec, tmp
 	end,
 	func = function(name, vec, tmp)
 		if tmp.get then
 			local ax, dir = worldeditadditions.player_axis2d(name)
-			vec[ax] = tmp.len * dir
+			if not tmp.axes:find("[xz]") then vec[ax] = tmp.len * dir end
+			if not tmp.axes:find("y") then vec.y = tmp.len end
 		end
 		
 		local p2 = vector.add(vec,worldedit.pos1[name])
