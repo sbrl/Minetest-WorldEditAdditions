@@ -36,6 +36,10 @@ minetest.register_chatcommand("/multi", {
 	description = "Executes multiple chat commands in sequence. Just prepend a list of space-separated chat commands with //multi, and you're good to go! The forward slashes at the beginning of each chat command must be the same as if you were executing it normally.",
 	privs = { worldedit = true },
 	func = function(name, params_text)
+		if not params_text then return false, "Error: No commands specified, so there's nothing to do." end
+		params_text = worldeditadditions.trim(params_text)
+		if #params_text == 0 then return false, "Error: No commands specified, so there's nothing to do." end
+		
 		
 		local i = 1 -- For feedback only
 		local master_start_time = worldeditadditions.get_ms_time()
@@ -47,6 +51,7 @@ minetest.register_chatcommand("/multi", {
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
 			if not found then command_name = command end
 			command_name = trim(command_name)
+			if not args then args = "" end
 			
 			worldedit.player_notify(name, "#"..i..": /"..command)
 			
@@ -55,9 +60,9 @@ minetest.register_chatcommand("/multi", {
 				return false, "Error: "..command_name.." isn't a valid command."
 			end
 			if not minetest.check_player_privs(name, cmd.privs) then
-				return false, "Your privileges are insufficient to execute one or more commands in that list."
+				return false, "Your privileges are insufficient to execute /"..command_name..". Abort."
 			end
-			
+			-- print("[DEBUG] command_name", command_name, "cmd", dump2(cmd))
 			minetest.log("action", name.." runs "..command)
 			cmd.func(name, args)
 			
