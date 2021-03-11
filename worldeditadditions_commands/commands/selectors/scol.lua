@@ -14,7 +14,7 @@ worldedit.register_command("scol", {
 		local ax1, sn1, len = (tostring(find[1]):match('[xyz]') or "g"):sub(1,1), wea.getsign(find[1]), find[table.maxn(find)]
 		
 		tmp.len = tonumber(len)
-		-- If len == nill cancel the operation
+		-- If len == nil cancel the operation
 		if not tmp.len then return false, "No length specified." end
 		-- If ax1 is bad send "get" order
 		if ax1 == "g" then tmp.get = true
