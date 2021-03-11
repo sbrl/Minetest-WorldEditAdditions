@@ -482,6 +482,14 @@ Executes the given command, and then clips the result to the largest ellipsoid t
 //ellipsoidapply layers desert_sand sand 2 desert_sandstone 4 sandstone 10
 ```
 
+## `//scol [<axis1> ] <length>`
+Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
+
+```
+//scol 10
+//scol x 3
+```
+
 ## `//srect [<axis1> [<axis2>]] <length>`
 Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
 
@@ -489,6 +497,16 @@ Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from 
 //srect x z 10
 //srect 3
 //srect -z y 25
+```
+
+## `//scube [<axis1> [<axis2> [<axis3>]]] <length>`
+Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1. If the axes aren't specified, defaults to positive y, the direction you are facing and the axis to the left of facing. Implementation thanks to @VorTechnix.
+
+```
+//scube 5
+//scube z a y 12
+//scube x z 3
+//scube -z 12
 ```
 
 ## `//sstack`
