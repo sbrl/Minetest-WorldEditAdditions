@@ -7,6 +7,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
  - Add `//spush`, `//spop`, and `//sstack`
  - `//overlay`: Don't place nodes above water
+ - `//multi`: Improve resilience by handling some edge cases
 
 
 ## v1.11: The big data update (25th January 2021)
