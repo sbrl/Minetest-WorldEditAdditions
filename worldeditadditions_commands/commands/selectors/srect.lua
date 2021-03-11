@@ -3,13 +3,14 @@
 -- ███████ ██████  █████   ██         ██
 --      ██ ██   ██ ██      ██         ██
 -- ███████ ██   ██ ███████  ██████    ██
+local wea = worldeditadditions
 worldedit.register_command("srect", {
 	params = "[<axis1> [<axis2>]] <length>",
 	description = "Set WorldEdit region position 2 at a set distance along 2 axes.",
 	privs = { worldedit = true },
 	require_pos = 1,
 	parse = function(params_text)
-		local wea, vec, tmp = worldeditadditions, vector.new(0, 0, 0), {}
+		local vec, tmp = vector.new(0, 0, 0), {}
 		local find = wea.split(params_text, "%s", false)
 		local ax1, ax2 = (tostring(find[1]):match('[xyz]') or "g"):sub(1,1), (tostring(find[2]):match('[xyz]') or "g"):sub(1,1)
 		local sn1, sn2, len  = wea.getsign(find[1]), wea.getsign(find[2]), find[table.maxn(find)]
@@ -28,7 +29,7 @@ worldedit.register_command("srect", {
 	end,
 	func = function(name, vec, tmp)
 		if tmp.get then
-			local ax, dir = worldeditadditions.player_axis2d(name)
+			local ax, dir = wea.player_axis2d(name)
 			if not tmp.axes:find("[xz]") then vec[ax] = tmp.len * dir end
 			if not tmp.axes:find("y") then vec.y = tmp.len end
 		end
