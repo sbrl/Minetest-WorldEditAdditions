@@ -22,6 +22,9 @@ worldedit.register_command("scol", {
 		else vec[ax1] = sn1 * tmp.len end
 		
 		return true, vec, tmp
+		-- tmp carries:
+		-- The length (len) arguement to the main function for use if "get" is invoked there
+		-- The bool value "get" to tell the main function if it needs to populate missing information in vec
 	end,
 	func = function(name, vec, tmp)
 		if tmp.get then

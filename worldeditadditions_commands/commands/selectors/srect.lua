@@ -26,6 +26,10 @@ worldedit.register_command("srect", {
 		
 		tmp.axes = ax1..","..ax2
 		return true, vec, tmp
+		-- tmp carries:
+		-- The length (len) arguement to the main function for use if "get" is invoked there
+		-- The bool value "get" to tell the main function if it needs to populate missing information in vec
+		-- The string "axes" to tell the main function what axes are and/or need to be populated if "get" is invoked
 	end,
 	func = function(name, vec, tmp)
 		if tmp.get then
