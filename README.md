@@ -57,10 +57,12 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#count)
 
 ### Selection
-- [`//srect [<axis1> [<axis2>]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#srect-axis1-axis2-length)
-- [`//sstack`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#sstack)
-- [`//spush`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spush)
-- [`//spop`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spop)
+ - [`//scol [<axis1> ] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#scol-axis1--length)
+ - [`//srect [<axis1> [<axis2>]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#srect-axis1-axis2-length)
+ - [`//scube [<axis1> [<axis2> [<axis3>]]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#scube-axis1-axis2-axis3-length)
+ - [`//sstack`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#sstack)
+ - [`//spush`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spush)
+ - [`//spop`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spop)
 
 ### Meta
  - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
