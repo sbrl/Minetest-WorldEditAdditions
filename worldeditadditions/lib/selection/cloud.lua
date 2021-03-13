@@ -5,7 +5,7 @@
 --  ██████ ███████  ██████   ██████  ██████
 worldeditadditions.add_pos = {}
 local wea = worldeditadditions
-function worldeditadditions.add_point(name, pos)
+function worldeditadditions.selection.add_point(name, pos)
 	if pos ~= nil then
 		-- print("[set_pos1]", name, "("..pos.x..", "..pos.y..", "..pos.z..")")
 		if not worldedit.pos1[name] then worldedit.pos1[name] = vector.new(pos) end
@@ -28,7 +28,7 @@ function worldeditadditions.add_point(name, pos)
 		-- print("[set_pos1]", name, "nil")
 	end
 end
-function worldeditadditions.clear_points(name, pos)
+function worldeditadditions.selection.clear_points(name)
 	worldedit.pos1[name] = nil
 	worldedit.pos2[name] = nil
 	worldedit.marker_update(name)
@@ -36,13 +36,3 @@ function worldeditadditions.clear_points(name, pos)
 	
 	worldedit.player_notify(name, "Region cleared")
 end
-minetest.register_on_punchnode(function(pos, node, puncher)
-	local name = puncher:get_player_name()
-	if name ~= "" and wea.add_pos[name] ~= nil then
-		if wea.add_pos[name] > 0 then
-			wea.add_point(name,pos)
-			wea.add_pos[name] = wea.add_pos[name] - 1
-			worldedit.player_notify(name, "You have "..wea.add_pos[name].." nodes left to punch")
-		else wea.add_pos[name] = nil end
-	end
-end)
