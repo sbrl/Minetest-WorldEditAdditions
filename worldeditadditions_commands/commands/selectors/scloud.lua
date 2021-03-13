@@ -29,7 +29,7 @@ worldedit.register_command("scloud", {
 			wea.clear_points(name)
 			return true, "selection cleared"
 		else
-			return false, (param == "" and "no input" or "invalid input: '"..param).."'! Allowed params are: 0-6/stop/reset"
+			return false, (param == "" and "no input" or "invalid input: '"..param).."'! Allowed params are: 0-6, stop, or reset"
 		end
 	end,
 })
