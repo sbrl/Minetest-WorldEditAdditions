@@ -41,6 +41,7 @@ dofile(we_c.modpath.."/commands/meta/many.lua")
 dofile(we_c.modpath.."/commands/meta/subdivide.lua")
 dofile(we_c.modpath.."/commands/meta/ellipsoidapply.lua")
 
+dofile(we_c.modpath.."/commands/selectors/scloud.lua")
 dofile(we_c.modpath.."/commands/selectors/scol.lua")
 dofile(we_c.modpath.."/commands/selectors/srect.lua")
 dofile(we_c.modpath.."/commands/selectors/scube.lua")
