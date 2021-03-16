@@ -57,9 +57,10 @@ wea.noise.perlin.randMax = 256
 
 --- Creates a new perlin instance.
 -- @return	perlin	A new perlin instance.
-function wea.noice.perlin.new()
+function wea.noise.perlin.new()
 	local instance = {}
 	setmetatable(instance, wea.noise.perlin)
+	instance:load()
 	return instance
 end
 
