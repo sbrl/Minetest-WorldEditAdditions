@@ -2,4 +2,5 @@ worldeditadditions
 worldedit_commands
 worldedit_shortcommands
 worldedit
+worldeditadditions_debug?
 bonemeal?
