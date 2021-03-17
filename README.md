@@ -81,6 +81,33 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//farwand skip_liquid (true|false) | maxdist <number>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#farwand-skip_liquid-truefalse--maxdist-number)
 
 
+## Installation
+You can install _WorldEditAadditions_ in multiple ways:
+
+### Through ContentDB
+WorldEditAdditions is on ContentDB here: <https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/>.
+
+### Through the latest release
+You can get a copy of WorldEditAdditions by downloading the source code for the [latest release](https://github.com/sbrl/Minetest-WorldEditAdditions/releases/latest), but this is not recommended because it takes additional effort to update to the latest version.
+
+### Through Git
+You can also clone this git repository. Note that the `main` branch is not considered to be stable at all times - though it shouldn't crash. It is recommended that you checkout a release to ensure stability. Do that like so:
+
+```bash
+# First, clone the repository
+git clone https://github.com/sbrl/Minetest-WorldEditAdditions.git WorldEditAdditions
+cd WorldEditAdditions
+# Then, checkout the latest release on Linux:
+git checkout "$(git describe --tags --abbrev=0)";
+```
+
+Windows users, you'll need to check the [releases page](https://github.com/sbrl/Minetest-WorldEditAdditions/releases) and find the name of the latest release, then do this instead of the `git checkout` above:
+
+```bash
+git checkout TAG_NAME_HERE
+```
+
+
 ## Troubleshooting
 If you're experiencing issues with this mod, try checking this FAQ before opening an issue.
 
