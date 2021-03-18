@@ -525,9 +525,6 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 //scentre
 ```
 
-## `//sstack`
-Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
-
 ## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation by @VorTechnix.
 
@@ -537,6 +534,8 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //srel left 3 up 5 -front 7
 //scube -z 12 -y -2 x -2
 ```
+## `//sstack`
+Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
 
 ```
 //sstack
