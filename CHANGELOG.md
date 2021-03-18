@@ -3,11 +3,13 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
-## v1.12 (unreleased)
- - Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
+## v1.12: The selection tools update (unreleased)
  - Add `//spush`, `//spop`, and `//sstack`
  - `//overlay`: Don't place nodes above water
  - `//multi`: Improve resilience by handling some edge cases
+### @VorTechnix contributions:
+- Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
+- Add `//scloud` (_select point cloud_), `//scentre` (_select centre node(s)_), `//srel` (_select relative_) 
 
 
 ## v1.11: The big data update (25th January 2021)
