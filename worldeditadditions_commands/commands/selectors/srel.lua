@@ -13,7 +13,7 @@ local function parse_with_name(name,args)
 			tmp.ax = tmp.proc:match("[xyz]")
 			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1)
 		else
-			tmp.ax, _ = wea.dh_dir(name, tmp.proc:match("%l+"))
+			tmp.ax, _ = wea.xlate_dir(name, tmp.proc:match("%l+"))
 			if not tmp.ax then return false, _ end
 			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1) * _
 		end

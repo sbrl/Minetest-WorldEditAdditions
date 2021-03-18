@@ -22,7 +22,7 @@ end
 -- @param	name	string	The name of the player to return facing direction of.
 -- @param	dir	string	Relative direction to translate.
 -- @return	Returns axis name and sign multiplier.
-function worldeditadditions.dh_dir(name, dir)
+function worldeditadditions.xlate_dir(name, dir)
 	local axfac, drfac = worldeditadditions.player_axis2d(name)
 	local _, axlft, drlft = worldeditadditions.axis_left(axfac,drfac)
 	if dir:match("front") or dir:match("back") then
