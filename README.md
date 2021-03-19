@@ -5,6 +5,8 @@
 
 If you can dream of it, it probably belongs here!
 
+**Important News: The `master` branch has been renamed to `main`, to follow the new standard across the Git ecosystem. If you've installed _WorldEditAadditions_ through git, you will need to re-clone the repository.**
+
 ![Screenshot](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/screenshot.png)
 
 _(Do you have a cool build that you used WorldEditAdditions to build? [Get in touch](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) and I'll feature your screenshot here!)_
@@ -57,10 +59,12 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#count)
 
 ### Selection
-- [`//srect [<axis1> [<axis2>]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#srect-axis1-axis2-length)
-- [`//sstack`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#sstack)
-- [`//spush`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spush)
-- [`//spop`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spop)
+ - [`//scol [<axis1> ] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#scol-axis1--length)
+ - [`//srect [<axis1> [<axis2>]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#srect-axis1-axis2-length)
+ - [`//scube [<axis1> [<axis2> [<axis3>]]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#scube-axis1-axis2-axis3-length)
+ - [`//sstack`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#sstack)
+ - [`//spush`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spush)
+ - [`//spop`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#spop)
 
 ### Meta
  - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
@@ -75,6 +79,33 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 ### Tools
  - [WorldEditAdditions Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#far-wand)
  - [`//farwand skip_liquid (true|false) | maxdist <number>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#farwand-skip_liquid-truefalse--maxdist-number)
+
+
+## Installation
+You can install _WorldEditAadditions_ in multiple ways:
+
+### Through ContentDB
+WorldEditAdditions is on ContentDB here: <https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/>.
+
+### Through the latest release
+You can get a copy of WorldEditAdditions by downloading the source code for the [latest release](https://github.com/sbrl/Minetest-WorldEditAdditions/releases/latest), but this is not recommended because it takes additional effort to update to the latest version.
+
+### Through Git
+You can also clone this git repository. Note that the `main` branch is not considered to be stable at all times - though it shouldn't crash. It is recommended that you checkout a release to ensure stability. Do that like so:
+
+```bash
+# First, clone the repository
+git clone https://github.com/sbrl/Minetest-WorldEditAdditions.git WorldEditAdditions
+cd WorldEditAdditions
+# Then, checkout the latest release on Linux:
+git checkout "$(git describe --tags --abbrev=0)";
+```
+
+Windows users, you'll need to check the [releases page](https://github.com/sbrl/Minetest-WorldEditAdditions/releases) and find the name of the latest release, then do this instead of the `git checkout` above:
+
+```bash
+git checkout TAG_NAME_HERE
+```
 
 
 ## Troubleshooting
@@ -97,6 +128,8 @@ As far as I can tell, the saplings provided by the [`moretrees` mod](https://con
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
 
 Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc.
+
+I, Starbeamrainbowlabs (@sbrl), have the ultimate final say.
 
 
 ## WorldEditAdditions around the web
