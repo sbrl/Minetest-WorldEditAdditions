@@ -509,6 +509,31 @@ Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1.
 //scube -z 12
 ```
 
+## `//scloud <0-6|stop|reset>`
+Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punch. Numbers 1-6 designate how many nodes you want to punch before the operation ends. 0 or stop terminate the operation so that any further nodes you punch won't be added to selection. Reset terminates operation if one is running and resets the selection area.
+
+```
+//scloud 6
+//scloud 5
+//scloud stop
+```
+
+## `//scentre`
+Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the current selection area. 1, 2, 4 or 8 nodes may be selected depending on what parts of the original selection are even in distance. Implementation by @VorTechnix.
+
+```
+//scentre
+```
+
+## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation by @VorTechnix.
+
+```
+//srel front 5
+//srel  y 12 right -2
+//srel left 3 up 5 -front 7
+//scube -z 12 -y -2 x -2
+```
 ## `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
 

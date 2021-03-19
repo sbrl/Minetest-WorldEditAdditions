@@ -42,6 +42,17 @@ function worldeditadditions.vector.floor(v)
 	if v.z then v.z = math.floor(v.z) end
 end
 
+--- Rounds the values in a vector up.
+-- Warning: This MUTATES the given vector!
+-- @param	v	Vector	The vector to operate on
+function worldeditadditions.vector.ceil(v)
+	if v.x then v.x = math.ceil(v.x) end
+	-- Some vectors are 2d, but on the x / z axes
+	if v.y then v.y = math.ceil(v.y) end
+	-- Some vectors are 2d
+	if v.z then v.z = math.ceil(v.z) end
+end
+
 --- Determines if the target point is contained within the defined worldedit region.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
@@ -73,4 +84,12 @@ function worldeditadditions.vector.expand_region(pos1, pos2, target)
 	if target.z > pos2.z then pos2.z = target.z end
 	
 	return pos1, pos2
+end
+
+--- Returns the mean (average) of 2 positions to give you the centre.
+-- @param	pos1	Vector	pos1 of the defined region.
+-- @param	pos2	Vector	pos2 of the defined region.
+-- @param	target	Vector	Centre coordinates.
+function worldeditadditions.vector.mean(pos1, pos2)
+	return vector.new((pos1.x + pos2.x)/2, (pos1.y + pos2.y)/2, (pos1.z + pos2.z)/2)
 end
