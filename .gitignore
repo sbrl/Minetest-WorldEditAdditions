@@ -40,4 +40,4 @@ luac.out
 *.hex
 
 # Debug Tools (for now)
-*debug/
+worldeditadditions_debug/
