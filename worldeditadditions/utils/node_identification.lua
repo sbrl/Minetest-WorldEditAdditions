@@ -61,6 +61,20 @@ function worldeditadditions.is_sapling(id)
 	return minetest.get_item_group(node_name, "sapling") ~= 0
 end
 
+
+-- ███████  █████  ██████  ██      ██ ███    ██  ██████
+-- ██      ██   ██ ██   ██ ██      ██ ████   ██ ██
+-- ███████ ███████ ██████  ██      ██ ██ ██  ██ ██   ███
+--      ██ ██   ██ ██      ██      ██ ██  ██ ██ ██    ██
+-- ███████ ██   ██ ██      ███████ ██ ██   ████  ██████
+-- 
+--  █████  ██      ██  █████  ███████ ███████ ███████
+-- ██   ██ ██      ██ ██   ██ ██      ██      ██
+-- ███████ ██      ██ ███████ ███████ █████   ███████
+-- ██   ██ ██      ██ ██   ██      ██ ██           ██
+-- ██   ██ ███████ ██ ██   ██ ███████ ███████ ███████
+
+
 local sapling_aliases = {}
 function worldeditadditions.register_sapling_alias(sapling_node_name, alias)
 	if sapling_aliases[sapling_node_name] ~= nil then
