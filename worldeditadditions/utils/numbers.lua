@@ -38,13 +38,13 @@ end
 -- @param	done_count		number		The number of work units completed so far.
 -- @param	total_count		number		The total number of work units to be completed.
 function worldeditadditions.eta(existing_times, done_count, total_count)
-		local max = 100
-		local average = worldeditadditions.average(
-				worldeditadditions.table_get_last(existing_times, max)
-		)
-		local times_left = total_count - done_count
-		if times_left == 0 then return 0 end
-		return average * times_left
+	local max = 100
+	local average = worldeditadditions.average(
+		worldeditadditions.table_get_last(existing_times, max)
+	)
+	local times_left = total_count - done_count
+	if times_left == 0 then return 0 end
+	return average * times_left
 end
 
 --- Returns the sign (+ or -) at the beginning of a string if present.

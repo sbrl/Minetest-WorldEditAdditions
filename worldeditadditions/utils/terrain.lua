@@ -7,7 +7,7 @@
 -- @param	manip	VoxelManip	The VoxelManip object.
 -- @param	area	area		The associated area object.
 -- @param	data	table		The associated data object.
--- @return	table,table			The ZERO-indexed heightmap data (as 1 single flat array), followed by the size of the heightmap in the form { 0 = size_z, 1 = size_x }.
+-- @return	table,table			The ZERO-indexed heightmap data (as 1 single flat array), followed by the size of the heightmap in the form { z = size_z, x = size_x }.
 function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 	-- z y x (in reverse for little-endian machines) is the preferred loop order, but that isn't really possible here
 	
@@ -84,6 +84,15 @@ function worldeditadditions.calculate_normals(heightmap, heightmap_size)
 	return result
 end
 
+--- Applies changes to a heightmap to a Voxel Manipulator data block.
+-- @param	pos1	vector		Position 1 of the defined region
+-- @param	pos2	vector		Position 2 of the defined region
+-- @param	area	VoxelArea	The VoxelArea object (see worldedit.manip_helpers.init)
+-- @param	data	number[]	The node ids data array containing the slice of the Minetest world extracted using the Voxel Manipulator.
+-- @param	heightmap_old	number[]	The original heightmap from worldeditadditions.make_heightmap.
+-- @param	heightmap_new	number[]	The new heightmap containing the altered updated values. It is expected that worldeditadditions.shallowcopy be used to make a COPY of the data worldeditadditions.make_heightmap for this purpose. Both heightmap_old AND heightmap_new are REQUIRED in order for this function to work.
+-- @param	heightmap_size	vector	The x / z size of the heightmap. Any y value set in the vector is ignored.
+-- 
 function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heightmap_old, heightmap_new, heightmap_size)
 	local stats = { added = 0, removed = 0 }
 	local node_id_air = minetest.get_content_id("air")
