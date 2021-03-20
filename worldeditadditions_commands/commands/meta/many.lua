@@ -34,9 +34,9 @@ local function step(params)
 		full_cmd,
 		(params.i + 1), params.count,
 		((params.i + 1) / params.count)*100,
-		worldeditadditions.human_time(params.times[#params.times] or 0),
-		worldeditadditions.human_time(worldeditadditions.average(params.times)),
-		worldeditadditions.human_time(worldeditadditions.eta(
+		worldeditadditions.format.human_time(params.times[#params.times] or 0),
+		worldeditadditions.format.human_time(worldeditadditions.average(params.times)),
+		worldeditadditions.format.human_time(worldeditadditions.eta(
 			params.times,
 			params.i,
 			params.count
@@ -60,8 +60,8 @@ local function step(params)
 		table.insert(done_message,
 			string.format("Executed '"..full_cmd.."' %d times in %s (~%s / time)",
 				#params.times,
-				worldeditadditions.human_time(total_time),
-				worldeditadditions.human_time(
+				worldeditadditions.format.human_time(total_time),
+				worldeditadditions.format.human_time(
 					worldeditadditions.average(params.times)
 				)
 			)
@@ -70,7 +70,7 @@ local function step(params)
 		if #params.times < 10 then
 			local message_parts = {}
 			for j=1,#params.times do
-				table.insert(message_parts, worldeditadditions.human_time(params.times[j]))
+				table.insert(message_parts, worldeditadditions.format.human_time(params.times[j]))
 			end
 			table.insert(done_message, "; ")
 			table.insert(done_message, table.concat(message_parts, ", "))

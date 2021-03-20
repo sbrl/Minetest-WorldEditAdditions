@@ -75,12 +75,12 @@ minetest.register_chatcommand("/multi", {
 		table.insert(done_message,
 			string.format("Executed %d commands in %s (",
 				#times,
-				worldeditadditions.human_time(total_time)
+				worldeditadditions.format.human_time(total_time)
 			)
 		)
 		local message_parts = {}
 		for j=1,#times do
-			table.insert(message_parts, worldeditadditions.human_time(times[j]))
+			table.insert(message_parts, worldeditadditions.format.human_time(times[j]))
 		end
 		table.insert(done_message, table.concat(message_parts, ", "))
 		table.insert(done_message, ")")

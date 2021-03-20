@@ -23,7 +23,7 @@ minetest.register_chatcommand("/saplingaliases", {
 				table.insert(display, { node_name, alias })
 			end
 			table.sort(display, function(a, b) return a[2] < b[2] end)
-			table.insert(msg, worldeditadditions.make_ascii_table(display))
+			table.insert(msg, worldeditadditions.format.make_ascii_table(display))
 		elseif params_text == "all_saplings" then
 			local results = worldeditadditions.registered_nodes_by_group("sapling")
 			table.insert(msg, "Sapling-like nodes:\n")

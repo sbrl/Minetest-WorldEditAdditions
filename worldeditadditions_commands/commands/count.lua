@@ -24,14 +24,14 @@ worldedit.register_command("count", {
 			true
 		)
 		
-		local result = worldeditadditions.make_ascii_table(counts).."\n"..
+		local result = worldeditadditions.format.make_ascii_table(counts).."\n"..
 			string.rep("=", 6 + #tostring(total) + 6).."\n"..
 			"Total "..total.." nodes\n"
 		
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name.." used //count at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", counting "..total.." nodes in "..worldeditadditions.human_time(time_taken))
+		minetest.log("action", name.." used //count at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", counting "..total.." nodes in "..worldeditadditions.format.human_time(time_taken))
 		return true, result
 	end
 })

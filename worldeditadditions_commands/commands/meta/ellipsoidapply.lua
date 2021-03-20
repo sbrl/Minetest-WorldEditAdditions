@@ -56,7 +56,7 @@ worldedit.register_command("ellipsoidapply", {
 		)
 		local time_overhead = 100 - worldeditadditions.round((stats_time.fn / stats_time.all) * 100, 3)
 		
-		minetest.log("action", name.." used //ellipsoidapply at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name]).." in "..worldeditadditions.human_time(stats_time.all))
-		return true, "Complete in "..worldeditadditions.human_time(stats_time.all).." ("..worldeditadditions.human_time(stats_time.fn).." fn, "..time_overhead.."% ellipsoidapply overhead)"
+		minetest.log("action", name.." used //ellipsoidapply at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name]).." in "..worldeditadditions.format.human_time(stats_time.all))
+		return true, "Complete in "..worldeditadditions.format.human_time(stats_time.all).." ("..worldeditadditions.format.human_time(stats_time.fn).." fn, "..time_overhead.."% ellipsoidapply overhead)"
 	end
 })

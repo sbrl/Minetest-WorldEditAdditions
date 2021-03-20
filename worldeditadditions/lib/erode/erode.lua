@@ -20,8 +20,8 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 	local heightmap_eroded = worldeditadditions.shallowcopy(heightmap)
 	
 	-- print("[erode.run] algorithm: "..algorithm..", params:");
-	-- print(worldeditadditions.map_stringify(params))
-	-- worldeditadditions.print_2d(heightmap, heightmap_size.x)
+	-- print(worldeditadditions.format.map(params))
+	-- worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
 	local success, msg, stats
 	if algorithm == "snowballs" then
 		success, msg = worldeditadditions.erode.snowballs(heightmap, heightmap_eroded, heightmap_size, region_height, params)

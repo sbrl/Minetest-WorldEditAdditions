@@ -25,7 +25,7 @@ function worldeditadditions.is_airlike(id)
 		return true
 	end
 	-- Just in case
-	if worldeditadditions.string_starts(this_node_name, "wielded_light") then
+	if worldeditadditions.str_starts(this_node_name, "wielded_light") then
 		return true
 	end
 	-- Just in case

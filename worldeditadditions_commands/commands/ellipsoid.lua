@@ -48,7 +48,7 @@ worldedit.register_command("ellipsoid", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //ellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })
 
@@ -71,6 +71,6 @@ worldedit.register_command("hollowellipsoid", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //hollowellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

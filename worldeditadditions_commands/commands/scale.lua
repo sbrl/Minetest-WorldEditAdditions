@@ -122,6 +122,6 @@ worldedit.register_command("scale", {
 		
 		
 		minetest.log("action", name.." used //scale at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", updating "..stats.updated.." nodes in "..time_taken.."s")
-		return true, stats.updated.." nodes updated in " .. worldeditadditions.human_time(time_taken)
+		return true, stats.updated.." nodes updated in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

@@ -44,6 +44,6 @@ worldedit.register_command("floodfill", {
 		end
 		
 		minetest.log("action", name .. " used //floodfill at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. nodes_replaced .. " nodes in " .. time_taken .. "s")
-		return true, nodes_replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, nodes_replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

@@ -31,6 +31,6 @@ worldedit.register_command("fillcaves", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //fillcaves at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. stats.replaced .. " nodes in " .. time_taken .. "s")
-		return true, stats.replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, stats.replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

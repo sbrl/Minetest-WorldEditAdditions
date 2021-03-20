@@ -58,6 +58,6 @@ worldedit.register_command("bonemeal", {
 		if candidates == 0 then percentage = 0 end
 		
 		minetest.log("action", name .. " used //bonemeal at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken.."s")
-		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..worldeditadditions.human_time(time_taken)
+		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..worldeditadditions.format.human_time(time_taken)
 	end
 })

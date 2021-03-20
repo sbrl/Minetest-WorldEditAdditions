@@ -22,7 +22,7 @@ worldedit.register_command("erode", {
 			return false, "Failed to split params_text into 2 parts (this is probably a bug)"
 		end
 		
-		local success, map = worldeditadditions.parse_map(params)
+		local success, map = worldeditadditions.parse.map(params)
 		if not success then return success, map end
 		return true, algorithm, map
 	end,
@@ -39,6 +39,6 @@ worldedit.register_command("erode", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //erode "..algorithm.." at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", adding " .. stats.added .. " nodes and removing " .. stats.removed .. " nodes in " .. time_taken .. "s")
-		return true, msg.."\n"..stats.added .. " nodes added and " .. stats.removed .. " nodes removed in " .. worldeditadditions.human_time(time_taken)
+		return true, msg.."\n"..stats.added .. " nodes added and " .. stats.removed .. " nodes removed in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

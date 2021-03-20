@@ -29,6 +29,6 @@ worldedit.register_command("walls", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //walls from "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." to "..worldeditadditions.vector.tostring(worldedit.pos1[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

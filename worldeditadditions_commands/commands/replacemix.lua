@@ -78,9 +78,10 @@ worldedit.register_command("replacemix", {
 		
 		local nodes_total = worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 		local percentage_replaced = worldeditadditions.round((changed / candidates)*100, 2)
-		local distribution_table = worldeditadditions.make_ascii_table(
-			worldeditadditions.node_distribution_to_list(distribution, changed),
-			changed
+		local distribution_table = worldeditadditions.format.node_distribution(
+			distribution,
+			changed,
+			true -- Add a grand total to the bottom
 		)
 		
 		local time_taken = worldeditadditions.get_ms_time() - start_time
@@ -88,6 +89,6 @@ worldedit.register_command("replacemix", {
 		
 		minetest.log("action", name .. " used //replacemix at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. changed.." nodes (out of "..nodes_total.." nodes) in "..time_taken.."s")
 		
-		return true, distribution_table..changed.." out of "..candidates.." (~"..percentage_replaced.."%) candidates replaced in "..worldeditadditions.human_time(time_taken)
+		return true, distribution_table..changed.." out of "..candidates.." (~"..percentage_replaced.."%) candidates replaced in "..worldeditadditions.format.human_time(time_taken)
 	end
 })

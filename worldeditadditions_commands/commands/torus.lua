@@ -46,7 +46,7 @@ worldedit.register_command("torus", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //torus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })
 
@@ -69,6 +69,6 @@ worldedit.register_command("hollowtorus", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //hollowtorus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

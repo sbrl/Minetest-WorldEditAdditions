@@ -47,6 +47,6 @@ worldedit.register_command("line", {
 		if success == false then return false, stats end
 		
 		minetest.log("action", name .. " used //line at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. stats.replaced .. " nodes in " .. time_taken .. "s")
-		return true, stats.replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, stats.replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

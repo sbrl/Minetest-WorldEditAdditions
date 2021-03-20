@@ -27,7 +27,7 @@ local function parse_params_maze(params_text, is_3d)
 		path_depth = tonumber(parts[4])
 	end
 	if #parts >= param_index_seed then
-		seed = worldeditadditions.makeseed(parts[param_index_seed])
+		seed = worldeditadditions.parse.seed(parts[param_index_seed])
 	end
 	
 	replace_node = worldedit.normalize_nodename(replace_node)
@@ -76,7 +76,7 @@ worldedit.register_command("maze", {
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //maze at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. " - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })
 
@@ -107,6 +107,6 @@ worldedit.register_command("maze3d", {
 		
 		
 		minetest.log("action", name .. " used //maze3d at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. " - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

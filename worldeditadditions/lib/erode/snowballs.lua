@@ -90,7 +90,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 	worldeditadditions.table_apply(params_custom, params)
 	
 	-- print("[erode/snowballs] params: ")
-	-- print(worldeditadditions.map_stringify(params))
+	-- print(worldeditadditions.format.map(params))
 	
 	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
 	

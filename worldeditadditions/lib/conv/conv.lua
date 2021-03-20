@@ -68,9 +68,9 @@ function worldeditadditions.convolve(pos1, pos2, kernel, kernel_size)
 	)
 	
 	-- print("original")
-	-- worldeditadditions.print_2d(heightmap, (pos2.z - pos1.z) + 1)
+	-- worldeditadditions.format.array_2d(heightmap, (pos2.z - pos1.z) + 1)
 	-- print("transformed")
-	-- worldeditadditions.print_2d(heightmap_conv, (pos2.z - pos1.z) + 1)
+	-- worldeditadditions.format.array_2d(heightmap_conv, (pos2.z - pos1.z) + 1)
 	
 	worldeditadditions.apply_heightmap_changes(
 		pos1, pos2, area, data,

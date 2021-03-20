@@ -43,6 +43,6 @@ worldedit.register_command("hollow", {
 		if not success then return success, changes end
 		
 		minetest.log("action", name .. " used //hollow at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.replaced .. " nodes in " .. time_taken .. "s")
-		return true, changes.replaced .. " nodes replaced in " .. worldeditadditions.human_time(time_taken)
+		return true, changes.replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

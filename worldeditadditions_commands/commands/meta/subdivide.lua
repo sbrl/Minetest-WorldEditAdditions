@@ -130,10 +130,10 @@ worldedit.register_command("subdivide", {
 						msg_prefix,
 						stats.chunks_completed, stats.chunks_total,
 						(stats.chunks_completed / stats.chunks_total) * 100,
-						wea.human_time(math.floor(stats.times.step_last)), -- the time is an integer anyway because precision
-						wea.human_time(wea.average(stats.times.steps)),
+						worldeditadditions.format.human_time(math.floor(stats.times.step_last)), -- the time is an integer anyway because precision
+						worldeditadditions.format.human_time(wea.average(stats.times.steps)),
 						stats.emerge_overhead * 100,
-						wea.human_time(stats.eta)
+						worldeditadditions.format.human_time(stats.eta)
 					)
 				)
 				time_last_msg = wea.get_ms_time()
@@ -150,13 +150,13 @@ worldedit.register_command("subdivide", {
 				wea.vector.tostring(pos2),
 				stats.chunks_completed,
 				stats.volume_nodes,
-				wea.human_time(stats.times.total)
+				worldeditadditions.format.human_time(stats.times.total)
 			))
 			worldedit.player_notify(name, string.format(
 				"%sComplete: %d chunks processed in %s (%.2f%% emerge overhead, emerge totals: %s)",
 				msg_prefix,
 				stats.chunks_completed,
-				wea.human_time(stats.times.total),
+				worldeditadditions.format.human_time(stats.times.total),
 				stats.emerge_overhead * 100,
 				emerge_stats_tostring(stats.emerge)
 			))
