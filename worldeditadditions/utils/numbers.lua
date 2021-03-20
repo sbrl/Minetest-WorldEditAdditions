@@ -31,6 +31,12 @@ function worldeditadditions.get_ms_time()
 	return minetest.get_us_time() / 1000
 end
 
+--- Calculates the estimated time remaining from a list of times.
+-- Intended to be used where one has a number of works units, and one has a
+-- list of how long the most recent units have taken to run.
+-- @param	existing_times	number[]	A list of times - in ms - that the most recent work units have taken.
+-- @param	done_count		number		The number of work units completed so far.
+-- @param	total_count		number		The total number of work units to be completed.
 function worldeditadditions.eta(existing_times, done_count, total_count)
 		local max = 100
 		local average = worldeditadditions.average(
