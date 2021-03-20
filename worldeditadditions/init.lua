@@ -19,7 +19,7 @@ dofile(worldeditadditions.modpath.."/utils/node_identification.lua")
 dofile(worldeditadditions.modpath.."/utils/tables.lua")
 dofile(worldeditadditions.modpath.."/utils/terrain.lua")
 dofile(worldeditadditions.modpath.."/utils/raycast_adv.lua") -- For the farwand
-dofile(worldeditadditions.modpath.."/utils/selector_helps.lua")
+dofile(worldeditadditions.modpath.."/utils/axes.lua")
 
 dofile(worldeditadditions.modpath.."/lib/compat/saplingnames.lua")
 

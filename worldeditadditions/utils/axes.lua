@@ -8,6 +8,7 @@ function worldeditadditions.player_axis2d(name)
 	if x > z then return "x", dir.x > 0 and 1 or -1
 	else return "z", dir.z > 0 and 1 or -1 end
 end
+
 -- Returns the axis and sign of the axis to the left of the input axis.
 -- @param	axis	string	x or z.
 -- @param sign	int	Sign multiplier.
