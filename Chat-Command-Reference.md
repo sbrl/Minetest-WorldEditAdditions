@@ -21,7 +21,7 @@ Floods all connected nodes of the same type starting at _pos1_ with <replace_nod
 //floodfill glass 25
 ```
 
-## `//overlay <node_name_a> [<chance[<snowballs|...> [<key_1> [<vaue_1>]] [<key_2> [<value_2>]] ...]_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`
+## `//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`
 Places `<node_name_a>` in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with `<node_name_a>`. Optionally supports a mix of node names and chances, as `//mix` (WorldEdit) and `//replacemix` (WorldEditAdditions) does.
 
 Will also work in caves, as it scans columns of nodes from top to bottom, skipping every non-air node until it finds one - and only then will it start searching for a node to place the target node on top of.
