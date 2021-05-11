@@ -25,27 +25,20 @@ function worldeditadditions.bonemeal(pos1, pos2, strength, chance)
 	local candidates = 0
 	for z = pos2.z, pos1.z, -1 do
 		for x = pos2.x, pos1.x, -1 do
-			local found_air = false
-			
 			for y = pos2.y, pos1.y, -1 do
-				if data[area:index(x, y, z)] ~= node_id_air then
-					if found_air then
-						-- We've found an air block previously,  so this node definitely has air above it
-						
-						if math.random(0, chance - 1) == 0 then
-							bonemeal:on_use(
-								{ x = x, y = y, z = z },
-								strength,
-								nil
-							)
-							nodes_bonemealed = nodes_bonemealed + 1
-						end
-						
-						candidates = candidates + 1
-						found_air = false
+				if not worldeditadditions.is_airlike(data[area:index(x, y, z)]) then
+					-- It's not an air node, so let's try to bonemeal it
+					
+					if math.random(0, chance - 1) == 0 then
+						bonemeal:on_use(
+							{ x = x, y = y, z = z },
+							strength,
+							nil
+						)
+						nodes_bonemealed = nodes_bonemealed + 1
 					end
-				else
-					found_air = true
+					
+					candidates = candidates + 1
 				end
 			end
 		end
