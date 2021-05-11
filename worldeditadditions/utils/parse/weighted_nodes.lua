@@ -27,7 +27,7 @@ function worldeditadditions.parse.weighted_nodes(parts, as_list, func_normalise)
 			mode = MODE_EITHER
 		elseif mode == MODE_EITHER then
 			-- print("mode: either");
-			local chance = tonumber(part)
+			local chance = worldeditadditions.parse.chance(part, "weight")
 			if not chance then
 				-- print("not a chance, trying a node name")
 				local node_name
@@ -58,6 +58,8 @@ function worldeditadditions.parse.weighted_nodes(parts, as_list, func_normalise)
 		if as_list then table.insert(result, { node = last_node_name, weight = 1 })
 		else result[last_node_name] = 1 end
 	end
+	
+	print(worldeditadditions.format.map(result, " "))
 	
 	return true, result
 end
