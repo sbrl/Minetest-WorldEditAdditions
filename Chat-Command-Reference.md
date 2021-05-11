@@ -37,6 +37,7 @@ Note also that columns without any air nodes in them at all are also skipped, so
 //overlay grass_with_dirt 10 dirt
 //overlay grass_with_dirt 10 dirt 2 sand 1
 //overlay sandstone dirt 2 sand 5
+//overlay dirt 90% stone 10%
 ```
 
 ## `//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
@@ -212,12 +213,15 @@ Also optionally takes a chance number. This is the chance that an eligible node 
 
 For example, a chance number of 2 would mean a 50% chance that any given eligible node will get bonemealed. A chance number of 16 would be a 6.25% chance, and a chance number of 25 would be 2%.
 
+Since WorldEditAdditions v1.12, a percentage chance is also supported. This is denoted by suffixing a number with a percent sign (e.g. `//bonemeal 1 25%`).
+
 ```
 //bonemeal
 //bonemeal 3 25
 //bonemeal 4
 //bonemeal 1 10
 //bonemeal 2 15
+//bonemeal 2 10%
 ```
 
 ## `//walls <replace_node>`
@@ -349,6 +353,14 @@ If we wanted to put all of the above features together into a single command, th
 ```
 
 The above replaces 1 in 3 `dirt` nodes with a mix of `sandstone`, `dry_dirt`, and `cobble` nodes in the ratio 10:1:2. Awesome!
+
+Since WorldEditAdditions v1.12, you can also use percentages:
+
+```
+//replacemix dirt 33% sandstone 75% dry_dirt 10% cobble 15% 
+```
+
+Note though that the percentages are internally converted to a 1-in-N chance and rounded down.
 
 Here are all the above examples together:
 
