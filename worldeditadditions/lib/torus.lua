@@ -42,8 +42,13 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 			for x = -total_radius, total_radius do
 				local x_sq = x*x
 				
+				local sq = vector.new(x_sq, y_sq, z_sq)
+				
+				-- Default: xy
 				if axes == "xz" then
-					-- TODO: Figure out which 2 axes we need to fiddle here
+					sq.x, sq.y, sq.z = sq.x, sq.z, sq.y
+				elseif axes == "yz" then
+					sq.x, sq.y, sq.z = sq.y, sq.z, sq.x
 				end
 				
 				-- (x^2+y^2+z^2-(a^2+b^2))^2-4 a b (b^2-z^2)
@@ -51,8 +56,8 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 				-- (x, y, z) is the point
 				-- a is the major radius (centre to centre of circle)
 				-- b is the minor radius (radius of circle 
-				local comp_a = (x_sq+y_sq+z_sq - (major_radius_sq+minor_radius_sq))
-				local test_value = comp_a*comp_a - 4*major_radius*minor_radius*(minor_radius_sq-z_sq)
+				local comp_a = (sq.x+sq.y+sq.z - (major_radius_sq+minor_radius_sq))
+				local test_value = comp_a*comp_a - 4*major_radius*minor_radius*(minor_radius_sq-sq.z)
 				
 				-- If we're inside the torus, then fill it in
 				if test_value <= 1 then
@@ -60,8 +65,8 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 					
 					if not place_ok then
 						-- It must be hollow! Do some additional calculations.
-						local inner_comp_a = (x_sq+y_sq+z_sq - (major_radius_sq+inner_minor_radius_sq))
-						local inner_test_value = inner_comp_a*inner_comp_a - 4*major_radius*inner_minor_radius*(inner_minor_radius_sq-z_sq)
+						local inner_comp_a = (sq.x+sq.y+sq.z - (major_radius_sq+inner_minor_radius_sq))
+						local inner_test_value = inner_comp_a*inner_comp_a - 4*major_radius*inner_minor_radius*(inner_minor_radius_sq-sq.z)
 						
 						-- It's only ok to place it if it's outside our inner torus
 						place_ok = inner_test_value >= 0
