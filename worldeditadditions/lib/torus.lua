@@ -4,7 +4,7 @@
 --- Generates a torus shape at the given position with the given parameters.
 -- @param	position		Vector		The position at which to generate the torus.
 -- @param	major_radius	number		The major radius of the torus - i.e. the distance from the middle to the ring.
--- @param	minor_radius	number		The minor radius of the torus - i.e. the radaius fo the ring itself.
+-- @param	minor_radius	number		The minor radius of the torus - i.e. the radius fo the ring itself.
 -- @param	target_node		string		The name of the target node to generate the torus with.
 -- @param	axes=xz			string|nil	The axes upon which the torus should lay flat.
 -- @param	hollow=false	boolean		Whether the generated torus should be hollow or not.
@@ -20,6 +20,7 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 	
 	-- Fetch the nodes in the specified area
 	-- OPTIMIZE: We should be able to calculate a more efficient box-area here
+	-- This is complicated by the multiple possible axes though
 	local manip, area = worldedit.manip_helpers.init_radius(position, total_radius)
 	local data = manip:get_data()
 	
