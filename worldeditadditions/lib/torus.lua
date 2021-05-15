@@ -1,7 +1,16 @@
 --- Overlap command. Places a specified node on top of 
 -- @module worldeditadditions.overlay
 
-function worldeditadditions.torus(position, major_radius, minor_radius, target_node, hollow)
+--- Generates a torus shape at the given position with the given parameters.
+-- @param	position		Vector		The position at which to generate the torus.
+-- @param	major_radius	number		The major radius of the torus - i.e. the distance from the middle to the ring.
+-- @param	minor_radius	number		The minor radius of the torus - i.e. the radaius fo the ring itself.
+-- @param	target_node		string		The name of the target node to generate the torus with.
+-- @param	axes=xz			string|nil	The axes upon which the torus should lay flat.
+-- @param	hollow=false	boolean		Whether the generated torus should be hollow or not.
+function worldeditadditions.torus(position, major_radius, minor_radius, target_node, axes, hollow)
+	if type(axes) ~= "string" then axes = "xz" end
+	
 	-- position = { x, y, z }
 	local total_radius = major_radius + minor_radius
 	local inner_minor_radius = minor_radius - 2
@@ -32,6 +41,10 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 			local i = idx_y_base
 			for x = -total_radius, total_radius do
 				local x_sq = x*x
+				
+				if axes == "xz" then
+					-- TODO: Figure out which 2 axes we need to fiddle here
+				end
 				
 				-- (x^2+y^2+z^2-(a^2+b^2))^2-4 a b (b^2-z^2)
 				-- Where:
