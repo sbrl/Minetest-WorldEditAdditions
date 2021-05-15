@@ -5,20 +5,15 @@
 --    ██     ██████  ██   ██  ██████  ███████
 local function parse_params_torus(params_text)
 	local parts = worldeditadditions.split(params_text, "%s+", false)
-	print("[DEBUG:torus/parts]")
-	for i = 1, #parts, 1 do print(parts[i]) end
-	-- local found, _, major_radius, minor_radius, replace_node, axes = params_text:find("([0-9]+)%s+([0-9]+)%s+([a-z:_\\-]+)%s+([xyz]+)")
-	
-	if #parts < 3 then return nil, nil, nil end
 	
 	if #parts < 1 then
-		return false, "Error: Invalid replace_node."
+		return false, "Error: No replace_node specified."
 	end
 	if #parts < 2 then
-		return false, "Error: Invalid major radius (expected integer greater than 0)"
+		return false, "Error: No major radius specified (expected integer greater than 0)."
 	end
 	if #parts < 3 then
-		return false, "Error: Invalid minor radius (expected integer greater than 0)"
+		return false, "Error: No minor radius specified (expected integer greater than 0)."
 	end
 	
 	local major_radius = tonumber(parts[1])
@@ -38,7 +33,7 @@ local function parse_params_torus(params_text)
 		return false, "Error: Invalid node name."
 	end
 	if axes:find("[^xyz]") then
-		return false, "Error: The axes may only contain the latters x, y, and z."
+		return false, "Error: The axes may only contain the letters x, y, and z."
 	end
 	if #axes ~= 2 then
 		return false, "Error: Exactly 2 axes must be specified. For example, 'xy' is valid, but 'xyy' is not (both of course without quotes)."
