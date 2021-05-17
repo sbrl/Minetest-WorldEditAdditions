@@ -1,4 +1,4 @@
---- Overlap command. Places a specified node on top of 
+--- Overlap command. Places a specified node on top of
 -- @module worldeditadditions.overlay
 
 function worldeditadditions.torus(position, major_radius, minor_radius, target_node, hollow)
@@ -37,7 +37,7 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 				-- Where:
 				-- (x, y, z) is the point
 				-- a is the major radius (centre to centre of circle)
-				-- b is the minor radius (radius of circle 
+				-- b is the minor radius (radius of circle)
 				local comp_a = (x_sq+y_sq+z_sq - (major_radius_sq+minor_radius_sq))
 				local test_value = comp_a*comp_a - 4*major_radius*minor_radius*(minor_radius_sq-z_sq)
 				
