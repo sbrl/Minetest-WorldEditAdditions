@@ -1,4 +1,4 @@
-local we_c = worldeditadditions_commands
+local wea = worldeditadditions
 
 -- ██████  ███████ ██████  ██       █████   ██████ ███████ ███    ███ ██ ██   ██
 -- ██   ██ ██      ██   ██ ██      ██   ██ ██      ██      ████  ████ ██  ██ ██
@@ -15,7 +15,7 @@ worldedit.register_command("replacemix", {
 			return false, "Error: No arguments specified"
 		end
 		
-		local parts = worldeditadditions.split(params_text, "%s+", false)
+		local parts = wea.split(params_text, "%s+", false)
 		
 		local target_node = nil
 		local target_node_chance = 1
@@ -30,16 +30,16 @@ worldedit.register_command("replacemix", {
 					return false, "Error: Invalid target_node name"
 				end
 				mode = "target_chance"
-			elseif mode == "target_chance" and tonumber(part) then
-				target_node_chance = tonumber(part)
+			elseif mode == "target_chance" and wea.parse.chance(part) then
+				target_node_chance = wea.parse.chance(part)
 				mode = "replace_node"
-			elseif (mode == "target_chance" and not tonumber(part)) or mode == "replace_node" then
+			elseif (mode == "target_chance" and not wea.parse.chance(part, "weight")) or mode == "replace_node" then
 				mode = "replace_node"
-				if tonumber(part) then
+				if wea.parse.chance(part, "weight") then
 					if not last_node_name then
 						return false, "Error: No previous node name was found (this is a probably a bug)."
 					end
-					replace_nodes[last_node_name] = math.floor(tonumber(part))
+					replace_nodes[last_node_name] = math.floor(wea.parse.chance(part, "weight"))
 				else
 					if last_node_name and not replace_nodes[last_node_name] then
 						replace_nodes[last_node_name] = 1
