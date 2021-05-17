@@ -1,5 +1,5 @@
---- Overlap command. Places a specified node on top of
--- @module worldeditadditions.overlay
+--- Generates torus shapes.
+-- @module worldeditadditions.torus
 
 --- Generates a torus shape at the given position with the given parameters.
 -- @param	position		Vector		The position at which to generate the torus.
@@ -57,8 +57,8 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 				-- (x^2+y^2+z^2-(a^2+b^2))^2-4 a b (b^2-z^2)
 				-- Where:
 				-- (x, y, z) is the point
-				-- a is the major radius (centre to centre of circle)
-				-- b is the minor radius (radius of circle)
+				-- a is the major radius (centre of the ring to the centre of the torus)
+				-- b is the minor radius (radius of the ring)
 				local comp_a = (sq.x+sq.y+sq.z - (major_radius_sq+minor_radius_sq))
 				local test_value = comp_a*comp_a - 4*major_radius*minor_radius*(minor_radius_sq-sq.z)
 				
