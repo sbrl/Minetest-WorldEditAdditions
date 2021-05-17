@@ -10,9 +10,8 @@
 -- @param	hollow=false	boolean		Whether the generated torus should be hollow or not.
 function worldeditadditions.torus(position, major_radius, minor_radius, target_node, axes, hollow)
 	local matrix = {x='yz', y='xz', z='xy'}
-	if type(axes) ~= "string" then axes = "xz"
-	elseif #axes == 1 and axes.match('[xyz]') then axes = matrix[axes]
-	else axes = ((axes:match('x') or '')..(axes:match('y') or '')..(axes:match('z') or '')):sub(1,2) end
+	if type(axes) ~= "string" then axes = "xz" end
+	if #axes == 1 and axes.match('[xyz]') then axes = matrix[axes] end
 	
 	-- position = { x, y, z }
 	local total_radius = major_radius + minor_radius
