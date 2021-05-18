@@ -1,4 +1,4 @@
---- Overlap command. Places a specified node on top of
+--- Overlap command. Places a specified node on top of 
 -- @module worldeditadditions.overlay
 
 --- Generates a torus shape at the given position with the given parameters.
@@ -12,7 +12,7 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 	local matrix = {x='yz', y='xz', z='xy'}
 	if type(axes) ~= "string" then axes = "xz" end
 	if #axes == 1 and axes:match('[xyz]') then axes = matrix[axes] end
-	
+
 	-- position = { x, y, z }
 	local total_radius = major_radius + minor_radius
 	local inner_minor_radius = minor_radius - 2
@@ -22,7 +22,6 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 	
 	-- Fetch the nodes in the specified area
 	-- OPTIMIZE: We should be able to calculate a more efficient box-area here
-	-- This is complicated by the multiple possible axes though
 	local manip, area = worldedit.manip_helpers.init_radius(position, total_radius)
 	local data = manip:get_data()
 	
@@ -45,15 +44,6 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 			for x = -total_radius, total_radius do
 				local x_sq = x*x
 				
-				local sq = vector.new(x_sq, y_sq, z_sq)
-				
-				-- Default: xy
-				if axes == "xz" then
-					sq.x, sq.y, sq.z = sq.x, sq.z, sq.y
-				elseif axes == "yz" then
-					sq.x, sq.y, sq.z = sq.y, sq.z, sq.x
-				end
-				
 				-- (x^2+y^2+z^2-(a^2+b^2))^2-4 a b (b^2-z^2)
 				-- Where:
 				-- (x, y, z) is the point
@@ -68,8 +58,8 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 					
 					if not place_ok then
 						-- It must be hollow! Do some additional calculations.
-						local inner_comp_a = (sq.x+sq.y+sq.z - (major_radius_sq+inner_minor_radius_sq))
-						local inner_test_value = inner_comp_a*inner_comp_a - 4*major_radius*inner_minor_radius*(inner_minor_radius_sq-sq.z)
+						local inner_comp_a = (x_sq+y_sq+z_sq - (major_radius_sq+inner_minor_radius_sq))
+						local inner_test_value = inner_comp_a*inner_comp_a - 4*major_radius*inner_minor_radius*(inner_minor_radius_sq-z_sq)
 						
 						-- It's only ok to place it if it's outside our inner torus
 						place_ok = inner_test_value >= 0

@@ -37,7 +37,6 @@ Note also that columns without any air nodes in them at all are also skipped, so
 //overlay grass_with_dirt 10 dirt
 //overlay grass_with_dirt 10 dirt 2 sand 1
 //overlay sandstone dirt 2 sand 5
-//overlay dirt 90% stone 10%
 ```
 
 ## `//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
@@ -127,8 +126,6 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 ## `//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`
 Creates a solid torus at position 1 with the specified major and minor radii. The major radius is the distance from the centre of the torus to the centre of the circle bit, and the minor radius is the radius of the circle bit.
 
-The optional axes sets the axes upon which the torus will lay flat. Possible values: `xy` (the default), `xz`, `yz`.
-
 ```
 //torus 15 5 stone
 //torus 5 3 meselamp x
@@ -142,7 +139,6 @@ Creates a hollow torus at position 1 with the radius major and minor radii. Work
 ```
 //hollowtorus 10 5 glass
 //hollowtorus 21 11 stone
-//hollowtorus 18 6 dirt xz
 ```
 
 ## `//line [<replace_node> [<radius>]]`
@@ -218,15 +214,12 @@ Also optionally takes a chance number. This is the chance that an eligible node 
 
 For example, a chance number of 2 would mean a 50% chance that any given eligible node will get bonemealed. A chance number of 16 would be a 6.25% chance, and a chance number of 25 would be 2%.
 
-Since WorldEditAdditions v1.12, a percentage chance is also supported. This is denoted by suffixing a number with a percent sign (e.g. `//bonemeal 1 25%`).
-
 ```
 //bonemeal
 //bonemeal 3 25
 //bonemeal 4
 //bonemeal 1 10
 //bonemeal 2 15
-//bonemeal 2 10%
 ```
 
 ## `//walls <replace_node>`
