@@ -131,8 +131,9 @@ The optional axes sets the axes upon which the torus will lay flat. Possible val
 
 ```
 //torus 15 5 stone
-//torus 5 3 meselamp
-//hollowtorus 10 6 sandstone xz
+//torus 5 3 meselamp x
+//torus 10 6 sandstone xz hollow
+//torus 10 6 wool:red y h
 ```
 
 ## `//hollowtorus <major_radius> <minor_radius> <node_name>`
@@ -303,7 +304,7 @@ If you want to specify different scale factors for difference axes, then `//scal
 This will scale the defined region by 2x in the positive x, 3x in the positive y, and 4x in the positive z. As these are all scale factors, we can also use the syntax described above to scale up and down in the same operation:
 
 ```
-//scale 50% 2 1/4 
+//scale 50% 2 1/4
 ```
 
 This will first scale in the positive y by 2x. Once that operation is completed, it will scale down to 50% size in the positive x and down to 25% size in the positive z. Note that if you want to scale down first and then scale up, you'll need to execute 2 separate commands.
@@ -361,7 +362,7 @@ The above replaces 1 in 3 `dirt` nodes with a mix of `sandstone`, `dry_dirt`, an
 Since WorldEditAdditions v1.12, you can also use percentages:
 
 ```
-//replacemix dirt 33% sandstone 75% dry_dirt 10% cobble 15% 
+//replacemix dirt 33% sandstone 75% dry_dirt 10% cobble 15%
 ```
 
 Note though that the percentages are internally converted to a 1-in-N chance and rounded down.
@@ -379,7 +380,7 @@ Here are all the above examples together:
 ## `//convolve <kernel> [<width>[,<height>]] [<sigma>]`
 Advanced version of `//smooth` from we_env, and one of the few WorldEditAdditions commands to have any aliases (`//smoothadv` and `//conv`).
 
-Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain. 
+Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain.
 
 Possible kernels:
 
@@ -451,7 +452,7 @@ Counts all the nodes in the defined region and returns the result along with cal
 ```
 
 ## `//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`
-Splits the current WorldEdit region into `(<size_x>, <size_y>, <size_z>)` sized chunks, and run `//<cmd_name> <args>` over each chunk. 
+Splits the current WorldEdit region into `(<size_x>, <size_y>, <size_z>)` sized chunks, and run `//<cmd_name> <args>` over each chunk.
 
 Sometimes, we want to run a single command on a truly vast area. Usually, this results in running out of memory. If this was you, then this command is just what you need! It should be able to handle any sized region - the only limit is your patience for command to complete.....
 
