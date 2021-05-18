@@ -51,7 +51,7 @@ local function parse_params_torus(params_text)
 end
 
 worldedit.register_command("torus", {
-	params = "<major_radius> <minor_radius> <replace_node> [<axes=xy>] [h[ollow]]",
+	params = "<major_radius> <minor_radius> <replace_node> [<axes=xy> [h[ollow]]]",
 	description = "Creates a 3D torus with a major radius of <major_radius> and a minor radius of <minor_radius> at pos1, filled with <replace_node>, on axes <axes> (i.e. 2 axis names: xz, zy, etc).",
 	privs = { worldedit = true },
 	require_pos = 1,
