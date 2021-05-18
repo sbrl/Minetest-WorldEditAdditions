@@ -27,7 +27,7 @@ worldedit.register_command("bonemeal", {
 			end
 		end
 		if #parts >= 2 then
-			chance = tonumber(parts[2])
+			chance = worldeditadditions.parse.chance(parts[2])
 			if not chance then
 				return false, "Invalid chance value (must be a positive integer)"
 			end
