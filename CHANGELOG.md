@@ -14,7 +14,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add new universal chance parsing
      - Any `<chance>` can now either be a 1-in-N number (e.g. `4`, `10`), or a percentage chance (e.g. `50%`, `10%`).
      - Caveat: Percentages are converted to a 1-in-N chance, but additionally that number is rounded down in some places
- - `//torus`, `//hollowtorus`: Add optional new axes argument
+ - `//torus`, `//hollowtorus`: Add optional new axes and hollow (for `//torus`) argument
 
 
 ## v1.11: The big data update (25th January 2021)
