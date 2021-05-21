@@ -124,18 +124,20 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 //hollowellipsoid 21 11 41 stone
 ```
 
-## `//torus <major_radius> <minor_radius> <node_name> [<axes=xy>]`
+## `//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`
 Creates a solid torus at position 1 with the specified major and minor radii. The major radius is the distance from the centre of the torus to the centre of the circle bit, and the minor radius is the radius of the circle bit.
 
-The optional axes sets the axes upon which the torus will lay flat. Possible values: `xy` (the default), `xz`, `yz`.
+The optional axes sets the axes upon which the torus will lay flat. Possible values: `xy` (the default), `xz`, `yz`. A single axis may also be specified (i.e. `x`, `y`, or `z`) - this will be interpreted as the axis that runs through the hole in the middle of the torus.
 
 ```
 //torus 15 5 stone
 //torus 5 3 meselamp
-//hollowtorus 10 6 sandstone xz
+//torus 10 6 sandstone xz
+//torus 10 6 wool:red y
+//torus 25 10 dirt xz hollow
 ```
 
-## `//hollowtorus <major_radius> <minor_radius> <node_name>`
+## `//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`
 Creates a hollow torus at position 1 with the radius major and minor radii. Works the same way as `//torus` does.
 
 ```
@@ -303,7 +305,7 @@ If you want to specify different scale factors for difference axes, then `//scal
 This will scale the defined region by 2x in the positive x, 3x in the positive y, and 4x in the positive z. As these are all scale factors, we can also use the syntax described above to scale up and down in the same operation:
 
 ```
-//scale 50% 2 1/4 
+//scale 50% 2 1/4
 ```
 
 This will first scale in the positive y by 2x. Once that operation is completed, it will scale down to 50% size in the positive x and down to 25% size in the positive z. Note that if you want to scale down first and then scale up, you'll need to execute 2 separate commands.
@@ -361,7 +363,7 @@ The above replaces 1 in 3 `dirt` nodes with a mix of `sandstone`, `dry_dirt`, an
 Since WorldEditAdditions v1.12, you can also use percentages:
 
 ```
-//replacemix dirt 33% sandstone 75% dry_dirt 10% cobble 15% 
+//replacemix dirt 33% sandstone 75% dry_dirt 10% cobble 15%
 ```
 
 Note though that the percentages are internally converted to a 1-in-N chance and rounded down.
@@ -379,7 +381,7 @@ Here are all the above examples together:
 ## `//convolve <kernel> [<width>[,<height>]] [<sigma>]`
 Advanced version of `//smooth` from we_env, and one of the few WorldEditAdditions commands to have any aliases (`//smoothadv` and `//conv`).
 
-Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain. 
+Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain.
 
 Possible kernels:
 
@@ -451,7 +453,7 @@ Counts all the nodes in the defined region and returns the result along with cal
 ```
 
 ## `//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`
-Splits the current WorldEdit region into `(<size_x>, <size_y>, <size_z>)` sized chunks, and run `//<cmd_name> <args>` over each chunk. 
+Splits the current WorldEdit region into `(<size_x>, <size_y>, <size_z>)` sized chunks, and run `//<cmd_name> <args>` over each chunk.
 
 Sometimes, we want to run a single command on a truly vast area. Usually, this results in running out of memory. If this was you, then this command is just what you need! It should be able to handle any sized region - the only limit is your patience for command to complete.....
 
