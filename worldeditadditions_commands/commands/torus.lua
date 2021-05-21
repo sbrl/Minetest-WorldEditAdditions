@@ -39,8 +39,10 @@ local function parse_params_torus(params_text)
 		return false, "Error: 2 or less axes must be specified. For example, xy is valid, but xzy is not."
 	end
 	
-	local hollow = parts[5]
-	if hollow == "false" then hollow = false end
+	local hollow = false
+	if parts[5] == "hollow" or parts[5] == "h" then
+		hollow = true
+	end
 	
 	-- Sort the axis names (this is important to ensure we can identify the direction properly)
 	if axes == "yx" then axes = "xy" end
@@ -64,7 +66,13 @@ worldedit.register_command("torus", {
 	end,
 	func = function(name, target_node, major_radius, minor_radius, axes, hollow)
 		local start_time = worldeditadditions.get_ms_time()
-		local replaced = worldeditadditions.torus(worldedit.pos1[name], major_radius, minor_radius, target_node, axes, hollow)
+		local replaced = worldeditadditions.torus(
+			worldedit.pos1[name],
+			major_radius, minor_radius,
+			target_node,
+			axes,
+			hollow
+		)
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //torus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
@@ -85,9 +93,15 @@ worldedit.register_command("hollowtorus", {
 	nodes_needed = function(name, target_node, major_radius, minor_radius)
 		return math.ceil(2 * math.pi*math.pi * major_radius * minor_radius*minor_radius)
 	end,
-	func = function(name, target_node, major_radius, minor_radius)
+	func = function(name, target_node, major_radius, minor_radius, axes)
 		local start_time = worldeditadditions.get_ms_time()
-		local replaced = worldeditadditions.torus(worldedit.pos1[name], major_radius, minor_radius, target_node, axes, true)
+		local replaced = worldeditadditions.torus(
+			worldedit.pos1[name],
+			major_radius, minor_radius,
+			target_node,
+			axes,
+			true -- hollow
+		)
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //hollowtorus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")

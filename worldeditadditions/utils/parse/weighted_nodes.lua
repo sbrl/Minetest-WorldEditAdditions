@@ -59,7 +59,5 @@ function worldeditadditions.parse.weighted_nodes(parts, as_list, func_normalise)
 		else result[last_node_name] = 1 end
 	end
 	
-	print(worldeditadditions.format.map(result, " "))
-	
 	return true, result
 end

@@ -127,13 +127,14 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 ## `//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`
 Creates a solid torus at position 1 with the specified major and minor radii. The major radius is the distance from the centre of the torus to the centre of the circle bit, and the minor radius is the radius of the circle bit.
 
-The optional axes sets the axes upon which the torus will lay flat. Possible values: `xy` (the default), `xz`, `yz`.
+The optional axes sets the axes upon which the torus will lay flat. Possible values: `xy` (the default), `xz`, `yz`. A single axis may also be specified (i.e. `x`, `y`, or `z`) - this will be interpreted as the axis that runs through the hole in the middle of the torus.
 
 ```
 //torus 15 5 stone
-//torus 5 3 meselamp x
-//torus 10 6 sandstone xz hollow
-//torus 10 6 wool:red y h
+//torus 5 3 meselamp
+//torus 10 6 sandstone xz
+//torus 10 6 wool:red y
+//torus 25 10 dirt xz hollow
 ```
 
 ## `//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`
