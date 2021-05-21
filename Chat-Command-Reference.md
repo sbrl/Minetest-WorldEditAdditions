@@ -101,6 +101,8 @@ Mode			| Description
 ## `//fillcaves [<node_name>]`
 Fills in all airlike nodes beneath non airlike nodes, which gives the effect of filling in caves. Defaults to filling in with stone, but this can be customised.
 
+Note that the *entire* cave you want filling must be selected, as `//fillcaves` only operates within the defined region (ref #50).
+
 ```
 //fillcaves
 //fillcaves dirt
