@@ -16,6 +16,7 @@ Note to self: See the bottom of this file for the release template text.
      - Caveat: Percentages are converted to a 1-in-N chance, but additionally that number is rounded down in some places
  - `//torus`, `//hollowtorus`: Add optional new axes
  - `//torus`: Add optional hollow keyword
+ - `//layers`: Fix crash duee to outdated debug code
 
 
 ## v1.11: The big data update (25th January 2021)
