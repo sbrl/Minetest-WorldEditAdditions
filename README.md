@@ -30,8 +30,8 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 ### Geometry
  - [`//ellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#ellipsoid-rx-ry-rz-node_name)
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#hollowellipsoid-rx-ry-rz-node_name)
- - [`//torus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#torus-major_radius-minor_radius-node_name)
- - [`//hollowtorus <major_radius> <minor_radius> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#hollowtorus-major_radius-minor_radius-node_name)
+ - [`//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#torus-major_radius-minor_radius-node_name-axesxy-hollow)
+ - [`//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#hollowtorus-major_radius-minor_radius-node_name-axesxy)
  - [`//walls <replace_node>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#walls-replace_node)
  - [`//line [<replace_node> [<radius>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#line-replace_node-radius)
  - [`//hollow [<wall_thickness>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#hollow-wall_thickness)
