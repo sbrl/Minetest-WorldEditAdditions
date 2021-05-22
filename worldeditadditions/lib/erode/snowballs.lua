@@ -132,7 +132,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 	if not params.noconv then
 		local success, matrix = worldeditadditions.get_conv_kernel("gaussian", 3, 3)
 		if not success then return success, matrix end
-		matrix_size = {} matrix_size[0] = 3 matrix_size[1] = 3
+		local matrix_size = {} matrix_size[0] = 3 matrix_size[1] = 3
 		worldeditadditions.conv.convolve(
 			heightmap, heightmap_size,
 			matrix,
