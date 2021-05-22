@@ -27,6 +27,10 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 		success, msg = worldeditadditions.erode.snowballs(heightmap, heightmap_eroded, heightmap_size, region_height, params)
 		if not success then return success, msg end
 	else
+		-- FUTURE: Add a new "river" algorithm here that:
+		-- * Fills in blocks that are srrounded on more than 3 horizontal sides
+		-- * Destroys blocks that have no horizontal neighbours
+		-- A bit like cellular automata actually.
 		return false, "Error: Unknown algorithm '"..algorithm.."'. Currently implemented algorithms: snowballs (2d; hydraulic-like). Ideas for algorithms to implement are welcome!"
 	end
 	
