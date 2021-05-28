@@ -1,5 +1,5 @@
 --- Uncomment these 2 lines to run in standalone mode
--- worldeditadditions = {}
+-- worldeditadditions = { parse = {  } }
 -- function worldeditadditions.trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
 
 
@@ -18,7 +18,7 @@
 -- 
 -- @param	command_str		str		The command string to operate on.
 -- @returns	bool,(string[]|string)	If the operation was successful, then true followed by a table of strings is returned. If the operation was not successful, then false followed by an error message (as a single string) is returned instead.
-function worldeditadditions.tokenise_commands(command_str)
+function worldeditadditions.parse.tokenise_commands(command_str)
 	local success, result = tokenise(command_str)
 	if not success then return success, result end
 	return true, recombine(result)
@@ -106,7 +106,7 @@ end
 -- end
 -- 
 -- local function test_input(input)
--- 	local success, result = worldeditadditions.tokenise_commands(input)
+-- 	local success, result = worldeditadditions.parse.tokenise_commands(input)
 -- 	if success then
 -- 		printparts(result)
 -- 
