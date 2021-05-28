@@ -24,13 +24,16 @@ function worldeditadditions.parse.tokenise_commands(command_str)
 	return true, recombine(result)
 end
 
-
+--- The main tokeniser. Splits the input string up into space separated tokens, except when said spaces are inside { curly braces }.
+-- Note that the outermost set of curly braces are stripped.
+-- @param   str     string  The input string to tokenise.
+-- @returns string[]        A list of tokens
 local function tokenise(str)
-    if type(str) ~= "string" then return false, "Error: Expected input of type string." end
+	if type(str) ~= "string" then return false, "Error: Expected input of type string." end
 	str = str:gsub("%s+", " ") -- Replace all runs of whitespace with a single space
 	
-    -- The resulting tokens
-    local result = {}
+	-- The resulting tokens
+	local result = {}
 	
 	local nested_depth = 0     -- The nested depth inside { and } we're currently at
 	local nested_stack = {}    -- Stack of starting positions of curly brace {  } blocks
@@ -82,6 +85,9 @@ local function tokenise(str)
 	return true, result
 end
 
+--- Recombines a list of tokens into a list of commands.
+-- @param   parts   string[]    The tokens from tokenise(str).
+-- @returns         string[]	The tokens, but run through trim() & grouped into commands (1 element in the list = 1 command)
 local function recombine(parts)
 	local result = {}
 	local acc = {}
