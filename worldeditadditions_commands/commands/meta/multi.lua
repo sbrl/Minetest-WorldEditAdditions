@@ -26,11 +26,6 @@ local function explode(delim, str)
 	end
 end
 
--- From http://lua-users.org/wiki/StringTrim
-local function trim(s)
-   return (s:gsub("^%s*(.-)%s*$", "%1"))
-end
-
 minetest.register_chatcommand("/multi", {
 	params = "/<command_a> <args> //<command_b> <args> /<command_c> <args>.....",
 	description = "Executes multiple chat commands in sequence. Just prepend a list of space-separated chat commands with //multi, and you're good to go! The forward slashes at the beginning of each chat command must be the same as if you were executing it normally.",
@@ -50,7 +45,7 @@ minetest.register_chatcommand("/multi", {
 			local start_time = worldeditadditions.get_ms_time()
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
 			if not found then command_name = command end
-			command_name = trim(command_name)
+			command_name = worldeditadditions.trim(command_name)
 			if not args then args = "" end
 			
 			worldedit.player_notify(name, "#"..i..": /"..command)
