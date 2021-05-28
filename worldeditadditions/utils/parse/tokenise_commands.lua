@@ -3,27 +3,6 @@
 -- function worldeditadditions.trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
 
 
---- Tokenises a string of multiple commands into an array of individual commands.
--- Preserves the forward slash at the beginning of each command name.
--- Also supports arbitrarily nested and complex curly braces { } for grouping
--- commands together that would normally be split apart.
--- 
--- Simple example:
--- INPUT: //1 //2 //outset 25 //fixlight
--- OUTPUT: { "//1", "//2", "//outset 25", "//fixlight" }
--- 
--- Example with curly braces:
--- INPUT: //1 //2 //outset 50 {//many 5 //multi //fixlight //clearcut}
--- OUTPUT: { "//1", "//2", "//outset 50", "//many 5 //multi //fixlight //clearcut"}
--- 
--- @param	command_str		str		The command string to operate on.
--- @returns	bool,(string[]|string)	If the operation was successful, then true followed by a table of strings is returned. If the operation was not successful, then false followed by an error message (as a single string) is returned instead.
-function worldeditadditions.parse.tokenise_commands(command_str)
-	local success, result = tokenise(command_str)
-	if not success then return success, result end
-	return true, recombine(result)
-end
-
 --- The main tokeniser. Splits the input string up into space separated tokens, except when said spaces are inside { curly braces }.
 -- Note that the outermost set of curly braces are stripped.
 -- @param   str     string  The input string to tokenise.
@@ -102,6 +81,29 @@ local function recombine(parts)
 	if #acc > 0 then table.insert(result, table.concat(acc, " ")) end
 	return result
 end
+
+
+--- Tokenises a string of multiple commands into an array of individual commands.
+-- Preserves the forward slash at the beginning of each command name.
+-- Also supports arbitrarily nested and complex curly braces { } for grouping
+-- commands together that would normally be split apart.
+-- 
+-- Simple example:
+-- INPUT: //1 //2 //outset 25 //fixlight
+-- OUTPUT: { "//1", "//2", "//outset 25", "//fixlight" }
+-- 
+-- Example with curly braces:
+-- INPUT: //1 //2 //outset 50 {//many 5 //multi //fixlight //clearcut}
+-- OUTPUT: { "//1", "//2", "//outset 50", "//many 5 //multi //fixlight //clearcut"}
+-- 
+-- @param	command_str		str		The command string to operate on.
+-- @returns	bool,(string[]|string)	If the operation was successful, then true followed by a table of strings is returned. If the operation was not successful, then false followed by an error message (as a single string) is returned instead.
+function worldeditadditions.parse.tokenise_commands(command_str)
+	local success, result = tokenise(command_str)
+	if not success then return success, result end
+	return true, recombine(result)
+end
+
 
 ----- Test harness code -----
 -----------------------------
