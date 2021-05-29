@@ -76,18 +76,10 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 				end
 				
 				if action == "fill" then
-					local above_us = wea.table_filter(adjacent_heights,
-						function(height) return height > thisheight end
-					)
-					local above_us_next = wea.min(above_us)
-					heightmap[hi] = above_us_next
+					heightmap[hi] = heightmap[hi] + 1
 					filled = filled + 1
 				elseif action == "remove" then
-					local below_us = wea.table_filter(adjacent_heights,
-						function(height) return height < thisheight end
-					)
-					local below_us_next = wea.max(below_us)
-					heightmap[hi] = below_us_next
+					heightmap[hi] = heightmap[hi] - 1
 					removed = removed + 1
 				end
 			end
