@@ -40,29 +40,36 @@ minetest.register_chatcommand("/multi", {
 		local master_start_time = worldeditadditions.get_ms_time()
 		local times = {}
 		
-		-- Things start at 1, not 0 in Lua :-(
-		for command in explode(" /", string.sub(params_text, 2)) do
+		-- Tokenise the input into a list of commands
+		local success, commands = worldeditadditions.parse.tokenise_commands(params_text)
+		if not success then return success, commands end
+		
+		for i, command in ipairs(commands) do
+			print("[DEBUG] i", i, "command: '"..command.."'")
 			local start_time = worldeditadditions.get_ms_time()
+			
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
 			if not found then command_name = command end
-			command_name = worldeditadditions.trim(command_name)
+			-- Things start at 1, not 0 in Lua :-(
+			command_name = worldeditadditions.trim(command_name):sub(2) -- Strip the leading /
 			if not args then args = "" end
+			print("command_name", command_name)
 			
-			worldedit.player_notify(name, "#"..i..": /"..command)
+			worldedit.player_notify(name, "#"..i..": "..command)
 			
 			local cmd = minetest.chatcommands[command_name]
 			if not cmd then
 				return false, "Error: "..command_name.." isn't a valid command."
 			end
 			if not minetest.check_player_privs(name, cmd.privs) then
-				return false, "Your privileges are insufficient to execute /"..command_name..". Abort."
+				return false, "Your privileges are insufficient to execute "..command_name..". Abort."
 			end
 			-- print("[DEBUG] command_name", command_name, "cmd", dump2(cmd))
 			minetest.log("action", name.." runs "..command)
 			cmd.func(name, args)
 			
 			times[#times + 1] = (worldeditadditions.get_ms_time() - start_time)
-			i = i + 1
+			-- i = i + 1
 		end
 		
 		local total_time = (worldeditadditions.get_ms_time() - master_start_time)

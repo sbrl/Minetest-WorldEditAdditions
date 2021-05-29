@@ -476,6 +476,20 @@ While other server commands can be executed while a `//subdivide` is running, `/
 Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but does work with others too. Don't forget a space between commands!
 
 ```
+//multi //set dirt //shift x 10 //set glass
+```
+
+Since WorldEditAdditions v1.12, curly brace syntax has also been introduced to allow nesting of commands:
+
+```
+//multi //fixlight {//many 5 //bonemeal 3 100}
+```
+
+This syntax can also be nested arbitrarily in arbitrarily complex combinations, and can also be used multiple separate times in a single `//multi` invocation (if you find a bug, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new)), though do remember that only `//multi` supports parsing out this syntax (e.g. if you want to nest multiple commands in a `//many` that's inside a `//multi`, you'll need a sub `//multi` there).
+
+In addition, this also allows for including a double forward slash in the argument list for a command, should you need to do so (e.g. `//multi //example {//bar //baz} //example` will be executed as 3 commands: `/example`, then `/bar` with an argument of `//baz`, then finally `/example`).
+
+```
 //multi //1 //2 //shift z -10 //sphere 5 sand //shift z 20 //ellipsoid 5 3 5 ice
 //multi //1 //hollowtorus 30 5 stone //hollowtorus 20 3 dirt //torus 10 2 dirt_with_grass
 //multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //2 //sphere 8 air //shift down 1 //floodfill //reset

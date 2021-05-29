@@ -14,6 +14,7 @@ Note to self: See the bottom of this file for the release template text.
      - Caveat: Percentages are converted to a 1-in-N chance, but additionally that number is rounded down in some places
  - `//torus`, `//hollowtorus`: Add optional new axes
  - `//torus`: Add optional hollow keyword
+ - `//multi`: Add curly brace syntax for nesting command calls
 
 ### Bugfixes
  - `//overlay`: Don't place nodes above water
@@ -92,7 +93,7 @@ Updating depends on how you installed WorldEditAdditions.
 
  - UI in Minetest: There should be an update button for you to click in the mod menu
  - ContentDB: Download the latest update from [here](https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/)
- - Git: `cd` to the WorldEditAdditions directory and run `git pull`
+ - Git: `cd` to the WorldEditAdditions directory and run `git pull` (**Important:** Recently, WorldEditAdditions changed the default branch from `master` to `main`. If you're updating from before then, you'll need to re-clone the mod or else do some git-fu)
 
 After installing the update, don't forget to restart your client and / or server.
 
