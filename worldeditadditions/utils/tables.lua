@@ -75,7 +75,7 @@ function worldeditadditions.table_map(tbl, func)
 	local result = {}
 	for i,value in ipairs(tbl) do
 		local newval = func(value, i)
-		if newval ~= nil then table.insert(tbl, newval) end
+		if newval ~= nil then table.insert(result, newval) end
 	end
 	return result
 end
