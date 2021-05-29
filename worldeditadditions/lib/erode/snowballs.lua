@@ -86,7 +86,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		maxdiff = 0.4,
 		count = 25000
 	}
-	-- Apply the default settings
+	-- Apply the custom settings
 	worldeditadditions.table_apply(params_custom, params)
 	
 	-- print("[erode/snowballs] params: ")
