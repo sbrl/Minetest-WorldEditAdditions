@@ -14,7 +14,7 @@ Note to self: See the bottom of this file for the release template text.
      - Caveat: Percentages are converted to a 1-in-N chance, but additionally that number is rounded down in some places
  - `//torus`, `//hollowtorus`: Add optional new axes
  - `//torus`: Add optional hollow keyword
- - `//multi`: Add curly brace syntax for nesting command calls ([more information](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#multi-command_a-command_b-command_c-))
+ - `//multi`: Add curly brace syntax for nesting command calls ([more information](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#multi-command_a-command_b-command_c-))
 
 ### Bugfixes
  - `//overlay`: Don't place nodes above water
@@ -37,7 +37,7 @@ Note to self: See the bottom of this file for the release template text.
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
  - `//many` can now be used with commands with no arguments.
  - `//conv`, `//erode`, `//fillcaves`: Treat liquids as air
- - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#cloud-wand)
+ - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#cloud-wand)
  - `//conv`, `//erode`: Minor refactoring to improve code clarity
 
 
