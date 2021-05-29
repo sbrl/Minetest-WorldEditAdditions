@@ -77,6 +77,7 @@ function worldeditadditions.table_map(tbl, func)
 		local newval = func(value, i)
 		if newval ~= nil then table.insert(tbl, newval) end
 	end
+	return result
 end
 
 --- Filters the items in the given table using the given function.
