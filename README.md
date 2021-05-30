@@ -48,7 +48,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
  - [`//fillcaves [<node_name>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#fillcaves-node_name)
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#convolve-kernel-widthheight-sigma)
- - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#erode-snowballs-river-key_1-value_1-key_2-value_2-) **experimental**
+ - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#erode-snowballsriver-key_1-value_1-key_2-value_2-) **experimental**
 
 ### Flora
  - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#bonemeal-strength-chance)
