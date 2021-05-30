@@ -462,7 +462,7 @@ Ever been annoyed by small 1 wide holes or thin pillars all over the place? This
 
 Parameter			| Type		| Default Value		| Description
 --------------------|-----------|-------------------|--------------------------
-steps				| `integer`	| 1					| The number of rounds or passes of the algorithm to run. Useful since if you have a 1x3 hole for instance, it will take at least 2 steps to fill it in - and more if it's deeper than 1 node.
+steps				| `integer`	| 1					| The number of rounds or passes of the algorithm to run. Useful if you have a 1x3 hole for instance, it will take at least 2 steps to fill it in - and more if it's deeper than 1 node.
 lower_sides			| `string`	| 4,3				| Comma separated list of numbers. Columns with this many sides lower than it will be lowered in height by 1 node.
 raise_sides			| `string`	| 4,3				| Comma separated list of numbers. Columns with this many sides higher than it will be raised in height by 1 node.
 doraise				| `boolean`	| true				| Whether to raise columns in height. If false, then no columns will be raised in height even if they are eligible to be so according to `raise_sides`.
