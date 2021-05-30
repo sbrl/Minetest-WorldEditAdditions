@@ -53,6 +53,17 @@ function worldeditadditions.vector.ceil(v)
 	if v.z then v.z = math.ceil(v.z) end
 end
 
+--- Sets the values in a vector to their absolute values.
+-- Warning: This MUTATES the given vector!
+-- @param	v	Vector	The vector to operate on
+function worldeditadditions.vector.abs(v)
+	if v.x then v.x = math.abs(v.x) end
+	-- Some vectors are 2d, but on the x / z axes
+	if v.y then v.y = math.abs(v.y) end
+	-- Some vectors are 2d
+	if v.z then v.z = math.abs(v.z) end
+end
+
 --- Determines if the target point is contained within the defined worldedit region.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
