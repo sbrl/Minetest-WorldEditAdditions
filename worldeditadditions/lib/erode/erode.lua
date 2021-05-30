@@ -1,6 +1,7 @@
 worldeditadditions.erode = {}
 
 dofile(worldeditadditions.modpath.."/lib/erode/snowballs.lua")
+dofile(worldeditadditions.modpath.."/lib/erode/river.lua")
 
 
 function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
