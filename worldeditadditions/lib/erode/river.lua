@@ -29,8 +29,8 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 	local filled = 0
 	local removed = 0
 	for i=1,params.steps do
-		print("[DEBUG:river] step ", i)
-		wea.format.array_2d(heightmap, heightmap_size.x)
+		-- print("[DEBUG:river] step ", i)
+		-- wea.format.array_2d(heightmap, heightmap_size.x)
 		local time_start = wea.get_ms_time()
 		
 		-- Store up changes to make and make them at the end of the step
@@ -42,7 +42,7 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 			for x = heightmap_size.x - 1, 0, -1 do
 				local hi = z*heightmap_size.x + x
 				local thisheight = heightmap[hi]
-				print("[DEBUG:river] z", z, "x", x, "thisheight", thisheight)
+				-- print("[DEBUG:river] z", z, "x", x, "thisheight", thisheight)
 				
 				local height_up = heightmap[hi]
 				local height_down = heightmap[hi]
@@ -96,7 +96,7 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 					end
 				end
 				
-				print("[DEBUG:river] sides_higher", sides_higher, "sides_lower", sides_lower, "action", action)
+				
 				if action == "fill" and params.doraise then
 					table.insert(fill, hi)
 					filled = filled + 1
@@ -104,7 +104,8 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 					table.insert(remove, hi)
 					removed = removed + 1
 				end
-				wea.format.array_2d(heightmap, heightmap_size.x)
+				-- print("[DEBUG:river] sides_higher", sides_higher, "sides_lower", sides_lower, "action", action)
+				-- wea.format.array_2d(heightmap, heightmap_size.x)
 			end
 		end
 		
