@@ -3,35 +3,39 @@
 -- █████   ██      ██      ██ ██████  ███████ ██    ██ ██ ██   ██
 -- ██      ██      ██      ██ ██           ██ ██    ██ ██ ██   ██
 -- ███████ ███████ ███████ ██ ██      ███████  ██████  ██ ██████
-
+local wea = worldeditadditions
 local function parse_params_ellipsoid(params_text)
-	local found, _, radius_x, radius_y, radius_z, replace_node = params_text:find("([0-9]+)%s+([0-9]+)%s+([0-9]+)%s+([a-z:_\\-]+)")
+	local parts = worldeditadditions.split(params_text, "%s+", false)
+	-- Test: ('1 2 3 stone h')
+	-- Test: ('1 gill 3 stone h')
+	-- /lua a = worldeditadditions.split(" ", "%s+", false)
+	-- /lua worldeditadditions.split(" ", "%s+", false)
 	
-	if found == nil then
-		return false, "Invalid syntax"
+	if #parts < 4 then
+		return false, "Error: Not enough arguments. Expected \"<rx> <ry> <rz> <replace_node> [h[ollow]]\"."
 	end
 	
-	local radius = {
-		x = tonumber(radius_x),
-		y = tonumber(radius_y),
-		z = tonumber(radius_z)
-	}
+	local radius = minetest.string_to_pos(parts[1].." "..parts[2].." "..parts[3])
+	if not radius then
+		return false, "Error: 3 radii must be specified."
+	end
+	wea.vector.abs(radius)
 	
-	replace_node = worldedit.normalize_nodename(replace_node)
+	local replace_node = worldedit.normalize_nodename(parts[4])
 	if not replace_node then
-		worldedit.player_notify(name, "Error: Invalid node name.")
-		return false
-	end
-	if not radius.x or not radius.y or not radius.z then
-		worldedit.player_notify(name, "Error: Invalid radius(es).")
-		return false
+		return false, "Error: Invalid replace_node specified."
 	end
 	
-	return true, replace_node, radius
+	local hollow = false
+	if parts[5] == "hollow" or parts[5] == "h" then
+		hollow = true
+	end
+	
+	return true, replace_node, radius, hollow
 end
 
 worldedit.register_command("ellipsoid", {
-	params = "<rx> <ry> <rz> <replace_node>",
+	params = "<rx> <ry> <rz> <replace_node> [h[ollow]]",
 	description = "Creates a 3D ellipsoid with a radius of (rx, ry, rz) at pos1, filled with <replace_node>.",
 	privs = { worldedit = true },
 	require_pos = 1,
@@ -42,9 +46,9 @@ worldedit.register_command("ellipsoid", {
 	nodes_needed = function(name, target_node, radius)
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
 	end,
-	func = function(name, target_node, radius)
+	func = function(name, target_node, radius, hollow)
 		local start_time = worldeditadditions.get_ms_time()
-		local replaced = worldeditadditions.ellipsoid(worldedit.pos1[name], radius, target_node, false)
+		local replaced = worldeditadditions.ellipsoid(worldedit.pos1[name], radius, target_node, hollow)
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //ellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
