@@ -42,15 +42,12 @@ function worldeditadditions.gsplit(text, pattern, plain)
 end
 
 
--- split: split a string into substrings separated by a pattern.
---
--- Parameters:
--- text (string)    - the string to iterate over
--- pattern (string) - the separator pattern
--- plain (boolean)  - if true (or truthy), pattern is interpreted as a plain
---                    string, not a Lua pattern
---
--- Returns: table (a sequence table containing the substrings)
+-- Split a string into substrings separated by a pattern.
+-- @param	text	string	The string to iterate over
+-- @param	pattern	string	The separator pattern
+-- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
+-- 							plain string, not a Lua pattern
+-- @returns	table	A sequence table containing the substrings
 function worldeditadditions.split(text, pattern, plain)
 	local ret = {}
 	for match in worldeditadditions.gsplit(text, pattern, plain) do

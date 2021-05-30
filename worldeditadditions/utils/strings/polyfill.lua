@@ -22,8 +22,8 @@ end
 -- @param	str		string	The string to operate on
 -- @param	start	number	The start string to look for
 -- @returns	bool	Whether start is present at the beginning of str
-function worldeditadditions.str_starts(str,start)
-   return string.sub(str,1,string.len(start))==start
+function worldeditadditions.str_starts(str, start)
+   return string.sub(str, 1, string.len(start)) == start
 end
 
 --- Trims whitespace from a string from the beginning and the end.

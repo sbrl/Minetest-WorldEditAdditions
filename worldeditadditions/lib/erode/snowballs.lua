@@ -86,7 +86,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		maxdiff = 0.4,
 		count = 25000
 	}
-	-- Apply the default settings
+	-- Apply the custom settings
 	worldeditadditions.table_apply(params_custom, params)
 	
 	-- print("[erode/snowballs] params: ")
@@ -132,7 +132,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 	if not params.noconv then
 		local success, matrix = worldeditadditions.get_conv_kernel("gaussian", 3, 3)
 		if not success then return success, matrix end
-		matrix_size = {} matrix_size[0] = 3 matrix_size[1] = 3
+		local matrix_size = {} matrix_size[0] = 3 matrix_size[1] = 3
 		worldeditadditions.conv.convolve(
 			heightmap, heightmap_size,
 			matrix,

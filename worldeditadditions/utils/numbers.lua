@@ -19,11 +19,42 @@ function worldeditadditions.sum(list)
 		return sum
 end
 
-
+--- Calculates the mean of all the numbers in the given list.
+-- @param	list	number[]	The list (table) of numbers to calculate the mean for.
+-- @returns	The mean of the numbers in the given table.
 function worldeditadditions.average(list)
 	if #list == 0 then return 0 end
 	return worldeditadditions.sum(list) / #list
 end
+
+--- Finds the minimum value in the given list.
+-- @param	list	number[]	The list (table) of numbers to find the minimum value of.
+-- @returns	number	The minimum value in the given list.
+function worldeditadditions.min(list)
+	if #list == 0 then return nil end
+	local min = nil
+	for i,value in ipairs(list) do
+		if min == nil or min > value then
+			min = value
+		end
+	end
+	return min
+end
+
+--- Finds the maximum value in the given list.
+-- @param	list	number[]	The list (table) of numbers to find the maximum value of.
+-- @returns	number	The maximum value in the given list.
+function worldeditadditions.max(list)
+	if #list == 0 then return nil end
+	local max = nil
+	for i,value in ipairs(list) do
+		if max == nil or max < value then
+			max = value
+		end
+	end
+	return max
+end
+
 
 --- Returns the minetest.get_us_time() in ms
 -- @return	float

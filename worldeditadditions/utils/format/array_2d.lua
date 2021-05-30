@@ -3,7 +3,7 @@
 -- @param	tbl		number[]	The ZERO-indexed list of numbers
 -- @param	width	number		The width of 2D array.
 function worldeditadditions.format.array_2d(tbl, width)
-	print("==== count: "..#tbl..", width:"..width.." ====")
+	print("==== count: "..(#tbl+1)..", width:"..width.." ====")
 	local display_width = 1
 	for _i,value in pairs(tbl) do
 		display_width = math.max(display_width, #tostring(value))

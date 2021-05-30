@@ -5,8 +5,6 @@ Note to self: See the bottom of this file for the release template text.
 
 ## v1.12: The selection tools update (unreleased)
  - Add `//spush`, `//spop`, and `//sstack`
- - `//overlay`: Don't place nodes above water
- - `//multi`: Improve resilience by handling some edge cases
  - Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
  - Add `//scloud` (_select point cloud_), `//scentre` (_select centre node(s)_), `//srel` (_select relative_)  - thanks, @VorTechnix!
  - Significantly refactored backend utility functions (more to come in future updates)
@@ -16,7 +14,14 @@ Note to self: See the bottom of this file for the release template text.
      - Caveat: Percentages are converted to a 1-in-N chance, but additionally that number is rounded down in some places
  - `//torus`, `//hollowtorus`: Add optional new axes
  - `//torus`: Add optional hollow keyword
- - `//layers`: Fix crash duee to outdated debug code
+ - `//multi`: Add curly brace syntax for nesting command calls ([more information](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#multi-command_a-command_b-command_c-))
+ - `//erode`: Add new `river` erosion algorithm for filling in potholes and removing pillars
+
+### Bugfixes
+ - `//overlay`: Don't place nodes above water
+ - `//multi`: Improve resilience by handling some edge cases
+ - `//layers`: Fix crash due to outdated debug code
+ - `//erode`/snowballs: Fix assignment to undeclared variable
 
 
 ## v1.11: The big data update (25th January 2021)
@@ -33,7 +38,7 @@ Note to self: See the bottom of this file for the release template text.
  - Bugfix: Fix obscure crash in calls to `human_size` ("unknown" will now be returned if passed junk)
  - `//many` can now be used with commands with no arguments.
  - `//conv`, `//erode`, `//fillcaves`: Treat liquids as air
- - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/master/Chat-Command-Reference.md#cloud-wand)
+ - Add new [cloud wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#cloud-wand)
  - `//conv`, `//erode`: Minor refactoring to improve code clarity
 
 
@@ -89,7 +94,7 @@ Updating depends on how you installed WorldEditAdditions.
 
  - UI in Minetest: There should be an update button for you to click in the mod menu
  - ContentDB: Download the latest update from [here](https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/)
- - Git: `cd` to the WorldEditAdditions directory and run `git pull`
+ - Git: `cd` to the WorldEditAdditions directory and run `git pull` (**Important:** Recently, WorldEditAdditions changed the default branch from `master` to `main`. If you're updating from before then, you'll need to re-clone the mod or else do some git-fu)
 
 After installing the update, don't forget to restart your client and / or server.
 

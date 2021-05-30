@@ -65,3 +65,53 @@ function worldeditadditions.table_tostring(tbl, sep, new_line)
     end
     return ret:concat("")
 end
+
+--- Executes the given function on every item in the given table.
+-- Ignores return values that are nil and doesn't insert them into the table.
+-- @param	tbl		table		The table to operate on.
+-- @param	func	function<any>:any|nil	The function to execute on every item in the table.
+-- @returns	table	A new table containing the return values of the function.
+function worldeditadditions.table_map(tbl, func)
+	local result = {}
+	for i,value in ipairs(tbl) do
+		local newval = func(value, i)
+		if newval ~= nil then table.insert(result, newval) end
+	end
+	return result
+end
+
+--- Filters the items in the given table using the given function.
+-- The function is executed for each item in the list. If it returns true, the
+-- item is kept. If it returns false, the item is discarded.
+-- @param	tbl		table		The table of values to filter.
+-- @param	func	function<any>:bool	The filter function to execute - should return a boolean value indicating whether the item provided as the first argument should be kept
+-- @returns	table	A new table containing the values that the given function returned true for.
+function worldeditadditions.table_filter(tbl, func)
+	local result = {}
+	for i,value in ipairs(tbl) do
+		if func(value) then
+			table.insert(result, value)
+		end
+	end
+	return result
+end
+
+--- Builds a new table with the elements of the given table appearing at most once.
+-- @param	tbl		table	The table of values to make unique.
+-- @returns	table	A new table containing the values of the given table appearing at most once.
+function worldeditadditions.table_unique(tbl)
+	local newtbl = {}
+	for i,value in ipairs(tbl) do
+		local seen = false
+		for j,seenvalue in ipairs(newtbl) do
+			if value == seenvalue then
+				seen = true
+				break
+			end
+		end
+		if not seen then
+			table.insert(newtbl, value)
+		end
+	end
+	return newtbl
+end
