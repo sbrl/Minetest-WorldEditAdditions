@@ -15,6 +15,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//torus`, `//hollowtorus`: Add optional new axes
  - `//torus`: Add optional hollow keyword
  - `//multi`: Add curly brace syntax for nesting command calls ([more information](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#multi-command_a-command_b-command_c-))
+ - `//erode`: Add new `river` erosion algorithm for filling in potholes and removing pillars
 
 ### Bugfixes
  - `//overlay`: Don't place nodes above water

@@ -408,14 +408,17 @@ The sigma value is only applicable to the `gaussian` kernel, and can be thought 
 //convolve gaussian 5 0.2
 ```
 
-## `//erode [<snowballs|...> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+## `//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
 Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
+
+Works best if you run `//fillcaves` first, or otherwise have no air nodes below the top non-air node in each column.
 
 Currently implemented algorithms:
 
 Algorithm	| Mode	| Description
 ------------|-------|-------------------
 `snowballs`	| 2D	| The default - based on [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html). Simulates snowballs rolling across the terrain, eroding & depositing material. Then runs a 3x3 gaussian kernel over the result (i.e. like the `//conv` / `//smoothadv` command).
+`river`     | 2D    | Fills in potholes and lowers pillars using a cellular automata-like algorithm that analyses the height of neighouring columns.
 
 Usage examples:
 
@@ -431,7 +434,7 @@ Each of the algorithms above have 1 or more parameters that they support. These 
 Based on the algorithm detailed in [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html) ([direct link to the source code](https://github.com/jobtalle/HydraulicErosion/blob/master/js/archipelago/island/terrain/erosionHydraulic.js)), devised by [Job Talle](https://jobtalle.com/).
 
 Parameter			| Type		| Default Value		| Description
---------------------|-----------|-------------------|------------------------
+--------------------|-----------|-------------------|--------------------------
 rate_deposit		| `float`	| 0.03				| The rate at which snowballs will deposit material
 rate_erosion		| `float`	| 0.04				| The rate at which snowballs will erode material
 friction			| `float`	| 0.07				| More friction slows snowballs down more.
@@ -444,7 +447,33 @@ maxdiff				| `float`	| 0.4				| The maximum difference in height (between 0 and 
 count				| `float`	| 25000				| The number of snowballs to simulate.
 noconv				| any		| n/a				| When set to any value, disables to automatic 3x3 gaussian convolution.
 
+Example invocations:
+
+```
+//erode
+//erode snowballs
+//erode snowballs count 50000
+```
+
 If you find any good combinations of these parameters, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or a PR!) and let me know! I'll include good combinations here, and possibly add a presets feature too.
+
+### Algorithm: `river`
+Ever been annoyed by small 1 wide holes or thin pillars all over the place? This command is for you! Does not operate on the very edge of the defined region, because the algorithm can't see the neighbours of those columns.
+
+Parameter			| Type		| Default Value		| Description
+--------------------|-----------|-------------------|--------------------------
+steps				| `integer`	| 1					| The number of rounds or passes of the algorithm to run. Useful since if you have a 1x3 hole for instance, it will take at least 2 steps to fill it in - and more if it's deeper than 1 node.
+lower_sides			| `string`	| 4,3				| Comma separated list of numbers. Columns with this many sides lower than it will be lowered in height by 1 node.
+raise_sides			| `string`	| 4,3				| Comma separated list of numbers. Columns with this many sides higher than it will be raised in height by 1 node.
+doraise				| `boolean`	| true				| Whether to raise columns in height. If false, then no columns will be raised in height even if they are eligible to be so according to `raise_sides`.
+dolower				| `boolean`	| true				| Whether to lower columns in height. If false, then no columns will be lowered in height even if they are eligible to be so according to `lower_sides`.
+
+Example invocations:
+
+```
+//erode river
+//erode river steps 10
+```
 
 
 ## `//count`

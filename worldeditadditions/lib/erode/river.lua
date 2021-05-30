@@ -14,16 +14,16 @@ end
 function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_size, region_height, params_custom)
 	local params = {
 		steps = 1,				-- Number of rounds/passes of the algorithm to run
-		remove_sides = "4,3",	-- Cells with this many adjacent horizontal neighbours that are lower than the current pixel will be removed
-		fill_sides = "4,3",		-- Cells with this many adjacect horizontal neighbours that are higher than the current pixel will be filled in
+		lower_sides = "4,3",	-- Cells with this many adjacent horizontal neighbours that are lower than the current pixel will be removed
+		raise_sides = "4,3",		-- Cells with this many adjacect horizontal neighbours that are higher than the current pixel will be filled in
 		doraise = true,			-- Whether to do raise operations or not
 		dolower = true			-- Whether to do lower operations or not
 	}
 	-- Apply the custom settings
 	wea.table_apply(params_custom, params)
 	
-	params.remove_sides = parse_sides_list(params.remove_sides)
-	params.fill_sides = parse_sides_list(params.fill_sides)
+	params.lower_sides = parse_sides_list(params.lower_sides)
+	params.raise_sides = parse_sides_list(params.raise_sides)
 	
 	local timings = {}
 	local filled = 0
@@ -80,14 +80,14 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 				local action = "none"
 				if not isedge then 
 					if sides_higher > sides_lower then
-						for i,sidecount in ipairs(params.fill_sides) do
+						for i,sidecount in ipairs(params.raise_sides) do
 							if sidecount == sides_higher then
 								action = "fill"
 								break
 							end
 						end
 					else
-						for i,sidecount in ipairs(params.remove_sides) do
+						for i,sidecount in ipairs(params.lower_sides) do
 							if sidecount == sides_lower then
 								action = "remove"
 								break
