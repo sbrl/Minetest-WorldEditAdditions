@@ -24,8 +24,7 @@ worldedit.register_command("floodfill", {
 		replace_node = worldedit.normalize_nodename(replace_node)
 		
 		if not replace_node then
-			worldedit.player_notify(name, "Error: Invalid node name.")
-			return false
+			return false, "Error: Invalid node name."
 		end
 		
 		return true, replace_node, radius

@@ -22,6 +22,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//multi`: Improve resilience by handling some edge cases
  - `//layers`: Fix crash due to outdated debug code
  - `//erode`/snowballs: Fix assignment to undeclared variable
+ - `//floodfill`: Fix error handling
 
 
 ## v1.11: The big data update (25th January 2021)
