@@ -109,13 +109,15 @@ Note that the *entire* cave you want filling must be selected, as `//fillcaves` 
 //fillcaves brick
 ```
 
-## `//ellipsoid <rx> <ry> <rz> <node_name>`
+## `//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`
 Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
 
 ```
 //ellipsoid 10 5 15 ice
 //ellipsoid 3 5 10 dirt
 //ellipsoid 20 10 40 air
+//ellipsoid 14 5 8 steelblock h
+//ellipsoid 7 4 7 papyrus hollow
 ```
 
 ## `//hollowellipsoid <rx> <ry> <rz> <node_name>`
