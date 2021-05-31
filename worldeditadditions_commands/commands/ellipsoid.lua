@@ -5,11 +5,7 @@
 -- ███████ ███████ ███████ ██ ██      ███████  ██████  ██ ██████
 local wea = worldeditadditions
 local function parse_params_ellipsoid(params_text)
-	local parts = worldeditadditions.split(params_text, "%s+", false)
-	-- Test: ('1 2 3 stone h')
-	-- Test: ('1 gill 3 stone h')
-	-- /lua a = worldeditadditions.split(" ", "%s+", false)
-	-- /lua worldeditadditions.split(" ", "%s+", false)
+	local parts = wea.split(params_text, "%s+", false)
 	
 	if #parts < 4 then
 		return false, "Error: Not enough arguments. Expected \"<rx> <ry> <rz> <replace_node> [h[ollow]]\"."
