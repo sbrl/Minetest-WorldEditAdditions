@@ -5,7 +5,7 @@ tags: navigable
 date: 2000-01-01
 ---
 
-<section class="bigbox" style="--bg: url(/images/banner-main.jpeg)">
+<section class="bigbox" style="--bg: url({% image-url "images/banner-main.jpeg" %})">
 	<h1>WorldEditAdditions</h1>
 	<p><em>Extra tools and commands to extend <a href="https://github.com/Uberi/Minetest-WorldEdit">WorldEdit</a> for <a href="https://www.minetest.net/">Minetest</a></em></p>
 	<p>If you can dream of it, it probably belongs here!</p>
@@ -13,7 +13,8 @@ date: 2000-01-01
 
 <section class="features-large">
 	<figure>
-		<img src="/images/maze2d-alt.png" alt="A green 2D hedge maze, made with the //maze command" />
+		{% image "images/maze2d-alt.png", "A green 2D hedge maze, made with the //maze command" %}
+		<!-- <img src="/images/maze2d-alt.png" alt="A green 2D hedge maze, made with the //maze command" /> -->
 		<figcaption>
 			<p>Use <code>//maze</code> and <code>//maze3d</code> to generate customisable mazes in 2 or 3 dimensions.</p>
 			<p>Customise the path sizing for additional artistic control.</p>
@@ -21,7 +22,8 @@ date: 2000-01-01
 	</figure>
 	
 	<figure>
-		<img src="/images/forest.png" alt="A forest of orange and lemon trees from the cooltrees mod, along with some bushes from Minetest Game." />
+		{% image "images/forest.png", "A forest of orange and lemon trees from the cooltrees mod, along with some bushes from Minetest Game." %}
+		<!-- <img src="/images/forest.png" alt="A forest of orange and lemon trees from the cooltrees mod, along with some bushes from Minetest Game." /> -->
 		<figcaption>
 			<p>Save time by creating instant forests with <code>//forest</code>.</p>
 			<p>Artibrary mixes of saplings are supported too as a weighted list.</p>
@@ -29,7 +31,8 @@ date: 2000-01-01
 	</figure>
 	
 	<figure>
-		<img src="/images/conv-layers.png" alt="A small mountain smoothed with //smoothadv and topped with snow with //overlay" />
+		{% image "images/conv-layers.png", "A small mountain smoothed with //smoothadv and topped with snow with //overlay" %}
+		<!-- <img src="/images/conv-layers.png" alt="A small mountain smoothed with //smoothadv and topped with snow with //overlay" /> -->
 		<figcaption>
 			<p>Unlock a continuously growing library of commands, such as <code>//smoothadv</code> for easy terrain smoothing, and <code>//overlay</code> for overlaying a node on top of terrain.</p>
 			<p>Many more commands are waiting to be discovered, including <code>//torus</code>, <code>//bonemeal</code>, and <code>//scale</code>.</p>
@@ -37,6 +40,7 @@ date: 2000-01-01
 	</figure>
 	
 	<figure>
+		{% image "images/torus-bonemeal.png", "A dirt torus with a grassy top, and a meadow of grass/flowers. Demonstrates //layers and //bonemeal. Doesn't have much to do with the sentences below - I just thought it looked nice as meta commands are difficult to find a good picture for." %}
 		<img src="/images/torus-bonemeal.png" alt="A dirt torus with a grassy top, and a meadow of grass/flowers. Demonstrates //layers and //bonemeal. Doesn't have much to do with the sentences below - I just thought it looked nice as meta commands are difficult to find a good picture for." />
 		<figcaption>
 			<p>Powerful meta commands such as <code>//multi</code> for executing multiple commands at once and <code>//subdivide</code> for running commands on areas of virtually unlimited size enable convenience and enhance flexibility.</p>
@@ -44,7 +48,12 @@ date: 2000-01-01
 	</figure>
 </section>
 
-
-
-
 <!-- Potentially we might want some inspiration from https://codepen.io/emared/pen/gWGBLR here -->
+<section class="cssbox-gallery">
+	{% cssbox "images/gallery-a.jpeg" %}
+		A scene demonstrating <code>//replacemix</code>, <code>//ellipsoid</code>, <code>//layers</code>, <code>smoothadv</code> (aka <code>convolve</code> and <code>conv</code>), and <code>//floodfill</code> - all of which are provided by WorldEditAdditions.
+	{% endcssbox %}
+	{% cssbox "images/gallery-b.jpeg" %}
+		The inside of a 3d maze made with <code>//maze3d</code>. Lighting was placed manually to improve screenshot quality.
+	{% endcssbox %}
+</section>

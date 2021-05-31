@@ -103,6 +103,7 @@ iframe, object, embed, img, table
 {
 	max-width: 100%;
 }
+picture img { height: initial; }
 
 /* Turn the user's cursor into a hand when over things they can click */
 button, summary
@@ -217,3 +218,8 @@ input[type=text], input[type=number], textarea
 /* .features-large figure img {
 	max-width: 12em;
 } */
+
+
+.cssgallery {
+	display: flex;
+}
