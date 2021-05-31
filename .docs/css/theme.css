@@ -219,7 +219,6 @@ input[type=text], input[type=number], textarea
 	max-width: 12em;
 } */
 
-
-.cssgallery {
+.cssbox-gallery {
 	display: flex;
 }
