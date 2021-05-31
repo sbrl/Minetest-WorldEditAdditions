@@ -449,7 +449,7 @@ maxdiff				| `float`	| 0.4				| The maximum difference in height (between 0 and 
 count				| `float`	| 25000				| The number of snowballs to simulate.
 noconv				| any		| n/a				| When set to any value, disables to automatic 3x3 gaussian convolution.
 
-Example invocations:
+Usage examples:
 
 ```
 //erode
@@ -470,7 +470,7 @@ raise_sides			| `string`	| 4,3				| Comma separated list of numbers. Columns wit
 doraise				| `boolean`	| true				| Whether to raise columns in height. If false, then no columns will be raised in height even if they are eligible to be so according to `raise_sides`.
 dolower				| `boolean`	| true				| Whether to lower columns in height. If false, then no columns will be lowered in height even if they are eligible to be so according to `lower_sides`.
 
-Example invocations:
+Usage examples:
 
 ```
 //erode river
@@ -584,14 +584,14 @@ Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punc
 ```
 
 ## `//scentre`
-Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the current selection area. 1, 2, 4 or 8 nodes may be selected depending on what parts of the original selection are even in distance. Implementation by @VorTechnix.
+Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the current selection area. 1, 2, 4 or 8 nodes may be selected depending on what parts of the original selection are even in distance. Implementation thanks to @VorTechnix.
 
 ```
 //scentre
 ```
 
 ## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
-Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation by @VorTechnix.
+Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```
 //srel front 5
