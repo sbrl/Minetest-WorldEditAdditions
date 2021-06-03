@@ -1,3 +1,9 @@
+-- ██████   █████  ██████  ███████ ███████
+-- ██   ██ ██   ██ ██   ██ ██      ██
+-- ██████  ███████ ██████  ███████ █████
+-- ██      ██   ██ ██   ██      ██ ██
+-- ██      ██   ██ ██   ██ ███████ ███████
+
 worldeditadditions.parse = {}
 
 dofile(worldeditadditions.modpath.."/utils/parse/chance.lua")
