@@ -55,3 +55,23 @@ function worldeditadditions.split(text, pattern, plain)
 	end
 	return ret
 end
+
+-- Split into table of characters.
+-- @param	text	string	The string to iterate over
+-- @param	s	bool	Sort characters
+-- @param	d	bool	Remove duplicate characters
+-- @returns	table	A sequence table containing the substrings
+function worldeditadditions.tochars(text,s,d)
+--function tochars(text,s,d)
+	t, set = {}, {}
+	if d then
+		text:gsub(".",function(c) set[c] = true end)
+		for k,v in pairs(set) do table.insert(t,k) end
+	else
+		text:gsub(".",function(c) table.insert(t,c) end)
+	end
+	
+	if s then table.sort(t) end
+	
+	return t
+end
