@@ -9,6 +9,7 @@
 -- extensive collection of functions :P
 
 -- TODO: Refactor into its own worldeditadditions.tables namespace.
+worldeditadditions.tables = {}
 
 dofile(worldeditadditions.modpath.."/utils/tables/sets.lua")
 dofile(worldeditadditions.modpath.."/utils/tables/shallowcopy.lua")
