@@ -12,11 +12,11 @@ dofile(worldeditadditions.modpath.."/utils/vector.lua")
 dofile(worldeditadditions.modpath.."/utils/strings/init.lua")
 dofile(worldeditadditions.modpath.."/utils/format/init.lua")
 dofile(worldeditadditions.modpath.."/utils/parse/init.lua")
+dofile(worldeditadditions.modpath.."/utils/tables/init.lua")
 
 dofile(worldeditadditions.modpath.."/utils/numbers.lua")
 dofile(worldeditadditions.modpath.."/utils/nodes.lua")
 dofile(worldeditadditions.modpath.."/utils/node_identification.lua")
-dofile(worldeditadditions.modpath.."/utils/tables.lua")
 dofile(worldeditadditions.modpath.."/utils/terrain.lua")
 dofile(worldeditadditions.modpath.."/utils/raycast_adv.lua") -- For the farwand
 dofile(worldeditadditions.modpath.."/utils/axes.lua")
