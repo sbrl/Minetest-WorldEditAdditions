@@ -27,6 +27,7 @@ function worldeditadditions.noise2d(pos1, pos2, noise_params)
 	
 	local perlin_map = PerlinNoiseMap(noise_params, heightmap_size)
 	
+	-- TODO: apply the perlin noise map here
 	
 	local stats = { added = 0, removed = 0 }
 	

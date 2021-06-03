@@ -1,0 +1,224 @@
+/* Base CSS */
+
+/*
+ * This CSS file contains (for me) logical style defaults that are easy to read.
+ * 
+ * This file is quite often used as a starting point for other projects.
+ * 
+ * Todo:
+	* <button>
+	* <inputs>
+	* <progress>
+	* <meter>
+ */
+
+:root {
+	--bg-main: #8ABEF6;
+	--bg-bright: #38871e;
+	--bg-alt: #3F57B4;
+	--bg-transcluscent-slight: rgba(255, 255, 255, 0.1);
+	--bg-transcluscent: rgba(255, 255, 255, 0.8);
+	
+	--text-main: #3F57B4;
+	--text-bright: #efefef;
+	--text-alt: #38871e;
+	
+	--highlight: hsl(353, 100%, 36%);
+}
+
+/* @media (prefers-color-scheme: dark) {
+	:root {
+		--bg-main: #232323;
+		--bg-bright: black;
+		--bg-transcluscent: rgba(50, 50, 50, 0.5);
+		
+		--text-main: #f3f3f3;
+	}
+} */
+
+/* rem is relative to the html element, and em is relative to the current element. */
+html { font-size: 100%; }
+
+body
+{
+	margin: 0;
+	font-family: sans-serif; /* Serif is awful :( */
+	
+	background: var(--bg-main); /* Don't forget to update the @page one too for paged media */
+	color: var(--text-main);
+}
+
+title { string-set: page-title content(text); }
+
+/* Special tweaks for paged media (e.g. PDFs) */
+@page {
+	font-family: sans-serif;
+	background: var(--bg-main); /* Set the background colour to cover the whole page */
+	
+	@top-right {
+		content: "By Starbeamrainbowlabs";
+		opacity: 0.6;
+	}
+	@bottom-right {
+		content: "Page " counter(page) " of " counter(pages);
+		opacity: 0.6;
+	}
+}
+
+nav {
+	background: var(--bg-bright);
+	display: flex;
+	align-items: baseline;
+	font-size: 1.1em;
+	margin: 0;
+}
+nav h1 {
+	background: var(--bg-alt);
+	margin: 0;
+	padding: 0.5em;
+	font-size: 1.2em;
+	color: var(--text-bright);
+}
+nav ul {
+	flex: 1;
+	list-style-type: none;
+	margin: 0; padding: 0;
+	display: flex;
+	justify-content: space-evenly;
+}
+nav ul li {
+	background: var(--bg-transcluscent-slight);
+}
+nav a {
+	display: inline-block;
+	padding: 1.2em 3em;
+	text-decoration: none;
+	font-weight: bold;
+	color: var(--text-bright);
+}
+
+
+/* A small tweak to things more responsive */
+iframe, object, embed, img, table
+{
+	max-width: 100%;
+}
+picture img { height: initial; }
+
+/* Turn the user's cursor into a hand when over things they can click */
+button, summary
+{
+	cursor: pointer;
+}
+
+th, td
+{
+	margin: 4px 6px;
+	padding: 4px 6px;
+}
+
+a { font-weight: bold; }
+/* a:not(.nav) { color: hsl(208, 67%, 40%); }
+a:not(.nav):hover { color: hsl(214, 67%, 50%); }
+a:not(.nav):active, a:focus { color: hsl(214, 87%, 60%); } */
+a:not(.nav):visited { color: hsl(240, 77%, 60%); }
+
+pre { page-break-inside: avoid; break-inside: avoid; }
+pre, code {
+	white-space: pre-wrap;
+	-moz-tab-size: 4;
+	tab-size: 4;
+}
+
+
+/* todo add the rest of the textbox like inputs here */
+input[type=text], input[type=number], textarea
+{
+	margin: 3px 5px;
+	padding: 5px 8px;
+	
+	background: var(--bg-bright);
+	border: 0;
+	border-radius: 5px;
+}
+
+
+/* Utility / layout aids */
+.float.left		{ float: left;	}
+.float.right	{ float: right;	}
+
+.flex	{ display: flex; }
+.flex-1	{ flex: 1;	}
+.flex-2	{ flex: 2;	}
+.flex-3	{ flex: 3;	}
+.flex-4	{ flex: 4;	}
+.flex-5	{ flex: 5;	}
+.flex-6	{ flex: 6;	}
+
+.small-spacing	{ margin: 0.25em 0.35em;	padding: 0.25em 0.35em;	}
+.med-spacing	{ margin: 0.45em 0.65em;	padding: 0.45em 0.65em;	}
+.high-spacing	{ margin: 1em 1.25em;		padding: 1em 1.25em;	}
+
+.text-left		{ text-align: left;		}
+.text-centre	{ text-align: center;	}
+.text-right		{ text-align: right;	}
+
+.small-text		{ font-size: 0.8rem;	}
+.medium-text	{ font-size: 1rem;		}
+.large-text		{ font-size: 1.3rem;	}
+
+.bold-text		{ font-weight: bolder;	}
+
+.block			{ display: block;			}
+.inline			{ display: inline;			}
+.inline.block	{ display: inline-block;	}
+
+.invisilink		{ text-decoration: none; color: inherit;			}
+.invisilist		{ list-style-type: none; margin: 5px; padding: 5px; }
+
+.icon			{ vertical-align: middle;					}
+.icon.tiny		{ max-width: 1em; max-height: 1em;			}
+.icon.small		{ max-width: 1.25em; max-height: 1.25em;	}
+.icon.medium	{ max-width: 2em; max-height: 2em;			}
+.icon.large		{ max-width: 5em; max-height: 5em;			}
+
+.img-text-middle{ vertical-align: middle; }
+
+
+.bigbox {
+	display: flex;
+	flex-direction: column;
+	align-items: center; justify-content: center;
+	background: content-box linear-gradient(var(--bg-transcluscent), var(--bg-transcluscent)),
+		var(--bg) center / cover;
+	height: 80vh;
+	padding: 0 5em 0 5em;
+	box-sizing: border-box;
+}
+.bigbox h1 {
+	margin-top: 0;
+	font-size: 3em;
+	color: var(--text-alt);
+}
+.bigbox :last-child { margin-bottom: 7em; }
+
+.features-large {
+	margin: 3em 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+.features-large figure {
+	background: var(--bg-transcluscent);
+	margin: 0.1em;
+	padding: 1em;
+	max-width: 15em;
+}
+/* .features-large figure img {
+	max-width: 12em;
+} */
+
+.cssbox-gallery {
+	display: flex;
+}

@@ -62,6 +62,18 @@ else
 	minetest.log("action", "[WorldEditAdditions] bonemeal mod not detected: //bonemeal and //forest commands not registered (if you see this message and you're using an alternative mod that provides bonemeal, please get in touch by opening an issue)")
 end
 
+-- Minetest doesn't allow you to read from files outside the mod
+-- directory - even if you're part of a modpack you can't read from the main
+-- modpack directory. Furthermore, symlinks don't help.
+-- If you have a solution to this issue, please comment on this GitHub issue:
+-- https://github.com/sbrl/Minetest-WorldEditAdditions/issues/55
+-- NOTE TO SELF: When uncommenting this, also add "doc?" to depends.txt
+-- if minetest.get_modpath("doc") then
+-- 	dofile(we_c.modpath.."/doc/init.lua")
+-- else
+-- 	minetest.log("action", "[WorldEditAdditions] doc mod not detected: not registering doc category with extended help")
+-- end
+
 
 worldedit.alias_command("smoothadv", "convolve")
 worldedit.alias_command("conv", "convolve")

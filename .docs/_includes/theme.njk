@@ -1,0 +1,35 @@
+---
+
+---
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>{{ title }} • WorldEditAdditions</title>
+		
+		<link rel="stylesheet" href="/theme.css" />
+	</head>
+	<body>
+		<nav>
+			<h1>
+				<img src="https://starbeamrainbowlabs.com/images/placeholder/?width=64&height=64&text=%20?%20" alt="Placeholder logo" class="icon medium" />
+				WorldEditAdditions
+			</h1>
+			<ul>
+			{% for navitem in collections.navigable %}
+				<li {% if page.url == navitem.url %}aria-current="page"{% endif %}>
+					<a href="{{ navitem.url }}" class="nav">{{ navitem.data.title }}</a>
+				</li>
+			{% endfor %}
+				<li><a href="https://github.com/sbrl/Minetest-WorldEditAdditions/" class="nav">GitHub</a></li>
+			</ul>
+		</nav>
+		{{ content | safe }}
+		
+		<footer>
+			<p>Built with ❤ by <a href="https://starbeamrainbowlabs.com/">Starbeamrainbowlabs</a></p>
+			<p>Tech: <a href="https://www.11ty.dev/">Eleventy</a></p>
+			<p>Licensed under <a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public Licence 2.0</a> (<a href="https://tldrlegal.com/license/mozilla-public-license-2.0-(mpl-2)">tldr</a>)</p>
+		</footer>
+	</body>
+</html>
