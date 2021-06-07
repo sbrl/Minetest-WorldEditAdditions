@@ -23,6 +23,8 @@
 	--text-bright: #efefef;
 	--text-alt: #38871e;
 	
+	--shadow: hsla(0, 0%, 25%, 0.25);
+	
 	--highlight: hsl(353, 100%, 36%);
 }
 
@@ -121,7 +123,7 @@ a { font-weight: bold; }
 /* a:not(.nav) { color: hsl(208, 67%, 40%); }
 a:not(.nav):hover { color: hsl(214, 67%, 50%); }
 a:not(.nav):active, a:focus { color: hsl(214, 87%, 60%); } */
-a:not(.nav):visited { color: hsl(240, 77%, 60%); }
+a:not(.nav):not(.bigbutton):visited { color: hsl(240, 77%, 60%); }
 
 pre { page-break-inside: avoid; break-inside: avoid; }
 pre, code {
@@ -208,7 +210,6 @@ footer {
 	font-size: 3em;
 	color: var(--text-alt);
 }
-.bigbox :last-child { margin-bottom: 7em; }
 
 .features-large {
 	margin: 3em 0;
@@ -229,4 +230,38 @@ footer {
 
 .cssbox-gallery {
 	display: flex;
+}
+
+.bigbutton {
+	display: inline-block;
+	
+	margin: 0;
+	padding: 0.35em 0.45em;
+	border: 0;
+	border-radius: 0.25em;
+	
+	background: var(--bg-alt);
+	
+	color: var(--text-bright);
+	font-size: 1.25em;
+	text-decoration: none;
+	text-align: center;
+	
+	box-shadow: 0 0 0.5em var(--shadow);
+	
+	cursor: pointer;
+	transition: box-shadow 0.25s, transform 0.25s;
+}
+.bigbutton:hover {
+	box-shadow: 0 0.25em 0.65em var(--shadow);
+	transform: translateY(-0.25em);
+}
+.bigbutton:active {
+	box-shadow: 0 0 0.25em var(--shadow);
+	transform: translateY(0.1em);
+}
+.bigbutton.disabled {
+	filter: saturate(25%);
+	opacity: 0.75;
+	cursor: default;
 }
