@@ -47,19 +47,16 @@ async function shortcode_image_url(src) {
 	return data.url;
 }
 
-async function shortcode_cssbox(content, src) {
-	let idprev = `image-${nextid}`;
-	nextid += 1;
-	let idthis = `image-${nextid}`;
-	let idnext = `image-${nextid + 1}`;
-	return `<div class="cssbox">
-<a id="${idthis}" href="#${idthis}">${await shortcode_image(src, content, "cssbox_thumb", "300w")}
-	<span class="cssbox_full">${await shortcode_image(src, content, "", "1920w")}</span>
-</a>
-<a class="cssbox_close" href="#void"></a>
-<a class="cssbox_prev" href="#${idprev}">&lt;</a>
-<a class="cssbox_next" href="#${idnext}">&gt;</a>
-</div>`;
+async function shortcode_gallerybox(content, src, idthis, idprev, idnext) {
+	return `<figure class="gallerybox-item" id="${idthis}">
+<!-- ${await shortcode_image(src, "", "gallerybox-thumb", "300w")} -->
+	${await shortcode_image(src, "", "", "1920w")}
+	
+	<figcaption>${content}</figcaption>
+	
+<a class="gallerybox-prev" href="#${idprev}">❰</a>
+<a class="gallerybox-next" href="#${idnext}">❱</a>
+</figure>`;
 }
 
 module.exports = function(eleventyConfig) {
@@ -68,5 +65,5 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addShortcode("image", shortcode_image);
 	eleventyConfig.addJavaScriptFunction("image", shortcode_image);
 	eleventyConfig.addShortcode("image-url", shortcode_image_url);
-	eleventyConfig.addPairedShortcode("cssbox", shortcode_cssbox);
+	eleventyConfig.addPairedShortcode("gallerybox", shortcode_gallerybox);
 }

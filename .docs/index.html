@@ -50,11 +50,16 @@ date: 2000-01-01
 </section>
 
 <!-- Potentially we might want some inspiration from https://codepen.io/emared/pen/gWGBLR here -->
-<section class="cssbox">
-	{% cssbox "images/gallery-a.jpeg" %}
-		A scene demonstrating <code>//replacemix</code>, <code>//ellipsoid</code>, <code>//layers</code>, <code>smoothadv</code> (aka <code>convolve</code> and <code>conv</code>), and <code>//floodfill</code> - all of which are provided by WorldEditAdditions.
-	{% endcssbox %}
-	{% cssbox "images/gallery-b.jpeg" %}
-		The inside of a 3d maze made with <code>//maze3d</code>. Lighting was placed manually to improve screenshot quality.
-	{% endcssbox %}
+<section class="gallerybox">
+	<section class="gallerybox-gallery">
+		{% gallerybox "images/gallery-a.jpeg" "image-first" "image-last" "image-b" %}
+			A scene demonstrating <code>//replacemix</code>, <code>//ellipsoid</code>, <code>//layers</code>, <code>smoothadv</code> (aka <code>convolve</code> and <code>conv</code>), and <code>//floodfill</code> - all of which are provided by WorldEditAdditions.
+		{% endgallerybox %}
+		{% gallerybox "images/gallery-b.jpeg" "image-b" "image-first" "image-last" %}
+			The inside of a 3d maze made with <code>//maze3d</code>. Lighting was placed manually to improve screenshot quality.
+		{% endgallerybox %}
+		{% gallerybox "images/gallery-c.jpeg" "image-last" "image-b" "image-first" %}
+			A cliff made with <code>//erode</code> and <code>//layers</code>. A <code>//forest</code> has been applied on top with multiple sapling / tree types.
+		{% endgallerybox %}
+	</section>
 </section>

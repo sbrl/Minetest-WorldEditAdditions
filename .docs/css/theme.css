@@ -265,3 +265,7 @@ footer {
 	opacity: 0.75;
 	cursor: default;
 }
+
+.gallerybox {
+	background: var(--bg-transcluscent);
+}
