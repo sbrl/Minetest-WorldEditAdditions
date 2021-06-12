@@ -1,3 +1,20 @@
+/*
+ ██████   █████  ██      ██      ███████ ██████  ██    ██ ██████   ██████  ██   ██
+██       ██   ██ ██      ██      ██      ██   ██  ██  ██  ██   ██ ██    ██  ██ ██
+██   ███ ███████ ██      ██      █████   ██████    ████   ██████  ██    ██   ███
+██    ██ ██   ██ ██      ██      ██      ██   ██    ██    ██   ██ ██    ██  ██ ██
+ ██████  ██   ██ ███████ ███████ ███████ ██   ██    ██    ██████   ██████  ██   ██
+
+A pure css gallery, made with a bunch of wonderful hacks! Will be upgraded to
+be (slightly) less hacky once :target-within lands in browsers.
+
+Exported to codepen: https://codepen.io/sbrl/details/YzZJYxg
+
+
+
+ */
+
+
 .gallerybox {
 	display: flex;
 	justify-content: center;
