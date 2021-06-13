@@ -14,16 +14,20 @@
 
 :root {
 	--bg-main: #8ABEF6;
-	--bg-bright: #38871e;
+	/* --bg-bright: #57b43f; */
+	--bg-bright: #7ac767;
 	--bg-alt: #3F57B4;
 	--bg-transcluscent-slight: rgba(255, 255, 255, 0.1);
-	--bg-transcluscent: rgba(255, 255, 255, 0.8);
+	--bg-transcluscent: rgba(255, 255, 255, 0.85);
+	--bg-transcluscent-alt: hsla(226, 59%, 38%, 0.8);
 	
-	--text-main: #3F57B4;
+	/* --text-main: #3F57B4; */
+	--text-main: hsl(227, 70%, 35%);
 	--text-bright: #efefef;
 	--text-alt: #38871e;
 	
 	--shadow: hsla(0, 0%, 25%, 0.25);
+	--shadow-dark: hsla(0, 0%, 25%, 0.5);
 	
 	--highlight: hsl(353, 100%, 36%);
 }
@@ -66,6 +70,9 @@ title { string-set: page-title content(text); }
 		opacity: 0.6;
 	}
 }
+h1, h2, h3, h4, h5, h6 {
+	text-align: center;
+}
 
 nav {
 	background: var(--bg-bright);
@@ -96,7 +103,7 @@ nav a {
 	padding: 1.2em 3em;
 	text-decoration: none;
 	font-weight: bold;
-	color: var(--text-bright);
+	color: var(--text-main);
 }
 
 
@@ -125,8 +132,19 @@ a:not(.nav):hover { color: hsl(214, 67%, 50%); }
 a:not(.nav):active, a:focus { color: hsl(214, 87%, 60%); } */
 a:not(.nav):not(.bigbutton):visited { color: hsl(240, 77%, 60%); }
 
-pre { page-break-inside: avoid; break-inside: avoid; }
+pre {
+	page-break-inside: avoid;
+	break-inside: avoid;
+	padding: 0.5em 0.6em;
+	border: 0.2em solid var(--bg-transcluscent-alt);
+	background: var(--bg-transcluscent-alt);
+	box-shadow: inset 0 0 0.5em 0.1em var(--shadow-dark);
+	line-height: 1.75em;
+	color: var(--text-bright);
+}
 pre, code {
+	text-align: left;
+	font-size: 1rem;
 	white-space: pre-wrap;
 	-moz-tab-size: 4;
 	tab-size: 4;
@@ -149,7 +167,7 @@ footer {
 	padding: 1em;
 	text-align: center;
 	background: var(--bg-bright);
-	color: var(--text-bright);
+	/* color: var(--text-bright); */
 }
 
 
@@ -218,15 +236,27 @@ footer {
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 }
-.features-large figure {
+.features-large > :where(figure, .features-item) {
 	background: var(--bg-transcluscent);
 	margin: 0.1em;
 	padding: 1em;
 	max-width: 15em;
 }
-/* .features-large figure img {
-	max-width: 12em;
-} */
+.features-item.wide {
+	flex: 1;
+	max-width: initial;
+	margin: 0.1em 2em;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.features-item.wide > :last-child {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+}
 
 .cssbox-gallery {
 	display: flex;
