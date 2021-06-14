@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 
 const htmlentities = require("html-entities");
@@ -5,16 +6,18 @@ const Image = require("@11ty/eleventy-img");
 
 var nextid = 0;
 
+const image_filename_format = (_id, src, width, format, _options) => {
+	const extension = path.extname(src);
+	const name = path.basename(src, extension);
+	return `${name}-${width}w.${format}`;
+};
+
 async function shortcode_image(src, alt, classes = "") {
 	let metadata = await Image(src, {
 		widths: [300, null],
 		formats: ["avif", "jpeg"],
 		outputDir: `./_site/img/`,
-		filenameFormat: (_id, src, width, format, _options) => {
-			const extension = path.extname(src);
-			const name = path.basename(src, extension);
-			return `${name}-${width}w.${format}`;
-		}
+		filenameFormat: image_filename_format
 	});
 	console.log(metadata);
 	
@@ -35,16 +38,23 @@ async function shortcode_image_url(src) {
 		widths: [ null ],
 		formats: [ "jpeg" ],
 		outputDir: `./_site/img/`,
-		filenameFormat: (_id, src, width, format, _options) => {
-			const extension = path.extname(src);
-			const name = path.basename(src, extension);
-			return `${name}-${width}w.${format}`;
-		}
+		filenameFormat: image_filename_format
 	});
 	console.log(metadata);
 	
 	let data = metadata.jpeg[metadata.jpeg.length - 1];
 	return data.url;
+}
+
+async function shortcode_image_urlpng(src) {
+	let target_dir = `./_site/img`;
+	if(!fs.existsSync(target_dir))
+		await fs.promises.mkdir(target_dir, { recursive: true });
+	let filename = path.basename(src);
+	// Generally speaking we optimise PNGs *very* well with oxipng/Zopfli,
+	// and the Image plugin doesn't respect this
+	await fs.promises.copyFile(src, path.join(target_dir, filename));
+	return `/img/${filename}`;
 }
 
 async function shortcode_gallerybox(content, src, idthis, idprev, idnext) {
@@ -64,6 +74,7 @@ module.exports = function(eleventyConfig) {
 	// eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addShortcode("image", shortcode_image);
 	eleventyConfig.addJavaScriptFunction("image", shortcode_image);
-	eleventyConfig.addShortcode("image-url", shortcode_image_url);
+	eleventyConfig.addShortcode("image_url", shortcode_image_url);
+	eleventyConfig.addNunjucksAsyncShortcode("image_urlpng", shortcode_image_urlpng);
 	eleventyConfig.addPairedShortcode("gallerybox", shortcode_gallerybox);
 }

@@ -50,7 +50,8 @@ body
 	margin: 0;
 	font-family: sans-serif; /* Serif is awful :( */
 	
-	background: var(--bg-main); /* Don't forget to update the @page one too for paged media */
+	background: url('{% image_urlpng "images/clouds.png" %}') center / cover fixed,
+		var(--bg-main); /* Don't forget to update the @page one too for paged media */
 	color: var(--text-main);
 }
 
@@ -170,36 +171,9 @@ footer {
 	/* color: var(--text-bright); */
 }
 
-
-/* Utility / layout aids */
-.float.left		{ float: left;	}
-.float.right	{ float: right;	}
-
-.flex	{ display: flex; }
-.flex-1	{ flex: 1;	}
-.flex-2	{ flex: 2;	}
-.flex-3	{ flex: 3;	}
-.flex-4	{ flex: 4;	}
-.flex-5	{ flex: 5;	}
-.flex-6	{ flex: 6;	}
-
-.small-spacing	{ margin: 0.25em 0.35em;	padding: 0.25em 0.35em;	}
-.med-spacing	{ margin: 0.45em 0.65em;	padding: 0.45em 0.65em;	}
-.high-spacing	{ margin: 1em 1.25em;		padding: 1em 1.25em;	}
-
 .text-left		{ text-align: left;		}
 .text-centre	{ text-align: center;	}
 .text-right		{ text-align: right;	}
-
-.small-text		{ font-size: 0.8rem;	}
-.medium-text	{ font-size: 1rem;		}
-.large-text		{ font-size: 1.3rem;	}
-
-.bold-text		{ font-weight: bolder;	}
-
-.block			{ display: block;			}
-.inline			{ display: inline;			}
-.inline.block	{ display: inline-block;	}
 
 .invisilink		{ text-decoration: none; color: inherit;			}
 .invisilist		{ list-style-type: none; margin: 5px; padding: 5px; }
@@ -210,8 +184,10 @@ footer {
 .icon.medium	{ max-width: 2em; max-height: 2em;			}
 .icon.large		{ max-width: 5em; max-height: 5em;			}
 
-.img-text-middle{ vertical-align: middle; }
-
+.shadow-top		{ box-shadow: 0 -0.25em	0.5em			var(--shadow);	}
+.shadow-bottom	{ box-shadow: 0 0.25em	0.5em			var(--shadow);	}
+.shadow-vertical{ box-shadow: 0 0		0.5em	0.25em	var(--shadow);	}
+.shadow-text	{ text-shadow: 0.15em 0.15em 0.15em		var(--shadow);	}
 
 .bigbox {
 	display: flex;
@@ -241,6 +217,7 @@ footer {
 	margin: 0.1em;
 	padding: 1em;
 	max-width: 15em;
+	box-shadow: 0.25em 0.25em 0.5em var(--shadow);
 }
 .features-item.wide {
 	flex: 1;
