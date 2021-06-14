@@ -46,7 +46,7 @@ async function shortcode_image_url(src) {
 	return data.url;
 }
 
-async function shortcode_image_urlpng(src) {
+async function shortcode_image_urlpass(src) {
 	let target_dir = `./_site/img`;
 	if(!fs.existsSync(target_dir))
 		await fs.promises.mkdir(target_dir, { recursive: true });
@@ -74,7 +74,8 @@ module.exports = function(eleventyConfig) {
 	// eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addShortcode("image", shortcode_image);
 	eleventyConfig.addJavaScriptFunction("image", shortcode_image);
-	eleventyConfig.addShortcode("image_url", shortcode_image_url);
-	eleventyConfig.addNunjucksAsyncShortcode("image_urlpng", shortcode_image_urlpng);
+	// eleventyConfig.addNunjucksAsyncShortcode("image_url", shortcode_image_url);
+	eleventyConfig.addAsyncShortcode("image_url", shortcode_image_url);
+	eleventyConfig.addNunjucksAsyncShortcode("image_urlpass", shortcode_image_urlpass);
 	eleventyConfig.addPairedShortcode("gallerybox", shortcode_gallerybox);
 }

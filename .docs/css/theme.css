@@ -43,14 +43,14 @@
 } */
 
 /* rem is relative to the html element, and em is relative to the current element. */
-html { font-size: 100%; }
+html { font-size: 100%; scroll-behavior: smooth; }
 
 body
 {
 	margin: 0;
 	font-family: sans-serif; /* Serif is awful :( */
 	
-	background: url('{% image_urlpng "images/clouds.png" %}') center / cover fixed,
+	background: url('{% image_urlpass "images/clouds.png" %}') center / cover fixed,
 		var(--bg-main); /* Don't forget to update the @page one too for paged media */
 	color: var(--text-main);
 }
@@ -96,16 +96,18 @@ nav ul {
 	display: flex;
 	justify-content: space-evenly;
 }
-nav ul li {
-	background: var(--bg-transcluscent-slight);
-}
 nav a {
+	background: var(--bg-transcluscent-slight);
 	display: inline-block;
 	padding: 1.2em 3em;
 	text-decoration: none;
 	font-weight: bold;
 	color: var(--text-main);
 }
+nav a.image {
+	padding: 0.75em 1em 0.5em 1em;
+}
+nav img { max-height: 2em; }
 
 
 /* A small tweak to things more responsive */
@@ -227,16 +229,27 @@ footer {
 	flex-direction: column;
 	justify-content: flex-start;
 }
-.features-item.wide > :last-child {
+/* .features-item.wide > :last-child {
     flex: 1;
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
     align-items: center;
+} */
+
+.panel-generic {
+	background: var(--bg-transcluscent);
+	margin: 2em;
+	padding: 1em;
+	box-shadow: 0.25em 0.25em 0.5em var(--shadow);
 }
 
-.cssbox-gallery {
+.bigbutton-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 1em 0;
 	display: flex;
+	justify-content: space-around;
 }
 
 .bigbutton {
