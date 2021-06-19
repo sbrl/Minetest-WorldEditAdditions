@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"private": true,
 	"scripts": {
-		"test": "echo \"No tests have been implemented yet\""
+		"test": "echo \"No tests have been implemented yet\"",
+		"start": "npx @11ty/eleventy --serve"
 	},
 	"repository": {
 		"type": "git",
