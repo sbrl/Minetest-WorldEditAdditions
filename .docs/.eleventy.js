@@ -12,6 +12,14 @@ const image_filename_format = (_id, src, width, format, _options) => {
 	return `${name}-${width}w.${format}`;
 };
 
+function image_metadata_log(metadata, source) {
+	for(let format in metadata) {
+		for(let img of metadata[format]) {
+			console.log(`${source.padEnd(10)} ${format.padEnd(5)} ${`${img.width}x${img.height}`.padEnd(10)} ${img.outputPath}`);
+		}
+	}
+}
+
 async function shortcode_image(src, alt, classes = "") {
 	let metadata = await Image(src, {
 		widths: [300, null],
@@ -19,7 +27,7 @@ async function shortcode_image(src, alt, classes = "") {
 		outputDir: `./_site/img/`,
 		filenameFormat: image_filename_format
 	});
-	console.log(metadata);
+	image_metadata_log(metadata, `IMAGE`);
 	
 	let imageAttributes = {
 		class: classes,
@@ -40,7 +48,7 @@ async function shortcode_image_url(src) {
 		outputDir: `./_site/img/`,
 		filenameFormat: image_filename_format
 	});
-	console.log(metadata);
+	image_metadata_log(metadata, `IMAGE_URL`);
 	
 	let data = metadata.jpeg[metadata.jpeg.length - 1];
 	return data.url;
@@ -76,6 +84,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addJavaScriptFunction("image", shortcode_image);
 	// eleventyConfig.addNunjucksAsyncShortcode("image_url", shortcode_image_url);
 	eleventyConfig.addAsyncShortcode("image_url", shortcode_image_url);
+	eleventyConfig.addAsyncShortcode("image_urlpass", shortcode_image_urlpass);
 	eleventyConfig.addNunjucksAsyncShortcode("image_urlpass", shortcode_image_urlpass);
 	eleventyConfig.addPairedShortcode("gallerybox", shortcode_gallerybox);
 }
