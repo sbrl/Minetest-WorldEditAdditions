@@ -104,6 +104,11 @@ nav a {
 	font-weight: bold;
 	color: var(--text-main);
 }
+nav li[aria-current=page] a {
+	margin: -0.25em;
+	border: 0.25em solid var(--bg-alt);
+}
+
 nav a.image {
 	padding: 0.75em 1em 0.5em 1em;
 }
