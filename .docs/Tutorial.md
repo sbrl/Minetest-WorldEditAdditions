@@ -49,12 +49,42 @@ Most WorldEdit and WorldEditAdditions commands require either 1 or 2 points to b
 
 
 ## Command syntax
+When explaining the syntax (ref [a](https://en.wikipedia.org/wiki/Syntax_(programming_languages)), [b](https://www.bbc.co.uk/bitesize/guides/z22wwmn/revision/6)) of a command, a number of different conventions are used to concisely explain said syntax. Understanding enables you to quickly understand the output of `/help /maze` for example, or the list of commands in the [reference](/Reference).
 
- - Command syntax conventions:
-	 - `<thing>`
-	 - `a|b`
-	 - `[optional_thing]`
-	 - `<thing|other_thing>`
+ - `<thing>`: A placeholder for a value that you can change. Do *not* include the `<` angle brackets `>` when replacing it with your actual value.
+ - `a | b`: 1 thing or another, but not both.
+ - `[optional_thing]`: Something that's optional. Specifying it enables greater control over the behaviour of the command, but it can be left out for convenience.
+ - `<thing|other_thing>`: Pick 1 item from the list and replace the entire group, removing the `<` angle brackets `>` as with `<thing>`. For example `<snowballs|river>` could become either `snowballs` or `river`, but not both at the same time.
+ - `<thing=default_value>`: Most commonly seen in `[` square brackets `]` indicating an optional thing. Indicates the default value of something that you can replace (or omit).
+ - `...`: Indicates that the previous items can be repeated.
+
+Let's illustrate this with a practical example. Consider the following:
+
+```
+//example <height> <apple|orange> | <height> <width> <pear|maple> [<extra_value>]
+```
+
+The following different invocations of the above would be valid:
+
+```
+//example 10 apple
+//example 45 30 maple
+//example 30 12 pear something_else
+```
+
+Now let's apply this to a more practical example:
+
+```
+//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]
+```
+
+The `<snowballs|river>` explains that either a value of `snowballs` or `river` is acceptable. Then, a key - value list of options can be specified - allowing an arbitrary number of options.
+
+From this, we can infer the following usage:
+
+```
+//erode snowballs speed 1 count 50000
+```
 
 
 ## Anything else?
@@ -63,7 +93,28 @@ Most WorldEdit and WorldEditAdditions commands require either 1 or 2 points to b
 
 
 ## Advanced Concepts
+A number of additional concepts that are not required to use WorldEditAdditions are explained here, as they can be helpful for understanding some of the more advanced concepts and commands provided by WorldEditAdditions.
 
- - Memory usage
- - Meta commands
- - Other things?
+### Meta commands
+WorldEditAdditions provides a number of *meta commands*. Such commands don't do anything on their own, but call other commands in various different ways. Examples of meta commands include:
+
+ - [`//subdivide`](/Reference#subdivide-size_x-size_y-size_z-cmd_name-args): split a region into chunks, and execute the command once for each chunk
+ - [`//many`](/Reference#many-times-command): Execute a command multiple times
+ - [`//multi`](/Reference#multi-command_a-command_b-command_c-): Execute multiple commands in sequence
+
+Of course, this isn't an exhaustive list - check the [reference](/Reference) for a full list.
+
+### Memory usage
+Memory (or RAM - Random Access Memory) is used by all the processes running on a system to hold data that they are currently working with. This is especially important for WorldEdit and WorldEditAdditions, since the larger the region you define the more memory that will be required to run commands on it.
+
+Depending on your system, Minetest and your system can slow to a crawl or even crash if you execute a command on a region that's too big.
+
+To work around this, the [`//subdivide`](/Reference#subdivide-size_x-size_y-size_z-cmd_name-args) command was implemented. It splits the defined region into chunks, and calls the specified command over and over again for each chunk. 
+
+It's not suitable for all commands (since it requires that said command takes 2 points) though, but because it splits the defined region into multiple chunks, it can be executed on *enormous* regions that can't fit into memory all at the same time.
+
+
+## Conclusion
+This short tutorial has explained a few key concepts that are useful for understanding WorldEditAdditions, from executing chat commands to the syntax used in the [reference](/Reference) to concisely describe commands.
+
+If there's a concept that you don't understand after reading this and the [reference](/Reference), please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) with a detailed explanation of what it is that you're finding difficult to understand.
