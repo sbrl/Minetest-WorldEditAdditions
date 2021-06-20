@@ -33,16 +33,6 @@
 	--highlight: hsl(353, 100%, 36%);
 }
 
-/* @media (prefers-color-scheme: dark) {
-	:root {
-		--bg-main: #232323;
-		--bg-bright: black;
-		--bg-transcluscent: rgba(50, 50, 50, 0.5);
-		
-		--text-main: #f3f3f3;
-	}
-} */
-
 /* rem is relative to the html element, and em is relative to the current element. */
 html { font-size: 100%; scroll-behavior: smooth; }
 
@@ -220,7 +210,10 @@ footer {
 	margin: 3em 0 0 0;
 	padding: 1em;
 	text-align: center;
-	background: var(--bg-bright);
+	background-color: #7ac767;
+	/* Ref https://www.heropatterns.com/ */
+	background: var(--pattern-jigsaw-green),
+		var(--bg-bright);
 	/* color: var(--text-bright); */
 }
 
@@ -250,6 +243,7 @@ footer {
 	align-items: center; justify-content: center;
 	background: content-box linear-gradient(var(--bg-transcluscent), var(--bg-transcluscent)),
 		var(--bg) center / cover;
+	
 	height: 80vh;
 	padding: 0 5em 0 5em;
 	box-sizing: border-box;
@@ -269,6 +263,7 @@ footer {
 }
 .features-large > :where(figure, .features-item) {
 	background: var(--bg-transcluscent);
+	background-image: var(--pattern-bricks);
 	margin: 0.1em;
 	padding: 1em;
 	max-width: 15em;
@@ -292,6 +287,7 @@ footer {
 
 .panel-generic {
 	background: var(--bg-transcluscent);
+	background-image: var(--pattern-bricks);
 	margin: 2em;
 	padding: 1em;
 	box-shadow: 0.25em 0.25em 0.5em var(--shadow);
@@ -340,7 +336,7 @@ footer {
 }
 
 .gallerybox {
-	background: var(--bg-transcluscent);
+	background: var(--pattern-hex), var(--bg-transcluscent);
 }
 
 
