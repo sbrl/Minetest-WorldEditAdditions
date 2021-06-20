@@ -103,7 +103,7 @@ nav ul {
 	display: flex;
 	justify-content: space-evenly;
 }
-nav a {
+nav > ul a {
 	background: var(--bg-transcluscent-slight);
 	display: inline-block;
 	padding: 1.2em 2em;
