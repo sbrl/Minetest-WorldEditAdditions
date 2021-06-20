@@ -36,8 +36,16 @@ See a full list with complete explanations in the [chat command reference](/Refe
 
 
 ## Regions
+WorldEdit allows you to define a _region_ by specifying 2 points in the world - we number these points 1 and 2. By using the WorldEdit wand (or WorldEditAdditions Far Wand), one can left click to set the position of point 1, and right click to set point 2:
 
- - Explain WorldEdit regions, points 1 & 2
+{% image "images/tutorial_pos1_2.jpeg" "A screenshot showing WorldEdit points 1 and 2 in a desert with a cactus" %}
+
+Point 1 is on the cactus, and point 2 is on the ground in the bottom left.
+
+Most WorldEdit and WorldEditAdditions commands require either 1 or 2 points to be set in order to work.
+
+ - If 1 point is required, it's the origin point used by the command
+ - If 2 points are required, the defined region specifies the area in which the command is operate
 
 
 ## Command syntax
