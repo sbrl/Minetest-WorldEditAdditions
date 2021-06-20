@@ -116,7 +116,7 @@ nav ul {
 nav a {
 	background: var(--bg-transcluscent-slight);
 	display: inline-block;
-	padding: 1.2em 3em;
+	padding: 1.2em 2em;
 	text-decoration: none;
 	font-weight: bold;
 	color: var(--text-main);
