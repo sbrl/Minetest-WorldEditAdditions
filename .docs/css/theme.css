@@ -13,7 +13,7 @@
  */
 
 :root {
-	--bg-main: #8ABEF6;
+	--bg-main: hsl(206, 87%, 67%);
 	/* --bg-bright: #57b43f; */
 	--bg-bright: #7ac767;
 	--bg-alt: #3F57B4;
