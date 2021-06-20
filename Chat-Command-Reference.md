@@ -479,6 +479,8 @@ Example invocations:
 ## `//count`
 Counts all the nodes in the defined region and returns the result along with calculated percentages (note that if the chat window used a monospace font, the returned result would be a perfect table. If someone has a ~~hack~~ solution to make the columns line up neatly, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) :D)
 
+**Note:** The output of `//count` can be rather long sometimes, and Minetest by default only shows the last few lines of chat. Press <kbd>F10</kbd> to show the full chat window that you can then scroll through to inspect the full output.
+
 ```
 //count
 ```
