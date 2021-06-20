@@ -90,11 +90,11 @@ nav {
 	margin: 0;
 }
 nav h1 {
-	background: var(--bg-alt);
+	background: var(--text-bright);
 	margin: 0;
-	padding: 0.5em;
+	padding: 0.2em 0.5em 0.2em 0.2em;
 	font-size: 1.2em;
-	color: var(--text-bright);
+	color: var(--bg-alt);
 }
 nav ul {
 	flex: 1;
@@ -210,8 +210,6 @@ footer {
 	margin: 3em 0 0 0;
 	padding: 1em;
 	text-align: center;
-	background-color: #7ac767;
-	/* Ref https://www.heropatterns.com/ */
 	background: var(--pattern-jigsaw-green),
 		var(--bg-bright);
 	/* color: var(--text-bright); */
@@ -229,6 +227,14 @@ footer {
 .icon.small		{ max-width: 1.25em; max-height: 1.25em;	}
 .icon.medium	{ max-width: 2em; max-height: 2em;			}
 .icon.large		{ max-width: 5em; max-height: 5em;			}
+.icon.logo		{
+	max-width: 3em;
+	max-height: 3em;
+}
+.icon.logo-large {
+	max-width: 8em;
+	max-height: 8em;
+}
 
 .shadow-top		{ box-shadow: 0 -0.25em	0.5em			var(--shadow);	}
 .shadow-bottom	{ box-shadow: 0 0.25em	0.5em			var(--shadow);	}
@@ -251,7 +257,8 @@ footer {
 .bigbox h1 {
 	margin: 0;
 	font-size: 3em;
-	color: var(--text-alt);
+	/* color: var(--text-alt); */
+	color: var(--bg-alt);
 }
 
 .features-large {
