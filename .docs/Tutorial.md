@@ -10,8 +10,8 @@ Welcome to the WorldEditAdditions beginners tutorial! There are a number of conv
 
 It is assumed that:
 
+ - You are already familiar the basics of [Minetest](https://www.minetest.net/) (try the [tutorial game](https://content.minetest.net/packages/Wuzzy/tutorial/) if you're unsure)
  - You have both WorldEdit and WorldEditAdditions installed (see the [Download](/#download) section)
- - You are already familiar the basics of [Minetest](https://www.minetest.net/)
 
 Minetest supports the execution of _Chat Commands_ to manipulate the Minetest world. While in a Minetest world, simply type `/help` (the first forward slash `/` will automatically cause the chat window to appear) and hit <kbd>enter</kbd> to display a list of chat commands that are currently registered grouped by mod for example.
 
@@ -52,3 +52,10 @@ See a full list with complete explanations in the [chat command reference](/Refe
 ## Anything else?
 
  - Make sure we have covered everything
+
+
+## Advanced Concepts
+
+ - Memory usage
+ - Meta commands
+ - Other things?
