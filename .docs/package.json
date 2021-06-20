@@ -6,7 +6,8 @@
 	"private": true,
 	"scripts": {
 		"test": "echo \"No tests have been implemented yet\"",
-		"start": "npx @11ty/eleventy --serve"
+		"start": "npx @11ty/eleventy --serve",
+		"build": "npx @11ty/eleventy"
 	},
 	"repository": {
 		"type": "git",
