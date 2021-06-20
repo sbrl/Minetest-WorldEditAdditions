@@ -1,6 +1,3 @@
----
-
----
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,9 +7,9 @@
 		<link rel="stylesheet" href="/theme.css" />
 	</head>
 	<body>
-		<nav>
+		<nav class="shadow-bottom">
 			<h1>
-				<img src="https://starbeamrainbowlabs.com/images/placeholder/?width=64&height=64&text=%20?%20" alt="Placeholder logo" class="icon medium" />
+				<img src="{% image_urlpass '../worldeditadditions.png' %}" alt="" class="icon logo" />
 				WorldEditAdditions
 			</h1>
 			<ul>
@@ -21,15 +18,25 @@
 					<a href="{{ navitem.url }}" class="nav">{{ navitem.data.title }}</a>
 				</li>
 			{% endfor %}
-				<li><a href="https://github.com/sbrl/Minetest-WorldEditAdditions/" class="nav">GitHub</a></li>
+				<li><a href="https://github.com/sbrl/Minetest-WorldEditAdditions/" class="nav image"><img src="{% image_urlpass 'images/github.svg' %}" alt="GitHub" title="GitHub" /></a></li>
 			</ul>
 		</nav>
+		
 		{{ content | safe }}
 		
-		<footer>
-			<p>Built with ❤ by <a href="https://starbeamrainbowlabs.com/">Starbeamrainbowlabs</a></p>
-			<p>Tech: <a href="https://www.11ty.dev/">Eleventy</a></p>
-			<p>Licensed under <a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public Licence 2.0</a> (<a href="https://tldrlegal.com/license/mozilla-public-license-2.0-(mpl-2)">tldr</a>)</p>
+		<footer class="shadow-top">
+			<p>WorldEditAdditions built with ❤️ by these awesome people:</p>
+			<ul class="contributor-list">
+				{% for contributor in contributors %}
+				<li><a href="{{ contributor.profile_url }}">
+					<img class="icon large" src="{{ contributor.avatar_url }}" alt="{{ contributor.name }}" />
+					<span>{{ contributor.name }}</span>
+				</a></li>
+				{% endfor %}
+			</ul>
+			
+			<p>Tech: <a href="https://www.11ty.dev/">Eleventy</a> (this website), <a href="https://www.heropatterns.com/">Hero Patterns</a> (background patterns), <a href="https://github.com/shssoichiro/oxipng">Oxipng</a> (PNG image compression), <a href="https://www.minetest.net/">Minetest</a> (of course)</p>
+			<p>Licensed under the <a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public Licence 2.0</a> (<a href="https://tldrlegal.com/license/mozilla-public-license-2.0-(mpl-2)">tldr</a>)</p>
 		</footer>
 	</body>
 </html>

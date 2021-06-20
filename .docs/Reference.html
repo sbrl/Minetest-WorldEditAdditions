@@ -1,0 +1,99 @@
+<main>
+	<section class="panel-generic">
+		<h1 id="{{ section.slug }}">{{ section_intro.title }}</h1>
+		<p>This is the full chat command reference for WorldEditAdditions. It has 2 parts:</p>
+		
+		<ol>
+			<li>A contents list of commands and their syntax</li>
+			<li>A full reference, with detailed explanations for each command</li>
+		</ol>
+		
+		<p>After the contents, there is a <a href="#filter">filter box</a> for filtering the detailed explanations to quickly find the one you're after.</p>
+	</section>
+	
+	<section class="panel-generic">
+		<h2 id="contents" class="linked-section-heading">
+			<a class="section-link" href="#{{ section.slug }}">&#x1f517; <!-- Link Symbol --></a>
+			<span>Contents</span>
+		</h2>
+		<p>TODO: Group commands here by category (*especially* the meta commands)</p>
+		<ul class="command-list">
+			{% for section in sections_help %}
+			<li><a href="#{{ section.slug }}">
+				<code>{{ section.title }}</code>
+			</a></li>
+			{% endfor %}
+		</ul>
+	</section>
+	
+	<section id="filter" class="panel-generic">
+		<div class="form-item bigsearch">
+			<label for="input-filter">Filter:</label>
+			<input type="search" id="input-filter" />
+		</div>
+		<div class="form-item centre checkbox">
+			<input type="checkbox" id="input-searchall" placeholder="Start typing to filter the sections." />
+			<label for="input-searchall" title="If unchecked, only the title will be searched.">Search content</label>
+		</div>
+	</section>
+	
+	<script>
+		function search_text(query, text) {
+			return text.toLocaleLowerCase().includes(query);
+		}
+		
+		function do_filter() {
+			let el_search = document.querySelector("#input-filter");
+			let el_searchall = document.querySelector("#input-searchall");
+			let els_sections = document.querySelectorAll("section.filterable");
+			
+			let query = el_search.value.toLocaleLowerCase();
+			
+			let mode = el_searchall.checked ? "all" : "header";
+			console.log(`SEARCH | mode`, mode, `query`, query);
+			
+			for(let i = 0; i < els_sections.length; i++) {
+				let el_next = els_sections[i];
+				
+				let show = true;
+				if(query.length > 0) {
+					switch(mode) {
+						case "all":
+							show = search_text(query,
+								el_next.textContent
+							);
+							break;
+						case "header":
+							show = search_text(query,
+								el_next.querySelector(".linked-section-heading").textContent
+							);
+							break;
+					}
+				}
+				
+				el_next.classList.remove("visible", "hidden");
+				el_next.classList.add(show ? "visible" : "hidden");
+			}
+		}
+		
+		window.addEventListener("load", (_event) => {
+			let el_search = document.querySelector("#input-filter");
+			let el_searchall = document.querySelector("#input-searchall");
+			
+			el_search.addEventListener("input", do_filter);
+			el_search.addEventListener("search", do_filter);
+			el_searchall.addEventListener("change", do_filter);
+		});
+	</script>
+	
+	{% for section in sections_help %}
+		<section class="panel-generic filterable">
+			<h2 id="{{ section.slug }}" class="linked-section-heading">
+				<a class="section-link" href="#{{ section.slug }}">&#x1f517; <!-- Link Symbol --></a>
+				<span>{{ section.title }}</span>
+			</h2>
+			
+			{{ section.content }}
+		</section>
+	{% endfor %}
+</main>

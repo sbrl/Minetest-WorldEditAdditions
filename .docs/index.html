@@ -5,10 +5,18 @@ tags: navigable
 date: 2000-01-01
 ---
 
-<section class="bigbox" style="--bg: url({% image-url "images/banner-main.jpeg" %})">
+<section class="bigbox shadow-bottom" style="--bg: url({% image_url "images/banner-main.jpeg" %})">
+	<img src="{% image_urlpass '../worldeditadditions.png' %}" alt="" class="icon logo-large" />
 	<h1>WorldEditAdditions</h1>
+	<p>
+		<a href="https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/"><img src="https://img.shields.io/badge/dynamic/json?color=%23375a7f&amp;label=ContentDB&amp;query=downloads&amp;suffix=+downloads&amp;url=https%3A//content.minetest.net/api/packages/Starbeamrainbowlabs/worldeditadditions/" alt="WorldEditAdditions on ContentDB" /></a>
+		<a href="https://forum.minetest.net/viewtopic.php?f=11&t=24635"><img src="https://img.shields.io/badge/%F0%9F%92%AC-Forums-%2366D034" alt="WorldEditAdditions on the Minetest Forums" /></a>
+		<a href="https://github.com/sbrl/Minetest-WorldEditAdditions/releases/latest"><img src="https://img.shields.io/github/v/release/sbrl/Minetest-WorldEditAdditions?color=green&amp;label=latest%20release" alt="Latest release on GitHub" /></a>
+		<a href="/Changelog"><img src="https://img.shields.io/badge/%F0%9F%93%B0-Changelog-informational" alt="View the changelog" /></a>
+	</p>
 	<p><em>Extra tools and commands to extend <a href="https://github.com/Uberi/Minetest-WorldEdit">WorldEdit</a> for <a href="https://www.minetest.net/">Minetest</a></em></p>
 	<p>If you can dream of it, it probably belongs here!</p>
+	<p><a href="#download" class="bigbutton">Get Started</a></p>
 </section>
 
 <section class="features-large">
@@ -41,7 +49,7 @@ date: 2000-01-01
 	
 	<figure>
 		{% image "images/torus-bonemeal.png", "A dirt torus with a grassy top, and a meadow of grass/flowers. Demonstrates //layers and //bonemeal. Doesn't have much to do with the sentences below - I just thought it looked nice as meta commands are difficult to find a good picture for." %}
-		<img src="/images/torus-bonemeal.png" alt="A dirt torus with a grassy top, and a meadow of grass/flowers. Demonstrates //layers and //bonemeal. Doesn't have much to do with the sentences below - I just thought it looked nice as meta commands are difficult to find a good picture for." />
+		<!-- <img src="/images/torus-bonemeal.png" alt="A dirt torus with a grassy top, and a meadow of grass/flowers. Demonstrates //layers and //bonemeal. Doesn't have much to do with the sentences below - I just thought it looked nice as meta commands are difficult to find a good picture for." /> -->
 		<figcaption>
 			<p>Powerful meta commands such as <code>//multi</code> for executing multiple commands at once and <code>//subdivide</code> for running commands on areas of virtually unlimited size enable convenience and enhance flexibility.</p>
 		</figcaption>
@@ -49,11 +57,55 @@ date: 2000-01-01
 </section>
 
 <!-- Potentially we might want some inspiration from https://codepen.io/emared/pen/gWGBLR here -->
-<section class="cssbox-gallery">
-	{% cssbox "images/gallery-a.jpeg" %}
-		A scene demonstrating <code>//replacemix</code>, <code>//ellipsoid</code>, <code>//layers</code>, <code>smoothadv</code> (aka <code>convolve</code> and <code>conv</code>), and <code>//floodfill</code> - all of which are provided by WorldEditAdditions.
-	{% endcssbox %}
-	{% cssbox "images/gallery-b.jpeg" %}
-		The inside of a 3d maze made with <code>//maze3d</code>. Lighting was placed manually to improve screenshot quality.
-	{% endcssbox %}
+<section class="gallerybox shadow-vertical">
+	<section class="gallerybox-gallery">
+		{% gallerybox "images/gallery-a.jpeg" "image-first" "image-last" "image-b" %}
+			A scene demonstrating <code>//replacemix</code>, <code>//ellipsoid</code>, <code>//layers</code>, <code>smoothadv</code> (aka <code>convolve</code> and <code>conv</code>), and <code>//floodfill</code> - all of which are provided by WorldEditAdditions.
+		{% endgallerybox %}
+		{% gallerybox "images/gallery-b.jpeg" "image-b" "image-first" "image-last" %}
+			The inside of a 3d maze made with <code>//maze3d</code>. Lighting was placed manually to improve screenshot quality.
+		{% endgallerybox %}
+		{% gallerybox "images/gallery-c.jpeg" "image-last" "image-b" "image-first" %}
+			A cliff made with <code>//layers</code> and <code>//erode</code>. A <code>//forest</code> has been applied on top with multiple sapling / tree types.
+		{% endgallerybox %}
+	</section>
+</section>
+
+<section>
+	<h2 id="download" class="shadow-text">Download</h2>
+	<div class="features-large">
+		<div class="features-item wide text-centre">
+			<h3>ContentDB</h3>
+			
+			<p><a href="https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/"><img class="icon-medium" src="{% image_urlpass 'images/contentdb.png' %}" alt="WorldEditAdditions on ContentDB" /></a></p>
+			
+			<p>Download from ContentDB, or from the <em>Content</em> tab in Minetest.</p>
+			
+			<p><a class="bigbutton" href="https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/">WorldEditAdditions on ContentDB</a></p>
+		</div>
+		<div class="features-item wide text-centre">
+			<h3>Git</h3>
+			<p>WorldEditAdditions is dependent on <a href="https://content.minetest.net/packages/sfan5/worldedit/">WorldEdit</a>. Clone using Git:</p>
+			
+			<pre><code>cd path/to/worldmods;
+git clone https://github.com/Uberi/Minetest-WorldEdit.git worldedit;
+git clone https://github.com/sbrl/Minetest-WorldEditAdditions.git worldeditadditions;</code></pre>
+			
+			<p><a class="bigbutton" href="https://github.com/sbrl/Minetest-WorldEditAdditions">Source code on GitHub</a></p>
+		</div>
+	</div>
+</section>
+
+<section>
+	<h2 class="shadow-text">Getting Started</h2>
+	
+	<div class="panel-generic">
+		<p>If you're familiar with WorldEdit already, then WorldEditAdditions will follow the existing expectations you're used to. For players new to WorldEdit / WorldEditAdditions, we have a tutorial that will get you up to speed in no time!</p>
+		
+		<ul class="bigbutton-list">
+			<li><a class="bigbutton" href="/Reference">Reference</a></li>
+			<li><a class="bigbutton" href="/Cookbook">Cookbook</a></li>
+			<li><a class="bigbutton" href="/Tutorial">Tutorial for Beginners</a></li>
+		</ul>
+	</div>
 </section>
