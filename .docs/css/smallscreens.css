@@ -1,6 +1,6 @@
 @media (max-width: 1200px) {
 	nav > ul a {
-		padding: 0.5em;
+		padding: 1.45em 0.5em;
 	}
 }
 
@@ -24,6 +24,7 @@
 @media (max-width: 640px) {
 	nav > ul {
 		padding-top: 0.5em;
+		justify-content: center;
 		flex-wrap: wrap;
 	}
 	

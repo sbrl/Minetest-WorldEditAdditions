@@ -107,14 +107,14 @@ nav ul {
 nav > ul a {
 	background: var(--bg-transcluscent-slight);
 	display: inline-block;
-	padding: 1.2em 2em;
+	padding: 1.45em 2em;
 	text-decoration: none;
 	font-weight: bold;
 	color: var(--text-main);
 }
 nav li[aria-current=page] a {
-	margin: -0.25em;
-	border: 0.25em solid var(--bg-alt);
+	color: var(--bg-bright);
+	background: var(--text-main);
 }
 
 nav a.image {
