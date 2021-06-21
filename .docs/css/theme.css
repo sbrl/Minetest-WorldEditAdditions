@@ -102,6 +102,7 @@ nav ul {
 	margin: 0; padding: 0;
 	display: flex;
 	justify-content: space-evenly;
+	align-items: center;
 }
 nav > ul a {
 	background: var(--bg-transcluscent-slight);
@@ -247,6 +248,7 @@ footer {
 	display: flex;
 	flex-direction: column;
 	align-items: center; justify-content: center;
+	text-align: center; /* If any text wraps in a <p>, then this makes sure it's still centred */
 	background: content-box linear-gradient(var(--bg-transcluscent), var(--bg-transcluscent)),
 		var(--bg) center / cover;
 	
@@ -271,7 +273,7 @@ footer {
 .features-large > :where(figure, .features-item) {
 	background: var(--bg-transcluscent);
 	background-image: var(--pattern-bricks);
-	margin: 0.1em;
+	margin: 1em 0.1em;
 	padding: 1em;
 	max-width: 15em;
 	box-shadow: 0.25em 0.25em 0.5em var(--shadow);
@@ -306,12 +308,13 @@ footer {
 	padding: 1em 0;
 	display: flex;
 	justify-content: space-around;
+	flex-wrap: wrap;
 }
 
 .bigbutton {
 	display: inline-block;
 	
-	margin: 0;
+	margin: 0.25em 0;
 	padding: 0.35em 0.45em;
 	border: 0;
 	border-radius: 0.25em;
