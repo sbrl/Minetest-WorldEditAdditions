@@ -252,7 +252,7 @@ footer {
 	background: content-box linear-gradient(var(--bg-transcluscent), var(--bg-transcluscent)),
 		var(--bg) center / cover;
 	
-	height: 80vh;
+	height: max(30em, 80vh);
 	padding: 0 5em 0 5em;
 	box-sizing: border-box;
 }
@@ -281,7 +281,7 @@ footer {
 .features-item.wide {
 	flex: 1;
 	max-width: initial;
-	margin: 0.1em 2em;
+	margin: 0.5em 2em;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
