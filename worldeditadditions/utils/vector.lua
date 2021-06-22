@@ -5,7 +5,7 @@ function worldeditadditions.vector.tostring(v)
 	return "(" .. v.x ..", " .. v.y ..", " .. v.z ..")"
 end
 
--- Calculates the length squared of the given vector.
+--- Calculates the length squared of the given vector.
 -- @param	v	Vector	The vector to operate on
 -- @return	number		The length of the given vector squared
 function worldeditadditions.vector.lengthsquared(v)
@@ -103,4 +103,20 @@ end
 -- @param	target	Vector	Centre coordinates.
 function worldeditadditions.vector.mean(pos1, pos2)
 	return vector.new((pos1.x + pos2.x)/2, (pos1.y + pos2.y)/2, (pos1.z + pos2.z)/2)
+end
+
+--- Returns a vector of the min values of 2 positions.
+-- @param	pos1	Vector	pos1 of the defined region.
+-- @param	pos2	Vector	pos2 of the defined region.
+-- @return	Vector	Min values from input vectors.
+function worldeditadditions.vector.min(pos1, pos2)
+	return vector.new(math.min(pos1.x + pos2.x), math.min(pos1.y + pos2.y), math.min(pos1.z + pos2.z))
+end
+
+--- Returns a vector of the max values of 2 positions.
+-- @param	pos1	Vector	pos1 of the defined region.
+-- @param	pos2	Vector	pos2 of the defined region.
+-- @return	Vector	Max values from input vectors.
+function worldeditadditions.vector.max(pos1, pos2)
+	return vector.new(math.max(pos1.x + pos2.x), math.max(pos1.y + pos2.y), math.max(pos1.z + pos2.z))
 end
