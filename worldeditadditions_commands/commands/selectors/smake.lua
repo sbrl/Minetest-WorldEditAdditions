@@ -33,8 +33,8 @@ worldedit.register_command("smake", {
 		end
 		
 		-- Resolve target then mode (in that order incase mode is target).
-		if not targ then -- If no target set to default (xyz)
-			targ = "xyz"
+		if not targ then -- If no target set to default (xz)
+			targ = "xz"
 		elseif targ:match("[xyz]+") then -- ensure correct target syntax
 			targ = table.concat(wea.tochars(targ:match("[xyz]+"),true,true))
 		else
@@ -87,7 +87,7 @@ worldedit.register_command("smake", {
 					if mode == "avg" then
 						if int > _m then int = abs - 1
 						else int = abs + 1 end
-					elseif mode == "shrink" and abs > 1 then int = abs - 1
+					elseif mode == "shrink" and abs > 0 then int = abs - 1
 					else int = abs + 1 end
 				end
 				if neg then int = int * -1 end
@@ -96,11 +96,11 @@ worldedit.register_command("smake", {
 		elseif oper == "odd" then
 			eval = function(int)
 				local tmp, abs, neg = int / 2, math.abs(int), int < 0
-				if math.floor(tmp) ~= tmp then
+				if math.floor(tmp) == tmp then
 					if mode == "avg" then
 						if int > _m then int = abs - 1
 						else int = abs + 1 end
-					elseif mode == "shrink" and abs > 1 then int = abs - 1
+					elseif mode == "shrink" and abs > 0 then int = abs - 1
 					else int = abs + 1 end
 				end
 				if neg then int = int * -1 end
@@ -117,7 +117,7 @@ worldedit.register_command("smake", {
 		
 		-- for k,v in pairs(targ) do delta[k] = eval(delta[k]) end
 		
-		--- There is a test:
+		--- Test:
 		local brk = ""
 		for k,v in pairs(targ) do
 			brk = brk..k..": "..delta[k]..", "
