@@ -68,12 +68,12 @@ worldedit.register_command("smake", {
 	end,
 	func = function(name, oper, mode, targ, base)
 		local p1, p2, eval = vector.new(worldedit.pos1[name]), vector.new(worldedit.pos2[name]), function(int) return int or 0 end
-		local delta, targ, _m = vector.subtract(p2,p1), wea.tocharset(targ), 0 -- local delta equation: Vd(a) = V2(a) - V1(a)
+		local delta, _tl, targ, _m = vector.subtract(p2,p1), #targ, wea.tocharset(targ), 0 -- local delta equation: Vd(a) = V2(a) - V1(a)
 		
-		-- set _m to the max, min or mean of the target axes depending on mode
+		-- set _m to the max, min or mean of the target axes depending on mode (_tl is the length of targ)
 		if mode == "avg" then
 			for k,v in pairs(targ) do _m = _m + math.abs(delta[k]) end
-			_m = _m / #targ
+			_m = _m / _tl
 		elseif mode == "grow" then
 			for k,v in pairs(targ) do if math.abs(delta[k]) > _m then _m = math.abs(delta[k]) end end
 		else
@@ -115,18 +115,20 @@ worldedit.register_command("smake", {
 			return false, "Case \"equal\" not handled."
 		end
 		
-		-- for k,v in pairs(targ) do delta[k] = eval(delta[k]) end
-		
 		--- Test:
-		local brk = ""
-		for k,v in pairs(targ) do
-			brk = brk..k..": "..delta[k]..", "
-			delta[k] = eval(delta[k])
-			brk = brk..k..": "..delta[k]..", "
+		if false then
+			local brk = ""
+			for k,v in pairs(targ) do
+				brk = brk..k..": "..delta[k]..", "
+				delta[k] = eval(delta[k])
+				brk = brk..k..": "..delta[k]..", "
+			end
+			return false, brk
 		end
-		if true then return false, brk end
 		-- //multi //fp set1 589 2 -82 //fp set2 615 2 -53
 		-- //smake even shrink
+		
+		for k,v in pairs(targ) do delta[k] = eval(delta[k]) end
 		
 		worldedit.pos2[name] = vector.add(p1,delta)
 		worldedit.mark_pos2(name)
