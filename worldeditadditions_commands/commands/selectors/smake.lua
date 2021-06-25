@@ -70,13 +70,17 @@ worldedit.register_command("smake", {
 		local p1, p2, eval = vector.new(worldedit.pos1[name]), vector.new(worldedit.pos2[name]), function(int) return int or 0 end
 		local delta, _tl, targ, _m = vector.subtract(p2,p1), #targ, wea.tocharset(targ), 0 -- local delta equation: Vd(a) = V2(a) - V1(a)
 		
-		-- set _m to the max, min or mean of the target axes depending on mode (_tl is the length of targ)
-		if mode == "avg" then
+		-- set _m to the max, min or mean of the target axes depending on mode (_tl is the length of targ) or base if it exists
+		if base then _m = delta[base]
+		elseif mode == "avg" then
 			for k,v in pairs(targ) do _m = _m + math.abs(delta[k]) end
 			_m = _m / _tl
 		elseif mode == "grow" then
 			for k,v in pairs(targ) do if math.abs(delta[k]) > _m then _m = math.abs(delta[k]) end end
 		else
+			-- Take output of next(targ), put it in a table, wrap the table in brackets to force evlauation so that
+			-- we can call the first element of that table to serve as the key for a call to delta.
+			_m = delta[({next(targ)})[1]]
 			for k,v in pairs(targ) do if math.abs(delta[k]) < _m then _m = math.abs(delta[k]) end end
 		end
 		
@@ -106,13 +110,13 @@ worldedit.register_command("smake", {
 				if neg then int = int * -1 end
 				return int
 			end
-		elseif oper == "fac" then
-			-- Future feature to add compatability with //maze
-			-- //smake factor avg xz 5
-			-- //smake fac grow 3
-			-- Equasion: round(delta[<axis>] / factor) * factor
 		else -- Case: oper == "equal"
-			return false, "Case \"equal\" not handled."
+			eval = function(int)
+				-- Bug: shrink sets pos2 to pos1
+				if int < 0 then return _m * -1
+				else return _m end
+			end
+			-- return false, "Case \"equal\" not handled."
 		end
 		
 		--- Test:
