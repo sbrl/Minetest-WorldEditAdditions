@@ -1,0 +1,34 @@
+@media (max-width: 1200px) {
+	nav > ul a {
+		padding: 1.45em 0.5em;
+	}
+}
+
+
+@media (max-width: 930px) {
+	nav {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	nav > h1 {
+		width: 100%;
+	}
+	
+	.bigbox {
+		padding: 0 5vmin;
+	}
+}
+
+@media (max-width: 640px) {
+	nav > ul {
+		padding-top: 0.5em;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	
+	.bigbox h1 {
+		font-size: 1.5em;
+	}
+}

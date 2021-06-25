@@ -10,6 +10,12 @@ be (slightly) less hacky once :target-within lands in browsers.
 
 Exported to codepen: https://codepen.io/sbrl/details/YzZJYxg
  */
+ 
+@media (orientation: landscape) {
+	.gallerybox-gallery {
+		max-width: 95vw;
+	}
+}
 
 
 .gallerybox {
