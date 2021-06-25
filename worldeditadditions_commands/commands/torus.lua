@@ -5,7 +5,7 @@
 --    ██     ██████  ██   ██  ██████  ███████
 local function parse_params_torus(params_text)
 	local parts = worldeditadditions.split(params_text, "%s+", false)
-
+	
 	if #parts < 1 then
 		return false, "Error: No replace_node specified."
 	end
@@ -15,14 +15,14 @@ local function parse_params_torus(params_text)
 	if #parts < 3 then
 		return false, "Error: No minor radius specified (expected integer greater than 0)."
 	end
-
+	
 	local major_radius = tonumber(parts[1])
 	local minor_radius = tonumber(parts[2])
 	local replace_node = worldedit.normalize_nodename(parts[3])
 	local axes
 	if #parts > 3 then axes = parts[4] end
 	if not axes then axes = "xy" end
-
+	
 	if major_radius < 1 then
 		return false, "Error: The major radius must be greater than 0."
 	end
