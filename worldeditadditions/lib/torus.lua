@@ -46,7 +46,7 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 				local x_sq = x*x
 				
 				local sq = vector.new(x_sq, y_sq, z_sq)
-
+				
 				-- Default: xy
 				if axes == "xz" then
 					sq.x, sq.y, sq.z = sq.x, sq.z, sq.y
