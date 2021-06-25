@@ -602,6 +602,55 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //scube -z 12 -y -2 x -2
 ```
 
+## `//smake <operation> <mode> [<target=xz> [<base>]]`
+Short for _selection make_. Modifies existing selection by moving pos2. Allows you to make the selection an odd or even length on one or more axes or set two or more axes equal to each other or the longest, shortest or average of them. Implementation thanks to @VorTechnix.
+
+Usage examples:
+
+```
+//smake odd shrink
+//smake even avg xz
+//smake equal grow xy
+//smake equal average
+//smake equal zy x
+```
+
+### `<operation>`: odd/even/equal/factor
+
+|Value | Description |
+| --- | --- |
+odd: | round up or down, based on mode, all axes specified in `<target>` to the nearest odd length relative to pos1
+even: | round up or down, based on mode, all axes specified in `<target>` to the nearest even length relative to pos1
+equal: | set `<target>` axes length equal to the length of `<base>` axis if specified or to the length of the largest, smallest or average of the `<target>` axes based on mode.
+
+### `<mode>:` grow/shrink/average
+
+#### *If `<operation>` == odd or even:*
+
+|Value | Description |
+| --- | --- |
+grow: | grow each axis specified in `<target>` to the nearest odd/even number to itself
+shrink: | shrink each axis specified in `<target>` to the nearest odd/even number to itself
+average/avg: | take the average of all axes specified in `<target>` and then for each specified axis grow or shrink it, depending on weather it is less than or greater than the average, to the nearest odd/even number to itself
+
+#### *If `<operation>` == equal:* ^[1]
+
+|Value | Description |
+| --- | --- |
+grow: | grow each axis specified in `<target>` to the length of the longest specified axis
+shrink: | shrink each axis specified in `<target>` to the length of the shortest specified axis
+average/avg: | set each axis specified in `<target>` to the average length of all the specified axes
+
+### Additional arguments:
+
+|Name  | Description |
+| --- | --- |
+`<target>`: | Specify axes to perform operation on (default= xz)|
+`<base>`: If `<operation>` == odd or even: | Does nothing 
+`<base>`: If `<operation>` == equal: | Overrides `<mode>`^[1] and sets all `<target>` axes equal to itself
+	
+^[1]: `<mode>` argument can be omitted and will not be parsed if present if `<base>` is specified
+
 ## `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
 

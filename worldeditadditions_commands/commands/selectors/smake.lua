@@ -61,7 +61,7 @@ worldedit.register_command("smake", {
 			return false, "Error: Invalid operator \""..oper.."\". Expected \"odd\", \"even\" or \"equal\"."
 		end
 		
-		if false then
+		if false then -- Argument test
 			return false, "<operator>: " .. oper .. ", <mode>: " .. tostring(mode) .. ", <target>: " .. tostring(targ) .. ", <base>: " .. tostring(base)
 		end
 		return true, oper, mode, targ, base
