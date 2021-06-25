@@ -4,7 +4,6 @@
 -- @param	rem_dups	bool	Remove duplicate characters
 -- @returns	table	A sequence table containing the substrings
 function worldeditadditions.tochars(text,sort,rem_dups)
---function tochars(text,s,d)
 	local t, set = {}, {}
 	if rem_dups then
 		text:gsub(".",function(c) set[c] = true end)
