@@ -17,7 +17,7 @@ function worldeditadditions.tochars(text,sort,rem_dups)
 	return t
 end
 
---- Split into set of characters.
+--- Split into a set of characters.
 -- @param	text	string	The string to iterate over
 -- @returns	table	A sequence set table containing the substrings
 function worldeditadditions.tocharset(text)
