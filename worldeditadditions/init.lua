@@ -8,6 +8,7 @@
 worldeditadditions = {}
 worldeditadditions.modpath = minetest.get_modpath("worldeditadditions")
 dofile(worldeditadditions.modpath.."/utils/vector.lua")
+dofile(worldeditadditions.modpath.."/utils/vector3.lua")
 
 dofile(worldeditadditions.modpath.."/utils/strings/init.lua")
 dofile(worldeditadditions.modpath.."/utils/format/init.lua")
