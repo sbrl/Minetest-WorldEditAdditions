@@ -67,10 +67,15 @@ worldedit.register_command("smake", {
 		return true, oper, mode, targ, base
 	end,
 	func = function(name, oper, mode, targ, base)
-		local p1, p2, eval = vector.new(worldedit.pos1[name]), vector.new(worldedit.pos2[name]), function(int) return int or 0 end
-		local delta, _tl, targ, _m = vector.subtract(p2,p1), #targ, wea.tocharset(targ), 0 -- local delta equation: Vd(a) = V2(a) - V1(a)
+		local p1, p2, = vector.new(worldedit.pos1[name]), vector.new(worldedit.pos2[name])
+		local eval = function() end -- Declare eval placeholder function to edit later
 		
-		-- set _m to the max, min or mean of the target axes depending on mode (_tl is the length of targ) or base if it exists
+		local delta = vector.subtract(p2,p1) -- local delta equation: Vd(a) = V2(a) - V1(a)
+		local _tl = #targ -- Get targ length as a variable incase mode is "average"/"avg"
+		local targ = wea.tocharset(targ) -- Break up targ string into set table
+		local _m =  0 -- _m is the container to hold the max, min or average (depending on the mode) of the axes in targ targ
+		
+		-- set _m to the max, min or mean of the target axes depending on mode or base if it exists
 		if base then _m = delta[base]
 		elseif mode == "avg" then
 			for k,v in pairs(targ) do _m = _m + math.abs(delta[k]) end
