@@ -109,6 +109,12 @@ end
 function Vector3.ceil(a)
 	return Vector3.new(math.ceil(a.x), math.ceil(a.y), math.ceil(a.z))
 end
+--- Rounds the components of this vector.
+-- @param 	a		Vector3		The vector to operate on.
+-- @returns	Vector3	A new instance with the x/y/z components rounded.
+function Vector3.round(a)
+	return Vector3.new(math.floor(a.x+0.5), math.floor(a.y+0.5), math.floor(a.z+0.5))
+end
 
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
