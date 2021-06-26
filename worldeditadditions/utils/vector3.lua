@@ -253,6 +253,102 @@ function Vector3.abs(a)
 	return Vector3.new(math.abs(a.x), math.abs(a.y), math.abs(a.z))
 end
 
+--- Sorts the components of the given vectors.
+-- pos1 will contain the minimum values, and pos2 the maximum values.
+-- Returns 2 new vectors.
+-- Note that the vectors provided do not *have* to be instances of Vector3.
+-- It is only required that they have the keys x, y, and z.
+-- Vector3 instances are always returned.
+-- This enables convenient ingesting of positions from outside.
+-- @param	pos1	Vector3		The first vector to operate on.
+-- @param	pos2	Vector3		The second vector to operate on.
+-- @returns	Vector3,Vector3		The 2 sorted vectors.
+function Vector3.sort(pos1, pos2)
+	local pos1_new = Vector3.clone(pos1) -- This way we can accept non-Vector3 instances
+	local pos2_new = Vector3.clone(pos2) -- This way we can accept non-Vector3 instances
+	if pos1_new.x > pos2_new.x then
+		pos1_new.x, pos2_new.x = pos2_new.x, pos1_new.x
+	end
+	if pos1_new.y > pos2_new.y then
+		pos1_new.y, pos2_new.y = pos2_new.y, pos1_new.y
+	end
+	if pos1_new.z > pos2_new.z then
+		pos1_new.z, pos2_new.z = pos2_new.z, pos1_new.z
+	end
+	return pos1_new, pos2_new
+end
+
+--- Determines if this vector is contained within the region defined by the given vectors.
+-- @param	a		Vector3		The target vector to check.
+-- @param	pos1	Vector3		pos1 of the defined region.
+-- @param	pos2	Vector3		pos2 of the defined region.
+-- @return	boolean	Whether the given target is contained within the defined worldedit region.
+function Vector3.is_contained(target, pos1, pos2)
+	local pos1, pos2 = Vector3.sort(pos1, pos2)
+	
+	return pos1.x <= target.x
+		and pos1.y <= target.y
+		and pos1.z <= target.z
+		and pos2.x >= target.x
+		and pos2.y >= target.y
+		and pos2.z >= target.z
+end
+
+
+--- Expands the defined region to include the given point.
+-- @param	target	Vector3	The target vector to include.
+-- @param	pos1	Vector3	pos1 of the defined region.
+-- @param	pos2	Vector3	pos2 of the defined region.
+-- @returns	Vector3,Vector3		2 vectors that represent the expand_region.
+function Vector3.expand_region(target, pos1, pos2)
+	local pos1, pos2 = Vector3.sort(pos1, pos2)
+	
+	if target.x < pos1.x then pos1.x = target.x end
+	if target.y < pos1.y then pos1.y = target.y end
+	if target.z < pos1.z then pos1.z = target.z end
+	
+	if target.x > pos2.x then pos2.x = target.x end
+	if target.y > pos2.y then pos2.y = target.y end
+	if target.z > pos2.z then pos2.z = target.z end
+	
+	return pos1, pos2
+end
+
+--- Returns the mean (average) of 2 positions.
+-- In other words, returns the centre of 2 points.
+-- @param	pos1	Vector3	pos1 of the defined region.
+-- @param	pos2	Vector3	pos2 of the defined region.
+-- @param	target	Vector3	Centre coordinates.
+function Vector3.mean(pos1, pos2)
+	return (pos1 + pos2) / 2
+end
+
+
+--- Returns a vector of the min components of 2 vectors.
+-- @param	pos1	Vector3		The first vector to operate on.
+-- @param	pos2	Vector3		The second vector to operate on.
+-- @return	Vector3	The minimum values from the input vectors
+function Vector3.min(pos1, pos2)
+	return Vector3.new(
+		math.min(pos1.x, pos2.x),
+		math.min(pos1.y, pos2.y),
+		math.min(pos1.z, pos2.z)
+	)
+end
+
+--- Returns a vector of the max values of 2 vectors.
+-- @param	pos1	Vector3		The first vector to operate on.
+-- @param	pos2	Vector3		The second vector to operate on.
+-- @return	Vector3		The maximum values from the input vectors.
+function Vector3.max(pos1, pos2)
+	return Vector3.new(
+		math.max(pos1.x, pos2.x),
+		math.max(pos1.y, pos2.y),
+		math.max(pos1.z, pos2.z)
+	)
+end
+
+
 
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
