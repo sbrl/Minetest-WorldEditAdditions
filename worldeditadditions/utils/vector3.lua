@@ -134,6 +134,27 @@ function Vector3.area(a)
 	return a.x * a.y * a.z
 end
 
+--- Returns the scalar length of this vector squared.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	number	The length squared of this vector as a scalar value.
+function Vector3.length_squared(a)
+	return a.x * a.x + a.y * a.y + a.z * a.z
+end
+
+--- Square roots each component of this vector.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	number	A new vector with each component square rooted.
+function Vector3.sqrt(a)
+	return Vector3.new(math.sqrt(a.x), math.sqrt(a.y), math.sqrt(a.z))
+end
+
+--- Calculates the scalar length of this vector.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	number	The length of this vector as a scalar value.
+function Vector3.length(a)
+	return math.sqrt(a:length_squared())
+end
+
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
 -- ██    ██ ██████  █████   ██████  ███████    ██    ██    ██ ██████
