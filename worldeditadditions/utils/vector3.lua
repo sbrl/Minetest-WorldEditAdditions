@@ -1,3 +1,4 @@
+--- A 3-dimensional vector.
 local Vector3 = {}
 Vector3.__index = Vector3
 
