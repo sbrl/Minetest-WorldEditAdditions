@@ -13,7 +13,7 @@ Note to self: See the bottom of this file for the release template text.
      - Any `<chance>` can now either be a 1-in-N number (e.g. `4`, `10`), or a percentage chance (e.g. `50%`, `10%`).
      - Caveat: Percentages are converted to a 1-in-N chance, but additionally that number is rounded down in some places
  - `//torus`, `//hollowtorus`: Add optional new axes
- - `//torus`: Add optional hollow keyword
+ - `//torus`: Add optional hollow keyword - @VorTechnix
  - `//multi`: Add curly brace syntax for nesting command calls ([more information](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#multi-command_a-command_b-command_c-))
  - `//erode`: Add new `river` erosion algorithm for filling in potholes and removing pillars
 
