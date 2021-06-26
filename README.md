@@ -82,6 +82,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 
 ### Tools
  - [WorldEditAdditions Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#far-wand)
+ - [WorldEditAdditions Cloud Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#cloud-wand)
  - [`//farwand skip_liquid (true|false) | maxdist <number>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#farwand-skip_liquid-truefalse--maxdist-number)
 
 
