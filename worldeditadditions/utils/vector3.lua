@@ -229,6 +229,22 @@ function Vector3.move_towards(a, b, amount)
 	return a + (b - a):limit_to(amount)
 end
 
+--- Returns the value of the minimum component of the vector.
+-- Returns a scalar value.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	number	The value of the minimum component of the vector.
+function Vector3.min_component(a)
+	return math.min(a.x, a.y, a.z)
+end
+
+--- Returns the value of the maximum component of the vector.
+-- Returns a scalar value.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	number	The value of the maximum component of the vector.
+function Vector3.max_component(a)
+	return math.max(a.x, a.y, a.z)
+end
+
 
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
