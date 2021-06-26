@@ -9,6 +9,7 @@ See also:
 
 
 ## Fix lighting
+
 ```
 //multi //1 //2 //outset 50 //fixlight //y
 ```

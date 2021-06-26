@@ -7,13 +7,14 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//spush`, `//spop`, and `//sstack`
  - Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
  - Add `//scloud` (_select point cloud_), `//scentre` (_select centre node(s)_), `//srel` (_select relative_)  - thanks, @VorTechnix!
+ - Add `//smake` (_selection make_) - thanks, @VorTechnix!
  - Significantly refactored backend utility functions (more to come in future updates)
  - `//bonemeal`: Try bonemealing everything that isn't an air block (#49)
  - Add new universal chance parsing
      - Any `<chance>` can now either be a 1-in-N number (e.g. `4`, `10`), or a percentage chance (e.g. `50%`, `10%`).
      - Caveat: Percentages are converted to a 1-in-N chance, but additionally that number is rounded down in some places
  - `//torus`, `//hollowtorus`: Add optional new axes
- - `//torus`: Add optional hollow keyword - @VorTechnix
+ - `//torus`, `//ellipsoid`: Add optional hollow keyword - @VorTechnix
  - `//multi`: Add curly brace syntax for nesting command calls ([more information](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#multi-command_a-command_b-command_c-))
  - `//erode`: Add new `river` erosion algorithm for filling in potholes and removing pillars
 

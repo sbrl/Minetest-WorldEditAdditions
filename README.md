@@ -28,7 +28,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 The detailed explanations have moved! Check them out [here](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md), or click the links below.
 
 ### Geometry
- - [`//ellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#ellipsoid-rx-ry-rz-node_name)
+ - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#ellipsoid-rx-ry-rz-node_name-hollow)
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#hollowellipsoid-rx-ry-rz-node_name)
  - [`//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#torus-major_radius-minor_radius-node_name-axesxy-hollow)
  - [`//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#hollowtorus-major_radius-minor_radius-node_name-axesxy)

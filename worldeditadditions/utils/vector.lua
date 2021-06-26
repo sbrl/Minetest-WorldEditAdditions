@@ -5,7 +5,7 @@ function worldeditadditions.vector.tostring(v)
 	return "(" .. v.x ..", " .. v.y ..", " .. v.z ..")"
 end
 
--- Calculates the length squared of the given vector.
+--- Calculates the length squared of the given vector.
 -- @param	v	Vector	The vector to operate on
 -- @return	number		The length of the given vector squared
 function worldeditadditions.vector.lengthsquared(v)
@@ -53,6 +53,17 @@ function worldeditadditions.vector.ceil(v)
 	if v.z then v.z = math.ceil(v.z) end
 end
 
+--- Sets the values in a vector to their absolute values.
+-- Warning: This MUTATES the given vector!
+-- @param	v	Vector	The vector to operate on
+function worldeditadditions.vector.abs(v)
+	if v.x then v.x = math.abs(v.x) end
+	-- Some vectors are 2d, but on the x / z axes
+	if v.y then v.y = math.abs(v.y) end
+	-- Some vectors are 2d
+	if v.z then v.z = math.abs(v.z) end
+end
+
 --- Determines if the target point is contained within the defined worldedit region.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
@@ -92,4 +103,20 @@ end
 -- @param	target	Vector	Centre coordinates.
 function worldeditadditions.vector.mean(pos1, pos2)
 	return vector.new((pos1.x + pos2.x)/2, (pos1.y + pos2.y)/2, (pos1.z + pos2.z)/2)
+end
+
+--- Returns a vector of the min values of 2 positions.
+-- @param	pos1	Vector	pos1 of the defined region.
+-- @param	pos2	Vector	pos2 of the defined region.
+-- @return	Vector	Min values from input vectors.
+function worldeditadditions.vector.min(pos1, pos2)
+	return vector.new(math.min(pos1.x + pos2.x), math.min(pos1.y + pos2.y), math.min(pos1.z + pos2.z))
+end
+
+--- Returns a vector of the max values of 2 positions.
+-- @param	pos1	Vector	pos1 of the defined region.
+-- @param	pos2	Vector	pos2 of the defined region.
+-- @return	Vector	Max values from input vectors.
+function worldeditadditions.vector.max(pos1, pos2)
+	return vector.new(math.max(pos1.x + pos2.x), math.max(pos1.y + pos2.y), math.max(pos1.z + pos2.z))
 end

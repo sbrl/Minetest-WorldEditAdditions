@@ -109,13 +109,15 @@ Note that the *entire* cave you want filling must be selected, as `//fillcaves` 
 //fillcaves brick
 ```
 
-## `//ellipsoid <rx> <ry> <rz> <node_name>`
+## `//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`
 Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
 
 ```
 //ellipsoid 10 5 15 ice
 //ellipsoid 3 5 10 dirt
 //ellipsoid 20 10 40 air
+//ellipsoid 14 5 8 steelblock h
+//ellipsoid 7 4 7 papyrus hollow
 ```
 
 ## `//hollowellipsoid <rx> <ry> <rz> <node_name>`
@@ -447,7 +449,7 @@ maxdiff				| `float`	| 0.4				| The maximum difference in height (between 0 and 
 count				| `float`	| 25000				| The number of snowballs to simulate.
 noconv				| any		| n/a				| When set to any value, disables to automatic 3x3 gaussian convolution.
 
-Example invocations:
+Usage examples:
 
 ```
 //erode
@@ -468,7 +470,7 @@ raise_sides			| `string`	| 4,3				| Comma separated list of numbers. Columns wit
 doraise				| `boolean`	| true				| Whether to raise columns in height. If false, then no columns will be raised in height even if they are eligible to be so according to `raise_sides`.
 dolower				| `boolean`	| true				| Whether to lower columns in height. If false, then no columns will be lowered in height even if they are eligible to be so according to `lower_sides`.
 
-Example invocations:
+Usage examples:
 
 ```
 //erode river
@@ -584,14 +586,14 @@ Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punc
 ```
 
 ## `//scentre`
-Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the current selection area. 1, 2, 4 or 8 nodes may be selected depending on what parts of the original selection are even in distance. Implementation by @VorTechnix.
+Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the current selection area. 1, 2, 4 or 8 nodes may be selected depending on what parts of the original selection are even in distance. Implementation thanks to @VorTechnix.
 
 ```
 //scentre
 ```
 
 ## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
-Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation by @VorTechnix.
+Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```
 //srel front 5
@@ -599,6 +601,55 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //srel left 3 up 5 -front 7
 //scube -z 12 -y -2 x -2
 ```
+
+## `//smake <operation> <mode> [<target=xz> [<base>]]`
+Short for _selection make_. Modifies existing selection by moving pos2. Allows you to make the selection an odd or even length on one or more axes or set two or more axes equal to each other or the longest, shortest or average of them. Implementation thanks to @VorTechnix.
+
+Usage examples:
+
+```
+//smake odd shrink
+//smake even avg xz
+//smake equal grow xy
+//smake equal average
+//smake equal zy x
+```
+
+### `<operation>`: odd/even/equal/factor
+
+|Value | Description |
+| --- | --- |
+odd: | round up or down, based on mode, all axes specified in `<target>` to the nearest odd length relative to pos1
+even: | round up or down, based on mode, all axes specified in `<target>` to the nearest even length relative to pos1
+equal: | set `<target>` axes length equal to the length of `<base>` axis if specified or to the length of the largest, smallest or average of the `<target>` axes based on mode.
+
+### `<mode>:` grow/shrink/average
+
+#### *If `<operation>` == odd or even:*
+
+|Value | Description |
+| --- | --- |
+grow: | grow each axis specified in `<target>` to the nearest odd/even number to itself
+shrink: | shrink each axis specified in `<target>` to the nearest odd/even number to itself
+average/avg: | take the average of all axes specified in `<target>` and then for each specified axis grow or shrink it, depending on weather it is less than or greater than the average, to the nearest odd/even number to itself
+
+#### *If `<operation>` == equal:* ^[1]
+
+|Value | Description |
+| --- | --- |
+grow: | grow each axis specified in `<target>` to the length of the longest specified axis
+shrink: | shrink each axis specified in `<target>` to the length of the shortest specified axis
+average/avg: | set each axis specified in `<target>` to the average length of all the specified axes
+
+### Additional arguments:
+
+|Name  | Description |
+| --- | --- |
+`<target>`: | Specify axes to perform operation on (default= xz)|
+`<base>`: If `<operation>` == odd or even: | Does nothing 
+`<base>`: If `<operation>` == equal: | Overrides `<mode>`^[1] and sets all `<target>` axes equal to itself
+	
+^[1]: `<mode>` argument can be omitted and will not be parsed if present if `<base>` is specified
 
 ## `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
