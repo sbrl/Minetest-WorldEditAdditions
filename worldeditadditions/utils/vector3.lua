@@ -230,9 +230,8 @@ end
 -- ██    ██  ██  ██  ██      ██   ██ ██   ██ ██ ██   ██ ██           ██
 --  ██████    ████   ███████ ██   ██ ██   ██ ██ ██████  ███████ ███████
 
-function Vector3.__call(x, y, z)
-	return Vector3.new(x, y, z)
-end
+function Vector3.__call(x, y, z) return Vector3.new(x, y, z) end
+
 function Vector3.__add(a, b)
 	return Vector3.add(a, b)
 end
