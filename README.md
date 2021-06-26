@@ -65,6 +65,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//scloud <0-6|stop|reset>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#scloud-0-6stopreset)
  - [`//scentre`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#scentre)
  - [`//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#srel-axis1-length1-axis2-length2-axis3-length3)
+ - [`//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#smake-operationoddevenequal-modegrowshrinkaverage-targetxz-base)
  - [`//sstack`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#sstack)
  - [`//spush`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#spush)
  - [`//spop`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#spop)
