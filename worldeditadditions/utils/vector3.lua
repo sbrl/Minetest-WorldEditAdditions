@@ -174,6 +174,17 @@ function Vector3.dot_product(a, b)
 	return Vector3.dot(a, b)
 end
 
+--- Determines if 2 vectors are equal to each other.
+-- 2 vectors are equal if their values are identical.
+-- @param	a		Vector3		The first vector to test.
+-- @param	a		Vector3		The second vector to test.
+-- @returns	bool	Whether the 2 vectors are equal or not.
+function Vector3.equals(a, b)
+	return a.x == b.x
+		and a.y == b.y
+		and a.z == b.z
+end
+
 --- Returns a new vector whose length clamped to the given length.
 -- The direction in which the vector is pointing is not changed.
 -- @param	a		Vector3		The vector to operate on.
@@ -236,6 +247,10 @@ end
 
 function Vector3.__div(a, b)
 	return Vector3.divide(a, b)
+end
+
+function Vector3.__eq(a, b)
+	return Vector3.equals(a, b)
 end
 
 --- Returns the current Vector3 as a string.

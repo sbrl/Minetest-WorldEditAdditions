@@ -37,7 +37,9 @@ describe("Vector3.limit_to", function()
 			Vector3.new(80198051, 80198051, 80198051),
 			result
 		)
-		assert.are_not.equal(result, a)
+		a.x = 4
+		assert.are.same(Vector3.new(4, 801980510, 801980510), a)
+		assert.are.same(Vector3.new(80198051, 80198051, 80198051), result)
 	end)
 	it("should return a new Vector3 instance if the length is smaller", function()
 		local a = Vector3.new(3, 4, 5)
@@ -47,6 +49,8 @@ describe("Vector3.limit_to", function()
 			Vector3.new(3, 4, 5),
 			result
 		)
-		assert.are_not.equal(result, a)
+		a.x = 40
+		assert.are.same(Vector3.new(40, 4, 5), a)
+		assert.are.same(Vector3.new(3, 4, 5), result)
 	end)
 end)
