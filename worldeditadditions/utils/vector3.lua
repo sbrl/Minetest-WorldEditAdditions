@@ -116,6 +116,14 @@ function Vector3.round(a)
 	return Vector3.new(math.floor(a.x+0.5), math.floor(a.y+0.5), math.floor(a.z+0.5))
 end
 
+--- Returns the area of this vector.
+-- In other words, multiplies all the components together and returns a scalar value.
+-- @param	a		Vector3		The vector to return the area of.
+-- @returns	number	The area of this vector.
+function Vector3.area(a)
+	return a.x * a.y * a.z
+end
+
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
 -- ██    ██ ██████  █████   ██████  ███████    ██    ██    ██ ██████
