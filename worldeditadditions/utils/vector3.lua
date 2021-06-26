@@ -175,6 +175,17 @@ function Vector3.limit_to(a, length)
 	return a:clone()
 end
 
+--- Returns a new vector whose length clamped to the given length.
+-- The direction in which the vector is pointing is not changed.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	Vector3	A new Vector3 instance limited to the specified length.
+function Vector3.set_to(a, length)
+	if type(length) ~= "number" then error("Error: Expected number, but found "..type(length)..".") end
+	
+	return (a / a:length()) * length
+end
+
+
 --- Return a vector that is amount distance towards b from a.
 -- @param	a		Vector3		The vector to move from.
 -- @param	b		Vector3		The vector to move towards.
