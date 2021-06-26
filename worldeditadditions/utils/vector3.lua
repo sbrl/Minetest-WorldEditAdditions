@@ -175,6 +175,14 @@ function Vector3.limit_to(a, length)
 	return a:clone()
 end
 
+--- Return a vector that is amount distance towards b from a.
+-- @param	a		Vector3		The vector to move from.
+-- @param	b		Vector3		The vector to move towards.
+-- @param	amount	number		The amount to move.
+function Vector3.move_towards(a, b, amount)
+	return a + (b - a):limit_to(amount)
+end
+
 
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
