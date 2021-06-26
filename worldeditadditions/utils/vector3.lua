@@ -245,6 +245,14 @@ function Vector3.max_component(a)
 	return math.max(a.x, a.y, a.z)
 end
 
+--- Returns the absolute form of this vector.
+-- In other words, it removes the minus sign from all components of the vector.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	Vector3	The absolute form of the given vector.
+function Vector3.abs(a)
+	return Vector3.new(math.abs(a.x), math.abs(a.y), math.abs(a.z))
+end
+
 
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
