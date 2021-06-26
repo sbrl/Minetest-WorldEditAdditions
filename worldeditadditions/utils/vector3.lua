@@ -162,6 +162,20 @@ function Vector3.length(a)
 	return math.sqrt(a:length_squared())
 end
 
+--- Returns a new vector whose length clamped to the given length.
+-- The direction in which the vector is pointing is not changed.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	Vector3	A new Vector3 instance limited to the specified length.
+function Vector3.limit_to(a, length)
+	if type(length) ~= "number" then error("Error: Expected number, but found "..type(length)..".") end
+	
+	if a:length() > length then
+		return (a / a:length()) * length
+	end
+	return a:clone()
+end
+
+
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
 -- ██    ██ ██████  █████   ██████  ███████    ██    ██    ██ ██████
