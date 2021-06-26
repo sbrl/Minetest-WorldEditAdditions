@@ -602,7 +602,7 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //scube -z 12 -y -2 x -2
 ```
 
-## `//smake <operation> <mode> [<target=xz> [<base>]]`
+## `//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`
 Short for _selection make_. Modifies existing selection by moving pos2. Allows you to make the selection an odd or even length on one or more axes or set two or more axes equal to each other or the longest, shortest or average of them. Implementation thanks to @VorTechnix.
 
 Usage examples:
