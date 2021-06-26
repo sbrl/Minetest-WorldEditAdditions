@@ -27,7 +27,7 @@ luarocks_root="${PWD}/.luarocks";
 # Setup the lua module path
 eval "$(luarocks --tree "${luarocks_root}" path)";
 
-mode="${1}"; shift;
+mode="${1}"; if [[ "$#" -gt 0 ]]; then shift; fi
 
 run_setup() {
 	log_msg "Installing busted";

@@ -1,0 +1,25 @@
+local Vector3 = require("worldeditadditions.utils.vector3")
+
+describe("Vector3.add", function()
+	it("should create a new Vector3", function()
+		assert.are.same(
+			Vector3.new(3, 4, 5),
+			{ x = 3, y = 4, z = 5 }
+		)
+	end)
+	it("should throw an error on invalid x", function()
+		assert.has.errors(function()
+			Vector3.new("cheese", 4, 5)
+		end)
+	end)
+	it("should throw an error on invalid y", function()
+		assert.has.errors(function()
+			Vector3.new(4, "cheese", 5)
+		end)
+	end)
+	it("should throw an error on invalid z", function()
+		assert.has.errors(function()
+			Vector3.new(66, 2, "cheese")
+		end)
+	end)
+end)
