@@ -96,6 +96,20 @@ end
 --- Alias for Vector3.divide.
 function Vector3.div(a, b) return Vector3.divide(a, b) end
 
+
+--- Rounds the components of this vector down.
+-- @param 	a		Vector3		The vector to operate on.
+-- @returns	Vector3	A new instance with the x/y/z components rounded down.
+function Vector3.floor(a)
+	return Vector3.new(math.floor(a.x), math.floor(a.y), math.floor(a.z))
+end
+--- Rounds the components of this vector up.
+-- @param 	a		Vector3		The vector to operate on.
+-- @returns	Vector3	A new instance with the x/y/z components rounded up.
+function Vector3.ceil(a)
+	return Vector3.new(math.ceil(a.x), math.ceil(a.y), math.ceil(a.z))
+end
+
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
 -- ██    ██ ██   ██ ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
 -- ██    ██ ██████  █████   ██████  ███████    ██    ██    ██ ██████
