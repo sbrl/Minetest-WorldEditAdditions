@@ -162,6 +162,18 @@ function Vector3.length(a)
 	return math.sqrt(a:length_squared())
 end
 
+--- Calculates the dot product of this vector and another vector.
+-- @param	a		Vector3		The first vector to operate on.
+-- @param	a		Vector3		The second vector to operate on.
+-- @returns	number	The dot product of this vector as a scalar value.
+function Vector3.dot(a, b)
+	return a.x * b.x + a.y * b.y + a.z * b.z;
+end
+--- Alias of Vector3.dot.
+function Vector3.dot_product(a, b)
+	return Vector3.dot(a, b)
+end
+
 --- Returns a new vector whose length clamped to the given length.
 -- The direction in which the vector is pointing is not changed.
 -- @param	a		Vector3		The vector to operate on.
