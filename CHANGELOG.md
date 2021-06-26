@@ -3,7 +3,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
-## v1.12: The selection tools update (unreleased)
+## v1.12: The selection tools update
  - Add `//spush`, `//spop`, and `//sstack`
  - Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
  - Add `//scloud` (_select point cloud_), `//scentre` (_select centre node(s)_), `//srel` (_select relative_)  - thanks, @VorTechnix!
