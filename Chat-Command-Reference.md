@@ -629,28 +629,28 @@ Usage examples:
 
 Value   | Description
 --------|---------------
-odd		| Round up or down, based on mode, all axes specified in `<target>` to the nearest odd length relative to pos1
-even	| Round up or down, based on mode, all axes specified in `<target>` to the nearest even length relative to pos1
-equal	| Set `<target>` axes length equal to the length of `<base>` axis if specified or to the length of the largest, smallest or average of the `<target>` axes based on mode.
+`odd`	| Round up or down, based on mode, all axes specified in `<target>` to the nearest odd length relative to pos1
+`even`	| Round up or down, based on mode, all axes specified in `<target>` to the nearest even length relative to pos1
+`equal`	| Set `<target>` axes length equal to the length of `<base>` axis if specified or to the length of the largest, smallest or average of the `<target>` axes based on mode.
 
 ### `<mode>`: grow|shrink|average
 
 #### *If `<operation>` == odd or even:*
 
-Value		| Description
-------------|--------------
-grow		| Grow each axis specified in `<target>` to the nearest odd/even number to itself
-shrink		| Shrink each axis specified in `<target>` to the nearest odd/even number to itself
-average/avg	| Take the average of all axes specified in `<target>` and then for each specified axis grow or shrink it, depending on weather it is less than or greater than the average, to the nearest odd/even number to itself
+Value			| Description
+----------------|--------------
+`grow`			| Grow each axis specified in `<target>` to the nearest odd/even number to itself
+`shrink`		| Shrink each axis specified in `<target>` to the nearest odd/even number to itself
+`average`|`avg`	| Take the average of all axes specified in `<target>` and then for each specified axis grow or shrink it, depending on weather it is less than or greater than the average, to the nearest odd/even number to itself
 
 #### *If `<operation>` == equal:*
 The `<mode>` argument can be omitted and will not be parsed if present if `<base>` is specified
 
-Value		| Description
-------------|---------------
-grow		| Grow each axis specified in `<target>` to the length of the longest specified axis
-shrink		| Shrink each axis specified in `<target>` to the length of the shortest specified axis
-average/avg	| Set each axis specified in `<target>` to the average length of all the specified axes
+Value			| Description
+----------------|---------------
+`grow`			| Grow each axis specified in `<target>` to the length of the longest specified axis
+`shrink`		| Shrink each axis specified in `<target>` to the length of the shortest specified axis
+`average`|`avg`	| Set each axis specified in `<target>` to the average length of all the specified axes
 
 ### Additional arguments:
 
