@@ -208,6 +208,18 @@ function Vector3.set_to(a, length)
 	return (a / a:length()) * length
 end
 
+--- Returns the unit vector of this vector.
+-- The unit vector is a vector with a length of 1.
+-- Returns a new vector.
+-- Does not change the direction of the vector.
+-- @param	a		Vector3		The vector to operate on.
+-- @returns	Vector3	The unit vector of this vector.
+function Vector3.unit(a)
+	return a / a:length()
+end
+--- Alias of Vector3.unit.
+function Vector3.normalise(a) return a:unit() end
+
 
 --- Return a vector that is amount distance towards b from a.
 -- @param	a		Vector3		The vector to move from.
