@@ -123,7 +123,7 @@ end
 -- @param	number	grid_size	The size of the squares on the imaginary grid to which to snap.
 -- @returns	Vector3	A new Vector3 instance snapped to an imaginary grid of the specified size.
 function Vector3.snap_to(a, grid_size)
-	return a:round(a / grid_size) * grid_size
+	return (a / grid_size):round() * grid_size
 end
 
 --- Returns the area of this vector.
