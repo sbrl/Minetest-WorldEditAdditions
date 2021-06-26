@@ -116,6 +116,16 @@ function Vector3.round(a)
 	return Vector3.new(math.floor(a.x+0.5), math.floor(a.y+0.5), math.floor(a.z+0.5))
 end
 
+
+--- Snaps this Vector3 to an imaginary square grid with the specified sized
+-- squares.
+-- @param 	a		Vector3		The vector to operate on.
+-- @param	number	grid_size	The size of the squares on the imaginary grid to which to snap.
+-- @returns	Vector3	A new Vector3 instance snapped to an imaginary grid of the specified size.
+function Vector3.snap_to(a, grid_size)
+	return a:round(a / grid_size) * grid_size
+end
+
 --- Returns the area of this vector.
 -- In other words, multiplies all the components together and returns a scalar value.
 -- @param	a		Vector3		The vector to return the area of.

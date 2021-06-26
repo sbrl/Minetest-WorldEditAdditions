@@ -3,8 +3,8 @@ local Vector3 = require("worldeditadditions.utils.vector3")
 describe("Vector3.add", function()
 	it("should create a new Vector3", function()
 		assert.are.same(
-			Vector3.new(3, 4, 5),
-			{ x = 3, y = 4, z = 5 }
+			{ x = 3, y = 4, z = 5 },
+			Vector3.new(3, 4, 5)
 		)
 	end)
 	it("should throw an error on invalid x", function()
