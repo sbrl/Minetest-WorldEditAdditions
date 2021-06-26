@@ -625,7 +625,7 @@ Usage examples:
 //smake equal zy x
 ```
 
-### `<operation>`: odd|even|equal|factor
+### `<operation>`: odd|even|equal
 
 Value   | Description
 --------|---------------
