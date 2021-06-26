@@ -21,7 +21,6 @@ end
 -- @param	text	string	The string to iterate over
 -- @returns	table	A sequence set table containing the substrings
 function worldeditadditions.tocharset(text)
--- function tocharset(text)
 	local t = {}
 	text:gsub(".",function(c) t[c] = true end)
 	return t
