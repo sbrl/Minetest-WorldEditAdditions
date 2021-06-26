@@ -15,7 +15,8 @@ module.exports = function parse_sections(source) {
 				result.push({
 					title: htmlentities.encode(title),
 					slug: title.toLowerCase().replace(/[^a-z0-9-_\s]+/gi, "")
-						.replace(/\s+/g, "-"),
+						.replace(/\s+/g, "-")
+						.replace(/-.*$/, ""),
 					content: markdown.render(acc.slice(1).join("\n"))
 				});
 			}
