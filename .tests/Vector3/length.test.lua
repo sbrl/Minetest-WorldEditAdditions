@@ -1,13 +1,5 @@
 local Vector3 = require("worldeditadditions.utils.vector3")
 
-local function format_map(map)
-	local result = {}
-	for key, value in pairs(map) do
-		table.insert(result, key.."\t"..tostring(value))
-	end
-	return table.concat(result, "\n")
-end
-
 -- To find these numbers, in Javascript:
 -- function t(x) { return Math.sqrt((x*x)*3); }
 -- for(let i = 0; i < 1000000000; i++) { let r = t(i); if(Math.floor(r) === r) console.log(`i ${i}, r ${r}`); }

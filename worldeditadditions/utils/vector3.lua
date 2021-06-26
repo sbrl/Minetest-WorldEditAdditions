@@ -21,6 +21,13 @@ function Vector3.new(x, y, z)
 	return result
 end
 
+--- Returns a new instance of this vector.
+-- @param	a			Vector3		The vector to clone.
+-- @returns	Vector3		A new vector whose values are identical to those of the original vector.
+function Vector3.clone(a)
+	return Vector3.new(a.x, a.y, a.z)
+end
+
 --- Adds the specified vectors or numbers together.
 -- Returns the result as a new vector.
 -- If 1 of the inputs is a number and the other a vector, then the number will
