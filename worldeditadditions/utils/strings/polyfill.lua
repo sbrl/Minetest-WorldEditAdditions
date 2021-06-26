@@ -42,6 +42,9 @@ if worldeditadditions then
 	worldeditadditions.trim = trim
 else
     return {
-        str_padend = str_padend
+        str_padend = str_padend,
+        str_padstart = str_padstart,
+		str_starts = str_starts,
+		trim = trim
     }
 end
