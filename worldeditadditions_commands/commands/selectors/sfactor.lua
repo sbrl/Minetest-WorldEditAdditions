@@ -49,10 +49,6 @@ worldedit.register_command("sfactor", {
 			return false, "Error: Invalid <target> \""..targ.."\". Expected \"x\" and or \"y\" and or \"z\"."
 		end
 		
-		if false then -- Argument test
-			return false, "<mode>: " .. tostring(mode) .. ", <factor>: " .. type(fac) .. ", <target>: " .. tostring(targ)
-		end
-		
 		return true, mode, fac, targ
 	end,
 	func = function(name, mode, fac, targ)
@@ -78,23 +74,9 @@ worldedit.register_command("sfactor", {
 			elseif mode == "shrink" then int = math.floor(abs / fac) * fac
 			else int = math.ceil(abs / fac) * fac end
 			
-			if int < fac then int = fac end -- Ensure small selections aren't collapsed to 0
-			if neg then int = int * -1 end -- Ensure correct facing direction
+			if neg then int = int * -1 end
 			return int
 		end
-		
-		--- Test:
-		if false then
-			local brk = ""
-			for k,v in pairs(targ) do
-				brk = brk..k..": "..delta[k]..", "
-				delta[k] = eval(delta[k],fac)
-				brk = brk..k..": "..delta[k]..", "
-			end
-			return false, brk
-		end
-		-- //multi //fp set1 589 2 -82 //fp set2 615 2 -53
-		-- //smake even shrink
 		
 		for k,v in pairs(targ) do delta[k] = eval(delta[k],fac) end
 		

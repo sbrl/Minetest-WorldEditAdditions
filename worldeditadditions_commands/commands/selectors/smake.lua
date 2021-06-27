@@ -61,9 +61,6 @@ worldedit.register_command("smake", {
 			return false, "Error: Invalid operator \""..oper.."\". Expected \"odd\", \"even\" or \"equal\"."
 		end
 		
-		if false then -- Argument test
-			return false, "<operator>: " .. oper .. ", <mode>: " .. tostring(mode) .. ", <target>: " .. tostring(targ) .. ", <base>: " .. tostring(base)
-		end
 		return true, oper, mode, targ, base
 	end,
 	func = function(name, oper, mode, targ, base)
@@ -121,21 +118,7 @@ worldedit.register_command("smake", {
 				if int < 0 then return _m * -1
 				else return _m end
 			end
-			-- return false, "Case \"equal\" not handled."
 		end
-		
-		--- Test:
-		if false then
-			local brk = ""
-			for k,v in pairs(targ) do
-				brk = brk..k..": "..delta[k]..", "
-				delta[k] = eval(delta[k])
-				brk = brk..k..": "..delta[k]..", "
-			end
-			return false, brk
-		end
-		-- //multi //fp set1 589 2 -82 //fp set2 615 2 -53
-		-- //smake even shrink
 		
 		for k,v in pairs(targ) do delta[k] = eval(delta[k]) end
 		
