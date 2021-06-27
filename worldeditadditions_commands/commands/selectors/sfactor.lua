@@ -12,11 +12,6 @@ worldedit.register_command("sfactor", {
 	parse = function(params_text)
 		local parts = wea.split(params_text, "%s+", false)
 		
-		--- Dissable command for current release
-		if false then
-			return false, "Feature not yet implemented."
-		end
-		
 		if #parts < 2 then
 			return false, "Error: Not enough arguments. Expected \"<mode> <factor> [<target>]\"."
 		end
