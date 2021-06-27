@@ -73,7 +73,7 @@ worldedit.register_command("smake", {
 		local delta = vector.subtract(p2,p1) -- local delta equation: Vd(a) = V2(a) - V1(a)
 		local _tl = #targ -- Get targ length as a variable incase mode is "average"/"avg"
 		local targ = wea.tocharset(targ) -- Break up targ string into set table
-		local _m =  0 -- _m is the container to hold the max, min or average (depending on the mode) of the axes in targ targ
+		local _m =  0 -- _m is the container to hold the max, min or average (depending on the mode) of the axes in targ
 		
 		-- set _m to the max, min or mean of the target axes depending on mode or base if it exists
 		if base then _m = delta[base]
@@ -99,7 +99,7 @@ worldedit.register_command("smake", {
 					elseif mode == "shrink" and abs > 0 then int = abs - 1
 					else int = abs + 1 end
 				end
-				if neg then int = int * -1 end
+				if neg then int = int * -1 end -- Ensure correct facing direction
 				return int
 			end
 		elseif oper == "odd" then
