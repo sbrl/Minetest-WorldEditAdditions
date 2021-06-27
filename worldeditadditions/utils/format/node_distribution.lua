@@ -15,7 +15,7 @@ function worldeditadditions.format.node_distribution(distribution, nodes_total, 
 	local result = worldeditadditions.format.make_ascii_table(distribution_data)
 	
 	if add_total == true then
-		result = result..string.rep("=", 6 + #tostring(nodes_total) + 6).."\n"..
+		result = result.."\n"..string.rep("=", 6 + #tostring(nodes_total) + 6).."\n"..
 		"Total "..nodes_total.." nodes\n"
 	end
 	
