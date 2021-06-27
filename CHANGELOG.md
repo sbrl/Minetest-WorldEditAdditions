@@ -3,6 +3,9 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
+## v1.13: Untitled update (unreleased)
+ - Add `//sfactor` (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
+
 ## v1.12: The selection tools update (26th June 2021)
  - Add `//spush`, `//spop`, and `//sstack`
  - Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
