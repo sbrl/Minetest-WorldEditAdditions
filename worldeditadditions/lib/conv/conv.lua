@@ -58,7 +58,7 @@ function worldeditadditions.convolve(pos1, pos2, kernel, kernel_size)
 	local node_id_air = minetest.get_content_id("air")
 	
 	local heightmap, heightmap_size = worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
-	local heightmap_conv = worldeditadditions.shallowcopy(heightmap)
+	local heightmap_conv = worldeditadditions.table.shallowcopy(heightmap)
 	
 	worldeditadditions.conv.convolve(
 		heightmap_conv,

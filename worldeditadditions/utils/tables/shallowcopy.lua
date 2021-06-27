@@ -3,7 +3,7 @@
 -- @source	http://lua-users.org/wiki/CopyTable
 -- @param	orig	table	The table to clone.
 -- @return	table	The cloned table.
-function worldeditadditions.shallowcopy(orig)
+local function shallowcopy(orig)
 	local orig_type = type(orig)
 	local copy
 	if orig_type == 'table' then
@@ -16,3 +16,5 @@ function worldeditadditions.shallowcopy(orig)
 	end
 	return copy
 end
+
+return shallowcopy

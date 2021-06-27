@@ -59,7 +59,7 @@ worldedit.register_command("torus", {
 	require_pos = 1,
 	parse = function(params_text)
 		local values = {parse_params_torus(params_text)}
-		return unpack(values)
+		return worldeditadditions.table.unpack(values)
 	end,
 	nodes_needed = function(name, target_node, major_radius, minor_radius)
 		return math.ceil(2 * math.pi*math.pi * major_radius * minor_radius*minor_radius)
@@ -88,7 +88,7 @@ worldedit.register_command("hollowtorus", {
 	require_pos = 1,
 	parse = function(params_text)
 		local values = {parse_params_torus(params_text)}
-		return unpack(values)
+		return worldeditadditions.table.unpack(values)
 	end,
 	nodes_needed = function(name, target_node, major_radius, minor_radius)
 		return math.ceil(2 * math.pi*math.pi * major_radius * minor_radius*minor_radius)

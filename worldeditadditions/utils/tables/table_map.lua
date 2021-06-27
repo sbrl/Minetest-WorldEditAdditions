@@ -3,7 +3,7 @@
 -- @param	tbl		table		The table to operate on.
 -- @param	func	function<any>:any|nil	The function to execute on every item in the table.
 -- @returns	table	A new table containing the return values of the function.
-function worldeditadditions.table_map(tbl, func)
+local function table_map(tbl, func)
 	local result = {}
 	for i,value in ipairs(tbl) do
 		local newval = func(value, i)
@@ -11,3 +11,5 @@ function worldeditadditions.table_map(tbl, func)
 	end
 	return result
 end
+
+return table_map

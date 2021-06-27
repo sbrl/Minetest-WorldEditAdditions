@@ -13,7 +13,7 @@ local function will_trigger_saferegion(name, cmd_name, args)
 	if not parse_success then return nil, table.remove(parsed, 1) end
 	
 	if not def.nodes_needed then return false end
-	local result = def.nodes_needed(name, unpack(parsed))
+	local result = def.nodes_needed(name, wea.table.unpack(parsed))
 	if not result then return nil, result end
 	if result > 10000 then return true end
 	return false
@@ -117,7 +117,7 @@ worldedit.register_command("subdivide", {
 			worldedit.pos1[name] = cpos1
 			worldedit.pos2[name] = cpos2
 			worldedit.marker_update(name)
-			cmd.func(name, unpack(cmd_args_parsed))
+			cmd.func(name, wea.table.unpack(cmd_args_parsed))
 			if will_trigger_saferegion(name, cmd_name, args) then
 				minetest.chatcommands["/y"].func(name)
 			end

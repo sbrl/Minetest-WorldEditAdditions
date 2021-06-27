@@ -39,7 +39,7 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 	
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
-	local data_copy = worldeditadditions.shallowcopy(data)
+	local data_copy = worldeditadditions.table.shallowcopy(data)
 	
 	local node_id_air = minetest.get_content_id("air")
 	
@@ -68,7 +68,7 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 			for x = pos2.x, pos1.x, -1 do
 				local posi_rel = vector.subtract({ x = x, y = y, z = z }, pos1)
 				
-				-- local posi_copy = worldeditadditions.shallowcopy(posi_rel)
+				-- local posi_copy = worldeditadditions.table.shallowcopy(posi_rel)
 				-- posi_copy = vector.floor(vector.divide(posi_rel/*, scale_down*/))
 				
 				local posi_copy = {

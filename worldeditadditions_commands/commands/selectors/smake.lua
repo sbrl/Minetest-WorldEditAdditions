@@ -18,9 +18,9 @@ worldedit.register_command("smake", {
 			for i=3,4 do if not parts[i] then parts[i] = false end end
 		end
 		
-		-- Initialze local variables and sets
-		local oper, mode, targ, base = unpack(parts)
-		local operSet, modeSet = wea.makeset {"equal", "odd", "even"}, wea.makeset {"grow", "shrink", "avg"}
+		-- Initialize local variables and sets
+		local oper, mode, targ, base = wea.table.unpack(parts)
+		local operSet, modeSet = wea.table.makeset {"equal", "odd", "even"}, wea.table.makeset {"grow", "shrink", "avg"}
 		
 		-- Main Logic
 		-- Check base if base is present and if so valid.

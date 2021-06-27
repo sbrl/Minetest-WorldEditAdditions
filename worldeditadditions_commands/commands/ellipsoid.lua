@@ -37,7 +37,7 @@ worldedit.register_command("ellipsoid", {
 	require_pos = 1,
 	parse = function(params_text)
 		local values = {parse_params_ellipsoid(params_text)}
-		return unpack(values)
+		return wea.table.unpack(values)
 	end,
 	nodes_needed = function(name, target_node, radius)
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
@@ -60,7 +60,7 @@ worldedit.register_command("hollowellipsoid", {
 	require_pos = 1,
 	parse = function(params_text)
 		local values = {parse_params_ellipsoid(params_text)}
-		return unpack(values)
+		return wea.table.unpack(values)
 	end,
 	nodes_needed = function(name, target_node, radius)
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)

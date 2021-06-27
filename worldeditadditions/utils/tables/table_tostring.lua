@@ -3,7 +3,7 @@
 -- @param	sep	string	key value seperator
 -- @param	new_line	string	key value pair delimiter
 -- @return	string	concatenated table pairs
-function worldeditadditions.table_tostring(tbl, sep, new_line)
+local function table_tostring(tbl, sep, new_line)
     if type(sep) ~= "string" then sep = ": " end
     if type(new_line) ~= "string" then new_line = ", " end
     local ret = {}
@@ -16,3 +16,5 @@ function worldeditadditions.table_tostring(tbl, sep, new_line)
     end
     return ret:concat("")
 end
+
+return table_tostring

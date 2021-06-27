@@ -71,7 +71,7 @@ end
 function worldeditadditions.eta(existing_times, done_count, total_count)
 	local max = 100
 	local average = worldeditadditions.average(
-		worldeditadditions.table_get_last(existing_times, max)
+		worldeditadditions.table.get_last(existing_times, max)
 	)
 	local times_left = total_count - done_count
 	if times_left == 0 then return 0 end

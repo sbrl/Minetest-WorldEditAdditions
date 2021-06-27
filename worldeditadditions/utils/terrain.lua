@@ -90,7 +90,7 @@ end
 -- @param	area	VoxelArea	The VoxelArea object (see worldedit.manip_helpers.init)
 -- @param	data	number[]	The node ids data array containing the slice of the Minetest world extracted using the Voxel Manipulator.
 -- @param	heightmap_old	number[]	The original heightmap from worldeditadditions.make_heightmap.
--- @param	heightmap_new	number[]	The new heightmap containing the altered updated values. It is expected that worldeditadditions.shallowcopy be used to make a COPY of the data worldeditadditions.make_heightmap for this purpose. Both heightmap_old AND heightmap_new are REQUIRED in order for this function to work.
+-- @param	heightmap_new	number[]	The new heightmap containing the altered updated values. It is expected that worldeditadditions.table.shallowcopy be used to make a COPY of the data worldeditadditions.make_heightmap for this purpose. Both heightmap_old AND heightmap_new are REQUIRED in order for this function to work.
 -- @param	heightmap_size	vector	The x / z size of the heightmap. Any y value set in the vector is ignored.
 -- 
 function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heightmap_old, heightmap_new, heightmap_size)

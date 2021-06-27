@@ -18,7 +18,7 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 	local region_height = (pos2.y - pos1.y) + 1
 	
 	local heightmap = worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
-	local heightmap_eroded = worldeditadditions.shallowcopy(heightmap)
+	local heightmap_eroded = worldeditadditions.table.shallowcopy(heightmap)
 	
 	-- print("[erode.run] algorithm: "..algorithm..", params:");
 	-- print(worldeditadditions.format.map(params))

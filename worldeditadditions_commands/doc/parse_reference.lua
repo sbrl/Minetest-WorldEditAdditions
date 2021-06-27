@@ -32,7 +32,7 @@ end
 
 function worldeditadditions.doc.parse_reference()
 	local lines = get_reference()
-	local headings = worldeditadditions.table_filter(
+	local headings = worldeditadditions.table.filter(
 		group_by_heading(lines, 2),
 		function(item, i) return item.level ~= 2 end
 	)

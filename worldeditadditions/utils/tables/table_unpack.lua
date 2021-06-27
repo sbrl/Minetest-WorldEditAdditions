@@ -3,10 +3,12 @@
 -- found.
 -- This is needed because in Lua 5.1 it's the global unpack(), but in Lua 5.4
 -- it's moved to table.unpack().
-function worldeditadditions.table_unpack(tbl, offset, count)
+local function table_unpack(tbl, offset, count)
 	if type(unpack) == "function" then
 		return unpack(tbl, offset, count)
 	else
 		return table.unpack(tbl, offset, count)
 	end
 end
+
+return table_unpack

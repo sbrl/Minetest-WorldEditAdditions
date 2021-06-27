@@ -7,7 +7,7 @@
 -- @param	tbl		table		The table of values to filter.
 -- @param	func	function<any, number>:bool	The filter function to execute - should return a boolean value indicating whether the item provided as the first argument should be kept
 -- @returns	table	A new table containing the values that the given function returned true for.
-function worldeditadditions.table_filter(tbl, func)
+local function table_filter(tbl, func)
 	local result = {}
 	for i,value in ipairs(tbl) do
 		if func(value, i) then
@@ -16,3 +16,5 @@ function worldeditadditions.table_filter(tbl, func)
 	end
 	return result
 end
+
+return table_filter

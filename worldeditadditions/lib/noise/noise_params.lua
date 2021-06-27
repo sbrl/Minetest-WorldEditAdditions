@@ -25,8 +25,8 @@ function worldeditadditions.noise.params_apply_default(params)
 	-- If params[1] is thing, this is a list of params
 	-- This might be a thing if we're dealingw ith multiple octaves
 	for i,params_el in ipairs(params) do
-		local default_copy = worldeditadditions.shallowcopy(params_default)
-		worldeditadditions.table_apply(
+		local default_copy = worldeditadditions.table.shallowcopy(params_default)
+		worldeditadditions.table.apply(
 			params_el,
 			default_copy
 		)

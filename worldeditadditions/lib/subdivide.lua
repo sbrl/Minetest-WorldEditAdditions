@@ -88,7 +88,7 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 	state_ours.times.emerge_last = wea.get_ms_time() - state_ours.times.emerge_last
 	table.insert(state_ours.times.emerge, state_ours.times.emerge_last)
 	if #state_ours.times.emerge > 25 then
-		state_ours.times.emerge = wea.table_get_last(state_ours.times.emerge, 100)
+		state_ours.times.emerge = wea.table.get_last(state_ours.times.emerge, 100)
 	end
 	state_ours.times.emerge_total = state_ours.times.emerge_total + state_ours.times.emerge_last
 	
@@ -108,7 +108,7 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 	state_ours.times.step_last = wea.get_ms_time() - state_ours.times.step_start_abs
 	table.insert(state_ours.times.steps, state_ours.times.step_last)
 	if #state_ours.times.steps > 25 then
-		state_ours.times.steps = wea.table_get_last(state_ours.times.steps, 100)
+		state_ours.times.steps = wea.table.get_last(state_ours.times.steps, 100)
 	end
 	state_ours.times.steps_total = state_ours.times.steps_total + state_ours.times.step_last
 	state_ours.times.step_start_abs = wea.get_ms_time()

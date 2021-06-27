@@ -5,7 +5,7 @@ local wea = worldeditadditions
 -- @returns	number[]		A list of side numbers.
 local function parse_sides_list(list)
 	list = list:gsub("%s", "")	-- Spaces are not permitted
-	return wea.table_unique(wea.table_map(
+	return wea.table.unique(wea.table.map(
 		wea.split(list, ","),
 		function(value) return tonumber(value) end
 	))
@@ -20,7 +20,7 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 		dolower = true			-- Whether to do lower operations or not
 	}
 	-- Apply the custom settings
-	wea.table_apply(params_custom, params)
+	wea.table.apply(params_custom, params)
 	
 	params.lower_sides = parse_sides_list(params.lower_sides)
 	params.raise_sides = parse_sides_list(params.raise_sides)

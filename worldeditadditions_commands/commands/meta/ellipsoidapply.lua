@@ -51,7 +51,7 @@ worldedit.register_command("ellipsoidapply", {
 		local success, stats_time = worldeditadditions.ellipsoidapply(
 			worldedit.pos1[name], worldedit.pos2[name],
 			function()
-				cmd.func(name, unpack(args_parsed))
+				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
 			end, args
 		)
 		local time_overhead = 100 - worldeditadditions.round((stats_time.fn / stats_time.all) * 100, 3)

@@ -95,7 +95,7 @@ worldedit.register_command("maze3d", {
 	require_pos = 2,
 	parse = function(params_text)
 		local values = {parse_params_maze(params_text, true)}
-		return unpack(values)
+		return worldeditadditions.table.unpack(values)
 	end,
 	nodes_needed = function(name)
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])

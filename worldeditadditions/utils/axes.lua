@@ -36,4 +36,4 @@ function worldeditadditions.dir_to_xyz(name, dir)
 end
 
 -- Tests
--- /lua print(unpack(worldeditadditions.player_axis2d(myname)))
+-- /lua print(worldeditadditions.table.unpack(worldeditadditions.player_axis2d(myname)))

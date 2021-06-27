@@ -23,7 +23,7 @@ function worldeditadditions.noise2d(pos1, pos2, noise_params)
 		manip, area,
 		data
 	)
-	local heightmap_new = worldeditadditions.shallowcopy(heightmap_old)
+	local heightmap_new = worldeditadditions.table.shallowcopy(heightmap_old)
 	
 	local perlin_map = PerlinNoiseMap(noise_params, heightmap_size)
 	
