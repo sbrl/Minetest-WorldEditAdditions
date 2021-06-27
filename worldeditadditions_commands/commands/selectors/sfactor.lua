@@ -74,7 +74,8 @@ worldedit.register_command("sfactor", {
 			elseif mode == "shrink" then int = math.floor(abs / fac) * fac
 			else int = math.ceil(abs / fac) * fac end
 			
-			if neg then int = int * -1 end
+			if int < fac then int = fac end -- Ensure selection doesn't collapse to 0
+			if neg then int = int * -1 end -- Ensure correct facing direction
 			return int
 		end
 		
