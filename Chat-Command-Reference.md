@@ -641,7 +641,7 @@ Value			| Description
 ----------------|--------------
 `grow`			| Grow each axis specified in `<target>` to the nearest odd/even number to itself
 `shrink`		| Shrink each axis specified in `<target>` to the nearest odd/even number to itself
-`average`|`avg`	| Take the average of all axes specified in `<target>` and then for each specified axis grow or shrink it, depending on weather it is less than or greater than the average, to the nearest odd/even number to itself
+`average`/`avg` | Takes the average of all axes specified in `<target>` and then for each specified axis grows or shrinks it, depending on whether it is less than or greater than the average, to the nearest odd/even number to itself
 
 #### *If `<operation>` == equal:*
 The `<mode>` argument can be omitted and will not be parsed if present if `<base>` is specified
@@ -650,7 +650,8 @@ Value			| Description
 ----------------|---------------
 `grow`			| Grow each axis specified in `<target>` to the length of the longest specified axis
 `shrink`		| Shrink each axis specified in `<target>` to the length of the shortest specified axis
-`average`|`avg`	| Set each axis specified in `<target>` to the average length of all the specified axes
+`average`/`avg`	| Set each axis specified in `<target>` to the average length of all the specified axes
+If `<base>` | `<mode>` becomes optional. If present it will be ignored.
 
 ### Additional arguments:
 
@@ -658,8 +659,25 @@ Name		| Description
 ------------|------------------
 `<target>`	| Specify axes to perform operation on (default= xz)|
 `<base>`: If `<operation>` == odd or even	| Does nothing 
-`<base>`: If `<operation>` == equal			| Overrides `<mode>`^[1] and sets all `<target>` axes equal to itself
+`<base>`: If `<operation>` == equal			| Overrides `<mode>` and sets all `<target>` axes equal to itself
 
+## `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`
+Short for _selection make_; alias: `//sfac`. Built specifically for use with `//maze`, this command sets targeted axes equal to the nearest multiple of `<factor>` based on the `<mode>`.
+
+Usage examples:
+
+```
+//sfac grow 5
+//sfac avg 3 xy
+```
+
+### `<mode>`: grow|shrink|average
+
+Value	|	Description
+--------|--------------
+`grow` | Rounds the length of each target axis up to the nearest multiple of `<factor>`
+`shrink` | Rounds the length of each target axis down to the nearest multiple of `<factor>`
+`average`/`avg` | Takes the average of all axes specified in `<target>` and then for each specified axis grows or shrinks it, depending on whether it is less than or greater than the average, to the nearest multiple of `<factor>`
 
 ## `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
@@ -667,7 +685,6 @@ Displays the contents of your per-user selection stack. This stack can be pushed
 ```
 //sstack
 ```
-
 
 ## `//spush`
 Pushes the currently defined region onto your per-user selection stack. Does not otherwise alter the defined region.
