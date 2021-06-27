@@ -5,7 +5,7 @@
 -- ███████ ██      ██ ██   ██ ██   ██ ███████
 local wea = worldeditadditions
 worldedit.register_command("smake", {
-	params = "<operation> <mode> [<target=xyz> [<base>]]",
+	params = "<operation:odd|even|equal> <mode:grow|shrink|average> [<target=xyz> [<base>]]",
 	description = "Make one or more axes of the current selection odd, even, or equal to another.",
 	privs = { worldedit = true },
 	require_pos = 2,

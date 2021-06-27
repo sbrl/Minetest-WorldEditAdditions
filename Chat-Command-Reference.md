@@ -505,6 +505,7 @@ While other server commands can be executed while a `//subdivide` is running, `/
 //subdivice 25 25 25 fixlight
 ```
 
+
 ## `//multi <command_a> <command_b> <command_c> .....`
 Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but does work with others too. Don't forget a space between commands!
 
@@ -528,6 +529,7 @@ In addition, this also allows for including a double forward slash in the argume
 //multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //2 //sphere 8 air //shift down 1 //floodfill //reset
 ```
 
+
 ## `//many <times> <command>`
 Executes a single chat command many times in a row. Uses `minetest.after()` to yield to the main server thread to allow other things to happen at the same time, so technically you could have multiple `//many` calls going at once (but multithreading support is out of reach, so only a single one will be executing at the same time).
 
@@ -537,6 +539,7 @@ Note that this isn't necessarily limited to executing WorldEdit / WorldEditAddit
 //many 10 //bonemeal 3 100
 //many 100 //multi //1 //2 //outset 20 //set dirt
 ```
+
 
 ## `//ellipsoidapply <command_name> <args>`
 Executes the given command, and then clips the result to the largest ellipsoid that will fit inside the defined region. The specified command must obviously take 2 positions - so for example `//set`, `//replacemix`, and `//maze3d` will work, but `//sphere`, `//torus`, and `//floodfill` won't.
@@ -549,6 +552,7 @@ Executes the given command, and then clips the result to the largest ellipsoid t
 //ellipsoidapply layers desert_sand sand 2 desert_sandstone 4 sandstone 10
 ```
 
+
 ## `//scol [<axis1> ] <length>`
 Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
 
@@ -556,6 +560,7 @@ Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos
 //scol 10
 //scol x 3
 ```
+
 
 ## `//srect [<axis1> [<axis2>]] <length>`
 Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
@@ -565,6 +570,7 @@ Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from 
 //srect 3
 //srect -z y 25
 ```
+
 
 ## `//scube [<axis1> [<axis2> [<axis3>]]] <length>`
 Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1. If the axes aren't specified, defaults to positive y, the direction you are facing and the axis to the left of facing. Implementation thanks to @VorTechnix.
@@ -576,6 +582,7 @@ Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1.
 //scube -z 12
 ```
 
+
 ## `//scloud <0-6|stop|reset>`
 Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punch. Numbers 1-6 designate how many nodes you want to punch before the operation ends. 0 or stop terminate the operation so that any further nodes you punch won't be added to selection. Reset terminates operation if one is running and resets the selection area.
 
@@ -585,12 +592,14 @@ Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punc
 //scloud stop
 ```
 
+
 ## `//scentre`
 Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the current selection area. 1, 2, 4 or 8 nodes may be selected depending on what parts of the original selection are even in distance. Implementation thanks to @VorTechnix.
 
 ```
 //scentre
 ```
+
 
 ## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
@@ -602,7 +611,8 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //scube -z 12 -y -2 x -2
 ```
 
-## `//smake <operation> <mode> [<target=xz> [<base>]]`
+
+## `//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`
 Short for _selection make_. Modifies existing selection by moving pos2. Allows you to make the selection an odd or even length on one or more axes or set two or more axes equal to each other or the longest, shortest or average of them. Implementation thanks to @VorTechnix.
 
 Usage examples:
@@ -615,41 +625,41 @@ Usage examples:
 //smake equal zy x
 ```
 
-### `<operation>`: odd/even/equal/factor
+### `<operation>`: odd|even|equal
 
-|Value | Description |
-| --- | --- |
-odd: | round up or down, based on mode, all axes specified in `<target>` to the nearest odd length relative to pos1
-even: | round up or down, based on mode, all axes specified in `<target>` to the nearest even length relative to pos1
-equal: | set `<target>` axes length equal to the length of `<base>` axis if specified or to the length of the largest, smallest or average of the `<target>` axes based on mode.
+Value   | Description
+--------|---------------
+`odd`	| Round up or down, based on mode, all axes specified in `<target>` to the nearest odd length relative to pos1
+`even`	| Round up or down, based on mode, all axes specified in `<target>` to the nearest even length relative to pos1
+`equal`	| Set `<target>` axes length equal to the length of `<base>` axis if specified or to the length of the largest, smallest or average of the `<target>` axes based on mode.
 
-### `<mode>:` grow/shrink/average
+### `<mode>`: grow|shrink|average
 
 #### *If `<operation>` == odd or even:*
 
-|Value | Description |
-| --- | --- |
-grow: | grow each axis specified in `<target>` to the nearest odd/even number to itself
-shrink: | shrink each axis specified in `<target>` to the nearest odd/even number to itself
-average/avg: | take the average of all axes specified in `<target>` and then for each specified axis grow or shrink it, depending on weather it is less than or greater than the average, to the nearest odd/even number to itself
+Value			| Description
+----------------|--------------
+`grow`			| Grow each axis specified in `<target>` to the nearest odd/even number to itself
+`shrink`		| Shrink each axis specified in `<target>` to the nearest odd/even number to itself
+`average`|`avg`	| Take the average of all axes specified in `<target>` and then for each specified axis grow or shrink it, depending on weather it is less than or greater than the average, to the nearest odd/even number to itself
 
-#### *If `<operation>` == equal:* ^[1]
+#### *If `<operation>` == equal:*
+The `<mode>` argument can be omitted and will not be parsed if present if `<base>` is specified
 
-|Value | Description |
-| --- | --- |
-grow: | grow each axis specified in `<target>` to the length of the longest specified axis
-shrink: | shrink each axis specified in `<target>` to the length of the shortest specified axis
-average/avg: | set each axis specified in `<target>` to the average length of all the specified axes
+Value			| Description
+----------------|---------------
+`grow`			| Grow each axis specified in `<target>` to the length of the longest specified axis
+`shrink`		| Shrink each axis specified in `<target>` to the length of the shortest specified axis
+`average`|`avg`	| Set each axis specified in `<target>` to the average length of all the specified axes
 
 ### Additional arguments:
 
-|Name  | Description |
-| --- | --- |
-`<target>`: | Specify axes to perform operation on (default= xz)|
-`<base>`: If `<operation>` == odd or even: | Does nothing 
-`<base>`: If `<operation>` == equal: | Overrides `<mode>`^[1] and sets all `<target>` axes equal to itself
-	
-^[1]: `<mode>` argument can be omitted and will not be parsed if present if `<base>` is specified
+Name		| Description
+------------|------------------
+`<target>`	| Specify axes to perform operation on (default= xz)|
+`<base>`: If `<operation>` == odd or even	| Does nothing 
+`<base>`: If `<operation>` == equal			| Overrides `<mode>`^[1] and sets all `<target>` axes equal to itself
+
 
 ## `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
@@ -657,6 +667,7 @@ Displays the contents of your per-user selection stack. This stack can be pushed
 ```
 //sstack
 ```
+
 
 ## `//spush`
 Pushes the currently defined region onto your per-user selection stack. Does not otherwise alter the defined region.

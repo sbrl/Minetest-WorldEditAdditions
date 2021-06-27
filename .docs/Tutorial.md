@@ -27,10 +27,10 @@ Explaining core WorldEdit commands is out of scope of this tutorial, but you can
 
 The purpose of _WorldEditAdditions_ is to extend _WorldEdit_ by adding additional commands. Example commands that have been implemented that are not present in core _WorldEdit_ include (but certainly aren't limited to):
 
- - [`//maze`](/Reference/#maze-replace_node-path_length-path_width-seed): Create instant mazes
- - [`//forest`](/Reference/#forest-density-sapling_a-chance_a-sapling_b-chance_b-sapling_n-chance_n-): Plant forests
- - [`//torus`](http://localhost:8080/Reference/#torus-major_radius-minor_radius-node_name-axesxy-hollow): Generate [torus](https://en.wikipedia.org/wiki/Torus) shapes
- - [`//scale`](/Reference/#scale-axis-scale_factor-factor_x-factor_y-factor_z-anchor_x-anchor_y-anchor_z): Scale things up and down - even both at the same time!
+ - [`//maze`](/Reference/#maze): Create instant mazes
+ - [`//forest`](/Reference/#forest): Plant forests
+ - [`//torus`](http://localhost:8080/Reference/#torus): Generate [torus](https://en.wikipedia.org/wiki/Torus) shapes
+ - [`//scale`](/Reference/#scale): Scale things up and down - even both at the same time!
 
 See a full list with complete explanations in the [chat command reference](/Reference).
 
@@ -98,9 +98,9 @@ A number of additional concepts that are not required to use WorldEditAdditions 
 ### Meta commands
 WorldEditAdditions provides a number of *meta commands*. Such commands don't do anything on their own, but call other commands in various different ways. Examples of meta commands include:
 
- - [`//subdivide`](/Reference#subdivide-size_x-size_y-size_z-cmd_name-args): split a region into chunks, and execute the command once for each chunk
- - [`//many`](/Reference#many-times-command): Execute a command multiple times
- - [`//multi`](/Reference#multi-command_a-command_b-command_c-): Execute multiple commands in sequence
+ - [`//subdivide`](/Reference#subdivide): split a region into chunks, and execute the command once for each chunk
+ - [`//many`](/Reference#many): Execute a command multiple times
+ - [`//multi`](/!node_modules, !_sitemulti): Execute multiple commands in sequence
 
 Of course, this isn't an exhaustive list - check the [reference](/Reference) for a full list.
 
@@ -109,7 +109,7 @@ Memory (or RAM - Random Access Memory) is used by all the processes running on a
 
 Depending on your system, Minetest and your system can slow to a crawl or even crash if you execute a command on a region that's too big.
 
-To work around this, the [`//subdivide`](/Reference#subdivide-size_x-size_y-size_z-cmd_name-args) command was implemented. It splits the defined region into chunks, and calls the specified command over and over again for each chunk. 
+To work around this, the [`//subdivide`](/Reference#subdivide) command was implemented. It splits the defined region into chunks, and calls the specified command over and over again for each chunk. 
 
 It's not suitable for all commands (since it requires that said command takes 2 points) though, but because it splits the defined region into multiple chunks, it can be executed on *enormous* regions that can't fit into memory all at the same time.
 

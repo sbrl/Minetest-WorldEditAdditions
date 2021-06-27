@@ -110,7 +110,7 @@ end
 -- @param	pos2	Vector	pos2 of the defined region.
 -- @return	Vector	Min values from input vectors.
 function worldeditadditions.vector.min(pos1, pos2)
-	return vector.new(math.min(pos1.x + pos2.x), math.min(pos1.y + pos2.y), math.min(pos1.z + pos2.z))
+	return vector.new(math.min(pos1.x, pos2.x), math.min(pos1.y, pos2.y), math.min(pos1.z, pos2.z))
 end
 
 --- Returns a vector of the max values of 2 positions.
@@ -118,5 +118,5 @@ end
 -- @param	pos2	Vector	pos2 of the defined region.
 -- @return	Vector	Max values from input vectors.
 function worldeditadditions.vector.max(pos1, pos2)
-	return vector.new(math.max(pos1.x + pos2.x), math.max(pos1.y + pos2.y), math.max(pos1.z + pos2.z))
+	return vector.new(math.max(pos1.x, pos2.x), math.max(pos1.y, pos2.y), math.max(pos1.z, pos2.z))
 end
