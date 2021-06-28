@@ -197,11 +197,19 @@ The last example below shows how to set the path length and width:
 ```
 
 ## `//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`
-Same as `//maze`, but adapted for 3d - has all the same properties. Note that currently there's no way to adjust the height of the passageways generated (you'll need to scale the generated maze afterwards).
-
-Requires the currently selected area to be at least 3x3x3.
+Same as `//maze`, but instead generates mazes in 3 dimensions instead of 2. Requires the currently selected area to be at least 3x3x3.
 
 The optional `path_depth` parameter defaults to `1` and allows customisation of the height of the paths generated.
+
+To get a better look at the generated maze, try inverting it like so:
+
+```
+//maze3d stone
+//replace air dirt
+//replace stone air
+```
+
+Additional examples:
 
 ```
 //maze3d glass
