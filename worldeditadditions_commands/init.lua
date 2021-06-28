@@ -41,16 +41,8 @@ dofile(we_c.modpath.."/commands/meta/many.lua")
 dofile(we_c.modpath.."/commands/meta/subdivide.lua")
 dofile(we_c.modpath.."/commands/meta/ellipsoidapply.lua")
 
-dofile(we_c.modpath.."/commands/selectors/srel.lua")
-dofile(we_c.modpath.."/commands/selectors/scentre.lua")
-dofile(we_c.modpath.."/commands/selectors/scloud.lua")
-dofile(we_c.modpath.."/commands/selectors/scol.lua")
-dofile(we_c.modpath.."/commands/selectors/scube.lua")
-dofile(we_c.modpath.."/commands/selectors/smake.lua")
-dofile(we_c.modpath.."/commands/selectors/spop.lua")
-dofile(we_c.modpath.."/commands/selectors/spush.lua")
-dofile(we_c.modpath.."/commands/selectors/srect.lua")
-dofile(we_c.modpath.."/commands/selectors/sstack.lua")
+-- Selection Tools
+dofile(we_c.modpath.."/commands/selectors/init.lua")
 
 dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/extra/basename.lua")
@@ -85,3 +77,5 @@ worldedit.alias_command("naturalize", "layers")
 worldedit.alias_command("flora", "bonemeal")
 
 worldedit.alias_command("mcount", "count")
+
+worldedit.alias_command("sfac", "sfactor")

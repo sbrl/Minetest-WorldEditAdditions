@@ -61,9 +61,6 @@ worldedit.register_command("smake", {
 			return false, "Error: Invalid operator \""..oper.."\". Expected \"odd\", \"even\" or \"equal\"."
 		end
 		
-		if false then -- Argument test
-			return false, "<operator>: " .. oper .. ", <mode>: " .. tostring(mode) .. ", <target>: " .. tostring(targ) .. ", <base>: " .. tostring(base)
-		end
 		return true, oper, mode, targ, base
 	end,
 	func = function(name, oper, mode, targ, base)
@@ -73,7 +70,7 @@ worldedit.register_command("smake", {
 		local delta = vector.subtract(p2,p1) -- local delta equation: Vd(a) = V2(a) - V1(a)
 		local _tl = #targ -- Get targ length as a variable incase mode is "average"/"avg"
 		local targ = wea.tocharset(targ) -- Break up targ string into set table
-		local _m =  0 -- _m is the container to hold the max, min or average (depending on the mode) of the axes in targ targ
+		local _m =  0 -- _m is the container to hold the max, min or average (depending on the mode) of the axes in targ
 		
 		-- set _m to the max, min or mean of the target axes depending on mode or base if it exists
 		if base then _m = delta[base]
@@ -99,7 +96,7 @@ worldedit.register_command("smake", {
 					elseif mode == "shrink" and abs > 0 then int = abs - 1
 					else int = abs + 1 end
 				end
-				if neg then int = int * -1 end
+				if neg then int = int * -1 end -- Ensure correct facing direction
 				return int
 			end
 		elseif oper == "odd" then
@@ -121,21 +118,7 @@ worldedit.register_command("smake", {
 				if int < 0 then return _m * -1
 				else return _m end
 			end
-			-- return false, "Case \"equal\" not handled."
 		end
-		
-		--- Test:
-		if false then
-			local brk = ""
-			for k,v in pairs(targ) do
-				brk = brk..k..": "..delta[k]..", "
-				delta[k] = eval(delta[k])
-				brk = brk..k..": "..delta[k]..", "
-			end
-			return false, brk
-		end
-		-- //multi //fp set1 589 2 -82 //fp set2 615 2 -53
-		-- //smake even shrink
 		
 		for k,v in pairs(targ) do delta[k] = eval(delta[k]) end
 		
