@@ -8,8 +8,10 @@
 worldeditadditions = {}
 worldeditadditions.modpath = minetest.get_modpath("worldeditadditions")
 dofile(worldeditadditions.modpath.."/utils/vector.lua")
-dofile(worldeditadditions.modpath.."/utils/vector3.lua")
-dofile(worldeditadditions.modpath.."/utils/mesh.lua")
+worldeditadditions.Vector3 = dofile(worldeditadditions.modpath.."/utils/vector3.lua")
+worldeditadditions.Mesh,
+worldeditadditions.Face = dofile(worldeditadditions.modpath.."/utils/mesh.lua")
+
 
 dofile(worldeditadditions.modpath.."/utils/strings/init.lua")
 dofile(worldeditadditions.modpath.."/utils/format/init.lua")

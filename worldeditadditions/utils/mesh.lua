@@ -88,12 +88,4 @@ function Mesh.dedupe(self)
 end
 
 
-if worldeditadditions then
-	worldeditadditions.Face = Face
-	worldeditadditions.Mesh = Mesh
-else
-	return {
-		Face = Face,
-		Mesh = Mesh
-	}
-end
+return Mesh, Face

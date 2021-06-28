@@ -391,9 +391,4 @@ function Vector3.__tostring(a)
 end
 
 
-
-if worldeditadditions then
-	worldeditadditions.Vector3 = Vector3
-else
-	return Vector3
-end
+return Vector3
