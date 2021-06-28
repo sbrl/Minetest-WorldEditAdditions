@@ -662,7 +662,7 @@ Name		| Description
 `<base>`: If `<operation>` == equal			| Overrides `<mode>` and sets all `<target>` axes equal to itself
 
 ## `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`
-Short for _selection make_; alias: `//sfac`. Built specifically for use with `//maze`, this command sets targeted axes equal to the nearest multiple of `<factor>` based on the `<mode>`.
+Short for _selection factor_; alias: `//sfac`. Built specifically for use with `//maze`, this command sets targeted axes equal to the nearest multiple of `<factor>` based on the `<mode>`.
 
 Usage examples:
 
