@@ -9,3 +9,4 @@
 local we_cm = worldeditadditions_commands.modpath .. "/commands/measure/"
 
 dofile(we_cm.."mface.lua")
+dofile(we_cm.."midpos.lua")
