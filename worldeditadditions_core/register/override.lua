@@ -11,7 +11,7 @@ function we_c.override_command(name, def)
 		params = def.params,
 		description = def.description,
 		func = function(player_name, param)
-			return chatcommand_handler(name, player_name, param)
+			return we_c.chatcommand_handler(name, player_name, param)
 		end,
 	})
 	worldedit.registered_commands[name] = def

@@ -1,4 +1,4 @@
-function worldeditadditions.register_command(def)
+function worldeditadditions_core.register_command(def)
 	local def = table.copy(def)
 	assert(name and #name > 0)
 	assert(def.privs)
