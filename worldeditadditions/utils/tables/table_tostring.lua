@@ -9,12 +9,12 @@ local function table_tostring(tbl, sep, new_line)
     local ret = {}
     if type(tbl) ~= "table" then return "Error: input not table!" end
     for key,value in pairs(tbl) do
-        ret:append(key)
-        ret:append(sep)
-        ret:append(value)
-        ret:append(new_line)
+        table.insert(ret,key)
+        table.insert(ret,sep)
+        table.insert(ret,value)
+        table.insert(ret,new_line)
     end
-    return ret:concat("")
+    return table.concat(ret,"")
 end
 
 return table_tostring
