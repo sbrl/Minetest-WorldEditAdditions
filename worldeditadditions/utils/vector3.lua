@@ -1,7 +1,12 @@
 --- A 3-dimensional vector.
+-- @class
 local Vector3 = {}
 Vector3.__index = Vector3
 
+--- Creates a new Vector3 instance.
+-- @param x		number	The x co-ordinate value.
+-- @param y		number	The y co-ordinate value.
+-- @param z		number	The z co-ordinate value.
 function Vector3.new(x, y, z)
 	if type(x) ~= "number" then
 		error("Error: Expected number for the value of x, but received argument of type "..type(x)..".")

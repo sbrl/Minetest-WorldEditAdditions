@@ -8,6 +8,7 @@ local wea = worldeditadditions
 -- ██      ██   ██  ██████ ███████
 
 --- A single face of a Mesh.
+-- @class
 local Face = {}
 Face.__index = Face
 
@@ -41,6 +42,7 @@ function Face.__eq(a, b) return Face.equal(a, b) end
 -- ██      ██ ███████ ███████ ██   ██
 
 --- A mesh of faces.
+-- @class
 local Mesh = {}
 Mesh.__index = Mesh
 

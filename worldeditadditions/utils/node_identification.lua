@@ -76,6 +76,11 @@ end
 
 
 local sapling_aliases = {}
+
+--- Register a new sapling alias.
+-- @param	sapling_node_name	string		The canonical name of the sapling.
+-- @param	alias				string		The alias name of the sapling.
+-- @returns	bool[,string]		Whether the alias registration was successful or not. If false, then an error message as a string is also returned as the second value.
 function worldeditadditions.register_sapling_alias(sapling_node_name, alias)
 	if sapling_aliases[sapling_node_name] ~= nil then
 		return false, "Error: An alias against the node name '"..sapling_node_name.."' already exists."
@@ -83,6 +88,9 @@ function worldeditadditions.register_sapling_alias(sapling_node_name, alias)
 	sapling_aliases[alias] = sapling_node_name
 	return true
 end
+--- Convenience function to register many sapling aliases at once.
+-- @param	tbl	[string, string][]	A list of tables containing exactly 2 strings in the form { sapling_node_name, alias }.
+-- @returns	bool[,string]		Whether the alias registrations were successful or not. If false, then an error message as a string is also returned as the second value.
 function worldeditadditions.register_sapling_alias_many(tbl)
 	for i, next in ipairs(tbl) do
 		local success, msg = worldeditadditions.register_sapling_alias(
@@ -91,6 +99,7 @@ function worldeditadditions.register_sapling_alias_many(tbl)
 		)
 		if not success then return success, msg end
 	end
+	return true
 end
 --- Returns the current key ⇒ value table of sapling names and aliases.
 -- @return	table
