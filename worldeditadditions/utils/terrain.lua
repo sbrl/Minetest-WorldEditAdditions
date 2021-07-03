@@ -92,7 +92,7 @@ end
 -- @param	heightmap_old	number[]	The original heightmap from worldeditadditions.make_heightmap.
 -- @param	heightmap_new	number[]	The new heightmap containing the altered updated values. It is expected that worldeditadditions.table.shallowcopy be used to make a COPY of the data worldeditadditions.make_heightmap for this purpose. Both heightmap_old AND heightmap_new are REQUIRED in order for this function to work.
 -- @param	heightmap_size	vector	The x / z size of the heightmap. Any y value set in the vector is ignored.
--- 
+-- @returns	bool, string|{ added: number, removed: number }	A bool indicating whether the operation was successful or not, followed by either an error message as a string (if it was not successful) or a table of statistics (if it was successful).
 function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heightmap_old, heightmap_new, heightmap_size)
 	local stats = { added = 0, removed = 0 }
 	local node_id_air = minetest.get_content_id("air")

@@ -1,8 +1,5 @@
 local wea = worldeditadditions
 
--- original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
--- Port from this StackOverflow answer: https://stackoverflow.com/a/33425812/1460422
-
 
 local function BitAND(a, b) --Bitwise and
 	local p, c = 1, 0
@@ -29,10 +26,15 @@ local function grad(hash, x, y, z)
 	return ((h and 1) == 0 and u or - u) + ((h and 2) == 0 and v or - v)
 end
 
+--- Perlin noise generation engine.
+-- Original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
+-- Port from this StackOverflow answer: https://stackoverflow.com/a/33425812/1460422
+-- @class
+local Perlin = {}
+Perlin.__index = Perlin
 
-wea.noise.perlin = {}
-wea.noise.perlin.p = {}
-wea.noise.perlin.permutation = {
+Perlin.p = {}
+Perlin.permutation = {
 	151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140,
 	36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120,
 	234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33,
@@ -50,28 +52,36 @@ wea.noise.perlin.permutation = {
 	115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222, 114, 67, 29,
 	24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
 }
-wea.noise.perlin.size = 256
-wea.noise.perlin.gx = {}
-wea.noise.perlin.gy = {}
-wea.noise.perlin.randMax = 256
+Perlin.size = 256
+Perlin.gx = {}
+Perlin.gy = {}
+Perlin.randMax = 256
 
---- Creates a new perlin instance.
--- @return	perlin	A new perlin instance.
-function wea.noise.perlin.new()
+--- Creates a new Perlin instance.
+-- @return	Perlin	A new perlin instance.
+function Perlin.new()
 	local instance = {}
-	setmetatable(instance, wea.noise.perlin)
+	setmetatable(instance, Perlin)
 	instance:load()
 	return instance
 end
 
-function wea.noise.perlin:load()
+--- Initialises this Perlin instance.
+-- Called automatically by the constructor - you do NOT need to call this
+-- yourself.
+function Perlin:load()
 	for i = 1, self.size do
 		self.p[i] = self.permutation[i]
 		self.p[255 + i] = self.p[i]
 	end
 end
 
-function wea.noise.perlin:noise( x, y, z )
+--- Returns a noise value for a given point in 3D space.
+-- @param	x	number	The x co-ordinate.
+-- @param	y	number	The y co-ordinate.
+-- @param	z	number	The z co-ordinate.
+-- @returns	number		The calculated noise value.
+function Perlin:noise( x, y, z )
 	local X = BitAND(math.floor(x), 255) + 1
 	local Y = BitAND(math.floor(y), 255) + 1
 	local Z = BitAND(math.floor(z), 255) + 1
@@ -98,3 +108,5 @@ function wea.noise.perlin:noise( x, y, z )
 		lerp(u, grad(self.p[AB + 1], x, y - 1, z - 1),
 	grad(self.p[BB + 1], x - 1, y - 1, z - 1))))
 end
+
+return Perlin

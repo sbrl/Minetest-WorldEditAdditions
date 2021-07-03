@@ -11,15 +11,13 @@
 -- @param	size	Vector	An x/y vector representing the size of the noise area to generate.
 -- @param	params	table|table<table>	A table of noise params to use to generate the noise. Values that aren't specified are filled in automatically. If a table of tables is specified, it is interpreted as multiple octaves of noise to apply in sequence.
 function worldeditadditions.noise.make_2d(size, params)
-	params = worldeditadditions.noise.params_apply_default(params)
-	
 	local result = {}
 	
 	local generator;
 	if params.algorithm == "perlin" then
 		generator = worldeditadditions.noise.perlin.new()
 	else -- We don't have any other generators just yet
-		return false, "Error: Unknown noise algorithm '"..params.."'."
+		return false, "Error: Unknown noise algorithm '"..params.."' (available algorithms: perlin)."
 	end
 	
 	for x=params.offset.x, params.offset.x+size.x do
