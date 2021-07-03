@@ -495,6 +495,22 @@ Counts all the nodes in the defined region and returns the result along with cal
 //count
 ```
 
+
+## `//basename <name>`
+Returns the absolute canonical name of a node, given an alias or partial node name. For example:
+
+```
+//basename dirt
+```
+
+...will return `default:dirt`. Uses `worldedit.normalize_nodename(string)` under the hood.
+
+```
+//basename stonebrick
+//basename glass
+```
+
+
 ## `//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`
 Splits the current WorldEdit region into `(<size_x>, <size_y>, <size_z>)` sized chunks, and run `//<cmd_name> <args>` over each chunk.
 
