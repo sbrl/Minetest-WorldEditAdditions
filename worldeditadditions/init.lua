@@ -44,6 +44,7 @@ dofile(worldeditadditions.modpath.."/lib/scale_down.lua")
 dofile(worldeditadditions.modpath.."/lib/scale.lua")
 dofile(worldeditadditions.modpath.."/lib/conv/conv.lua")
 dofile(worldeditadditions.modpath.."/lib/erode/erode.lua")
+dofile(worldeditadditions.modpath.."/lib/noise/init.lua")
 
 dofile(worldeditadditions.modpath.."/lib/count.lua")
 

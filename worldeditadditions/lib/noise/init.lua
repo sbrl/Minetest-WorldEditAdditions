@@ -1,12 +1,14 @@
-worldeditadditions.noise = {}
+local wea = worldeditadditions
+
+wea.noise = {}
 
 -- The command itself
-dofile(worldeditadditions.modpath.."/lib/noise/noise2d.lua")
+dofile(wea.modpath.."/lib/noise/run2d.lua")
 
 -- Dependencies
-dofile(worldeditadditions.modpath.."/lib/noise/apply_2d.lua")
-dofile(worldeditadditions.modpath.."/lib/noise/make_2d.lua")
-dofile(worldeditadditions.modpath.."/lib/noise/params_apply_default.lua")
+dofile(wea.modpath.."/lib/noise/apply_2d.lua")
+dofile(wea.modpath.."/lib/noise/make_2d.lua")
+dofile(wea.modpath.."/lib/noise/params_apply_default.lua")
 
 -- Noise generation engines
-dofile(worldeditadditions.modpath.."/lib/noise/engines/perlin.lua")
+wea.noise.Perlin = dofile(wea.modpath.."/lib/noise/engines/perlin.lua")

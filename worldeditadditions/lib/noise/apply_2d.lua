@@ -29,7 +29,7 @@ function worldeditadditions.noise.apply_2d(heightmap, noise, heightmap_size, reg
 				rescaled = rescaled * region_height * percent
 				heightmap[i] = rescaled
 			else
-				return false, "Error: Unknown apply_mode '"..apply_mode.."'"
+				return false, "Error: Unknown apply mode '"..apply_mode.."'"
 			end
 		end
 	end

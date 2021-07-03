@@ -32,9 +32,14 @@ function worldeditadditions.noise.params_apply_default(params)
 	if not params[1] then params = { params } end
 	
 	-- If params[1] is thing, this is a list of params
-	-- This might be a thing if we're dealingw ith multiple octaves
+	-- This might be a thing if we're dealing with multiple octaves
 	for i,params_el in ipairs(params) do
 		local default_copy = worldeditadditions.table.shallowcopy(params_default)
+		
+		-- Keyword support
+		if params_el.perlin then params_el.algorithm = "perlin" end
+		print("DEBUG params_el type", type(params_el), "RAW", params_el)
+		-- Apply this table to fill in the gaps
 		worldeditadditions.table.apply(
 			params_el,
 			default_copy

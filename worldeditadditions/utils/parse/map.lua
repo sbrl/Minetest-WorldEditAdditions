@@ -13,7 +13,7 @@ function worldeditadditions.parse.map(params_text)
 		if i % 2 == 0 then -- Lua starts at 1 :-/
 			-- Try converting to a number to see if it works
 			local part_converted = tonumber(part)
-			if as_number == nil then part_converted = part end
+			if part_converted == nil then part_converted = part end
 			-- Look for bools
 			if part_converted == "true" then part_converted = true end
 			if part_converted == "false" then part_converted = false end

@@ -1,31 +1,5 @@
 local wea = worldeditadditions
 
-
-local function BitAND(a, b) --Bitwise and
-	local p, c = 1, 0
-	while a > 0 and b > 0 do
-		local ra, rb = a%2, b%2
-		if ra + rb > 1 then c = c + p end
-		a, b, p = (a - ra) / 2, (b - rb) / 2, p * 2
-	end
-	return c
-end
-
-local function fade(t)
-	return t * t * t * (t * (t * 6 - 15) + 10)
-end
-
-local function lerp(t, a, b)
-	return a + t * (b - a)
-end
-
-local function grad(hash, x, y, z)
-	local h = BitAND(hash, 15)
-	local u = h < 8 and x or y
-	local v = h < 4 and y or ((h == 12 or h == 14) and x or z)
-	return ((h and 1) == 0 and u or - u) + ((h and 2) == 0 and v or - v)
-end
-
 --- Perlin noise generation engine.
 -- Original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
 -- Port from this StackOverflow answer: https://stackoverflow.com/a/33425812/1460422
@@ -71,10 +45,22 @@ end
 -- yourself.
 function Perlin:load()
 	for i = 1, self.size do
-		self.p[i] = self.permutation[i]
-		self.p[255 + i] = self.p[i]
+		self.p[i - 1] = self.permutation[i]
+		self.p[i + 255] = self.permutation[i]
 	end
 end
+
+--- Formats a key-value table of values as a string.
+-- @param	map		table	The table of key-value pairs to format.
+-- @returns	string	The given table of key-value pairs formatted as a string.
+local function format_map(map)
+	local result = {}
+	for key, value in pairs(map) do
+		table.insert(result, key.."\t"..tostring(value))
+	end
+	return table.concat(result, "\n")
+end
+
 
 --- Returns a noise value for a given point in 3D space.
 -- @param	x	number	The x co-ordinate.
@@ -82,31 +68,84 @@ end
 -- @param	z	number	The z co-ordinate.
 -- @returns	number		The calculated noise value.
 function Perlin:noise( x, y, z )
-	local X = BitAND(math.floor(x), 255) + 1
-	local Y = BitAND(math.floor(y), 255) + 1
-	local Z = BitAND(math.floor(z), 255) + 1
-
+	y = y or 0
+	z = z or 0
+	local xi = self:BitAND(math.floor(x), 255)
+	local yi = self:BitAND(math.floor(y), 255)
+	local zi = self:BitAND(math.floor(z), 255)
+	
+	-- print("x", x, "y", y, "z", z, "xi", xi, "yi", yi, "zi", zi)
+	-- print("p[xi]", self.p[xi])
 	x = x - math.floor(x)
 	y = y - math.floor(y)
 	z = z - math.floor(z)
-	local u = fade(x)
-	local v = fade(y)
-	local w = fade(z)
-	local A = self.p[X] + Y
-	local AA = self.p[A] + Z
-	local AB = self.p[A + 1] + Z
-	local B = self.p[X + 1] + Y
-	local BA = self.p[B] + Z
-	local BB = self.p[B + 1] + Z
-
-	return lerp(w, lerp(v, lerp(u, grad(self.p[AA ], x, y, z ),
-		grad(self.p[BA ], x - 1, y, z )),
-		lerp(u, grad(self.p[AB ], x, y - 1, z ),
-	grad(self.p[BB ], x - 1, y - 1, z ))),
-	lerp(v, lerp(u, grad(self.p[AA + 1], x, y, z - 1),
-		grad(self.p[BA + 1], x - 1, y, z - 1)),
-		lerp(u, grad(self.p[AB + 1], x, y - 1, z - 1),
-	grad(self.p[BB + 1], x - 1, y - 1, z - 1))))
+	local u = self:fade(x)
+	local v = self:fade(y)
+	local w = self:fade(z)
+	local A = self.p[xi] + yi
+	local AA = self.p[A] + zi
+	local AB = self.p[A + 1] + zi
+	local AAA = self.p[AA]
+	local ABA = self.p[AB]
+	local AAB = self.p[AA + 1]
+	local ABB = self.p[AB + 1]
+	
+	local B = self.p[xi + 1] + yi
+	local BA = self.p[B] + zi
+	local BB = self.p[B + 1] + zi
+	local BAA = self.p[BA]
+	local BBA = self.p[BB]
+	local BAB = self.p[BA + 1]
+	local BBB = self.p[BB + 1]
+	
+	-- Add 0.5 to rescale to 0 - 1 instead of -0.5 - +0.5
+	return 0.5 + self:lerp(w,
+		self:lerp(v,
+			self:lerp(u,
+				self:grad(AAA,x,y,z),
+				self:grad(BAA,x-1,y,z)
+			),
+			self:lerp(u,
+				self:grad(ABA,x,y-1,z),
+				self:grad(BBA,x-1,y-1,z)
+			)
+		),
+		self:lerp(v,
+			self:lerp(u,
+				self:grad(AAB,x,y,z-1), self:grad(BAB,x-1,y,z-1)
+			),
+			self:lerp(u,
+				self:grad(ABB,x,y-1,z-1), self:grad(BBB,x-1,y-1,z-1)
+			)
+		)
+	)
 end
+
+
+function Perlin:BitAND(a, b) --Bitwise and
+	local p, c = 1, 0
+	while a > 0 and b > 0 do
+		local ra, rb = a%2, b%2
+		if ra + rb > 1 then c = c + p end
+		a, b, p = (a - ra) / 2, (b - rb) / 2, p * 2
+	end
+	return c
+end
+
+function Perlin:fade(t)
+	return t * t * t * (t * (t * 6 - 15) + 10)
+end
+
+function Perlin:lerp(t, a, b)
+	return a + t * (b - a)
+end
+
+function Perlin:grad(hash, x, y, z)
+	local h = self:BitAND(hash, 15)
+	local u = h < 8 and x or y
+	local v = h < 4 and y or ((h == 12 or h == 14) and x or z)
+	return ((h and 1) == 0 and u or - u) + ((h and 2) == 0 and v or - v)
+end
+
 
 return Perlin

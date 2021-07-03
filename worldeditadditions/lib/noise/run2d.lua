@@ -11,14 +11,15 @@ local wea = worldeditadditions
 --- Applies a layer of 2d noise over the terrain in the defined region.
 -- @param	pos1			Vector	pos1 of the defined region
 -- @param	pos2			Vector	pos2 of the defined region
--- @param	noise_params	table	A noise parameters table. Will be passed unmodified to PerlinNoise() from the Minetest API.
-function worldeditadditions.noise.noise2d(pos1, pos2, noise_params)
+-- @param	noise_params	table	A noise parameters table.
+function worldeditadditions.noise.run2d(pos1, pos2, noise_params)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	local region_height = pos1.y - pos2.y
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fill in the default params
 	noise_params = worldeditadditions.noise.params_apply_default(noise_params)
+	print("DEBUG noise_params[1] ", wea.format.map(noise_params[1]))
 	
 	-- Fetch the nodes in the specified area
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
@@ -31,15 +32,22 @@ function worldeditadditions.noise.noise2d(pos1, pos2, noise_params)
 	)
 	local heightmap_new = worldeditadditions.table.shallowcopy(heightmap_old)
 	
-	local noisemap = wea.noise.make_2d(noise_params, heightmap_size)
+	local success, noisemap = wea.noise.make_2d(
+		heightmap_size,
+		pos1,
+		noise_params)
+	if not success then return success, noisemap end
 	
-	wea.noise.apply_2d(
+	success, message = wea.noise.apply_2d(
 		heightmap_new,
 		noisemap,
 		heightmap_size,
 		region_height,
-		noise_params.apply
+		noise_params[1].apply
 	)
+	print("RETURNED apply_2d success", success, "message", message)
+	if not success then return success, message end
+	
 	
 	local success, stats = wea.apply_heightmap_changes(
 		pos1, pos2,
