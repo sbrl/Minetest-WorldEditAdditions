@@ -45,7 +45,7 @@ minetest.register_chatcommand("/multi", {
 		if not success then return success, commands end
 		
 		for i, command in ipairs(commands) do
-			print("[DEBUG] i", i, "command: '"..command.."'")
+			-- print("[DEBUG] i", i, "command: '"..command.."'")
 			local start_time = worldeditadditions.get_ms_time()
 			
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
@@ -53,7 +53,7 @@ minetest.register_chatcommand("/multi", {
 			-- Things start at 1, not 0 in Lua :-(
 			command_name = worldeditadditions.trim(command_name):sub(2) -- Strip the leading /
 			if not args then args = "" end
-			print("command_name", command_name)
+			-- print("command_name", command_name)
 			
 			worldedit.player_notify(name, "#"..i..": "..command)
 			

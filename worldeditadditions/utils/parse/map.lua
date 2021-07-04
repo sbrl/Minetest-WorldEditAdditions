@@ -13,7 +13,6 @@ function worldeditadditions.parse.map(params_text, keywords)
 	local last_key = nil
 	local mode = "KEY"
 	for i, part in ipairs(parts) do
-		print("PARSE_MAP | i", i, "MODE", mode, "PART", part)
 		if mode == "VALUE" then
 			-- Try converting to a number to see if it works
 			local part_converted = tonumber(part)
@@ -27,7 +26,6 @@ function worldeditadditions.parse.map(params_text, keywords)
 			last_key = part
 			-- Keyword support
 			if wea.table.contains(keywords, last_key) then
-				print("IS KEYWORD")
 				result[last_key] = true
 			else
 				mode = "VALUE"

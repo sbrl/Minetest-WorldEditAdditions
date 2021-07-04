@@ -14,7 +14,6 @@ function worldeditadditions.line(pos1, pos2, thickness, node_name)
 	pos2 = vector.new(pos2)
 	
 	local node_id_replace = minetest.get_content_id(node_name)
-	print("thickness", thickness, "node_name", node_name, "node_id_replace", node_id_replace)
 	
 	-- Fetch the nodes in the specified area
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
@@ -37,7 +36,6 @@ function worldeditadditions.line(pos1, pos2, thickness, node_name)
 				local distance = vector.length(vector.subtract(here, closest_on_line))
 				
 				if distance < thickness then
-					print("[line] vector", closest_on_line.x, closest_on_line.y, closest_on_line.z, "length", distance)
 					data[area:index(x, y, z)] = node_id_replace
 					counts.replaced = counts.replaced + 1
 				end

@@ -66,7 +66,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 						end
 					end
 					if not did_grow then
-						print("[//forest] Failed to grow sapling, detected node id", new_id_at_pos, "name", new_name_at_pos, "was originally", minetest.get_name_from_content_id(node_id))
+						-- print("[//forest] Failed to grow sapling, detected node id", new_id_at_pos, "name", new_name_at_pos, "was originally", minetest.get_name_from_content_id(node_id))
 						-- We can't set it to air here because then when we save back we would overwrite all the newly grown trees
 						stats.failures = stats.failures + 1
 					end

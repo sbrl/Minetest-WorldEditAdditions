@@ -102,7 +102,7 @@ worldedit.register_command("scale", {
 		return volume * factor
 	end,
 	func = function(name, scale, anchor)
-		print("initial scale: "..worldeditadditions.vector.tostring(scale)..", anchor: "..worldeditadditions.vector.tostring(anchor))
+		-- print("initial scale: "..worldeditadditions.vector.tostring(scale)..", anchor: "..worldeditadditions.vector.tostring(anchor))
 		
 		
 		local start_time = worldeditadditions.get_ms_time()

@@ -17,9 +17,9 @@ function worldeditadditions.noise.run2d(pos1, pos2, noise_params)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fill in the default params
-	print("DEBUG noise_params_custom ", wea.format.map(noise_params))
+	-- print("DEBUG noise_params_custom ", wea.format.map(noise_params))
 	noise_params = worldeditadditions.noise.params_apply_default(noise_params)
-	print("DEBUG noise_params[1] ", wea.format.map(noise_params[1]))
+	-- print("DEBUG noise_params[1] ", wea.format.map(noise_params[1]))
 	
 	-- Fetch the nodes in the specified area
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
@@ -46,7 +46,6 @@ function worldeditadditions.noise.run2d(pos1, pos2, noise_params)
 		pos1, pos2,
 		noise_params[1].apply
 	)
-	print("RETURNED apply_2d success", success, "message", message)
 	if not success then return success, message end
 	
 	

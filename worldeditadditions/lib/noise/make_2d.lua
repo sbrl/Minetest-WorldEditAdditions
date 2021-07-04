@@ -13,8 +13,6 @@ local wea = worldeditadditions
 function worldeditadditions.noise.make_2d(size, start_pos, params)
 	local result = {}
 	
-	print("size x", size.x, "z", size.z, "start_pos x", start_pos.x, "z", start_pos.z)
-	
 	for i, layer in ipairs(params) do
 		local generator
 		if layer.algorithm == "perlin" then
@@ -33,7 +31,6 @@ function worldeditadditions.noise.make_2d(size, start_pos, params)
 				local noise_y = (y + 100000+start_pos.z+layer.offset.z) * layer.scale.z
 				local noise_value = generator:noise(noise_x, noise_y, 0)
 				
-				-- print("DEBUG NOISE x", noise_x, "y", noise_y, "value", noise_value)
 				if type(result[i]) ~= "number" then result[i] = 0 end
 				result[i] = result[i] + (noise_value ^ layer.exponent) * layer.multiply + layer.add
 			end

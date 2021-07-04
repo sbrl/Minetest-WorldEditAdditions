@@ -16,13 +16,11 @@ function worldeditadditions.noise.apply_2d(heightmap, noise, heightmap_size, pos
 	
 	local region_height = pos2.y - pos1.y
 	
-	print("NOISE\n")
-	worldeditadditions.format.array_2d(noise, heightmap_size.x)
+	-- print("NOISE\n")
+	-- worldeditadditions.format.array_2d(noise, heightmap_size.x)
 	
 	
 	local height = tonumber(apply_mode)
-	
-	print("HEIGHT", height)
 	
 	for z = heightmap_size.z - 1, 0, -1 do
 		for x = heightmap_size.x - 1, 0, -1 do
@@ -35,15 +33,12 @@ function worldeditadditions.noise.apply_2d(heightmap, noise, heightmap_size, pos
 			elseif height then
 				-- Rescale from 0 - 1 to -1 - +1
 				local rescaled = (noise[i] * 2) - 1
-				-- print("DEBUG x", x, "z", z, "rescaled 1", rescaled)
 				-- Rescale to match the height specified
 				rescaled = rescaled * height
-				-- print("DEBUG x", x, "z", z, "rescaled 2", rescaled)
 				rescaled = math.floor(wea.clamp(
 					heightmap[i] + rescaled,
 					0, region_height
 				))
-				-- print("DEBUG x", x, "z", z, "before", heightmap[i], "after", rescaled)
 				heightmap[i] = rescaled
 			else
 				return false, "Error: Unknown apply mode '"..apply_mode.."'"

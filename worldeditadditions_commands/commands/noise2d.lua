@@ -18,9 +18,6 @@ worldedit.register_command("noise2d", {
 		})
 		if not success then return success, map end
 		
-		print("DEBUG noise_params raw ", wea.format.map(map))
-		
-		
 		if map.scale then
 			map.scale = tonumber(map.scale)
 			map.scale = wea.Vector3.new(map.scale, map.scale, map.scale)
