@@ -4,7 +4,7 @@
 -- ██ ████ ██ ███████ █████   █████            █████  ██   ██
 -- ██  ██  ██ ██   ██ ██  ██  ██              ██      ██   ██
 -- ██      ██ ██   ██ ██   ██ ███████ ███████ ███████ ██████
-
+local wea = worldeditadditions
 
 -- Generate a flat array of 2D noise.
 -- Written with help from https://www.redblobgames.com/maps/terrain-from-noise/
@@ -18,7 +18,9 @@ function worldeditadditions.noise.make_2d(size, start_pos, params)
 	for i, layer in ipairs(params) do
 		local generator
 		if layer.algorithm == "perlin" then
-			generator = worldeditadditions.noise.Perlin.new()
+			generator = wea.noise.engines.Perlin.new()
+		elseif layer.algorithm == "sin" then
+			generator = wea.noise.engines.Sin.new()
 		else -- We don't have any other generators just yet
 			return false, "Error: Unknown noise algorithm '"..tostring(layer.algorithm).."' in layer "..i.." of "..#params.." (available algorithms: perlin)."
 		end
@@ -39,14 +41,7 @@ function worldeditadditions.noise.make_2d(size, start_pos, params)
 		
 	end
 	
-	for x = 0, size.x do
-		for y = 0, size.z do
-			local i = y*size.x + x
-			result[i] = worldeditadditions.round(result[i])
-		end
-	end
-	
-	print("NOISE\n", worldeditadditions.format.array_2d(result, size.x))
+	-- We don't round here, because otherwise when we apply it it'll be inaccurate
 	
 	return true, result
 end

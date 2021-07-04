@@ -14,10 +14,10 @@ local wea = worldeditadditions
 -- @param	noise_params	table	A noise parameters table.
 function worldeditadditions.noise.run2d(pos1, pos2, noise_params)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
-	local region_height = pos1.y - pos2.y
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fill in the default params
+	print("DEBUG noise_params_custom ", wea.format.map(noise_params))
 	noise_params = worldeditadditions.noise.params_apply_default(noise_params)
 	print("DEBUG noise_params[1] ", wea.format.map(noise_params[1]))
 	
@@ -38,11 +38,12 @@ function worldeditadditions.noise.run2d(pos1, pos2, noise_params)
 		noise_params)
 	if not success then return success, noisemap end
 	
+	local message
 	success, message = wea.noise.apply_2d(
 		heightmap_new,
 		noisemap,
 		heightmap_size,
-		region_height,
+		pos1, pos2,
 		noise_params[1].apply
 	)
 	print("RETURNED apply_2d success", success, "message", message)

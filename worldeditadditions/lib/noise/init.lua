@@ -11,4 +11,4 @@ dofile(wea.modpath.."/lib/noise/make_2d.lua")
 dofile(wea.modpath.."/lib/noise/params_apply_default.lua")
 
 -- Noise generation engines
-wea.noise.Perlin = dofile(wea.modpath.."/lib/noise/engines/perlin.lua")
+wea.noise.engines = dofile(wea.modpath.."/lib/noise/engines/init.lua")

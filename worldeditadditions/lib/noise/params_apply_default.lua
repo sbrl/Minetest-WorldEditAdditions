@@ -11,7 +11,7 @@ function worldeditadditions.noise.params_apply_default(params)
 		-- - The exact string "add": Noise values are added to each heightmap pixel.
 		-- - The exact string "multiply": Each heightmap pixel is multiplied by the corresponding noise value.
 		-- - A string in the form of digits followed by a percent sign (e.g. "40%"), then the noise will is remapped from the range 0 - 1 to the range -1 - +1, and then for each pixel in the heightmap will be altered at most the given percentage of the total height of the defined region.
-		apply = "40%",
+		apply = 5,
 		-- The backend noise algorithm to use
 		algorithm = "perlin",
 		-- Zooms in and out
@@ -38,7 +38,8 @@ function worldeditadditions.noise.params_apply_default(params)
 		
 		-- Keyword support
 		if params_el.perlin then params_el.algorithm = "perlin" end
-		print("DEBUG params_el type", type(params_el), "RAW", params_el)
+		if params_el.sin then params_el.algorithm = "sin" end
+		
 		-- Apply this table to fill in the gaps
 		worldeditadditions.table.apply(
 			params_el,

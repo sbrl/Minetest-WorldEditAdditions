@@ -12,16 +12,22 @@ worldedit.register_command("noise2d", {
 		if params_text == "" then return true, {} end
 		
 		
-		local success, map = worldeditadditions.parse.map(params_text)
+		local success, map = worldeditadditions.parse.map(params_text, {
+			-- Keywords
+			"perlin", "sin"
+		})
 		if not success then return success, map end
+		
+		print("DEBUG noise_params raw ", wea.format.map(map))
+		
 		
 		if map.scale then
 			map.scale = tonumber(map.scale)
 			map.scale = wea.Vector3.new(map.scale, map.scale, map.scale)
 		elseif map.scalex or map.scaley or map.scalez then
-			map.scalex = tonumber(map.scalex) or 0
-			map.scaley = tonumber(map.scaley) or 0
-			map.scalez = tonumber(map.scalez) or 0
+			map.scalex = tonumber(map.scalex) or 1
+			map.scaley = tonumber(map.scaley) or 1
+			map.scalez = tonumber(map.scalez) or 1
 			map.scale = wea.Vector3.new(map.scalex, map.scaley, map.scalez)
 		end
 		if map.offsetx or map.offsety or map.offsetz then
