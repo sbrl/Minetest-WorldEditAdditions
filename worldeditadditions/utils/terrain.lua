@@ -98,8 +98,8 @@ function worldeditadditions.apply_heightmap_changes(pos1, pos2, area, data, heig
 	local node_id_air = minetest.get_content_id("air")
 	local node_id_ignore = minetest.get_content_id("ignore")
 	
-	for z = heightmap_size.z, 0, -1 do
-		for x = heightmap_size.x, 0, -1 do
+	for z = heightmap_size.z - 1, 0, -1 do
+		for x = heightmap_size.x - 1, 0, -1 do
 			local hi = z*heightmap_size.x + x
 			
 			local height_old = heightmap_old[hi]
