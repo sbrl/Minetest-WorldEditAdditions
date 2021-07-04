@@ -50,18 +50,6 @@ function Perlin:load()
 	end
 end
 
---- Formats a key-value table of values as a string.
--- @param	map		table	The table of key-value pairs to format.
--- @returns	string	The given table of key-value pairs formatted as a string.
-local function format_map(map)
-	local result = {}
-	for key, value in pairs(map) do
-		table.insert(result, key.."\t"..tostring(value))
-	end
-	return table.concat(result, "\n")
-end
-
-
 --- Returns a noise value for a given point in 3D space.
 -- @param	x	number	The x co-ordinate.
 -- @param	y	number	The y co-ordinate.
