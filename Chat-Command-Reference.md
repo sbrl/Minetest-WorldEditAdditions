@@ -488,6 +488,53 @@ Usage examples:
 ```
 
 
+## `//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+Applies 2D noise to the terrain in the defined region. Like `//erode`, this command accepts a number of different key-value parameters and provides a number of different underlying algorithms.
+
+Parameter	| Type		| Default Value	| Description
+------------|-----------|---------------|-----------------------
+algorithm	| `string`	| perlin		| The 2D noise algorithm to apply - see below.
+apply		| `string|integer` | 5		| How to apply the noise to the terrain - see below.
+scalex		| `float`	| 1				| The scale of the noise on the x axis.
+scaley		| `float`	| 1				| The scale of the noise on the y axis.
+scalez		| `float`	| 1				| The scale of the noise on the z axis.
+offsetx		| `float`	| 1				| The offset to add to the x axis before calling the noise function.
+offsety		| `float`	| 0				| The offset to add to the y axis before calling the noise function.
+offsetz		| `float`	| 0				| The offset to add to the z axis before calling the noise function.
+exponent	| `float`	| 0				| Raise the generated noise value (with a range of 0 to 1) to this power. Generally results in sharper peaks.
+multiply	| `float`	| 1				| Multiply the generated noise value by this number
+add			| `float`	| 0				| Add this number to the generated noise value.
+
+
+Different values of the `apply` parameter result in the generated noise values being applied in different ways:
+
+ - An integer indicates that the noise should be rescaled to a given amplitude (equal parts of the range above and below 0) before being added to the terrain heightmap.`
+ - The exact string `add`: Noise values are added to each heightmap pixel.
+ - The exact string `multiply`: Each heightmap pixel is multiplied by the corresponding noise value.
+
+The following algorithms are currently available:
+
+Algorithm	| Description
+------------|--------------------------
+`perlin`	| Perlin noise. Functional, but currently contains artefacts I'm having difficulty tracking down.
+`sin`		| A sine wave created with `math.sin()`.
+
+When specifying algorithm names, the `algorithm` parameter name is optional. For example, the following are both equivalent:
+
+```
+//noise2d offsetx 4 perlin scale 0.2
+//noise2d offsetx 4 algorithm perlin scale 0.2
+```
+
+Example invocations:
+
+```
+//noise2d sin scale 0.5
+//noise2d offsetx 20 perlin
+//noise2d sin exponent 4
+```
+
+
 ## `//count`
 Counts all the nodes in the defined region and returns the result along with calculated percentages (note that if the chat window used a monospace font, the returned result would be a perfect table. If someone has a ~~hack~~ solution to make the columns line up neatly, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) :D)
 
