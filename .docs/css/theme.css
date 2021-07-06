@@ -20,6 +20,7 @@
 	--bg-transcluscent-slight: rgba(255, 255, 255, 0.1);
 	--bg-transcluscent: rgba(255, 255, 255, 0.85);
 	--bg-transcluscent-alt: hsla(226, 59%, 38%, 0.8);
+	--bg-transcluscent-alt-vdark: hsla(226, 59%, 8%, 0.8);
 	--bg-transcluscent-alt-slight: hsla(196, 91%, 62%, 0.23);
 	
 	/* --text-main: #3F57B4; */
@@ -173,6 +174,9 @@ code {
 	border-radius: 0.25em;
 	padding: 0.15em;
 }
+/* pre.language-weacmd {
+	background: var(--bg-transcluscent-alt-vdark);
+} */
 
 label {
 	font-weight: bold;

@@ -15,7 +15,7 @@ Other useful links:
 ## `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
 
-```
+```weacmd
 //floodfill
 //floodfill water_source 50
 //floodfill glass 25
@@ -30,7 +30,7 @@ Note that all-air columns are skipped - so if you experience issues with it not 
 
 Note also that columns without any air nodes in them at all are also skipped, so try `//expand y 1` to add an extra layer to your defined region.
 
-```
+```weacmd
 //overlay grass
 //overlay glass
 //overlay grass_with_dirt
@@ -45,7 +45,7 @@ Finds the first non-air node in each column and works downwards, replacing non-a
 
 The list of nodes has a form similar to that of a chance list you might find in `//replacemix`, `//overlay`, or `//mix` - see the examples below. If the numberr of layers isn't specified, `1` is assumed (i.e. a single layer).
 
-```
+```weacmd
 //layers dirt_with_grass dirt 3
 //layers sand 5 sandstone 4 desert_stone 2
 //layers brick stone 3
@@ -74,7 +74,7 @@ If you like, you can also reference the full name of a sapling node instead. The
 
 For example, the first 2 examples below are functionally equivalent.
 
-```
+```weacmd
 //forest aspen
 //forest default:aspen_sapling
 //forest 2 oak 3 aspen pine
@@ -92,7 +92,7 @@ Mode			| Description
 `aliases`		| The default. Lists all the currently registered sapling aliases in alphabetical order.
 `all_saplings`	| Spins through all the nodes currently registered in Minetest, and lists all the nodes that have the `sapling` group.
 
-```
+```weacmd
 //saplingaliases
 //saplingaliases all_saplings
 //saplingaliases aliases
@@ -104,7 +104,7 @@ Fills in all airlike nodes beneath non airlike nodes, which gives the effect of 
 
 Note that the *entire* cave you want filling must be selected, as `//fillcaves` only operates within the defined region (ref #50).
 
-```
+```weacmd
 //fillcaves
 //fillcaves dirt
 //fillcaves brick
@@ -114,7 +114,7 @@ Note that the *entire* cave you want filling must be selected, as `//fillcaves` 
 ## `//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`
 Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
 
-```
+```weacmd
 //ellipsoid 10 5 15 ice
 //ellipsoid 3 5 10 dirt
 //ellipsoid 20 10 40 air
@@ -125,7 +125,7 @@ Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
 ## `//hollowellipsoid <rx> <ry> <rz> <node_name>`
 Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works the same way as `//ellipsoid` does.
 
-```
+```weacmd
 //hollowellipsoid 10 5 15 glass
 //hollowellipsoid 21 11 41 stone
 ```
@@ -135,7 +135,7 @@ Creates a solid torus at position 1 with the specified major and minor radii. Th
 
 The optional axes sets the axes upon which the torus will lay flat. Possible values: `xy` (the default), `xz`, `yz`. A single axis may also be specified (i.e. `x`, `y`, or `z`) - this will be interpreted as the axis that runs through the hole in the middle of the torus.
 
-```
+```weacmd
 //torus 15 5 stone
 //torus 5 3 meselamp
 //torus 10 6 sandstone xz
@@ -146,7 +146,7 @@ The optional axes sets the axes upon which the torus will lay flat. Possible val
 ## `//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`
 Creates a hollow torus at position 1 with the radius major and minor radii. Works the same way as `//torus` does.
 
-```
+```weacmd
 //hollowtorus 10 5 glass
 //hollowtorus 21 11 stone
 //hollowtorus 18 6 dirt xz
@@ -159,7 +159,7 @@ The radius can be thought of as the thickness of the line, and is defined as the
 
 Floating-point values are fully supported for the radius.
 
-```
+```weacmd
 //line
 //line stone
 //line sandstone 3
@@ -171,7 +171,7 @@ Replaces nodes inside the defined region with air, but leaving a given number of
 
 Note that all air-like nodes are also left alone.
 
-```
+```weacmd
 //hollow
 //hollow 2
 ```
@@ -191,7 +191,7 @@ Note also that since WorldEditAdditions v1.10, the seed doesn't have to be a num
 
 The last example below shows how to set the path length and width:
 
-```
+```weacmd
 //maze ice
 //maze stone 2 1 1234
 //maze dirt 4 2 56789
@@ -205,7 +205,7 @@ The optional `path_depth` parameter defaults to `1` and allows customisation of 
 
 To get a better look at the generated maze, try inverting it like so:
 
-```
+```weacmd
 //maze3d stone
 //replace air dirt
 //replace stone air
@@ -213,7 +213,7 @@ To get a better look at the generated maze, try inverting it like so:
 
 Additional examples:
 
-```
+```weacmd
 //maze3d glass
 //maze3d bush_leaves 2 1 1 12345
 //maze3d dirt 4 2 2
@@ -235,7 +235,7 @@ For example, a chance number of 2 would mean a 50% chance that any given eligibl
 
 Since WorldEditAdditions v1.12, a percentage chance is also supported. This is denoted by suffixing a number with a percent sign (e.g. `//bonemeal 1 25%`).
 
-```
+```weacmd
 //bonemeal
 //bonemeal 3 25
 //bonemeal 4
@@ -247,7 +247,7 @@ Since WorldEditAdditions v1.12, a percentage chance is also supported. This is d
 ## `//walls <replace_node>`
 Creates vertical walls of `<replace_node>` around the inside edges of the defined region.
 
-```
+```weacmd
 //walls dirt
 //walls stone
 //walls goldblock
@@ -276,25 +276,25 @@ With this in mind, there are 3 forms that you can tell `//scale` how you want to
 ### Single Axis
 If you just need to scale a single axis, you can tell `//scale` that like so:
 
-```
+```weacmd
 //scale <axis> <scale_factor>
 ```
 
 To give a concrete example:
 
-```
+```weacmd
 //scale y 2
 ```
 
 The above will scale the defined region in the positive y direction by 2 times, doubling the height. If you want to scale in the opposite direction, do this:
 
-```
+```weacmd
 //scale -y 2
 ```
 
 This will scale in the _negative_ y direction by 2 times (again, doubling the height). Some more examples:
 
-```
+```weacmd
 //scale z 50%
 //scale -x 1/3
 ```
@@ -302,7 +302,7 @@ This will scale in the _negative_ y direction by 2 times (again, doubling the he
 ### All axes
 To scale on all axes at once, `//scale` takes the shortcut syntax of specifying a single scale factor:
 
-```
+```weacmd
 //scale 2
 //scale 200%
 ```
@@ -312,13 +312,13 @@ Both of the above will scale the defined region up by 2 times in all directions.
 ### Multiple scale factors
 If you want to specify different scale factors for difference axes, then `//scale` also supports a third syntax. Here's an example:
 
-```
+```weacmd
 //scale 2 3 4
 ```
 
 This will scale the defined region by 2x in the positive x, 3x in the positive y, and 4x in the positive z. As these are all scale factors, we can also use the syntax described above to scale up and down in the same operation:
 
-```
+```weacmd
 //scale 50% 2 1/4
 ```
 
@@ -326,7 +326,7 @@ This will first scale in the positive y by 2x. Once that operation is completed,
 
 If you want to change the anchor point of the scaling operation too, `//scale` supports a final syntax like so:
 
-```
+```weacmd
 //scale 50% 2 1/4 1 -1 1
 ```
 
@@ -340,7 +340,7 @@ Replaces a given node with a random mix of other nodes. Functions like `//mix`.
 
 This command is best explained with examples:
 
-```
+```weacmd
 //replacemix dirt stone
 ```
 
@@ -348,19 +348,19 @@ The above functions just like `//replace` - nothing special going on here. It re
 
 Let's make it more interesting:
 
-```
+```weacmd
 //replacemix dirt 5 stone
 ```
 
 The above replaces 1 in every 5 `dirt` nodes with `stone`. Let's get even fancier:
 
-```
+```weacmd
 //replacemix stone stone_with_diamond stone_with_gold
 ```
 
 The above replaces `stone` nodes with a random mix of `stone_with_diamond` and `stone_with_gold` nodes. But wait - there's more!
 
-```
+```weacmd
 //replacemix stone stone_with_diamond stone_with_gold 4
 ```
 
@@ -368,7 +368,7 @@ The above replaces `stone` nodes with a random mix of `stone_with_diamond` and `
 
 If we wanted to put all of the above features together into a single command, then we might do this:
 
-```
+```weacmd
 //replacemix dirt 3 sandstone 10 dry_dirt cobble 2
 ```
 
@@ -376,7 +376,7 @@ The above replaces 1 in 3 `dirt` nodes with a mix of `sandstone`, `dry_dirt`, an
 
 Since WorldEditAdditions v1.12, you can also use percentages:
 
-```
+```weacmd
 //replacemix dirt 33% sandstone 75% dry_dirt 10% cobble 15%
 ```
 
@@ -384,7 +384,7 @@ Note though that the percentages are internally converted to a 1-in-N chance and
 
 Here are all the above examples together:
 
-```
+```weacmd
 //replacemix dirt stone
 //replacemix dirt 5 stone
 //replacemix stone stone_with_diamond stone_with_gold
@@ -411,7 +411,7 @@ The width and height (if specified) refer to the dimensions of the kernel and mu
 
 The sigma value is only applicable to the `gaussian` kernel, and can be thought of as the 'smoothness' to apply. Greater values result in more smoothing. Default: 2. See the [Gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur) page on Wikipedia for some pictures showing the effect of the sigma value.
 
-```
+```weacmd
 //convolve
 //convolve box 7
 //convolve pascal 11,3
@@ -434,7 +434,7 @@ Algorithm	| Mode	| Description
 
 Usage examples:
 
-```
+```weacmd
 //erode
 //erode snowballs
 //erode snowballs count 25000
@@ -461,7 +461,7 @@ noconv				| any		| n/a				| When set to any value, disables to automatic 3x3 gau
 
 Usage examples:
 
-```
+```weacmd
 //erode
 //erode snowballs
 //erode snowballs count 50000
@@ -482,7 +482,7 @@ dolower				| `boolean`	| true				| Whether to lower columns in height. If false,
 
 Usage examples:
 
-```
+```weacmd
 //erode river
 //erode river steps 10
 ```
@@ -521,14 +521,14 @@ Algorithm	| Description
 
 When specifying algorithm names, the `algorithm` parameter name is optional. For example, the following are both equivalent:
 
-```
+```weacmd
 //noise2d offsetx 4 perlin scale 0.2
 //noise2d offsetx 4 algorithm perlin scale 0.2
 ```
 
 Example invocations:
 
-```
+```weacmd
 //noise2d sin scale 0.5
 //noise2d offsetx 20 perlin
 //noise2d sin exponent 4
@@ -540,7 +540,7 @@ Counts all the nodes in the defined region and returns the result along with cal
 
 **Note:** The output of `//count` can be rather long sometimes, and Minetest by default only shows the last few lines of chat. Press <kbd>F10</kbd> to show the full chat window that you can then scroll through to inspect the full output.
 
-```
+```weacmd
 //count
 ```
 
@@ -548,13 +548,13 @@ Counts all the nodes in the defined region and returns the result along with cal
 ## `//basename <name>`
 Returns the absolute canonical name of a node, given an alias or partial node name. For example:
 
-```
+```weacmd
 //basename dirt
 ```
 
 ...will return `default:dirt`. Uses `worldedit.normalize_nodename(string)` under the hood.
 
-```
+```weacmd
 //basename stonebrick
 //basename glass
 ```
@@ -573,7 +573,7 @@ While other server commands can be executed while a `//subdivide` is running, `/
 
 **Warning:** Once started, this command cannot be stopped without restarting your server! This is the case with all WorldEdit commands, but it's worth a special mention here.
 
-```
+```weacmd
 //subdivide 10 10 10 set dirt
 //subdivice 25 25 25 fixlight
 ```
@@ -582,13 +582,13 @@ While other server commands can be executed while a `//subdivide` is running, `/
 ## `//multi <command_a> <command_b> <command_c> .....`
 Executes multi chat commands in sequence. Intended for _WorldEdit_ commands, but does work with others too. Don't forget a space between commands!
 
-```
+```weacmd
 //multi //set dirt //shift x 10 //set glass
 ```
 
 Since WorldEditAdditions v1.12, curly brace syntax has also been introduced to allow nesting of commands:
 
-```
+```weacmd
 //multi //fixlight {//many 5 //bonemeal 3 100}
 ```
 
@@ -596,7 +596,7 @@ This syntax can also be nested arbitrarily in arbitrarily complex combinations, 
 
 In addition, this also allows for including a double forward slash in the argument list for a command, should you need to do so (e.g. `//multi //example {//bar //baz} //example` will be executed as 3 commands: `/example`, then `/bar` with an argument of `//baz`, then finally `/example`).
 
-```
+```weacmd
 //multi //1 //2 //shift z -10 //sphere 5 sand //shift z 20 //ellipsoid 5 3 5 ice
 //multi //1 //hollowtorus 30 5 stone //hollowtorus 20 3 dirt //torus 10 2 dirt_with_grass
 //multi /time 7:00 //1 //outset h 20 //outset v 5 //overlay dirt_with_grass //1 //2 //sphere 8 air //shift down 1 //floodfill //reset
@@ -608,7 +608,7 @@ Executes a single chat command many times in a row. Uses `minetest.after()` to y
 
 Note that this isn't necessarily limited to executing WorldEdit / WorldEditAdditions commands. Combine with `//multi` (see above) execute multiple commands at once for even more power and flexibility!
 
-```
+```weacmd
 //many 10 //bonemeal 3 100
 //many 100 //multi //1 //2 //outset 20 //set dirt
 ```
@@ -617,7 +617,7 @@ Note that this isn't necessarily limited to executing WorldEdit / WorldEditAddit
 ## `//ellipsoidapply <command_name> <args>`
 Executes the given command, and then clips the result to the largest ellipsoid that will fit inside the defined region. The specified command must obviously take 2 positions - so for example `//set`, `//replacemix`, and `//maze3d` will work, but `//sphere`, `//torus`, and `//floodfill` won't.
 
-```
+```weacmd
 //ellipsoidapply set dirt
 //ellipsoidapply maze3d dirt 4 2 2
 //ellipsoidapply erode
@@ -629,7 +629,7 @@ Executes the given command, and then clips the result to the largest ellipsoid t
 ## `//scol [<axis1> ] <length>`
 Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
 
-```
+```weacmd
 //scol 10
 //scol x 3
 ```
@@ -638,7 +638,7 @@ Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos
 ## `//srect [<axis1> [<axis2>]] <length>`
 Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
 
-```
+```weacmd
 //srect x z 10
 //srect 3
 //srect -z y 25
@@ -648,7 +648,7 @@ Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from 
 ## `//scube [<axis1> [<axis2> [<axis3>]]] <length>`
 Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1. If the axes aren't specified, defaults to positive y, the direction you are facing and the axis to the left of facing. Implementation thanks to @VorTechnix.
 
-```
+```weacmd
 //scube 5
 //scube z a y 12
 //scube x z 3
@@ -659,7 +659,7 @@ Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1.
 ## `//scloud <0-6|stop|reset>`
 Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punch. Numbers 1-6 designate how many nodes you want to punch before the operation ends. 0 or stop terminate the operation so that any further nodes you punch won't be added to selection. Reset terminates operation if one is running and resets the selection area.
 
-```
+```weacmd
 //scloud 6
 //scloud 5
 //scloud stop
@@ -669,7 +669,7 @@ Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punc
 ## `//scentre`
 Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the current selection area. 1, 2, 4 or 8 nodes may be selected depending on what parts of the original selection are even in distance. Implementation thanks to @VorTechnix.
 
-```
+```weacmd
 //scentre
 ```
 
@@ -677,7 +677,7 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 ## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
-```
+```weacmd
 //srel front 5
 //srel  y 12 right -2
 //srel left 3 up 5 -front 7
@@ -690,7 +690,7 @@ Short for _selection make_. Modifies existing selection by moving pos2. Allows y
 
 Usage examples:
 
-```
+```weacmd
 //smake odd shrink
 //smake even avg xz
 //smake equal grow xy
@@ -739,7 +739,7 @@ Short for _selection factor_; alias: `//sfac`. Built specifically for use with `
 
 Usage examples:
 
-```
+```weacmd
 //sfac grow 5
 //sfac avg 3 xy
 ```
@@ -755,7 +755,7 @@ Value	|	Description
 ## `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
 
-```
+```weacmd
 //sstack
 ```
 
@@ -766,14 +766,14 @@ If the stack is full (currently the limit is set to 100 regions in the stack), t
 
 Note that pos2 does _not_ need to be defined in order to use this. if it isn't defined, then a pos2 of `nil` will be pushed onto the stack instead.
 
-```
+```weacmd
 //spush
 ```
 
 ## `//spop`
 Pops a selection off your per-user selection stack and applies it to the currently defined region. If pos2 from the item popped from the stack is nil, then pos2 is explicitly unset. If the stack is empty, this has no effect.
 
-```
+```weacmd
 //spop
 ```
 
@@ -782,7 +782,7 @@ Confirms the execution of a command if it could potentially affect a large numbe
 
 <!-- Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command. -->
 
-```
+```weacmd
 //y
 ```
 
@@ -791,7 +791,7 @@ Prevents the execution of a command if it could potentially affect a large numbe
 
 <!-- Equivalent to _WorldEdit_'s `//y`, but because of security sandboxing issues it's not really possible to hook into WorldEdit's existing command. -->
 
-```
+```weacmd
 //n
 ```
 
@@ -804,20 +804,20 @@ It functions very similarly to the regular WorldEdit wand, except that it has a 
 ## `//farwand skip_liquid (true|false) | maxdist <number>`
 This command helps control the behaviour of the [WorldEditAdditions far wand](#far-wand). Calling it without any arguments shows the current status:
 
-```
+```weacmd
 //farwand
 ```
 
 You can decide whether you can select liquids or not like so:
 
-```
+```weacmd
 //farwand skip_liquid true
 //farwand skip_liquid false
 ```
 
 You can change the maximum range with the `maxdist` subcommand:
 
-```
+```weacmd
 //farwand maxdist 1000
 //farwand maxdist 200
 //farwand maxdist 9999

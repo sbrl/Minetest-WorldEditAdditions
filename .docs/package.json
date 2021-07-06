@@ -23,6 +23,8 @@
 		"@11ty/eleventy": "^0.12.1",
 		"@11ty/eleventy-img": "^0.9.0",
 		"html-entities": "^2.3.2",
-		"htmlentities": "^1.0.0"
+		"htmlentities": "^1.0.0",
+		"markdown-it-prism": "^2.1.8",
+		"phin": "^3.6.0"
 	}
 }

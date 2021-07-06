@@ -1,8 +1,12 @@
+const os = require("os");
 const fs = require("fs");
 const path = require("path");
 
 const htmlentities = require("html-entities");
+const phin = require("phin");
+
 const Image = require("@11ty/eleventy-img");
+
 
 var nextid = 0;
 
@@ -77,7 +81,25 @@ async function shortcode_gallerybox(content, src, idthis, idprev, idnext) {
 </figure>`;
 }
 
+async function fetch(url) {
+	let package = JSON.parse(await fs.promises.readFile(
+		path.join(__dirname, "package.json"), "utf8"
+	));
+	
+	return (await phin({
+		url,
+		headers: {
+			"user-agent": `WorldEditAdditionsStaticBuilder/${package.version} (Node.js/${process.version}; ${os.platform()} ${os.arch()}) eleventy/${package.devDependencies["@11ty/eleventy"].replace(/\^/, "")}`
+		},
+		followRedirects: true,
+		parse: "string"
+	})).body;
+}
+
 module.exports = function(eleventyConfig) {
+	
+	eleventyConfig.addAsyncShortcode("fetch", fetch);
+	
 	// eleventyConfig.addPassthroughCopy("images");
 	// eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addShortcode("image", shortcode_image);
