@@ -4,7 +4,7 @@
 -- ██  ██  ██ ██   ██    ██    ██ ██    ██
 -- ██      ██ ██   ██    ██    ██  ██████
 local wea = worldeditadditions
-worldeditdebug.register("abschk")
+-- worldeditdebug.register("abschk")
 worldedit.register_command("mtrig", {
 	params = "",
 	description = "Return the length of each axis of current selection.",
@@ -18,10 +18,10 @@ worldedit.register_command("mtrig", {
 		local vec = vector.subtract(worldedit.pos2[name],worldedit.pos1[name])
 		wea.vector.abs(vec)
 		-- Test:
-		if worldeditdebug.debug["abschk"][name] then
-			-- //debug abschk
-			return false, "Values = " .. worldeditdebug.table_tostring(vec)
-		end
+		-- if worldeditdebug.debug["abschk"][name] then
+		-- 	-- //debug abschk
+		-- 	return false, "Values = " .. worldeditdebug.table_tostring(vec)
+		-- end
 		local len = wea.Vector3.length(vec)
 		str = str..len..", X/Z angle: "..math.atan(vec.z/vec.x).."° h/Y angle: "..math.atan(vec.y/len).."°"
 		return true, str
