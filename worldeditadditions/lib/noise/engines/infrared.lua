@@ -22,12 +22,8 @@ function Infrared:noise( x, y, z )
 		for ny=y-self.window,y+self.window do
 			for nz=z-self.window,z+self.window do
 				table.insert(values, self.white:noise(nx, ny, nz))
-				
-				print("DEBUG nx", nx, "ny", ny, "nz", nz, "value", value)
 			end
 		end
-	end
-	for i,value in ipairs(values) do
 	end
 	return wea.average(values)
 end
