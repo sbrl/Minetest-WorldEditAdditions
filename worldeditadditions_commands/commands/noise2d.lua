@@ -12,10 +12,8 @@ worldedit.register_command("noise2d", {
 		if params_text == "" then return true, {} end
 		
 		
-		local success, map = worldeditadditions.parse.map(params_text, {
-			-- Keywords
-			"perlin", "sin"
-		})
+		local success, map = worldeditadditions.parse.map(params_text,
+			wea.noise.engines.available) -- Keywords
 		if not success then return success, map end
 		
 		if map.scale then

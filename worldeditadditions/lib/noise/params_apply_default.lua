@@ -34,14 +34,17 @@ function worldeditadditions.noise.params_apply_default(params)
 	-- If params[1] is thing, this is a list of params
 	-- This might be a thing if we're dealing with multiple octaves
 	for i,params_el in ipairs(params) do
-		local default_copy = worldeditadditions.table.shallowcopy(params_default)
+		local default_copy = wea.table.shallowcopy(params_default)
 		
 		-- Keyword support
-		if params_el.perlin then params_el.algorithm = "perlin" end
-		if params_el.sin then params_el.algorithm = "sin" end
+		for i, keyword in ipairs(wea.noise.engines.available) do
+			if params_el[keyword] ~= nil then
+				params_el.algorithm = keyword
+			end
+		end
 		
 		-- Apply this table to fill in the gaps
-		worldeditadditions.table.apply(
+		wea.table.apply(
 			params_el,
 			default_copy
 		)

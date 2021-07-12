@@ -16,11 +16,13 @@ function worldeditadditions.noise.apply_2d(heightmap, noise, heightmap_size, pos
 	
 	local region_height = pos2.y - pos1.y
 	
-	-- print("NOISE\n")
-	-- worldeditadditions.format.array_2d(noise, heightmap_size.x)
+	
+	print("NOISE APPLY_2D\n")
+	worldeditadditions.format.array_2d(noise, heightmap_size.x)
 	
 	
 	local height = tonumber(apply_mode)
+	print("DEBUG apply_mode", apply_mode, "as height", height)
 	
 	for z = heightmap_size.z - 1, 0, -1 do
 		for x = heightmap_size.x - 1, 0, -1 do
@@ -45,6 +47,15 @@ function worldeditadditions.noise.apply_2d(heightmap, noise, heightmap_size, pos
 			end
 		end
 	end
+	
+	-- for z = heightmap_size.z - 1, 0, -1 do
+	-- 	x = 0
+	-- 	heightmap[(z * heightmap_size.x) + x] = z
+	-- end
+	
+	print("HEIGHTMAP\n")
+	worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
+	
 	
 	return true
 end
