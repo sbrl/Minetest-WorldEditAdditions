@@ -519,7 +519,8 @@ Algorithm	| Description
 `perlin`	| Perlin noise. Functional, but currently contains artefacts I'm having difficulty tracking down.
 `sin`		| A sine wave created with `math.sin()`.
 `white`		| Random white noise.
-`red`       | Red noise - has a lower frequency than white noise.
+`red`		| Red noise - has a lower frequency than white noise.
+`infrared`	| Even smoother than red noise. Tends to also be quite flat unless you use a slightly higher `apply` value (e.g. `20`).
 
 When specifying algorithm names, the `algorithm` parameter name is optional. For example, the following are both equivalent:
 

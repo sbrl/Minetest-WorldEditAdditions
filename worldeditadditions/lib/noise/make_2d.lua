@@ -23,6 +23,8 @@ function worldeditadditions.noise.make_2d(size, start_pos, params)
 			generator = wea.noise.engines.White.new()
 		elseif layer.algorithm == "red" then
 			generator = wea.noise.engines.Red.new()
+		elseif layer.algorithm == "infrared" then
+			generator = wea.noise.engines.Infrared.new()
 		else -- We don't have any other generators just yet
 			return false, "Error: Unknown noise algorithm '"..tostring(layer.algorithm).."' in layer "..layer_i.." of "..#params.." (available algorithms: "..table.concat(wea.noise.engines.available, ", ")..")."
 		end
