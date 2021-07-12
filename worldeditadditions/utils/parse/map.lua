@@ -4,9 +4,10 @@ local wea = worldeditadditions
 -- For example, "count 25000 speed 0.8 rate_erosion 0.006 doawesome true" would be parsed into
 -- the following table: { count = 25000, speed = 0.8, rate_erosion = 0.006, doawesome = true }.
 -- @param	params_text	string		The string to parse.
--- @param	keywords	string[]	A list of keywords. Keywords can be present on their own without a value. If found, their value will be automatically set to bool true.
+-- @param	keywords	string[]?	Optional. A list of keywords. Keywords can be present on their own without a value. If found, their value will be automatically set to bool true.
 -- @returns	table		A table of key-value pairs parsed out from the given string.
 function worldeditadditions.parse.map(params_text, keywords)
+	if not keywords then keywords = {} end
 	local result = {}
 	local parts = wea.split(params_text, "%s+", false)
 	
