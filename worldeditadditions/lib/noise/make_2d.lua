@@ -25,6 +25,7 @@ function worldeditadditions.noise.make_2d(size, start_pos, params)
 			return false, "Error: Unknown noise algorithm '"..tostring(layer.algorithm).."' in layer "..layer_i.." of "..#params.." (available algorithms: "..table.concat(wea.noise.engines.available, ", ")..")."
 		end
 		
+		-- TODO: Optimise performance by making i count backwards in sequence
 		for x = 0, size.x - 1 do
 			for y = 0, size.z - 1 do
 				local i = y*size.x + x
