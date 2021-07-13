@@ -1,47 +1,7 @@
 --- Flood-fill command for complex lakes etc.
 -- @module worldeditadditions.floodfill
 
--------------------------------------------------------------------------------
---- A Queue implementation, taken & adapted from https://www.lua.org/pil/11.4.html
--- @submodule worldeditadditions.utils.queue
-
-local Queue = {}
-function Queue.new()
-	return { first = 0, last = -1 }
-end
-
-function Queue.enqueue(queue, value)
-	local new_last = queue.last + 1
-	queue.last = new_last
-	queue[new_last] = value
-end
-
-function Queue.contains(queue, value)
-	for i=queue.first,queue.last do
-		if queue[i] == value then
-			return true
-		end
-	end
-	return false
-end
-
-function Queue.is_empty(queue)
-	return queue.first > queue.last
-end
-
-function Queue.dequeue(queue)
-	local first = queue.first
-	if Queue.is_empty(queue) then
-		error("Error: The queue is empty!")
-	end
-	
-	local value = queue[first]
-	queue[first] = nil -- Help the garbage collector out
-	queue.first = first + 1
-	return value
-end
-
--------------------------------------------------------------------------------
+local wea = worldeditadditions
 
 function worldeditadditions.floodfill(start_pos, radius, replace_node)
 	-- Calculate the area we want to modify
@@ -67,12 +27,12 @@ function worldeditadditions.floodfill(start_pos, radius, replace_node)
 	end
 	
 	local count = 0
-	local remaining_nodes = Queue.new()
-	Queue.enqueue(remaining_nodes, start_pos_index)
+	local remaining_nodes = wea.Queue.new()
+	remaining_nodes:enqueue(start_pos_index)
 	
 	-- Do the floodfill
-	while Queue.is_empty(remaining_nodes) == false do
-		local cur = Queue.dequeue(remaining_nodes)
+	while remaining_nodes:is_empty() == false do
+		local cur = remaining_nodes:dequeue()
 		
 		-- Replace this node
 		data[cur] = replace_id
@@ -83,37 +43,37 @@ function worldeditadditions.floodfill(start_pos, radius, replace_node)
 		local xplus = cur + 1 -- +X
 		if data[xplus] == search_id and
 			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(xplus), start_pos)) < radius_sq and
-			not Queue.contains(remaining_nodes, xplus) then
+			not remaining_nodes:contains(xplus) then
 			-- minetest.log("action", "[floodfill] [+X] index " .. xplus .. " is a " .. data[xplus] .. ", searching for a " .. search_id)
-			Queue.enqueue(remaining_nodes, xplus)
+			remaining_nodes:enqueue(xplus)
 		end
 		local xminus = cur - 1 -- -X
 		if data[xminus] == search_id and
 			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(xminus), start_pos)) < radius_sq and
-			not Queue.contains(remaining_nodes, xminus) then
+			not remaining_nodes:contains(xminus) then
 			-- minetest.log("action", "[floodfill] [-X] index " .. xminus .. " is a " .. data[xminus] .. ", searching for a " .. search_id)
-			Queue.enqueue(remaining_nodes, xminus)
+			remaining_nodes:enqueue(xminus)
 		end
 		local zplus = cur + area.zstride -- +Z
 		if data[zplus] == search_id and
 			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(zplus), start_pos)) < radius_sq and
-			not Queue.contains(remaining_nodes, zplus) then
+			not remaining_nodes:contains(zplus) then
 			-- minetest.log("action", "[floodfill] [+Z] index " .. zplus .. " is a " .. data[zplus] .. ", searching for a " .. search_id)
-			Queue.enqueue(remaining_nodes, zplus)
+			remaining_nodes:enqueue(zplus)
 		end
 		local zminus = cur - area.zstride -- -Z
 		if data[zminus] == search_id and
 			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(zminus), start_pos)) < radius_sq and
-			not Queue.contains(remaining_nodes, zminus) then
+			not remaining_nodes:contains(zminus) then
 			-- minetest.log("action", "[floodfill] [-Z] index " .. zminus .. " is a " .. data[zminus] .. ", searching for a " .. search_id)
-			Queue.enqueue(remaining_nodes, zminus)
+			remaining_nodes:enqueue(zminus)
 		end
 		local yminus = cur - area.ystride -- -Y
 		if data[yminus] == search_id and
 			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(yminus), start_pos)) < radius_sq and
-			not Queue.contains(remaining_nodes, yminus)  then
+			not remaining_nodes:contains(yminus)  then
 			-- minetest.log("action", "[floodfill] [-Y] index " .. yminus .. " is a " .. data[yminus] .. ", searching for a " .. search_id)
-			Queue.enqueue(remaining_nodes, yminus)
+			remaining_nodes:enqueue(yminus)
 		end
 		
 		count = count + 1
