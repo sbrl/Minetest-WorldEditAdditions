@@ -17,7 +17,9 @@ worldedit.register_command("mtrig", {
 		local str = "The measurements of the line pos1,pos2 are Length (D): "
 		local vec = v3.subtract(worldedit.pos2[name],worldedit.pos1[name]):abs()
 		local len = vec:length()
-		str = str..wea.round(len, 4)..", ∠XZ: "..wea.round(math.deg(math.atan(vec.z/vec.x)), 4).."°, ∠DY: "..wea.round(math.deg(math.asin(vec.y/len)), 4).."°"
+		str = str..wea.round(len, 4)..", ∠XZ: "..
+			wea.round(math.deg(math.atan(vec.z/vec.x)), 4).."°, ∠DY: "..
+			wea.round(math.deg(math.asin(vec.y/len)), 4).."°"
 		return true, str
 	end,
 })
