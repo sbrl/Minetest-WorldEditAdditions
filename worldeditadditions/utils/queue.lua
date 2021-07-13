@@ -15,6 +15,7 @@ function Queue:enqueue(value)
 	local new_last = self.last + 1
 	self.last = new_last
 	self.items[new_last] = value
+	return new_last
 end
 
 function Queue:contains(value)
@@ -30,15 +31,25 @@ function Queue:is_empty()
 	return self.first > self.last
 end
 
+function Queue:remove_index(index)
+	self.items[index] = nil
+end
+
 function Queue:dequeue()
-	local first = self.first
 	if Queue.is_empty(self) then
 		error("Error: The self is empty!")
 	end
 	
-	local value = self.items[first]
-	self.items[first] = nil -- Help the garbage collector out
-	self.first = first + 1
+	local first = self.first
+	-- Find the next non-nil item
+	local value
+	while value == nil do
+		if first >= self.last then return nil end
+		value = self.items[first]
+		self.items[first] = nil -- Help the garbage collector out
+		first = first + 1
+	end
+	self.first = first
 	return value
 end
 

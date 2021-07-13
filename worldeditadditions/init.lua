@@ -13,6 +13,7 @@ worldeditadditions.Mesh,
 worldeditadditions.Face = dofile(worldeditadditions.modpath.."/utils/mesh.lua")
 
 worldeditadditions.Queue = dofile(worldeditadditions.modpath.."/utils/queue.lua")
+worldeditadditions.LRU = dofile(worldeditadditions.modpath.."/utils/lru.lua")
 
 
 dofile(worldeditadditions.modpath.."/utils/strings/init.lua")
