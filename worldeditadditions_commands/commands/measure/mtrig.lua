@@ -1,10 +1,10 @@
--- ███    ███ ██████  ████████ ██  ██████
--- ████  ████ ██   ██    ██    ██ ██
--- ██ ████ ██ ██████     ██    ██ ██   ███
--- ██  ██  ██ ██   ██    ██    ██ ██    ██
--- ██      ██ ██   ██    ██    ██  ██████
+-- ███    ███ ████████ ██████  ██  ██████
+-- ████  ████    ██    ██   ██ ██ ██
+-- ██ ████ ██    ██    ██████  ██ ██   ███
+-- ██  ██  ██    ██    ██   ██ ██ ██    ██
+-- ██      ██    ██    ██   ██ ██  ██████
 local wea = worldeditadditions
--- worldeditdebug.register("abschk")
+local v3 = worldeditadditions.Vector3
 worldedit.register_command("mtrig", {
 	params = "",
 	description = "Return the length of each axis of current selection.",
@@ -14,16 +14,10 @@ worldedit.register_command("mtrig", {
 		return true
 	end,
 	func = function(name, params_text)
-		local str = "The measurements of the line pos1,pos2 are Length: "
-		local vec = vector.subtract(worldedit.pos2[name],worldedit.pos1[name])
-		wea.vector.abs(vec)
-		-- Test:
-		-- if worldeditdebug.debug["abschk"][name] then
-		-- 	-- //debug abschk
-		-- 	return false, "Values = " .. worldeditdebug.table_tostring(vec)
-		-- end
-		local len = wea.Vector3.length(vec)
-		str = str..len..", X/Z angle: "..math.atan(vec.z/vec.x).."° h/Y angle: "..math.atan(vec.y/len).."°"
+		local str = "The measurements of the line pos1,pos2 are Length (D): "
+		local vec = v3.subtract(worldedit.pos2[name],worldedit.pos1[name]):abs()
+		local len = vec:length()
+		str = str..len..", ∠XZ: "..math.deg(math.atan(vec.z/vec.x)).."° ∠DY: "..math.deg(math.asin(vec.y/len)).."°"
 		return true, str
 	end,
 })
