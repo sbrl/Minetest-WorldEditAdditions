@@ -7,7 +7,7 @@ local wea = worldeditadditions
 local v3 = worldeditadditions.Vector3
 worldedit.register_command("mtrig", {
 	params = "",
-	description = "Return the length of each axis of current selection.",
+	description = "Return the length of and angles of an imginary line between pos1 and pos2 in the selection.",
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
