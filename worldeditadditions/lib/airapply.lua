@@ -35,12 +35,13 @@ function worldeditadditions.airapply(pos1, pos2, func)
 	for z = pos2.z, pos1.z, -1 do
 		for y = pos2.y, pos1.y, -1 do
 			for x = pos2.x, pos1.x, -1 do
-				local i = area:index(x, y, z)
-				local old_is_airlike = worldeditadditions.is_airlike(data_before[i])
+				local i_before = area_before:index(x, y, z)
+				local i_after = area_after:index(x, y, z)
+				local old_is_airlike = worldeditadditions.is_airlike(data_before[i_before])
 				
 				-- Roll everything that replaces nodes that aren't airlike
 				if not old_is_airlike then
-					data_after[area_after:index(x, y, z)] = data_before[area_before:index(x, y, z)]
+					data_after[i_after] = data_before[i_before]
 				end
 			end
 		end

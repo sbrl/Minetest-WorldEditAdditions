@@ -55,6 +55,7 @@ dofile(worldeditadditions.modpath.."/lib/bonemeal.lua")
 dofile(worldeditadditions.modpath.."/lib/forest.lua")
 
 dofile(worldeditadditions.modpath.."/lib/ellipsoidapply.lua")
+dofile(worldeditadditions.modpath.."/lib/airapply.lua")
 
 dofile(worldeditadditions.modpath.."/lib/subdivide.lua")
 dofile(worldeditadditions.modpath.."/lib/selection/stack.lua")
