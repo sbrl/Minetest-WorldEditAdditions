@@ -712,6 +712,34 @@ Pops a selection off your per-user selection stack and applies it to the current
 //spop
 ```
 
+## `//mface`
+Returns the horizontal (X/Z) axis or axes the player is looking along.
+
+```
+//mface
+```
+
+## `//midpos`
+Returns the coordinates of the centre of the current selection.
+
+```
+//midpos
+```
+
+## `//msize`
+Returns the lengths of the current selection on the X, Y and Z axes.
+
+```
+//msize
+```
+
+## `//mtrig`
+Returns the length of the diagonal pos1,pos2 and it's angle on the XZ and h/Y axes.
+
+```
+//mtrig
+```
+
 ## `//y`
 Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
 
