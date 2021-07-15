@@ -389,5 +389,11 @@ function Vector3.__tostring(a)
 	return "("..a.x..", "..a.y..", "..a.z..")"
 end
 
+function Vector3.__concat(a, b)
+	if type(a) ~= "string" then a = tostring(a) end
+	if type(b) ~= "string" then b = tostring(b) end
+	return a .. b
+end
+
 
 return Vector3
