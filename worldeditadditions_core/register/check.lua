@@ -5,7 +5,7 @@ function worldeditadditions_core.register_command(def)
 	def.require_pos = def.require_pos or 0
 	assert(def.require_pos >= 0 and def.require_pos < 3)
 	if def.params == "" and not def.parse then
-		def.parse = function(param) return true end
+		def.parse = function(params_text) return true end
 	else
 		assert(def.parse)
 	end
