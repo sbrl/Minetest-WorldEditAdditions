@@ -25,7 +25,6 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 		z = math.floor(1 / scale.z)
 	}
 	local size = vector.subtract(pos2, pos1)
-	print("[DEBUG] scale_down", worldeditadditions.vector.tostring(scale_down), "size", size)
 	
 	if size.x < scale_down.x or size.y < scale_down.y or size.z < scale.z then
 		return false, "Error: Area isn't big enough to apply scale down by "..worldeditadditions.vector.tostring(scale).."."

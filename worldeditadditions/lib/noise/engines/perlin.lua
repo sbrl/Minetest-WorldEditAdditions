@@ -1,38 +1,14 @@
 local wea = worldeditadditions
 
--- original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
+--- Perlin noise generation engine.
+-- Original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
 -- Port from this StackOverflow answer: https://stackoverflow.com/a/33425812/1460422
+-- @class
+local Perlin = {}
+Perlin.__index = Perlin
 
-
-local function BitAND(a, b) --Bitwise and
-	local p, c = 1, 0
-	while a > 0 and b > 0 do
-		local ra, rb = a%2, b%2
-		if ra + rb > 1 then c = c + p end
-		a, b, p = (a - ra) / 2, (b - rb) / 2, p * 2
-	end
-	return c
-end
-
-local function fade(t)
-	return t * t * t * (t * (t * 6 - 15) + 10)
-end
-
-local function lerp(t, a, b)
-	return a + t * (b - a)
-end
-
-local function grad(hash, x, y, z)
-	local h = BitAND(hash, 15)
-	local u = h < 8 and x or y
-	local v = h < 4 and y or ((h == 12 or h == 14) and x or z)
-	return ((h and 1) == 0 and u or - u) + ((h and 2) == 0 and v or - v)
-end
-
-
-wea.noise.perlin = {}
-wea.noise.perlin.p = {}
-wea.noise.perlin.permutation = {
+Perlin.p = {}
+Perlin.permutation = {
 	151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140,
 	36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120,
 	234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33,
@@ -50,51 +26,114 @@ wea.noise.perlin.permutation = {
 	115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222, 114, 67, 29,
 	24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
 }
-wea.noise.perlin.size = 256
-wea.noise.perlin.gx = {}
-wea.noise.perlin.gy = {}
-wea.noise.perlin.randMax = 256
+Perlin.size = 256
+Perlin.gx = {}
+Perlin.gy = {}
+Perlin.randMax = 256
 
---- Creates a new perlin instance.
--- @return	perlin	A new perlin instance.
-function wea.noise.perlin.new()
+--- Creates a new Perlin instance.
+-- @return	Perlin	A new perlin instance.
+function Perlin.new()
 	local instance = {}
-	setmetatable(instance, wea.noise.perlin)
+	setmetatable(instance, Perlin)
 	instance:load()
 	return instance
 end
 
-function wea.noise.perlin:load()
+--- Initialises this Perlin instance.
+-- Called automatically by the constructor - you do NOT need to call this
+-- yourself.
+function Perlin:load()
 	for i = 1, self.size do
-		self.p[i] = self.permutation[i]
-		self.p[255 + i] = self.p[i]
+		self.p[i - 1] = self.permutation[i]
+		self.p[i + 255] = self.permutation[i]
 	end
 end
 
-function wea.noise.perlin:noise( x, y, z )
-	local X = BitAND(math.floor(x), 255) + 1
-	local Y = BitAND(math.floor(y), 255) + 1
-	local Z = BitAND(math.floor(z), 255) + 1
-
+--- Returns a noise value for a given point in 3D space.
+-- @param	x	number	The x co-ordinate.
+-- @param	y	number	The y co-ordinate.
+-- @param	z	number	The z co-ordinate.
+-- @returns	number		The calculated noise value.
+function Perlin:noise( x, y, z )
+	y = y or 0
+	z = z or 0
+	local xi = self:BitAND(math.floor(x), 255)
+	local yi = self:BitAND(math.floor(y), 255)
+	local zi = self:BitAND(math.floor(z), 255)
+	
+	-- print("x", x, "y", y, "z", z, "xi", xi, "yi", yi, "zi", zi)
+	-- print("p[xi]", self.p[xi])
 	x = x - math.floor(x)
 	y = y - math.floor(y)
 	z = z - math.floor(z)
-	local u = fade(x)
-	local v = fade(y)
-	local w = fade(z)
-	local A = self.p[X] + Y
-	local AA = self.p[A] + Z
-	local AB = self.p[A + 1] + Z
-	local B = self.p[X + 1] + Y
-	local BA = self.p[B] + Z
-	local BB = self.p[B + 1] + Z
-
-	return lerp(w, lerp(v, lerp(u, grad(self.p[AA ], x, y, z ),
-		grad(self.p[BA ], x - 1, y, z )),
-		lerp(u, grad(self.p[AB ], x, y - 1, z ),
-	grad(self.p[BB ], x - 1, y - 1, z ))),
-	lerp(v, lerp(u, grad(self.p[AA + 1], x, y, z - 1),
-		grad(self.p[BA + 1], x - 1, y, z - 1)),
-		lerp(u, grad(self.p[AB + 1], x, y - 1, z - 1),
-	grad(self.p[BB + 1], x - 1, y - 1, z - 1))))
+	local u = self:fade(x)
+	local v = self:fade(y)
+	local w = self:fade(z)
+	local A = self.p[xi] + yi
+	local AA = self.p[A] + zi
+	local AB = self.p[A + 1] + zi
+	local AAA = self.p[AA]
+	local ABA = self.p[AB]
+	local AAB = self.p[AA + 1]
+	local ABB = self.p[AB + 1]
+	
+	local B = self.p[xi + 1] + yi
+	local BA = self.p[B] + zi
+	local BB = self.p[B + 1] + zi
+	local BAA = self.p[BA]
+	local BBA = self.p[BB]
+	local BAB = self.p[BA + 1]
+	local BBB = self.p[BB + 1]
+	
+	-- Add 0.5 to rescale to 0 - 1 instead of -0.5 - +0.5
+	return 0.5 + self:lerp(w,
+		self:lerp(v,
+			self:lerp(u,
+				self:grad(AAA,x,y,z),
+				self:grad(BAA,x-1,y,z)
+			),
+			self:lerp(u,
+				self:grad(ABA,x,y-1,z),
+				self:grad(BBA,x-1,y-1,z)
+			)
+		),
+		self:lerp(v,
+			self:lerp(u,
+				self:grad(AAB,x,y,z-1), self:grad(BAB,x-1,y,z-1)
+			),
+			self:lerp(u,
+				self:grad(ABB,x,y-1,z-1), self:grad(BBB,x-1,y-1,z-1)
+			)
+		)
+	)
 end
+
+
+function Perlin:BitAND(a, b) --Bitwise and
+	local p, c = 1, 0
+	while a > 0 and b > 0 do
+		local ra, rb = a%2, b%2
+		if ra + rb > 1 then c = c + p end
+		a, b, p = (a - ra) / 2, (b - rb) / 2, p * 2
+	end
+	return c
+end
+
+function Perlin:fade(t)
+	return t * t * t * (t * (t * 6 - 15) + 10)
+end
+
+function Perlin:lerp(t, a, b)
+	return a + t * (b - a)
+end
+
+function Perlin:grad(hash, x, y, z)
+	local h = self:BitAND(hash, 15)
+	local u = h < 8 and x or y
+	local v = h < 4 and y or ((h == 12 or h == 14) and x or z)
+	return ((h and 1) == 0 and u or - u) + ((h and 2) == 0 and v or - v)
+end
+
+
+return Perlin

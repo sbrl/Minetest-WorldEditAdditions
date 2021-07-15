@@ -3,6 +3,19 @@ const markdown = require("markdown-it")({
 	xhtmlOut: true
 });
 
+const markdown_prism = require("markdown-it-prism");
+markdown.use(markdown_prism, {
+	init: (Prism) => {
+		Prism.languages.weacmd = {
+			"string": /\<[^>]+?\>/,
+			"function": /^(?:\/\/\S+)\b/m,
+			"number": /\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?%?/i,
+			"operator": /[<>:=\[\]|{}]/,
+			"keyword": /\b(?:[-+]?[zyx])\b/
+		}
+	}
+});
+
 module.exports = function parse_sections(source) {
 	const lines = source.split(/\r?\n/gi);
 	const result = [];

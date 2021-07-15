@@ -12,6 +12,9 @@ worldeditadditions.Vector3 = dofile(worldeditadditions.modpath.."/utils/vector3.
 worldeditadditions.Mesh,
 worldeditadditions.Face = dofile(worldeditadditions.modpath.."/utils/mesh.lua")
 
+worldeditadditions.Queue = dofile(worldeditadditions.modpath.."/utils/queue.lua")
+worldeditadditions.LRU = dofile(worldeditadditions.modpath.."/utils/lru.lua")
+
 
 dofile(worldeditadditions.modpath.."/utils/strings/init.lua")
 dofile(worldeditadditions.modpath.."/utils/format/init.lua")
@@ -44,6 +47,7 @@ dofile(worldeditadditions.modpath.."/lib/scale_down.lua")
 dofile(worldeditadditions.modpath.."/lib/scale.lua")
 dofile(worldeditadditions.modpath.."/lib/conv/conv.lua")
 dofile(worldeditadditions.modpath.."/lib/erode/erode.lua")
+dofile(worldeditadditions.modpath.."/lib/noise/init.lua")
 
 dofile(worldeditadditions.modpath.."/lib/count.lua")
 
@@ -51,6 +55,7 @@ dofile(worldeditadditions.modpath.."/lib/bonemeal.lua")
 dofile(worldeditadditions.modpath.."/lib/forest.lua")
 
 dofile(worldeditadditions.modpath.."/lib/ellipsoidapply.lua")
+dofile(worldeditadditions.modpath.."/lib/airapply.lua")
 
 dofile(worldeditadditions.modpath.."/lib/subdivide.lua")
 dofile(worldeditadditions.modpath.."/lib/selection/stack.lua")

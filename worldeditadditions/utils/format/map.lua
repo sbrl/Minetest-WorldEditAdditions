@@ -4,7 +4,7 @@
 function worldeditadditions.format.map(map)
 	local result = {}
 	for key, value in pairs(map) do
-		table.insert(result, key.."\t"..value)
+		table.insert(result, key.."\t"..tostring(value))
 	end
 	return table.concat(result, "\n")
 end

@@ -28,7 +28,6 @@ minetest.register_chatcommand("/saplingaliases", {
 			local results = worldeditadditions.registered_nodes_by_group("sapling")
 			table.insert(msg, "Sapling-like nodes:\n")
 			local str = table.concat(results, "\n")
-			print(str)
 			table.insert(msg, str)
 		else
 			table.insert(msg, "Unknown mode '")

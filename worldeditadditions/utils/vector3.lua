@@ -1,17 +1,16 @@
 --- A 3-dimensional vector.
+-- @class
 local Vector3 = {}
 Vector3.__index = Vector3
 
+--- Creates a new Vector3 instance.
+-- @param x		number	The x co-ordinate value.
+-- @param y		number	The y co-ordinate value.
+-- @param z		number	The z co-ordinate value.
 function Vector3.new(x, y, z)
-	if type(x) ~= "number" then
-		error("Error: Expected number for the value of x, but received argument of type "..type(x)..".")
-	end
-	if type(y) ~= "number" then
-		error("Error: Expected number for the value of y, but received argument of type "..type(y)..".")
-	end
-	if type(z) ~= "number" then
-		error("Error: Expected number for the value of z, but received argument of type "..type(z)..".")
-	end
+	x = x or 0
+	y = y or 0
+	z = z or 0
 	
 	local result = {
 		x = x,
@@ -388,6 +387,12 @@ end
 --- Returns the current Vector3 as a string.
 function Vector3.__tostring(a)
 	return "("..a.x..", "..a.y..", "..a.z..")"
+end
+
+function Vector3.__concat(a, b)
+	if type(a) ~= "string" then a = tostring(a) end
+	if type(b) ~= "string" then b = tostring(b) end
+	return a .. b
 end
 
 

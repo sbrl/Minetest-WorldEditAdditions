@@ -87,6 +87,17 @@ function worldeditadditions.getsign(src)
 	else return src:match('-') and -1 or 1 end
 end
 
+--- Clamp a number to ensure it falls within a given range.
+-- @param	value	number	The value to clamp.
+-- @param	min		number	The minimum allowed value.
+-- @param	max		number	The maximum allowed value.
+-- @returns	number	The clamped number.
+function worldeditadditions.clamp(value, min, max)
+	if value < min then return min end
+	if value > max then return max end
+	return value
+end
+
 -- For Testing:
 -- worldeditadditions = {}
 -- print(worldeditadditions.getsign('-y'))
