@@ -14,7 +14,7 @@ worldedit.register_command("mtrig", {
 		return true
 	end,
 	func = function(name, params_text)
-		local str = "The measurements of the line pos1,pos2 are Length (D): "
+		local str = "The measurements of the line from pos1 to pos2 are Length (D): "
 		local vec = v3.subtract(worldedit.pos2[name],worldedit.pos1[name]):abs()
 		local len = vec:length()
 		str = str..wea.round(len, 4)..", ∠XZ: "..
