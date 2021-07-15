@@ -46,6 +46,9 @@ dofile(we_c.modpath.."/commands/meta/airapply.lua")
 -- Selection Tools
 dofile(we_c.modpath.."/commands/selectors/init.lua")
 
+-- Measure Tools
+dofile(we_c.modpath.."/commands/measure/init.lua")
+
 dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/extra/basename.lua")
 
@@ -78,6 +81,9 @@ worldedit.alias_command("naturalize", "layers")
 
 worldedit.alias_command("flora", "bonemeal")
 
-worldedit.alias_command("mcount", "count")
-
+-- Selection Tools
 worldedit.alias_command("sfac", "sfactor")
+
+-- Measure Tools
+worldedit.alias_command("mcount", "count")
+worldedit.alias_command("mfacing", "mface")

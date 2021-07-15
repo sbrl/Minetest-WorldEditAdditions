@@ -4,17 +4,14 @@
 -- @param	new_line	string	key value pair delimiter
 -- @return	string	concatenated table pairs
 local function table_tostring(tbl, sep, new_line)
-    if type(sep) ~= "string" then sep = ": " end
-    if type(new_line) ~= "string" then new_line = ", " end
-    local ret = {}
-    if type(tbl) ~= "table" then return "Error: input not table!" end
-    for key,value in pairs(tbl) do
-        ret:append(key)
-        ret:append(sep)
-        ret:append(value)
-        ret:append(new_line)
-    end
-    return ret:concat("")
+	if type(sep) ~= "string" then sep = ": " end
+	if type(new_line) ~= "string" then new_line = ", " end
+	local ret = {}
+	if type(tbl) ~= "table" then return "Error: input not table!" end
+	for key,value in pairs(tbl) do
+		table.insert(ret,tostring(key) .. sep .. tostring(value) .. new_line)
+	end
+	return table.concat(ret,"")
 end
 
 return table_tostring
