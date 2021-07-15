@@ -10,7 +10,7 @@ local we_c = worldeditadditions_core
 
 we_c.modpath = minetest.get_modpath("worldeditadditions_core")
 
--- Initialze WorldEdit stuff if the WorldEdit mod is not present
+-- Initialise WorldEdit stuff if the WorldEdit mod is not present
 if not minetest.get_modpath("worldedit") then
 	dofile(we_c.modpath.."/worldedit/init.lua")
 end

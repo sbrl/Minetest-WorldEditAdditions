@@ -784,11 +784,12 @@ Pops a selection off your per-user selection stack and applies it to the current
 Alias for [`//count`](#count).
 
 ```
-//mface
+//mcount
 ```
 
 ## `//mface`
 Returns the horizontal (X/Z) axis or axes the player is looking along.
+Aliases: `//mfacing`.
 
 ```
 //mface
@@ -809,7 +810,7 @@ Returns the lengths of the current selection on the X, Y and Z axes.
 ```
 
 ## `//mtrig`
-Returns the length of the diagonal pos1,pos2 and it's angle on the XZ and h/Y axes.
+Returns the length of the diagonal from pos1 to pos2 and its angle on the XZ (horizontal) and Y (vertical) axes.
 
 ```
 //mtrig
