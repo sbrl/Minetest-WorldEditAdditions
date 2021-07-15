@@ -784,7 +784,7 @@ Pops a selection off your per-user selection stack and applies it to the current
 Alias for [`//count`](#count).
 
 ```
-//mface
+//mcount
 ```
 
 ## `//mface`
