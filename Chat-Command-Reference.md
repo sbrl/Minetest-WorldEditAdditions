@@ -712,6 +712,13 @@ Pops a selection off your per-user selection stack and applies it to the current
 //spop
 ```
 
+## `//mcount`
+Alias for [`//count`](#count).
+
+```
+//mface
+```
+
 ## `//mface`
 Returns the horizontal (X/Z) axis or axes the player is looking along.
 

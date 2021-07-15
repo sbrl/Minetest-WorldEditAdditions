@@ -69,7 +69,13 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//sstack`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#sstack)
  - [`//spush`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#spush)
  - [`//spop`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#spop)
-
+ 
+### Measure
+ - [`//mface`](Chat-Command-Reference.md#mface)
+ - [`//midpos`](Chat-Command-Reference.md#midpos)
+ - [`//msize`](Chat-Command-Reference.md#msize)
+ - [`//mtrig`](Chat-Command-Reference.md#mtrig)
+ 
 ### Meta
  - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
  - [`//many <times> <command>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#many-times-command) _(new in v1.9)_
