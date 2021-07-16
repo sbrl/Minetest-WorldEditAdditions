@@ -629,6 +629,15 @@ Executes the given command, and then clips the result to the largest ellipsoid t
 ```
 
 
+## `//airapply <command_name> <args>`
+Like [`//ellipsoidapply`](#ellipsoidapply), but instead only keeps changes that replace airlike nodes, and discards any other changes made.
+
+```weacmd
+//airapply set sandstone
+//airapply maze3d dirt 4 2 2
+```
+
+
 ## `//scol [<axis1> ] <length>`
 Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
 
