@@ -26,7 +26,7 @@ worldedit.register_command("ellipsoidapply", {
 			return false, "Error: "..cmd_name.." isn't a valid command."
 		end
 		-- print("cmd require_pos", cmd_we.require_pos, "END")
-		if cmd_we.require_pos ~= 2 then
+		if cmd_we.require_pos ~= 2 and cmd_name ~= "multi" then
 			return false, "Error: The command "..cmd_name.." exists, but doesn't take 2 positions and so can't be used with //ellipsoidapply."
 		end
 		

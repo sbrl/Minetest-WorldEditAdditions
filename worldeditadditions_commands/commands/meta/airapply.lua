@@ -24,7 +24,7 @@ worldedit.register_command("airapply", {
 		if cmd_we == nil then
 			return false, "Error: "..cmd_name.." isn't a valid command."
 		end
-		if cmd_we.require_pos ~= 2 then
+		if cmd_we.require_pos ~= 2 and cmd_name ~= "multi" then
 			return false, "Error: The command "..cmd_name.." exists, but doesn't take 2 positions and so can't be used with //airapply."
 		end
 		
