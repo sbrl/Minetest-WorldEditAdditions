@@ -620,6 +620,8 @@ Note that this isn't necessarily limited to executing WorldEdit / WorldEditAddit
 ## `//ellipsoidapply <command_name> <args>`
 Executes the given command, and then clips the result to the largest ellipsoid that will fit inside the defined region. The specified command must obviously take 2 positions - so for example `//set`, `//replacemix`, and `//maze3d` will work, but `//sphere`, `//torus`, and `//floodfill` won't.
 
+For advanced users, `//multi` is also supported - but make sure your modifications stay within the defined region - otherwise they will not be affected by the ellipsoidal clipping operation.
+
 ```weacmd
 //ellipsoidapply set dirt
 //ellipsoidapply maze3d dirt 4 2 2
@@ -631,6 +633,8 @@ Executes the given command, and then clips the result to the largest ellipsoid t
 
 ## `//airapply <command_name> <args>`
 Like [`//ellipsoidapply`](#ellipsoidapply), but instead only keeps changes that replace airlike nodes, and discards any other changes made.
+
+As with `//ellipsoidapply` for advanced users `//multi` is also supported - but make sure your modifications stay within the defined region - otherwise they be kept regardless, as `//airapply` only applies the masking to the nodes in the defined region.
 
 ```weacmd
 //airapply set sandstone
