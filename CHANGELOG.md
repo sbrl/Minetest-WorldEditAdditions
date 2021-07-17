@@ -8,6 +8,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add `mface` (_measure facing_), `midpos` (_measure middle position_), `msize` (_measure size_), `mtrig` (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
  - Add `//airapply` for applying commands only to air nodes in the defined region
 
+
 ## v1.12: The selection tools update (26th June 2021)
  - Add `//spush`, `//spop`, and `//sstack`
  - Add `//srect` (_select rectangle_), `//scol` (_select column_), `//scube` (_select cube_) - thanks, @VorTechnix!
