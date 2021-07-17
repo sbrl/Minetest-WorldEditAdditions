@@ -58,9 +58,9 @@ end
 function Perlin:noise( x, y, z )
 	y = y or 0
 	z = z or 0
-	local xi = self:BitAND(math.floor(x), 255)
-	local yi = self:BitAND(math.floor(y), 255)
-	local zi = self:BitAND(math.floor(z), 255)
+	local xi = wea.bit.band(math.floor(x), 255)
+	local yi = wea.bit.band(math.floor(y), 255)
+	local zi = wea.bit.band(math.floor(z), 255)
 	
 	-- print("x", x, "y", y, "z", z, "xi", xi, "yi", yi, "zi", zi)
 	-- print("p[xi]", self.p[xi])
@@ -109,17 +109,6 @@ function Perlin:noise( x, y, z )
 	)
 end
 
-
-function Perlin:BitAND(a, b) --Bitwise and
-	local p, c = 1, 0
-	while a > 0 and b > 0 do
-		local ra, rb = a%2, b%2
-		if ra + rb > 1 then c = c + p end
-		a, b, p = (a - ra) / 2, (b - rb) / 2, p * 2
-	end
-	return c
-end
-
 function Perlin:fade(t)
 	return t * t * t * (t * (t * 6 - 15) + 10)
 end
@@ -129,7 +118,7 @@ function Perlin:lerp(t, a, b)
 end
 
 function Perlin:grad(hash, x, y, z)
-	local h = self:BitAND(hash, 15)
+	local h = wea.bit.band(hash, 15)
 	local u = h < 8 and x or y
 	local v = h < 4 and y or ((h == 12 or h == 14) and x or z)
 	return ((h and 1) == 0 and u or - u) + ((h and 2) == 0 and v or - v)
