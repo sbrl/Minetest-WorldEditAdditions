@@ -49,6 +49,9 @@ dofile(we_c.modpath.."/commands/selectors/init.lua")
 -- Measure Tools
 dofile(we_c.modpath.."/commands/measure/init.lua")
 
+-- Wireframe
+dofile(we_c.modpath.."/commands/wireframe/init.lua")
+
 dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/extra/basename.lua")
 
