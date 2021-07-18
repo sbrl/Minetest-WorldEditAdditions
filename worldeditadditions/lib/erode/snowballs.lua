@@ -36,7 +36,7 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 		
 		if hi > heightmap_length then return false, "Out-of-bounds on the array, hi: "..hi..", heightmap_length: "..heightmap_length end
 		
-		-- NOTE: We need to decide whether we want to keep the precomputed normals as we have now, or whether we want to dynamically compute them at the some of request.
+		-- NOTE: We need to decide whether we want to keep the precomputed normals as we have now, or whether we want to dynamically compute them at the time of request.
 		-- print("[snowball] sediment", sediment, "rate_deposit", params.rate_deposit, "normalmap[hi].z", normalmap[hi].z)
 		local step_deposit = sediment * params.rate_deposit * normalmap[hi].z
 		local step_erode = params.rate_erosion * (1 - normalmap[hi].z) * math.min(1, i*params.scale_iterations)
