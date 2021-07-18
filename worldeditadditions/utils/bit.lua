@@ -12,7 +12,13 @@
 -- Docs: http://bitop.luajit.org/api.html
 
 -- module: bit
-local bit = bit or {}
+
+local bit
+if minetest.global_exists("bit") then
+	bit = bit
+else
+	bit = {}
+end
 
 bit.bits = 32
 bit.powtab = { 1 }
