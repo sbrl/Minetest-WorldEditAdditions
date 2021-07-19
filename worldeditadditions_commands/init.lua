@@ -37,11 +37,8 @@ dofile(we_c.modpath.."/commands/walls.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 
-dofile(we_c.modpath.."/commands/meta/multi.lua")
-dofile(we_c.modpath.."/commands/meta/many.lua")
-dofile(we_c.modpath.."/commands/meta/subdivide.lua")
-dofile(we_c.modpath.."/commands/meta/ellipsoidapply.lua")
-dofile(we_c.modpath.."/commands/meta/airapply.lua")
+-- Meta Commands
+dofile(we_c.modpath.."/commands/meta/init.lua")
 
 -- Selection Tools
 dofile(we_c.modpath.."/commands/selectors/init.lua")
