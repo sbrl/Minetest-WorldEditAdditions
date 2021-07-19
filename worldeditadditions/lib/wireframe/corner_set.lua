@@ -16,7 +16,7 @@ function worldeditadditions.corner_set(pos1,pos2,node)
 	for k,z in pairs({pos1.z,pos2.z}) do
 		for k,y in pairs({pos1.y,pos2.y}) do
 			for k,x in pairs({pos1.x,pos2.x}) do
-				minetest.setnode(vector.new(x,y,z), node_id_replace)
+				minetest.set_node(vector.new(x,y,z), node_id_replace)
 				counts.replaced = counts.replaced + 1
 			end
 		end
