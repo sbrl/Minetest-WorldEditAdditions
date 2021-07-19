@@ -65,3 +65,6 @@ dofile(wea.modpath.."/lib/airapply.lua")
 dofile(wea.modpath.."/lib/subdivide.lua")
 dofile(wea.modpath.."/lib/selection/stack.lua")
 dofile(wea.modpath.."/lib/selection/cloud.lua")
+
+dofile(wea.modpath.."/lib/wireframe/corner_set.lua")
+dofile(wea.modpath.."/lib/wireframe/wire_box.lua")
