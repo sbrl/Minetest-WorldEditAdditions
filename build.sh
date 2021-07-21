@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e;
 
+current_branch="$(git rev-parse --abbrev-ref HEAD)";
+
+if [[ "${1}" == "ci" ]] && [[ "${current_branch}" != "main" ]]; then
+	echo "Skipping build, because we are currently on the branch '${current_branch}', and we only deploy on the 'main' branch.";
+fi
+
 #  ██████ ██     ██████  ██    ██ ██ ██      ██████
 # ██      ██     ██   ██ ██    ██ ██ ██      ██   ██
 # ██      ██     ██████  ██    ██ ██ ██      ██   ██
