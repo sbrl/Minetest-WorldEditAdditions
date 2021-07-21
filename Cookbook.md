@@ -35,6 +35,13 @@ The following brushes together can make large-scale terrain sculpting easy:
 //brush cubeapply 50 layers dirt_with_grass dirt 3 stone 10
 ```
 
+## Preserve Air During Schematic Load
+`//load` only writes non-air blocks in a saved WorldEdit schematic. To get around this the `//allocate` command was created so that users could set the target area to air before the new nodes were written. The following command applies this work flow (replace `<file>` with the name of your schematic before using the command):
+
+```
+//multi //allocate <file> //set air //load <file>
+```
+
 ## En-mass Foliage clearing
 Clearing large amounts of foliage is easy!
 
