@@ -12,14 +12,21 @@
 -- Docs: http://bitop.luajit.org/api.html
 
 -- module: bit
-local bit = bit or {}
 
-bit.bits = 32
-bit.powtab = { 1 }
-
-for b = 1, bit.bits - 1 do
-	bit.powtab[#bit.powtab + 1] = math.pow(2, b)
+local bit
+if minetest.global_exists("bit") then
+	bit = bit
+else
+	bit = {}
+	
+	bit.bits = 32
+	bit.powtab = { 1 }
+	
+	for b = 1, bit.bits - 1 do
+		bit.powtab[#bit.powtab + 1] = math.pow(2, b)
+	end
 end
+
 
 -- Functions
 -- bit.band
