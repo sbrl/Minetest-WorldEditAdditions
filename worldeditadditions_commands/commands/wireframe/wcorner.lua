@@ -9,10 +9,10 @@ worldedit.register_command("wcorner", {
 	description = "Set the corners of the current selection to <node>",
 	privs = {worldedit=true},
 	require_pos = 2,
-	parse = function(param)
-		local node = worldedit.normalize_nodename(param)
+	parse = function(params_text)
+		local node = worldedit.normalize_nodename(params_text)
 		if not node then
-			return false, "invalid node name: " .. param
+			return false, "invalid node name: " .. params_text
 		end
 		return true, node
 	end,
