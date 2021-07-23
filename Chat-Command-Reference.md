@@ -253,6 +253,31 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 //walls goldblock
 ```
 
+## `//wbox <replace_node>`
+Sets the edges of the current selection to `<replace_node>`to create an outline of a rectangular prism. Useful for roughing in walls.
+
+```weacmd
+//wbox silver_sandstone
+//wbox dirt
+```
+
+## `//wcompass <replace_node> [<bead_node>]`
+Creates a compass around pos1 with a single node bead pointing north (+Z).
+
+```weacmd
+//wcompass meselamp
+//wcompass desert_cobble torch
+//wcompass gold diamond
+```
+
+## `//wcorner <replace_node>`
+Set the corners of the current selection to `<replace_node>`. Useful for outlining building sites and setting boundaries.
+
+```weacmd
+//wcorner glass
+//wcorner stone_with_iron
+```
+
 ## `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
 Advanced version of [`//stretch` from WorldEdit](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#stretch-stretchx-stretchy-stretchz) that can scale both up and down at the same time by transparently splitting it into 2 different operations. Scaling up is *always* done before scaling down.
 

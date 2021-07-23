@@ -7,7 +7,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//sfactor` (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
  - Add `mface` (_measure facing_), `midpos` (_measure middle position_), `msize` (_measure size_), `mtrig` (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
  - Add `//airapply` for applying commands only to air nodes in the defined region
-
+ - Add `wcorner` (_wireframe corners_), `wbox` (_wireframe box_), `wcompass` (_wireframe compass_) - Wireframes implemented by @VorTechnix.
 
 ## v1.12: The selection tools update (26th June 2021)
  - Add `//spush`, `//spop`, and `//sstack`

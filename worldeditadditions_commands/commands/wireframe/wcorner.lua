@@ -5,8 +5,8 @@
 --  ███ ███   ██████  ██████  ██   ██ ██   ████ ███████ ██   ██
 local wea = worldeditadditions
 worldedit.register_command("wcorner", {
-	params = "<node>",
-	description = "Set the corners of the current selection to <node>",
+	params = "<replace_node>",
+	description = "Set the corners of the current selection to <replace_node>",
 	privs = {worldedit=true},
 	require_pos = 2,
 	parse = function(params_text)

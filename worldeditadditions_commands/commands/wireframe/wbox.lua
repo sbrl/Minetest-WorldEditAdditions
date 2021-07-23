@@ -6,11 +6,14 @@
 local wea = worldeditadditions
 local v3 = worldeditadditions.Vector3
 worldedit.register_command("wbox", {
-	params = "<node>",
-	description = "Set the corners of the current selection to <node>",
+	params = "<replace_node>",
+	description = "Sets the edges of the current selection to <replace_node>",
 	privs = {worldedit=true},
 	require_pos = 2,
 	parse = function(params_text)
+		if params_text == "" then
+			return false, "Error: too few arguments! Expected: \"<replace_node>\""
+		end
 		local node = worldedit.normalize_nodename(params_text)
 		if not node then
 			return false, "invalid node name: " .. params_text
