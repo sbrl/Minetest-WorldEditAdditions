@@ -48,13 +48,13 @@ end
 -- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
 -- 							plain string, not a Lua pattern
 -- @returns	table	A sequence table containing the substrings
--- function worldeditadditions.split(text, pattern, plain)
--- 	local ret = {}
--- 	for match in worldeditadditions.gsplit(text, pattern, plain) do
--- 		table.insert(ret, match)
--- 	end
--- 	return ret
--- end
+function worldeditadditions.split(text, pattern, plain)
+	local ret = {}
+	for match in worldeditadditions.gsplit(text, pattern, plain) do
+		table.insert(ret, match)
+	end
+	return ret
+end
 
 --- Split a string into substrings separated by a pattern.
 -- @param	str	string	The string to iterate over
@@ -62,7 +62,7 @@ end
 -- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
 -- 							plain string, not a Lua pattern
 -- @returns	table	A sequence table containing the substrings
-function worldeditadditions.split (str,dlm,plain)
+function worldeditadditions.fsplit (str,dlm,plain)
 	local pos, ins = 0, 0
 	local ret = {}
 	repeat
