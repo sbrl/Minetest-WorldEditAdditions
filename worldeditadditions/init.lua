@@ -67,4 +67,5 @@ dofile(wea.modpath.."/lib/selection/stack.lua")
 dofile(wea.modpath.."/lib/selection/cloud.lua")
 
 dofile(wea.modpath.."/lib/wireframe/corner_set.lua")
+dofile(wea.modpath.."/lib/wireframe/make_compass.lua")
 dofile(wea.modpath.."/lib/wireframe/wire_box.lua")
