@@ -371,6 +371,7 @@ This command is best explained with examples:
 
 The above functions just like `//replace` - nothing special going on here. It replaces all `dirt` nodes with `stone`.
 
+
 Let's make it more interesting:
 
 ```weacmd
@@ -722,7 +723,7 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //srel front 5
 //srel  y 12 right -2
 //srel left 3 up 5 -front 7
-//scube -z 12 -y -2 x -2
+//srel -z 12 -y -2 x -2
 ```
 
 
