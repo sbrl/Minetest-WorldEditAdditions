@@ -16,6 +16,41 @@ Additionally, every command should be implemented in its own file. This helps ke
 
 Don't forget to update `init.lua` to `dofile()` the new file(s) you create in each submod :-)
 
+## Chat command template
+
+```lua
+-- ███    ██  █████  ███    ███ ███████
+-- ████   ██ ██   ██ ████  ████ ██
+-- ██ ██  ██ ███████ ██ ████ ██ █████
+-- ██  ██ ██ ██   ██ ██  ██  ██ ██
+-- ██   ████ ██   ██ ██      ██ ███████
+local wea = worldeditadditions
+worldedit.register_command("{name}", {
+	params = "<argument> <argument=default> <option1|option2|...> [<optional_argument> <optional_argument2> ...] | [<optional_argument> [<optional_argument2>]]",
+	description = "A **brief** description of what this command does",
+	privs = { worldedit = true },
+	require_pos = 0, -- Optional | (0|1|2)
+	parse = function(params_text)
+		-- Do stuff with params_text
+		return true, param1, param2
+	end,
+	nodes_needed = function(name) --Optional
+		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
+	end,
+	func = function(name, param1, param2)
+		-- Start a timer
+		local start_time = wea.get_ms_time()
+		-- Do stuff
+		
+		-- Finish timer
+		local time_taken = wea.get_ms_time() - start_time
+		
+		minetest.log("This is a logged message!")
+		return true, "Completed command in " .. wea.format.human_time(time_taken)
+	end
+})
+```
+
 
 ## Guidelines
 When actually implementing stuff, here are a few guidelines that I recommend to summarise everything:
