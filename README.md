@@ -138,7 +138,7 @@ As far as I can tell, the saplings provided by the [`moretrees` mod](https://con
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
 
-Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc.
+Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc. More contributing help can be found in [the contributing guide](./Contributing.md)
 
 I, Starbeamrainbowlabs (@sbrl), have the ultimate final say.
 
