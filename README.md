@@ -140,6 +140,8 @@ Contributions are welcome! Please state in your pull request(s) that you release
 
 Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc.
 
+For more information check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
 I, Starbeamrainbowlabs (@sbrl), have the ultimate final say.
 
 
