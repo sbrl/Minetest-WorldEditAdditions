@@ -100,7 +100,7 @@ WorldEditAdditions provides a number of *meta commands*. Such commands don't do 
 
  - [`//subdivide`](/Reference#subdivide): split a region into chunks, and execute the command once for each chunk
  - [`//many`](/Reference#many): Execute a command multiple times
- - [`//multi`](/!node_modules, !_sitemulti): Execute multiple commands in sequence
+ - [`//multi`](/Reference#multi): Execute multiple commands in sequence
 
 Of course, this isn't an exhaustive list - check the [reference](/Reference) for a full list.
 
