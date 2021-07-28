@@ -2,6 +2,15 @@ function is_whitespace(char)
 	return char == " " or char == "\t" or char == "\r" or char == "\n"
 end
 
+local function table_map(tbl, func)
+	local result = {}
+	for i,value in ipairs(tbl) do
+		local newval = func(value, i)
+		if newval ~= nil then table.insert(result, newval) end
+	end
+	return result
+end
+
 function split_shell(text)
 	local text_length = #text
 	local scan_pos = 1
@@ -60,7 +69,11 @@ function split_shell(text)
 	if #acc > 0 then
 		table.insert(result, table.concat(acc, ""))
 	end
-	return result
+	
+	-- Unwind all escapes by 1 level
+	return table_map(result, function(str)
+		return str:gsub("\\([\"'\\])", "%1")
+	end)
 end
 
 function test(text)
@@ -74,7 +87,7 @@ end
 test("yay yay yay")
 test("yay \"yay yay\" yay")
 test("yay \"yay\\\" yay\" yay")
-test("yay \"yay 'inside quotes' yay\" yay")
+test("yay \"yay 'inside quotes' yay\\\"\" yay")
 test("yay 'inside quotes' another")
 test("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
 
