@@ -90,7 +90,3 @@ test("yay \"yay\\\" yay\" yay")
 test("yay \"yay 'inside quotes' yay\\\"\" yay")
 test("yay 'inside quotes' another")
 test("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
-
--- for i=1,10000 do
--- 	split_shell("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
--- end
