@@ -1,17 +1,10 @@
-function is_whitespace(char)
-	return char == " " or char == "\t" or char == "\r" or char == "\n"
+local table_map = dofile(worldeditadditions.modpath.."/utils/tables/table_map.lua")
+
+local function is_whitespace(char)
+	return char:match("%s")
 end
 
-local function table_map(tbl, func)
-	local result = {}
-	for i,value in ipairs(tbl) do
-		local newval = func(value, i)
-		if newval ~= nil then table.insert(result, newval) end
-	end
-	return result
-end
-
-function split_shell(text)
+local function split_shell(text)
 	local text_length = #text
 	local scan_pos = 1
 	local result = {  }
@@ -76,17 +69,19 @@ function split_shell(text)
 	end)
 end
 
-function test(text)
-	print("Source", text)
-	for i,value in ipairs(split_shell(text)) do
-		print("i", i, "→", value)
-	end
-	print("************")
-end
+return split_shell
 
-test("yay yay yay")
-test("yay \"yay yay\" yay")
-test("yay \"yay\\\" yay\" yay")
-test("yay \"yay 'inside quotes' yay\\\"\" yay")
-test("yay 'inside quotes' another")
-test("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
+-- function test(text)
+-- 	print("Source", text)
+-- 	for i,value in ipairs(split_shell(text)) do
+-- 		print("i", i, "→", value)
+-- 	end
+-- 	print("************")
+-- end
+-- 
+-- test("yay yay yay")
+-- test("yay \"yay yay\" yay")
+-- test("yay \"yay\\\" yay\" yay")
+-- test("yay \"yay 'inside quotes' yay\\\"\" yay")
+-- test("yay 'inside quotes' another")
+-- test("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
