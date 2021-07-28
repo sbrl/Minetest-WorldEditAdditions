@@ -65,7 +65,7 @@ end
 function worldeditadditions.split (str,dlm,plain)
 	local pos, ret = 0, {}
 	local ins, i = str:find(dlm,pos,plain)
-	-- if plain shaves off some time in the while statement
+	-- "if plain" shaves off some time in the while statement
 	if plain then
 		while ins do
 			table.insert(ret,str:sub(pos,ins - 1))
