@@ -14,6 +14,37 @@
 -- ?Comma deliniation support for values
 
 local wea = worldeditadditions
+local function step(params)
+	-- Initialize additional params on first call
+	if not params.first then
+		params.i = 1 -- Iteration number
+		params.time = 0 -- Total execution time
+		params.first = true
+	end
+	
+	-- Load current value to use
+	local v = params.values[params.i]
+	
+	-- Start a timer
+	local start_time = wea.get_ms_time()
+	-- Execute command
+	params.cmd.func(params.player_name, params.args:gsub("%%+",v))
+	-- Finish timer and add to total
+	params.time = params.time + wea.get_ms_time() - start_time
+	-- Increment iteration state
+	params.i = params.i + 1
+	
+	if params.i <= #params.values then
+		-- If we haven't run out of values call function again
+		minetest.after(0, step, params)
+	else
+		worldedit.player_notify(params.player_name, "For "..
+			table.concat(params.values,", ")..
+			", /"..params.cmd_name.." completed in " ..
+			wea.format.human_time(params.time))
+	end
+end
+
 worldedit.register_command("for", {
 	params = "<value1> <value2> <value3>... do //<command> <arg> %% <arg>",
 	description = "Executes a chat command for each value before \" do \" replacing any instances of \"%%\" with those values. The forward slashes at the beginning of the chat command must be the same as if you were executing it normally.",
@@ -44,14 +75,14 @@ worldedit.register_command("for", {
 		if not minetest.check_player_privs(name, cmd.privs) then
 			return false, "Your privileges are insufficient to run \""..command.."\"."
 		end
-		-- Start a timer
-		local start_time = wea.get_ms_time()
-		for _,v in pairs(values) do
-			cmd.func(name, args:gsub("%%+",v))
-		end
-		-- Finish timer
-		local time_taken = wea.get_ms_time() - start_time
 		
-		return true, "For "..table.concat(values,", ")..", command completed in " .. wea.format.human_time(time_taken)
+		step({
+			player_name = name,
+			cmd_name = command,
+			values = values,
+			cmd = cmd,
+			args = args
+		})
+		
 	end
 })
