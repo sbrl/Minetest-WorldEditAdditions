@@ -36,7 +36,10 @@ function split_shell(text)
 			if curchar == "\"" and prevchar ~= "\\" and is_whitespace(nextchar) then
 				-- It's the end of a quote!
 				mode = "NORMAL"
-			elseif (curchar == "\\" and nextchar ~= "\"" and not is_whitespace(nextnextchar)) or curchar ~= "\\" then
+			elseif (curchar == "\\" and (
+				nextchar ~= "\""
+				or (nextchar == "\"" and not is_whitespace(nextnextchar))
+			)) or curchar ~= "\\" then
 				-- It's a regular character
 				table.insert(acc, curchar)
 			end
@@ -44,7 +47,10 @@ function split_shell(text)
 			if curchar == "'" and prevchar ~= "\\" and is_whitespace(nextchar) then
 				-- It's the end of a quote!
 				mode = "NORMAL"
-			elseif (curchar == "\\" and nextchar ~= "'" and not is_whitespace(nextnextchar)) or curchar ~= "\\" then
+			elseif (curchar == "\\" and (
+				nextchar ~= "'"
+				or (nextchar == "'" and not is_whitespace(nextnextchar))
+			)) or curchar ~= "\\" then
 				-- It's a regular character
 				table.insert(acc, curchar)
 			end
@@ -70,3 +76,8 @@ test("yay \"yay yay\" yay")
 test("yay \"yay\\\" yay\" yay")
 test("yay \"yay 'inside quotes' yay\" yay")
 test("yay 'inside quotes' another")
+test("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
+
+-- for i=1,10000 do
+-- 	split_shell("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
+-- end
