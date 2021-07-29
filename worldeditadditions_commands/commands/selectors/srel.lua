@@ -36,7 +36,7 @@ worldedit.register_command("srel", {
 		if not _ then return false, vec end
 		
 		if not worldedit.pos1[name] then
-			local pos = vector.add(minetest.get_player_by_name(name):get_pos(), vector.new(0.5,-0.5,0.5))
+			local pos = vector.add(wea.player_vector(name), vector.new(0.5,-0.5,0.5))
 			wea.vector.floor(pos)
 			worldedit.pos1[name] = pos
 			worldedit.mark_pos1(name)
