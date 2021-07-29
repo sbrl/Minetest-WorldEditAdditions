@@ -73,7 +73,7 @@ worldedit.register_command("for", {
 			return false, "Error: "..command.." isn't a valid command."
 		end
 		if not minetest.check_player_privs(name, cmd.privs) then
-			return false, "Your privileges are insufficient to run \""..command.."\"."
+			return false, "Your privileges are insufficient to run /\""..command.."\"."
 		end
 		
 		step({
