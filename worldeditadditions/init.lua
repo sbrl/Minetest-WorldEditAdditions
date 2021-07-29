@@ -31,7 +31,7 @@ dofile(wea.modpath.."/utils/nodes.lua")
 dofile(wea.modpath.."/utils/node_identification.lua")
 dofile(wea.modpath.."/utils/terrain.lua")
 dofile(wea.modpath.."/utils/raycast_adv.lua") -- For the farwand
-dofile(wea.modpath.."/utils/axes.lua")
+dofile(wea.modpath.."/utils/player.lua") -- Player info functions
 
 dofile(wea.modpath.."/lib/compat/saplingnames.lua")
 

@@ -1,8 +1,14 @@
+-- Returns the player's position (at leg level).
+-- @param	name	string	The name of the player to return facing direction of.
+-- @return	Returns position.
+function worldeditadditions.player_vector(name)
+	return minetest.get_player_by_name(name):get_pos()
+end
 -- Returns the player's facing direction on the horizontal axes only.
 -- @param	name	string	The name of the player to return facing direction of.
 -- @return	Returns axis name and sign multiplier.
 function worldeditadditions.player_axis2d(name)
-  -- minetest.get_player_by_name("singleplayer"):
+	-- minetest.get_player_by_name("singleplayer"):
 	local dir = minetest.get_player_by_name(name):get_look_dir()
 	local x, z= math.abs(dir.x), math.abs(dir.z)
 	if x > z then return "x", dir.x > 0 and 1 or -1
