@@ -16,7 +16,7 @@ local function step(params)
 	-- Load current command string to use
 	local command, args = params.commands[params.i]:match("/([^%s]+)%s*(.*)$")
 	if not args then args = ""
-	else args = wea.trim(args) end
+	else args = args:match("^%s*(.*)%s*$") end
 	-- Get command and test privs
 	local cmd = minetest.chatcommands[command]
 	if not cmd then
@@ -37,7 +37,7 @@ local function step(params)
 	
 	if params.i <= #params.commands then
 		-- If we haven't run out of values call function again
-		minetest.after(0, step, params)
+		minetest.after(params.delay, step, params) -- Time is in seconds
 	else
 		worldedit.player_notify(params.player_name, "The macro \""..
 			params.file.."\" was completed in " ..
@@ -46,20 +46,31 @@ local function step(params)
 end
 
 worldedit.register_command("macro", {
-	params = "<file>",
-	description = "Load commands from \"(world folder)/macros/<file>[.weamac | .wmac]\" with position 1 of the current WorldEdit region as the origin",
+	params = "<file> [<delay=0>]",
+	description = "Load commands from \"(world folder)/macros/<file>[.weamac | .wmac]\" with position 1 of the current WorldEdit region as the origin.",
 	privs = {worldedit=true},
 	require_pos = 0,
 	parse = function(params_text)
-		if params_text == "" then
-			return false
+		local parts = wea.split(params_text,"%s")
+		local file_name, delay -- = params_text:match("^(.-)%s*(%d*%.?%d*)$")
+		-- Check for params and delay
+		if not parts[1] then
+			return false, "Error: Insufficient arguments. Expected: \"<file> [<delay=0>]\""
+		elseif not parts[#parts]:match("[^%d%.]") then
+			delay = table.remove(parts,#parts)
+			file_name = table.concat(parts," ")
+		else
+			delay = 0
+			file_name = table.concat(parts," ")
 		end
-		if params_text:match("[!\"#%%&'%(%)%*%+,/:;<=>%?%[\\]%^`{|}]") then
+		-- Check file name
+		if file_name:match("[!\"#%%&'%(%)%*%+,/:;<=>%?%[\\]%^`{|}]") then
 			return false, "Disallowed file name: " .. params_text
 		end
-		return true, wea.trim(params_text)
+		
+		return true, file_name, delay
 	end,
-	func = function(name, file_name)
+	func = function(name, file_name, delay)
 		if not worldedit.pos1[name] then
 			worldedit.pos1[name] = v3.add(wea.player_vector(name), v3.new(0.5,-0.5,0.5)):floor()
 			worldedit.mark_pos1(name)
@@ -87,6 +98,7 @@ worldedit.register_command("macro", {
 		step({
 			player_name = name,
 			file = file_name:match("^[^%.]+"),
+			delay = delay,
 			commands = wea.split(value,"[\n\r]+")
 		})
 		
