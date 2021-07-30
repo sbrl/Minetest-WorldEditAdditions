@@ -21,7 +21,7 @@ function worldeditadditions.parse.map(params_text, keywords)
 			-- Look for bools
 			if part_converted == "true" then part_converted = true end
 			if part_converted == "false" then part_converted = false end
-			result[last_key] = part
+			result[last_key] = part_converted
 			mode = "KEY"
 		else
 			last_key = part
