@@ -80,7 +80,7 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 				if anchor.y < 0 then posi_copy.y = size.y - posi_copy.y end
 				if anchor.z < 0 then posi_copy.z = size.z - posi_copy.z end
 				
-				local posi_copy = vector.add(pos1, posi_copy)
+				posi_copy = vector.add(pos1, posi_copy)
 				
 				local i_source = area:index(x, y, z)
 				local i_target = area:index(posi_copy.x, posi_copy.y, posi_copy.z)
