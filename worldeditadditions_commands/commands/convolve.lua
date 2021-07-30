@@ -58,7 +58,8 @@ worldedit.register_command("convolve", {
 		kernel_size[0] = kernel_height
 		kernel_size[1] = kernel_width
 		
-		local success, stats = worldeditadditions.convolve(
+		local stats
+		success, stats = worldeditadditions.convolve(
 			worldedit.pos1[name], worldedit.pos2[name],
 			kernel, kernel_size
 		)
