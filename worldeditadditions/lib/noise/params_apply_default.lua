@@ -37,7 +37,7 @@ function worldeditadditions.noise.params_apply_default(params)
 		local default_copy = wea.table.shallowcopy(params_default)
 		
 		-- Keyword support
-		for i, keyword in ipairs(wea.noise.engines.available) do
+		for _i, keyword in ipairs(wea.noise.engines.available) do
 			if params_el[keyword] ~= nil then
 				params_el.algorithm = keyword
 			end
