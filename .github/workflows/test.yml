@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Install Dependencies
-        run: sudo apt-get install lua5.1
+        run: sudo apt-get --quiet install lua5.1
         
       - name: uname -a
         run: uname -a
@@ -18,9 +18,7 @@ jobs:
         run: lua -v
         
       - name: Perform Check
-        run: |
-          ls -la
-          find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
+        run: find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
   Busted:
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Install Dependencies
-        run: sudo apt-get install lua5.1 luarocks
+        run: sudo apt-get --quiet install lua5.1 luarocks
         
       - name: uname -a
         run: uname -a
@@ -38,6 +36,4 @@ jobs:
         run: lua -v
         
       - name: Run Tests
-        run: |
-          ls -la
-          ./tests.sh
+        run: ./tests.sh run
