@@ -2,11 +2,17 @@ quiet = 1
 codes = true
 
 exclude_files = {
-	".luarocks/*"
+	".luarocks/*",
+	"worldeditadditions/utils/bit.lua"
 }
 
 
-ignore = {"631", "61[124]", "412", "21[123]"}
+ignore = {
+	"631", "61[124]",
+	"412",
+	"321/bit",
+	"21[123]"
+}
 
 -- Read-write globals (i.e. they can be defined)
 globals = {
