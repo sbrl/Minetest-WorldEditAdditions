@@ -1,4 +1,4 @@
-name: "WorldEditAdditions Continuous Integration"
+name: "CI Tests"
 on: [push]
 jobs:
   Syntax-Check:
