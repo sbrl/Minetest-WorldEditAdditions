@@ -12,7 +12,7 @@ local function explode(delim, str)
 	return function()
 		if is_done then return end
 		
-		local result = nil
+		local result
 		local loc = string.find(str, delim, ll, true) -- find the next d in the string
 		if loc ~= nil then -- if "not not" found then..
 			result = string.sub(str, ll, loc - 1) -- Save it in our array.
