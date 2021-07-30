@@ -5,7 +5,7 @@
 ----------------------------------
 -- function to print out the world
 ----------------------------------
-function printspace3d(space, w, h, d)
+local function printspace3d(space, w, h, d)
 	for z = 0, d - 1, 1 do
 		for y = 0, h - 1, 1 do
 			local line = ""
@@ -17,9 +17,6 @@ function printspace3d(space, w, h, d)
         print("")
 	end
 end
-
--- Initialise the world
-start_time = worldeditadditions.get_ms_time()
 
 local function generate_maze3d(seed, width, height, depth, path_length, path_width, path_depth)
 	
