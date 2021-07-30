@@ -14,7 +14,9 @@ jobs:
         run: lua -v
         
       - name: Perform Check
-        run: find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
+        run: |
+          ls -la
+          find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
   Busted:
     runs-on: ubuntu-latest
     steps:
@@ -28,4 +30,6 @@ jobs:
         run: lua -v
         
       - name: Run Tests
-        run: ./tests.sh
+        run: |
+          ls -la
+          ./tests.sh
