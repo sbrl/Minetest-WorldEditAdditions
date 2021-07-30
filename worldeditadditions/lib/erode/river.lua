@@ -80,14 +80,14 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 				local action = "none"
 				if not isedge then 
 					if sides_higher > sides_lower then
-						for i,sidecount in ipairs(params.raise_sides) do
+						for _,sidecount in ipairs(params.raise_sides) do
 							if sidecount == sides_higher then
 								action = "fill"
 								break
 							end
 						end
 					else
-						for i,sidecount in ipairs(params.lower_sides) do
+						for _i,sidecount in ipairs(params.lower_sides) do
 							if sidecount == sides_lower then
 								action = "remove"
 								break
@@ -109,10 +109,10 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 			end
 		end
 		
-		for i,hi in ipairs(fill) do
+		for _i,hi in ipairs(fill) do
 			heightmap[hi] = heightmap[hi] + 1
 		end
-		for i,hi in ipairs(remove) do
+		for _i,hi in ipairs(remove) do
 			heightmap[hi] = heightmap[hi] - 1
 		end
 		
