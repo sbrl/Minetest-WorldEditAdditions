@@ -16,7 +16,7 @@ local values = {
 }
 
 -- From http://lua-users.org/wiki/SimpleRound
-function round(num, numDecimalPlaces)
+local function round(num, numDecimalPlaces)
 	local mult = 10^(numDecimalPlaces or 0)
 	return math.floor(num * mult + 0.5) / mult
 end
@@ -37,7 +37,7 @@ end
 
 local values_count = #values
 
-function test(size)
+local function test(size)
 	local cpu_start = os.clock()
 	
 	
