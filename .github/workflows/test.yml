@@ -58,5 +58,5 @@ jobs:
       
       # luacheck throws lots of errors at the moment, so don't fail the build
       - name: Run luacheck
-        run: luacheck --config .tests/luacheckrc . || true
+        run: luacheck . || true
       
