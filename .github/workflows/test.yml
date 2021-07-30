@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Dependencies
-        run: apt install lua5.1
+        run: sudo apt-get install lua5.1
         
       - name: uname -a
         run: uname -a
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Dependencies
-        run: apt install lua5.1 luarocks
+        run: sudo apt-get install lua5.1 luarocks
         
       - name: uname -a
         run: uname -a
