@@ -10,8 +10,8 @@ jobs:
       - name: uname -a
         run: uname -a
         
-      - name: lua --version
-        run: lua --version
+      - name: Lua version
+        run: lua -v
         
       - name: Perform Check
         run: find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
@@ -24,8 +24,8 @@ jobs:
       - name: uname -a
         run: uname -a
         
-      - name: lua --version
-        run: lua --version
+      - name: Lua version
+        run: lua -v
         
       - name: Run Tests
         run: ./tests.sh
