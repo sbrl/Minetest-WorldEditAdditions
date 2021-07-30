@@ -1,0 +1,19 @@
+name: "WorldEditAdditions Continuous Integration"
+on: [push]
+jobs:
+    Syntax-Check:
+        runs-on: minideb
+        name: Install Dependencies
+        run: install_packages lua5.1
+        run: uname -a
+        run: lua --version
+        name: Perform Check
+        run: 
+    Busted:
+        runs-on: minideb
+        - name: Install Dependencies
+          run: install_packages lua5.1 luarocks lua-check
+          run: uname -a
+          run: lua --version
+        - name: Run Tests
+          run: ./tests.sh
