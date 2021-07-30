@@ -2,18 +2,18 @@ name: "WorldEditAdditions Continuous Integration"
 on: [push]
 jobs:
   Syntax-Check:
-    - runs-on: minideb
-    - name: Install Dependencies
-      run: install_packages lua5.1
-      run: uname -a
-      run: lua --version
-    - name: Perform Check
-      run: find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
+    runs-on: minideb
+    name: Install Dependencies
+    run: install_packages lua5.1
+    run: uname -a
+    run: lua --version
+    name: Perform Check
+    run: find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
   Busted:
-    - runs-on: minideb
-    - name: Install Dependencies
-      run: install_packages lua5.1 luarocks lua-check
-      run: uname -a
-      run: lua --version
-    - name: Run Tests
-      run: ./tests.sh
+    runs-on: minideb
+    name: Install Dependencies
+    run: install_packages lua5.1 luarocks lua-check
+    run: uname -a
+    run: lua --version
+    name: Run Tests
+    run: ./tests.sh
