@@ -42,7 +42,7 @@ jobs:
         run: ./tests.sh run
   LuaCheck:
     runs-on: ubuntu-latest
-    sets:
+    steps:
         # Checkout the git repo
       - name: Checkout
         uses: actions/checkout@v2
