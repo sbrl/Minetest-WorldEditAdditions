@@ -40,7 +40,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 					local did_grow = false
 					local new_id_at_pos
 					local new_name_at_pos
-					for i=1,100 do
+					for attempt_number=1,100 do
 						bonemeal:on_use(
 							{ x = x, y = y, z = z },
 							4,
@@ -55,7 +55,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 						if not group_cache[new_id_at_pos] then
 							did_grow = true
 							-- Log the number of attempts it took to grow
-							table.insert(stats.attempts, i)
+							table.insert(stats.attempts, attempt_number)
 							-- Update the running total of saplings that grew
 							if not stats.placed[node_id] then
 								stats.placed[node_id] = 0
