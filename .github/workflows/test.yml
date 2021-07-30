@@ -40,3 +40,22 @@ jobs:
         
       - name: Run Tests
         run: ./tests.sh run
+  LuaCheck:
+    runs-on: ubuntu-latest
+    sets:
+        # Checkout the git repo
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Install apt dependencies
+        run: sudo apt-get --quiet install lua5.1 lua-check
+      
+      - name: uname -a
+        run: uname -a
+        
+      - name: Lua version
+        run: lua -v
+      
+      - name: Run luacheck
+        run: luacheck --config .tests/luacheckrc . || true
+      

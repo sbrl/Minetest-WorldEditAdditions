@@ -1,0 +1,29 @@
+quiet = 1
+codes = true
+
+exclude_files = {
+	".luarocks/*"
+}
+
+
+ignore = {"631", "61[124]", "412", "21[123]"}
+
+-- Read-write globals (i.e. they can be defined)
+globals = {
+	"worldedit",
+	"worldeditadditions",
+	"worldeditadditions_commands",
+	"worldeditadditions_core"
+}
+-- Read-only globals
+read_globals = {
+	"minetest",
+	"vector",
+	"assert",
+	"bit",
+	"it",
+	"describe",
+	"bonemeal",
+	"dofile"
+}
+std = "max"
