@@ -56,6 +56,7 @@ jobs:
       - name: Lua version
         run: lua -v
       
+      # luacheck throws lots of errors at the moment, so don't fail the build
       - name: Run luacheck
         run: luacheck --config .tests/luacheckrc . || true
       
