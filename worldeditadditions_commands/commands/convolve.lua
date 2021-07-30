@@ -63,6 +63,7 @@ worldedit.register_command("convolve", {
 			worldedit.pos1[name], worldedit.pos2[name],
 			kernel, kernel_size
 		)
+		if not success then return success, stats end
 		
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
