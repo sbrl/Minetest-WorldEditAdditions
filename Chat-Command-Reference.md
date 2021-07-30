@@ -372,6 +372,7 @@ This command is best explained with examples:
 The above functions just like `//replace` - nothing special going on here. It replaces all `dirt` nodes with `stone`.
 
 
+
 Let's make it more interesting:
 
 ```weacmd
@@ -715,7 +716,6 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 //scentre
 ```
 
-
 ## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
@@ -726,6 +726,15 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //srel -z 12 -y -2 x -2
 ```
 
+## `//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
+
+```weacmd
+//sshift back 4
+//sshift right -2 up 2
+//sshift -left 2 z -7 -y -4
+//sshift -z 12 -y -2 x -2
+```
 
 ## `//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`
 Short for _selection make_. Modifies existing selection by moving pos2. Allows you to make the selection an odd or even length on one or more axes or set two or more axes equal to each other or the longest, shortest or average of them. Implementation thanks to @VorTechnix.
