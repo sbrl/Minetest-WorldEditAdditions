@@ -35,8 +35,6 @@ minetest.register_chatcommand("/multi", {
 		params_text = worldeditadditions.trim(params_text)
 		if #params_text == 0 then return false, "Error: No commands specified, so there's nothing to do." end
 		
-		
-		local i = 1 -- For feedback only
 		local master_start_time = worldeditadditions.get_ms_time()
 		local times = {}
 		
