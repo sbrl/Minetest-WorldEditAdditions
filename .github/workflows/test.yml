@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Install Dependencies
+      - name: Install apt dependencies
         run: sudo apt-get --quiet install lua5.1
         
       - name: uname -a
@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Install Dependencies
+      - name: Install apt dependencies
         run: sudo apt-get --quiet install lua5.1 luarocks
         
       - name: uname -a
@@ -34,6 +34,9 @@ jobs:
         
       - name: Lua version
         run: lua -v
+        
+      - name: Set up tests
+        run: ./tests.sh run
         
       - name: Run Tests
         run: ./tests.sh run
