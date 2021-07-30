@@ -2,7 +2,7 @@ name: "CI Tests"
 on: [push]
 jobs:
   Syntax-Check:
-    runs-on: minideb
+    runs-on: bitnami/minideb
     steps:
       - name: Install Dependencies
         run: install_packages lua5.1
@@ -16,7 +16,7 @@ jobs:
       - name: Perform Check
         run: find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
   Busted:
-    runs-on: minideb
+    runs-on: bitnami/minideb
     steps:
       - name: Install Dependencies
         run: install_packages lua5.1 luarocks
