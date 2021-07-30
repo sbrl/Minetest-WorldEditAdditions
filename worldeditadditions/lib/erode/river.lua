@@ -47,7 +47,7 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 				local height_up = heightmap[hi]
 				local height_down = heightmap[hi]
 				local height_left = heightmap[hi]
-				local height_down = heightmap[hi]
+				local height_right = heightmap[hi]
 				
 				if x > 0 then height_left = heightmap[z*heightmap_size.x + x-1] end
 				if x < heightmap_size.x - 1 then height_right = heightmap[z*heightmap_size.x + x+1] end
