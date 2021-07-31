@@ -10,7 +10,7 @@ worldedit.register_command("overlay", {
 	require_pos = 2,
 	parse = function(params_text)
 		local success, node_list = worldeditadditions.parse.weighted_nodes(
-			worldeditadditions.split(params_text, "%s+", false)
+			worldeditadditions.split_shell(params_text)
 		)
 		return success, node_list
 	end,

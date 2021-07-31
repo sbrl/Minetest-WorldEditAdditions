@@ -15,7 +15,7 @@ worldedit.register_command("bonemeal", {
 			params_text = "1"
 		end
 		
-		local parts = worldeditadditions.split(params_text, "%s+", false)
+		local parts = worldeditadditions.split_shell(params_text, "%s+", false)
 		
 		local strength = 1
 		local chance = 1

@@ -18,7 +18,7 @@ worldedit.register_command("forest", {
 		end
 		
 		local success, sapling_list = worldeditadditions.parse.weighted_nodes(
-			worldeditadditions.split(params_text, "%s+", false),
+			worldeditadditions.split_shell(params_text),
 			false,
 			function(name)
 				return worldedit.normalize_nodename(

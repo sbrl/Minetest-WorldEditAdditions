@@ -30,7 +30,7 @@ worldedit.register_command("scale", {
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
-		local parts = worldeditadditions.split(params_text, "%s+", false)
+		local parts = worldeditadditions.split_shell(params_text)
 		
 		local scale = vector.new(1, 1, 1)
 		local anchor = vector.new(1, 1, 1)

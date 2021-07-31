@@ -15,7 +15,7 @@ worldedit.register_command("replacemix", {
 			return false, "Error: No arguments specified"
 		end
 		
-		local parts = wea.split(params_text, "%s+", false)
+		local parts = wea.split_shell(params_text)
 		
 		local target_node = nil
 		local target_node_chance = 1
