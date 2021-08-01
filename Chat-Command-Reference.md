@@ -11,22 +11,6 @@ Other useful links:
 
 **Note:** If anything in this reference isn't clear, that's a bug. Please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) (or even better a PR improving it) to let me know precisely which bit you don't understand and why.
 
-## Conventions
-
-Conventions for command syntax.
-
-### DIR
-WorldEditAdditions uses the `DIR` system in some of its selection modifier commands. `Dir`s are relative to the axis the player is facing and are defined as follows:
-
-|Name|Definition|
-|---|---|
-`front`|The horizontal axis (X or Z) which the player is mostly facing toward and the multiplier (1 or -1) corresponding to whether the value of the player's position vector corresponding to that axis would increase or decrease if they moved in the direction they are facing.
-`back`|Same axis as `front` but the multiplier is inverted (m * -1).
-`left`|The horizontal axis (X or Z) perpendicular to the player with the opposite multiplier to `front` if the front axis is Z or the same multiplier as `front` if the front axis is X.
-`right`|Same axis as `left` but the multiplier is inverted (m * -1).
-`up`|The Y axis with the multiplier 1.
-`down`|The Y axis with the multiplier -1.
-
 
 ## `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
@@ -389,7 +373,6 @@ The above functions just like `//replace` - nothing special going on here. It re
 
 
 
-
 Let's make it more interesting:
 
 ```weacmd
@@ -724,7 +707,6 @@ Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punc
 //scloud 5
 //scloud stop
 ```
-
 
 
 ## `//scentre`
