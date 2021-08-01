@@ -10,6 +10,9 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//wcorner` (_wireframe corners_), `//wbox` (_wireframe box_), `//compass` (_wireframe compass_) - Wireframes implemented by @VorTechnix.
  - Add `//for` for executing commands while changing their arguments - Implemented by @VorTechnix.
  - Add `//sshift`  (_selection shift_) - WorldEdit cuboid manipulator replacements implemented by @VorTechnix.
+ - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues
+ - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
+
 
 ## v1.12: The selection tools update (26th June 2021)
  - Add `//spush`, `//spop`, and `//sstack`

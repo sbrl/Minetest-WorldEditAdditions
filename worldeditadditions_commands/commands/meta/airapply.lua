@@ -43,7 +43,7 @@ worldedit.register_command("airapply", {
 	end,
 	func = function(name, cmd, args_parsed)
 		if not minetest.check_player_privs(name, cmd.privs) then
-			return false, "Your privileges are insufficient to execute the command '"..cmd_name.."'."
+			return false, "Your privileges are insufficient to execute the command '"..cmd.."'."
 		end
 		
 		local pos1, pos2 = worldeditadditions.Vector3.sort(
@@ -56,7 +56,7 @@ worldedit.register_command("airapply", {
 			pos1, pos2,
 			function()
 				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
-			end, args
+			end, args_parsed
 		)
 		
 		

@@ -45,14 +45,14 @@ worldedit.register_command("ellipsoidapply", {
 	end,
 	func = function(name, cmd, args_parsed)
 		if not minetest.check_player_privs(name, cmd.privs) then
-			return false, "Your privileges are insufficient to execute the command '"..cmd_name.."'."
+			return false, "Your privileges are insufficient to execute the command '"..cmd.."'."
 		end
 		
 		local success, stats_time = worldeditadditions.ellipsoidapply(
 			worldedit.pos1[name], worldedit.pos2[name],
 			function()
 				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
-			end, args
+			end, args_parsed
 		)
 		local time_overhead = 100 - worldeditadditions.round((stats_time.fn / stats_time.all) * 100, 3)
 		

@@ -11,7 +11,8 @@ worldedit.register_command("convolve", {
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
-		local parts = worldeditadditions.split(params_text, "%s+", false)
+		-- local parts = worldeditadditions.split(params_text, "%s+", false)
+		local parts = worldeditadditions.split_shell(params_text)
 		
 		local kernel_name = "gaussian"
 		local width = 5
@@ -58,10 +59,12 @@ worldedit.register_command("convolve", {
 		kernel_size[0] = kernel_height
 		kernel_size[1] = kernel_width
 		
-		local success, stats = worldeditadditions.convolve(
+		local stats
+		success, stats = worldeditadditions.convolve(
 			worldedit.pos1[name], worldedit.pos2[name],
 			kernel, kernel_size
 		)
+		if not success then return success, stats end
 		
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		

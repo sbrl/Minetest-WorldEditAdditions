@@ -1,0 +1,62 @@
+name: "CI Tests"
+on: [push]
+jobs:
+  Syntax-Check:
+    runs-on: ubuntu-latest
+    steps:
+        # Checkout the git repo
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Install apt dependencies
+        run: sudo apt-get --quiet install lua5.1
+        
+      - name: uname -a
+        run: uname -a
+        
+      - name: Lua version
+        run: lua -v
+        
+      - name: Perform Check
+        run: find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
+  Busted:
+    runs-on: ubuntu-latest
+    steps:
+        # Checkout the git repo
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Install apt dependencies
+        run: sudo apt-get --quiet install lua5.1 luarocks
+        
+      - name: uname -a
+        run: uname -a
+        
+      - name: Lua version
+        run: lua -v
+        
+      - name: Set up tests
+        run: ./tests.sh run
+        
+      - name: Run Tests
+        run: ./tests.sh run
+  LuaCheck:
+    runs-on: ubuntu-latest
+    steps:
+        # Checkout the git repo
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Install apt dependencies
+        run: sudo apt-get --quiet install lua5.1 lua-check
+      
+      - name: uname -a
+        run: uname -a
+        
+      - name: Lua version
+        run: lua -v
+      
+      # luacheck throws lots of errors at the moment, so don't fail the build
+      - name: Run luacheck
+        run: luacheck . || true
+      

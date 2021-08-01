@@ -21,7 +21,7 @@ function worldeditadditions.unwind_node_list(list)
 	local result = {}
 	for i,item in ipairs(list) do
 		local node_id = minetest.get_content_id(item.node)
-		for i = 1, item.weight do
+		for _i = 1, item.weight do
 			table.insert(result, node_id)
 		end
 	end

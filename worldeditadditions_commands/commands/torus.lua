@@ -4,7 +4,7 @@
 --    ██    ██    ██ ██   ██ ██    ██      ██
 --    ██     ██████  ██   ██  ██████  ███████
 local function parse_params_torus(params_text)
-	local parts = worldeditadditions.split(params_text, "%s+", false)
+	local parts = worldeditadditions.split_shell(params_text)
 	
 	if #parts < 1 then
 		return false, "Error: No replace_node specified."

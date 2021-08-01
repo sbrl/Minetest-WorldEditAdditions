@@ -5,7 +5,7 @@
 -- @param	decimals	number	The number of decimal places to show.
 -- @return	string		A formatted string that represents the given input number.
 function worldeditadditions.format.human_size(n, decimals)
-	sizes = { "", "K", "M", "G", "T", "P", "E", "Y", "Z" }
+	local sizes = { "", "K", "M", "G", "T", "P", "E", "Y", "Z" }
 	local factor = math.floor((#tostring(n) - 1) / 3)
 	local multiplier = 10^(decimals or 0)
 	local result = math.floor(0.5 + (n / math.pow(1000, factor)) * multiplier) / multiplier

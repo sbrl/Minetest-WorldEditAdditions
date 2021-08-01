@@ -93,7 +93,7 @@ worldedit.register_command("subdivide", {
 		local cmd_args_parsed = {cmd.parse(args)}
 		local success = table.remove(cmd_args_parsed, 1)
 		if not success then
-			return false, cmd_name..": "..(parsed[1] or "invalid usage")
+			return false, cmd_name..": "..(cmd_args_parsed[1] or "invalid usage")
 		end
 			
 		wea.subdivide(pos1, pos2, chunk_size, function(cpos1, cpos2, stats)

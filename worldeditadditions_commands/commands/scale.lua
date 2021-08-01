@@ -30,14 +30,14 @@ worldedit.register_command("scale", {
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
-		local parts = worldeditadditions.split(params_text, "%s+", false)
+		local parts = worldeditadditions.split_shell(params_text)
 		
 		local scale = vector.new(1, 1, 1)
 		local anchor = vector.new(1, 1, 1)
 		
 		if #parts == 2 then
 			if not (parts[1] == "x" or parts[1] == "y" or parts[1] == "z"
-			 	or parts[1] == "-x" or parts[1] == "-y" or parts[1] == "-z") then
+				or parts[1] == "-x" or parts[1] == "-y" or parts[1] == "-z") then
 				return false, "Error: Got 2 arguments, but the first doesn't look like the name of an axis."
 			end
 			local axis = parts[1]

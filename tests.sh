@@ -2,6 +2,12 @@
 # Make sure the current directory is the location of this script to simplify matters
 cd "$(dirname "$(readlink -f "$0")")" || { echo "Error: Failed to cd to script directory" >&2; exit 1; };
 
+# To run Luacheck:
+# 
+# luacheck . --ignore 631 61[124] 412 21[123] --globals minetest worldedit worldeditadditions worldeditadditions_commands worldeditadditions_core vector assert bit it describe bonemeal  --codes -j "$(nproc)" --quiet --exclude-files .luarocks/*
+# 
+# This is a work-in-progress, as it currently throws an *enormous* number of warnings.
+
 ###############################################################################
 
 log_msg() {
@@ -35,6 +41,10 @@ run_setup() {
 	luarocks --tree "${luarocks_root}" install busted;
 }
 
+run_syntax_check() {
+	find . -type f -name '*.lua' -not -path '*luarocks*' -not -path '*.git/*' -print0 | xargs -0 -n1 -P "$(nproc)" luac -p;
+}
+
 run_test() {
 	.luarocks/bin/busted --no-auto-insulate --pattern ".test.lua" .tests;
 }
@@ -48,6 +58,7 @@ case "${mode}" in
 		if [[ ! -d "${luarocks_root}" ]]; then
 			run_setup;
 		fi
+		run_syntax_check;
 		run_test;
 		;;
 	

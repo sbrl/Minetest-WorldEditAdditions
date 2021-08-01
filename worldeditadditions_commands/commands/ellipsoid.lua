@@ -5,7 +5,7 @@
 -- ███████ ███████ ███████ ██ ██      ███████  ██████  ██ ██████
 local wea = worldeditadditions
 local function parse_params_ellipsoid(params_text)
-	local parts = wea.split(params_text, "%s+", false)
+	local parts = wea.split_shell(params_text)
 	
 	if #parts < 4 then
 		return false, "Error: Not enough arguments. Expected \"<rx> <ry> <rz> <replace_node> [h[ollow]]\"."

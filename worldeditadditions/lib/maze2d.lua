@@ -17,7 +17,7 @@ local function printspace(space, w, h)
 end
 
 local function generate_maze(seed, width, height, path_length, path_width)
-	start_time = worldeditadditions.get_ms_time()
+	local start_time = worldeditadditions.get_ms_time()
 	
     if not path_length then path_length = 2 end
     if not path_width then path_width = 1 end

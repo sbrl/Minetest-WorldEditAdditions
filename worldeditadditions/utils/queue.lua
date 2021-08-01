@@ -6,7 +6,7 @@ local Queue = {}
 Queue.__index = Queue
 
 function Queue.new()
-	result = { first = 0, last = -1, items = {} }
+	local result = { first = 0, last = -1, items = {} }
 	setmetatable(result, Queue)
 	return result
 end

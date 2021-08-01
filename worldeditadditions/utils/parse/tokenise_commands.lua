@@ -40,7 +40,7 @@ local function tokenise(str)
 			-- Decrease the nested depth
 			nested_depth = nested_depth - 1
 			-- Pop the start of this block off the stack and find this block's contents
-			block_start = table.remove(nested_stack, #nested_stack)
+			local block_start = table.remove(nested_stack, #nested_stack)
 			local substr = str:sub(block_start, nextpos - 1)
 			if #substr > 0 and nested_depth == 0 then table.insert(result, substr) end
 		elseif char == "{" then

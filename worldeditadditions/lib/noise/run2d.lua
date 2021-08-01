@@ -48,8 +48,8 @@ function worldeditadditions.noise.run2d(pos1, pos2, noise_params)
 	)
 	if not success then return success, message end
 	
-	
-	local success, stats = wea.apply_heightmap_changes(
+	local stats
+	success, stats = wea.apply_heightmap_changes(
 		pos1, pos2,
 		area, data,
 		heightmap_old, heightmap_new,

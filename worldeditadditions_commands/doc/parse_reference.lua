@@ -37,7 +37,7 @@ function worldeditadditions.doc.parse_reference()
 		function(item, i) return item.level ~= 2 end
 	)
 	for i,value in ipairs(headings) do
-		print(i, "level", level, "heading", heading, "text", text)
+		print(i, "level", value.level, "heading", value.heading, "text", value.text)
 	end
 end
 

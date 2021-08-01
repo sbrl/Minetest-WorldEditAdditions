@@ -12,7 +12,7 @@ local function explode(delim, str)
 	return function()
 		if is_done then return end
 		
-		local result = nil
+		local result
 		local loc = string.find(str, delim, ll, true) -- find the next d in the string
 		if loc ~= nil then -- if "not not" found then..
 			result = string.sub(str, ll, loc - 1) -- Save it in our array.
@@ -35,8 +35,6 @@ minetest.register_chatcommand("/multi", {
 		params_text = worldeditadditions.trim(params_text)
 		if #params_text == 0 then return false, "Error: No commands specified, so there's nothing to do." end
 		
-		
-		local i = 1 -- For feedback only
 		local master_start_time = worldeditadditions.get_ms_time()
 		local times = {}
 		
