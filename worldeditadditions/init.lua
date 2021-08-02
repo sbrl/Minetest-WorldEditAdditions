@@ -63,8 +63,8 @@ dofile(wea.modpath.."/lib/ellipsoidapply.lua")
 dofile(wea.modpath.."/lib/airapply.lua")
 
 dofile(wea.modpath.."/lib/subdivide.lua")
-dofile(wea.modpath.."/lib/selection/stack.lua")
-dofile(wea.modpath.."/lib/selection/cloud.lua")
+
+dofile(wea.modpath.."/lib/selection/init.lua") -- Helpers for selections
 
 dofile(wea.modpath.."/lib/wireframe/corner_set.lua")
 dofile(wea.modpath.."/lib/wireframe/make_compass.lua")

@@ -4,7 +4,6 @@
 -- ██      ██      ██    ██ ██    ██ ██   ██
 --  ██████ ███████  ██████   ██████  ██████
 worldeditadditions.add_pos = {}
-worldeditadditions.selection = {}
 function worldeditadditions.selection.add_point(name, pos)
 	if pos ~= nil then
 		-- print("[set_pos1]", name, "("..pos.x..", "..pos.y..", "..pos.z..")")
