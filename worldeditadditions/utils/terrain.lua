@@ -49,7 +49,7 @@ end
 -- will have the z and y values swapped.
 -- @param	heightmap		table	A ZERO indexed flat heightmap. See worldeditadditions.make_heightmap().
 -- @param	heightmap_size	int[]	The size of the heightmap in the form [ z, x ]
--- @return	Vector[]		The calculated normal map, in the same form as the input heightmap. Each element of the array is a 3D Vector (i.e. { x, y, z }) representing a normal.
+-- @return	Vector[]		The calculated normal map, in the same form as the input heightmap. Each element of the array is a Vector3 instance representing a normal.
 function worldeditadditions.calculate_normals(heightmap, heightmap_size)
 	-- print("heightmap_size: "..heightmap_size.x.."x"..heightmap_size.z)
 	local result = {}
