@@ -1,3 +1,4 @@
+local wea = worldeditadditions
 
 --- Given a manip object and associates, generates a 2D x/z heightmap.
 -- Note that pos1 and pos2 should have already been pushed through
@@ -20,7 +21,7 @@ function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 			-- Scan each column top to bottom
 			for y = pos2.y+1, pos1.y, -1 do
 				local i = area:index(x, y, z)
-				if not (worldeditadditions.is_airlike(data[i]) or worldeditadditions.is_liquidlike(data[i])) then
+				if not (wea.is_airlike(data[i]) or wea.is_liquidlike(data[i])) then
 					-- It's the first non-airlike node in this column
 					-- Start heightmap values from 1 (i.e. there's at least 1 node in the column)
 					heightmap[hi] = (y - pos1.y) + 1 
@@ -72,16 +73,40 @@ function worldeditadditions.calculate_normals(heightmap, heightmap_size)
 			-- print("[normals] LEFT	| index", z*heightmap_size.x + (x-1), "x", x, "x-1", x - 1, "left", left, "limit", 0)
 			-- print("[normals] RIGHT	| index", z*heightmap_size.x + (x+1), "x", x, "x+1", x + 1, "right", right, "limit", heightmap_size.x-1)
 			
-			result[hi] = worldeditadditions.vector.normalize({
-				x = left - right,
-				y = 2, -- Z & Y are flipped
-				z = down - up
-			})
+			result[hi] = wea.vector3.new(
+				left - right,	-- x
+				2,				-- y - Z & Y are flipped
+				down - up		-- z
+			):normalise()
 			
-			-- print("[normals] at "..hi.." ("..x..", "..z..") normal "..worldeditadditions.vector.tostring(result[hi]))
+			-- print("[normals] at "..hi.." ("..x..", "..z..") normal "..result[hi])
 		end
 	end
 	return result
+end
+
+--- Converts a 2d heightmap into slope values in radians.
+-- Convert a radians to degrees by doing (radians*math.pi) / 180 for display,
+-- but it is STRONGLY recommended to keep all internal calculations in radians.
+-- @param	heightmap		table	A ZERO indexed flat heightmap. See worldeditadditions.make_heightmap().
+-- @param	heightmap_size	int[]	The size of the heightmap in the form [ z, x ]
+-- @return	Vector[]		The calculated slope map, in the same form as the input heightmap. Each element of the array is a (floating-point) number representing the slope in that cell in radians.
+function worldeditadditions.calculate_slope(heightmap, heightmap_size)
+	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
+	local slopes = {  }
+	
+	local up = wea.vector3(0, 1, 0) -- Z & Y are flipped
+	
+	for z = heightmap_size.z-1, 0, -1 do
+		for x = heightmap_size.x-1, 0, -1 do
+			local hi = z*heightmap_size.x + x
+			
+			-- Ref https://stackoverflow.com/a/16669463/1460422
+			slopes[hi] = wea.vector3.dot_product(normals[hi], up)
+		end
+	end
+	
+	return slopes
 end
 
 --- Applies changes to a heightmap to a Voxel Manipulator data block.
