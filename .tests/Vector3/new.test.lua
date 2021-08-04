@@ -7,6 +7,12 @@ describe("Vector3.add", function()
 			Vector3.new(3, 4, 5)
 		)
 	end)
+	it("should default to (0, 0, 0)", function()
+		assert.are.same(
+			{ x = 0, y = 0, z = 0 },
+			Vector3.new()
+		)
+	end)
 	it("should not throw an error on invalid x", function()
 		assert.has_no.errors(function()
 			Vector3.new("cheese", 4, 5)
