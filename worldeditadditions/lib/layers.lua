@@ -6,6 +6,15 @@
 
 local wea = worldeditadditions
 
+local function print_slopes(slopemap, width)
+	local copy = wea.table.shallowcopy(slopemap)
+	for key,value in pairs(copy) do
+		copy[key] = wea.round(math.deg(value), 2)
+	end
+	
+	worldeditadditions.format.array_2d(copy, width)
+end
+
 --- Replaces the non-air nodes in each column with a list of nodes from top to bottom.
 -- @param	pos1			Vector		Position 1 of the region to operate on
 -- @param	pos2			Vector		Position 2 of the region to operate on
@@ -13,7 +22,7 @@ local wea = worldeditadditions
 -- @param	min_slope		number?		
 -- @param	max_slope		number?		
 function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slope)
-	pos1, pos2 = wea.vector3.sort(pos1, pos2)
+	pos1, pos2 = wea.Vector3.sort(pos1, pos2)
 	if not min_slope then min_slope = math.rad(0) end
 	if not max_slope then max_slope = math.rad(180) end
 	-- pos2 will always have the highest co-ordinates now
@@ -31,8 +40,11 @@ function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slop
 		manip, area, data
 	)
 	local slopemap = wea.calculate_slopes(heightmap, heightmap_size)
+	worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
+	print_slopes(slopemap, heightmap_size.x)
 	--luacheck:ignore 311
 	heightmap = nil -- Just in case Lua wants to garbage collect it
+	
 	
 	-- minetest.log("action", "pos1: " .. wea.vector.tostring(pos1))
 	-- minetest.log("action", "pos2: " .. wea.vector.tostring(pos2))
@@ -47,7 +59,9 @@ function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slop
 			local next_index = 1 -- We use table.insert() in make_weighted
 			local placed_node = false
 			
-			local hi = z*heightmap_size.x + x
+			local hi = (z-pos1.z)*heightmap_size.x + (x-pos1.x)
+			
+			-- print("DEBUG hi", hi, "x", x, "z", z, "slope", slopemap[hi], "as deg", math.deg(slopemap[hi]))
 			
 			-- Again, Lua 5.1 doesn't have a continue statement :-/
 			if slopemap[hi] >= min_slope and slopemap[hi] <= max_slope then

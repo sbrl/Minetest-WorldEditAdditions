@@ -49,7 +49,6 @@ worldedit.register_command("layers", {
 		if not min_slope then min_slope = 0		end
 		if not max_slope then max_slope = 180	end
 		
-		
 		local node_list
 		success, node_list = worldeditadditions.parse.weighted_nodes(
 			parts,
@@ -68,6 +67,9 @@ worldedit.register_command("layers", {
 			min_slope, max_slope
 		)
 		local time_taken = worldeditadditions.get_ms_time() - start_time
+		
+		print("DEBUG min_slope", min_slope, "max_slope", max_slope)
+		print("DEBUG min_slope", math.deg(min_slope), "max_slope", math.deg(max_slope))
 		
 		minetest.log("action", name .. " used //layers at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.replaced .. " nodes and skipping " .. changes.skipped_columns .. " columns ("..changes.skipped_columns_slope.." due to slope constraints) in " .. time_taken .. "s")
 		return true, changes.replaced .. " nodes replaced and " .. changes.skipped_columns .. " columns skipped ("..changes.skipped_columns_slope.." due to slope constraints) in " .. worldeditadditions.format.human_time(time_taken)

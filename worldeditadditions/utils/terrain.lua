@@ -73,7 +73,7 @@ function worldeditadditions.calculate_normals(heightmap, heightmap_size)
 			-- print("[normals] LEFT	| index", z*heightmap_size.x + (x-1), "x", x, "x-1", x - 1, "left", left, "limit", 0)
 			-- print("[normals] RIGHT	| index", z*heightmap_size.x + (x+1), "x", x, "x+1", x + 1, "right", right, "limit", heightmap_size.x-1)
 			
-			result[hi] = wea.vector3.new(
+			result[hi] = wea.Vector3.new(
 				left - right,	-- x
 				2,				-- y - Z & Y are flipped
 				down - up		-- z
@@ -95,14 +95,15 @@ function worldeditadditions.calculate_slopes(heightmap, heightmap_size)
 	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
 	local slopes = {  }
 	
-	local up = wea.vector3(0, 1, 0) -- Z & Y are flipped
+	local up = wea.Vector3.new(0, 1, 0) -- Z & Y are flipped
 	
 	for z = heightmap_size.z-1, 0, -1 do
 		for x = heightmap_size.x-1, 0, -1 do
 			local hi = z*heightmap_size.x + x
 			
 			-- Ref https://stackoverflow.com/a/16669463/1460422
-			slopes[hi] = wea.vector3.dot_product(normals[hi], up)
+			-- slopes[hi] = wea.Vector3.dot_product(normals[hi], up)
+			slopes[hi] = math.acos(normals[hi].y)
 		end
 	end
 	
