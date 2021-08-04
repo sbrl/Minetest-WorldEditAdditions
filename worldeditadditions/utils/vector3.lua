@@ -256,7 +256,8 @@ end
 --- Sorts the components of the given vectors.
 -- pos1 will contain the minimum values, and pos2 the maximum values.
 -- Returns 2 new vectors.
--- Note that the vectors provided do not *have* to be instances of Vector3.
+-- Note that for this specific function
+-- the vectors provided do not *have* to be instances of Vector3.
 -- It is only required that they have the keys x, y, and z.
 -- Vector3 instances are always returned.
 -- This enables convenient ingesting of positions from outside.

@@ -91,7 +91,7 @@ end
 -- @param	heightmap		table	A ZERO indexed flat heightmap. See worldeditadditions.make_heightmap().
 -- @param	heightmap_size	int[]	The size of the heightmap in the form [ z, x ]
 -- @return	Vector[]		The calculated slope map, in the same form as the input heightmap. Each element of the array is a (floating-point) number representing the slope in that cell in radians.
-function worldeditadditions.calculate_slope(heightmap, heightmap_size)
+function worldeditadditions.calculate_slopes(heightmap, heightmap_size)
 	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
 	local slopes = {  }
 	
