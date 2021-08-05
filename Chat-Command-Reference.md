@@ -254,13 +254,15 @@ Since WorldEditAdditions v1.13, a list of node names is also optionally supporte
 //bonemeal 4 50 ethereal:grove_dirt
 ```
 
-## `//walls <replace_node>`
-Creates vertical walls of `<replace_node>` around the inside edges of the defined region.
+## `//walls <replace_node> [<thickness=1>]`
+Creates vertical walls of `<replace_node>` around the inside edges of the defined region, optionally specifying the thickness thereof.
 
 ```weacmd
 //walls dirt
 //walls stone
 //walls goldblock
+//walls sandstone 2
+//walls glass 4
 ```
 
 ## `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
