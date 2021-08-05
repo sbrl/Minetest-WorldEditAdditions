@@ -82,9 +82,12 @@ end
 -- @param	src	string|int	Input string.
 -- @return	string|int	Returns the signed multiplier (1|-1).
 function worldeditadditions.getsign(src)
-	if type(src) == "number" then return src < 0 and -1 or 1
+	if type(src) == "number" then
+		if src < 0 then return -1 else return 1 end
 	elseif type(src) ~= "string" then return 1
-	else return src:match('-') and -1 or 1 end
+	else
+		if src:match('-') then return -1 else return 1 end
+	end
 end
 
 --- Clamp a number to ensure it falls within a given range.
