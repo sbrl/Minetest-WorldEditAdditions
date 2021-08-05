@@ -1,5 +1,3 @@
---- Creates vertical walls on the inside of the defined region.
--- @module worldeditadditions.walls
 
 -- ██     ██  █████  ██      ██      ███████
 -- ██     ██ ██   ██ ██      ██      ██
@@ -7,8 +5,15 @@
 -- ██ ███ ██ ██   ██ ██      ██           ██
 --  ███ ███  ██   ██ ███████ ███████ ███████
 
-function worldeditadditions.walls(pos1, pos2, node_name)
+--- Creates vertical walls on the inside of the defined region.
+-- @apipath worldeditadditions.walls
+-- @param	pos1		Vector	Position 1 of the defined region,
+-- @param	pos2		Vector	Position 2 of the defined region.
+-- @param	node_name	string	The name of the node to use to create the walls with.
+-- @param	thickness	number?	The thickness of the walls to create. Default: 1
+function worldeditadditions.walls(pos1, pos2, node_name, thickness)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	if not thickness then thickness = 1 end
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fetch the nodes in the specified area
@@ -22,7 +27,10 @@ function worldeditadditions.walls(pos1, pos2, node_name)
 	for z = pos2.z, pos1.z, -1 do
 		for y = pos2.y, pos1.y, -1 do
 			for x = pos2.x, pos1.x, -1 do
-				if x == pos1.x or x == pos2.x or z == pos1.z or z == pos2.z then
+				if math.abs(x - pos1.x) < thickness
+					or math.abs(x - pos2.x) < thickness
+					or math.abs(z - pos1.z) < thickness
+					or math.abs(z - pos2.z) < thickness then
 					data[area:index(x, y, z)] = node_id
 					count_replaced = count_replaced + 1
 				end

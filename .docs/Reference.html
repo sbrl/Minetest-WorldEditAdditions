@@ -11,21 +11,6 @@
 		<p>After the contents, there is a <a href="#filter">filter box</a> for filtering the detailed explanations to quickly find the one you're after.</p>
 	</section>
 	
-	<section class="panel-generic">
-		<h2 id="contents" class="linked-section-heading">
-			<a class="section-link" href="#{{ section.slug }}">&#x1f517; <!-- Link Symbol --></a>
-			<span>Contents</span>
-		</h2>
-		<p>TODO: Group commands here by category (*especially* the meta commands)</p>
-		<ul class="command-list">
-			{% for section in sections_help %}
-			<li><a href="#{{ section.slug }}">
-				<code>{{ section.title }}</code>
-			</a></li>
-			{% endfor %}
-		</ul>
-	</section>
-	
 	<section id="filter" class="panel-generic">
 		<div class="form-item bigsearch">
 			<label for="input-filter">Filter:</label>
@@ -37,6 +22,21 @@
 		</div>
 	</section>
 	
+	<section class="panel-generic">
+		<h2 id="contents" class="linked-section-heading">
+			<a class="section-link" href="#{{ section.slug }}">&#x1f517; <!-- Link Symbol --></a>
+			<span>Contents</span>
+		</h2>
+		<p>TODO: Group commands here by category (*especially* the meta commands)</p>
+		<ul class="command-list">
+			{% for section in sections_help %}
+			<li data-filtermode-force="all"><a href="#{{ section.slug }}">
+				<code>{{ section.title }}</code>
+			</a></li>
+			{% endfor %}
+		</ul>
+	</section>
+	
 	<script>
 		function search_text(query, text) {
 			return text.toLocaleLowerCase().includes(query);
@@ -45,19 +45,27 @@
 		function do_filter() {
 			let el_search = document.querySelector("#input-filter");
 			let el_searchall = document.querySelector("#input-searchall");
-			let els_sections = document.querySelectorAll("section.filterable");
+			/* Filterable items
+			 - Sections
+			 - Commands in the command list
+			 */
+			let els_filterable = document.querySelectorAll("section.filterable, .command-list > li");
 			
 			let query = el_search.value.toLocaleLowerCase();
 			
 			let mode = el_searchall.checked ? "all" : "header";
 			console.log(`SEARCH | mode`, mode, `query`, query);
 			
-			for(let i = 0; i < els_sections.length; i++) {
-				let el_next = els_sections[i];
+			for(let i = 0; i < els_filterable.length; i++) {
+				let el_next = els_filterable[i];
+				
+				let mode_this = mode;
+				if(typeof el_next.dataset.filtermodeForce == "string")
+					mode_this = el_next.dataset.filtermodeForce;
 				
 				let show = true;
 				if(query.length > 0) {
-					switch(mode) {
+					switch(mode_this) {
 						case "all":
 							show = search_text(query,
 								el_next.textContent

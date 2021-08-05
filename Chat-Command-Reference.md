@@ -40,16 +40,21 @@ Note also that columns without any air nodes in them at all are also skipped, so
 //overlay dirt 90% stone 10%
 ```
 
-## `//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
+## `//layers [<max_slope|min_slope..max_slope>] [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
 Finds the first non-air node in each column and works downwards, replacing non-air nodes with a defined list of nodes in sequence. Like WorldEdit for Minecraft's `//naturalize` command, and also similar to [`we_env`'s `//populate`](https://github.com/sfan5/we_env). Speaking of, this command has `//naturalise` and `//naturalize` as aliases. Defaults to 1 layer of grass followed by 3 layers of dirt.
 
-The list of nodes has a form similar to that of a chance list you might find in `//replacemix`, `//overlay`, or `//mix` - see the examples below. If the numberr of layers isn't specified, `1` is assumed (i.e. a single layer).
+Since WorldEditAdditions v1.13, a maximum and minimum slope is optionally accepted, and constrains the columns in the defined region that `//layers` will operate on. For example, specifying a value of `20` would mean that only columns with a slop less than or equal to 20° (degrees, not radians) will be operated on. A value of `45..60` would mean that only columns with a slope between 45° and 60° will be operated on.
+
+The list of nodes has a form similar to that of a chance list you might find in `//replacemix`, `//overlay`, or `//mix` - see the examples below. If the number of layers isn't specified, `1` is assumed (i.e. a single layer).
+
 
 ```weacmd
 //layers dirt_with_grass dirt 3
 //layers sand 5 sandstone 4 desert_stone 2
 //layers brick stone 3
 //layers cobble 2 dirt
+//layers 45..60 dirt_with_snow dirt 2
+//layers 30 snowblock dirt_with_snow dirt 2
 ```
 
 ## `//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`
@@ -220,7 +225,7 @@ Additional examples:
 //maze3d stone 6 3 3 54321
 ```
 
-## `//bonemeal [<strength> [<chance>]]`
+## `//bonemeal [<strength> [<chance> [<node_name> [<node_name> ...]]]]`
 Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and output a message to the server log). Alias: `//flora`.
 
 Bonemeals all eligible nodes in the current region. An eligible node is one that has an air node directly above it - note that just because a node is eligible doesn't mean to say that something will actually happen when the `bonemeal` mod bonemeals it.
@@ -235,6 +240,9 @@ For example, a chance number of 2 would mean a 50% chance that any given eligibl
 
 Since WorldEditAdditions v1.12, a percentage chance is also supported. This is denoted by suffixing a number with a percent sign (e.g. `//bonemeal 1 25%`).
 
+Since WorldEditAdditions v1.13, a list of node names is also optionally supported. This will constrain bonemeal operations to be performed only on the node names listed.
+
+
 ```weacmd
 //bonemeal
 //bonemeal 3 25
@@ -242,15 +250,19 @@ Since WorldEditAdditions v1.12, a percentage chance is also supported. This is d
 //bonemeal 1 10
 //bonemeal 2 15
 //bonemeal 2 10%
+//bonemeal 2 10% dirt
+//bonemeal 4 50 ethereal:grove_dirt
 ```
 
-## `//walls <replace_node>`
-Creates vertical walls of `<replace_node>` around the inside edges of the defined region.
+## `//walls <replace_node> [<thickness=1>]`
+Creates vertical walls of `<replace_node>` around the inside edges of the defined region, optionally specifying the thickness thereof.
 
 ```weacmd
 //walls dirt
 //walls stone
 //walls goldblock
+//walls sandstone 2
+//walls glass 4
 ```
 
 ## `//wbox <replace_node>`

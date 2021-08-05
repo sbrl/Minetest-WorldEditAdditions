@@ -256,7 +256,8 @@ end
 --- Sorts the components of the given vectors.
 -- pos1 will contain the minimum values, and pos2 the maximum values.
 -- Returns 2 new vectors.
--- Note that the vectors provided do not *have* to be instances of Vector3.
+-- Note that for this specific function
+-- the vectors provided do not *have* to be instances of Vector3.
 -- It is only required that they have the keys x, y, and z.
 -- Vector3 instances are always returned.
 -- This enables convenient ingesting of positions from outside.
@@ -316,8 +317,8 @@ end
 
 --- Returns the mean (average) of 2 positions.
 -- In other words, returns the centre of 2 points.
--- @param	pos1	Vector3	pos1 of the defined region.
--- @param	pos2	Vector3	pos2 of the defined region.
+-- @param	pos1	Vector3|number	pos1 of the defined region.
+-- @param	pos2	Vector3|number	pos2 of the defined region.
 -- @param	target	Vector3	Centre coordinates.
 function Vector3.mean(pos1, pos2)
 	return (pos1 + pos2) / 2
@@ -325,10 +326,16 @@ end
 
 
 --- Returns a vector of the min components of 2 vectors.
--- @param	pos1	Vector3		The first vector to operate on.
--- @param	pos2	Vector3		The second vector to operate on.
+-- @param	pos1	Vector3|number	The first vector to operate on.
+-- @param	pos2	Vector3|number	The second vector to operate on.
 -- @return	Vector3	The minimum values from the input vectors
 function Vector3.min(pos1, pos2)
+	if type(pos1) == "number" then
+		pos1 = Vector3.new(pos1, pos1, pos1)
+	end
+	if type(pos2) == "number" then
+		pos2 = Vector3.new(pos2, pos2, pos2)
+	end
 	return Vector3.new(
 		math.min(pos1.x, pos2.x),
 		math.min(pos1.y, pos2.y),
@@ -341,6 +348,12 @@ end
 -- @param	pos2	Vector3		The second vector to operate on.
 -- @return	Vector3		The maximum values from the input vectors.
 function Vector3.max(pos1, pos2)
+	if type(pos1) == "number" then
+		pos1 = Vector3.new(pos1, pos1, pos1)
+	end
+	if type(pos2) == "number" then
+		pos2 = Vector3.new(pos2, pos2, pos2)
+	end
 	return Vector3.new(
 		math.max(pos1.x, pos2.x),
 		math.max(pos1.y, pos2.y),

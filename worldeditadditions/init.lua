@@ -16,6 +16,7 @@ wea.Mesh, wea.Face = dofile(wea.modpath.."/utils/mesh.lua")
 
 wea.Queue = dofile(wea.modpath.."/utils/queue.lua")
 wea.LRU = dofile(wea.modpath.."/utils/lru.lua")
+wea.inspect = dofile(wea.modpath.."/utils/inspect.lua")
 
 wea.bit = dofile(wea.modpath.."/utils/bit.lua")
 
