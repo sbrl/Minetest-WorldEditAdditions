@@ -22,16 +22,16 @@ local function inspect(item, maxdepth)
 	return table.concat(result,"")
 end
 
-local test = {
-	a = { x = 5, y = 7, z = -6 },
-	http = {
-		port = 80,
-		protocol = "http"
-	},
-	mode = "do_stuff",
-	apple = false,
-	deepa = { deepb = { deepc = { yay = "Happy Birthday!" } }}
-}
-print(inspect(test, 10))
+-- local test = {
+-- 	a = { x = 5, y = 7, z = -6 },
+-- 	http = {
+-- 		port = 80,
+-- 		protocol = "http"
+-- 	},
+-- 	mode = "do_stuff",
+-- 	apple = false,
+-- 	deepa = { deepb = { deepc = { yay = "Happy Birthday!" } }}
+-- }
+-- print(inspect(test))
 
 return inspect
