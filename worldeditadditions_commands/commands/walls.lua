@@ -29,11 +29,14 @@ worldedit.register_command("walls", {
 		
 		return true, target_node, math.floor(thickness)
 	end,
-	nodes_needed = function(name)
+	nodes_needed = function(name, target_node, thickness)
 		-- //overlay only modifies up to 1 node per column in the selected region
 		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
 		
-		local pos3 = { x = pos2.x - 2, z = pos2.z - 2, y = pos2.y }
+		local pos3 = {
+			x = pos2.x - thickness*2,
+			z = pos2.z - thickness*2,
+			y = pos2.y }
 		
 		return worldedit.volume(pos1, pos2) - worldedit.volume(pos1, pos3)
 	end,
