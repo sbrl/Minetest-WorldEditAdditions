@@ -40,8 +40,8 @@ function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slop
 		manip, area, data
 	)
 	local slopemap = wea.calculate_slopes(heightmap, heightmap_size)
-	worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
-	print_slopes(slopemap, heightmap_size.x)
+	-- worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
+	-- print_slopes(slopemap, heightmap_size.x)
 	--luacheck:ignore 311
 	heightmap = nil -- Just in case Lua wants to garbage collect it
 	
