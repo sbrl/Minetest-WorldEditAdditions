@@ -9,7 +9,8 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//airapply` for applying commands only to air nodes in the defined region
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
- - Add optional slope constraint to `//layers` (inspired by [WorldPainter](https://worldpainter.net/))
+ - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
+ - `//bonemeal`: Add optional node list contraint
 
 
 ## v1.12: The selection tools update (26th June 2021)

@@ -4,7 +4,8 @@
 
 -- strength		The strength to apply - see bonemeal:on_use
 -- chance		Positive integer that represents the chance bonemealing will occur
-function worldeditadditions.bonemeal(pos1, pos2, strength, chance)
+function worldeditadditions.bonemeal(pos1, pos2, strength, chance, nodename_list)
+	if not nodename_list then nodename_list = {} end
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
@@ -13,6 +14,12 @@ function worldeditadditions.bonemeal(pos1, pos2, strength, chance)
 	if not minetest.get_modpath("bonemeal") then
 		return false, "Bonemeal mod not loaded"
 	end
+	
+	local node_list = worldeditadditions.table.map(nodename_list, function(nodename)
+		return minetest.get_content_id(nodename)
+	end)
+	local node_list_count = #nodename_list
+	
 	
 	-- Fetch the nodes in the specified area
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
@@ -26,10 +33,17 @@ function worldeditadditions.bonemeal(pos1, pos2, strength, chance)
 	for z = pos2.z, pos1.z, -1 do
 		for x = pos2.x, pos1.x, -1 do
 			for y = pos2.y, pos1.y, -1 do
-				if not worldeditadditions.is_airlike(data[area:index(x, y, z)]) then
+				local i = area:index(x, y, z)
+				if not worldeditadditions.is_airlike(data[i]) then
+					local should_bonemeal = true
+					if node_list_count > 0 and not worldeditadditions.table.contains(node_list, data[i]) then
+						should_bonemeal = false
+					end
+					
+					
 					-- It's not an air node, so let's try to bonemeal it
 					
-					if math.random(0, chance - 1) == 0 then
+					if should_bonemeal and math.random(0, chance - 1) == 0 then
 						bonemeal:on_use(
 							{ x = x, y = y, z = z },
 							strength,

@@ -225,7 +225,7 @@ Additional examples:
 //maze3d stone 6 3 3 54321
 ```
 
-## `//bonemeal [<strength> [<chance>]]`
+## `//bonemeal [<strength> [<chance> [<node_name> [<node_name> ...]]]]`
 Requires the [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/) ([repo](https://notabug.org/TenPlus1/bonemeal/)) mod (otherwise _WorldEditAdditions_ will not register this command and output a message to the server log). Alias: `//flora`.
 
 Bonemeals all eligible nodes in the current region. An eligible node is one that has an air node directly above it - note that just because a node is eligible doesn't mean to say that something will actually happen when the `bonemeal` mod bonemeals it.
@@ -240,6 +240,9 @@ For example, a chance number of 2 would mean a 50% chance that any given eligibl
 
 Since WorldEditAdditions v1.12, a percentage chance is also supported. This is denoted by suffixing a number with a percent sign (e.g. `//bonemeal 1 25%`).
 
+Since WorldEditAdditions v1.13, a list of node names is also optionally supported. This will constrain bonemeal operations to be performed only on the node names listed.
+
+
 ```weacmd
 //bonemeal
 //bonemeal 3 25
@@ -247,6 +250,8 @@ Since WorldEditAdditions v1.12, a percentage chance is also supported. This is d
 //bonemeal 1 10
 //bonemeal 2 15
 //bonemeal 2 10%
+//bonemeal 2 10% dirt
+//bonemeal 4 50 ethereal:grove_dirt
 ```
 
 ## `//walls <replace_node>`
