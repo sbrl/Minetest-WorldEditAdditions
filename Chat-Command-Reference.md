@@ -43,7 +43,7 @@ Note also that columns without any air nodes in them at all are also skipped, so
 ## `//layers [<max_slope|min_slope..max_slope>] [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
 Finds the first non-air node in each column and works downwards, replacing non-air nodes with a defined list of nodes in sequence. Like WorldEdit for Minecraft's `//naturalize` command, and also similar to [`we_env`'s `//populate`](https://github.com/sfan5/we_env). Speaking of, this command has `//naturalise` and `//naturalize` as aliases. Defaults to 1 layer of grass followed by 3 layers of dirt.
 
-A maximum and minimum slope is optional, and constrains the columns in the defined region that `//layers` will operate on. For example, specifying a value of `20` would mean that only columns with a slop less than or equal to 20° (degrees, not radians) will be operated on. A value of `45..60` would mean that only columns with a slope between 45° and 60° will be operated on.
+Since WorldEditAdditions v1.13, a maximum and minimum slope is optionally accepted, and constrains the columns in the defined region that `//layers` will operate on. For example, specifying a value of `20` would mean that only columns with a slop less than or equal to 20° (degrees, not radians) will be operated on. A value of `45..60` would mean that only columns with a slope between 45° and 60° will be operated on.
 
 The list of nodes has a form similar to that of a chance list you might find in `//replacemix`, `//overlay`, or `//mix` - see the examples below. If the number of layers isn't specified, `1` is assumed (i.e. a single layer).
 
