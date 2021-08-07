@@ -14,6 +14,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//walls`: Add optional thickness argument
  - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
  - `//sstack`: Add human-readable approx volumes of regions in the selection stack
+ - `//spop`: Fix wording in displayed message
 
 
 ## v1.12: The selection tools update (26th June 2021)

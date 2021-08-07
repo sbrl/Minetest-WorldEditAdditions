@@ -27,7 +27,7 @@ worldedit.register_command("spop", {
 		
 		local region_text = worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])
 		
-		minetest.log("action", name .. " used //spush at "..region_text..". Stack height is now " .. new_count.." regions")
-		return true, "Region "..region_text.." pushed onto selection stack; "..new_count.." region"..plural.." now in the stack"
+		minetest.log("action", name .. " used //spopped at "..region_text..". Stack height is now " .. new_count.." regions")
+		return true, "Region "..region_text.." popped from selection stack; "..new_count.." region"..plural.." now in the stack"
 	end
 })
