@@ -27,15 +27,11 @@ function worldeditadditions.floodfill(start_pos, radius, replace_node)
 	end
 	
 	local count = 0
-	local remaining_nodes = wea.Queue.new()
-	print("DEBUG enqueue start_pos_index", start_pos_index)
-	print("DEBUG enqueued id", remaining_nodes:enqueue(start_pos_index))
+	local remaining_nodes = wea.Queue.new() remaining_nodes:enqueue(start_pos_index)
 	
 	-- Do the floodfill
 	while remaining_nodes:is_empty() == false do
 		local cur = remaining_nodes:dequeue()
-		
-		print("DEBUG cur", cur)
 		
 		-- Replace this node
 		data[cur] = replace_id
