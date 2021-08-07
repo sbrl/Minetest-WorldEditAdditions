@@ -11,12 +11,16 @@ local wea = worldeditadditions
 -- @param	size	Vector	An x/y vector representing the size of the noise area to generate.
 -- @param	params	table|table<table>	A table of noise params to use to generate the noise. Values that aren't specified are filled in automatically. If a table of tables is specified, it is interpreted as multiple octaves of noise to apply in sequence.
 function worldeditadditions.noise.make_2d(size, start_pos, params)
+	params = worldeditadditions.noise.params_apply_default(params)
+	
 	local result = {}
 	
 	for layer_i, layer in ipairs(params) do
 		local generator
 		if layer.algorithm == "perlin" then
 			generator = wea.noise.engines.Perlin.new()
+		elseif layer.algorithm == "perlinmt" then
+			generator = wea.noise.engines.PerlinMT.new()
 		elseif layer.algorithm == "sin" then
 			generator = wea.noise.engines.Sin.new()
 		elseif layer.algorithm == "white" then

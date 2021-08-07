@@ -31,6 +31,7 @@ read_globals = {
 	"it",
 	"describe",
 	"bonemeal",
-	"dofile"
+	"dofile",
+	"PerlinNoise"
 }
 std = "max"

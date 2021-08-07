@@ -13,7 +13,7 @@ function worldeditadditions.noise.params_apply_default(params)
 		-- - A string in the form of digits followed, then the noise will is remapped from the range 0 - 1 to the range -1 - +1 and multiplied by this number / 2, and then for each pixel in the heightmap the corresponding noise value will be added to it.
 		apply = 5,
 		-- The backend noise algorithm to use
-		algorithm = "perlin",
+		algorithm = "perlinmt",
 		-- Zooms in and out
 		scale = wea.Vector3.new(1, 1, 1),
 		-- Offset the generated noise by this vector.
