@@ -12,7 +12,7 @@ function PerlinMT.new(seed, params)
 		engine = PerlinNoise({
 			offset = 0,
 			scale = 1,
-			spread = {x = 10, y = 10, z = 10},
+			spread = {x = 50, y = 50, z = 50},
 			seed = seed,
 			octaves = 1,
 		    persistence = 0.63,
