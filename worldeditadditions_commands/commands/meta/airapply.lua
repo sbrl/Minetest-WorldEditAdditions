@@ -58,7 +58,7 @@ worldedit.register_command("airapply", {
 			pos1, pos2,
 			function()
 				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
-			end, args_parsed
+			end
 		)
 		if not success then return success, stats_time end
 		
