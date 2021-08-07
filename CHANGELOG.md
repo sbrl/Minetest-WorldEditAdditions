@@ -12,6 +12,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
  - `//bonemeal`: Add optional node list constraint
  - `//walls`: Add optional thickness argument
+ - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
 
 
 ## v1.12: The selection tools update (26th June 2021)
