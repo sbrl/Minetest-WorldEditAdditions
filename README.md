@@ -49,6 +49,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//fillcaves [<node_name>]`](https://worldeditadditions.mooncarrot.space/Reference/#fillcaves)
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://worldeditadditions.mooncarrot.space/Reference/#convolve)
  - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#erode) **experimental**
+ - [`//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d)
 
 ### Flora
  - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#bonemeal-strength-chance)
@@ -82,7 +83,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#subdivide)
  - [`//ellipsoidapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoidapply) _(new in v1.9)_
  - [`//airapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) _(new in v1.9)_
- - [`//noiseapply2d <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#noiseapply2d) _(new in v1.13)_
+ - [`//noiseapply2d <threshold> <scale> <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#noiseapply2d) _(new in v1.13)_
 
 ### Extras
  - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#y)
