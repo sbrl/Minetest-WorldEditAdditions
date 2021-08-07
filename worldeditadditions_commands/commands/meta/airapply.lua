@@ -58,6 +58,7 @@ worldedit.register_command("airapply", {
 				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
 			end, args_parsed
 		)
+		if not success then return success, stats_time end
 		
 		
 		local time_overhead = 100 - worldeditadditions.round((stats_time.fn / stats_time.all) * 100, 3)

@@ -12,8 +12,12 @@ Note to self: See the bottom of this file for the release template text.
  - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
  - `//bonemeal`: Add optional node list constraint
  - `//walls`: Add optional thickness argument
- - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
  - `//sstack`: Add human-readable approx volumes of regions in the selection stack
+
+
+### Bugfixes
+ - `//airapply`: Improve error handling
+ - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
  - `//spop`: Fix wording in displayed message
 
 
