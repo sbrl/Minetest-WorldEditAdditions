@@ -16,7 +16,7 @@ Note to self: See the bottom of this file for the release template text.
 
 
 ### Bugfixes
- - `//airapply`: Improve error handling
+ - `//airapply`: Improve error handling, fix safe_region node counter
  - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
  - `//spop`: Fix wording in displayed message
 

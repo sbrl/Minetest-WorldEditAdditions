@@ -71,10 +71,10 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)
  
 ### Measure
- - [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface)
- - [`//midpos`](https://worldeditadditions.mooncarrot.space/Reference/#midpos)
- - [`//msize`](https://worldeditadditions.mooncarrot.space/Reference/#msize)
- - [`//mtrig`](https://worldeditadditions.mooncarrot.space/Reference/#mtrig)
+ - [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface) _(new in v1.13)_
+ - [`//midpos`](https://worldeditadditions.mooncarrot.space/Reference/#midpos) _(new in v1.13)_
+ - [`//msize`](https://worldeditadditions.mooncarrot.space/Reference/#msize) _(new in v1.13)_
+ - [`//mtrig`](https://worldeditadditions.mooncarrot.space/Reference/#mtrig) _(new in v1.13)_
  
 ### Meta
  - [`//multi <command_a> <command_b> ....`](https://worldeditadditions.mooncarrot.space/Reference/#multi)
@@ -82,6 +82,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#subdivide)
  - [`//ellipsoidapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoidapply) _(new in v1.9)_
  - [`//airapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) _(new in v1.9)_
+ - [`//noiseapply2d <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#noiseapply2d) _(new in v1.13)_
 
 ### Extras
  - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#y)
