@@ -7,6 +7,8 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//sfactor` (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
  - Add `//mface` (_measure facing_), `//midpos` (_measure middle position_), `//msize` (_measure size_), `//mtrig` (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
  - Add `//airapply` for applying commands only to air nodes in the defined region
+ - Add `//noise2d` for perturbing terrain with multiple different noise functions
+ - Add `//noiseapply2d` for running commands on columns where a noise value is over a threshold
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
  - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))

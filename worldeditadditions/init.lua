@@ -60,6 +60,7 @@ dofile(wea.modpath.."/lib/forest.lua")
 
 dofile(wea.modpath.."/lib/ellipsoidapply.lua")
 dofile(wea.modpath.."/lib/airapply.lua")
+dofile(wea.modpath.."/lib/noiseapply2d.lua")
 
 dofile(wea.modpath.."/lib/subdivide.lua")
 dofile(wea.modpath.."/lib/selection/stack.lua")
