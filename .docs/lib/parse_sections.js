@@ -1,4 +1,4 @@
-const htmlentities = require("htmlentities");
+const htmlentities = require("html-entities");
 const markdown = require("markdown-it")({
 	xhtmlOut: true
 });
