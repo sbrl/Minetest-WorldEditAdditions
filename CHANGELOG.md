@@ -21,6 +21,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//airapply`: Improve error handling, fix safe_region node counter
  - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
  - `//spop`: Fix wording in displayed message
+ - Sapling aliases: Correct alias of `default:sapling` from `oak` to `apple` (since it produces apples), and `moretrees:apple_tree_sapling_ongen` from `apple` to `apple_moretrees`
 
 
 ## v1.12: The selection tools update (26th June 2021)
