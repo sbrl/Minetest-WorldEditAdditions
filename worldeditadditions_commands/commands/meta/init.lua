@@ -14,4 +14,5 @@ dofile(we_cm.."for.lua")
 -- dofile(we_cm.."macro.lua") -- Async bug
 dofile(we_cm.."many.lua")
 dofile(we_cm.."multi.lua")
+dofile(we_cm.."noiseapply2d.lua")
 dofile(we_cm.."subdivide.lua")
