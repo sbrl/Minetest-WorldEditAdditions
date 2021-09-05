@@ -27,8 +27,7 @@ function worldeditadditions.floodfill(start_pos, radius, replace_node)
 	end
 	
 	local count = 0
-	local remaining_nodes = wea.Queue.new()
-	remaining_nodes:enqueue(start_pos_index)
+	local remaining_nodes = wea.Queue.new() remaining_nodes:enqueue(start_pos_index)
 	
 	-- Do the floodfill
 	while remaining_nodes:is_empty() == false do

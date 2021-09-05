@@ -10,11 +10,25 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//wcorner` (_wireframe corners_), `//wbox` (_wireframe box_), `//compass` (_wireframe compass_) - Wireframes implemented by @VorTechnix.
  - Add `//for` for executing commands while changing their arguments - Implemented by @VorTechnix.
  - Add `//sshift`  (_selection shift_) - WorldEdit cuboid manipulator replacements implemented by @VorTechnix.
+ - Add `//noise2d` for perturbing terrain with multiple different noise functions
+ - Add `//noiseapply2d` for running commands on columns where a noise value is over a threshold
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
  - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
  - `//bonemeal`: Add optional node list constraint
  - `//walls`: Add optional thickness argument
+ - `//sstack`: Add human-readable approx volumes of regions in the selection stack
+
+
+### Bugfixes
+ - `//airapply`: Improve error handling, fix safe_region node counter
+ - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
+ - `//spop`: Fix wording in displayed message
+ - Sapling alias compatibility:
+     - Correct alias of `default:sapling` from `oak` to `apple` (since it produces apples)
+     - `moretrees:apple_tree_sapling_ongen` from `apple` to `apple_moretrees`
+     - Add `plum` → `plumtree:sapling`
+     - Add `holly` ⇒ `hollytree:sapling`
 
 
 ## v1.12: The selection tools update (26th June 2021)

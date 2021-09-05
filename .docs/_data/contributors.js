@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const htmlentities = require("htmlentities");
+const htmlentities = require("html-entities");
 
 function read_contributors() {
 	return fs.readFileSync(path.resolve(__dirname, "../../CONTRIBUTORS.tsv"), "utf-8")

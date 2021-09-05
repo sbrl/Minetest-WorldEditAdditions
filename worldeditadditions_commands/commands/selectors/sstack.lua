@@ -20,8 +20,15 @@ worldedit.register_command("sstack", {
 			table.insert(result, "(empty)")
 		else
 			for i,item in ipairs(worldeditadditions.sstack[name]) do
+				local volume = worldedit.volume(item[1], item[2])
+				local volume_text = worldeditadditions.format.human_size(volume, 2)
+				if volume > 1000 then volume_text = "~"..volume_text end
+				
 				table.insert(result, i)
 				table.insert(result, ": ")
+				
+				table.insert(result, volume_text)
+				table.insert(result, " nodes - ")
 				table.insert(result, worldeditadditions.vector.tostring(item[1]))
 				table.insert(result, " - ")
 				table.insert(result, worldeditadditions.vector.tostring(item[2]))

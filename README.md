@@ -28,59 +28,62 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 The detailed explanations have moved! Check them out [here](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md), or click the links below.
 
 ### Geometry
- - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#ellipsoid-rx-ry-rz-node_name-hollow)
- - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#hollowellipsoid-rx-ry-rz-node_name)
- - [`//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#torus-major_radius-minor_radius-node_name-axesxy-hollow)
- - [`//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#hollowtorus-major_radius-minor_radius-node_name-axesxy)
- - [`//walls <replace_node>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#walls-replace_node)
- - [`//line [<replace_node> [<radius>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#line-replace_node-radius)
- - [`//hollow [<wall_thickness>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#hollow-wall_thickness)
- - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#maze-replace_node-path_length-path_width-seed)
- - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#maze3d-replace_node-path_length-path_width-path_depth-seed)
+ - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid)
+ - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://worldeditadditions.mooncarrot.space/Reference/#hollowellipsoid)
+ - [`//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`](https://worldeditadditions.mooncarrot.space/Reference/#torus)
+ - [`//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`](https://worldeditadditions.mooncarrot.space/Reference/#hollowtorus)
+ - [`//walls <replace_node>`](https://worldeditadditions.mooncarrot.space/Reference/#walls)
+ - [`//line [<replace_node> [<radius>]]`](https://worldeditadditions.mooncarrot.space/Reference/#line)
+ - [`//hollow [<wall_thickness>]`](https://worldeditadditions.mooncarrot.space/Reference/#hollow)
+ - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](https://worldeditadditions.mooncarrot.space/Reference/#maze)
+ - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](https://worldeditadditions.mooncarrot.space/Reference/#maze3d)
 
 ### Misc
- - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#replacemix-target_node-chance-replace_node_a-chance_a-replace_node_b-chance_b-replace_node_n-chance_n-)
- - [`//floodfill [<replace_node> [<radius>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#floodfill-replace_node-radius-floodfill)
- - [`//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#scale-axis-scale_factor--factor_x-factor_y-factor_z-anchor_x-anchor_y-anchor_z) **experimental**
+ - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://worldeditadditions.mooncarrot.space/Reference/#replacemix)
+ - [`//floodfill [<replace_node> [<radius>]]`](https://worldeditadditions.mooncarrot.space/Reference/#floodfill)
+ - [`//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]`](https://worldeditadditions.mooncarrot.space/Reference/#scale) **experimental**
 
 ### Terrain
- - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#overlay-node_name_a-chance_a-node_name_b-chance_b-node_name_n-chance_n-)
- - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#layers-node_name_1-layer_count_1-node_name_2-layer_count_2-)
- - [`//fillcaves [<node_name>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#fillcaves-node_name)
- - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#convolve-kernel-widthheight-sigma)
- - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#erode-snowballsriver-key_1-value_1-key_2-value_2-) **experimental**
+ - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](https://worldeditadditions.mooncarrot.space/Reference/#overlay)
+ - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](https://worldeditadditions.mooncarrot.space/Reference/#layers)
+ - [`//fillcaves [<node_name>]`](https://worldeditadditions.mooncarrot.space/Reference/#fillcaves)
+ - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://worldeditadditions.mooncarrot.space/Reference/#convolve)
+ - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#erode) **experimental**
+ - [`//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d)
 
 ### Flora
  - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#bonemeal-strength-chance)
- - [`//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#forest-density-sapling_a-chance_a-sapling_b-chance_b-sapling_N-chance_N-) _(new in v1.9)_
- - [`//saplingaliases [aliases|all_saplings]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#saplingaliases-aliasesall_saplings) _(new in v1.9)_
+ - [`//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`](https://worldeditadditions.mooncarrot.space/Reference/#forest) _(new in v1.9)_
+ - [`//saplingaliases [aliases|all_saplings]`](https://worldeditadditions.mooncarrot.space/Reference/#saplingaliases) _(new in v1.9)_
 
 ### Statistics
- - [`//count`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#count)
+ - [`//count`](https://worldeditadditions.mooncarrot.space/Reference/#count)
 
 ### Selection
- - [`//scol [<axis1> ] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#scol-axis1--length)
- - [`//srect [<axis1> [<axis2>]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#srect-axis1-axis2-length)
- - [`//scube [<axis1> [<axis2> [<axis3>]]] <length>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#scube-axis1-axis2-axis3-length)
- - [`//scloud <0-6|stop|reset>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#scloud-0-6stopreset)
- - [`//scentre`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#scentre)
- - [`//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#srel-axis1-length1-axis2-length2-axis3-length3)
- - [`//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#smake-operationoddevenequal-modegrowshrinkaverage-targetxz-base)
- - [`//sstack`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#sstack)
- - [`//spush`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#spush)
- - [`//spop`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#spop)
+ - [`//scol [<axis1> ] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#scol)
+ - [`//srect [<axis1> [<axis2>]] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#srect)
+ - [`//scube [<axis1> [<axis2> [<axis3>]]] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#scube)
+ - [`//scloud <0-6|stop|reset>`](https://worldeditadditions.mooncarrot.space/Reference/#scloud)
+ - [`//scentre`](https://worldeditadditions.mooncarrot.space/Reference/#scentre)
+ - [`//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#srel)
+ - [`//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`](https://worldeditadditions.mooncarrot.space/Reference/#smake)
+ - [`//sstack`](https://worldeditadditions.mooncarrot.space/Reference/#sstack)
+ - [`//spush`](https://worldeditadditions.mooncarrot.space/Reference/#spush)
+ - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)
  
 ### Measure
- - [`//mface`](Chat-Command-Reference.md#mface)
- - [`//midpos`](Chat-Command-Reference.md#midpos)
- - [`//msize`](Chat-Command-Reference.md#msize)
- - [`//mtrig`](Chat-Command-Reference.md#mtrig)
+ - [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface) _(new in v1.13)_
+ - [`//midpos`](https://worldeditadditions.mooncarrot.space/Reference/#midpos) _(new in v1.13)_
+ - [`//msize`](https://worldeditadditions.mooncarrot.space/Reference/#msize) _(new in v1.13)_
+ - [`//mtrig`](https://worldeditadditions.mooncarrot.space/Reference/#mtrig) _(new in v1.13)_
  
 ### Meta
- - [`//multi <command_a> <command_b> ....`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#multi-command_a-command_b-command_c-)
- - [`//many <times> <command>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#many-times-command) _(new in v1.9)_
- - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#subdivide-size_x-size_y-size_z-cmd_name-args) **experimental**
- - [`//ellipsoidapply <command_name> <args>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#ellipsoidapply-command_name-args) _(new in v1.9)_
+ - [`//multi <command_a> <command_b> ....`](https://worldeditadditions.mooncarrot.space/Reference/#multi)
+ - [`//many <times> <command>`](https://worldeditadditions.mooncarrot.space/Reference/#many) _(new in v1.9)_
+ - [`//subdivide <size_x> <size_y> <size_z> <cmd_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#subdivide)
+ - [`//ellipsoidapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoidapply) _(new in v1.9)_
+ - [`//airapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) _(new in v1.9)_
+ - [`//noiseapply2d <threshold> <scale> <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#noiseapply2d) _(new in v1.13)_
 
 ### Extras
  - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#y)

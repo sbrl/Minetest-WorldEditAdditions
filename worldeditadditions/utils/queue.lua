@@ -61,7 +61,7 @@ function Queue:dequeue()
 	-- Find the next non-nil item
 	local value
 	while value == nil do
-		if first >= self.last then return nil end
+		if first > self.last then return nil end
 		value = self.items[first]
 		self.items[first] = nil -- Help the garbage collector out
 		first = first + 1

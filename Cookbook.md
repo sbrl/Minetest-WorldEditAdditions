@@ -43,7 +43,13 @@ The following brushes together can make large-scale terrain sculpting easy:
 ```
 
 ## En-mass Foliage clearing
-Clearing large amounts of foliage is easy!
+Clearing large amounts of foliage is easy with the new `//subdivide` function!
+
+```
+//subdivide 20 20 20 //clearcut
+```
+
+Another good way to clear large chunk of land is with `//many`:
 
 ```
 //many 25 //multi //clearcut //y //shift x 10

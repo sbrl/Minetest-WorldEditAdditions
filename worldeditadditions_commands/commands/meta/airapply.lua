@@ -38,8 +38,10 @@ worldedit.register_command("airapply", {
 		return true, cmd_we, args_parsed
 	end,
 	nodes_needed = function(name)
-		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
-		return math.ceil(4/3 * math.pi * (pos2.x - pos1.x)/2 * (pos2.y - pos1.y)/2 * (pos2.z - pos1.z)/2)
+		return worldedit.volume(
+			worldedit.pos1[name],
+			worldedit.pos2[name]
+		)
 	end,
 	func = function(name, cmd, args_parsed)
 		if not minetest.check_player_privs(name, cmd.privs) then
@@ -56,8 +58,9 @@ worldedit.register_command("airapply", {
 			pos1, pos2,
 			function()
 				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
-			end, args_parsed
+			end
 		)
+		if not success then return success, stats_time end
 		
 		
 		local time_overhead = 100 - worldeditadditions.round((stats_time.fn / stats_time.all) * 100, 3)

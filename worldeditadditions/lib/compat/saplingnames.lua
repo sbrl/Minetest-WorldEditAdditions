@@ -16,7 +16,7 @@ Alternatively, you can register support in your mod directly. Do that by adding 
 
 if minetest.get_modpath("default") then
 	worldeditadditions.register_sapling_alias_many({
-		{ "default:sapling", "oak" },
+		{ "default:sapling", "apple" },
 		{ "default:bush_sapling", "bush" },
 		{ "default:pine_sapling", "pine" },
 		{ "default:pine_bush_sapling", "pine_bush" },
@@ -40,7 +40,7 @@ if minetest.get_modpath("moretrees") then
 		{ "moretrees:willow_sapling_ongen", "willow_moretrees" },
 		{ "moretrees:poplar_sapling_ongen", "poplar" },
 		{ "moretrees:poplar_small_sapling_ongen", "poplar_small" },
-		{ "moretrees:apple_tree_sapling_ongen", "apple" },
+		{ "moretrees:apple_tree_sapling_ongen", "apple_moretrees" },
 		{ "moretrees:birch_sapling_ongen", "birch_moretrees" },
 		{ "moretrees:palm_sapling_ongen", "palm_moretrees" },
 		{ "moretrees:date_palm_sapling_ongen", "palm_date" },
@@ -109,6 +109,12 @@ if minetest.get_modpath("maple") then
 end
 if minetest.get_modpath("palm") then
 	worldeditadditions.register_sapling_alias("palm:sapling", "palm")
+end
+if minetest.get_modpath("plumtree") then
+	worldeditadditions.register_sapling_alias("plumtree:sapling", "plum")
+end
+if minetest.get_modpath("hollytree") then
+	worldeditadditions.register_sapling_alias("hollytree:sapling", "holly")
 end
 if minetest.get_modpath("pomegranate") then
 	worldeditadditions.register_sapling_alias("pomegranate:sapling", "pomegranate")

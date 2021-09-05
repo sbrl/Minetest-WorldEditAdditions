@@ -532,7 +532,7 @@ Applies 2D noise to the terrain in the defined region. Like `//erode`, this comm
 
 Parameter	| Type		| Default Value	| Description
 ------------|-----------|---------------|-----------------------
-algorithm	| `string`	| perlin		| The 2D noise algorithm to apply - see below.
+algorithm	| `string`	| perlinmt		| The 2D noise algorithm to apply - see below.
 apply		| `string|integer` | 5		| How to apply the noise to the terrain - see below.
 scalex		| `float`	| 1				| The scale of the noise on the x axis.
 scaley		| `float`	| 1				| The scale of the noise on the y axis.
@@ -555,7 +555,8 @@ The following algorithms are currently available:
 
 Algorithm	| Description
 ------------|--------------------------
-`perlin`	| Perlin noise. Functional, but currently contains artefacts I'm having difficulty tracking down.
+`perlinmt`  | **Default**.Perlin noise, backed by Minetest's inbuilt `PerlinNoise` class.
+`perlin`	| Perlin noise, backed by a pure Lua perlin noise implementation. Functional, but currently contains artefacts I'm having difficulty tracking down.
 `sin`		| A sine wave created with `math.sin()`.
 `white`		| Random white noise.
 `red`		| Red noise - has a lower frequency than white noise. Ref [Noise Functions and Map Generation by Red Blob Games](https://www.redblobgames.com/articles/noise/introduction.html).
@@ -678,6 +679,21 @@ As with `//ellipsoidapply` for advanced users `//multi` is also supported - but 
 ```weacmd
 //airapply set sandstone
 //airapply maze3d dirt 4 2 2
+```
+
+
+## `//noiseapply2d <threshold> <scale> <command_name> <args>`
+Like [`//ellipsoidapply`](#ellipsoidapply), but instead only keeps changes where a noise function (defaults to `perlinmt`, see [`//noise2d`](#noise2d)) returns a value greater than a given threshold value.
+
+Also takes a scale value that controls the scale of the noise - -higher values result in smaller "blobs". If you're operating on small areas, then a value of at least 10 is advised as "blobs" are by default on the scale of ~50 nodes.
+
+As with `//ellipsoidapply` for advanced users `//multi` is also supported - but make sure your modifications stay within the defined region - otherwise they be kept regardless, as `//noiseapply2d` only applies the masking to the nodes in the defined region.
+
+Any suggestions on  how to provide more customisability without making this command more difficult to use or significantly more inconsistent with other `//*apply` functions are welcome - please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new).
+
+```weacmd
+//noiseapply2d 0.5 10 set dirt
+//noiseapply2d 0.4 3 layers dirt_with_snow dirt 3 stone 10
 ```
 
 
