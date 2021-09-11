@@ -43,7 +43,7 @@ log_msg() {
 # $1 - Command name to check for
 check_command() {
 	set +e;
-	which $1 >/dev/null 2>&1; exit_code=$?
+	command -v "$1" >/dev/null 2>&1; exit_code="$?";
 	if [[ "${exit_code}" -ne 0 ]]; then
 		log_msg "Error: Couldn't locate $1. Make sure it's installed and in your path.";
 	fi
