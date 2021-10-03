@@ -15,6 +15,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//bonemeal`: Add optional node list constraint
  - `//walls`: Add optional thickness argument
  - `//sstack`: Add human-readable approx volumes of regions in the selection stack
+ - Cloud wand: Improve chat message text
 
 
 ### Bugfixes

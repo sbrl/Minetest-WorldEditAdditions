@@ -7,6 +7,7 @@ worldeditadditions.add_pos = {}
 worldeditadditions.selection = {}
 function worldeditadditions.selection.add_point(name, pos)
 	if pos ~= nil then
+		local is_new = not worldedit.pos1[name] and not worldedit.pos2[name]
 		-- print("[set_pos1]", name, "("..pos.x..", "..pos.y..", "..pos.z..")")
 		if not worldedit.pos1[name] then worldedit.pos1[name] = vector.new(pos) end
 		if not worldedit.pos2[name] then worldedit.pos2[name] = vector.new(pos) end
@@ -22,7 +23,16 @@ function worldeditadditions.selection.add_point(name, pos)
 		local volume_difference = volume_after - volume_before
 		
 		worldedit.marker_update(name)
-		worldedit.player_notify(name, "Expanded region by "..volume_difference.." nodes")
+		print("DEBUG volume_before", volume_before, "volume_after", volume_after)
+		if is_new then
+			local msg = "Created new region of "..volume_after.." node"
+			if volume_after ~= 1 then msg = msg.."s" end
+			worldedit.player_notify(name, msg)
+		else
+			local msg = "Expanded region by "..volume_difference.." node"
+			if volume_difference ~= 1 then msg = msg.."s" end
+			worldedit.player_notify(name, msg)
+		end
 	else
 		worldedit.player_notify(name, "Error: Too far away (try raising your maxdist with //farwand maxdist <number>)")
 		-- print("[set_pos1]", name, "nil")
