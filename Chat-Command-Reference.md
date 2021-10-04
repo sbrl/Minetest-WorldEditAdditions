@@ -882,7 +882,7 @@ The far wand (`worldeditadditions:farwand`) is a variant on the traditional Worl
 It functions very similarly to the regular WorldEdit wand, except that it has a _much_ longer range - which can be very useful for working on large-scale terrain for example. It also comes with an associated command to control it.
 
 ## `//farwand skip_liquid (true|false) | maxdist <number>`
-This command helps control the behaviour of the [WorldEditAdditions far wand](#far-wand). Calling it without any arguments shows the current status:
+This command helps control the behaviour of the [WorldEditAdditions far wand](#far-wand) and [cloud wand](#cloud-wand). Calling it without any arguments shows the current status:
 
 ```weacmd
 //farwand
