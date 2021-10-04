@@ -45,14 +45,14 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 
 ### Terrain
  - [`//overlay <node_name_a> [<chance_a>] <node_name_b> [<chance_b>] [<node_name_N> [<chance_N>]] ...`](https://worldeditadditions.mooncarrot.space/Reference/#overlay)
- - [`//layers [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](https://worldeditadditions.mooncarrot.space/Reference/#layers)
+ - [`//layers [<max_slope|min_slope..max_slope>] [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`](https://worldeditadditions.mooncarrot.space/Reference/#layers)
  - [`//fillcaves [<node_name>]`](https://worldeditadditions.mooncarrot.space/Reference/#fillcaves)
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://worldeditadditions.mooncarrot.space/Reference/#convolve)
  - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#erode) **experimental**
  - [`//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d)
 
 ### Flora
- - [`//bonemeal [<strength> [<chance>]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#bonemeal-strength-chance)
+ - [`//bonemeal [<strength> [<chance> [<node_name> [<node_name> ...]]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#bonemeal-strength-chance)
  - [`//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`](https://worldeditadditions.mooncarrot.space/Reference/#forest) _(new in v1.9)_
  - [`//saplingaliases [aliases|all_saplings]`](https://worldeditadditions.mooncarrot.space/Reference/#saplingaliases) _(new in v1.9)_
 

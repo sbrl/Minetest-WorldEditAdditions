@@ -15,7 +15,6 @@ Note to self: See the bottom of this file for the release template text.
  - `//bonemeal`: Add optional node list constraint
  - `//walls`: Add optional thickness argument
  - `//sstack`: Add human-readable approx volumes of regions in the selection stack
- - Cloud wand: Improve chat message text
 
 
 ### Bugfixes
@@ -28,6 +27,7 @@ Note to self: See the bottom of this file for the release template text.
      - Add `plum` → `plumtree:sapling`
      - Add `holly` ⇒ `hollytree:sapling`
  - `//replacemix`: Improve error handling to avoid crashes (thanks, Jonathon for reporting via Discord!)
+ - Cloud wand: Improve chat message text
 
 
 ## v1.12: The selection tools update (26th June 2021)
