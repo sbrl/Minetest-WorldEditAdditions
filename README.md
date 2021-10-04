@@ -58,6 +58,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 
 ### Statistics
  - [`//count`](https://worldeditadditions.mooncarrot.space/Reference/#count)
+ - [`//basename <name>`](https://worldeditadditions.mooncarrot.space/Reference/#basename)
 
 ### Selection
  - [`//scol [<axis1> ] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#scol)
