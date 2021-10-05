@@ -151,7 +151,7 @@
 					switch(mode_this) {
 						case "all":
 							show = search_text(query,
-								el_next.textContent
+								el_next.textContent + ` ` + el_next.dataset.category
 							);
 							break;
 						case "header":
