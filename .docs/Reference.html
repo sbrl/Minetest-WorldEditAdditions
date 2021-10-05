@@ -26,21 +26,103 @@
 	<section class="panel-generic">
 		<h2 id="contents" class="linked-section-heading">
 			<a class="section-link" href="#{{ section.slug }}">&#x1f517; <!-- Link Symbol --></a>
-			<span>Contents</span>
+			<span class="title">Contents</span>
 		</h2>
-		<p>TODO: Group commands here by category (*especially* the meta commands)</p>
-		<ul class="command-list">
-			{% for section in sections_help %}
-			<li data-filtermode-force="all"><a href="#{{ section.slug }}">
-				<code>{{ section.title }}</code>
-			</a></li>
-			{% endfor %}
-		</ul>
+		<div class="command-ordering-tabs">
+			<button class="active" data-mode="alphabetical">Alphabetical</button>
+			<button data-mode="categorical">Categorical</button>
+		</div>
+		<input type="hidden" id="category-names" value="{{ categories }}" />
+		<div class="command-container">
+			<h3>Alphabetical</h3>
+			<ul class="command-list">
+				{% for section in sections_help %}
+				<li data-filtermode-force="all" data-category="{{ section.category }}" style="--cat-colour: {{ section.category_colour }};"><a href="#{{ section.slug }}">
+					<code>{{ section.title }}</code>
+				</a></li>
+				{% endfor %}
+			</ul>
+		</div>
 	</section>
 	
 	<script>
 		function search_text(query, text) {
 			return text.toLocaleLowerCase().includes(query);
+		}
+		
+		function handle_display_mode(event) {
+			set_display_mode(event.target.dataset.mode);
+			
+			localStorage.setItem("commandlist-displaymode", event.target.dataset.mode);
+		}
+		
+		function sort_command_list(list) {
+			list.sort((a, b) =>
+				a.querySelector("a").href.localeCompare(b.querySelector("a").href))
+		}
+		function nodelist2array(list) {
+			const result = [];
+			for(let i = 0; i < list.length; i++) result.push(list[i]);
+			return result;
+		}
+		
+		function set_display_mode(mode) {
+			console.info(`SET DISPLAYMODE ${mode}`)
+			
+			const commands = nodelist2array(document.querySelectorAll(`.command-list li`));
+			const container = document.querySelector(`.command-container`);
+			
+			switch(mode) {
+				case "categorical":
+					const sections = Object.create(null);
+					for(const command of [...commands]) {
+						const cat = command.dataset.category;
+						if(!(sections[cat] instanceof Array))
+							sections[cat] = [];
+						sections[cat].push(command);
+					}
+					
+					const section_names = document.querySelector("#category-names").value
+						.split("|");
+					
+					const fragment = new DocumentFragment();
+					
+					for(const section_name of section_names) {
+						sort_command_list(sections[section_name]);
+						
+						const header = document.createElement("h3");
+						header.appendChild(document.createTextNode(section_name));
+						fragment.appendChild(header);
+						const list = document.createElement("ul");
+						list.classList.add("command-list", "coloured");
+						for(const item of sections[section_name])
+							list.appendChild(item);
+						fragment.appendChild(list);
+					}
+					container.replaceChildren(fragment);
+					break;
+				
+				case "alphabetical":
+					const alpha_fragment = new DocumentFragment();
+					const alpha_header = document.createElement("h3");
+					alpha_header.appendChild(document.createTextNode("Alphabetical"));
+					alpha_fragment.appendChild(alpha_header);
+					const alpha_list = document.createElement("ul");
+					alpha_list.classList.add("command-list");
+					alpha_list.classList.add("command-alpha_list");
+					sort_command_list(commands);
+					for(let i = 0; i < commands.length; i++)
+						alpha_list.appendChild(commands[i]);
+					alpha_fragment.appendChild(alpha_list);
+					container.replaceChildren(alpha_fragment);
+					break;
+			}
+			
+			const el_alpha = document.querySelector(".command-ordering-tabs [data-mode=alphabetical]");
+			const el_cats = document.querySelector(".command-ordering-tabs [data-mode=categorical]");
+			
+			el_alpha.classList.toggle("active");
+			el_cats.classList.toggle("active");
 		}
 		
 		function do_filter() {
@@ -88,18 +170,28 @@
 		window.addEventListener("load", (_event) => {
 			let el_search = document.querySelector("#input-filter");
 			let el_searchall = document.querySelector("#input-searchall");
+			let els_cats = document.querySelectorAll(".command-ordering-tabs button");
 			
 			el_search.addEventListener("input", do_filter);
 			el_search.addEventListener("search", do_filter);
 			el_searchall.addEventListener("change", do_filter);
+			
+			for(let i = 0; i < els_cats.length; i++) {
+				els_cats[i].addEventListener("click", handle_display_mode);
+				els_cats[i].addEventListener("touchend", handle_display_mode);
+			}
+			
+			if(localStorage.getItem("commandlist-displaymode") !== null)
+				set_display_mode(localStorage.getItem("commandlist-displaymode"))
 		});
 	</script>
 	
 	{% for section in sections_help %}
-		<section class="panel-generic filterable">
+		<section class="panel-generic filterable" style="--cat-colour: {{ section.category_colour_dark }};">
 			<h2 id="{{ section.slug }}" class="linked-section-heading">
 				<a class="section-link" href="#{{ section.slug }}">&#x1f517; <!-- Link Symbol --></a>
-				<span>{{ section.title }}</span>
+				<span class="title">{{ section.title }}</span>
+				<span class="category">{{ section.category }}</span>
 			</h2>
 			
 			{{ section.content }}

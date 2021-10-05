@@ -22,6 +22,7 @@
 	"devDependencies": {
 		"@11ty/eleventy": "^0.12.1",
 		"@11ty/eleventy-img": "^0.10.0",
+		"chroma-js": "^2.1.2",
 		"markdown-it-prism": "^2.2.1",
 		"phin": "^3.6.0"
 	},
