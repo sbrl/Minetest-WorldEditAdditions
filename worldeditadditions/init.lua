@@ -53,6 +53,8 @@ dofile(wea.modpath.."/lib/conv/conv.lua")
 dofile(wea.modpath.."/lib/erode/erode.lua")
 dofile(wea.modpath.."/lib/noise/init.lua")
 
+dofile(wea.modpath.."/lib/copy.lua")
+
 dofile(wea.modpath.."/lib/count.lua")
 
 dofile(wea.modpath.."/lib/bonemeal.lua")
