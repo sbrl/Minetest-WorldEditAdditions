@@ -78,9 +78,17 @@ h1, h2, h3, h4, h5, h6 {
 .linked-section-heading > a.section-link:hover {
 	opacity: 1;
 }
-.linked-section-heading > span {
+.linked-section-heading > span.title {
 	flex: 1;
 	word-wrap: anywhere;
+}
+.linked-section-heading > span.category {
+	font-size: 0.75em;
+	border-radius: 1em;
+	background: var(--cat-colour);
+	padding: 0 0.5em;
+	line-height: 1.5;
+	align-self: flex-start;
 }
 
 nav {
@@ -353,6 +361,17 @@ footer {
 	background: var(--pattern-hex), var(--bg-transcluscent);
 }
 
+.command-ordering-tabs {
+	display: flex;
+	gap: 1em;
+	margin-bottom: 2em;
+}
+.command-ordering-tabs button {
+	flex: 1;
+	font-size: 1.1em;
+	padding: 0.5em;
+}
+.command-ordering-tabs button.active { font-weight: bold; }
 
 .command-list {
 	margin: 0;
@@ -363,11 +382,16 @@ footer {
 .command-list > li > a {
 	text-decoration: none;
 }
+.command-list.coloured code { background: var(--cat-colour); }
 .command-list code {
 	display: block;
 	padding: 0.5em;
 	box-sizing: border-box;
-	margin: 0.5em;
+	margin: 0.5em 0;
+}
+
+.filterable {
+	border: 0.2em solid var(--cat-colour);
 }
 
 

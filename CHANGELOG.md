@@ -29,6 +29,8 @@ Note to self: See the bottom of this file for the release template text.
      - `moretrees:apple_tree_sapling_ongen` from `apple` to `apple_moretrees`
      - Add `plum` → `plumtree:sapling`
      - Add `holly` ⇒ `hollytree:sapling`
+ - `//replacemix`: Improve error handling to avoid crashes (thanks, Jonathon for reporting via Discord!)
+ - Cloud wand: Improve chat message text
 
 
 ## v1.12: The selection tools update (26th June 2021)

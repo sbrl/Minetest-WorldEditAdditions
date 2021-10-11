@@ -53,6 +53,9 @@ worldedit.register_command("replacemix", {
 				end
 			end
 		end
+		if not target_node then return false, "Error: No target node specified." end
+		if not last_node_name then return false, "Error: At least 1 replace node must be specified." end
+		
 		if not replace_nodes[last_node_name] then
 			replace_nodes[last_node_name] = 1
 		end

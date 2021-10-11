@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -e;
 
-current_branch="$(git rev-parse --abbrev-ref HEAD)";
+# current_branch="$(git rev-parse --abbrev-ref HEAD)";
+is_main="$(git branch --contains HEAD | awk '/HEAD/ { next } /main/ { print $1 }')";
 
-if [[ "${1}" == "ci" ]] && [[ "${current_branch}" != "main" ]]; then
-	echo "Skipping build, because we are currently on the branch '${current_branch}', and we only deploy on the 'main' branch.";
+if [[ "${1}" == "ci" ]] && [[ ! -z "${is_main}" ]]; then
+	echo "Skipping build, because this commit does not appear to be on the 'main' branch, and we only deploy commits on the 'main' branch.";
 fi
 
 #  ██████ ██     ██████  ██    ██ ██ ██      ██████
@@ -43,7 +44,7 @@ log_msg() {
 # $1 - Command name to check for
 check_command() {
 	set +e;
-	which $1 >/dev/null 2>&1; exit_code=$?
+	command -v "$1" >/dev/null 2>&1; exit_code="$?";
 	if [[ "${exit_code}" -ne 0 ]]; then
 		log_msg "Error: Couldn't locate $1. Make sure it's installed and in your path.";
 	fi
