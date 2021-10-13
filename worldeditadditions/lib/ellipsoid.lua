@@ -18,7 +18,6 @@ function worldeditadditions.ellipsoid(position, radius, target_node, hollow)
 	local data = manip:get_data()
 	
 	local node_id = minetest.get_content_id(target_node)
-	local node_id_air = minetest.get_content_id("air")
 	
 	local stride_z, stride_y = area.zstride, area.ystride
 	
