@@ -4,6 +4,14 @@
 -- ██      ██      ██      ██ ██           ██ ██
 -- ███████ ███████ ███████ ██ ██      ███████ ███████
 
+--- Fills an ellipsoidal area around the given position with the target node.
+-- The resulting ellipsoid may optionally be hollow (in which case
+-- nodes inside the ellipsoid are left untouched).
+-- @param	position	Vector3		The centre position of the ellipsoid.
+-- @param	radius		Vector3		The radius of the ellipsoid in all 3 dimensions.
+-- @param	target_node	string		The name of the node to use to fill the ellipsoid.
+-- @param	hollow		bool		Whether the ellipsoid should be hollow or not.
+-- @returns	number		The number of nodes filled to create the (optionally hollow) ellipsoid. This number will be lower with hollow ellipsoids, since the internals of an ellipsoid aren't altered.
 function worldeditadditions.ellipsoid(position, radius, target_node, hollow)
 	-- position = { x, y, z }
 	local hollow_inner_radius = {
