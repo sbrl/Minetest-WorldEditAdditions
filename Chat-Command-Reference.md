@@ -42,6 +42,18 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 //hollowellipsoid 21 11 41 stone
 ```
 
+### `//ellipsoid2 [<node_name:dirt> [h[ollow]]]`
+Creates an (optionally hollow) solid ellipsoid that fills the defined region.
+
+```weacmd
+//ellipsoid2
+//ellipsoid2 ice
+//ellipsoid2 air
+//ellipsoid2 steelblock h
+//ellipsoid2 papyrus hollow
+```
+
+
 ### `//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`
 Creates a solid torus at position 1 with the specified major and minor radii. The major radius is the distance from the centre of the torus to the centre of the circle bit, and the minor radius is the radius of the circle bit.
 

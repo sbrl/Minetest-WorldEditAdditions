@@ -21,6 +21,7 @@ dofile(we_c.modpath.."/player_notify_suppress.lua")
 
 dofile(we_c.modpath.."/commands/convolve.lua")
 dofile(we_c.modpath.."/commands/ellipsoid.lua")
+dofile(we_c.modpath.."/commands/ellipsoid2.lua")
 dofile(we_c.modpath.."/commands/erode.lua")
 dofile(we_c.modpath.."/commands/fillcaves.lua")
 dofile(we_c.modpath.."/commands/floodfill.lua")

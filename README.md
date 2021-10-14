@@ -29,6 +29,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 
 ### Geometry
  - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid)
+ - [`//ellipsoid2 <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid2)
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://worldeditadditions.mooncarrot.space/Reference/#hollowellipsoid)
  - [`//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`](https://worldeditadditions.mooncarrot.space/Reference/#torus)
  - [`//hollowtorus <major_radius> <minor_radius> <node_name> [<axes=xy>]`](https://worldeditadditions.mooncarrot.space/Reference/#hollowtorus)
