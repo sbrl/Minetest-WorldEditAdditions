@@ -21,10 +21,15 @@
 	"homepage": "https://github.com/sbrl/Minetest-WorldEditAdditions#readme",
 	"devDependencies": {
 		"@11ty/eleventy": "^0.12.1",
-		"@11ty/eleventy-img": "^0.10.0",
 		"chroma-js": "^2.1.2",
+		"columnify": "^1.5.4",
+		"debug": "^4.3.2",
+		"imagickal": "^5.0.1",
 		"markdown-it-prism": "^2.2.1",
-		"phin": "^3.6.0"
+		"p-memoize": "^6.0.1",
+		"p-queue": "^7.1.0",
+		"phin": "^3.6.0",
+		"pretty-ms": "^7.0.1"
 	},
 	"dependencies": {
 		"html-entities": "^2.3.2"
