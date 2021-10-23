@@ -25,7 +25,6 @@ function worldeditadditions.ellipsoid2(pos1, pos2, target_node, hollow)
 	}
 	
 	-- Fetch the nodes in the specified area
-	-- OPTIMIZE: We should be able to calculate a more efficient box-area here
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
 	
