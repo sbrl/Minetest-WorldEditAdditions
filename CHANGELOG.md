@@ -29,6 +29,7 @@ Note to self: See the bottom of this file for the release template text.
      - Add `holly` ⇒ `hollytree:sapling`
  - `//replacemix`: Improve error handling to avoid crashes (thanks, Jonathon for reporting via Discord!)
  - Cloud wand: Improve chat message text
+ - Fix `bonemeal` mod detection to look for the global `bonemeal`, not whether the `bonemeal` mod name has been loaded
 
 
 ## v1.12: The selection tools update (26th June 2021)

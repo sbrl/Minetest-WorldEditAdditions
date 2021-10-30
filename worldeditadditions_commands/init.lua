@@ -55,7 +55,7 @@ dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/extra/basename.lua")
 
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
-if minetest.get_modpath("bonemeal") then
+if minetest.global_exists("bonemeal") then
 	dofile(we_c.modpath.."/commands/bonemeal.lua")
 	dofile(we_c.modpath.."/commands/forest.lua")
 else
