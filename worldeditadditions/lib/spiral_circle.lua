@@ -71,7 +71,7 @@ function worldeditadditions.spiral_circle(pos1, pos2, target_node, interval_init
 		if angle > math.pi / 2 then
 			acceleration_constant = (interval/angle * acceleration) * step
 		end
-		radius = 1 + interval*(angle / (math.pi*2))
+		radius = 1 + math.floor(interval*(angle / (math.pi*2)), 0)
 		interval = interval_initial + acceleration_constant
 		
 		
