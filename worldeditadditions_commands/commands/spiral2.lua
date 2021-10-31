@@ -36,21 +36,21 @@ worldedit.register_command("spiral2", {
 		if #parts >= 1 then
 			interval = tonumber(parts[1])
 			if not interval then
-				return false, "Error: Invalid interval value '"..parts[1].."'. Interval values must be integers."
+				return false, "Error: Invalid interval value '"..tostring(parts[1]).."'. Interval values must be integers."
 			end
 			table.remove(parts, 1)
 		end
 		if #parts >= 1 then
 			acceleration = tonumber(parts[1])
 			if not acceleration then
-				return false, "Error: Invalid acceleration value '"..parts[1].."'. Acceleration values must be integers."
+				return false, "Error: Invalid acceleration value '"..tostring(parts[1]).."'. Acceleration values must be integers."
 			end
 			table.remove(parts, 1)
 		end
 		
 		local target_node_norm = worldedit.normalize_nodename(target_node)
 		if not target_node_norm then
-			return false, "Error: Unknown node '"..target_node_norm.."'."
+			return false, "Error: Unknown node '"..tostring(target_node).."'."
 		end
 		
 		return true, mode, target_node_norm, interval, acceleration
