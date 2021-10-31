@@ -361,6 +361,22 @@ function Vector3.max(pos1, pos2)
 	)
 end
 
+--- Given 2 angles and a length, return a Vector3 pointing in that direction.
+-- Consider a sphere, with the 2 angles defining a point on the sphere's surface.
+-- This function returns that point as a Vector3.
+-- @source	https://math.stackexchange.com/a/1881767/221181
+-- @param	angle_x		number	The X angle.
+-- @param	angle_y		number	The Y angle.
+-- @param	length		number	The radius of the sphere in question.
+-- @returns	Vector3		The point on the sphere defined by the aforementioned parameters.
+function Vector3.fromBearing(angle_x, angle_y, length)
+	return Vector3.new( -- X and Y swapped
+		length * math.cos(angle_x),
+		length * math.sin(angle_x) * math.sin(angle_y),
+		length * math.sin(angle_x) * math.cos(angle_y)
+	)
+end
+
 
 
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████
