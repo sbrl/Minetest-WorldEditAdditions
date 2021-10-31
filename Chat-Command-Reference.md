@@ -160,7 +160,7 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 
 
 ### `//spiral2 [<circle|square>] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]`
-Generates both square and circular spiral shapes with the given `<replace_node>`. The interval defines the gap between the spiral in nodes, and the acceleration defines by how much the interval should be increased (a value of 1 means 1 node per revolution).
+Generates both square and circular spiral shapes with the given `<replace_node>` - defaulting to square spirals. The interval defines the gap between the spiral in nodes, and the acceleration defines by how much the interval should be increased (a value of 1 means 1 node per revolution).
 
 ```
 //spiral2

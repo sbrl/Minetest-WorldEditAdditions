@@ -4,17 +4,17 @@ local Vector3 = wea.Vector3
 
 worldedit.register_command("spiral2", {
 	params = "[<circle|square>] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]",
-	description = "Generates a spiral that fills the defined region using the specified replace node. The spiral is either circular (default) or square in shape. The interval specifies the distance between the walls of the spiral, and the acceleration specifies how quickly this value should increase.",
+	description = "Generates a spiral that fills the defined region using the specified replace node. The spiral is either square (default) or circular in shape. The interval specifies the distance between the walls of the spiral, and the acceleration specifies how quickly this value should increase.",
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		params_text = wea.trim(params_text)
-		if params_text == "" then return true, "circle", "dirt", 3, 0 end
+		if params_text == "" then return true, "square", "dirt", 3, 0 end
 		
 		local parts = wea.split_shell(params_text)
 		
-		local mode = "circle"
+		local mode = "square"
 		local target_node = "dirt"
 		local target_node_found = false
 		local interval = 3
