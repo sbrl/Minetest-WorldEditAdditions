@@ -146,10 +146,11 @@ Additional examples:
 ```
 
 
-### `//walls <replace_node> [<thickness=1>]`
-Creates vertical walls of `<replace_node>` around the inside edges of the defined region, optionally specifying the thickness thereof.
+### `//walls [<replace_node=dirt> [<thickness=1>]]`
+Creates vertical walls of `<replace_node>` around the inside edges of the defined region, optionally specifying the thickness thereof. Defaults to a replace node of `dirt` and a wall thickness of 1.
 
 ```weacmd
+//walls
 //walls dirt
 //walls stone
 //walls goldblock
