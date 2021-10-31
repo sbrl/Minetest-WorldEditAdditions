@@ -28,7 +28,7 @@ function worldeditadditions.spiral_square(pos1, pos2, target_node, interval, acc
 	local volume = pos2:subtract(pos1)
 	local volume_half = volume:divide(2)
 	
-	print("DEBUG:spiral_square | pos1: "..pos1..", pos2: "..pos2..", target_node: "..target_node)
+	print("DEBUG:spiral_square | pos1: "..pos1..", pos2: "..pos2..", target_node: "..target_node, "interval:"..interval..", acceleration: "..acceleration)
 	
 	
 	-- Fetch the nodes in the specified area
@@ -39,13 +39,14 @@ function worldeditadditions.spiral_square(pos1, pos2, target_node, interval, acc
 	
 	local count = 0 -- The number of nodes replaced
 	
-	local centre = pos2:subtract(pos1):floor()
+	local centre = pos2:subtract(pos1):floor():divide(2):add(pos1)
 	
-	local pos_current = centre:clone()
-	local pos_corner_last = pos_current:clone()
+	local pos_current = centre:clone():floor()
 	local side_length = 0
 	local direction = Vector3.new(1, 0, 0)
-	local side_length_max = interval
+	local side_length_max = interval + 1
+	local sides_complete = 0
+	-- local sides_acc = 0
 	
 	while pos_current:is_contained(pos1, pos2) do
 		
@@ -57,8 +58,16 @@ function worldeditadditions.spiral_square(pos1, pos2, target_node, interval, acc
 		pos_current = pos_current:add(direction)
 		side_length = side_length + 1
 		
-		if side_length > side_length_max then
-			side_length_max = side_length_max + interval + acceleration
+		print("DEBUG cpos", pos_current, "side_length", side_length, "side_length_max", side_length_max, "direction", direction)
+		
+		if side_length >= side_length_max then
+			sides_complete = sides_complete + 1
+			-- sides_acc = sides_acc + 1
+			if sides_complete % 2 == 0 then
+				-- sides_acc = 0
+				side_length_max = side_length_max + interval + acceleration + 1
+			end
+			side_length = 0
 			
 			if direction.x == 0 and direction.z == 1 then
 				direction.x = 1

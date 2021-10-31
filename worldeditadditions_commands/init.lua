@@ -35,6 +35,7 @@ dofile(we_c.modpath.."/commands/replacemix.lua")
 dofile(we_c.modpath.."/commands/scale.lua")
 dofile(we_c.modpath.."/commands/torus.lua")
 dofile(we_c.modpath.."/commands/walls.lua")
+dofile(we_c.modpath.."/commands/spiral2.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 
