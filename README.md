@@ -38,6 +38,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//hollow [<wall_thickness>]`](https://worldeditadditions.mooncarrot.space/Reference/#hollow)
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](https://worldeditadditions.mooncarrot.space/Reference/#maze)
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](https://worldeditadditions.mooncarrot.space/Reference/#maze3d)
+ - [``//spiral2 [<circle|square>] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]``](https://worldeditadditions.mooncarrot.space/Reference/#spiral2)
 
 ### Misc
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://worldeditadditions.mooncarrot.space/Reference/#replacemix)

@@ -159,6 +159,19 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 ```
 
 
+### `//spiral2 [<circle|square>] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]`
+Generates both square and circular spiral shapes with the given `<replace_node>`. The interval defines the gap between the spiral in nodes, and the acceleration defines by how much the interval should be increased (a value of 1 means 1 node per revolution).
+
+```
+//spiral2
+//spiral2 circle stone
+//spiral2 square
+//spiral2 circle
+//spiral2 glass 5
+//spiral2 square desert_sand 3 1
+```
+
+
 
 ## Misc
 <!--
@@ -171,7 +184,7 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 
 
 ### `//floodfill [<replace_node> [<radius>]]`
-Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
+Floods all connected nodes of the same type starting at _pos1_ with `<replace_node>` (which defaults to `water_source`), in a sphere with a radius of `<radius>` (which defaults to 50).
 
 ```weacmd
 //floodfill
