@@ -14,11 +14,11 @@
 	
 	<section id="filter" class="panel-generic">
 		<div class="form-item bigsearch">
-			<label for="input-filter">Filter:</label>
-			<input type="search" id="input-filter" />
+			<label for="input-filter" >Filter:</label>
+			<input type="search" id="input-filter" placeholder="Start typing to filter." />
 		</div>
 		<div class="form-item centre checkbox">
-			<input type="checkbox" id="input-searchall" placeholder="Start typing to filter the sections." />
+			<input type="checkbox" id="input-searchall" />
 			<label for="input-searchall" title="If unchecked, only the title will be searched.">Search content</label>
 		</div>
 	</section>
@@ -128,6 +128,7 @@
 		function do_filter() {
 			let el_search = document.querySelector("#input-filter");
 			let el_searchall = document.querySelector("#input-searchall");
+			localStorage.setItem("commandlist-searchall", el_searchall.checked);
 			/* Filterable items
 			 - Sections
 			 - Commands in the command list
@@ -165,6 +166,22 @@
 				el_next.classList.remove("visible", "hidden");
 				el_next.classList.add(show ? "visible" : "hidden");
 			}
+			
+			let commandlist_is_categorical = document.querySelector("button.active[data-mode=categorical]") !== null;
+			if(commandlist_is_categorical) {
+				let container = document.querySelector(".command-container");
+				for(let i = 0; i < container.children.length; i++) {
+					if(container.children[i].nodeName.toLowerCase() === "ul") {
+						let class_name = "visible";
+						if(container.children[i].querySelector("li.visible") === null)
+							class_name = "hidden";
+						if(i > 0) {
+							container.children[i-1].classList.remove("visible", "hidden");
+							container.children[i-1].classList.add(class_name);
+						}
+					}
+				}
+			}
 		}
 		
 		window.addEventListener("load", (_event) => {
@@ -180,6 +197,9 @@
 				els_cats[i].addEventListener("click", handle_display_mode);
 				els_cats[i].addEventListener("touchend", handle_display_mode);
 			}
+			
+			if(localStorage.getItem("commandlist-searchall") !== null)
+				el_searchall.checked = localStorage.getItem("commandlist-searchall") === "true";
 			
 			if(localStorage.getItem("commandlist-displaymode") !== null)
 				set_display_mode(localStorage.getItem("commandlist-displaymode"))

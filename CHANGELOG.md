@@ -12,7 +12,9 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//sshift`  (_selection shift_) - WorldEdit cuboid manipulator replacements implemented by @VorTechnix.
  - Add `//noise2d` for perturbing terrain with multiple different noise functions
  - Add `//noiseapply2d` for running commands on columns where a noise value is over a threshold
- - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues
+ - Add `//ellipsoid2` which creates an ellipsoid that fills the defined region
+ - Add `//spiral2` for creating both square and circular spirals
+ - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues [code quality from now on will be significantly improved]
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
  - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
  - `//bonemeal`: Add optional node list constraint
@@ -31,6 +33,8 @@ Note to self: See the bottom of this file for the release template text.
      - Add `holly` ⇒ `hollytree:sapling`
  - `//replacemix`: Improve error handling to avoid crashes (thanks, Jonathon for reporting via Discord!)
  - Cloud wand: Improve chat message text
+ - Fix `bonemeal` mod detection to look for the global `bonemeal`, not whether the `bonemeal` mod name has been loaded
+ - `//walls`: Prevent crash if not parameters are specified by defaulting to `dirt` as the replace_node
 
 
 ## v1.12: The selection tools update (26th June 2021)

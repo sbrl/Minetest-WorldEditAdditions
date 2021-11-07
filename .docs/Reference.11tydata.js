@@ -1,5 +1,12 @@
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
+
+const columnify = require("columnify");
+const htmlentities = require("html-entities");
+
+const a = require("./lib/Ansi.js");
 const parse_sections = require("./lib/parse_sections.js");
 
 let { sections, categories } = parse_sections(fs.readFileSync(
@@ -15,11 +22,20 @@ sections = sections.slice(1).sort((a, b) => a.title.replace(/^\/+/g, "").localeC
 
 
 console.log(`REFERENCE SECTION TITLES`)
-console.log(sections
-	.map(s => [s.category, s.title].join(`\t`)).join(`\n`));
+console.log(columnify(sections.map(s => { return {
+	category: `${a.hicol}${a.fyellow}${s.category}${a.reset}`,
+	command: `${a.hicol}${a.fmagenta}${htmlentities.decode(s.title)}${a.reset}`
+} })));
+// console.log(sections
+// 	.map(s => `${a.fyellow}${a.hicol}${s.category}${a.reset}\t${a.fmagenta}${a.hicol}${s.title}${a.reset}`).join(`\n`));
 console.log(`************************`);
 
-console.log(`REFERENCE SECTION COLOURS`, categories);
+console.log(`REFERENCE SECTION COLOURS`);
+console.log(columnify(Array.from(categories).map(el => { return {
+	category: el[0],
+	colour: el[1]
+} })));
+
 module.exports = {
 	layout: "theme.njk",
 	title: "Reference",

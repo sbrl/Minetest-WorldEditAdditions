@@ -2,7 +2,6 @@ local we_c = worldeditadditions_core
 function we_c.register_command(name, def)
 	local def = table.copy(def)
 	local success, err = we_c.check_command(name, def)
-
 	if not success then
 		return false, err
 	end

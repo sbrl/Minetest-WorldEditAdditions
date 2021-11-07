@@ -21,6 +21,7 @@ dofile(we_c.modpath.."/player_notify_suppress.lua")
 
 dofile(we_c.modpath.."/commands/convolve.lua")
 dofile(we_c.modpath.."/commands/ellipsoid.lua")
+dofile(we_c.modpath.."/commands/ellipsoid2.lua")
 dofile(we_c.modpath.."/commands/erode.lua")
 dofile(we_c.modpath.."/commands/fillcaves.lua")
 dofile(we_c.modpath.."/commands/floodfill.lua")
@@ -34,6 +35,7 @@ dofile(we_c.modpath.."/commands/replacemix.lua")
 dofile(we_c.modpath.."/commands/scale.lua")
 dofile(we_c.modpath.."/commands/torus.lua")
 dofile(we_c.modpath.."/commands/walls.lua")
+dofile(we_c.modpath.."/commands/spiral2.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 
@@ -53,7 +55,7 @@ dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/extra/basename.lua")
 
 -- Don't registry the //bonemeal command if the bonemeal mod isn't present
-if minetest.get_modpath("bonemeal") then
+if minetest.global_exists("bonemeal") then
 	dofile(we_c.modpath.."/commands/bonemeal.lua")
 	dofile(we_c.modpath.."/commands/forest.lua")
 else

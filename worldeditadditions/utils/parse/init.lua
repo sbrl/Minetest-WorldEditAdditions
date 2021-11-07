@@ -4,7 +4,9 @@
 -- ██      ██   ██ ██   ██      ██ ██
 -- ██      ██   ██ ██   ██ ███████ ███████
 
-worldeditadditions.parse = {}
+worldeditadditions.parse = {
+	axes = dofile(worldeditadditions.modpath.."/utils/parse/axes.lua")
+}
 
 dofile(worldeditadditions.modpath.."/utils/parse/chance.lua")
 dofile(worldeditadditions.modpath.."/utils/parse/map.lua")

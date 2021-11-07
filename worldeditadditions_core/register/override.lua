@@ -2,7 +2,7 @@ local we_c = worldeditadditions_core
 function we_c.override_command(name, def)
 	local def = table.copy(def)
 	local success, err = we_c.check_command(name, def)
-
+	
 	if not success then
 		error(err)
 		return false

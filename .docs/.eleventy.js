@@ -1,12 +1,14 @@
+"use strict";
+
 const os = require("os");
 const fs = require("fs");
 const path = require("path");
 
+const debug = require("debug");
 const htmlentities = require("html-entities");
 const phin = require("phin");
 
-const Image = require("@11ty/eleventy-img");
-
+const HTMLPicture = require("./lib/HTMLPicture.js");
 
 var nextid = 0;
 
@@ -16,46 +18,22 @@ const image_filename_format = (_id, src, width, format, _options) => {
 	return `${name}-${width}w.${format}`;
 };
 
-function image_metadata_log(metadata, source) {
-	for(let format in metadata) {
-		for(let img of metadata[format]) {
-			console.log(`${source.padEnd(10)} ${format.padEnd(5)} ${`${img.width}x${img.height}`.padEnd(10)} ${img.outputPath}`);
-		}
-	}
-}
-
-async function shortcode_image(src, alt, classes = "") {
-	let metadata = await Image(src, {
-		widths: [300, null],
-		formats: ["avif", "jpeg"],
-		outputDir: `./_site/img/`,
-		filenameFormat: image_filename_format
-	});
-	image_metadata_log(metadata, `IMAGE`);
+async function shortcode_image(src, alt) {
 	
-	let imageAttributes = {
-		class: classes,
-		alt: htmlentities.encode(alt),
-		sizes: Object.values(metadata)[0].map((el) => `${el.width}w`).join(" "),
-		loading: "lazy",
-		decoding: "async",
-	};
-
-	// You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
-	return Image.generateHTML(metadata, imageAttributes);
+	return HTMLPicture(
+		src, alt,
+		`./_site/img`, `/img`
+	);
 }
 
 async function shortcode_image_url(src) {
-	let metadata = await Image(src, {
-		widths: [ null ],
-		formats: [ "jpeg" ],
-		outputDir: `./_site/img/`,
-		filenameFormat: image_filename_format
-	});
-	image_metadata_log(metadata, `IMAGE_URL`);
+	const src_parsed = path.parse(src);
+	const target = path.join(`./_site/img`, src_parsed.base);
+	if(!fs.existsSync(path.dirname(target)))
+	await fs.promises.mkdir(target_dir, { recursive: true });
+	await fs.promises.copyFile(src, target);
 	
-	let data = metadata.jpeg[metadata.jpeg.length - 1];
-	return data.url;
+	return path.join(`/img`, src_parsed.base);
 }
 
 async function shortcode_image_urlpass(src) {
@@ -82,14 +60,14 @@ async function shortcode_gallerybox(content, src, idthis, idprev, idnext) {
 }
 
 async function fetch(url) {
-	let package = JSON.parse(await fs.promises.readFile(
+	const pkg_obj = JSON.parse(await fs.promises.readFile(
 		path.join(__dirname, "package.json"), "utf8"
 	));
 	
 	return (await phin({
 		url,
 		headers: {
-			"user-agent": `WorldEditAdditionsStaticBuilder/${package.version} (Node.js/${process.version}; ${os.platform()} ${os.arch()}) eleventy/${package.devDependencies["@11ty/eleventy"].replace(/\^/, "")}`
+			"user-agent": `WorldEditAdditionsStaticBuilder/${pkg_obj.version} (Node.js/${process.version}; ${os.platform()} ${os.arch()}) eleventy/${pkg_obj.devDependencies["@11ty/eleventy"].replace(/\^/, "")}`
 		},
 		followRedirects: true,
 		parse: "string"

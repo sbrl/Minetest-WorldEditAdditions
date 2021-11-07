@@ -21,17 +21,17 @@ function worldeditadditions.wire_box(pos1,pos2,node)
 	local counts = { replaced = 0 }
 	
 	for z = ps1.z,ps2.z do
-		for k,y in pairs({pos1.y,pos2.y}) do
-			for k,x in pairs({pos1.x,pos2.x}) do
+		for _j,y in pairs({pos1.y,pos2.y}) do
+			for _k,x in pairs({pos1.x,pos2.x}) do
 				data[area:index(x, y, z)] = node_id_replace
 				counts.replaced = counts.replaced + 1
 			end
 		end
 	end
 	if math.abs(ps2.y-ps1.y) > 1 then
-		for k,z in pairs({pos1.z,pos2.z}) do
+		for _j,z in pairs({pos1.z,pos2.z}) do
 			for y = pos1.y+1,pos2.y-1 do
-				for k,x in pairs({pos1.x,pos2.x}) do
+				for _k,x in pairs({pos1.x,pos2.x}) do
 					data[area:index(x, y, z)] = node_id_replace
 					counts.replaced = counts.replaced + 1
 				end
@@ -39,8 +39,8 @@ function worldeditadditions.wire_box(pos1,pos2,node)
 		end
 	end
 	if math.abs(ps2.x-ps1.x) > 1 then
-		for k,z in pairs({pos1.z,pos2.z}) do
-			for k,y in pairs({pos1.y,pos2.y}) do
+		for _j,z in pairs({pos1.z,pos2.z}) do
+			for _k,y in pairs({pos1.y,pos2.y}) do
 				for x = pos1.x+1,pos2.x-1 do
 					data[area:index(x, y, z)] = node_id_replace
 					counts.replaced = counts.replaced + 1

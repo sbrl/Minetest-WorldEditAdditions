@@ -1,5 +1,5 @@
 function worldeditadditions_core.chatcommand_handler(cmd_name, name, param)
-	local def = assert(worldedit.registered_commands[cmd_name])
+	local def = assert(worldedit.registered_commands[cmd_name], "Error: Failed to locate worldedit command definition for command '"..name.."' (this is probably a bug).")
 
 	if def.require_pos == 2 then
 		local pos1, pos2 = worldedit.pos1[name], worldedit.pos2[name]
