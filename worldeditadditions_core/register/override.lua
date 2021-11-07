@@ -1,6 +1,6 @@
 local we_c = worldeditadditions_core
 function we_c.override_command(name, def)
-	local success, def = we_c.check(def)
+	local success, def = we_c.check(name, def)
 
 	if not success then
 		return false, def

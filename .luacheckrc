@@ -6,6 +6,7 @@ exclude_files = {
 	"worldeditadditions/utils/bit.lua"
 }
 
+files["worldeditadditions_core/register/check.lua"] = { read_globals = { "table" } }
 
 ignore = {
 	"631", "61[124]",
