@@ -45,11 +45,27 @@ describe("parse_abs_axis_name", function()
 			result
 		)
 	end)
-	it("should work with negative x", function()
+	it("should work with negative z", function()
 		local success, result = parse_abs_axis_name("-z")
 		assert.is_true(success)
 		assert.are.same(
 			Vector3.new(0, 0, -1),
+			result
+		)
+	end)
+	it("should work with multiple axes -x y", function()
+		local success, result = parse_abs_axis_name("-xy")
+		assert.is_true(success)
+		assert.are.same(
+			Vector3.new(-1, 1, 0),
+			result
+		)
+	end)
+	it("should work with multiple axes z-y", function()
+		local success, result = parse_abs_axis_name("z-y")
+		assert.is_true(success)
+		assert.are.same(
+			Vector3.new(0, -1, 1),
 			result
 		)
 	end)
