@@ -1,11 +1,12 @@
--- ███████ ██████  ███████ ██
--- ██      ██   ██ ██      ██
--- ███████ ██████  █████   ██
---      ██ ██   ██ ██      ██
--- ███████ ██   ██ ███████ ███████
+-- ███████ ███████ ██   ██ ██ ███████ ████████
+-- ██      ██      ██   ██ ██ ██         ██
+-- ███████ ███████ ███████ ██ █████      ██
+--      ██      ██ ██   ██ ██ ██         ██
+-- ███████ ███████ ██   ██ ██ ██         ██
 local wea = worldeditadditions
+local v3 = worldeditadditions.Vector3
 local function parse_with_name(name,args)
-	local vec, tmp = vector.new(0, 0, 0), {}
+	local vec, tmp = v3.new(0, 0, 0), {}
 	local find, _, i = {}, 0, 0
 	repeat
 		_, i, tmp.proc = args:find("([%l%s+-]+%d+)%s*", i)
@@ -21,32 +22,28 @@ local function parse_with_name(name,args)
 	until not args:find("([%l%s+-]+%d+)%s*", i)
 	return true, vec
 end
-worldedit.register_command("srel", {
-	params = "<axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]",
-	description = "Set WorldEdit region position 2 at set distances along 3 axes.",
+worldedit.register_command("sshift", {
+	params = "<axis1> <distance1> [<axis2> <distance2> [<axis3> <distance3>]]",
+	description = "Shift the WorldEdit region in 3 dimensions.",
 	privs = { worldedit = true },
-	require_pos = 0,
+	require_pos = 2,
 	parse = function(params_text)
 		if params_text:match("([%l%s+-]+%d+)") then return true, params_text
 		else return false, "No acceptable params found" end
 	end,
 	func = function(name, params_text)
-		local ret = ""
 		local _, vec = parse_with_name(name,params_text)
 		if not _ then return false, vec end
 		
-		if not worldedit.pos1[name] then
-			local pos = vector.add(wea.player_vector(name), vector.new(0.5,-0.5,0.5))
-			wea.vector.floor(pos)
-			worldedit.pos1[name] = pos
-			worldedit.mark_pos1(name)
-			ret = "position 1 set to " .. minetest.pos_to_string(pos) .. ", "
-		end
+		local pos1 = vec:add(worldedit.pos1[name])
+		worldedit.pos1[name] = pos1
+		worldedit.mark_pos1(name)
 		
-		local p2 = vector.add(vec,worldedit.pos1[name])
-		worldedit.pos2[name] = p2
+		local pos2 = vec:add(worldedit.pos2[name])
+		worldedit.pos2[name] = pos2
 		worldedit.mark_pos2(name)
-		return true, ret .. "position 2 set to " .. minetest.pos_to_string(p2)
+		
+		return true, "Region shifted by  " .. (vec.x + vec.y + vec.z) .. " nodes."
 	end,
 })
 

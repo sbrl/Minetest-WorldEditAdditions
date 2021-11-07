@@ -9,6 +9,8 @@ worldeditadditions = {}
 local wea = worldeditadditions
 wea.modpath = minetest.get_modpath("worldeditadditions")
 
+wea.Set = dofile(wea.modpath.."/utils/set.lua")
+
 wea.Vector3 = dofile(wea.modpath.."/utils/vector3.lua")
 wea.Mesh, wea.Face = dofile(wea.modpath.."/utils/mesh.lua")
 
@@ -30,7 +32,7 @@ dofile(wea.modpath.."/utils/nodes.lua")
 dofile(wea.modpath.."/utils/node_identification.lua")
 dofile(wea.modpath.."/utils/terrain.lua")
 dofile(wea.modpath.."/utils/raycast_adv.lua") -- For the farwand
-dofile(wea.modpath.."/utils/axes.lua")
+dofile(wea.modpath.."/utils/player.lua") -- Player info functions
 
 dofile(wea.modpath.."/lib/compat/saplingnames.lua")
 
@@ -68,5 +70,9 @@ dofile(wea.modpath.."/lib/airapply.lua")
 dofile(wea.modpath.."/lib/noiseapply2d.lua")
 
 dofile(wea.modpath.."/lib/subdivide.lua")
-dofile(wea.modpath.."/lib/selection/stack.lua")
-dofile(wea.modpath.."/lib/selection/cloud.lua")
+
+dofile(wea.modpath.."/lib/selection/init.lua") -- Helpers for selections
+
+dofile(wea.modpath.."/lib/wireframe/corner_set.lua")
+dofile(wea.modpath.."/lib/wireframe/make_compass.lua")
+dofile(wea.modpath.."/lib/wireframe/wire_box.lua")

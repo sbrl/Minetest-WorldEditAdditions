@@ -7,6 +7,9 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//sfactor` (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
  - Add `//mface` (_measure facing_), `//midpos` (_measure middle position_), `//msize` (_measure size_), `//mtrig` (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
  - Add `//airapply` for applying commands only to air nodes in the defined region
+ - Add `//wcorner` (_wireframe corners_), `//wbox` (_wireframe box_), `//compass` (_wireframe compass_) - Wireframes implemented by @VorTechnix.
+ - Add `//for` for executing commands while changing their arguments - Implemented by @VorTechnix.
+ - Add `//sshift`  (_selection shift_) - WorldEdit cuboid manipulator replacements implemented by @VorTechnix.
  - Add `//noise2d` for perturbing terrain with multiple different noise functions
  - Add `//noiseapply2d` for running commands on columns where a noise value is over a threshold
  - Add `//ellipsoid2` which creates an ellipsoid that fills the defined region

@@ -193,7 +193,32 @@ Floods all connected nodes of the same type starting at _pos1_ with `<replace_no
 ```
 
 
-### `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
+## `//wbox <replace_node>`
+Sets the edges of the current selection to `<replace_node>`to create an outline of a rectangular prism. Useful for roughing in walls.
+
+```weacmd
+//wbox silver_sandstone
+//wbox dirt
+```
+
+## `//wcompass <replace_node> [<bead_node>]`
+Creates a compass around pos1 with a single node bead pointing north (+Z).
+
+```weacmd
+//wcompass meselamp
+//wcompass desert_cobble torch
+//wcompass gold diamond
+```
+
+## `//wcorner <replace_node>`
+Set the corners of the current selection to `<replace_node>`. Useful for outlining building sites and setting boundaries.
+
+```weacmd
+//wcorner glass
+//wcorner stone_with_iron
+```
+
+## `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
 Advanced version of [`//stretch` from WorldEdit](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#stretch-stretchx-stretchy-stretchz) that can scale both up and down at the same time by transparently splitting it into 2 different operations. Scaling up is *always* done before scaling down.
 
 Although the syntax looks complicated, it's really quite simple. The key concept to understand is that of the scale factor. It refers to how much the defined region should be scaled up or down by, and can be specified in multiple different ways:
@@ -285,6 +310,8 @@ This command is best explained with examples:
 ```
 
 The above functions just like `//replace` - nothing special going on here. It replaces all `dirt` nodes with `stone`.
+
+
 
 Let's make it more interesting:
 
@@ -728,17 +755,25 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 //scentre
 ```
 
-
-### `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
 //srel front 5
 //srel  y 12 right -2
 //srel left 3 up 5 -front 7
-//scube -z 12 -y -2 x -2
+//srel -z 12 -y -2 x -2
 ```
 
+## `//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
+
+```weacmd
+//sshift back 4
+//sshift right -2 up 2
+//sshift -left 2 z -7 -y -4
+//sshift -z 12 -y -2 x -2
+```
 
 ### `//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`
 Short for _selection make_. Modifies existing selection by moving pos2. Allows you to make the selection an odd or even length on one or more axes or set two or more axes equal to each other or the longest, shortest or average of them. Implementation thanks to @VorTechnix.
@@ -786,7 +821,7 @@ If `<base>` | `<mode>` becomes optional. If present it will be ignored.
 Name		| Description
 ------------|------------------
 `<target>`	| Specify axes to perform operation on (default= xz)|
-`<base>`: If `<operation>` == odd or even	| Does nothing 
+`<base>`: If `<operation>` == odd or even	| Does nothing
 `<base>`: If `<operation>` == equal			| Overrides `<mode>` and sets all `<target>` axes equal to itself
 
 ### `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`

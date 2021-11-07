@@ -39,18 +39,17 @@ dofile(we_c.modpath.."/commands/spiral2.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 
-dofile(we_c.modpath.."/commands/meta/multi.lua")
-dofile(we_c.modpath.."/commands/meta/many.lua")
-dofile(we_c.modpath.."/commands/meta/subdivide.lua")
-dofile(we_c.modpath.."/commands/meta/ellipsoidapply.lua")
-dofile(we_c.modpath.."/commands/meta/airapply.lua")
-dofile(we_c.modpath.."/commands/meta/noiseapply2d.lua")
+-- Meta Commands
+dofile(we_c.modpath.."/commands/meta/init.lua")
 
 -- Selection Tools
 dofile(we_c.modpath.."/commands/selectors/init.lua")
 
 -- Measure Tools
 dofile(we_c.modpath.."/commands/measure/init.lua")
+
+-- Wireframe
+dofile(we_c.modpath.."/commands/wireframe/init.lua")
 
 dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/extra/basename.lua")
@@ -83,9 +82,6 @@ worldedit.alias_command("naturalise", "layers")
 worldedit.alias_command("naturalize", "layers")
 
 worldedit.alias_command("flora", "bonemeal")
-
--- Selection Tools
-worldedit.alias_command("sfac", "sfactor")
 
 -- Measure Tools
 worldedit.alias_command("mcount", "count")

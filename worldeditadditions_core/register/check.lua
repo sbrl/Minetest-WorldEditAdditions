@@ -1,37 +1,26 @@
-function worldeditadditions_core.register_command(name, def)
-	-- TODO: Implement our own deep copy function here
-	-- Depending on a Minetest-specific addition here makes be very uneasy
-	-- ...especially since it's not obvious at first glance that this isn't a
-	-- core feature provided by Lua itself
-	local def = table.copy(def)
-	
-	assert(
-		def.privs,
-		"Error: No privileges specified in definition of command '"..name.."'."
-	)
-	
-	def.require_pos = def.require_pos or 0
-	
-	assert(def.require_pos >= 0 and def.require_pos < 3)
-	
-	if def.params == "" and not def.parse then
-		def.parse = function(params_text) return true end
-	else
-		assert(
-			def.parse,
-			"Error: No parameter parsing function specified, even though parameters were specified in definition of command '"..name.."'."
-		)
+function worldeditadditions_core.check_command(name, def)
+	if not (name and #name > 0) then
+		return false, "Error: No command name."
 	end
-	
-	assert(
-		def.nodes_needed == nil or type(def.nodes_needed) == "function",
-		"Error: nodes_needed must be either not specified or be a function that returns the number of nodes that could potentially be changed for a given set fo parsed parameters in definition of command '"..name.."'"
-	)
-	
-	assert(
-		def.func,
-		"Error: 'func' is not defined. It must be defined to the function to call to run the command in definition of command '"..name.."'."
-	)
-	
-	return def
+	if not def.privs then
+		return false, "Error: privs is nill. Expected table."
+	end
+	def.require_pos = def.require_pos or 0
+	if not (def.require_pos >= 0 and def.require_pos < 3) then
+		return false, "Error: require_pos must be greater than -1 and less than 3."
+	end
+	if not def.parse then
+		if def.params == "" then
+			def.parse = function(params_text) return true end
+		else
+			return false, "Error: parse function is invalid."
+		end
+	end
+	if not (def.nodes_needed == nil or type(def.nodes_needed) == "function") then
+		return false, "Error: nodes_needed must be nil or function."
+	end
+	if not def.func then
+		return false, "Error: main function is invalid."
+	end
+	return true
 end

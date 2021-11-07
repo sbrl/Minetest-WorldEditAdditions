@@ -66,11 +66,11 @@ function Vector3.sub(a, b) return Vector3.subtract(a, b) end
 -- Returns the result as a new vector.
 -- If 1 of the inputs is a number and the other a vector, then the number will
 -- be multiplied to each of the components of the vector.
--- 
+--
 -- If both of the inputs are vectors, then the components are multiplied
 -- by each other (NOT the cross product). In other words:
 -- a.x * b.x, a.y * b.y, a.z * b.z
--- 
+--
 -- @param	a	Vector3|number	The first item to multiply.
 -- @param	a	Vector3|number	The second item to multiply.
 -- @returns	Vector3				The result as a new Vector3 object.
@@ -263,7 +263,7 @@ end
 -- This enables convenient ingesting of positions from outside.
 -- @param	pos1	Vector3		The first vector to operate on.
 -- @param	pos2	Vector3		The second vector to operate on.
--- @returns	Vector3,Vector3		The 2 sorted vectors.
+-- @returns	Vector3,Vector3		The 2 sorted vectors (min, max).
 function Vector3.sort(pos1, pos2)
 	local pos1_new = Vector3.clone(pos1) -- This way we can accept non-Vector3 instances
 	local pos2_new = Vector3.clone(pos2) -- This way we can accept non-Vector3 instances
@@ -384,7 +384,7 @@ end
 -- ██    ██ ██████  █████   ██████  ███████    ██    ██    ██ ██████
 -- ██    ██ ██      ██      ██   ██ ██   ██    ██    ██    ██ ██   ██
 --  ██████  ██      ███████ ██   ██ ██   ██    ██     ██████  ██   ██
--- 
+--
 --  ██████  ██    ██ ███████ ██████  ██████  ██ ██████  ███████ ███████
 -- ██    ██ ██    ██ ██      ██   ██ ██   ██ ██ ██   ██ ██      ██
 -- ██    ██ ██    ██ █████   ██████  ██████  ██ ██   ██ █████   ███████

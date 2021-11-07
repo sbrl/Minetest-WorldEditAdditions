@@ -18,4 +18,8 @@ dofile(we_cm.."smake.lua")
 dofile(we_cm.."spop.lua")
 dofile(we_cm.."spush.lua")
 dofile(we_cm.."srect.lua")
+dofile(we_cm.."sshift.lua")
 dofile(we_cm.."sstack.lua")
+
+-- Aliases
+worldedit.alias_command("sfac", "sfactor")
