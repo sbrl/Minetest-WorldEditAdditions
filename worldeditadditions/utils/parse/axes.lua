@@ -1,6 +1,10 @@
-local wea = worldeditadditions
-local Vector3 = dofile(wea.modpath.."/utils/vector3.lua")
-
+local Vector3 
+if worldeditadditions then
+	local wea = worldeditadditions
+	Vector3 = dofile(wea.modpath.."/utils/vector3.lua")
+else
+	Vector3 = require("worldeditadditions.utils.vector3")
+end
 
 --[[
 parse_axes("6",name) == return Vector3.new(6,6,6), Vector3.new(-6,-6,-6)
@@ -34,6 +38,10 @@ local function parse_abs_axis_name(axis_name)
 	elseif axis_name:match("y") then result.y = 1 end
 	if axis_name:match("-z") then result.z = -1
 	elseif axis_name:match("z") then result.z = 1 end
+	
+	if Vector3.new() == result then
+		return false, "Error: Unknown axis_name '"..axis_name.."'."
+	end
 	
 	return true, result
 end
@@ -79,9 +87,8 @@ end
 --- Parses a token list of axes and counts into a Vector3.
 -- For example, "x 4" would become { x = 4, y = 0, z = 0 }, and "? 4 -z 10"
 -- might become { x = 4, y = 0, z = -10 }.
--- Note that the input here needs to be *pre split*. wea.split_shell is
+-- Note that the input here needs to be *post split*. wea.split_shell is
 -- recommended for this purpose.
--- Uses wea.parse.axis for parsing axis names.
 -- @param	token_list	string[]	A list of tokens to parse
 -- @param	facing_dir	PlayerDir	The direction the player is facing. Returned from wea.player_dir(name).
 -- @returns	Vector3,Vector3		A Vector3 pair generated from parsing out the input token list representing the delta change that can be applied to a defined pos1, pos2 region.
@@ -143,4 +150,9 @@ local function parse_axes(token_list, facing_dir)
 	return true, pos1, pos2
 end
 
-return parse_axes
+return {
+	parse_axes = parse_axes,
+	parse_axis_name = parse_axis_name,
+	parse_abs_axis_name = parse_abs_axis_name,
+	parse_relative_axis_name = parse_relative_axis_name
+}

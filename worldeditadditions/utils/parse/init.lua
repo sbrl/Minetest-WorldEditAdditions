@@ -4,8 +4,11 @@
 -- ██      ██   ██ ██   ██      ██ ██
 -- ██      ██   ██ ██   ██ ███████ ███████
 
+local axes = dofile(worldeditadditions.modpath.."/utils/parse/axes.lua")
+
 worldeditadditions.parse = {
-	axes = dofile(worldeditadditions.modpath.."/utils/parse/axes.lua")
+	axes = axes.parse_axes,
+	axis_name = axes.parse_axis_name
 }
 
 dofile(worldeditadditions.modpath.."/utils/parse/chance.lua")
