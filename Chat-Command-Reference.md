@@ -2,7 +2,7 @@
 
 This is the full chat command reference for WorldEditAdditions. Having trouble finding the section you want? Try the **[quick reference](https://github.com/sbrl/Minetest-WorldEditAdditions#quick-command-reference)** instead, which has links to back to sections of this document!
 
-Check out the reference on the new website - it's even searchable: <https://worldeditadditions.mooncarrot.space/Reference/>
+**Check out the reference on the new website - it's even searchable: <https://worldeditadditions.mooncarrot.space/Reference/>**
 
 Other useful links:
 
