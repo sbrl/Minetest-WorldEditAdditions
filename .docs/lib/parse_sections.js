@@ -1,3 +1,5 @@
+"use strict";
+
 const crypto = require("crypto");
 
 const htmlentities = require("html-entities");
@@ -5,7 +7,6 @@ const markdown = require("markdown-it")({
 	xhtmlOut: true
 });
 const chroma = require("chroma-js");
-
 
 const markdown_prism = require("markdown-it-prism");
 markdown.use(markdown_prism, {

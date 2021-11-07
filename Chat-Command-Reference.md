@@ -2,7 +2,7 @@
 
 This is the full chat command reference for WorldEditAdditions. Having trouble finding the section you want? Try the **[quick reference](https://github.com/sbrl/Minetest-WorldEditAdditions#quick-command-reference)** instead, which has links to back to sections of this document!
 
-Check out the reference on the new website - it's even searchable: <https://worldeditadditions.mooncarrot.space/Reference/>
+**Check out the reference on the new website - it's even searchable: <https://worldeditadditions.mooncarrot.space/Reference/>**
 
 Other useful links:
 
@@ -41,6 +41,18 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 //hollowellipsoid 10 5 15 glass
 //hollowellipsoid 21 11 41 stone
 ```
+
+### `//ellipsoid2 [<node_name:dirt> [h[ollow]]]`
+Creates an (optionally hollow) solid ellipsoid that fills the defined region.
+
+```weacmd
+//ellipsoid2
+//ellipsoid2 ice
+//ellipsoid2 air
+//ellipsoid2 steelblock h
+//ellipsoid2 papyrus hollow
+```
+
 
 ### `//torus <major_radius> <minor_radius> <node_name> [<axes=xy> [h[ollow]]]`
 Creates a solid torus at position 1 with the specified major and minor radii. The major radius is the distance from the centre of the torus to the centre of the circle bit, and the minor radius is the radius of the circle bit.
@@ -134,15 +146,29 @@ Additional examples:
 ```
 
 
-### `//walls <replace_node> [<thickness=1>]`
-Creates vertical walls of `<replace_node>` around the inside edges of the defined region, optionally specifying the thickness thereof.
+### `//walls [<replace_node=dirt> [<thickness=1>]]`
+Creates vertical walls of `<replace_node>` around the inside edges of the defined region, optionally specifying the thickness thereof. Defaults to a replace node of `dirt` and a wall thickness of 1.
 
 ```weacmd
+//walls
 //walls dirt
 //walls stone
 //walls goldblock
 //walls sandstone 2
 //walls glass 4
+```
+
+
+### `//spiral2 [<circle|square>] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]`
+Generates both square and circular spiral shapes with the given `<replace_node>` - defaulting to square spirals. The interval defines the gap between the spiral in nodes, and the acceleration defines by how much the interval should be increased (a value of 1 means 1 node per revolution).
+
+```
+//spiral2
+//spiral2 circle stone
+//spiral2 square
+//spiral2 circle
+//spiral2 glass 5
+//spiral2 square desert_sand 3 1
 ```
 
 
@@ -158,7 +184,7 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 
 
 ### `//floodfill [<replace_node> [<radius>]]`
-Floods all connected nodes of the same type starting at _pos1_ with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 50).
+Floods all connected nodes of the same type starting at _pos1_ with `<replace_node>` (which defaults to `water_source`), in a sphere with a radius of `<radius>` (which defaults to 50).
 
 ```weacmd
 //floodfill
