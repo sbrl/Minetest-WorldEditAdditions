@@ -29,6 +29,7 @@ function worldeditadditions.player_dir(name)
 	dir.down = {axis="y",sign=-1}
 	return dir
 end
+
 -- /lua print(worldeditadditions.vector.tostring(minetest.get_player_by_name(myname):get_look_dir()))
 
 --- DEPRICATED =================================================================
