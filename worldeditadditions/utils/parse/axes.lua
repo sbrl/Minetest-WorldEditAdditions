@@ -6,20 +6,6 @@ else
 	Vector3 = require("worldeditadditions.utils.vector3")
 end
 
---[[
-parse_axes("6",name) == return Vector3.new(6,6,6), Vector3.new(-6,-6,-6)
-parse_axes("h 4",name) == return Vector3.new(4,0,4), Vector3.new(-4,0,-4)
-parse_axes("v 4",name) == return Vector3.new(0,4,0), Vector3.new(0,-4,0)
-parse_axes("-x 4 z 3 5",name) == return Vector3.new(0,0,3), Vector3.new(-4,0,-5)
-parse_axes("x -10 y 14 true",name) == return Vector3.new(0,14,0), Vector3.new(-10,-14,0)
-parse_axes("x -10 y 14 r",name) == return Vector3.new(0,14,0), Vector3.new(-10,-14,0)
-parse_axes("x -10 y 14 rev",name) == return Vector3.new(0,14,0), Vector3.new(-10,-14,0)
-
--- Assuming player is facing +Z (north)
-parse_axes("front 4 y 2 r",name) == return Vector3.new(0,2,4), Vector3.new(0,-2,0)
-parse_axes("right 4 y 2 r",name) == return Vector3.new(0,2,0), Vector3.new(-4,-2,0)
-]]--
-
 --- Parses an absolute axis name to a Vector3 instance.
 -- @example
 -- local v3instance = parse_abs_axis_name("-x")
@@ -93,6 +79,13 @@ end
 -- @param	facing_dir	PlayerDir	The direction the player is facing. Returned from wea.player_dir(name).
 -- @returns	Vector3,Vector3		A Vector3 pair generated from parsing out the input token list representing the delta change that can be applied to a defined pos1, pos2 region.
 local function parse_axes(token_list, facing_dir)
+	if type(token_list) ~= "table" then
+		return false, "Error: Expected list of tokens as a table, but found value of type '"..type(token_list).."' instead."
+	end
+	if type(facing_dir) ~= "table" then
+		return false, "Error: Expected facing_dir to be a table, but found value of type '"..type(token_list).."' instead."
+	end
+	
 	local pos1, pos2 = Vector3.new(), Vector3.new()
 	
 	if #token_list < 2 then
@@ -105,8 +98,14 @@ local function parse_axes(token_list, facing_dir)
 	local success
 	
 	for i,token in ipairs(token_list) do
+		if type(token) ~= "string" then
+			return false, "Error: Found token of unexpected type '"..type(token).."' at position "..i.."."
+		end
+		
+		-- print("DEBUG i", i, "token", token)
+		
 		if state == "AXIS" then
-			if token == "h" or "horizontal" then
+			if token == "h" or token == "horizontal" then
 				current_axis_text = "horizontal"
 				current_axis = Vector3.new(1, 0, 1)
 			elseif token == "v" or token == "vertical" then
@@ -117,6 +116,8 @@ local function parse_axes(token_list, facing_dir)
 				success, current_axis = parse_axis_name(token, facing_dir)
 				if not success then return success, current_axis end
 			end
+			-- print("DEBUG STATE AXIS current_axis_text", current_axis_text, "current_axis", current_axis)
+			
 			state = "VALUE"
 		elseif state == "VALUE" then
 			local offset_this = tonumber(token)
@@ -125,6 +126,8 @@ local function parse_axes(token_list, facing_dir)
 			end
 			
 			offset_this = current_axis * offset_this
+			
+			-- print("DEBUG STATE VALUE offset_this", offset_this)
 			
 			-- Apply the new offset to the virtual defined region
 			if current_axis_text == "horizontal" or current_axis_text == "vertical" then
