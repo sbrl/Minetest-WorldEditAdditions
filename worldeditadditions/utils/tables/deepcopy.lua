@@ -25,16 +25,16 @@
 -- @param	obj		table	The table to clone.
 -- @returns	table	A deep copy of the given table.
 local function deepcopy(obj, seen)
-    -- Handle non-tables and previously-seen tables.
-    if type(obj) ~= 'table' then return obj end
-    if seen and seen[obj] then return seen[obj] end
-  
-    -- New table; mark it as seen and copy recursively.
-    local s = seen or {}
-    local res = {}
-    s[obj] = res
-    for k, v in pairs(obj) do res[deepcopy(k, s)] = deepcopy(v, s) end
-    return setmetatable(res, getmetatable(obj))
+	-- Handle non-tables and previously-seen tables.
+	if type(obj) ~= 'table' then return obj end
+	if seen and seen[obj] then return seen[obj] end
+	
+	-- New table; mark it as seen and copy recursively.
+	local s = seen or {}
+	local res = {}
+	s[obj] = res
+	for k, v in pairs(obj) do res[deepcopy(k, s)] = deepcopy(v, s) end
+	return setmetatable(res, getmetatable(obj))
 end
 
 return deepcopy
