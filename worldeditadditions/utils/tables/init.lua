@@ -13,6 +13,7 @@ local wea = worldeditadditions
 wea.table = {
 	apply		= dofile(wea.modpath.."/utils/tables/table_apply.lua"),
 	contains	= dofile(wea.modpath.."/utils/tables/table_contains.lua"),
+	deepcopy	= dofile(wea.modpath.."/utils/tables/deepcopy.lua"),
 	filter		= dofile(wea.modpath.."/utils/tables/table_filter.lua"),
 	get_last	= dofile(wea.modpath.."/utils/tables/table_get_last.lua"),
 	makeset		= dofile(wea.modpath.."/utils/tables/makeset.lua"),
