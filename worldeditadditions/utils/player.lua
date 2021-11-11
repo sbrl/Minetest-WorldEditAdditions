@@ -9,8 +9,7 @@ end
 
 --- Returns the player's facing info including relative DIRs.
 -- @param	name	string	The name of the player to return facing direction of.
--- @return	table (vector3+)	xyz raw values and {axis,sign} tables for facing direction and
--- relative direction keys (front, back, left, right, up, down).
+-- @returns	table(vector3+)	xyz raw values and {axis,sign} tables for facing direction and relative direction keys (front, back, left, right, up, down).
 function worldeditadditions.player_dir(name)
 	local dir = v3.clone(minetest.get_player_by_name(name):get_look_dir())
 	local abs = dir:abs()
@@ -32,10 +31,11 @@ end
 
 -- /lua print(worldeditadditions.vector.tostring(minetest.get_player_by_name(myname):get_look_dir()))
 
---- DEPRICATED =================================================================
+--- DEPRECATED =================================================================
 -- TODO: Refactor commands that use the following functions to use player_dir then delete these functions
 
 --- Returns the player's facing direction on the horizontal axes only.
+-- @deprecated		Use worldeditadditions.player_dir instead.
 -- @param	name	string	The name of the player to return facing direction of.
 -- @return	string,int	Returns axis name and sign multiplier.
 function worldeditadditions.player_axis2d(name)
@@ -47,6 +47,7 @@ function worldeditadditions.player_axis2d(name)
 end
 
 --- Returns the axis and sign of the axis to the left of the input axis.
+-- @deprecated		Use worldeditadditions.player_dir instead.
 -- @param	axis	string	x or z.
 -- @param sign	int	Sign multiplier.
 -- @return	string,int	Returns axis name and sign multiplier.
@@ -57,6 +58,7 @@ function worldeditadditions.axis_left(axis,sign)
 end
 
 --- Dehumanize Direction: translates up, down, left, right, front, into xyz based on player orientation.
+-- @deprecated		Use worldeditadditions.player_dir instead.
 -- @param	name	string	The name of the player to return facing direction of.
 -- @param	dir	string	Relative direction to translate.
 -- @return	string	Returns axis name and sign multiplier.
