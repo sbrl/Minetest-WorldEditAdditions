@@ -104,7 +104,8 @@ local function parse_axes(token_list, facing_dir)
 	local mirroring_keywords = {
 		"sym", "symmetrical",
 		"mirror", "mir",
-		"rev", "reverse"
+		"rev", "reverse",
+		"true"
 	}
 	
 	if type(token_list) ~= "table" then
