@@ -193,7 +193,7 @@ Floods all connected nodes of the same type starting at _pos1_ with `<replace_no
 ```
 
 
-## `//wbox <replace_node>`
+### `//wbox <replace_node>`
 Sets the edges of the current selection to `<replace_node>`to create an outline of a rectangular prism. Useful for roughing in walls.
 
 ```weacmd
@@ -201,7 +201,7 @@ Sets the edges of the current selection to `<replace_node>`to create an outline 
 //wbox dirt
 ```
 
-## `//wcompass <replace_node> [<bead_node>]`
+### `//wcompass <replace_node> [<bead_node>]`
 Creates a compass around pos1 with a single node bead pointing north (+Z).
 
 ```weacmd
@@ -210,7 +210,7 @@ Creates a compass around pos1 with a single node bead pointing north (+Z).
 //wcompass gold diamond
 ```
 
-## `//wcorner <replace_node>`
+### `//wcorner <replace_node>`
 Set the corners of the current selection to `<replace_node>`. Useful for outlining building sites and setting boundaries.
 
 ```weacmd
@@ -218,7 +218,7 @@ Set the corners of the current selection to `<replace_node>`. Useful for outlini
 //wcorner stone_with_iron
 ```
 
-## `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
+### `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
 Advanced version of [`//stretch` from WorldEdit](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#stretch-stretchx-stretchy-stretchz) that can scale both up and down at the same time by transparently splitting it into 2 different operations. Scaling up is *always* done before scaling down.
 
 Although the syntax looks complicated, it's really quite simple. The key concept to understand is that of the scale factor. It refers to how much the defined region should be scaled up or down by, and can be specified in multiple different ways:
@@ -300,6 +300,40 @@ By adding 3 extra numbers for the x, y, and z axes respectively, we can control 
 So in the above example, we scale in the positive x and z directions, and the negative y direction.
 
 
+### `//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`
+Fully backwards-compatible with `//copy` from regular WorldEdit, but allows you to specify multiple axes at once in a single copy operation. Each successive axis in the list is specified in the form `<axis> <count>`, where:
+
+ - `<axis>` is the name of the axis to move the defined region along
+ - `<count>` is the number of nodes along the defined axis to move
+
+All of the following values are valid axes:
+
+ - `x`
+ - `y`
+ - `z`
+ - `-x`
+ - `-y`
+ - `-z`
+ - `?` / `front` / `f`
+ - `back` / `b`
+ - `left` / `l`
+ - `right` / `r`
+ - `up` / `u`
+ - `down` / `d`
+
+Additionally all the absolute axis names (`x`/`y`/`z`/`-x`/`-y`/`-z`) may also be specified multiple times under the same count - e.g. `xy-z 6`.
+
+```
+//copy+ x 6
+//copy+ y 10 z 4
+//copy+ front 6 left 5
+//copy+ ? 10 r 25 y 50
+//copy+ xz 50 front 22
+//copy+ yx 25
+//copy+ -xz-y 10
+```
+
+
 ### `//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...`
 Replaces a given node with a random mix of other nodes. Functions like `//mix`.
 
@@ -310,8 +344,6 @@ This command is best explained with examples:
 ```
 
 The above functions just like `//replace` - nothing special going on here. It replaces all `dirt` nodes with `stone`.
-
-
 
 Let's make it more interesting:
 

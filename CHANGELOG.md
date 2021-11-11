@@ -14,6 +14,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//noiseapply2d` for running commands on columns where a noise value is over a threshold
  - Add `//ellipsoid2` which creates an ellipsoid that fills the defined region
  - Add `//spiral2` for creating both square and circular spirals
+ - Add `//copy+` for copying a defined region across multiple axes at once
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues [code quality from now on will be significantly improved]
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
  - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
