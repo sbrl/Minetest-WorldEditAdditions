@@ -10,7 +10,7 @@ local Vector3 = wea.Vector3
 -- ██      ██    ██ ██         ██
 --  ██████  ██████  ██         ██
 
-function worldeditadditions.count(source_pos1, source_pos2, target_pos1, target_pos2)
+function worldeditadditions.copy(source_pos1, source_pos2, target_pos1, target_pos2)
 	source_pos1, source_pos2 = Vector3.sort(source_pos1, source_pos2)
 	target_pos1, target_pos2 = Vector3.sort(target_pos1, target_pos2)
 	
@@ -25,7 +25,7 @@ function worldeditadditions.count(source_pos1, source_pos2, target_pos1, target_
 	local manip_target, area_target = worldedit.manip_helpers.init(target_pos1, target_pos2)
 	local data_target = manip_target:get_data()
 	
-	-- z y x is the preferred loop order (because CPU cache I'd guess, since then we're iterating linearly through the data array)
+	-- z y x is the preferred loop order (because CPU cache, since then we're iterating linearly through the data array backwards. This only holds true for little-endian machines however)
 	
 	for z = source_pos2.z, source_pos1.z, -1 do
 		for y = source_pos2.y, source_pos1.y, -1 do

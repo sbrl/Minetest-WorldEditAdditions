@@ -112,7 +112,7 @@ local function parse_axes(token_list, facing_dir)
 		return false, "Error: Expected list of tokens as a table, but found value of type '"..type(token_list).."' instead."
 	end
 	if type(facing_dir) ~= "table" then
-		return false, "Error: Expected facing_dir to be a table, but found value of type '"..type(token_list).."' instead."
+		return false, "Error: Expected facing_dir to be a table, but found value of type '"..type(facing_dir).."' instead."
 	end
 	
 	local vpos1, vpos2 = Vector3.new(), Vector3.new()
