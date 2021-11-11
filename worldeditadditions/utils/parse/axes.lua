@@ -62,12 +62,34 @@ local function parse_relative_axis_name(axis_name, facing_dir)
 	return true, result
 end
 
+--- Parses a relative or absolute axis name into a Vector3 instance.
+-- @param	axis_name	string	The axis name to parse.
+-- @param	facing_dir	table	The direction the player is facing. Obtain this by calling worldeditadditions.
 local function parse_axis_name(axis_name, facing_dir)
 	local success, result = parse_relative_axis_name(axis_name, facing_dir)
 	if not success then
 		success, result = parse_abs_axis_name(axis_name)
 	end
 	return success, result
+end
+
+local function vregion_apply(vpos1, vpos2, offset)
+	-- It's a specific axis
+	if offset.x < 0 then vpos1.x = vpos1.x + offset.x
+	else vpos2.x = vpos2.x + offset.x end
+	if offset.y < 0 then vpos1.y = vpos1.y + offset.y
+	else vpos2.y = vpos2.y + offset.y end
+	if offset.z < 0 then vpos1.z = vpos1.z + offset.z
+	else vpos2.z = vpos2.z + offset.z end
+	
+	return vpos1, vpos2
+end
+
+local function in_list(list, str)
+	for i,item in ipairs(list) do
+		if item == str then return true end
+	end
+	return false
 end
 
 --- Parses a token list of axes and counts into a Vector3.
@@ -79,6 +101,12 @@ end
 -- @param	facing_dir	PlayerDir	The direction the player is facing. Returned from wea.player_dir(name).
 -- @returns	Vector3,Vector3		A Vector3 pair generated from parsing out the input token list representing the delta change that can be applied to a defined pos1, pos2 region.
 local function parse_axes(token_list, facing_dir)
+	local mirroring_keywords = {
+		"sym", "symmetrical",
+		"mirror", "mir",
+		"rev", "reverse"
+	}
+	
 	if type(token_list) ~= "table" then
 		return false, "Error: Expected list of tokens as a table, but found value of type '"..type(token_list).."' instead."
 	end
@@ -86,7 +114,7 @@ local function parse_axes(token_list, facing_dir)
 		return false, "Error: Expected facing_dir to be a table, but found value of type '"..type(token_list).."' instead."
 	end
 	
-	local pos1, pos2 = Vector3.new(), Vector3.new()
+	local vpos1, vpos2 = Vector3.new(), Vector3.new()
 	
 	if #token_list < 2 then
 		return false, "Error: Not enough arguments (at least 2 are required)"
@@ -97,7 +125,12 @@ local function parse_axes(token_list, facing_dir)
 	local current_axis_text = nil
 	local success
 	
-	for i,token in ipairs(token_list) do
+	-- for i,token in ipairs(token_list) do
+	for i=1,#token_list do
+		local token = token_list[i]
+		local token_next
+		if i < #token_list then token_next = token_list[i + 1] end
+		
 		if type(token) ~= "string" then
 			return false, "Error: Found token of unexpected type '"..type(token).."' at position "..i.."."
 		end
@@ -111,15 +144,15 @@ local function parse_axes(token_list, facing_dir)
 			elseif token == "v" or token == "vertical" then
 				current_axis_text = "vertical"
 				current_axis = Vector3.new(0, 1, 0)
-			else
+			elseif not in_list(mirroring_keywords, token) then
 				current_axis_text = token
 				success, current_axis = parse_axis_name(token, facing_dir)
 				if not success then return success, current_axis end
 			end
-			-- print("DEBUG STATE AXIS current_axis_text", current_axis_text, "current_axis", current_axis)
 			
 			state = "VALUE"
 		elseif state == "VALUE" then
+			
 			local offset_this = tonumber(token)
 			if not offset_this then
 				return false, "Error: Invalid count value '"..tostring(token).."' for axis '"..current_axis_text.."'. Values may only be positive or negative integers."
@@ -132,16 +165,14 @@ local function parse_axes(token_list, facing_dir)
 			-- Apply the new offset to the virtual defined region
 			if current_axis_text == "horizontal" or current_axis_text == "vertical" then
 				-- We're horizonal / vertical
-				pos1 = pos1 + (offset_this * -1)
-				pos2 = pos2 + offset_this
+				vpos1 = vpos1 + (offset_this * -1)
+				vpos2 = vpos2 + offset_this
 			else
-				-- It's a specific axis
-				if offset_this.x < 0 then pos1.x = pos1.x + offset_this.x
-				else pos2.x = pos2.x + offset_this.x end
-				if offset_this.y < 0 then pos1.y = pos1.y + offset_this.y
-				else pos2.y = pos2.y + offset_this.y end
-				if offset_this.z < 0 then pos1.z = pos1.z + offset_this.z
-				else pos2.z = pos2.z + offset_this.z end
+				vpos1, vpos2 = vregion_apply(vpos1, vpos2, offset_this)
+				-- Handle the extra mirroring keyword
+				if in_list(mirroring_keywords, token_next) then
+						vpos1, vpos2 = vregion_apply(vpos1, vpos2, offset_this * -1)
+				end
 			end
 			
 			state = "AXIS"
@@ -150,7 +181,7 @@ local function parse_axes(token_list, facing_dir)
 		end
 	end
 	
-	return true, pos1, pos2
+	return true, vpos1, vpos2
 end
 
 return {

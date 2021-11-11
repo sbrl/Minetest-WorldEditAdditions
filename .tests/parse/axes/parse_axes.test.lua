@@ -176,6 +176,27 @@ describe("parse_axes", function()
 		assert.are.same(Vector3.new(0, 88, 9), pos2)
 	end)
 	
+	it("should work with mirroring too", function()
+		local success, pos1, pos2 = parse_axes({ "x", "6", "sym" }, facing_dirs.x_pos)
+		assert.is_true(success)
+		assert.are.same(Vector3.new(-6, 0, 0), pos1)
+		assert.are.same(Vector3.new(6, 0, 0), pos2)
+	end)
+	
+	it("should work with relative mirroring", function()
+		local success, pos1, pos2 = parse_axes({ "front", "2", "mirror" }, facing_dirs.x_pos)
+		assert.is_true(success)
+		assert.are.same(Vector3.new(-2, 0, 0), pos1)
+		assert.are.same(Vector3.new(2, 0, 0), pos2)
+	end)
+	
+	it("should work with relative mirroring in a different direction", function()
+		local success, pos1, pos2 = parse_axes({ "back", "7", "rev" }, facing_dirs.z_pos)
+		assert.is_true(success)
+		assert.are.same(Vector3.new(0, 0, -7), pos1)
+		assert.are.same(Vector3.new(0, 0, 7), pos2)
+	end)
+	
 	
 	
 	it("returns an error with invalid token list", function()
