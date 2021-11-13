@@ -37,6 +37,7 @@ dofile(we_c.modpath.."/commands/torus.lua")
 dofile(we_c.modpath.."/commands/walls.lua")
 dofile(we_c.modpath.."/commands/spiral2.lua")
 dofile(we_c.modpath.."/commands/copy.lua")
+dofile(we_c.modpath.."/commands/move.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
 
