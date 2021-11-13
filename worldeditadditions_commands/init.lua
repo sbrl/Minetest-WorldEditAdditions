@@ -95,4 +95,5 @@ worldedit.alias_command("mfacing", "mface")
 -- Thorough testing is required of our replacement commands before these are uncommented
 -- TODO: Depend on worldeditadditions_core before uncommenting this
 -- worldeditadditions_core.alias_override("copy", "copy+")
+-- worldeditadditions_core.alias_override("move", "move+") -- MAY have issues where it doesn't overwrite the old region properly, but haven't been able to reliably reproduce this
 -- worldeditadditions_core.alias_override("replace", "replacemix")
