@@ -42,6 +42,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
 
 ### Misc
  - [`//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#copy+)
+ - [`//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#copy+)
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://worldeditadditions.mooncarrot.space/Reference/#replacemix)
  - [`//floodfill [<replace_node> [<radius>]]`](https://worldeditadditions.mooncarrot.space/Reference/#floodfill)
  - [`//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]`](https://worldeditadditions.mooncarrot.space/Reference/#scale) **experimental**

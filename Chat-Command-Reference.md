@@ -334,6 +334,20 @@ Additionally all the absolute axis names (`x`/`y`/`z`/`-x`/`-y`/`-z`) may also b
 ```
 
 
+## `//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`
+Identical to [`//copy+`](#copy), but instead moves the defined region instead of copying it.
+
+```
+//move+ x 6
+//move+ y 10 z 4
+//move+ front 6 left 5
+//move+ ? 10 r 25 y 50
+//move+ xz 50 front 22
+//move+ yx 25
+//move+ -xz-y 10
+```
+
+
 ### `//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...`
 Replaces a given node with a random mix of other nodes. Functions like `//mix`.
 
