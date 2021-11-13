@@ -45,17 +45,27 @@ worldedit.register_command("move+", { -- TODO: Make this an override
 		local success_a, copy_offset = parse_stage2(name, parts)
 		if not success_a then return success_a, copy_offset end
 		
+		--- 1: Calculate the source & target regions
+		-----------------------------------------------------------------------
 		local source_pos1 = Vector3.clone(worldedit.pos1[name])
 		local source_pos2 = Vector3.clone(worldedit.pos2[name])
 		
 		local target_pos1 = source_pos1 + copy_offset
 		local target_pos2 = source_pos2 + copy_offset
 		
+		-- 2: Move the nodes
+		-----------------------------------------------------------------------
 		local success_b, nodes_modified = wea.move(
 			source_pos1, source_pos2,
 			target_pos1, target_pos2
 		)
 		if not success_b then return success_b, nodes_modified end
+		
+		-- 3: Update the defined region
+		-----------------------------------------------------------------------
+		worldedit.pos1[name] = target_pos1
+		worldedit.pos2[name] = target_pos2
+		worldedit.marker_update(name)
 		
 		local time_taken = wea.get_ms_time() - start_time
 		

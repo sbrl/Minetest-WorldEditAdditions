@@ -37,8 +37,8 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 				local target = source:subtract(offset)
 				local target_i = area_target:index(target.x, target.y, target.z)
 				
-				data_source[source_i] = node_id_air
 				data_target[target_i] = data_source[source_i]
+				data_source[source_i] = node_id_air
 			end
 		end
 	end
