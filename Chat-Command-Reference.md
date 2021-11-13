@@ -334,7 +334,7 @@ Additionally all the absolute axis names (`x`/`y`/`z`/`-x`/`-y`/`-z`) may also b
 ```
 
 
-## `//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`
+### `//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`
 Identical to [`//copy+`](#copy), but instead moves the defined region instead of copying it.
 
 ```
@@ -801,7 +801,7 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 //scentre
 ```
 
-## `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+### `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -811,7 +811,7 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //srel -z 12 -y -2 x -2
 ```
 
-## `//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+### `//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
 Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
