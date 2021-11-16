@@ -3,7 +3,7 @@
 -- ███████ █████   ██      █████   ██         ██    ██ ██    ██ ██ ██  ██
 --      ██ ██      ██      ██      ██         ██    ██ ██    ██ ██  ██ ██
 -- ███████ ███████ ███████ ███████  ██████    ██    ██  ██████  ██   ████
-
+local v3 = worldeditadditions.Vector3
 ---Selection helpers and modifiers
 local selection = {}
 
@@ -13,6 +13,7 @@ local selection = {}
 -- @param	pos	vector	The position to include.
 function selection.add_point(name, pos)
 	if pos ~= nil then
+		local is_new = not worldedit.pos1[name] and not worldedit.pos2[name]
 		-- print("[set_pos1]", name, "("..pos.x..", "..pos.y..", "..pos.z..")")
 		if not worldedit.pos1[name] then worldedit.pos1[name] = vector.new(pos) end
 		if not worldedit.pos2[name] then worldedit.pos2[name] = vector.new(pos) end
@@ -28,7 +29,16 @@ function selection.add_point(name, pos)
 		local volume_difference = volume_after - volume_before
 		
 		worldedit.marker_update(name)
-		worldedit.player_notify(name, "Expanded region by "..volume_difference.." nodes")
+		-- print("DEBUG volume_before", volume_before, "volume_after", volume_after)
+		if is_new then
+			local msg = "Created new region of "..volume_after.." node"
+			if volume_after ~= 1 then msg = msg.."s" end
+			worldedit.player_notify(name, msg)
+		else
+			local msg = "Expanded region by "..volume_difference.." node"
+			if volume_difference ~= 1 then msg = msg.."s" end
+			worldedit.player_notify(name, msg)
+		end
 	else
 		worldedit.player_notify(name, "Error: Too far away (try raising your maxdist with //farwand maxdist <number>)")
 		-- print("[set_pos1]", name, "nil")
@@ -63,6 +73,26 @@ end
 -- @return	bool	If string is a valid dir then true.
 function selection.check_dir(str)
 	return (str == "front" or str == "back" or str == "left" or str == "right" or str == "up" or str == "down")
+end
+
+--- Makes two vectors from the given positions and expands or contracts them
+-- (based on mode) by a third provided vector.
+-- @param	mode	string	"grow" | "shrink".
+-- @param	pos1	vector	worldedit pos1.
+-- @param	pos2	vector	worldedit pos2.
+-- @param	vec	vector	The modifying vector.
+-- @return	Vector3,Vector3	New vectors for worldedit positions.
+function selection.resize(mode, pos1, pos2, vec)
+	local pos1, pos2 = v3.sort(pos1, pos2)
+	local vmin = v3.min(vec,v3.new()):abs()
+	local vmax = v3.max(vec,v3.new())
+	if mode == "grow" then
+		return pos1 - vmin, pos2 + vMax
+	elseif mode == "shrink" then
+		return pos1 + vmin, pos2 - vMax
+	else
+		error("Resize Error: invalid mode \""..tostring(mode).."\".")
+	end
 end
 
 return selection
