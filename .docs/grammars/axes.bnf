@@ -1,0 +1,27 @@
+{%
+
+Examples:
+
+```
+front 3 left 10 y 77 x 30 back 99
+```
+
+%}
+
+<axes> ::= <axis_part> *
+
+<axes_part> ::= <axis_name> <number>
+
+<axis_name> ::= <axis_name_absolute>
+	| <axis_name_relative>
+
+<axis_name_absolute> ::= <axis_letters_absolute>
+	| "-" <axis_letters_absolute>
+
+<axis_name_relative> ::= front | back | left | right | up | down | "?"
+
+<axis_letters_absolute> ::= x | y | z
+
+<number> ::= <digit> *
+
+<digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 0
