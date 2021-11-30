@@ -1,4 +1,7 @@
 {%
+# Lists of axes
+
+In various commands such as `//copy+`, `//move+`, and others lists of axes are used. These are all underpinned by a single grammar and a single parser (located in `worldeditadditions/utils/parse/axes.lua`). While the parser itself requires pre-split tokens (see `split_shell` for that), the grammar which it parses is documnted here.
 
 Examples:
 
@@ -11,6 +14,14 @@ front 3 left 10 y 77 x 30 back 99
 <axes> ::= <axis_part> *
 
 <axes_part> ::= <axis_name> <number>
+	| <axis_name> <number> <reverse>
+
+<reverse> ::= <number>
+	| <reverse_name>
+
+<reverse_name> ::= sym | symmetrical | mirror | mir | rev | reverse | true
+
+
 
 <axis_name> ::= <axis_name_absolute>
 	| <axis_name_relative>
@@ -21,6 +32,8 @@ front 3 left 10 y 77 x 30 back 99
 <axis_name_relative> ::= front | back | left | right | up | down | h | v | "?"
 
 <axis_letters_absolute> ::= x | y | z
+
+
 
 <number> ::= <digit> *
 
