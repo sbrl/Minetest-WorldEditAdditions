@@ -1,7 +1,10 @@
+local wea = worldeditadditions
 local we_c = worldeditadditions_commands
 
 local function parse_params_maze(params_text, is_3d)
-	if not params_text then
+	if not params_text then params_text = "" end
+	params_text = wea.trim(params_text)
+	if #params_text == 0 then
 		return false, "No arguments specified"
 	end
 	

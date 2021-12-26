@@ -36,6 +36,7 @@ Note to self: See the bottom of this file for the release template text.
  - Cloud wand: Improve chat message text
  - Fix `bonemeal` mod detection to look for the global `bonemeal`, not whether the `bonemeal` mod name has been loaded
  - `//walls`: Prevent crash if not parameters are specified by defaulting to `dirt` as the replace_node
+ - `//maze`, `//maze3d`: Fix crash if no arguments are specified
 
 
 ## v1.12: The selection tools update (26th June 2021)
