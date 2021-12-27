@@ -1,6 +1,7 @@
+local wea = worldeditadditions
 
 --- Returns a smooth gaussian brush.
--- @param	size	Vector3		The target size of the brush. Note that the actual size fo the brush will be different, as the gaussian function has some limitations.
+-- @param	size	Vector3		The target size of the brush. Note that the actual size of the brush will be different, as the gaussian function has some limitations.
 -- @param	sigma=2	number		The 'smoothness' of the brush. Higher values are more smooth.
 return function(size, sigma)
 	local size = math.min(size.x, size.y)
@@ -9,5 +10,13 @@ return function(size, sigma)
 		return false, "Error: Invalid brush size."
 	end
 	local success, gaussian = worldeditadditions.conv.kernel_gaussian(size, sigma)
+	
+	-- Normalise values to fill the range 0 - 1
+	-- By default, wea.conv.kernel_gaussian values add up to 1 in total
+	local max = wea.max(gaussian)
+	for i=0,size*size-1 do
+		gaussian[i] = gaussian[i] / max
+	end
+	
 	return success, gaussian, { x = size, y = size }
 end

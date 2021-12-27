@@ -57,7 +57,7 @@ dofile(wea.modpath.."/lib/spiral_circle.lua")
 dofile(wea.modpath.."/lib/conv/conv.lua")
 dofile(wea.modpath.."/lib/erode/erode.lua")
 dofile(wea.modpath.."/lib/noise/init.lua")
-dofile(wea.modpath.."/lib/sculpt/init.lua")
+wea.sculpt = dofile(wea.modpath.."/lib/sculpt/init.lua")
 
 dofile(wea.modpath.."/lib/copy.lua")
 dofile(wea.modpath.."/lib/move.lua")

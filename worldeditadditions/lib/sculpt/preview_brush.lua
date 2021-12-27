@@ -22,15 +22,17 @@ local function preview_brush(brush_name, target_size)
 	values["."] = 1
 	values[" "] = 0
 	
+	print(wea.inspect(brush))
+	
 	local result = {}
-	for z = target_size.z, 0, -1 do
+	for y = brush_size.y-1, 0, -1 do
 		local row = {}
-		for x = target_size.x, 0, -1 do
-			local i = z*brush_size.x + x
+		for x = brush_size.x-1, 0, -1 do
+			local i = y*brush_size.x + x
 			local pixel = " "
 			local threshold_cur = -1
 			for value,threshold in pairs(values) do
-				if brush[i] > threshold and threshold_cur < threshold then
+				if brush[i] * 10 > threshold and threshold_cur < threshold then
 					pixel = value
 					threshold_cur = threshold
 				end
@@ -39,8 +41,8 @@ local function preview_brush(brush_name, target_size)
 		end
 		table.insert(result, table.concat(row))
 	end
-	
-	return true, table.concat(result)
+	print("RESULT", wea.inspect(result))
+	return true, table.concat(result, "\n")
 end
 
 return preview_brush

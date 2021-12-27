@@ -20,12 +20,15 @@ minetest.register_chatcommand("/sculptlist", {
 		
 		if params_text == "preview" then
 			for brush_name, brush_def in pairs(wea.sculpt.brushes) do
-				local preview = wea.sculpt.preview_brush(brush_name)
+				local success, preview = wea.sculpt.preview_brush(brush_name)
 				
 				local brush_size = "dynamic"
-				if type(brush_size) ~= "function" then
+				if type(brush_def) ~= "function" then
 					brush_size = brush_def.size
 				end
+				
+				print("//sculptlist: preview for "..brush_name..":")
+				print(preview)
 				
 				table.insert(msg, brush_name.." ["..brush_size.."]:\n")
 				table.insert(msg, preview.."\n\n")
@@ -34,7 +37,7 @@ minetest.register_chatcommand("/sculptlist", {
 			local display = { { "Name", "Native Size" } }
 			for brush_name, brush_def in pairs(wea.sculpt.brushes) do
 				local brush_size = "dynamic"
-				if type(brush_size) ~= "function" then
+				if type(brush_def) ~= "function" then
 					brush_size = brush_def.size
 				end
 				

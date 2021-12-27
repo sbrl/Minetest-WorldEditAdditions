@@ -13,6 +13,8 @@ local sculpt = {
 	apply = dofile(wea.modpath.."/lib/sculpt/apply.lua")
 }
 
+return sculpt
+
 -- TODO: Automatically find & register all text file based brushes in the brushes directory
 
 -- TODO: Implement automatic scaling of static brushes to the correct size. We have ..scale already, but we probably need to implement a proper 2d canvas scaling algorithm. Some options to consider: linear < [bi]cubic < nohalo/lohalo

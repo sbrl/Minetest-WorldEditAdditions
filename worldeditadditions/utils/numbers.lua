@@ -33,7 +33,7 @@ end
 function worldeditadditions.min(list)
 	if #list == 0 then return nil end
 	local min = nil
-	for i,value in ipairs(list) do
+	for i,value in pairs(list) do
 		if min == nil or min > value then
 			min = value
 		end
@@ -46,8 +46,11 @@ end
 -- @returns	number	The maximum value in the given list.
 function worldeditadditions.max(list)
 	if #list == 0 then return nil end
+	-- We use pairs() instead of ipairs() here, because then we can support
+	-- zero-indexed 1D heightmaps too - and we don't care that the order is
+	-- undefined with pairs().
 	local max = nil
-	for i,value in ipairs(list) do
+	for i,value in pairs(list) do
 		if max == nil or max < value then
 			max = value
 		end
