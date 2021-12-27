@@ -148,7 +148,7 @@ function worldeditadditions.maze2d(pos1, pos2, target_node, seed, path_length, p
 	-- print("path_width: "..path_width..", path_length: "..path_length)
 
 	local maze = generate_maze(seed, extent.z, extent.x, path_length, path_width) -- x &   need to be the opposite way around to how we index it
-	printspace(maze, extent.z, extent.x)
+	-- printspace(maze, extent.z, extent.x)
 
 	-- z y x is the preferred loop order, but that isn't really possible here
 
