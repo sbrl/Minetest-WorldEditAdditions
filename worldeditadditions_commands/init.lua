@@ -55,8 +55,9 @@ dofile(we_c.modpath.."/commands/wireframe/init.lua")
 
 dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
 dofile(we_c.modpath.."/commands/extra/basename.lua")
+dofile(we_c.modpath.."/commands/extra/sculptlist.lua")
 
--- Don't registry the //bonemeal command if the bonemeal mod isn't present
+-- Don't register the //bonemeal command if the bonemeal mod isn't present
 if minetest.global_exists("bonemeal") then
 	dofile(we_c.modpath.."/commands/bonemeal.lua")
 	dofile(we_c.modpath.."/commands/forest.lua")
@@ -94,6 +95,7 @@ worldedit.alias_command("mfacing", "mface")
 -- These are commented out for now, as they could be potentially dangerous to stability
 -- Thorough testing is required of our replacement commands before these are uncommented
 -- TODO: Depend on worldeditadditions_core before uncommenting this
+-- BUG: //move+ seems to be leaving stuff behind for some strange reason --@sbrl 2021-12-26
 -- worldeditadditions_core.alias_override("copy", "copy+")
 -- worldeditadditions_core.alias_override("move", "move+") -- MAY have issues where it doesn't overwrite the old region properly, but haven't been able to reliably reproduce this
 -- worldeditadditions_core.alias_override("replace", "replacemix")
