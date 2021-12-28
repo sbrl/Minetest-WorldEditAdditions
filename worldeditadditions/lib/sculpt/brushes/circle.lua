@@ -1,7 +1,6 @@
 local wea = worldeditadditions
 local Vector3 = wea.Vector3
 
-local __smooth = dofile(wea.modpath.."/lib/sculpt/brushes/__smooth.lua")
 
 return function(size)
 	local brush = {}

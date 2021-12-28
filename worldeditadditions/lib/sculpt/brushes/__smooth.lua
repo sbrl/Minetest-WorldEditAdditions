@@ -10,7 +10,7 @@ return function(size, sigma)
 	if size < 1 then
 		return false, "Error: Invalid brush size."
 	end
-	local success, gaussian = worldeditadditions.conv.kernel_gaussian(size, sigma)
+	local success, gaussian = wea.conv.kernel_gaussian(size, sigma)
 	
 	-- Normalise values to fill the range 0 - 1
 	-- By default, wea.conv.kernel_gaussian values add up to 1 in total
