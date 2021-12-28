@@ -21,8 +21,11 @@ local function apply(pos1, brush_name, height, brush_size)
 	)
 	local brush_size_radius = (brush_size_terrain / 2):floor()
 	
-	local pos1_compute = pos1 - brush_size_radius
-	local pos2_compute = pos1 + brush_size_radius + Vector3.new(0, height, 0)
+	-- To try and make sure we catch height variations
+	local buffer = Vector3.new(0, math.min(height*2, 100), 0)
+	
+	local pos1_compute = pos1 - brush_size_radius - buffer
+	local pos2_compute = pos1 + brush_size_radius + Vector3.new(0, height, 0) + buffer
 	
 	pos1_compute, pos2_compute = Vector3.sort(
 		pos1_compute,

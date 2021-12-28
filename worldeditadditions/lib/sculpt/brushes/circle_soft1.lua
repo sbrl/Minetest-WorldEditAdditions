@@ -10,9 +10,6 @@ return function(size)
 	
 	local border = 1
 	local kernel_size = 3
-	local kernel_size_vec = {}
-	kernel_size_vec[0] = kernel_size
-	kernel_size_vec[1] = kernel_size
 	
 	-- Make the circle
 	-- We don't use 0 to 1 here, because we have to blur it and the existing convolutional
@@ -35,7 +32,7 @@ return function(size)
 	
 	local success2, msg = worldeditadditions.conv.convolve(
 		brush, Vector3.new(size.x, 0, size.y),
-		kernel, kernel_size_vec
+		kernel, Vector3.new(kernel_size, 0, kernel_size)
 	)
 	if not success2 then return success2, msg end
 	
