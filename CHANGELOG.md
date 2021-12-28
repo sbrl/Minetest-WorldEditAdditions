@@ -40,6 +40,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//maze`, `//maze3d`:
      - Fix generated maze not reaching the very edge of the defined region
      - Fix crash if no arguments are specified
+ - `//convolve`: Fix those super tall pillars appearing randomly
 
 
 ## v1.12: The selection tools update (26th June 2021)
