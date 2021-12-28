@@ -27,7 +27,7 @@ worldedit.register_command("bonemeal", {
 				return false, "Invalid strength value (value must be an integer)"
 			end
 		end
-		if #parts >= 2 then
+		if #parts >= 1 then
 			chance = worldeditadditions.parse.chance(table.remove(parts, 1))
 			if not chance then
 				return false, "Invalid chance value (must be a positive integer)"
