@@ -1,3 +1,4 @@
+local Vector3 = worldeditadditions.Vector3
 
 -- Test command: //multi //fp set1 1313 6 5540 //fp set2 1338 17 5521 //erode snowballs
 
@@ -132,7 +133,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 	if not params.noconv then
 		local success, matrix = worldeditadditions.get_conv_kernel("gaussian", 3, 3)
 		if not success then return success, matrix end
-		local matrix_size = {} matrix_size[0] = 3 matrix_size[1] = 3
+		local matrix_size = Vector3.new(3, 0, 3)
 		worldeditadditions.conv.convolve(
 			heightmap, heightmap_size,
 			matrix,

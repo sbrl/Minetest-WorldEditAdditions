@@ -1,3 +1,5 @@
+local Vector3 = worldeditadditions.Vector3
+
 worldeditadditions.conv = {}
 
 dofile(worldeditadditions.modpath.."/lib/conv/kernels.lua")
@@ -41,14 +43,16 @@ end
 function worldeditadditions.convolve(pos1, pos2, kernel, kernel_size)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	
-	local border_size = {}
-	border_size[0] = (kernel_size[0]-1) / 2		-- height
-	border_size[1] = (kernel_size[1]-1) / 2		-- width
+	local border_size = Vector3.new(
+		(kernel_size.x-1) / 2,		-- x = height
+		0,
+		(kernel_size.z-1) / 2		-- z = width
+	)
 	
-	pos1.z = pos1.z - border_size[0]
-	pos2.z = pos2.z + border_size[0]
-	pos1.x = pos1.x - border_size[1]
-	pos2.x = pos2.x + border_size[1]
+	pos1.z = pos1.z - border_size.x
+	pos2.z = pos2.z + border_size.x
+	pos1.x = pos1.x - border_size.z
+	pos2.x = pos2.x + border_size.z
 	
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
 	local data = manip:get_data()
