@@ -75,7 +75,7 @@ async function fetch(url) {
 }
 
 module.exports = function(eleventyConfig) {
-	
+	eleventyConfig.addPassthroughCopy("img2brush/img2brush.js");
 	eleventyConfig.addAsyncShortcode("fetch", fetch);
 	
 	// eleventyConfig.addPassthroughCopy("images");
