@@ -35,7 +35,7 @@ local function apply_heightmap(brush, brush_size, height, position, heightmap, h
 			local hi = z*heightmap_size.x + x
 			local pos_brush = Vector3.new(x, 0, z) - pos_start
 			local bi = pos_brush.z*brush_size.x + pos_brush.x
-			print("hi", hi, "heightmap[hi]", heightmap[hi], "bi", bi, "brush[bi]", brush[bi])
+			
 			local adjustment = math.floor(brush[bi]*height)
 			if adjustment > 0 then
 				added = added + adjustment
