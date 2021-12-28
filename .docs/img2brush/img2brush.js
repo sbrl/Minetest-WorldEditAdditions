@@ -79,17 +79,12 @@ function handle_new_image(image) {
 	document.querySelector("#brushimg-tsv").value = tsv;
 }
 
-function round(number, decimal_places = 0) {
-	let multiplier = Math.pow(10, decimal_places);
-	return Math.round(number * multiplier) / multiplier;
-}
-
 function pixels2tsv(pixels) {
 	let result = "";
 	for(let y = 0; y < pixels.height; y++) {
 		let row = [];
 		for(let x = 0; x < pixels.width; x++) {
-			row.push(round(pixels.data[((y*pixels.width + x) * 4) + 3], 3));
+			row.push((pixels.data[((y*pixels.width + x) * 4) + 3] / 255).toFixed(3));
 		}
 		result += row.join(`\t`) + `\n`;
 	}
