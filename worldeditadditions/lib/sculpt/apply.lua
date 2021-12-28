@@ -24,6 +24,10 @@ local function apply(pos1, brush_name, height, brush_size)
 	local pos1_compute = pos1 - brush_size_radius
 	local pos2_compute = pos1 + brush_size_radius + Vector3.new(0, height, 0)
 	
+	pos1_compute, pos2_compute = Vector3.sort(
+		pos1_compute,
+		pos2_compute
+	)
 	
 	-- 2: Fetch the nodes in the specified area, extract heightmap
 	local manip, area = worldedit.manip_helpers.init(pos1_compute, pos2_compute)
