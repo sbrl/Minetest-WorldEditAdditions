@@ -34,28 +34,22 @@ local function apply(pos1, brush_name, height, brush_size)
 	)
 	local heightmap_orig = wea.table.shallowcopy(heightmap)
 	
-	for z = pos2_compute.z, pos1_compute.z, -1 do
-		for x = pos2_compute.x, pos1_compute.x, -1 do
-			local next_index = 1 -- We use table.insert() in make_weighted
-			local placed_node = false
-			
-			local hi = (z-pos1_compute.z)*heightmap_size.x + (x-pos1_compute.x)
-			
-			local offset = brush[hi] * height
-			if height > 0 then offset = math.floor(offset)
-			else offset = math.ceil(offset) end
-			heightmap[hi] = heightmap[hi] + offset
-		end
-	end
+	local success2, added, removed = wea.sculpt.apply_heightmap(
+		brush, brush_size_actual,
+		height,
+		(heightmap_size / 2):floor(),
+		heightmap, heightmap_size
+	)
+	if not success2 then return success2, added end
 	
 	-- 3: Save back to disk & return
-	local success2, stats = wea.apply_heightmap_changes(
+	local success3, stats = wea.apply_heightmap_changes(
 		pos1_compute, pos2_compute,
 		area, data,
 		heightmap_orig, heightmap,
 		heightmap_size
 	)
-	if not success2 then return success2, stats end
+	if not success3 then return success2, stats end
 	
 	worldedit.manip_helpers.finish(manip, data)
 	
