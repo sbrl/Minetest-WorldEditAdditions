@@ -12,6 +12,8 @@ local function apply(pos1, brush_name, height, brush_size)
 	local success, brush, brush_size_actual = wea.sculpt.make_brush(brush_name, brush_size)
 	if not success then return success, brush end
 	
+	print(wea.sculpt.make_preview(brush, brush_size_actual))
+	
 	local brush_size_terrain = Vector3.new(
 		brush_size_actual.x,
 		0,

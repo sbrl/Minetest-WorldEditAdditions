@@ -9,6 +9,7 @@ local sculpt = {
 		circle = dofile(wea.modpath.."/lib/sculpt/brushes/circle.lua")
 	},
 	make_brush = dofile(wea.modpath.."/lib/sculpt/make_brush.lua"),
+	make_preview = dofile(wea.modpath.."/lib/sculpt/make_preview.lua"),
 	preview_brush = dofile(wea.modpath.."/lib/sculpt/preview_brush.lua"),
 	read_brush_static = dofile(wea.modpath.."/lib/sculpt/read_brush_static.lua"),
 	apply_heightmap = dofile(wea.modpath.."/lib/sculpt/apply_heightmap.lua"),

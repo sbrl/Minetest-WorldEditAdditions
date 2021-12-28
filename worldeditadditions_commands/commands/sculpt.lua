@@ -56,7 +56,6 @@ worldedit.register_command("sculpt", {
 		local brush_min = wea.min(brush)
 		local brush_max = wea.max(brush)
 		local range_nodes = (brush_max * height) - (brush_min * height)
-		print("//sculpt range_nodes", range_nodes)
 		
 		return size_actual.x * size_actual.y * range_nodes
 	end,
