@@ -40,6 +40,7 @@ dofile(we_c.modpath.."/commands/copy.lua")
 dofile(we_c.modpath.."/commands/move.lua")
 
 dofile(we_c.modpath.."/commands/count.lua")
+dofile(we_c.modpath.."/commands/sculpt.lua")
 
 -- Meta Commands
 dofile(we_c.modpath.."/commands/meta/init.lua")

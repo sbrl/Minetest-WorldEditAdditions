@@ -1,4 +1,5 @@
 local wea = worldeditadditions
+local Vector3 = wea.Vector3
 
 --- Given a manip object and associates, generates a 2D x/z heightmap.
 -- Note that pos1 and pos2 should have already been pushed through
@@ -35,10 +36,11 @@ function worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
 		end
 	end
 	
-	local heightmap_size = {
-		z = (pos2.z - pos1.z) + 1,
-		x = (pos2.x - pos1.x) + 1
-	}
+	local heightmap_size = Vector3.new(
+		(pos2.x - pos1.x) + 1,	-- x
+		0,						-- y
+		(pos2.z - pos1.z) + 1	-- z
+	)
 	
 	return heightmap, heightmap_size
 end

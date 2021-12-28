@@ -30,12 +30,12 @@ local function apply_heightmap(brush, brush_size, height, position, heightmap, h
 	-- Iterate over the heightmap and apply the brush
 	-- Note that we do not iterate over the brush, because we don't know if the
 	-- brush actually fits inside the region.... O.o
-	for z = pos_end, pos_start, -1 do
-		for x = pos_end, pos_start, -1 do
+	for z = pos_end.z - 1, pos_start.z, -1 do
+		for x = pos_end.x - 1, pos_start.x, -1 do
 			local hi = z*heightmap_size.x + x
 			local pos_brush = Vector3.new(x, 0, z) - pos_start
 			local bi = pos_brush.z*brush_size.x + pos_brush.x
-			
+			print("hi", hi, "heightmap[hi]", heightmap[hi], "bi", bi, "brush[bi]", brush[bi])
 			local adjustment = math.floor(brush[bi]*height)
 			if adjustment > 0 then
 				added = added + adjustment

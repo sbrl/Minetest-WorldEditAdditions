@@ -1,5 +1,6 @@
 local we_c = worldeditadditions_commands
 local wea = worldeditadditions
+local Vector3 = wea.Vector3
 
 -- ███████  ██████ ██    ██ ██      ██████  ████████
 -- ██      ██      ██    ██ ██      ██   ██    ██
@@ -41,7 +42,9 @@ worldedit.register_command("sculpt", {
 			end
 		end
 		
-		return true, brush_name, math.floor(height), math.floor(brush_size)
+		brush_size = Vector3.new(brush_size, brush_size, 0):floor()
+		
+		return true, brush_name, math.floor(height), brush_size
 	end,
 	nodes_needed = function(name, brush_name, height, brush_size)
 		local success, brush, size_actual = wea.sculpt.make_brush(brush_name, brush_size)

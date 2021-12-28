@@ -1,4 +1,5 @@
 local wea = worldeditadditions
+local Vector3 = wea.Vector3
 
 --- Returns a smooth gaussian brush.
 -- @param	size	Vector3		The target size of the brush. Note that the actual size of the brush will be different, as the gaussian function has some limitations.
@@ -18,5 +19,5 @@ return function(size, sigma)
 		gaussian[i] = gaussian[i] / max
 	end
 	
-	return success, gaussian, { x = size, y = size }
+	return success, gaussian, Vector3.new(size, size, 0)
 end
