@@ -5,7 +5,7 @@ local function is_whitespace(char)
 	return char:match("%s")
 end
 
-local function split_shell(text)
+local function split_shell(text, autotrim)
 	local text_length = #text
 	local scan_pos = 1
 	local result = {  }
@@ -26,7 +26,10 @@ local function split_shell(text)
 		
 		if mode == "NORMAL" then
 			if is_whitespace(curchar) and #acc > 0 then
-				table.insert(result, table.concat(acc, ""))
+				local nextval = worldeditadditions.trim(table.concat(acc, ""))
+				if #nextval > 0 then
+					table.insert(result, table.concat(acc, ""))
+				end
 				acc = {}
 			elseif (curchar == "\"" or curchar == "'") and #acc == 0 and prevchar ~= "\\" then
 				if curchar == "\"" then
