@@ -14,12 +14,12 @@ worldedit.register_command("sculpt", {
 	require_pos = 1,
 	parse = function(params_text)
 		if not params_text or params_text == "" then
-			params_text = "default"
+			params_text = "circle_soft1"
 		end
 		
 		local parts = wea.split_shell(params_text)
 		
-		local brush_name = "default"
+		local brush_name = "circle_soft1"
 		local height = 5
 		local brush_size = 10
 		
