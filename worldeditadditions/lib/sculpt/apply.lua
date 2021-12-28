@@ -1,53 +1,65 @@
 local wea = worldeditadditions
 local Vector3 = wea.Vector3
 
---- Applies the given brush at the given x/z position to the given heightmap.
--- Important: Where a Vector3 is mentioned in the parameter list, it reall MUST
--- be a Vector3 instance.
--- Also important: Remember that the position there is RELATIVE TO THE HEIGHTMAP'S origin (0, 0) and is on the X and Z axes!
--- @param	brush			table	The ZERO-indexed brush to apply. Values should be normalised to be between 0 and 1.
--- @param	brush_size		Vector3	The size of the brush on the x/y axes.
--- @pram	height			number	The multiplier to apply to each brush pixel value just before applying it. Negative values are allowed - this will cause a subtraction operation instead of an addition.
--- @param	position		Vector3	The position RELATIVE TO THE HEIGHTMAP on the x/z coordinates to centre the brush application on.
--- @param	heightmap		table	The heightmap to apply the brush to. See worldeditadditions.make_heightmap for how to obtain one of these.
--- @param	heightmap_size	Vector3	The size of the aforementioned heightmap. See worldeditadditions.make_heightmap for more information.
--- @returns	true,number,number|false,string		If the operation was not successful, then false followed by an error message as a string is returned. If it was successful however, 3 values are returned: true, then the number of nodes added, then the number of nodes removed.
-local function apply(brush, brush_size, height, position, heightmap, heightmap_size)
-	-- Convert brush_size to match the scheme used in the heightmap
-	brush_size = brush_size:clone()
-	brush_size.z = brush_size.y
-	brush_size.y = 0
+--- Applies the given brush with the given height and size to the given position.
+-- @param	pos1		Vector3		The position at which to apply the brush.
+-- @param	brush_name	string		The name of the brush to apply.
+-- @param	height		number		The height of the brush application.
+-- @param	brush_size	Vector3		The size of the brush application. Values are interpreted on the X/Y coordinates, and NOT X/Z!
+-- @returns	bool, string|{ added: number, removed: number }	A bool indicating whether the operation was successful or not, followed by either an error message as a string (if it was not successful) or a table of statistics (if it was successful).
+local function apply(pos1, brush_name, height, brush_size)
+	-- 1: Get & validate brush
+	local success, brush, brush_size_actual = wea.sculpt.make_brush(brush_name, brush_size)
+	if not success then return success, brush end
 	
-	local brush_radius = (brush_size/2):ceil() - 1
-	local pos_start = (position - brush_radius)
-		:clamp(Vector3.new(0, 0, 0), heightmap_size)
-	local pos_end = (pos_start + brush_size)
-		:clamp(Vector3.new(0, 0, 0), heightmap_size)
+	local brush_size_terrain = Vector3.new(
+		brush_size_actual.x,
+		0,
+		brush_size_actual.y
+	)
+	local brush_size_radius = (brush_size_terrain / 2):floor()
 	
-	local added = 0
-	local removed = 0
+	local pos1_compute = pos1 - brush_size_radius
+	local pos2_compute = pos1 + brush_size_radius + Vector3.new(0, height, 0)
 	
-	-- Iterate over the heightmap and apply the brush
-	-- Note that we do not iterate over the brush, because we don't know if the
-	-- brush actually fits inside the region.... O.o
-	for z = pos_end, pos_start, -1 do
-		for x = pos_end, pos_start, -1 do
-			local hi = z*heightmap_size.x + x
-			local pos_brush = Vector3.new(x, 0, z) - pos_start
-			local bi = pos_brush.z*brush_size.x + pos_brush.x
+	
+	-- 2: Fetch the nodes in the specified area, extract heightmap
+	local manip, area = worldedit.manip_helpers.init(pos1_compute, pos2_compute)
+	local data = manip:get_data()
+	
+	local heightmap, heightmap_size = wea.make_heightmap(
+		pos1_compute, pos2_compute,
+		manip, area,
+		data
+	)
+	local heightmap_orig = wea.table.shallowcopy(heightmap)
+	
+	for z = pos2_compute.z, pos1_compute.z, -1 do
+		for x = pos2_compute.x, pos1_compute.x, -1 do
+			local next_index = 1 -- We use table.insert() in make_weighted
+			local placed_node = false
 			
-			local adjustment = math.floor(brush[bi]*height)
-			if adjustment > 0 then
-				added = added + adjustment
-			elseif adjustment < 0 then
-				removed = removed + math.abs(adjustment)
-			end
+			local hi = (z-pos1_compute.z)*heightmap_size.x + (x-pos1_compute.x)
 			
-			heightmap[hi] = heightmap[hi] + adjustment
+			local offset = brush[hi] * height
+			if height > 0 then offset = math.floor(offset)
+			else offset = math.ceil(offset) end
+			heightmap[hi] = heightmap[hi] + offset
 		end
 	end
 	
-	return true, added, removed
+	-- 3: Save back to disk & return
+	local success2, stats = wea.apply_heightmap_changes(
+		pos1_compute, pos2_compute,
+		area, data,
+		heightmap_orig, heightmap,
+		heightmap_size
+	)
+	if not success2 then return success2, stats end
+	
+	worldedit.manip_helpers.finish(manip, data)
+	
+	return true, stats
 end
 
 
