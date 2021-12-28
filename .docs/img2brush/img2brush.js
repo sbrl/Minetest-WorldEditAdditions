@@ -84,7 +84,8 @@ function pixels2tsv(pixels) {
 	for(let y = 0; y < pixels.height; y++) {
 		let row = [];
 		for(let x = 0; x < pixels.width; x++) {
-			row.push((pixels.data[((y*pixels.width + x) * 4) + 3] / 255).toFixed(3));
+			// No need to rescale here - this is done automagically by WorldEditAdditions.
+			row.push(pixels.data[((y*pixels.width + x) * 4) + 3] / 255);
 		}
 		result += row.join(`\t`) + `\n`;
 	}
