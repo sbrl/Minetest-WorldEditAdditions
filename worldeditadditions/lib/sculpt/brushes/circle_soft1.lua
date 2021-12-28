@@ -29,9 +29,6 @@ return function(size)
 		end
 	end
 	
-	print("BEFORE_BLUR")
-	print(wea.sculpt.make_preview(brush, size))
-	
 	-- Make the kernel & blur it
 	local success, kernel = wea.conv.kernel_gaussian(kernel_size, 2)
 	if not success then return success, kernel end
@@ -47,10 +44,6 @@ return function(size)
 	for i,value in pairs(brush) do
 		brush[i] = brush[i] / max_value
 	end
-	
-	print("AFTER_BLUR")
-	print(wea.sculpt.make_preview(brush, size))
-	
 	
 	return true, brush, size
 end
