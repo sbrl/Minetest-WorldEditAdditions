@@ -6,7 +6,8 @@ local sculpt = {
 		default = dofile(wea.modpath.."/lib/sculpt/brushes/default.lua"),
 		default_soft = dofile(wea.modpath.."/lib/sculpt/brushes/default_soft.lua"),
 		square = dofile(wea.modpath.."/lib/sculpt/brushes/square.lua"),
-		circle = dofile(wea.modpath.."/lib/sculpt/brushes/circle.lua")
+		circle = dofile(wea.modpath.."/lib/sculpt/brushes/circle.lua"),
+		circle_soft1 = dofile(wea.modpath.."/lib/sculpt/brushes/circle_soft1.lua")
 	},
 	make_brush = dofile(wea.modpath.."/lib/sculpt/make_brush.lua"),
 	make_preview = dofile(wea.modpath.."/lib/sculpt/make_preview.lua"),
