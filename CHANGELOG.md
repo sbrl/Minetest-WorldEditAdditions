@@ -3,7 +3,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
-## v1.13: Untitled update (unreleased)
+## v1.13: untitled update (unreleased)
  - Add `//sfactor` (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
  - Add `//mface` (_measure facing_), `//midpos` (_measure middle position_), `//msize` (_measure size_), `//mtrig` (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
  - Add [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) for applying commands only to air nodes in the defined region
