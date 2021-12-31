@@ -616,7 +616,7 @@ Example invocations:
 ```
 
 
-## `//sculptlist [preview]`
+### `//sculptlist [preview]`
 Lists all the available sculpting brushes for use with `//sculpt`. If the `preview` keyword is specified as an argument, then the brushes are also rendered in ASCII as a preview. See [`//sculpt`](#sculpt).
 
 ```
@@ -625,7 +625,7 @@ Lists all the available sculpting brushes for use with `//sculpt`. If the `previ
 ```
 
 
-## `//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`
+### `//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`
 Applies a specified brush to the terrain at position 1 with a given height and a given size. Multiple brushes exist (see [`//sculptlist`](#sculptlist)) - and are represented as a 2D grid of values between 0 and 1, which are  then scaled to the specified height. The terrain around position 1 is first converted to a 2D heightmap (as in [`//convolve`](#convolve) before the brush "heightmap" is applied to it.
 
 Similar to [`//sphere`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#sphere-radius-node), [`//cubeapply 10 set`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cubeapply-sizesizex-sizey-sizez-command-parameters), or [`//cylinder y 5 10 10 dirt`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cylinder-xyz-length-radius1-radius2-node) (all from [WorldEdit](https://content.minetest.net/packages/sfan5/worldedit/)), but has a number of added advantages:
@@ -637,6 +637,8 @@ A negative height value causes the terrain to be lowered by the specified number
 
 While sculpting brushes cannot yet be rotated, this is a known issue. Rotating sculpting brushes will be implemented in a future version of WorldEditAdditions.
 
+The selection of available brushes is limited at the moment, but see below on how to easily create your own!
+
 ```
 //sculpt
 //sculpt default 10 25
@@ -644,7 +646,7 @@ While sculpting brushes cannot yet be rotated, this is a known issue. Rotating s
 //sculpt circle 5 50
 ```
 
-### Create your own brushes
+#### Create your own brushes
 2 types of brush exist:
 
 1. Dynamic (lua-generated) brushes
@@ -669,6 +671,10 @@ To assist with the creation of static brushes, a tool exists to convert any imag
 <https://worldeditadditions.mooncarrot.space/img2brush/>
 
 The tool operates on the **alpha channel only**, so it's recommended to use an image format that supports transparency. All colours in the R, G, and B channels are ignored.
+
+If you've created a cool new brush (be it static or dynamic), **please contribute it to WorldEditAdditions**! That way, everyone can enjoy using your awesome brush. [WorldPainter](https://www.worldpainter.net/) has many brushes available in the community, but `//sculpt` for WorldEditAdditions is new so don't have the same sized collection yet :-)
+
+To contribute your new brush back, you can either [open a pull request](https://github.com/sbrl/Minetest-WorldEditAdditions/pulls) if you're confident using GitHub, or [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues) with your brush attached if not.
 
 
 
