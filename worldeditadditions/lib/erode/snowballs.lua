@@ -1,4 +1,5 @@
-local Vector3 = worldeditadditions.Vector3
+local wea = worldeditadditions
+local Vector3 = wea.Vector3
 
 -- Test command: //multi //fp set1 1313 6 5540 //fp set2 1338 17 5521 //erode snowballs
 
@@ -28,7 +29,7 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 		end
 		
 		if #hist_velocity > 0 and i > 5
-			and worldeditadditions.average(hist_velocity) < 0.03 then
+			and wea.average(hist_velocity) < 0.03 then
 			-- print("[snowball] It looks like we've stopped")
 			return true, i
 		end
@@ -51,11 +52,11 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 		velocity.x = params.friction * velocity.x + normalmap[hi].x * params.speed
 		velocity.z = params.friction * velocity.z + normalmap[hi].y * params.speed
 		
-		-- print("[snowball] now at ("..x..", "..z..") velocity "..worldeditadditions.vector.lengthsquared(velocity)..", sediment "..sediment)
-		local new_vel_sq = worldeditadditions.vector.lengthsquared(velocity)
+		-- print("[snowball] now at ("..x..", "..z..") velocity "..wea.vector.lengthsquared(velocity)..", sediment "..sediment)
+		local new_vel_sq = wea.vector.lengthsquared(velocity)
 		if new_vel_sq > 1 then
 			-- print("[snowball] velocity squared over 1, normalising")
-			velocity = worldeditadditions.vector.normalize(velocity)
+			velocity = wea.vector.normalize(velocity)
 		end
 		table.insert(hist_velocity, new_vel_sq)
 		if #hist_velocity > params.velocity_hist_count then table.remove(hist_velocity, 1) end
@@ -74,7 +75,7 @@ Note that this *mutates* the given heightmap.
 @source https://jobtalle.com/simulating_hydraulic_erosion.html
 
 ]]--
-function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, heightmap_size, region_height, params_custom)
+function wea.erode.snowballs(heightmap_initial, heightmap, heightmap_size, region_height, params_custom)
 	local params = {
 		rate_deposit = 0.03, -- 0.03
 		rate_erosion = 0.04, -- 0.04
@@ -88,12 +89,12 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		count = 25000
 	}
 	-- Apply the custom settings
-	worldeditadditions.table.apply(params_custom, params)
+	wea.table.apply(params_custom, params)
 	
 	-- print("[erode/snowballs] params: ")
-	-- print(worldeditadditions.format.map(params))
+	-- print(wea.format.map(params))
 	
-	local normals = worldeditadditions.calculate_normals(heightmap, heightmap_size)
+	local normals = wea.terrain.calculate_normals(heightmap, heightmap_size)
 	
 	local stats_steps = {}
 	for i = 1, params.count do
@@ -111,7 +112,7 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 		if not success then return false, "Error: Failed at snowball "..i..":"..steps end
 	end
 	
-	-- print("[snowballs] "..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps, averaged ~"..worldeditadditions.average(stats_steps).."")
+	-- print("[snowballs] "..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps, averaged ~"..wea.average(stats_steps).."")
 	
 	-- Round everything to the nearest int, since you can't really have
 	-- something like .141592671 of a node
@@ -131,15 +132,15 @@ function worldeditadditions.erode.snowballs(heightmap_initial, heightmap, height
 	end
 	
 	if not params.noconv then
-		local success, matrix = worldeditadditions.get_conv_kernel("gaussian", 3, 3)
+		local success, matrix = wea.get_conv_kernel("gaussian", 3, 3)
 		if not success then return success, matrix end
 		local matrix_size = Vector3.new(3, 0, 3)
-		worldeditadditions.conv.convolve(
+		wea.conv.convolve(
 			heightmap, heightmap_size,
 			matrix,
 			matrix_size
 		)
 	end
 	
-	return true, ""..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps (averaged ~"..worldeditadditions.average(stats_steps).." steps)"
+	return true, ""..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps (averaged ~"..wea.average(stats_steps).." steps)"
 end

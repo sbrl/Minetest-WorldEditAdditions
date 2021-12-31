@@ -23,6 +23,7 @@ wea.io = dofile(wea.modpath.."/utils/io.lua")
 
 wea.bit = dofile(wea.modpath.."/utils/bit.lua")
 
+wea.terrain = dofile(wea.modpath.."/utils/terrain.lua")
 
 dofile(wea.modpath.."/utils/vector.lua")
 dofile(wea.modpath.."/utils/strings/init.lua")
@@ -33,7 +34,7 @@ dofile(wea.modpath.."/utils/tables/init.lua")
 dofile(wea.modpath.."/utils/numbers.lua")
 dofile(wea.modpath.."/utils/nodes.lua")
 dofile(wea.modpath.."/utils/node_identification.lua")
-dofile(wea.modpath.."/utils/terrain.lua")
+
 dofile(wea.modpath.."/utils/raycast_adv.lua") -- For the farwand
 dofile(wea.modpath.."/utils/player.lua") -- Player info functions
 

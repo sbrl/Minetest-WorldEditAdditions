@@ -36,7 +36,7 @@ local function apply(pos1, brush_name, height, brush_size)
 	local manip, area = worldedit.manip_helpers.init(pos1_compute, pos2_compute)
 	local data = manip:get_data()
 	
-	local heightmap, heightmap_size = wea.make_heightmap(
+	local heightmap, heightmap_size = wea.terrain.make_heightmap(
 		pos1_compute, pos2_compute,
 		manip, area,
 		data
@@ -52,7 +52,7 @@ local function apply(pos1, brush_name, height, brush_size)
 	if not success2 then return success2, added end
 	
 	-- 3: Save back to disk & return
-	local success3, stats = wea.apply_heightmap_changes(
+	local success3, stats = wea.terrain.apply_heightmap_changes(
 		pos1_compute, pos2_compute,
 		area, data,
 		heightmap_orig, heightmap,
