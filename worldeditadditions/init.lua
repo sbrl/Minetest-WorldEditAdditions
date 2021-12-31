@@ -23,7 +23,7 @@ wea.io = dofile(wea.modpath.."/utils/io.lua")
 
 wea.bit = dofile(wea.modpath.."/utils/bit.lua")
 
-wea.terrain = dofile(wea.modpath.."/utils/terrain.lua")
+wea.terrain = dofile(wea.modpath.."/utils/terrain/init.lua")
 
 dofile(wea.modpath.."/utils/vector.lua")
 dofile(wea.modpath.."/utils/strings/init.lua")
