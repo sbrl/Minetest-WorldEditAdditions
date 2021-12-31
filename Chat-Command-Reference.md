@@ -1131,6 +1131,23 @@ Any suggestions on  how to provide more customisability without making this comm
 //noiseapply2d 0.4 3 layers dirt_with_snow dirt 3 stone 10
 ```
 
+### `//for <value1> <value2> <value3>... do //<command> <arg> %% <arg>`
+For a given list of values, executes the specified command for each value, replacing `%%` with each value. Implementation thanks to @VorTechnix.
+
+To better illustrate what happens, consider the following command:
+
+```
+//for dirt stone glass do //replacemix air 10 %%
+```
+
+This is equivalent to executing the following 3 commands in sequence:
+
+```
+//replacemix air 10 dirt
+//replacemix air 10 stone
+//replacemix air 10 glass
+```
+
 
 
 ## Extras
