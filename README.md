@@ -54,6 +54,8 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://worldeditadditions.mooncarrot.space/Reference/#convolve)
  - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#erode) **experimental**
  - [`//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d)
+ - [`//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt)
+ - [`//sculptlist [preview]`](https://worldeditadditions.mooncarrot.space/Reference/#sculptlist)
 
 ### Flora
  - [`//bonemeal [<strength> [<chance> [<node_name> [<node_name> ...]]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#bonemeal-strength-chance)

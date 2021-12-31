@@ -616,6 +616,59 @@ Example invocations:
 ```
 
 
+## `//sculptlist [preview]`
+Lists all the available sculpting brushes for use with `//sculpt`. If the `preview` keyword is specified as an argument, then the brushes are also rendered in ASCII as a preview. See [`//sculpt`](#sculpt).
+
+```
+//sculptlist
+//sculptlist preview
+```
+
+
+## `//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`
+Applies a specified brush to the terrain at position 1 with a given height and a given size. Multiple brushes exist (see [`//sculptlist`](#sculptlist)) - and are represented as a 2D grid of values between 0 and 1, which are  then scaled to the specified height. The terrain around position 1 is first converted to a 2D heightmap (as in [`//convolve`](#convolve) before the brush "heightmap" is applied to it.
+
+Similar to [`//sphere`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#sphere-radius-node), [`//cubeapply 10 set`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cubeapply-sizesizex-sizey-sizez-command-parameters), or [`//cylinder y 5 10 10 dirt`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cylinder-xyz-length-radius1-radius2-node) (all from [WorldEdit](https://content.minetest.net/packages/sfan5/worldedit/)), but has a number of added advantages:
+
+ - No accidental overhangs
+ - Multiple custom brushes (see below on how you can add your own!)
+
+While sculpting brushes cannot yet be rotated, this is a known issue. Rotating sculpting brushes will be implemented in a future version of WorldEditAdditions.
+
+```
+//sculpt
+//sculpt default 10 25
+//sculpt ellipse
+//sculpt circle 5 50
+```
+
+### Create your own brushes
+2 types of brush exist:
+
+1. Dynamic (lua-generated) brushes
+2. Static brushes
+
+All brushes are located in `worldeditadditions/lib/sculpt/brushes` (relative to the root of WorldEditAdditions' installation directory).
+
+Lua-generated brushes are not the focus here, but are a file with the extension `.lua` and return a function that returns a brush - see other existing Lua-generated brushes for examples (and don't forget to update `worldeditadditions/lib/sculpt/.init.lua`).
+
+Static brushes on the other hand are simply a list of tab-separated values arranged in a grid. For example, here is a simple brush:
+
+```tsv
+0   1   0
+1   2   1
+0   1   0
+```
+
+Values are automatically rescaled to be between 0 and 1 based on the minimum and maximum values, so don't worry about which numbers to use. Static brushes are saved with the file extension `.brush.tsv` in the aforementioned directory, and are automatically rescanned when your Minetest server starts. While they can't be rescaled automatically to fix a target size (without creating multiple variants of a brush manually of course, though this may be implemented in the future), static brushes are much easier to create than dynamic brushes.
+
+To assist with the creation of static brushes, a tool exists to convert any image to a static brush:
+
+<https://worldeditadditions.mooncarrot.space/img2brush/>
+
+The tool operates on the **alpha channel only**, so it's recommended to use an image format that supports transparency. All colours in the R, G, and B channels are ignored.
+
+
 
 ## Flora
 <!--
