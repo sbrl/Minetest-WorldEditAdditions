@@ -12,7 +12,7 @@ local function parse_params_maze(params_text, is_3d)
 	local parts = worldeditadditions.split_shell(params_text)
 	
 	local replace_node = parts[1]
-	local seed = os.time()
+	local seed = os.time() * math.random()
 	local path_length = 2
 	local path_width = 1
 	local path_depth = 1
