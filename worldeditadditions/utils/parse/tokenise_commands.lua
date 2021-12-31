@@ -36,13 +36,17 @@ local function tokenise(str)
 		-- Extract the character in question
 		local char = str:sub(nextpos, nextpos)
 		
+		print("[TOKENISE] char", char, "depth", nested_depth)
+		
 		if char == "}" then
-			-- Decrease the nested depth
-			nested_depth = nested_depth - 1
-			-- Pop the start of this block off the stack and find this block's contents
-			local block_start = table.remove(nested_stack, #nested_stack)
-			local substr = str:sub(block_start, nextpos - 1)
-			if #substr > 0 and nested_depth == 0 then table.insert(result, substr) end
+			if nested_depth > 0 then
+				-- Decrease the nested depth
+				nested_depth = nested_depth - 1
+				-- Pop the start of this block off the stack and find this block's contents
+				local block_start = table.remove(nested_stack, #nested_stack)
+				local substr = str:sub(block_start, nextpos - 1)
+				if #substr > 0 and nested_depth == 0 then table.insert(result, substr) end
+			end
 		elseif char == "{" then
 			-- Increase the nested depth, and store this position on the stack for later
 			nested_depth = nested_depth + 1
