@@ -81,3 +81,14 @@ dofile(wea.modpath.."/lib/selection/init.lua") -- Helpers for selections
 dofile(wea.modpath.."/lib/wireframe/corner_set.lua")
 dofile(wea.modpath.."/lib/wireframe/make_compass.lua")
 dofile(wea.modpath.."/lib/wireframe/wire_box.lua")
+
+
+
+---
+-- Post-setup tasks
+---
+
+--- 1: Scan for an import static brushes
+-- Static brushes live in lib/sculpt/brushes (relative to this file), and have
+-- the file extension ".brush.tsv" (without quotes, of course).
+wea.sculpt.scan_static(wea.modpath.."/lib/sculpt/brushes")

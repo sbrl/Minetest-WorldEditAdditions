@@ -31,7 +31,7 @@ return function(dirpath, overwrite_existing)
 	local errors = 0
 	
 	
-	for filename in pairs(files) do
+	for i, filename in pairs(files) do
 		if wea.str_ends(filename, ".brush.tsv") then
 			local filepath = dirpath.."/"..filename
 			local name = filepath:gsub(".brush.tsv", "")

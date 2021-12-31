@@ -20,7 +20,7 @@ local sculpt = {
 	parse_static = dofile(wea.modpath.."/lib/sculpt/parse_static.lua")
 }
 
-sculpt.scan_static(wea.modpath.."/lib/sculpt/brushes")
+-- scan_sculpt is called after everything is loaded in the main init file
 
 return sculpt
 
