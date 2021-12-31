@@ -18,6 +18,9 @@ wea.Queue = dofile(wea.modpath.."/utils/queue.lua")
 wea.LRU = dofile(wea.modpath.."/utils/lru.lua")
 wea.inspect = dofile(wea.modpath.."/utils/inspect.lua")
 
+-- I/O compatibility layer
+wea.io = dofile(wea.modpath.."/utils/io.lua")
+
 wea.bit = dofile(wea.modpath.."/utils/bit.lua")
 
 
