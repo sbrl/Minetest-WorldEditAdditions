@@ -49,6 +49,13 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 	
 	-- BUG: Voxel Manipulators cover a larger area than the source area if the target position is too close the to the source, then the source will be overwritten by the target by accident.
 	
+	-- Potential solution:
+	-- 1. Grab source & target
+	-- 2. Perform copy
+	-- 3. Save move
+	-- 4. Re-grab source
+	-- 5. Zero out source, but avoiding touching any nodes that fall within target
+	
 	worldedit.manip_helpers.finish(manip_source, data_source)
 	worldedit.manip_helpers.finish(manip_target, data_target)
 	
