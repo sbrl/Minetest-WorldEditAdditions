@@ -14,8 +14,13 @@ local sculpt = {
 	preview_brush = dofile(wea.modpath.."/lib/sculpt/preview_brush.lua"),
 	read_brush_static = dofile(wea.modpath.."/lib/sculpt/read_brush_static.lua"),
 	apply_heightmap = dofile(wea.modpath.."/lib/sculpt/apply_heightmap.lua"),
-	apply = dofile(wea.modpath.."/lib/sculpt/apply.lua")
+	apply = dofile(wea.modpath.."/lib/sculpt/apply.lua"),
+	scan_static = dofile(wea.modpath.."/lib/sculpt/scan_static.lua"),
+	import_static = dofile(wea.modpath.."/lib/sculpt/import_static.lua"),
+	parse_static = dofile(wea.modpath.."/lib/sculpt/parse_static.lua")
 }
+
+sculpt.scan_static(wea.modpath.."/lib/sculpt/brushes")
 
 return sculpt
 
