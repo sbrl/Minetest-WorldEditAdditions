@@ -24,7 +24,7 @@ minetest.register_chatcommand("/sculptlist", {
 				
 				local brush_size = "dynamic"
 				if type(brush_def) ~= "function" then
-					brush_size = brush_def.size
+					brush_size = brush_def.size.x.."x"..brush_def.size.y
 				end
 				
 				print("//sculptlist: preview for "..brush_name..":")

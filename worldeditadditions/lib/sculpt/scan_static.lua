@@ -34,7 +34,7 @@ return function(dirpath, overwrite_existing)
 	for i, filename in pairs(files) do
 		if wea.str_ends(filename, ".brush.tsv") then
 			local filepath = dirpath.."/"..filename
-			local name = filepath:gsub(".brush.tsv", "")
+			local name = filename:gsub(".brush.tsv", "")
 			
 			local success, msg = import_filepath(filepath, name, overwrite_existing)
 			if not success then
