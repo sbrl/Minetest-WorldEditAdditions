@@ -2,6 +2,7 @@
 -- @class
 local Vector3 = {}
 Vector3.__index = Vector3
+Vector3.__name = "Vector3" -- A hack to allow identification in wea.inspect
 
 --- Creates a new Vector3 instance.
 -- @param x		number	The x co-ordinate value.
