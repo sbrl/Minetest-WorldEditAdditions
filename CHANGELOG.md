@@ -15,6 +15,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add [`//ellipsoid2`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid2) which creates an ellipsoid that fills the defined region
  - Add [`//spiral2`](https://worldeditadditions.mooncarrot.space/Reference/#spiral2) for creating both square and circular spirals
  - Add [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy) for copying a defined region across multiple axes at once
+ - Add [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move) for moving a defined region across multiple axes at once
  - Add [`//sculpt`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt) and [`//sculptlist`](https://worldeditadditions.mooncarrot.space/Reference/#sculptlist) for sculpting terrain using a number of custom brushes.
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues [code quality from now on will be significantly improved]
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
