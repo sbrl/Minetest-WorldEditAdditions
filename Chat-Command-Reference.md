@@ -633,6 +633,8 @@ Similar to [`//sphere`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/
  - No accidental overhangs
  - Multiple custom brushes (see below on how you can add your own!)
 
+A negative height value causes the terrain to be lowered by the specified number of nodes instead of raised.
+
 While sculpting brushes cannot yet be rotated, this is a known issue. Rotating sculpting brushes will be implemented in a future version of WorldEditAdditions.
 
 ```
