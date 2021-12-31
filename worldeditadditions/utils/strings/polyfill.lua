@@ -54,7 +54,7 @@ else
         str_padend = str_padend,
         str_padstart = str_padstart,
 		str_starts = str_starts,
-		str_ends = str_starts,
+		str_ends = str_ends,
 		trim = trim
     }
 end
