@@ -36,8 +36,6 @@ local function tokenise(str)
 		-- Extract the character in question
 		local char = str:sub(nextpos, nextpos)
 		
-		print("[TOKENISE] char", char, "depth", nested_depth)
-		
 		if char == "}" then
 			if nested_depth > 0 then
 				-- Decrease the nested depth
