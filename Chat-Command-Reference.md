@@ -1148,6 +1148,13 @@ This is equivalent to executing the following 3 commands in sequence:
 //replacemix air 10 glass
 ```
 
+Here are some more examples:
+
+```
+//for meselamp brick snowblock bamboo:wood do { //multi //maze %% //sshift y 5 }
+//for 5 10 15 do //torus %% 3 dirt xz
+```
+
 
 
 ## Extras
