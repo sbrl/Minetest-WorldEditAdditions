@@ -43,6 +43,7 @@ Note to self: See the bottom of this file for the release template text.
      - Fix crash if no arguments are specified
      - Fix automatic seed when generating many mazes in the same second (e.g. with `//for`, `//many`)
  - `//convolve`: Fix those super tall pillars appearing randomly
+ - cloud wand: improve feedback messages sent to players
 
 
 ## v1.12: The selection tools update (26th June 2021)
