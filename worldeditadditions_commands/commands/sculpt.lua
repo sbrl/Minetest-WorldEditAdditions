@@ -61,10 +61,8 @@ worldedit.register_command("sculpt", {
 	end,
 	func = function(name, brush_name, height, brush_size)
 		local start_time = wea.get_ms_time()
-		local pos1, pos2 = wea.Vector3.sort(
-			worldedit.pos1[name],
-			worldedit.pos2[name]
-		)
+		
+		local pos1 = wea.Vector3.clone(worldedit.pos1[name])
 		local success, stats = wea.sculpt.apply(
 			pos1,
 			brush_name, height, brush_size
