@@ -130,7 +130,7 @@ The text below is used as a template when making releases.
 
 INTRO
 
-See below for instructions on how to update.
+See below the changelog for instructions on how to update.
 
 CHANGELOG HERE
 
