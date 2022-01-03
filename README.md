@@ -25,7 +25,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 
 
 ## Quick Command Reference
-The detailed explanations have moved! Check them out [here](https://worldeditadditions.mooncarrot.space/Reference/), or click the links below.
+The detailed explanations have moved! Check them out [here](https://worldeditadditions.mooncarrot.space/Reference/) (or edit at [Chat-Command-Reference.md](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md)), or click the links below.
 
 ### Geometry
  - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid)
