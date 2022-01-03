@@ -3,7 +3,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
-## v1.13: The transformational update
+## v1.13: The transformational update (2nd January 2022)
  - Add [`//sfactor`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor) (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
  - Add [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface) (_measure facing_), [`//midpos`](https://worldeditadditions.mooncarrot.space/Reference/#midpos) (_measure middle position_), [`//msize`](https://worldeditadditions.mooncarrot.space/Reference/#msize) (_measure size_), [`//mtrig`](#mtrig) (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
  - Add [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) for applying commands only to air nodes in the defined region
