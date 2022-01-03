@@ -25,7 +25,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 
 
 ## Quick Command Reference
-The detailed explanations have moved! Check them out [here](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md), or click the links below.
+The detailed explanations have moved! Check them out [here](https://worldeditadditions.mooncarrot.space/Reference/), or click the links below.
 
 ### Geometry
  - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid)
@@ -82,7 +82,6 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)
  - [`//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#sshift)
  - [`//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor)
- - [``](https://worldeditadditions.mooncarrot.space/Reference/#)
  
 ### Measure
  - [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface) _(new in v1.13)_
