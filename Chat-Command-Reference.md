@@ -616,6 +616,67 @@ Example invocations:
 ```
 
 
+### `//sculptlist [preview]`
+Lists all the available sculpting brushes for use with `//sculpt`. If the `preview` keyword is specified as an argument, then the brushes are also rendered in ASCII as a preview. See [`//sculpt`](#sculpt).
+
+```
+//sculptlist
+//sculptlist preview
+```
+
+
+### `//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`
+Applies a specified brush to the terrain at position 1 with a given height and a given size. Multiple brushes exist (see [`//sculptlist`](#sculptlist)) - and are represented as a 2D grid of values between 0 and 1, which are  then scaled to the specified height. The terrain around position 1 is first converted to a 2D heightmap (as in [`//convolve`](#convolve) before the brush "heightmap" is applied to it.
+
+Similar to [`//sphere`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#sphere-radius-node), [`//cubeapply 10 set`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cubeapply-sizesizex-sizey-sizez-command-parameters), or [`//cylinder y 5 10 10 dirt`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cylinder-xyz-length-radius1-radius2-node) (all from [WorldEdit](https://content.minetest.net/packages/sfan5/worldedit/)), but has a number of added advantages:
+
+ - No accidental overhangs
+ - Multiple custom brushes (see below on how you can add your own!)
+
+A negative height value causes the terrain to be lowered by the specified number of nodes instead of raised.
+
+While sculpting brushes cannot yet be rotated, this is a known issue. Rotating sculpting brushes will be implemented in a future version of WorldEditAdditions.
+
+The selection of available brushes is limited at the moment, but see below on how to easily create your own!
+
+```
+//sculpt
+//sculpt default 10 25
+//sculpt ellipse
+//sculpt circle 5 50
+```
+
+#### Create your own brushes
+2 types of brush exist:
+
+1. Dynamic (lua-generated) brushes
+2. Static brushes
+
+All brushes are located in `worldeditadditions/lib/sculpt/brushes` (relative to the root of WorldEditAdditions' installation directory).
+
+Lua-generated brushes are not the focus here, but are a file with the extension `.lua` and return a function that returns a brush - see other existing Lua-generated brushes for examples (and don't forget to update `worldeditadditions/lib/sculpt/.init.lua`).
+
+Static brushes on the other hand are simply a list of tab-separated values arranged in a grid. For example, here is a simple brush:
+
+```tsv
+0   1   0
+1   2   1
+0   1   0
+```
+
+Values are automatically rescaled to be between 0 and 1 based on the minimum and maximum values, so don't worry about which numbers to use. Static brushes are saved with the file extension `.brush.tsv` in the aforementioned directory, and are automatically rescanned when your Minetest server starts. While they can't be rescaled automatically to fix a target size (without creating multiple variants of a brush manually of course, though this may be implemented in the future), static brushes are much easier to create than dynamic brushes.
+
+To assist with the creation of static brushes, a tool exists to convert any image to a static brush:
+
+<https://worldeditadditions.mooncarrot.space/img2brush/>
+
+The tool operates on the **alpha channel only**, so it's recommended to use an image format that supports transparency. All colours in the R, G, and B channels are ignored.
+
+If you've created a cool new brush (be it static or dynamic), **please contribute it to WorldEditAdditions**! That way, everyone can enjoy using your awesome brush. [WorldPainter](https://www.worldpainter.net/) has many brushes available in the community, but `//sculpt` for WorldEditAdditions is new so don't have the same sized collection yet :-)
+
+To contribute your new brush back, you can either [open a pull request](https://github.com/sbrl/Minetest-WorldEditAdditions/pulls) if you're confident using GitHub, or [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues) with your brush attached if not.
+
+
 
 ## Flora
 <!--
@@ -1068,6 +1129,30 @@ Any suggestions on  how to provide more customisability without making this comm
 ```weacmd
 //noiseapply2d 0.5 10 set dirt
 //noiseapply2d 0.4 3 layers dirt_with_snow dirt 3 stone 10
+```
+
+### `//for <value1> <value2> <value3>... do //<command> <arg> %% <arg>`
+For a given list of values, executes the specified command for each value, replacing `%%` with each value. Implementation thanks to @VorTechnix.
+
+To better illustrate what happens, consider the following command:
+
+```
+//for dirt stone glass do //replacemix air 10 %%
+```
+
+This is equivalent to executing the following 3 commands in sequence:
+
+```
+//replacemix air 10 dirt
+//replacemix air 10 stone
+//replacemix air 10 glass
+```
+
+Here are some more examples:
+
+```
+//for meselamp brick snowblock bamboo:wood do { //multi //maze %% //sshift y 5 }
+//for 5 10 15 do //torus %% 3 dirt xz
 ```
 
 

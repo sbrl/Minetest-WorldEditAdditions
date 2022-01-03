@@ -1,4 +1,5 @@
 local we_c = worldeditadditions_commands
+local wea = worldeditadditions
 
 -- ██████   ██████  ███    ██ ███████ ███    ███ ███████  █████  ██
 -- ██   ██ ██    ██ ████   ██ ██      ████  ████ ██      ██   ██ ██
@@ -15,19 +16,19 @@ worldedit.register_command("bonemeal", {
 			params_text = "1"
 		end
 		
-		local parts = worldeditadditions.split_shell(params_text, "%s+", false)
+		local parts = wea.split_shell(params_text)
 		
 		local strength = 1
 		local chance = 1
 		local node_names = {} -- An empty table means all nodes
 		
 		if #parts >= 1 then
-			strength = tonumber(table.remove(parts, 1))
+			strength = tonumber(wea.trim(table.remove(parts, 1)))
 			if not strength then
 				return false, "Invalid strength value (value must be an integer)"
 			end
 		end
-		if #parts >= 2 then
+		if #parts >= 1 then
 			chance = worldeditadditions.parse.chance(table.remove(parts, 1))
 			if not chance then
 				return false, "Invalid chance value (must be a positive integer)"

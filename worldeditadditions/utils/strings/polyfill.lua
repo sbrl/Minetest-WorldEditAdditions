@@ -26,6 +26,14 @@ local function str_starts(str, start)
    return string.sub(str, 1, string.len(start)) == start
 end
 
+--- Equivalent to string.endsWith in JS
+-- @param	str			string	The string to operate on
+-- @param	substr_end	number	The ending string to look for
+-- @returns	bool		Whether substr_end is present at the end of str
+local function str_ends(str, substr_end)
+	return string.sub(str, -string.len(substr_end)) == substr_end
+end
+
 --- Trims whitespace from a string from the beginning and the end.
 -- From http://lua-users.org/wiki/StringTrim
 -- @param	str		string	The string to trim the whitespace from.
@@ -39,12 +47,14 @@ if worldeditadditions then
 	worldeditadditions.str_padend = str_padend
 	worldeditadditions.str_padstart = str_padstart
 	worldeditadditions.str_starts = str_starts
+	worldeditadditions.str_ends = str_ends
 	worldeditadditions.trim = trim
 else
     return {
         str_padend = str_padend,
         str_padstart = str_padstart,
 		str_starts = str_starts,
+		str_ends = str_ends,
 		trim = trim
     }
 end

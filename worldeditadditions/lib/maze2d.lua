@@ -27,7 +27,7 @@ local function generate_maze(seed, width, height, path_length, path_width)
 
 	width = width - 1
 	height = height - 1
-
+	
 	local world = {}
 	for y = 0, height, 1 do
 		world[y] = {}
@@ -48,13 +48,13 @@ local function generate_maze(seed, width, height, path_length, path_width)
 		if cy - path_length > 0 and world[cy - path_length][cx] == "#" then
 			directions = directions .. "u"
 		end
-		if cy + path_length < height-path_width and world[cy + path_length][cx] == "#" then
+		if cy + path_length < height-path_width+1 and world[cy + path_length][cx] == "#" then
 			directions = directions .. "d"
 		end
 		if cx - path_length > 0 and world[cy][cx - path_length] == "#" then
 			directions = directions .. "l"
 		end
-		if cx + path_length < width-path_width and world[cy][cx + path_length] == "#" then
+		if cx + path_length < width-path_width+1 and world[cy][cx + path_length] == "#" then
 			directions = directions .. "r"
 		end
 		

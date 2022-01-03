@@ -411,3 +411,30 @@ footer {
 	flex-direction: column;
 	align-items: center;
 }
+
+@keyframes move-diagonal {
+	from {
+		background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+	}
+	to {
+		background-position: -52px -52px, -52px -52px, -51px -51px, -51px -51px;
+	}
+}
+
+
+#dropzone {
+	border: 0.3em dashed #aaaaaa;
+	transition: border 0.2s;
+	justify-content: flex-start;
+}
+#dropzone.dropzone-active {
+	border: 0.3em dashed hsl(203, 79%, 55%);
+	
+	/* Ref https://www.magicpattern.design/tools/css-backgrounds */
+	background-image:  linear-gradient(var(--bg-bright) 2px, transparent 2px), linear-gradient(90deg, var(--bg-bright) 2px, transparent 2px), linear-gradient(var(--bg-bright) 1px, transparent 1px), linear-gradient(90deg, var(--bg-bright) 1px, var(--bg-transcluscent) 1px);
+	background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+	background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+	
+	animation: move-diagonal 5s linear infinite;
+}
+#brushimg-preview { flex: 1; }

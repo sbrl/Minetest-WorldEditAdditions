@@ -18,8 +18,12 @@ wea.Queue = dofile(wea.modpath.."/utils/queue.lua")
 wea.LRU = dofile(wea.modpath.."/utils/lru.lua")
 wea.inspect = dofile(wea.modpath.."/utils/inspect.lua")
 
+-- I/O compatibility layer
+wea.io = dofile(wea.modpath.."/utils/io.lua")
+
 wea.bit = dofile(wea.modpath.."/utils/bit.lua")
 
+wea.terrain = dofile(wea.modpath.."/utils/terrain/init.lua")
 
 dofile(wea.modpath.."/utils/vector.lua")
 dofile(wea.modpath.."/utils/strings/init.lua")
@@ -30,7 +34,7 @@ dofile(wea.modpath.."/utils/tables/init.lua")
 dofile(wea.modpath.."/utils/numbers.lua")
 dofile(wea.modpath.."/utils/nodes.lua")
 dofile(wea.modpath.."/utils/node_identification.lua")
-dofile(wea.modpath.."/utils/terrain.lua")
+
 dofile(wea.modpath.."/utils/raycast_adv.lua") -- For the farwand
 dofile(wea.modpath.."/utils/player.lua") -- Player info functions
 
@@ -57,6 +61,7 @@ dofile(wea.modpath.."/lib/spiral_circle.lua")
 dofile(wea.modpath.."/lib/conv/conv.lua")
 dofile(wea.modpath.."/lib/erode/erode.lua")
 dofile(wea.modpath.."/lib/noise/init.lua")
+wea.sculpt = dofile(wea.modpath.."/lib/sculpt/init.lua")
 
 dofile(wea.modpath.."/lib/copy.lua")
 dofile(wea.modpath.."/lib/move.lua")
@@ -77,3 +82,14 @@ dofile(wea.modpath.."/lib/selection/init.lua") -- Helpers for selections
 dofile(wea.modpath.."/lib/wireframe/corner_set.lua")
 dofile(wea.modpath.."/lib/wireframe/make_compass.lua")
 dofile(wea.modpath.."/lib/wireframe/wire_box.lua")
+
+
+
+---
+-- Post-setup tasks
+---
+
+--- 1: Scan for an import static brushes
+-- Static brushes live in lib/sculpt/brushes (relative to this file), and have
+-- the file extension ".brush.tsv" (without quotes, of course).
+wea.sculpt.scan_static(wea.modpath.."/lib/sculpt/brushes")

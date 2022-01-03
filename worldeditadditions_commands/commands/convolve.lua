@@ -1,3 +1,6 @@
+local wea = worldeditadditions
+local Vector3 = wea.Vector3
+
 --  ██████  ██████  ███    ██ ██    ██  ██████  ██     ██    ██ ███████
 -- ██      ██    ██ ████   ██ ██    ██ ██    ██ ██     ██    ██ ██
 -- ██      ██    ██ ██ ██  ██ ██    ██ ██    ██ ██     ██    ██ █████
@@ -11,8 +14,8 @@ worldedit.register_command("convolve", {
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
-		-- local parts = worldeditadditions.split(params_text, "%s+", false)
-		local parts = worldeditadditions.split_shell(params_text)
+		-- local parts = wea.split(params_text, "%s+", false)
+		local parts = wea.split_shell(params_text)
 		
 		local kernel_name = "gaussian"
 		local width = 5
@@ -23,7 +26,7 @@ worldedit.register_command("convolve", {
 			kernel_name = parts[1]
 		end
 		if #parts >= 2 then
-			local parts_dimension = worldeditadditions.split(parts[2], ",%s*", false)
+			local parts_dimension = wea.split(parts[2], ",%s*", false)
 			width = tonumber(parts_dimension[1])
 			if not width then
 				return false, "Error: Invalid width (it must be a positive odd integer)."
@@ -50,26 +53,33 @@ worldedit.register_command("convolve", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, kernel_name, kernel_width, kernel_height, sigma)
-		local start_time = worldeditadditions.get_ms_time()
+		local start_time = wea.get_ms_time()
 		
-		local success, kernel = worldeditadditions.get_conv_kernel(kernel_name, kernel_width, kernel_height, sigma)
+		local success, kernel = wea.get_conv_kernel(kernel_name, kernel_width, kernel_height, sigma)
 		if not success then return success, kernel end
 		
-		local kernel_size = {}
-		kernel_size[0] = kernel_height
-		kernel_size[1] = kernel_width
+		local kernel_size = Vector3.new(
+			kernel_height,
+			0,
+			kernel_width
+		)
+		
+		local pos1, pos2 = Vector3.sort(
+			worldedit.pos1[name],
+			worldedit.pos2[name]
+		)
 		
 		local stats
-		success, stats = worldeditadditions.convolve(
-			worldedit.pos1[name], worldedit.pos2[name],
+		success, stats = wea.convolve(
+			pos1, pos2,
 			kernel, kernel_size
 		)
 		if not success then return success, stats end
 		
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name.." used //convolve at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", adding "..stats.added.." nodes and removing "..stats.removed.." nodes in "..time_taken.."s")
-		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //convolve at "..pos1.." - "..pos2..", adding "..stats.added.." nodes and removing "..stats.removed.." nodes in "..time_taken.."s")
+		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes in " .. wea.format.human_time(time_taken)
 	end
 })

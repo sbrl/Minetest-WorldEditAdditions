@@ -25,7 +25,7 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 
 
 ## Quick Command Reference
-The detailed explanations have moved! Check them out [here](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md), or click the links below.
+The detailed explanations have moved! Check them out [here](https://worldeditadditions.mooncarrot.space/Reference/) (or edit at [Chat-Command-Reference.md](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md)), or click the links below.
 
 ### Geometry
  - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid)
@@ -39,10 +39,13 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//maze <replace_node> [<path_length> [<path_width> [<seed>]]]`](https://worldeditadditions.mooncarrot.space/Reference/#maze)
  - [`//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`](https://worldeditadditions.mooncarrot.space/Reference/#maze3d)
  - [`//spiral2 [<circle|square>] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]`](https://worldeditadditions.mooncarrot.space/Reference/#spiral2)
+ - [`//wbox <replace_node>`](https://worldeditadditions.mooncarrot.space/Reference/#wbox)
+ - [`//wcompass <replace_node> [<bead_node>]`](https://worldeditadditions.mooncarrot.space/Reference/#wcompass)
+ - [`//wcorner <replace_node>`](https://worldeditadditions.mooncarrot.space/Reference/#wcorner)
 
 ### Misc
- - [`//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#copy+)
- - [`//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#copy+)
+ - [`//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#copy)
+ - [`//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#move)
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://worldeditadditions.mooncarrot.space/Reference/#replacemix)
  - [`//floodfill [<replace_node> [<radius>]]`](https://worldeditadditions.mooncarrot.space/Reference/#floodfill)
  - [`//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]`](https://worldeditadditions.mooncarrot.space/Reference/#scale) **experimental**
@@ -54,6 +57,8 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://worldeditadditions.mooncarrot.space/Reference/#convolve)
  - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#erode) **experimental**
  - [`//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d)
+ - [`//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt)
+ - [`//sculptlist [preview]`](https://worldeditadditions.mooncarrot.space/Reference/#sculptlist)
 
 ### Flora
  - [`//bonemeal [<strength> [<chance> [<node_name> [<node_name> ...]]]]`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#bonemeal-strength-chance)
@@ -75,6 +80,8 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//sstack`](https://worldeditadditions.mooncarrot.space/Reference/#sstack)
  - [`//spush`](https://worldeditadditions.mooncarrot.space/Reference/#spush)
  - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)
+ - [`//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#sshift)
+ - [`//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor)
  
 ### Measure
  - [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface) _(new in v1.13)_
@@ -89,6 +96,7 @@ The detailed explanations have moved! Check them out [here](https://github.com/s
  - [`//ellipsoidapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoidapply) _(new in v1.9)_
  - [`//airapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) _(new in v1.9)_
  - [`//noiseapply2d <threshold> <scale> <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#noiseapply2d) _(new in v1.13)_
+ - [`//for <value1> <value2> <value3>... do //<command> <arg> %% <arg>`](https://worldeditadditions.mooncarrot.space/Reference/#for) _(new in v1.13)_
 
 ### Extras
  - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#y)

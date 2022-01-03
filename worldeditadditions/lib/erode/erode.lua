@@ -1,10 +1,11 @@
-worldeditadditions.erode = {}
+local wea = worldeditadditions
+wea.erode = {}
 
-dofile(worldeditadditions.modpath.."/lib/erode/snowballs.lua")
-dofile(worldeditadditions.modpath.."/lib/erode/river.lua")
+dofile(wea.modpath.."/lib/erode/snowballs.lua")
+dofile(wea.modpath.."/lib/erode/river.lua")
 
 
-function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
+function wea.erode.run(pos1, pos2, algorithm, params)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	
 	local manip, area = worldedit.manip_helpers.init(pos1, pos2)
@@ -17,15 +18,15 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 	
 	local region_height = (pos2.y - pos1.y) + 1
 	
-	local heightmap = worldeditadditions.make_heightmap(pos1, pos2, manip, area, data)
-	local heightmap_eroded = worldeditadditions.table.shallowcopy(heightmap)
+	local heightmap = wea.terrain.make_heightmap(pos1, pos2, manip, area, data)
+	local heightmap_eroded = wea.table.shallowcopy(heightmap)
 	
 	-- print("[erode.run] algorithm: "..algorithm..", params:");
-	-- print(worldeditadditions.format.map(params))
-	-- worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
+	-- print(wea.format.map(params))
+	-- wea.format.array_2d(heightmap, heightmap_size.x)
 	local success, msg, stats
 	if algorithm == "snowballs" then
-		success, msg = worldeditadditions.erode.snowballs(
+		success, msg = wea.erode.snowballs(
 			heightmap, heightmap_eroded,
 			heightmap_size,
 			region_height,
@@ -33,7 +34,7 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 		)
 		if not success then return success, msg end
 	elseif algorithm == "river" then
-		success, msg = worldeditadditions.erode.river(
+		success, msg = wea.erode.river(
 			heightmap, heightmap_eroded,
 			heightmap_size,
 			region_height,
@@ -48,7 +49,7 @@ function worldeditadditions.erode.run(pos1, pos2, algorithm, params)
 		return false, "Error: Unknown algorithm '"..algorithm.."'. Currently implemented algorithms: snowballs (2d; hydraulic-like), river (2d; cellular automata-like; fills potholes and lowers towers). Ideas for algorithms to implement are welcome!"
 	end
 	
-	success, stats = worldeditadditions.apply_heightmap_changes(
+	success, stats = wea.terrain.apply_heightmap_changes(
 		pos1, pos2, area, data,
 		heightmap, heightmap_eroded, heightmap_size
 	)

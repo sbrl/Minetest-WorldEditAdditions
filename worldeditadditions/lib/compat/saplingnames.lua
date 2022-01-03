@@ -84,7 +84,7 @@ if minetest.get_modpath("baldcypress") then
 	worldeditadditions.register_sapling_alias("baldcypress:sapling", "baldcypress")
 end
 if minetest.get_modpath("bamboo") then
-	worldeditadditions.register_sapling_alias("bamboo:sapling", "bamboo")
+	worldeditadditions.register_sapling_alias("bamboo:sprout", "bamboo")
 end
 if minetest.get_modpath("birch") then
 	worldeditadditions.register_sapling_alias("birch:sapling", "birch")

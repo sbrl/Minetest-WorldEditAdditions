@@ -3,18 +3,20 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
-## v1.13: Untitled update (unreleased)
- - Add `//sfactor` (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
- - Add `//mface` (_measure facing_), `//midpos` (_measure middle position_), `//msize` (_measure size_), `//mtrig` (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
- - Add `//airapply` for applying commands only to air nodes in the defined region
- - Add `//wcorner` (_wireframe corners_), `//wbox` (_wireframe box_), `//compass` (_wireframe compass_) - Wireframes implemented by @VorTechnix.
- - Add `//for` for executing commands while changing their arguments - Implemented by @VorTechnix.
- - Add `//sshift`  (_selection shift_) - WorldEdit cuboid manipulator replacements implemented by @VorTechnix.
- - Add `//noise2d` for perturbing terrain with multiple different noise functions
- - Add `//noiseapply2d` for running commands on columns where a noise value is over a threshold
- - Add `//ellipsoid2` which creates an ellipsoid that fills the defined region
- - Add `//spiral2` for creating both square and circular spirals
- - Add `//copy+` for copying a defined region across multiple axes at once
+## v1.13: The transformational update (2nd January 2022)
+ - Add [`//sfactor`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor) (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
+ - Add [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface) (_measure facing_), [`//midpos`](https://worldeditadditions.mooncarrot.space/Reference/#midpos) (_measure middle position_), [`//msize`](https://worldeditadditions.mooncarrot.space/Reference/#msize) (_measure size_), [`//mtrig`](#mtrig) (_measure trigonometry_) - Measuring Tools implemented by @VorTechnix.
+ - Add [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) for applying commands only to air nodes in the defined region
+ - Add [`//wcorner`](https://worldeditadditions.mooncarrot.space/Reference/#wcorner) (_wireframe corners_), [`//wbox`](https://worldeditadditions.mooncarrot.space/Reference/#wbox) (_wireframe box_), [`//wcompass`](https://worldeditadditions.mooncarrot.space/Reference/#wcompass) (_wireframe compass_) - Wireframes implemented by @VorTechnix.
+ - Add [`//for`](https://worldeditadditions.mooncarrot.space/Reference/#for) for executing commands while changing their arguments - Implemented by @VorTechnix.
+ - Add [`//sshift`](https://worldeditadditions.mooncarrot.space/Reference/#sshift)  (_selection shift_) - WorldEdit cuboid manipulator replacements implemented by @VorTechnix.
+ - Add [`//noise2d`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d) for perturbing terrain with multiple different noise functions
+ - Add [`//noiseapply2d`](https://worldeditadditions.mooncarrot.space/Reference/#noiseapply2d) for running commands on columns where a noise value is over a threshold
+ - Add [`//ellipsoid2`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid2) which creates an ellipsoid that fills the defined region
+ - Add [`//spiral2`](https://worldeditadditions.mooncarrot.space/Reference/#spiral2) for creating both square and circular spirals
+ - Add [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy) for copying a defined region across multiple axes at once
+ - Add [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move) for moving a defined region across multiple axes at once
+ - Add [`//sculpt`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt) and [`//sculptlist`](https://worldeditadditions.mooncarrot.space/Reference/#sculptlist) for sculpting terrain using a number of custom brushes.
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues [code quality from now on will be significantly improved]
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
  - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
@@ -24,7 +26,6 @@ Note to self: See the bottom of this file for the release template text.
 
 
 ### Bugfixes
- - `//airapply`: Improve error handling, fix safe_region node counter
  - `//floodfill`: Fix crash caused by internal refactoring of the `Queue` data structure
  - `//spop`: Fix wording in displayed message
  - Sapling alias compatibility:
@@ -35,7 +36,15 @@ Note to self: See the bottom of this file for the release template text.
  - `//replacemix`: Improve error handling to avoid crashes (thanks, Jonathon for reporting via Discord!)
  - Cloud wand: Improve chat message text
  - Fix `bonemeal` mod detection to look for the global `bonemeal`, not whether the `bonemeal` mod name has been loaded
- - `//walls`: Prevent crash if not parameters are specified by defaulting to `dirt` as the replace_node
+ - `//bonemeal`: Fix argument parsing
+ - `//walls`: Prevent crash if no parameters are specified by defaulting to `dirt` as the replace_node
+ - `//maze`, `//maze3d`:
+     - Fix generated maze not reaching the very edge of the defined region
+     - Fix crash if no arguments are specified
+     - Fix automatic seed when generating many mazes in the same second (e.g. with `//for`, `//many`)
+ - `//convolve`: Fix those super tall pillars appearing randomly
+ - cloud wand: improve feedback messages sent to players
+ - `//forest`: Update sapling aliases for `bamboo` → `bambo:sprout` instead of `bamboo:sapling`
 
 
 ## v1.12: The selection tools update (26th June 2021)
@@ -121,7 +130,7 @@ The text below is used as a template when making releases.
 
 INTRO
 
-See below for instructions on how to update.
+See below the changelog for instructions on how to update.
 
 CHANGELOG HERE
 

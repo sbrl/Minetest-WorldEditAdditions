@@ -16,7 +16,7 @@ worldedit.register_command("sfactor", {
 			return false, "Error: Not enough arguments. Expected \"<mode> <factor> [<target>]\"."
 		end
 		local mode, fac, targ = unpack(parts)
-		local modeSet = wea.makeset {"grow", "shrink", "avg"}
+		local modeSet = wea.table.makeset {"grow", "shrink", "avg"}
 		
 		-- Mode parsing
 		if mode == "average" then -- If mode is average set to avg
@@ -60,16 +60,16 @@ worldedit.register_command("sfactor", {
 		end
 		
 		-- Equasion: round(delta[<axis>] / factor) * factor
-		local eval = function(int,fac)
-			local tmp, abs, neg = int / fac, math.abs(int), int < 0
+		local eval = function(int,fac_inner)
+			local tmp, abs, neg = int / fac_inner, math.abs(int), int < 0
 			
 			if mode == "avg" then
-				if int > _m then int = math.floor(abs / fac) * fac
-				else int = math.ceil(abs / fac) * fac end
-			elseif mode == "shrink" then int = math.floor(abs / fac) * fac
-			else int = math.ceil(abs / fac) * fac end
+				if int > _m then int = math.floor(abs / fac_inner) * fac_inner
+				else int = math.ceil(abs / fac_inner) * fac_inner end
+			elseif mode == "shrink" then int = math.floor(abs / fac_inner) * fac_inner
+			else int = math.ceil(abs / fac_inner) * fac_inner end
 			
-			if int < fac then int = fac end -- Ensure selection doesn't collapse to 0
+			if int < fac_inner then int = fac_inner end -- Ensure selection doesn't collapse to 0
 			if neg then int = int * -1 end -- Ensure correct facing direction
 			return int
 		end

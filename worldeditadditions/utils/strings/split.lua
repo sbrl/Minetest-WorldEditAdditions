@@ -62,7 +62,7 @@ end
 -- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
 -- 							plain string, not a Lua pattern
 -- @returns	table	A sequence table containing the substrings
-function worldeditadditions.split (str,dlm,plain)
+function worldeditadditions.split(str,dlm,plain)
 	local pos, ret = 0, {}
 	local ins, i = str:find(dlm,pos,plain)
 	-- "if plain" shaves off some time in the while statement

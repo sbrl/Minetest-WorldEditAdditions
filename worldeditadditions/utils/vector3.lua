@@ -2,6 +2,7 @@
 -- @class
 local Vector3 = {}
 Vector3.__index = Vector3
+Vector3.__name = "Vector3" -- A hack to allow identification in wea.inspect
 
 --- Creates a new Vector3 instance.
 -- @param x		number	The x co-ordinate value.
@@ -293,6 +294,17 @@ function Vector3.is_contained(target, pos1, pos2)
 		and pos2.x >= target.x
 		and pos2.y >= target.y
 		and pos2.z >= target.z
+end
+
+--- Clamps the given point to fall within the region defined by 2 points.
+-- @param	a		Vector3		The target vector to clamp.
+-- @param	pos1	Vector3	pos1 of the defined region.
+-- @param	pos2	Vector3	pos2 of the defined region.
+-- @returns	Vector3	The target vector, clamped to fall within the defined region.
+function Vector3.clamp(a, pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
+	
+	return Vector3.min(Vector3.max(a, pos1), pos2)
 end
 
 

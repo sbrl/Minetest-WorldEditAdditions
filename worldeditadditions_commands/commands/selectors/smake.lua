@@ -65,7 +65,7 @@ worldedit.register_command("smake", {
 	end,
 	func = function(name, oper, mode, targ, base)
 		local p1, p2 = vector.new(worldedit.pos1[name]), vector.new(worldedit.pos2[name])
-		local eval = function() end -- Declare eval placeholder function to edit later
+		local eval -- Declare eval placeholder function to edit later
 		
 		local delta = vector.subtract(p2,p1) -- local delta equation: Vd(a) = V2(a) - V1(a)
 		local _tl = #targ -- Get targ length as a variable incase mode is "average"/"avg"
