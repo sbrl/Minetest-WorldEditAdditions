@@ -172,6 +172,20 @@ Generates both square and circular spiral shapes with the given `<replace_node>`
 ```
 
 
+### `//dome+ <radius> <replace_node> [<pointing_dir:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> ...]`
+Creates a dome shape (i.e. a hemisphere; half a sphere) with a specified radius of the defined node, optionally specifying the direction it should be pointing in (defaults to the positive y direction).
+
+For example, `//dome+ 5 stone y` creates a dome shape pointing upwards, but `//dome+ 5 stone -y` creates a dome shape pointing downwards.
+
+Multiple pointing direction axes can be chained together to create multiple domes on top of each other. Multiple conflicting directions will cancel each other out.
+
+```
+//dome+ 5 stone y
+//dome+ 10 diamond -x
+//dome+ 25 cactus y z
+//dome+ 9 dirt x y z
+```
+
 
 ## Misc
 <!--

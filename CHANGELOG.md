@@ -5,6 +5,7 @@ Note to self: See the bottom of this file for the release template text.
 
 
 ## v1.14: The untitled update (unreleased)
+ - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Migrate from `depends.txt` to `mod.conf`
 
 
