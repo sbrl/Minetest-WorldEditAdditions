@@ -32,7 +32,6 @@ function calculate_size(width, height, size_spec) {
 
 // Main task list - we make sure it completes before exiting.
 var queue = null;
-var pMemoize = null;
 
 async function make_queue() {
 	// 1: Setup task queue

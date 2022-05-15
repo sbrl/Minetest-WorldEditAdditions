@@ -1,6 +1,0 @@
-worldeditadditions
-worldedit_commands
-worldedit_shortcommands
-worldedit
-worldeditdebug?
-bonemeal?
