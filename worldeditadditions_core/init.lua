@@ -5,14 +5,25 @@
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs and VorTechnix
 
-worldeditadditions_core = {}
+local temp = true
+if temp then return end
+-- This mod isn't finished yet, so it will not be executed for now.
+
+
+local modpath = minetest.get_modpath("worldeditadditions_core")
+
+worldeditadditions_core = {
+	modpath = modpath,
+	registered_commands = {},
+	register_command = dofile(modpath.."/core/register_command.lua")
+}
+
+
 local we_c = worldeditadditions_core
 
-we_c.modpath = minetest.get_modpath("worldeditadditions_core")
-
 -- Initialise WorldEdit stuff if the WorldEdit mod is not present
-if not minetest.get_modpath("worldedit") then
-	dofile(we_c.modpath.."/worldedit/init.lua")
-end
-
-dofile(we_c.modpath.."/register/init.lua")
+if minetest.global_exists("bonemeal") then
+	dofile(we_c.modpath.."/core/integrations/worldedit.lua")
+else
+	dofile(we_c.modpath.."/core/integrations/noworldedit.lua")
+end)
