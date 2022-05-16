@@ -63,7 +63,7 @@ dofile(wea.modpath.."/lib/conv/conv.lua")
 dofile(wea.modpath.."/lib/erode/erode.lua")
 dofile(wea.modpath.."/lib/noise/init.lua")
 wea.sculpt		= dofile(wea.modpath.."/lib/sculpt/init.lua")
-wea.metaballs	= dofile(wea.modpath.."/lib/metaballs.lua")
+wea.metaballs	= dofile(wea.modpath.."/lib/metaballs/init.lua")
 
 dofile(wea.modpath.."/lib/copy.lua")
 dofile(wea.modpath.."/lib/move.lua")
