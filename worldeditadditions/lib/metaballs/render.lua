@@ -10,7 +10,7 @@ local Vector3 = wea.Vector3
 -- direction the point should point.
 -- @param	metaballs		[{pos: Vector3, radius: number}]	Aa list of metaballs to render. Each metaball should be a table with 2 properties: pos - the position of the centre of the metaball as a Vector3, and radius - the radius of the metaball.
 -- @param	replace_node	string		The fully qualified name of the node to use to make the dome with.
-function worldeditadditions.metaballs(metaballs, replace_node, threshold)
+local function render(metaballs, replace_node, threshold)
 	local pos1, pos2
 	if not threshold then threshold = 1 end
 	
@@ -61,3 +61,6 @@ function worldeditadditions.metaballs(metaballs, replace_node, threshold)
 	
 	return true, replaced
 end
+
+
+return render
