@@ -6,6 +6,7 @@ Note to self: See the bottom of this file for the release template text.
 
 ## v1.14: The untitled update (unreleased)
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
+ - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
  - Migrate from `depends.txt` to `mod.conf`
 
 
