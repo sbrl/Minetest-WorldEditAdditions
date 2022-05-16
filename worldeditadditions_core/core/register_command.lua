@@ -26,10 +26,6 @@ local function register_command(cmdname, options)
 		log_error(cmdname, "The parse option is not a function.")
 		return false
 	end
-	if type(options.nodes_needed) ~= "string" then
-		log_error(cmdname, "The nodes_needed option is not a function.")
-		return false
-	end
 	if type(options.func) ~= "string" then
 		log_error(cmdname, "The func option is not a function.")
 		return false
@@ -41,7 +37,7 @@ local function register_command(cmdname, options)
 	---
 	if not options.privs then options.privs = {} end
 	if not options.require_pos then options.require_pos = 0 end
-	
+	if not options.nodes_needed then options.nodes_needed = function() return 0 end
 	
 	---
 	-- 3: Registration
