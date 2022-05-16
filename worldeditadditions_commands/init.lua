@@ -39,7 +39,7 @@ dofile(we_c.modpath.."/commands/spiral2.lua")
 dofile(we_c.modpath.."/commands/copy.lua")
 dofile(we_c.modpath.."/commands/move.lua")
 dofile(we_c.modpath.."/commands/dome.lua")
-
+dofile(we_c.modpath.."/commands/metaball.lua")
 dofile(we_c.modpath.."/commands/count.lua")
 dofile(we_c.modpath.."/commands/sculpt.lua")
 

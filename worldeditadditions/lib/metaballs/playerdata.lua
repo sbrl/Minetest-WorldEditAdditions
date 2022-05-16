@@ -74,7 +74,7 @@ local function remove(player_name, index)
 	local success, metaball_list = list(player_name)
 	if not success then return success, metaball_list end
 	
-	if #metaball_list > index then
+	if index > #metaball_list then
 		return false, "Error: Requested the removal of metaball "..tostring(index)..", but there are "..tostring(#metaball_list).." metaballs defined."
 	end
 	
@@ -95,10 +95,31 @@ local function clear(player_name)
 	return #metaball_list
 end
 
+--- Calculates the total volume that the currently defined metaballs are expected to take up.
+-- @param	player_name	string	The name of the player.
+-- @returns	bool,number	The total volume that the currently defined metaballs are expected to take up.
+local function volume(player_name)
+	local success, metaball_list = list(player_name)
+	if not success then return success, metaball_list end
+	
+	if #metaball_list == 0 then return 0 end
+	
+	local pos1 = metaball_list[1].pos
+	local pos2 = pos1
+	
+	for i,metaball in ipairs(metaball_list) do
+		pos1 = Vector3.min(pos1, metaball.pos - metaball.radius)
+		pos2 = Vector3.max(pos2, metaball.pos + metaball.radius)
+	end
+	
+	return (pos2 - pos1):area()
+end
+
 return {
 	add = add,
 	list = list,
 	list_pretty = list_pretty,
 	remove = remove,
-	clear = clear
+	clear = clear,
+	volume = volume
 }

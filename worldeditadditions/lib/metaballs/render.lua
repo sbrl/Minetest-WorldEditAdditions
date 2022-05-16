@@ -48,7 +48,7 @@ local function render(metaballs, replace_node, threshold)
 					metaball_sum = metaball_sum + falloff
 				end
 				
-				if metaball_sum <= threshold then
+				if metaball_sum >= threshold then
 					data[area:index(x, y, z)] = node_id_replace
 					replaced = replaced + 1
 				end

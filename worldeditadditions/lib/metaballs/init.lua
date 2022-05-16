@@ -9,7 +9,8 @@ local metaballs_ns = {
 	remove = playerdata.remove,
 	list = playerdata.list,
 	list_pretty = playerdata.list_pretty,
-	clear = playerdata.clear
+	clear = playerdata.clear,
+	volume = playerdata.volume
 }
 
 return metaballs_ns
