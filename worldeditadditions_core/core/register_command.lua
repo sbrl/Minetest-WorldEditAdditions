@@ -59,3 +59,5 @@ local function register_command(cmdname, options)
 	})
 	we_c.registered_commands[cmdname] = options
 end
+
+return register_command
