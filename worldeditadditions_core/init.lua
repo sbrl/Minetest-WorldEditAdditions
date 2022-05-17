@@ -27,7 +27,7 @@ worldeditadditions_core = {
 local we_c = worldeditadditions_core
 
 -- Initialise WorldEdit stuff if the WorldEdit mod is not present
-if minetest.global_exists("bonemeal") then
+if minetest.global_exists("worldedit") then
 	dofile(we_c.modpath.."/core/integrations/worldedit.lua")
 else
 	dofile(we_c.modpath.."/core/integrations/noworldedit.lua")
