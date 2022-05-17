@@ -15,6 +15,11 @@ local modpath = minetest.get_modpath("worldeditadditions_core")
 worldeditadditions_core = {
 	modpath = modpath,
 	registered_commands = {},
+	-- Storage for per-player node limits before safe_region kicks in.
+	-- TODO: Persist these to disk.
+	safe_region_limits = {},
+	-- The default limit for new players on the number of potential nodes changed before safe_region kicks in.
+	safe_region_limit_default = 100000,
 	register_command = dofile(modpath.."/core/register_command.lua")
 }
 

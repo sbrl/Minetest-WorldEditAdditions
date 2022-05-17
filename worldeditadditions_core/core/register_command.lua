@@ -54,7 +54,7 @@ local function register_command(cmdname, options)
 		description = options.description,
 		privs = options.privs,
 		func = function(player_name, paramtext)
-			run_command(cmdname, player_name, paramtext)
+			run_command(cmdname, options, player_name, paramtext)
 		end
 	})
 	we_c.registered_commands[cmdname] = options
