@@ -31,4 +31,4 @@ if minetest.global_exists("bonemeal") then
 	dofile(we_c.modpath.."/core/integrations/worldedit.lua")
 else
 	dofile(we_c.modpath.."/core/integrations/noworldedit.lua")
-end)
+end
