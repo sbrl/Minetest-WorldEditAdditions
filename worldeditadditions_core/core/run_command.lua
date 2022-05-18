@@ -1,5 +1,7 @@
 local we_c = worldeditadditions_core
 
+-- WARNING: safe_region MUST NOT be imported more than once, as it defines chat commands. If you want to import it again elsewhere, check first that multiple dofile() calls don't execute a file more than once.
+local safe_region = dofile(we_c.modpath.."/core/safe_region.lua")
 local human_size = dofile(we_c.modpath.."/core/lib/human_size.lua")
 
 -- TODO: Reimplement worldedit.player_notify(player_name, msg_text)
@@ -39,9 +41,9 @@ local function run_command(cmdname, options, player_name, paramtext)
 		
 		if potential_changes > limit then
 			worldedit.player_notify(player_name, "/"..cmdname.." "..paramtext.."' may affect up to "..human_size(potential_changes).." nodes. Type //y to continue, or //n to cancel (see the //saferegion command to control when this message appears).")
-			
-			-- TODO: Wrap run_command_stage2 in safe_region stuff
-			run_command_stage2(player_name, options.func, parse_result)
+			safe_region(player_name, cmdname, function()
+				run_command_stage2(player_name, options.func, parse_result)
+			end)
 		end
 	else
 		run_command_stage2(player_name, options.func, parse_result)
