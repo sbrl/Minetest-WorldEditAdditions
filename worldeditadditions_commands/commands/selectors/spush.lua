@@ -3,7 +3,7 @@
 -- ███████ ██████  ██    ██ ███████ ███████
 --      ██ ██      ██    ██      ██ ██   ██
 -- ███████ ██       ██████  ███████ ██   ██
-worldedit.register_command("spush", {
+worldeditadditions_core.register_command("spush", {
 	params = "",
 	description = "Pushes the currently defined region onto your (per-user) selection stack.",
 	privs = { worldedit = true },

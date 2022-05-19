@@ -4,7 +4,7 @@
 --      ██ ██      ██   ██ ██         ██    ██    ██ ██   ██
 -- ███████ ██      ██   ██  ██████    ██     ██████  ██   ██
 local wea = worldeditadditions
-worldedit.register_command("sfactor", {
+worldeditadditions_core.register_command("sfactor", {
 	params = "<mode> <factor> [<target=xz>]",
 	description = "Make the length of one or more target axes of the current selection to be multiple(s) of <factor>.",
 	privs = { worldedit = true },

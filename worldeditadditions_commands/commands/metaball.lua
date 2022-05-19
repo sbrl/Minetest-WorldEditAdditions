@@ -6,7 +6,7 @@ local Vector3 = wea.Vector3
 -- ██   ██ ██    ██ ██ ████ ██ █████
 -- ██   ██ ██    ██ ██  ██  ██ ██
 -- ██████   ██████  ██      ██ ███████
-worldedit.register_command("metaball", {
+worldeditadditions_core.register_command("metaball", {
 	params = "add <radius> | remove <index> | render <replace_node> [<threshold=1>] | list | clear | volume",
 	description = "Defines and creates metaballs. After using the add subcommand to define 1 or more metaballs (uses pos1), the render subcommand can then be used to create the metaballs as nodes.",
 	privs = { worldedit = true },

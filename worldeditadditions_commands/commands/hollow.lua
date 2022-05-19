@@ -3,7 +3,7 @@
 -- ███████ ██    ██ ██      ██      ██    ██ ██  █  ██
 -- ██   ██ ██    ██ ██      ██      ██    ██ ██ ███ ██
 -- ██   ██  ██████  ███████ ███████  ██████   ███ ███
-worldedit.register_command("hollow", {
+worldeditadditions_core.register_command("hollow", {
 	params = "[<wall_thickness>]",
 	description = "Replaces nodes inside the defined region with air, but leaving a given number of nodes near the outermost edges alone. In other words, it makes the defined region hollow leaving walls of a given thickness (default: 1)",
 	privs = { worldedit = true },

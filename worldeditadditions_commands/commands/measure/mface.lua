@@ -4,7 +4,7 @@
 -- ██  ██  ██ ██      ██   ██ ██      ██
 -- ██      ██ ██      ██   ██  ██████ ███████
 local wea = worldeditadditions
-worldedit.register_command("mface", {
+worldeditadditions_core.register_command("mface", {
 	params = "",
 	description = "Return player facing axis.",
 	privs = { worldedit = true },

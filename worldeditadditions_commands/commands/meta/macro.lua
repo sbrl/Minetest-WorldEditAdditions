@@ -45,7 +45,7 @@ local function step(params)
 	end
 end
 
-worldedit.register_command("macro", {
+worldeditadditions_core.register_command("macro", {
 	params = "<file> [<delay=0>]",
 	description = "Load commands from \"(world folder)/macros/<file>[.weamac | .wmac]\" with position 1 of the current WorldEdit region as the origin.",
 	privs = {worldedit=true},

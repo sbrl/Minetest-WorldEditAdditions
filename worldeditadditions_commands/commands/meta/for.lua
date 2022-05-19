@@ -45,7 +45,7 @@ local function step(params)
 	end
 end
 
-worldedit.register_command("for", {
+worldeditadditions_core.register_command("for", {
 	params = "<value1> <value2> <value3>... do //<command> <arg> %% <arg>",
 	description = "Executes a chat command for each value before \" do \" replacing any instances of \"%%\" with those values. The forward slashes at the beginning of the chat command must be the same as if you were executing it normally.",
 	privs = { worldedit = true },

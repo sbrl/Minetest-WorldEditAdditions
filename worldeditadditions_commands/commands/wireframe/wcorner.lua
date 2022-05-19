@@ -4,7 +4,7 @@
 -- ██ ███ ██ ██      ██    ██ ██   ██ ██  ██ ██ ██      ██   ██
 --  ███ ███   ██████  ██████  ██   ██ ██   ████ ███████ ██   ██
 local wea = worldeditadditions
-worldedit.register_command("wcorner", {
+worldeditadditions_core.register_command("wcorner", {
 	params = "<replace_node>",
 	description = "Set the corners of the current selection to <replace_node>",
 	privs = {worldedit=true},

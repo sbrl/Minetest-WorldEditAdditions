@@ -26,7 +26,7 @@ end
 -- ██    ██ ██    ██ █████   ██████  ██      ███████   ████
 -- ██    ██  ██  ██  ██      ██   ██ ██      ██   ██    ██
 --  ██████    ████   ███████ ██   ██ ███████ ██   ██    ██
-worldedit.register_command("layers", {
+worldeditadditions_core.register_command("layers", {
 	params = "[<max_slope|min_slope..max_slope>] [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...",
 	description = "Replaces the topmost non-airlike nodes with layers of the given nodes from top to bottom. Like WorldEdit for MC's //naturalize command. Optionally takes a maximum or minimum and maximum slope value. If a column's slope value falls outside the defined range, then it's skipped. Default: dirt_with_grass dirt 3",
 	privs = { worldedit = true },

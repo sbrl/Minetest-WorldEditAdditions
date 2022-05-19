@@ -21,7 +21,7 @@ local function parse_with_name(name,args)
 	until not args:find("([%l%s+-]+%d+)%s*", i)
 	return true, vec
 end
-worldedit.register_command("srel", {
+worldeditadditions_core.register_command("srel", {
 	params = "<axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]",
 	description = "Set WorldEdit region position 2 at set distances along 3 axes.",
 	privs = { worldedit = true },

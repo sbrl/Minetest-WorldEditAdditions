@@ -4,7 +4,7 @@
 --      ██ ██      ██      ██  ██ ██    ██    ██      ██   ██
 -- ███████  ██████ ███████ ██   ████    ██    ███████ ██   ██
 local wea = worldeditadditions
-worldedit.register_command("scentre", {
+worldeditadditions_core.register_command("scentre", {
 	params = "",
 	description = "Set WorldEdit region positions 1 and 2 to the centre of the current selection.",
 	privs = {worldedit=true},

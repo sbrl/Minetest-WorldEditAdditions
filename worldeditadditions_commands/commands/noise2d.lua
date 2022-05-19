@@ -1,7 +1,7 @@
 
 local wea = worldeditadditions
 
-worldedit.register_command("noise2d", {
+worldeditadditions_core.register_command("noise2d", {
 	params = "[<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]",
 	description = "Applies 2d random noise to the terrain as a 2d heightmap in the defined region. Optionally takes an arbitrary set of key - value pairs representing parameters that control the properties of the noise and how it's applied. See the full documentation for details of these parameters and what they do.",
 	privs = { worldedit = true },

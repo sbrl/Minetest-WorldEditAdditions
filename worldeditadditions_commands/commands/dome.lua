@@ -25,7 +25,7 @@ end
 -- ██   ██ ██    ██ ██ ████ ██ █████
 -- ██   ██ ██    ██ ██  ██  ██ ██
 -- ██████   ██████  ██      ██ ███████
-worldedit.register_command("dome+", { -- TODO: Make this an override
+worldeditadditions_core.register_command("dome+", { -- TODO: Make this an override
 	params = "<radius> <replace_node> [<pointing_dir:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> ...] [h[ollow]]",
 	description = "Creates a dome shape with a specified radius of the defined node, optionally specifying the direction it should be pointing in (defaults to the positive y direction).",
 	privs = { worldedit = true },

@@ -4,7 +4,7 @@
 --      ██ ██      ██    ██ ██
 -- ███████  ██████  ██████  ███████
 local wea = worldeditadditions
-worldedit.register_command("scol", {
+worldeditadditions_core.register_command("scol", {
 	params = "[<axis1>] <length>",
 	description = "Set WorldEdit region position 2 at a set distance along 1 axis.",
 	privs = {worldedit=true},

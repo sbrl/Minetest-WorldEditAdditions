@@ -30,7 +30,7 @@ local function emerge_stats_tostring(tbl_emerge)
 	return table.concat(result, ", ")
 end
 
-worldedit.register_command("subdivide", {
+worldeditadditions_core.register_command("subdivide", {
 	params = "<size_x> <size_y> <size_z> <command> <params>",
 	description = "Subdivides the given worldedit area into chunks and runs a worldedit command multiple times to cover the defined region. Note that the given command must NOT be prepended with any forward slashes - just like //cubeapply.",
 	privs = { worldedit = true },

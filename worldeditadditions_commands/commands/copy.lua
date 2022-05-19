@@ -24,7 +24,7 @@ end
 -- ██      ██    ██ ██████    ████
 -- ██      ██    ██ ██         ██
 --  ██████  ██████  ██         ██
-worldedit.register_command("copy+", { -- TODO: Make this an override
+worldeditadditions_core.register_command("copy+", { -- TODO: Make this an override
 	params = "<axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]",
 	description = "Copies the defined region to another location - potentially across multiple axes at once.",
 	privs = { worldedit = true },

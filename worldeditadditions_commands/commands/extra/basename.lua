@@ -3,7 +3,7 @@
 -- ██████  ███████ ███████ █████   ██ ██  ██ ███████ ██ ████ ██ █████
 -- ██   ██ ██   ██      ██ ██      ██  ██ ██ ██   ██ ██  ██  ██ ██
 -- ██████  ██   ██ ███████ ███████ ██   ████ ██   ██ ██      ██ ███████
-worldedit.register_command("basename", {
+worldeditadditions_core.register_command("basename", {
 	params = "<nodealias>",
 	description = "Returns the base name of nodes that use a given alias.",
 	privs = {worldedit = true},

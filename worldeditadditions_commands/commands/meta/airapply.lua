@@ -5,7 +5,7 @@
 -- ██   ██ ██ ██   ██ ██   ██ ██      ██      ███████ ██
 local wea_c  = worldeditadditions_core
 
-worldedit.register_command("airapply", {
+worldeditadditions_core.register_command("airapply", {
 	params = "<command_name> <args>",
 	description = "Executes the given command (automatically prepending '//'), but only on non-air nodes within the defined region.",
 	privs = { worldedit = true },

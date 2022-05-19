@@ -5,7 +5,7 @@
 -- ███████ ███████ ███████ ██ ██      ███████  ██████  ██ ██████
 local wea = worldeditadditions
 
-worldedit.register_command("ellipsoid2", {
+worldeditadditions_core.register_command("ellipsoid2", {
 	params = "[<replace_node:dirt> [h[ollow]]]",
 	description = "Creates am optionally hollow 3D ellipsoid that fills the defined region, filled with <replace_node>.",
 	privs = { worldedit = true },

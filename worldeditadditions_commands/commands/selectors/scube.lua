@@ -4,7 +4,7 @@
 --      ██ ██      ██    ██ ██   ██ ██
 -- ███████  ██████  ██████  ██████  ███████
 local wea = worldeditadditions
-worldedit.register_command("scube", {
+worldeditadditions_core.register_command("scube", {
 	params = "[<axis1> [<axis2> [<axis3>]]] <length>",
 	description = "Set WorldEdit region position 2 at a set distance along 3 axes.",
 	privs = { worldedit = true },

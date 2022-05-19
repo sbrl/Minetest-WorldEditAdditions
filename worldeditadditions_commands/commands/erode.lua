@@ -3,7 +3,7 @@
 -- █████   ██████  ██    ██ ██   ██ █████
 -- ██      ██   ██ ██    ██ ██   ██ ██
 -- ███████ ██   ██  ██████  ██████  ███████
-worldedit.register_command("erode", {
+worldeditadditions_core.register_command("erode", {
 	params = "[<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]",
 	description = "**experimental** Runs the specified erosion algorithm over the given defined region. This may occur in 2d or 3d. Currently implemented algorithms: snowballs (default;2d hydraulic-like). Also optionally takes an arbitrary set of key - value pairs representing parameters to pass to the algorithm. See the full documentation for details.",
 	privs = { worldedit = true },

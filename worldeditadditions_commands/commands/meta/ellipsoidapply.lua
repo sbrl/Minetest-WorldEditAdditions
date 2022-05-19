@@ -5,7 +5,7 @@
 -- ███████ ███████ ███████ ██ ██      ███████ ███████ ██   ██ ██      ██      ███████ ██
 local wea_c = worldeditadditions_core
 
-worldedit.register_command("ellipsoidapply", {
+worldeditadditions_core.register_command("ellipsoidapply", {
 	params = "<command_name> <args>",
 	description = "Executes the given command (automatically prepending '//'), clipping the result with an ellipse given by the defined region.",
 	privs = { worldedit = true },
