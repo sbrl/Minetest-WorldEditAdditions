@@ -5,8 +5,8 @@
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs and VorTechnix
 
-local temp = true
-if temp then return end
+-- local temp = true
+-- if temp then return end
 -- This mod isn't finished yet, so it will not be executed for now.
 
 
