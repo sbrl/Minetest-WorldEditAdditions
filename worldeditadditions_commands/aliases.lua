@@ -1,14 +1,16 @@
-worldedit.alias_command("smoothadv", "convolve")
-worldedit.alias_command("conv", "convolve")
+local wea_c = worldeditadditions_core
 
-worldedit.alias_command("naturalise", "layers")
-worldedit.alias_command("naturalize", "layers")
+wea_c.register_alias("smoothadv", "convolve")
+wea_c.register_alias("conv", "convolve")
 
-worldedit.alias_command("flora", "bonemeal")
+wea_c.register_alias("naturalise", "layers")
+wea_c.register_alias("naturalize", "layers")
+
+wea_c.register_alias("flora", "bonemeal")
 
 -- Measure Tools
-worldedit.alias_command("mcount", "count")
-worldedit.alias_command("mfacing", "mface")
+wea_c.register_alias("mcount", "count")
+wea_c.register_alias("mfacing", "mface")
 
 
 --- Overrides to core WorldEdit commands
