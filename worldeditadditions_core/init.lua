@@ -20,15 +20,16 @@ worldeditadditions_core = {
 	safe_region_limits = {},
 	-- The default limit for new players on the number of potential nodes changed before safe_region kicks in.
 	safe_region_limit_default = 100000,
-	register_command = dofile(modpath.."/core/register_command.lua")
 }
 
+local wea_c = worldeditadditions_core
+wea_c.register_command = dofile(modpath.."/core/register_command.lua")
+wea_c.fetch_command_def = dofile(modpath.."/core/fetch_command_def.lua")
 
-local we_c = worldeditadditions_core
 
 -- Initialise WorldEdit stuff if the WorldEdit mod is not present
 if minetest.global_exists("worldedit") then
-	dofile(we_c.modpath.."/core/integrations/worldedit.lua")
+	dofile(wea_c.modpath.."/core/integrations/worldedit.lua")
 else
-	dofile(we_c.modpath.."/core/integrations/noworldedit.lua")
+	dofile(wea_c.modpath.."/core/integrations/noworldedit.lua")
 end

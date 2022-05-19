@@ -1,7 +1,7 @@
 -- WARNING: safe_region MUST NOT be imported more than once, as it defines chat commands. If you want to import it again elsewhere, check first that multiple dofile() calls don't execute a file more than once.
-local modpath = minetest.get_modpath("worldeditadditions_core")
-local safe_region = dofile(modpath.."/core/safe_region.lua")
-local human_size = dofile(modpath.."/core/lib/human_size.lua")
+local wea_c = worldeditadditions_core
+local safe_region = dofile(wea_c.modpath.."/core/safe_region.lua")
+local human_size = dofile(wea_c.modpath.."/core/lib/human_size.lua")
 
 -- TODO: Reimplement worldedit.player_notify(player_name, msg_text)
 
@@ -14,7 +14,6 @@ local function run_command_stage2(player_name, func, parse_result)
 end
 
 local function run_command(cmdname, options, player_name, paramtext)
-	local we_c = worldeditadditions_core
 	if options.require_pos > 0 and not worldedit.pos1[player_name] then
 		worldedit.player_notify(player_name, "Error: pos1 must be selected to use this command.")
 		return false
@@ -34,9 +33,9 @@ local function run_command(cmdname, options, player_name, paramtext)
 	if options.nodes_needed then
 		local potential_changes = options.nodes_needed(player_name, unpack(parse_result))
 		
-		local limit = we_c.safe_region_limit_default
-		if we_c.safe_region_limits[player_name] then
-			limit = we_c.safe_region_limits[player_name]
+		local limit = wea_c.safe_region_limit_default
+		if wea_c.safe_region_limits[player_name] then
+			limit = wea_c.safe_region_limits[player_name]
 		end
 		
 		if potential_changes > limit then

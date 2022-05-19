@@ -3,6 +3,7 @@
 -- ██ ██  ██ ██    ██ ██ ███████ █████   ███████ ██████  ██████  ██     ████    █████  ██   ██
 -- ██  ██ ██ ██    ██ ██      ██ ██      ██   ██ ██      ██      ██      ██    ██      ██   ██
 -- ██   ████  ██████  ██ ███████ ███████ ██   ██ ██      ██      ███████ ██    ███████ ██████
+local wea_c = worldeditadditions_core
 
 
 worldedit.register_command("noiseapply2d", {
@@ -19,7 +20,7 @@ worldedit.register_command("noiseapply2d", {
 		end
 		
 		-- Note that we search the worldedit commands here, not the minetest ones
-		local cmd_we = worldedit.registered_commands[cmd_name]
+		local cmd_we = wea_c.fetch_command_def(cmd_name)
 		if cmd_we == nil then
 			return false, "Error: "..cmd_name.." isn't a valid command."
 		end

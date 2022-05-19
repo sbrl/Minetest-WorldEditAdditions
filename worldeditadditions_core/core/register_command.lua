@@ -5,15 +5,14 @@
 -- ██   ██ ███████  ██████  ██ ███████    ██    ███████ ██   ██
 
 -- WorldEditAdditions chat command registration
-local modpath = minetest.get_modpath("worldeditadditions_core")
-local run_command = dofile(modpath.."/core/run_command.lua")
+local wea_c = worldeditadditions_core
+local run_command = dofile(wea_c.modpath.."/core/run_command.lua")
 
 local function log_error(cmdname, error_message)
 	minetest.log("error", "register_command("..cmdname..") error: "..error_message)
 end
 
 local function register_command(cmdname, options)
-	local we_c = worldeditadditions_core
 	
 	---
 	-- 1: Validation

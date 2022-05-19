@@ -11,7 +11,7 @@
 -- The strategy here is not to have duplicate content, but to pull data from 
 -- existing sources.
 -- Long-form article descriptions: Chat-Command-Reference.md
--- Short descriptions: Undecided, but maybe worldedit.registered_commands
+-- Short descriptions: Undecided, but maybe from the registered command definition?
 
 worldeditadditions.doc = {}
 
