@@ -33,7 +33,7 @@ local function register_command(cmdname, options)
 		log_error(cmdname, "The func option is not a function.")
 		return false
 	end
-	if we_c.registered_commands[cmdname] and options.override ~= true then
+	if wea_c.registered_commands[cmdname] and options.override ~= true then
 		log_error(cmdname, "A WorldEditAdditions command with that name is registered, but the option override is not set to true.")
 		return false
 	end
@@ -57,7 +57,7 @@ local function register_command(cmdname, options)
 			run_command(cmdname, options, player_name, paramtext)
 		end
 	})
-	we_c.registered_commands[cmdname] = options
+	wea_c.registered_commands[cmdname] = options
 end
 
 return register_command
