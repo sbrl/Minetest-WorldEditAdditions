@@ -43,6 +43,8 @@ local function run_command(cmdname, options, player_name, paramtext)
 			safe_region(player_name, cmdname, function()
 				run_command_stage2(player_name, options.func, parse_result)
 			end)
+		else
+			run_command_stage2(player_name, options.func, parse_result)	
 		end
 	else
 		run_command_stage2(player_name, options.func, parse_result)

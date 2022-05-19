@@ -25,11 +25,11 @@ local function register_command(cmdname, options)
 		log_error(cmdname, "The description option is not a string.")
 		return false
 	end
-	if type(options.parse) ~= "string" then
+	if type(options.parse) ~= "function" then
 		log_error(cmdname, "The parse option is not a function.")
 		return false
 	end
-	if type(options.func) ~= "string" then
+	if type(options.func) ~= "function" then
 		log_error(cmdname, "The func option is not a function.")
 		return false
 	end
