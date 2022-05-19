@@ -58,6 +58,9 @@ local function register_command(cmdname, options)
 		end
 	})
 	wea_c.registered_commands[cmdname] = options
+	if minetest.global_exists("worldedit") then
+		worldedit.registered_commands[cmdname] = options
+	end
 end
 
 return register_command
