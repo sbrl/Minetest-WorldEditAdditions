@@ -6,7 +6,7 @@ local Vector3 = wea.Vector3
 -- ██      ██    ██ ██ ██  ██ ██    ██ ██    ██ ██     ██    ██ █████
 -- ██      ██    ██ ██  ██ ██  ██  ██  ██    ██ ██      ██  ██  ██
 --  ██████  ██████  ██   ████   ████    ██████  ███████  ████   ███████
-worldedit.register_command("convolve", {
+worldeditadditions_core.register_command("convolve", {
 	params = "<kernel> [<width>[,<height>]] [<sigma>]",
 	description = "Advanced version of //smooth from we_env. Convolves over the defined region with the given kernel. Possible kernels: box, pascal, gaussian. The width & height (if specified) must be odd integers. If the height is not specified, it defaults to the width. gaussian should give the smoothest result, but the width & height must be identical. The sigma value is only applicable to gaussian kernels, and can be thought of as the 'smoothness' to apply.",
 	privs = { worldedit = true },

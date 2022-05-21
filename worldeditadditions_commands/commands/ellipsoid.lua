@@ -30,7 +30,7 @@ local function parse_params_ellipsoid(params_text)
 	return true, replace_node, radius, hollow
 end
 
-worldedit.register_command("ellipsoid", {
+worldeditadditions_core.register_command("ellipsoid", {
 	params = "<rx> <ry> <rz> <replace_node> [h[ollow]]",
 	description = "Creates a 3D ellipsoid with a radius of (rx, ry, rz) at pos1, filled with <replace_node>.",
 	privs = { worldedit = true },
@@ -53,7 +53,7 @@ worldedit.register_command("ellipsoid", {
 })
 
 -- TODO: This duplicates a lot of code. Perhaps we can trim it down a bit?
-worldedit.register_command("hollowellipsoid", {
+worldeditadditions_core.register_command("hollowellipsoid", {
 	params = "<rx> <ry> <rz> <replace_node>",
 	description = "Creates a 3D hollow ellipsoid with a radius of (rx, ry, rz) at pos1, made out of <replace_node>.",
 	privs = { worldedit = true },

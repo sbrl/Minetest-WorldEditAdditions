@@ -4,7 +4,7 @@
 -- ██  ██  ██      ██ ██  ███    ██
 -- ██      ██ ███████ ██ ███████ ███████
 local wea = worldeditadditions
-worldedit.register_command("msize", {
+worldeditadditions_core.register_command("msize", {
 	params = "",
 	description = "Return the length of each axis of current selection.",
 	privs = { worldedit = true },

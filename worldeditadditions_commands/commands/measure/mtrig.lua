@@ -5,7 +5,7 @@
 -- ██      ██    ██    ██   ██ ██  ██████
 local wea = worldeditadditions
 local v3 = worldeditadditions.Vector3
-worldedit.register_command("mtrig", {
+worldeditadditions_core.register_command("mtrig", {
 	params = "",
 	description = "Return the length of and angles of an imginary line between pos1 and pos2 in the selection.",
 	privs = { worldedit = true },

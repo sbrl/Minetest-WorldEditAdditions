@@ -3,7 +3,7 @@
 -- ██  █  ██ ███████ ██      ██      ███████
 -- ██ ███ ██ ██   ██ ██      ██           ██
 --  ███ ███  ██   ██ ███████ ███████ ███████
-worldedit.register_command("walls", {
+worldeditadditions_core.register_command("walls", {
 	params = "[<replace_node=dirt> [<thickness=1>]]",
 	description = "Creates vertical walls of <replace_node> around the inside edges of the defined region. Optionally specifies a thickness for the walls to be created (defaults to 1)",
 	privs = { worldedit = true },

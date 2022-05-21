@@ -3,7 +3,7 @@
 -- █████   ██      ██    ██ ██    ██ ██   ██ █████   ██ ██      ██
 -- ██      ██      ██    ██ ██    ██ ██   ██ ██      ██ ██      ██
 -- ██      ███████  ██████   ██████  ██████  ██      ██ ███████ ███████
-worldedit.register_command("floodfill", {
+worldeditadditions_core.register_command("floodfill", {
 	params = "[<replace_node> [<radius>]]",
 	description = "Floods all connected nodes of the same type starting at pos1 with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 20).",
 	privs = { worldedit = true },

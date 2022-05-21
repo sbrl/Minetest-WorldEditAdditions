@@ -3,7 +3,7 @@
 -- ██      ██ ██ ██  ██ █████
 -- ██      ██ ██  ██ ██ ██
 -- ███████ ██ ██   ████ ███████
-worldedit.register_command("line", {
+worldeditadditions_core.register_command("line", {
 	params = "[<replace_node> [<radius>]]",
 	description = "Draws a line of a given radius (default: 1) from pos1 to pos2 in the given node (default: dirt).",
 	privs = { worldedit = true },

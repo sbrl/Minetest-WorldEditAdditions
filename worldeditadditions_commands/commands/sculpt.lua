@@ -7,7 +7,7 @@ local Vector3 = wea.Vector3
 -- ███████ ██      ██    ██ ██      ██████     ██
 --      ██ ██      ██    ██ ██      ██         ██
 -- ███████  ██████  ██████  ███████ ██         ██
-worldedit.register_command("sculpt", {
+worldeditadditions_core.register_command("sculpt", {
 	params = "[<brush_name=default> [<height=5> [<brush_size=10>]]]",
 	description = "Applies a sculpting brush to the terrain with a given height. See //sculptlist to list all available brushes. Note that while the brush size is configurable, the actual brush size you end up with may be slightly different to that which you request due to brush size restrictions.",
 	privs = { worldedit = true },

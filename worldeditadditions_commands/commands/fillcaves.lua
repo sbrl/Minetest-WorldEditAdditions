@@ -3,7 +3,7 @@
 -- █████   ██ ██      ██      ██      ███████ ██    ██ █████   ███████
 -- ██      ██ ██      ██      ██      ██   ██  ██  ██  ██           ██
 -- ██      ██ ███████ ███████  ██████ ██   ██   ████   ███████ ███████
-worldedit.register_command("fillcaves", {
+worldeditadditions_core.register_command("fillcaves", {
 	params = "[<node_name>]",
 	description = "Fills in all airlike nodes beneath the first non-airlike node detected in each column.",
 	privs = { worldedit = true },

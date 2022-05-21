@@ -3,9 +3,10 @@
 -- ██ ██  ██ ██    ██ ██ ███████ █████   ███████ ██████  ██████  ██     ████    █████  ██   ██
 -- ██  ██ ██ ██    ██ ██      ██ ██      ██   ██ ██      ██      ██      ██    ██      ██   ██
 -- ██   ████  ██████  ██ ███████ ███████ ██   ██ ██      ██      ███████ ██    ███████ ██████
+local wea_c = worldeditadditions_core
 
 
-worldedit.register_command("noiseapply2d", {
+worldeditadditions_core.register_command("noiseapply2d", {
 	params = "<threshold> <scale> <command_name> <args>",
 	description = "Executes the given command (automatically prepending '//'), but uses a 2d noise function with both a threshold value (a number between 0 and 1) and a scale value (number, 1 = normal scale, for small areas 10+ is recommended) to filter where in the defined region it's applied.",
 	privs = { worldedit = true },
@@ -19,7 +20,7 @@ worldedit.register_command("noiseapply2d", {
 		end
 		
 		-- Note that we search the worldedit commands here, not the minetest ones
-		local cmd_we = worldedit.registered_commands[cmd_name]
+		local cmd_we = wea_c.fetch_command_def(cmd_name)
 		if cmd_we == nil then
 			return false, "Error: "..cmd_name.." isn't a valid command."
 		end

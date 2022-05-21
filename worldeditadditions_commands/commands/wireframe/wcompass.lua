@@ -4,7 +4,7 @@
 -- ██ ███ ██ ██      ██    ██ ██  ██  ██ ██      ██   ██      ██      ██
 --  ███ ███   ██████  ██████  ██      ██ ██      ██   ██ ███████ ███████
 local wea = worldeditadditions
-worldedit.register_command("wcompass", {
+worldeditadditions_core.register_command("wcompass", {
 	params = "<replace_node> [<bead_node>]",
 	description = "Creates a compass around pos1 with a single node bead pointing north (+Z).",
 	privs = {worldedit=true},

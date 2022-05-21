@@ -3,9 +3,9 @@
 -- ███████ ██ ██████  ███████ ██████  ██████  ██     ████
 -- ██   ██ ██ ██   ██ ██   ██ ██      ██      ██      ██
 -- ██   ██ ██ ██   ██ ██   ██ ██      ██      ███████ ██
+local wea_c  = worldeditadditions_core
 
-
-worldedit.register_command("airapply", {
+worldeditadditions_core.register_command("airapply", {
 	params = "<command_name> <args>",
 	description = "Executes the given command (automatically prepending '//'), but only on non-air nodes within the defined region.",
 	privs = { worldedit = true },
@@ -20,7 +20,7 @@ worldedit.register_command("airapply", {
 		end
 		
 		-- Note that we search the worldedit commands here, not the minetest ones
-		local cmd_we = worldedit.registered_commands[cmd_name]
+		local cmd_we = wea_c.fetch_command_def(cmd_name)
 		if cmd_we == nil then
 			return false, "Error: "..cmd_name.." isn't a valid command."
 		end

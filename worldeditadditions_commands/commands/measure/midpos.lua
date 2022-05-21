@@ -4,7 +4,7 @@
 -- ██  ██  ██ ██ ██   ██ ██      ██    ██      ██
 -- ██      ██ ██ ██████  ██       ██████  ███████
 local wea = worldeditadditions
-worldedit.register_command("midpos", {
+worldeditadditions_core.register_command("midpos", {
 	params = "",
 	description = "Return the mid point of current selection.",
 	privs = { worldedit = true },

@@ -5,7 +5,7 @@
 --  ███ ███  ██████   ██████  ██   ██
 local wea = worldeditadditions
 local v3 = worldeditadditions.Vector3
-worldedit.register_command("wbox", {
+worldeditadditions_core.register_command("wbox", {
 	params = "<replace_node>",
 	description = "Sets the edges of the current selection to <replace_node>",
 	privs = {worldedit=true},

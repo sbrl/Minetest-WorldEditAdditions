@@ -22,7 +22,7 @@ end
 -- ███████ ██      ███████ ██      █████
 --      ██ ██      ██   ██ ██      ██
 -- ███████  ██████ ██   ██ ███████ ███████
-worldedit.register_command("scale", {
+worldeditadditions_core.register_command("scale", {
 	params = "<axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]",
 	description = "Combined scale up / down. Takes either an axis name + a scale factor (e.g. y 3 or -z 2; negative values swap the anchor point for the scale operation), or 3 scale factor values for x, y, and z respectively. In the latter mode, a set of anchors can also be specified, which indicate which size the scale operation should be anchored to.",
 	privs = { worldedit = true },

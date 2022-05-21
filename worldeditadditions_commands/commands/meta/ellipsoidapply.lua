@@ -3,8 +3,9 @@
 -- █████   ██      ██      ██ ██████  ███████ █████   ███████ ██████  ██████  ██     ████
 -- ██      ██      ██      ██ ██           ██ ██      ██   ██ ██      ██      ██      ██
 -- ███████ ███████ ███████ ██ ██      ███████ ███████ ██   ██ ██      ██      ███████ ██
+local wea_c = worldeditadditions_core
 
-worldedit.register_command("ellipsoidapply", {
+worldeditadditions_core.register_command("ellipsoidapply", {
 	params = "<command_name> <args>",
 	description = "Executes the given command (automatically prepending '//'), clipping the result with an ellipse given by the defined region.",
 	privs = { worldedit = true },
@@ -21,7 +22,7 @@ worldedit.register_command("ellipsoidapply", {
 		-- print("cmd_name", cmd_name, "args_text", args_text)
 		
 		-- Note that we search the worldedit commands here, not the minetest ones
-		local cmd_we = worldedit.registered_commands[cmd_name]
+		local cmd_we = wea_c.fetch_command_def(cmd_name)
 		if cmd_we == nil then
 			return false, "Error: "..cmd_name.." isn't a valid command."
 		end

@@ -3,7 +3,7 @@
 -- ███████ ███████    ██    ███████ ██      █████
 --      ██      ██    ██    ██   ██ ██      ██  ██
 -- ███████ ███████    ██    ██   ██  ██████ ██   ██
-worldedit.register_command("sstack", {
+worldeditadditions_core.register_command("sstack", {
 	params = "",
 	description = "Displays the contents of your (per-user) selection stack.",
 	privs = { worldedit = true },

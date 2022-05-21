@@ -22,7 +22,7 @@ local function parse_with_name(name,args)
 	until not args:find("([%l%s+-]+%d+)%s*", i)
 	return true, vec
 end
-worldedit.register_command("sshift", {
+worldeditadditions_core.register_command("sshift", {
 	params = "<axis1> <distance1> [<axis2> <distance2> [<axis3> <distance3>]]",
 	description = "Shift the WorldEdit region in 3 dimensions.",
 	privs = { worldedit = true },

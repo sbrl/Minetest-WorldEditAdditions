@@ -4,7 +4,7 @@
 --      ██ ██   ██ ██      ██         ██
 -- ███████ ██   ██ ███████  ██████    ██
 local wea = worldeditadditions
-worldedit.register_command("srect", {
+worldeditadditions_core.register_command("srect", {
 	params = "[<axis1> [<axis2>]] <length>",
 	description = "Set WorldEdit region position 2 at a set distance along 2 axes.",
 	privs = { worldedit = true },

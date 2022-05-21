@@ -3,7 +3,7 @@
 -- ██    ██ ██    ██ █████   ██████  ██      ███████   ████
 -- ██    ██  ██  ██  ██      ██   ██ ██      ██   ██    ██
 --  ██████    ████   ███████ ██   ██ ███████ ██   ██    ██
-worldedit.register_command("overlay", {
+worldeditadditions_core.register_command("overlay", {
 	params = "<replace_node_a> [<chance_a>] <replace_node_b> [<chance_b>] [<replace_node_N> [<chance_N>]] ...",
 	description = "Places <replace_node_a> in the last contiguous air space encountered above the first non-air node. In other words, overlays all top-most nodes in the specified area with <replace_node_a>. Optionally supports a mix of nodes and chances, as in //mix and //replacemix.",
 	privs = { worldedit = true },

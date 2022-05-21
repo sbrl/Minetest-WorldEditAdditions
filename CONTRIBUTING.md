@@ -37,7 +37,7 @@ When actually implementing stuff, here are a few guidelines that I recommend to 
 -- ██  ██ ██ ██   ██ ██  ██  ██ ██
 -- ██   ████ ██   ██ ██      ██ ███████
 local wea = worldeditadditions
-worldedit.register_command("{name}", {
+worldeditadditions_core.register_command("{name}", {
 	params = "<argument> <argument=default> <option1|option2|...> [<optional_argument> <optional_argument2> ...] | [<optional_argument> [<optional_argument2>]]",
 	description = "A **brief** description of what this command does",
 	privs = { worldedit = true },

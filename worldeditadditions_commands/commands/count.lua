@@ -3,7 +3,7 @@
 -- ██      ██    ██ ██    ██ ██ ██  ██    ██
 -- ██      ██    ██ ██    ██ ██  ██ ██    ██
 --  ██████  ██████   ██████  ██   ████    ██
-worldedit.register_command("count", {
+worldeditadditions_core.register_command("count", {
 	params = "",
 	description = "Counts all the nodes in the defined region.",
 	privs = { worldedit = true },

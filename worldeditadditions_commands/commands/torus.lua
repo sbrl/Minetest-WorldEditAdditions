@@ -52,7 +52,7 @@ local function parse_params_torus(params_text)
 	return true, replace_node, major_radius, minor_radius, axes, hollow
 end
 
-worldedit.register_command("torus", {
+worldeditadditions_core.register_command("torus", {
 	params = "<major_radius> <minor_radius> <replace_node> [<axes=xy> [h[ollow]]]",
 	description = "Creates a 3D torus with a major radius of <major_radius> and a minor radius of <minor_radius> at pos1, filled with <replace_node>, on axes <axes> (i.e. 2 axis names: xz, zy, etc).",
 	privs = { worldedit = true },
@@ -81,7 +81,7 @@ worldedit.register_command("torus", {
 })
 
 -- TODO: This duplicates a lot of code. Perhaps we can trim it down a bit?
-worldedit.register_command("hollowtorus", {
+worldeditadditions_core.register_command("hollowtorus", {
 	params = "<major_radius> <minor_radius> <replace_node> [<axes=xy>]",
 	description = "Creates a 3D hollow torus with a major radius of <major_radius> and a minor radius of <minor_radius> at pos1, made out of <replace_node>, on axes <axes> (i.e. 2 axis names: xz, zy, etc).",
 	privs = { worldedit = true },

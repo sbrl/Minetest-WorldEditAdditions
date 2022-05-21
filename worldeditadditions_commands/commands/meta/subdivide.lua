@@ -1,11 +1,12 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
 -- Test command:
 --	//multi //fp set1 1330 60 5455 //fp set2 1355 35 5430 //subdivide 10 10 10 fixlight //y
 
 local function will_trigger_saferegion(name, cmd_name, args)
-	if not worldedit.registered_commands[cmd_name] then return nil, "Error: That worldedit command could not be found (perhaps it hasn't been upgraded to worldedit.register_command() yet?)" end
-	local def = worldedit.registered_commands[cmd_name]
+	local def = wea_c.fetch_command_def(cmd_name)
+	if not def then return nil, "Error: That worldedit command could not be found (perhaps it hasn't been upgraded to worldedit.register_command() yet?)" end
 	if not def.parse then return nil, "Error: No parse method found (this is a bug)." end
 	
 	local parsed = {def.parse(args)}
@@ -29,7 +30,7 @@ local function emerge_stats_tostring(tbl_emerge)
 	return table.concat(result, ", ")
 end
 
-worldedit.register_command("subdivide", {
+worldeditadditions_core.register_command("subdivide", {
 	params = "<size_x> <size_y> <size_z> <command> <params>",
 	description = "Subdivides the given worldedit area into chunks and runs a worldedit command multiple times to cover the defined region. Note that the given command must NOT be prepended with any forward slashes - just like //cubeapply.",
 	privs = { worldedit = true },
@@ -57,7 +58,7 @@ worldedit.register_command("subdivide", {
 		
 		local cmd_name = parts[4]
 		
-		if not worldedit.registered_commands[cmd_name] then
+		if not wea_c.fetch_command_def(cmd_name) then
 			return false, "Error: The worldedit command '"..parts[4].."' does not exist (try /help)."
 		end
 		
@@ -73,7 +74,7 @@ worldedit.register_command("subdivide", {
 		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
 		local volume = worldedit.volume(pos1, pos2)
 		
-		local cmd = worldedit.registered_commands[cmd_name]
+		local cmd = wea_c.fetch_command_def(cmd_name)
 		-- Note that we don't need to check for //multi privileges, as it does it at runtime
 		if not minetest.check_player_privs(name, cmd.privs) then
 			return false, "Error: Your privileges are unsufficient to run '"..cmd_name.."'."

@@ -14,7 +14,7 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 		else wea.add_pos[name] = nil end
 	end
 end)
-worldedit.register_command("scloud", {
+worldeditadditions_core.register_command("scloud", {
 	params = "<0-6|stop|reset>",
 	description = "Set and add to WorldEdit region by punching up to six nodes that define the maximums of your target",
 	privs = {worldedit=true},
