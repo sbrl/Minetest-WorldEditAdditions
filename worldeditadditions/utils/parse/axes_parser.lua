@@ -58,7 +58,7 @@ local parse = {}
 -- For example, "zzy" would become "yz"
 -- @param: str: String: Axis declaration to parse
 -- @returns: Table|Bool: axis | axes | false
-function parse.axes(str)
+function parse.axis(str)
 	local axes, ret = {"x","y","z"}, {}
 	for i,v in ipairs(axes) do
 		if str:match(v) then table.insert(ret,v) end
@@ -96,7 +96,7 @@ function parse.keyword(str)
 		str = str:sub(2)
 	end
 	
-	local axes = parse.axes(str)
+	local axes = parse.axis(str)
 	if axes then
 		return key_instance.new("axis", axes, sign)
 	elseif keywords.dir[str] then
@@ -191,7 +191,7 @@ function parse.keytable(tbl, facing, sum)
 	end -- End of main for loop
 	
 	-- Handle Mirroring
-	if tmp.mirror then
+	if tmp.mirror and not sum then
 		max = max:max(min:abs())
 		min = max:multiply(-1)
 	end
