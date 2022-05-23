@@ -11,7 +11,7 @@ local key_instance = dofile(worldeditadditions.modpath.."/utils/parse/key_instan
 worldeditadditions.key_instance = key_instance
 worldeditadditions.parse = parse
 
--- Old parse functions (depricated).
+-- Old parse functions (marked for deprecation).
 -- Use parse.keytable or parse.keyword instead
 worldeditadditions.parse.axes = axes.parse_axes
 worldeditadditions.parse.axis_name = axes.parse_axis_name
