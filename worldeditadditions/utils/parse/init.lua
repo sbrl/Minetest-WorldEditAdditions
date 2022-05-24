@@ -4,17 +4,20 @@
 -- ██      ██   ██ ██   ██      ██ ██
 -- ██      ██   ██ ██   ██ ███████ ███████
 
+-- Unified Axes Keyword Parser
+local uak_parse = dofile(worldeditadditions.modpath.."/utils/parse/axes_parser.lua")
+-- Old axis parsing functions
 local axes = dofile(worldeditadditions.modpath.."/utils/parse/axes.lua")
-local parse = dofile(worldeditadditions.modpath.."/utils/parse/axes.lua")
-local key_instance = dofile(worldeditadditions.modpath.."/utils/parse/key_instance.lua")
 
-worldeditadditions.key_instance = key_instance
-worldeditadditions.parse = parse
-
--- Old parse functions (marked for deprecation).
--- Use parse.keytable or parse.keyword instead
-worldeditadditions.parse.axes = axes.parse_axes
-worldeditadditions.parse.axis_name = axes.parse_axis_name
+worldeditadditions.parse = {
+	keyword = uak_parse.keyword,
+	keytable = uak_parse.keytable,
+	number = uak_parse.num,
+	-- Old parse functions (marked for deprecation).
+	-- Use parse.keytable or parse.keyword instead
+	axes = axes.parse_axes,
+	axis_name = axes.parse_axis_name,
+}
 
 dofile(worldeditadditions.modpath.."/utils/parse/chance.lua")
 dofile(worldeditadditions.modpath.."/utils/parse/map.lua")

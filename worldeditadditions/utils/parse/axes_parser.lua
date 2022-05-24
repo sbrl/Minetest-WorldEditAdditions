@@ -31,24 +31,26 @@ else
 end
 
 --- Unified Axis Keywords banks
-local keywords = {}
--- Direction keywords
-keywords.dir = {
-	["?"] = "front", f = "front",
-	facing = "front", front = "front",
-	b = "back", back = "back",
-	behind = "back", rear = "back",
-	l = "left", left = "left",
-	r = "right", right = "right",
-	u = "up", up = "up",
-	d = "down", down = "down",
-}
--- Mirroring keywords
-keywords.mirroring = {
-	sym = true, symmetrical = true,
-	mirror = true, mir = true,
-	rev = true, reverse = true,
-	["true"] = true
+local keywords = {
+	-- Direction keywords
+	keywords.dir = {
+		["?"] = "front", f = "front",
+		facing = "front", front = "front",
+		b = "back", back = "back",
+		behind = "back", rear = "back",
+		l = "left", left = "left",
+		r = "right", right = "right",
+		u = "up", up = "up",
+		d = "down", down = "down",
+	},
+	
+	-- Mirroring keywords
+	keywords.mirroring = {
+		sym = true, symmetrical = true,
+		mirror = true, mir = true,
+		rev = true, reverse = true,
+		["true"] = true
+	},
 }
 
 --- Initialize parser function container
@@ -201,4 +203,8 @@ function parse.keytable(tbl, facing, sum)
 	
 end
 
-return parse
+return {
+	keyword = parse.keyword,
+	keytable = parse.keytable,
+	number = parse.num,
+}
