@@ -31,7 +31,15 @@ check_command luarocks;
 luarocks_root="${PWD}/.luarocks";
 
 # Setup the lua module path
-eval "$(luarocks --tree "${luarocks_root}" path)";
+# eval "$(luarocks --tree "${luarocks_root}" path)";
+
+PATH="$(luarocks --tree "${luarocks_root}" path --lr-bin):${PATH}";
+echo "PATH | ${PATH}";
+LUA_PATH="$(luarocks --tree "${luarocks_root}" path --lr-path);init.lua;./?.lua";
+LUA_CPATH="$(luarocks --tree "${luarocks_root}" path --lr-cpath);./?.so";
+
+
+export PATH LUA_PATH LUA_CPATH;
 
 mode="${1}"; if [[ "$#" -gt 0 ]]; then shift; fi
 
