@@ -10,8 +10,8 @@ local uak_parse = dofile(worldeditadditions.modpath.."/utils/parse/axes_parser.l
 local axes = dofile(worldeditadditions.modpath.."/utils/parse/axes.lua")
 
 worldeditadditions.parse = {
-	keyword = uak_parse.keyword,
-	keytable = uak_parse.keytable,
+	direction_keyword = uak_parse.keyword,
+	directions = uak_parse.keytable,
 	-- Old parse functions (marked for deprecation).
 	-- Use parse.keytable or parse.keyword instead
 	axes = axes.parse_axes,
