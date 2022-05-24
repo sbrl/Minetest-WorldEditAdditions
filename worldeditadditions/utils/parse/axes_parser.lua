@@ -206,5 +206,4 @@ end
 return {
 	keyword = parse.keyword,
 	keytable = parse.keytable,
-	number = parse.num,
 }
