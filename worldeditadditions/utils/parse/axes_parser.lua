@@ -33,7 +33,7 @@ end
 --- Unified Axis Keywords banks
 local keywords = {
 	-- Direction keywords
-	keywords.dir = {
+	dir = {
 		["?"] = "front", f = "front",
 		facing = "front", front = "front",
 		b = "back", back = "back",
@@ -45,7 +45,7 @@ local keywords = {
 	},
 	
 	-- Mirroring keywords
-	keywords.mirroring = {
+	mirroring = {
 		sym = true, symmetrical = true,
 		mirror = true, mir = true,
 		rev = true, reverse = true,
