@@ -16,7 +16,7 @@ local function register_alias(cmdname_target, cmdname_source, override)
 		return false
 	end
 	
-	print("DEBUG ALIAS source "..cmdname_source.." target "..cmdname_target)
+	-- print("DEBUG ALIAS source "..cmdname_source.." target "..cmdname_target)
 	
 	if minetest.chatcommands["/"..cmdname_target] then
 		minetest.override_chatcommand(
