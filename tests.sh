@@ -32,6 +32,9 @@ luarocks_root="${PWD}/.luarocks";
 
 # Setup the lua module path
 # eval "$(luarocks --tree "${luarocks_root}" path)";
+echo "PATH | ${PATH}";
+echo "LUA_PATH | ${LUA_PATH}";
+echo "LUA_CPATH | ${LUA_CPATH}";
 
 PATH="$(luarocks --tree "${luarocks_root}" path --lr-bin):${PATH}";
 LUA_PATH="$(luarocks --tree "${luarocks_root}" path --lr-path);init.lua;./?.lua;${LUA_PATH}";
