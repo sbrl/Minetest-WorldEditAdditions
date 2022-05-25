@@ -31,15 +31,13 @@ check_command luarocks;
 luarocks_root="${PWD}/.luarocks";
 
 # Setup the lua module path
-# eval "$(luarocks --tree "${luarocks_root}" path)";
-echo "PATH | ${PATH}";
-echo "LUA_PATH | ${LUA_PATH}";
-echo "LUA_CPATH | ${LUA_CPATH}";
-
-PATH="$(luarocks --tree "${luarocks_root}" path --lr-bin):${PATH}";
-LUA_PATH="$(luarocks --tree "${luarocks_root}" path --lr-path);init.lua;./?.lua;${LUA_PATH}";
-LUA_CPATH="$(luarocks --tree "${luarocks_root}" path --lr-cpath);./?.so;${LUA_CPATH}";
-
+if [[ "${OSTYPE}" == *"msys"* ]]; then
+	PATH="$(luarocks --tree "${luarocks_root}" path --lr-bin):${PATH}";
+	LUA_PATH="$(luarocks --tree "${luarocks_root}" path --lr-path);init.lua;./?.lua;${LUA_PATH}";
+	LUA_CPATH="$(luarocks --tree "${luarocks_root}" path --lr-cpath);./?.so;${LUA_CPATH}";
+else
+	eval "$(luarocks --tree "${luarocks_root}" path)";
+fi
 
 export PATH LUA_PATH LUA_CPATH;
 
