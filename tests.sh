@@ -34,9 +34,8 @@ luarocks_root="${PWD}/.luarocks";
 # eval "$(luarocks --tree "${luarocks_root}" path)";
 
 PATH="$(luarocks --tree "${luarocks_root}" path --lr-bin):${PATH}";
-echo "PATH | ${PATH}";
-LUA_PATH="$(luarocks --tree "${luarocks_root}" path --lr-path);init.lua;./?.lua";
-LUA_CPATH="$(luarocks --tree "${luarocks_root}" path --lr-cpath);./?.so";
+LUA_PATH="$(luarocks --tree "${luarocks_root}" path --lr-path);init.lua;./?.lua;${LUA_PATH}";
+LUA_CPATH="$(luarocks --tree "${luarocks_root}" path --lr-cpath);./?.so;${LUA_CPATH}";
 
 
 export PATH LUA_PATH LUA_CPATH;
@@ -54,7 +53,15 @@ run_syntax_check() {
 }
 
 run_test() {
-	.luarocks/bin/busted --no-auto-insulate --pattern ".test.lua" .tests;
+	busted_path=".luarocks/bin/busted";
+	if [[ ! -r "${busted_path}" ]]; then
+		busted_path=".luarocks/bin/busted.bat";
+	fi
+	if [[ ! -r "${busted_path}" ]]; then
+		echo "Error: Failed to find busted at .luarocks/bin/busted or .luarocks/bin/busted.bat" >&2;
+		exit 1;
+	fi
+	"${busted_path}" --no-auto-insulate --pattern ".test.lua" .tests;
 }
 
 case "${mode}" in
@@ -68,10 +75,6 @@ case "${mode}" in
 		fi
 		run_syntax_check;
 		run_test;
-		;;
-	
-	busted )
-		.luarocks/bin/busted "${@}";
 		;;
 	
 	* )
