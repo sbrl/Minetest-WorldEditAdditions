@@ -27,11 +27,23 @@ if worldeditadditions then
 	local wea = worldeditadditions
 	key_instance = dofile(wea.modpath.."/utils/parse/key_instance.lua")
 else
-	key_instance = require("worldeditadditions.key_instance")
+	key_instance = require("worldeditadditions.utils.parse.key_instance")
 end
 
 --- Unified Axis Keywords banks
 local keywords = {
+	-- Compass keywords
+	compass = {
+		n = "z", north = "z",
+		["-n"] = "-z", ["-north"] = "-z",
+		s = "-z", south = "-z",
+		["-s"] = "z", ["-south"] = "z",
+		e = "x", east = "x",
+		["-e"] = "-x", ["-east"] = "-x",
+		w = "-x", west = "-x",
+		["-w"] = "x", ["-west"] = "x",
+	},
+	
 	-- Direction keywords
 	dir = {
 		["?"] = "front", f = "front",
@@ -91,6 +103,8 @@ end
 function parse.keyword(str)
 	if type(str) ~= "string" then
 		return key_instance.new("err", "Error: \""..tostring(str).."\" is not a string.", 404)
+	elseif keywords.compass[str] then
+		str = keywords.compass[str]
 	end
 	local sign = 1
 	if str:sub(1,1) == "-" then
@@ -156,9 +170,10 @@ function parse.keytable(tbl, facing, sum)
 				-- Check key type and process further
 				if key_inst.type == "axis" then
 					tmp.axes = key_inst.entry
+					tmp.sign = key_inst.sign
 				elseif key_inst.type == "dir" then
 					tmp.axes = {facing[key_inst.entry].axis}
-					tmp.sign = facing[key_inst.entry].sign
+					tmp.sign = facing[key_inst.entry].sign * key_inst.sign
 				elseif key_inst.type == "rev" then
 					tmp.mirror = true
 				else
