@@ -140,7 +140,7 @@ end
 --- Converts Unified Axis Keyword table into Vector3 instances.
 -- @param: tbl: Table: Keyword table to parse
 -- @param: facing: Table: Output from worldeditadditions.player_dir(name)
--- @param: sum: Bool: Return a single vector by summing the 2 output vectors together
+-- @param: sum: Bool | String | nil: Return a single vector by summing the 2 output vectors together
 -- @returns: Vector3, [Vector3]: returns min, max Vector3s or sum Vector3 (if @param: sum ~= nil)
 -- if error: @returns: false, String: error message
 function parse.keytable(tbl, facing, sum)
