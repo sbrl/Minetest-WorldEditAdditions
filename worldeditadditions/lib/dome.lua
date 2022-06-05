@@ -48,22 +48,22 @@ function worldeditadditions.dome(pos, radius, replace_node, pointing_dir, hollow
 				if is_in_range then
 					-- It's inside the radius, but we're still not sure given this is a dome and not a sphere
 					local should_include = false
-					if x < centrepoint.x and pointing_dir.x < 0 then
+					if x <= centrepoint.x and pointing_dir.x < 0 then
 						should_include = true
 					end
-					if x > centrepoint.x and pointing_dir.x > 0 then
+					if x >= centrepoint.x and pointing_dir.x > 0 then
 						should_include = true
 					end
-					if y < centrepoint.y and pointing_dir.y < 0 then
+					if y <= centrepoint.y and pointing_dir.y < 0 then
 						should_include = true
 					end
-					if y > centrepoint.y and pointing_dir.y > 0 then
+					if y >= centrepoint.y and pointing_dir.y > 0 then
 						should_include = true
 					end
-					if z < centrepoint.z and pointing_dir.z < 0 then
+					if z <= centrepoint.z and pointing_dir.z < 0 then
 						should_include = true
 					end
-					if z > centrepoint.z and pointing_dir.z > 0 then
+					if z >= centrepoint.z and pointing_dir.z > 0 then
 						should_include = true
 					end
 					
