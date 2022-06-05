@@ -71,7 +71,7 @@ end
 -- @param	str	string	String to check (be sure to remove any + or -).
 -- @return	bool	If string is a valid dir then true.
 function selection.check_dir(str)
-	return (str == "front" or str == "back" or str == "left" or str == "right" or str == "up" or str == "down")
+	return (str == "facing" or str == "front" or str == "back" or str == "left" or str == "right" or str == "up" or str == "down")
 end
 
 return selection
