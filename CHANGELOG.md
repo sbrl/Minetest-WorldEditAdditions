@@ -9,6 +9,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
  - Migrate from `depends.txt` to `mod.conf`
  - `//sculpt`: Fix undefined `default` brush
+ - Commands that modify the terrain now ignore liquids
 
 
 ## v1.13: The transformational update (2nd January 2022)
