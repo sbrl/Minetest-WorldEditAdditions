@@ -587,7 +587,7 @@ Applies 2D noise to the terrain in the defined region. Like `//erode`, this comm
 Parameter	| Type		| Default Value	| Description
 ------------|-----------|---------------|-----------------------
 algorithm	| `string`	| perlinmt		| The 2D noise algorithm to apply - see below.
-apply		| `string|integer` | 5		| How to apply the noise to the terrain - see below.
+apply		| `string¦integer` | 5		| How to apply the noise to the terrain - see below.
 scalex		| `float`	| 1				| The scale of the noise on the x axis.
 scaley		| `float`	| 1				| The scale of the noise on the y axis.
 scalez		| `float`	| 1				| The scale of the noise on the z axis.
