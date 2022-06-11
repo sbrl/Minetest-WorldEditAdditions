@@ -57,23 +57,26 @@ module.exports = function parse_sections(source) {
 	for(let line of lines) {
 		
 		if(line.startsWith(`#`)) {
+			let heading_level = line.match(/^#+/)[0].length
 			
 			// 1: Deal with the previous section
 			if(acc.length > 0) {
 				let heading_level_prev = acc[0].match(/^#+/)[0].length;
-				if(heading_level_prev === 3 && acc.length > 0) {
+				if(heading_level_prev === 3 && acc.length > 0 && heading_level <= 3) {
 					result.push(make_section(acc, cat_current, cats));
 				}
 				
 			}
 			
 			// 2: Deal with the new line
-			let heading_level = line.match(/^#+/)[0].length
 			
 			if(heading_level === 2)
 				cat_current = extract_title(line);
 			
-			acc = [ line ];
+			if(heading_level > 3)
+				acc.push(line)
+			else
+				acc = [ line ];
 		}
 		else
 			acc.push(line);
