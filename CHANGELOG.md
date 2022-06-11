@@ -8,6 +8,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
  - Migrate from `depends.txt` to `mod.conf`
+ - `//sculpt`: Fix undefined `default` brush
 
 
 ## v1.13: The transformational update (2nd January 2022)

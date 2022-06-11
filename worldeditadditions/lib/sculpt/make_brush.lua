@@ -5,6 +5,7 @@ local wea = worldeditadditions
 -- @param	target_size	Vector3	The target size of the brush to create.
 -- @returns	true,table,Vector3|false,string	If the operation was successful, true followed by the brush in a 1D ZERO-indexed table followed by the actual size of the brush as a Vector3 (x & y components used only). If the operation was not successful, false and an error message string is returned instead.
 local function make_brush(brush_name, target_size)
+	if brush_name == "default" then brush_name = "circle_soft1" end
 	if not wea.sculpt.brushes[brush_name] then return false, "Error: That brush does not exist. Try using //sculptbrushes to list all available sculpting brushes." end
 	
 	local brush_def = wea.sculpt.brushes[brush_name]
