@@ -7,9 +7,12 @@ const path = require("path");
 const debug = require("debug");
 const htmlentities = require("html-entities");
 const phin = require("phin");
+const CleanCSS = require("clean-css");
+const { minify: minify_html } = require("html-minifier-terser");
 
 const HTMLPicture = require("./lib/HTMLPicture.js");
 
+const is_production = typeof process.env.NODE_ENV === "string" && process.env.NODE_ENV === "production";
 var nextid = 0;
 
 const image_filename_format = (_id, src, width, format, _options) => {
@@ -74,7 +77,49 @@ async function fetch(url) {
 	})).body;
 }
 
+function do_minifycss(source, output_path) {
+	if(!output_path.endsWith(".css") || !is_production) return source;
+	
+	const result = new CleanCSS({
+		level: 2
+	}).minify(source).styles.trim();
+	console.log(`MINIFY ${output_path}`, source.length, `→`, result.length, `(${((1 - (result.length / source.length)) * 100).toFixed(2)}% reduction)`);
+	return result;
+}
+
+async function do_minifyhtml(source, output_path) {
+	if(!output_path.endsWith(".html") || !is_production) return source;
+	
+	const result = await minify_html(source, {
+		collapseBooleanAttributes: true,
+		collapseWhitespace: true,
+		collapseInlineTagWhitespace: true,
+		continueOnParseError: true,
+		decodeEntities: true,
+		keepClosingSlash: true,
+		minifyCSS: true,
+		quoteCharacter: `"`,
+		removeComments: true,
+		removeAttributeQuotes: true,
+		removeRedundantAttributes: true,
+		removeScriptTypeAttributes: true,
+		removeStyleLinkTypeAttributes: true,
+		sortAttributes: true,
+		sortClassName: true,
+		useShortDoctype: true
+	});
+	
+	console.log(`MINIFY ${output_path}`, source.length, `→`, result.length, `(${((1 - (result.length / source.length)) * 100).toFixed(2)}% reduction)`);
+	
+	return result;
+}
+
+if(is_production) console.log("Production environment detected, minifying content");
+
 module.exports = function(eleventyConfig) {
+	eleventyConfig.addTransform("cssmin", do_minifycss);
+	eleventyConfig.addTransform("htmlmin", do_minifyhtml);
+	
 	eleventyConfig.addPassthroughCopy("img2brush/img2brush.js");
 	eleventyConfig.addAsyncShortcode("fetch", fetch);
 	
