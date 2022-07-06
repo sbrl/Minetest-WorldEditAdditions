@@ -11,8 +11,12 @@ const CleanCSS = require("clean-css");
 const { minify: minify_html } = require("html-minifier-terser");
 
 const HTMLPicture = require("./lib/HTMLPicture.js");
+const FileFetcher = require("./lib/FileFetcher.js");
+
+const file_fetcher = new FileFetcher();
 
 const is_production = typeof process.env.NODE_ENV === "string" && process.env.NODE_ENV === "production";
+
 var nextid = 0;
 
 const image_filename_format = (_id, src, width, format, _options) => {
@@ -63,10 +67,6 @@ async function shortcode_gallerybox(content, src, idthis, idprev, idnext) {
 }
 
 async function fetch(url) {
-	const pkg_obj = JSON.parse(await fs.promises.readFile(
-		path.join(__dirname, "package.json"), "utf8"
-	));
-	
 	return (await phin({
 		url,
 		headers: {
@@ -75,6 +75,10 @@ async function fetch(url) {
 		followRedirects: true,
 		parse: "string"
 	})).body;
+}
+
+function fetch_file(url) {
+	return file_fetcher.fetch_file(url);
 }
 
 function do_minifycss(source, output_path) {
@@ -122,6 +126,7 @@ module.exports = function(eleventyConfig) {
 	
 	eleventyConfig.addPassthroughCopy("img2brush/img2brush.js");
 	eleventyConfig.addAsyncShortcode("fetch", fetch);
+	eleventyConfig.addFilter("fetch_file", fetch_file);
 	
 	// eleventyConfig.addPassthroughCopy("images");
 	// eleventyConfig.addPassthroughCopy("css");

@@ -45,11 +45,11 @@
 		{{ content | safe }}
 		
 		<footer class="shadow-top">
-			<p>WorldEditAdditions built with ❤️ by these awesome people:</p>
+			<p>WorldEditAdditions is built with ❤️ by these awesome people:</p>
 			<ul class="contributor-list">
 				{% for contributor in contributors %}
 				<li><a href="{{ contributor.profile_url }}">
-					<img class="icon large" src="{{ contributor.avatar_url }}" alt="{{ contributor.name }}" />
+					<img class="icon large" src="{{ contributor.avatar_url | fetch_file }}" alt="{{ contributor.name }}" />
 					<span>{{ contributor.name }}</span>
 				</a></li>
 				{% endfor %}

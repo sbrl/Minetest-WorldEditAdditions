@@ -74,7 +74,7 @@ async function srcset(source_image, target_dir, urlpath, format = "__AUTO__", si
 				quality,
 				strip
 			});
-			console.log(`IMAGE\t${a.fcyan}${queue.size}/${queue.pending} tasks${a.reset}\t${a.fyellow}${pretty_ms(new Date() - start)}${a.reset}\t${a.fgreen}${target_current}${a.reset}`);
+			console.log(`${a.fmagenta}${a.hicol}IMAGE${a.reset}\t${a.fcyan}${queue.size}/${queue.pending} tasks${a.reset}\t${a.fyellow}${pretty_ms(new Date() - start)}${a.reset}\t${a.fgreen}${target_current}${a.reset}`);
 		});
 		// const size_target = await imagickal.dimensions(target_current);
 		
