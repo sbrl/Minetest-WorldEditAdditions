@@ -8,6 +8,9 @@ if [[ "${1}" == "ci" ]] && [[ ! -z "${is_main}" ]]; then
 	echo "Skipping build, because this commit does not appear to be on the 'main' branch, and we only deploy commits on the 'main' branch.";
 fi
 
+# This causes the eleventy docs site to minify stuff
+export NODE_ENV=production;
+
 #  ██████ ██     ██████  ██    ██ ██ ██      ██████
 # ██      ██     ██   ██ ██    ██ ██ ██      ██   ██
 # ██      ██     ██████  ██    ██ ██ ██      ██   ██
