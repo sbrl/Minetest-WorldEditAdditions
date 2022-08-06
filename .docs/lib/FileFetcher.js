@@ -44,7 +44,7 @@ class FileFetcher {
 		const response = await phin({
 			url,
 			headers: {
-				"user-agent": `WorldEditAdditionsStaticBuilder/${this.#pkg_obj.version} (Node.js/${process.version}; ${os.platform()} ${os.arch()}) eleventy/${this.#pkg_obj.devDependencies["@11ty/eleventy"].replace(/\^/, "")}`
+				"user-agent": `WorldEditAdditionsStaticBuilder/${this.#pkg_obj.version} (Node.js/${process.version}; ${os.platform()} ${os.arch()}) eleventy/${this.#pkg_obj.dependencies["@11ty/eleventy"].replace(/\^/, "")}`
 			},
 			followRedirects: true,
 			parse: 'none' // Returns a Buffer
