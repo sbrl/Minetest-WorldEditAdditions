@@ -19,7 +19,7 @@
 		"url": "https://github.com/sbrl/Minetest-WorldEditAdditions/issues"
 	},
 	"homepage": "https://github.com/sbrl/Minetest-WorldEditAdditions#readme",
-	"devDependencies": {
+	"dependencies": {
 		"@11ty/eleventy": "^1.0.1",
 		"chroma-js": "^2.4.2",
 		"columnify": "^1.6.0",
@@ -29,9 +29,7 @@
 		"p-memoize": "^7.1.0",
 		"p-queue": "^7.3.0",
 		"phin": "^3.6.1",
-		"pretty-ms": "^7.0.1"
-	},
-	"dependencies": {
+		"pretty-ms": "^7.0.1",
 		"clean-css": "^5.3.1",
 		"html-entities": "^2.3.3",
 		"html-minifier-terser": "^7.0.0-beta.0"

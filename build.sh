@@ -8,9 +8,6 @@ if [[ "${1}" == "ci" ]] && [[ ! -z "${is_main}" ]]; then
 	echo "Skipping build, because this commit does not appear to be on the 'main' branch, and we only deploy commits on the 'main' branch.";
 fi
 
-# This causes the eleventy docs site to minify stuff
-export NODE_ENV=production;
-
 #  ██████ ██     ██████  ██    ██ ██ ██      ██████
 # ██      ██     ██   ██ ██    ██ ██ ██      ██   ██
 # ██      ██     ██████  ██    ██ ██ ██      ██   ██
@@ -94,6 +91,9 @@ npm install;
 
 log_msg "Building website";
 
+# This causes the eleventy docs site to minify stuff
+# Note that this is NOT before the npm install, as npm doesn't install everything if we do that
+export NODE_ENV=production;
 npm run build;
 
 if [[ ! -d "_site" ]]; then
