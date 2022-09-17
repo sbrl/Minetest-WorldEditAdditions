@@ -8,6 +8,6 @@ function worldeditadditions.format.human_size(n, decimals)
 	local sizes = { "", "K", "M", "G", "T", "P", "E", "Y", "Z" }
 	local factor = math.floor((#tostring(n) - 1) / 3)
 	local multiplier = 10^(decimals or 0)
-	local result = math.floor(0.5 + (n / math.pow(1000, factor)) * multiplier) / multiplier
+	local result = math.floor(0.5 + (n / (1000 ^ factor)) * multiplier) / multiplier
 	return result .. sizes[factor+1]
 end

@@ -4,7 +4,9 @@
 -- This is needed because in Lua 5.1 it's the global unpack(), but in Lua 5.4
 -- it's moved to table.unpack().
 local function table_unpack(tbl, offset, count)
+	---@diagnostic disable-next-line: deprecated
 	if type(unpack) == "function" then
+		---@diagnostic disable-next-line: deprecated
 		return unpack(tbl, offset, count)
 	else
 		return table.unpack(tbl, offset, count)

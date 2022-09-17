@@ -5,8 +5,8 @@ function worldeditadditions.round(num, numDecimalPlaces)
 end
 
 function worldeditadditions.hypotenuse(x1, y1, x2, y2)
-	local xSquare = math.pow(x1 - x2, 2);
-	local ySquare = math.pow(y1 - y2, 2);
+	local xSquare = (x1 - x2) ^ 2;
+	local ySquare = (y1 - y2) ^ 2;
 	return math.sqrt(xSquare + ySquare);
 end
 

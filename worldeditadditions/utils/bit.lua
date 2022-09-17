@@ -23,7 +23,7 @@ else
 		powtab = { 1 }
 	}	
 	for b = 1, bit_local.bits - 1 do
-		bit_local.powtab[#bit_local.powtab + 1] = math.pow(2, b)
+		bit_local.powtab[#bit_local.powtab + 1] = 2 ^ b
 	end
 end
 
@@ -68,7 +68,7 @@ end
 -- bit_local.bnot
 if not bit_local.bnot then
 	bit_local.bnot = function(x)
-		return bit_local.bxor(x, math.pow((bit_local.bits or math.floor(math.log(x, 2))), 2) - 1)
+		return bit_local.bxor(x, (bit_local.bits or math.floor(math.log(x, 2)) ^ 2) - 1)
 	end
 end
 
