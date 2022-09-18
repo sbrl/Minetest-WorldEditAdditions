@@ -1,4 +1,5 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
 -- ███████  ██████ ██    ██ ██      ██████  ████████ ██      ██ ███████ ████████
 -- ██      ██      ██    ██ ██      ██   ██    ██    ██      ██ ██         ██
@@ -12,7 +13,7 @@ minetest.register_chatcommand("/sculptlist", {
 	func = function(name, params_text)
 		if name == nil then return end
 		if not params_text then params_text = "" end
-		params_text = wea.trim(params_text)
+		params_text = wea_c.trim(params_text)
 		
 		local msg = {}
 		
@@ -49,7 +50,7 @@ minetest.register_chatcommand("/sculptlist", {
 			-- Sort by brush name
 			table.sort(display, function(a, b) return a[1] < b[1] end)
 			
-			table.insert(msg, worldeditadditions.format.make_ascii_table(display))
+			table.insert(msg, wea_c.format.make_ascii_table(display))
 		end
 		
 		worldedit.player_notify(name, table.concat(msg))

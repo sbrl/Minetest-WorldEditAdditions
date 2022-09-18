@@ -1,9 +1,13 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 -- ███    ███ ███████ ██ ███████ ███████
 -- ████  ████ ██      ██    ███  ██
 -- ██ ████ ██ ███████ ██   ███   █████
 -- ██  ██  ██      ██ ██  ███    ██
 -- ██      ██ ███████ ██ ███████ ███████
-local wea = worldeditadditions
+
 worldeditadditions_core.register_command("msize", {
 	params = "",
 	description = "Return the length of each axis of current selection.",
@@ -14,8 +18,11 @@ worldeditadditions_core.register_command("msize", {
 	end,
 	func = function(name, params_text)
 		local str = "The dimensions of the current selection are "
-		local vec = vector.subtract(worldedit.pos2[name],worldedit.pos1[name])
-		wea.vector.abs(vec)
+		
+		local pos1 = Vector3.new(worldedit.pos1[name])
+		local pos2 = Vector3.new(worldedit.pos2[name])
+		
+		local vec = (pos2 - pos1):abs()
 		
 		return true, str .. "x: " .. vec.x .. ", y: " .. vec.y .. ", z: " .. vec.z
 	end,

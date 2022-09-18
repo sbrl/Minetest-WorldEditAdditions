@@ -3,7 +3,7 @@
 -- ██ ████ ██ █████   ███████ ██      █████
 -- ██  ██  ██ ██      ██   ██ ██      ██
 -- ██      ██ ██      ██   ██  ██████ ███████
-local wea = worldeditadditions
+
 worldeditadditions_core.register_command("mface", {
 	params = "",
 	description = "Return player facing axis.",

@@ -6,9 +6,9 @@
 
 -- Chat commands that measure things.
 
-local we_cm = worldeditadditions_commands.modpath .. "/commands/measure/"
+local subpath = worldeditadditions_commands.modpath .. "/commands/measure/"
 
-dofile(we_cm.."mface.lua")
-dofile(we_cm.."midpos.lua")
-dofile(we_cm.."msize.lua")
-dofile(we_cm.."mtrig.lua")
+dofile(subpath.."mface.lua")
+dofile(subpath.."midpos.lua")
+dofile(subpath.."msize.lua")
+dofile(subpath.."mtrig.lua")

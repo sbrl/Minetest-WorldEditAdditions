@@ -1,3 +1,5 @@
+local wea_c = worldeditadditions_core
+
 -- ███████  █████  ██████  ██      ██ ███    ██  ██████   █████  ██      ██  █████  ███████ ███████ ███████
 -- ██      ██   ██ ██   ██ ██      ██ ████   ██ ██       ██   ██ ██      ██ ██   ██ ██      ██      ██
 -- ███████ ███████ ██████  ██      ██ ██ ██  ██ ██   ███ ███████ ██      ██ ███████ ███████ █████   ███████
@@ -17,15 +19,15 @@ minetest.register_chatcommand("/saplingaliases", {
 		
 		if params_text == "aliases" then
 			table.insert(msg, "Currently registered aliases:\n")
-			local aliases = worldeditadditions.get_all_sapling_aliases()
+			local aliases = wea_c.get_all_sapling_aliases()
 			local display = {}
 			for node_name, alias in pairs(aliases) do
 				table.insert(display, { node_name, alias })
 			end
 			table.sort(display, function(a, b) return a[2] < b[2] end)
-			table.insert(msg, worldeditadditions.format.make_ascii_table(display))
+			table.insert(msg, wea_c.format.make_ascii_table(display))
 		elseif params_text == "all_saplings" then
-			local results = worldeditadditions.registered_nodes_by_group("sapling")
+			local results = wea_c.registered_nodes_by_group("sapling")
 			table.insert(msg, "Sapling-like nodes:\n")
 			local str = table.concat(results, "\n")
 			table.insert(msg, str)
