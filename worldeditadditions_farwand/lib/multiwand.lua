@@ -3,11 +3,11 @@ local wea = worldeditadditions
 local Vector3 = wea.Vector3
 
 local function push_pos(player_name, pos)
-	pos = Vector3.clone(pos)
 	if player_name == nil then return end
 	if pos == nil then
 		worldedit.player_notify(player_name, "[multi wand] Error: Too far away (try raising your maxdist with //farwand maxdist <number>)")
 	else
+		pos = Vector3.clone(pos)
 		wea_c.pos.push(player_name, pos)
 		worldedit.player_notify(player_name, "[multi wand] Added "..pos..". "..wea_c.pos.count(player_name).." points now registered.")
 	end
