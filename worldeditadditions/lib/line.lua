@@ -6,6 +6,8 @@
 -- ██      ██ ██ ██  ██ █████
 -- ██      ██ ██  ██ ██ ██
 -- ███████ ██ ██   ████ ███████
+
+
 function worldeditadditions.line(pos1, pos2, thickness, node_name)
 	local pos1_sorted, pos2_sorted = worldedit.sort_pos(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now

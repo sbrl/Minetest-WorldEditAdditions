@@ -1,4 +1,5 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 local Vector3 = wea.Vector3
 
 -- ██████   ██████  ███    ███ ███████
@@ -14,7 +15,7 @@ worldeditadditions_core.register_command("metaball", {
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
-		local parts = wea.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		if #parts < 1 then
 			return false, "Error: Not enough arguments (see /help /dome for usage information)."
@@ -88,7 +89,7 @@ worldeditadditions_core.register_command("metaball", {
 		end
 	end,
 	func = function(name, subcommand, subargs)
-		local start_time = wea.get_ms_time()
+		local start_time = wea_c.get_ms_time()
 		local message = ""
 		local append_time = false
 		if subcommand == "list" then
@@ -142,14 +143,14 @@ worldeditadditions_core.register_command("metaball", {
 			append_time = true
 		end
 		
-		local time_taken = wea.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
 		if append_time then
-			message = message.." in "..wea.format.human_time(time_taken)
+			message = message.." in "..wea_c.format.human_time(time_taken)
 		end
 		
-		minetest.log("action", name.." used //metaballs "..subcommand.." in "..wea.format.human_time(time_taken))
+		minetest.log("action", name.." used //metaballs "..subcommand.." in "..wea_c.format.human_time(time_taken))
 		return true, message
 	end
 })

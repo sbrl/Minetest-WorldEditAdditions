@@ -1,10 +1,11 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 local function parse_stage2(name, parts)
-	local success, vpos1, vpos2 = wea.parse.axes(
+	local success, vpos1, vpos2 = wea_c.parse.axes(
 		parts,
-		wea.player_dir(name)
+		wea_c.player_dir(name)
 	)
 	
 	if not success then return success, vpos1 end
@@ -32,7 +33,7 @@ worldeditadditions_core.register_command("move+", { -- TODO: Make this an overri
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
-		local parts = wea.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		return true, parts
 	end,
@@ -40,7 +41,7 @@ worldeditadditions_core.register_command("move+", { -- TODO: Make this an overri
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, parts)
-		local start_time = wea.get_ms_time()
+		local start_time = wea_c.get_ms_time()
 		
 		local success_a, copy_offset = parse_stage2(name, parts)
 		if not success_a then return success_a, copy_offset end
@@ -67,10 +68,10 @@ worldeditadditions_core.register_command("move+", { -- TODO: Make this an overri
 		worldedit.pos2[name] = target_pos2
 		worldedit.marker_update(name)
 		
-		local time_taken = wea.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name.." used //move+ from "..source_pos1.." - "..source_pos2.." to "..target_pos1.." - "..target_pos2..", modifying "..nodes_modified.." nodes in "..wea.format.human_time(time_taken))
-		return true, nodes_modified.." nodes moved using offset "..copy_offset.." in "..wea.format.human_time(time_taken)
+		minetest.log("action", name.." used //move+ from "..source_pos1.." - "..source_pos2.." to "..target_pos1.." - "..target_pos2..", modifying "..nodes_modified.." nodes in "..wea_c.format.human_time(time_taken))
+		return true, nodes_modified.." nodes moved using offset "..copy_offset.." in "..wea_c.format.human_time(time_taken)
 	end
 })

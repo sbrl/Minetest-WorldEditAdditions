@@ -1,3 +1,5 @@
+local wea_c = worldeditadditions_core
+
 local function parse_slope_range(text)
 	if string.match(text, "%.%.") then
 		-- It's in the form a..b

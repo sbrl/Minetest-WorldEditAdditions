@@ -1,15 +1,15 @@
 local wea = worldeditadditions
 local wea_c = worldeditadditions_core
-local Vector3 = worldeditadditions.Vector3
+local Vector3 = wea.Vector3
 
 local function parse_params_maze(params_text, is_3d)
 	if not params_text then params_text = "" end
-	params_text = wea.trim(params_text)
+	params_text = wea_c.trim(params_text)
 	if #params_text == 0 then
 		return false, "No arguments specified"
 	end
 	
-	local parts = worldeditadditions.split_shell(params_text)
+	local parts = wea_c.split_shell(params_text)
 	
 	local replace_node = parts[1]
 	local seed = os.time() * math.random()
@@ -31,7 +31,7 @@ local function parse_params_maze(params_text, is_3d)
 		path_depth = tonumber(parts[4])
 	end
 	if #parts >= param_index_seed then
-		seed = worldeditadditions.parse.seed(parts[param_index_seed])
+		seed = wea_c.parse.seed(parts[param_index_seed])
 	end
 	
 	replace_node = worldedit.normalize_nodename(replace_node)
@@ -75,7 +75,7 @@ wea_c.register_command("maze", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, replace_node, seed, path_length, path_width)
-		local start_time = wea.get_ms_time()
+		local start_time = wea_c.get_ms_time()
 		
 		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		local replaced = wea.maze2d(
@@ -85,10 +85,10 @@ wea_c.register_command("maze", {
 			path_length, path_width
 		)
 		
-		local time_taken = wea.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		minetest.log("action", name.." used //maze at "..pos1.." - "..pos2..", replacing "..replaced.." nodes in "..time_taken.."s")
-		return true, replaced.." nodes replaced in "..wea.format.human_time(time_taken)
+		return true, replaced.." nodes replaced in "..wea_c.format.human_time(time_taken)
 	end
 })
 
@@ -107,18 +107,24 @@ wea_c.register_command("maze3d", {
 	require_pos = 2,
 	parse = function(params_text)
 		local values = {parse_params_maze(params_text, true)}
-		return worldeditadditions.table.unpack(values)
+		return wea_c.table.unpack(values)
 	end,
 	nodes_needed = function(name)
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, replace_node, seed, path_length, path_width, path_depth)
-		local start_time = worldeditadditions.get_ms_time()
-		local replaced = worldeditadditions.maze3d(worldedit.pos1[name], worldedit.pos2[name], replace_node, seed, path_length, path_width, path_depth)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		local replaced = wea_c.maze3d(
+			pos1, pos2,
+			replace_node,
+			seed,
+			path_length, path_width, path_depth
+		)
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name.." used //maze3d at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing "..replaced.." nodes in "..time_taken.."s")
-		return true, replaced.." nodes replaced in "..worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //maze3d at "..pos1.." - "..pos2..", replacing "..replaced.." nodes in "..time_taken.."s")
+		return true, replaced.." nodes replaced in "..wea_c.format.human_time(time_taken)
 	end
 })

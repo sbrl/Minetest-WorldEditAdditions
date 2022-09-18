@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ██      ██ ███    ██ ███████
 -- ██      ██ ████   ██ ██
 -- ██      ██ ██ ██  ██ █████
@@ -39,13 +42,21 @@ worldeditadditions_core.register_command("line", {
 			)) -- Volume of a cylinder
 	end,
 	func = function(name, replace_node, radius)
-		local start_time = worldeditadditions.get_ms_time()
-		local success, stats = worldeditadditions.line(worldedit.pos1[name], worldedit.pos2[name], radius, replace_node)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local start_time = wea_c.get_ms_time()
+		-- Can't  sort here because the start & ending points matter
+		local pos1 = Vector3.clone(worldedit.pos1[name])
+		local pos2 = Vector3.clone(worldedit.pos2[name])
+		
+		local success, stats = worldeditadditions.line(
+			pos1, pos2,
+			radius,
+			replace_node
+		)
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		if success == false then return false, stats end
 		
-		minetest.log("action", name .. " used //line at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. stats.replaced .. " nodes in " .. time_taken .. "s")
-		return true, stats.replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //line from "..pos1.." to "..pos2..", replacing "..stats.replaced.." nodes in "..time_taken.."s")
+		return true, stats.replaced.." nodes replaced in "..wea_c.format.human_time(time_taken)
 	end
 })
