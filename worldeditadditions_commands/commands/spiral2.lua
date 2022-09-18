@@ -1,18 +1,18 @@
 
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
-worldeditadditions_core.register_command("spiral2", {
+wea_c.register_command("spiral2", {
 	params = "[circle|square] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]",
 	description = "Generates a spiral that fills the defined region using the specified replace node. The spiral is either square (default) or circular in shape. The interval specifies the distance between the walls of the spiral, and the acceleration specifies how quickly this value should increase.",
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
 		if not params_text then params_text = "" end
-		params_text = wea.trim(params_text)
+		params_text = wea_c.trim(params_text)
 		if params_text == "" then return true, "square", "dirt", 3, 0 end
 		
-		local parts = wea.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		local mode = "square"
 		local target_node = "dirt"
@@ -59,30 +59,30 @@ worldeditadditions_core.register_command("spiral2", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, mode, target_node, interval, acceleration)
-		local start_time = wea.get_ms_time()
+		local start_time = wea_c.get_ms_time()
 		
 		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		
 		local success, count
 		
 		if mode == "circle" then
-			success, count = wea.spiral_circle(
+			success, count = worldeditadditions.spiral_circle(
 				pos1, pos2,
 				target_node,
 				interval, acceleration
 			)
 			if not success then return success, count end
 		else
-			success, count = wea.spiral_square(
+			success, count = worldeditadditions.spiral_square(
 				pos1, pos2,
 				target_node,
 				interval, acceleration
 			)
 			if not success then return success, count end
 		end
-		local time_taken = wea.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //spiral at "..pos1.." - "..pos2..", adding " .. count .. " nodes in " .. time_taken .. "s")
-		return true, count .. " nodes replaced in " .. wea.format.human_time(time_taken)
+		return true, count .. " nodes replaced in " .. wea_c.format.human_time(time_taken)
 	end
 })

@@ -1,10 +1,14 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 -- ████████  ██████  ██████  ██    ██ ███████
 --    ██    ██    ██ ██   ██ ██    ██ ██
 --    ██    ██    ██ ██████  ██    ██ ███████
 --    ██    ██    ██ ██   ██ ██    ██      ██
 --    ██     ██████  ██   ██  ██████  ███████
 local function parse_params_torus(params_text)
-	local parts = worldeditadditions.split_shell(params_text)
+	local parts = wea_c.split_shell(params_text)
 	
 	if #parts < 1 then
 		return false, "Error: No replace_node specified."
@@ -59,24 +63,25 @@ worldeditadditions_core.register_command("torus", {
 	require_pos = 1,
 	parse = function(params_text)
 		local values = {parse_params_torus(params_text)}
-		return worldeditadditions.table.unpack(values)
+		return wea_c.table.unpack(values)
 	end,
 	nodes_needed = function(name, target_node, major_radius, minor_radius)
 		return math.ceil(2 * math.pi*math.pi * major_radius * minor_radius*minor_radius)
 	end,
 	func = function(name, target_node, major_radius, minor_radius, axes, hollow)
-		local start_time = worldeditadditions.get_ms_time()
+		local start_time = wea_c.get_ms_time()
+		local pos1 = Vector3.clone(worldedit.pos1[name])
 		local replaced = worldeditadditions.torus(
-			worldedit.pos1[name],
+			pos1,
 			major_radius, minor_radius,
 			target_node,
 			axes,
 			hollow
 		)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
-		minetest.log("action", name .. " used //torus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name .. " used //torus at " .. pos1 .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+		return true, replaced .. " nodes replaced in " .. wea_c.format.human_time(time_taken)
 	end
 })
 

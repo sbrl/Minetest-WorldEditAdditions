@@ -389,6 +389,7 @@ function Vector3.fromBearing(angle_x, angle_y, length)
 	)
 end
 
+-- TODO: Implement .volume() here
 
 
 --  ██████  ██████  ███████ ██████   █████  ████████  ██████  ██████

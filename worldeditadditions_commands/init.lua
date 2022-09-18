@@ -6,63 +6,57 @@
 -- @author Starbeamrainbowlabs
 
 worldeditadditions_commands = {}
-local we_c = worldeditadditions_commands
+local wea_cmd = worldeditadditions_commands
 
-we_c.modpath = minetest.get_modpath("worldeditadditions_commands")
+wea_cmd.modpath = minetest.get_modpath("worldeditadditions_commands")
 
-dofile(we_c.modpath.."/player_notify_suppress.lua")
+dofile(wea_cmd.modpath.."/player_notify_suppress.lua")
 
 
-
--- We no longer need our own implementation of safe_region thanks to @sfan5's
--- suggestion in issue #5 - yay!
--- we_c.safe_region, we_c.check_region, we_c.reset_pending
---	= dofile(we_c.modpath.."/safe.lua")
-
-dofile(we_c.modpath.."/commands/convolve.lua")
-dofile(we_c.modpath.."/commands/ellipsoid.lua")
-dofile(we_c.modpath.."/commands/ellipsoid2.lua")
-dofile(we_c.modpath.."/commands/erode.lua")
-dofile(we_c.modpath.."/commands/fillcaves.lua")
-dofile(we_c.modpath.."/commands/floodfill.lua")
-dofile(we_c.modpath.."/commands/hollow.lua")
-dofile(we_c.modpath.."/commands/layers.lua")
-dofile(we_c.modpath.."/commands/line.lua")
-dofile(we_c.modpath.."/commands/maze.lua")
-dofile(we_c.modpath.."/commands/noise2d.lua")
-dofile(we_c.modpath.."/commands/overlay.lua")
-dofile(we_c.modpath.."/commands/replacemix.lua")
-dofile(we_c.modpath.."/commands/scale.lua")
-dofile(we_c.modpath.."/commands/torus.lua")
-dofile(we_c.modpath.."/commands/walls.lua")
-dofile(we_c.modpath.."/commands/spiral2.lua")
-dofile(we_c.modpath.."/commands/copy.lua")
-dofile(we_c.modpath.."/commands/move.lua")
-dofile(we_c.modpath.."/commands/dome.lua")
-dofile(we_c.modpath.."/commands/metaball.lua")
-dofile(we_c.modpath.."/commands/count.lua")
-dofile(we_c.modpath.."/commands/sculpt.lua")
+dofile(wea_cmd.modpath.."/commands/convolve.lua")
+dofile(wea_cmd.modpath.."/commands/ellipsoid.lua")
+dofile(wea_cmd.modpath.."/commands/ellipsoid2.lua")
+dofile(wea_cmd.modpath.."/commands/erode.lua")
+dofile(wea_cmd.modpath.."/commands/fillcaves.lua")
+dofile(wea_cmd.modpath.."/commands/floodfill.lua")
+dofile(wea_cmd.modpath.."/commands/hollow.lua")
+dofile(wea_cmd.modpath.."/commands/layers.lua")
+dofile(wea_cmd.modpath.."/commands/line.lua")
+dofile(wea_cmd.modpath.."/commands/maze.lua")
+dofile(wea_cmd.modpath.."/commands/noise2d.lua")
+dofile(wea_cmd.modpath.."/commands/overlay.lua")
+dofile(wea_cmd.modpath.."/commands/replacemix.lua")
+dofile(wea_cmd.modpath.."/commands/scale.lua")
+dofile(wea_cmd.modpath.."/commands/torus.lua")
+dofile(wea_cmd.modpath.."/commands/walls.lua")
+dofile(wea_cmd.modpath.."/commands/spiral2.lua")
+dofile(wea_cmd.modpath.."/commands/copy.lua")
+dofile(wea_cmd.modpath.."/commands/move.lua")
+dofile(wea_cmd.modpath.."/commands/dome.lua")
+dofile(wea_cmd.modpath.."/commands/metaball.lua")
+dofile(wea_cmd.modpath.."/commands/count.lua")
+dofile(wea_cmd.modpath.."/commands/sculpt.lua")
 
 -- Meta Commands
-dofile(we_c.modpath.."/commands/meta/init.lua")
+dofile(wea_cmd.modpath.."/commands/meta/init.lua")
 
 -- Selection Tools
-dofile(we_c.modpath.."/commands/selectors/init.lua")
+dofile(wea_cmd.modpath.."/commands/selectors/init.lua")
 
 -- Measure Tools
-dofile(we_c.modpath.."/commands/measure/init.lua")
+dofile(wea_cmd.modpath.."/commands/measure/init.lua")
 
 -- Wireframe
-dofile(we_c.modpath.."/commands/wireframe/init.lua")
+dofile(wea_cmd.modpath.."/commands/wireframe/init.lua")
 
-dofile(we_c.modpath.."/commands/extra/saplingaliases.lua")
-dofile(we_c.modpath.."/commands/extra/basename.lua")
-dofile(we_c.modpath.."/commands/extra/sculptlist.lua")
+dofile(wea_cmd.modpath.."/commands/extra/saplingaliases.lua")
+dofile(wea_cmd.modpath.."/commands/extra/basename.lua")
+dofile(wea_cmd.modpath.."/commands/extra/sculptlist.lua")
 
 -- Don't register the //bonemeal command if the bonemeal mod isn't present
 if minetest.global_exists("bonemeal") then
-	dofile(we_c.modpath.."/commands/bonemeal.lua")
-	dofile(we_c.modpath.."/commands/forest.lua")
+	dofile(wea_cmd.modpath.."/commands/bonemeal.lua")
+	dofile(wea_cmd.modpath.."/commands/forest.lua")
 else
 	minetest.log("action", "[WorldEditAdditions] bonemeal mod not detected: //bonemeal and //forest commands not registered (if you see this message and you're using an alternative mod that provides bonemeal, please get in touch by opening an issue)")
 end
@@ -80,4 +74,4 @@ end
 -- end
 
 
-dofile(we_c.modpath.."/aliases.lua")
+dofile(wea_cmd.modpath.."/aliases.lua")

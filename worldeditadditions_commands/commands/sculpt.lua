@@ -1,6 +1,7 @@
-local we_c = worldeditadditions_commands
+local wea_c = worldeditadditions_core
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_cmd = worldeditadditions_commands
+local Vector3 = wea_c.Vector3
 
 -- ███████  ██████ ██    ██ ██      ██████  ████████
 -- ██      ██      ██    ██ ██      ██   ██    ██
@@ -17,7 +18,7 @@ worldeditadditions_core.register_command("sculpt", {
 			params_text = "circle_soft1"
 		end
 		
-		local parts = wea.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		local brush_name = "circle_soft1"
 		local height = 5
@@ -53,25 +54,25 @@ worldeditadditions_core.register_command("sculpt", {
 		-- This solution allows for brushes with negative values
 		-- it also allows for brushes that 'break the rules' and have values
 		-- that exceed the -1 to 1 range
-		local brush_min = wea.min(brush)
-		local brush_max = wea.max(brush)
+		local brush_min = wea_c.min(brush)
+		local brush_max = wea_c.max(brush)
 		local range_nodes = (brush_max * height) - (brush_min * height)
 		
 		return size_actual.x * size_actual.y * range_nodes
 	end,
 	func = function(name, brush_name, height, brush_size)
-		local start_time = wea.get_ms_time()
+		local start_time = wea_c.get_ms_time()
 		
-		local pos1 = wea.Vector3.clone(worldedit.pos1[name])
+		local pos1 = wea_c.Vector3.clone(worldedit.pos1[name])
 		local success, stats = wea.sculpt.apply(
 			pos1,
 			brush_name, height, brush_size
 		)
 		if not success then return success, stats.added end
 		
-		local time_taken = wea.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		minetest.log("action", name .. " used //sculpt at "..pos1..", adding " .. stats.added.." nodes and removing "..stats.removed.." nodes in "..time_taken.."s")
-		return true, stats.added.." nodes added and "..stats.removed.." removed in "..wea.format.human_time(time_taken)
+		return true, stats.added.." nodes added and "..stats.removed.." removed in "..wea_c.format.human_time(time_taken)
 	end
 })

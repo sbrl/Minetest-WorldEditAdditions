@@ -1,11 +1,13 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 -- ██████  ███████ ██████  ██       █████   ██████ ███████ ███    ███ ██ ██   ██
 -- ██   ██ ██      ██   ██ ██      ██   ██ ██      ██      ████  ████ ██  ██ ██
 -- ██████  █████   ██████  ██      ███████ ██      █████   ██ ████ ██ ██   ███
 -- ██   ██ ██      ██      ██      ██   ██ ██      ██      ██  ██  ██ ██  ██ ██
 -- ██   ██ ███████ ██      ███████ ██   ██  ██████ ███████ ██      ██ ██ ██   ██
-worldeditadditions_core.register_command("replacemix", {
+wea_c.register_command("replacemix", {
 	params = "<target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...",
 	description = "Replaces target_node with a mix of other nodes. Functions simmilarly to //mix. <chance> is optional and the chance to replace the target node at all. replace_node_a is the node to replace target_node with. If multiple nodes are specified in a space separated list, then when replacing an instance of target_node one is randomly chosen from the list. Just like with //mix, if a positive integer is present after a replace_node, that adds a weighting to that particular node making it more common.",
 	privs = { worldedit = true },
@@ -15,7 +17,7 @@ worldeditadditions_core.register_command("replacemix", {
 			return false, "Error: No arguments specified"
 		end
 		
-		local parts = wea.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		local target_node = nil
 		local target_node_chance = 1
@@ -30,16 +32,16 @@ worldeditadditions_core.register_command("replacemix", {
 					return false, "Error: Invalid target_node name"
 				end
 				mode = "target_chance"
-			elseif mode == "target_chance" and wea.parse.chance(part) then
-				target_node_chance = wea.parse.chance(part)
+			elseif mode == "target_chance" and wea_c.parse.chance(part) then
+				target_node_chance = wea_c.parse.chance(part)
 				mode = "replace_node"
-			elseif (mode == "target_chance" and not wea.parse.chance(part, "weight")) or mode == "replace_node" then
+			elseif (mode == "target_chance" and not wea_c.parse.chance(part, "weight")) or mode == "replace_node" then
 				mode = "replace_node"
-				if wea.parse.chance(part, "weight") then
+				if wea_c.parse.chance(part, "weight") then
 					if not last_node_name then
 						return false, "Error: No previous node name was found (this is a probably a bug)."
 					end
-					replace_nodes[last_node_name] = math.floor(wea.parse.chance(part, "weight"))
+					replace_nodes[last_node_name] = math.floor(wea_c.parse.chance(part, "weight"))
 				else
 					if last_node_name and not replace_nodes[last_node_name] then
 						replace_nodes[last_node_name] = 1
@@ -67,9 +69,10 @@ worldeditadditions_core.register_command("replacemix", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, target_node, target_node_chance, replace_nodes)
-		local start_time = worldeditadditions.get_ms_time()
-		
-		local success, changed, candidates, distribution = worldeditadditions.replacemix(
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+
+		local success, changed, candidates, distribution = wea.replacemix(
 			worldedit.pos1[name], worldedit.pos2[name],
 			target_node,
 			target_node_chance,
@@ -79,19 +82,19 @@ worldeditadditions_core.register_command("replacemix", {
 			return success, changed
 		end
 		
-		local nodes_total = worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
-		local percentage_replaced = worldeditadditions.round((changed / candidates)*100, 2)
-		local distribution_table = worldeditadditions.format.node_distribution(
+		local nodes_total = worldedit.volume(pos1, pos2)
+		local percentage_replaced = wea_c.round((changed / candidates)*100, 2)
+		local distribution_table = wea_c.format.node_distribution(
 			distribution,
 			changed,
 			true -- Add a grand total to the bottom
 		)
 		
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name .. " used //replacemix at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", replacing " .. changed.." nodes (out of "..nodes_total.." nodes) in "..time_taken.."s")
+		minetest.log("action", name .. " used //replacemix at "..pos1.." - "..pos2..", replacing " .. changed.." nodes (out of "..nodes_total.." nodes) in "..time_taken.."s")
 		
-		return true, distribution_table..changed.." out of "..candidates.." (~"..percentage_replaced.."%) candidates replaced in "..worldeditadditions.format.human_time(time_taken)
+		return true, distribution_table..changed.." out of "..candidates.." (~"..percentage_replaced.."%) candidates replaced in "..wea_c.format.human_time(time_taken)
 	end
 })

@@ -1,8 +1,12 @@
+local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 local function parse_scale_component(val)
 	local result = tonumber(val)
 	if result then return true, result end
-	if string.find(val, "/") then
-		local parts = worldeditadditions.split(val, "/", true)
+	if string.find(val, "/")  then
+		local parts = wea_c.split(val, "/", true)
 		local a = tonumber(parts[1])
 		local b = tonumber(parts[2])
 		if not b then return false, "Invalid number after the forward slash in scale component." end
@@ -22,7 +26,7 @@ end
 -- ███████ ██      ███████ ██      █████
 --      ██ ██      ██   ██ ██      ██
 -- ███████  ██████ ██   ██ ███████ ███████
-worldeditadditions_core.register_command("scale", {
+wea_c.register_command("scale", {
 	params = "<axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]",
 	description = "Combined scale up / down. Takes either an axis name + a scale factor (e.g. y 3 or -z 2; negative values swap the anchor point for the scale operation), or 3 scale factor values for x, y, and z respectively. In the latter mode, a set of anchors can also be specified, which indicate which size the scale operation should be anchored to.",
 	privs = { worldedit = true },
@@ -30,10 +34,10 @@ worldeditadditions_core.register_command("scale", {
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
-		local parts = worldeditadditions.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
-		local scale = vector.new(1, 1, 1)
-		local anchor = vector.new(1, 1, 1)
+		local scale = Vector3.new(1, 1, 1)
+		local anchor = Vector3.new(1, 1, 1)
 		
 		if #parts == 2 then
 			if not (parts[1] == "x" or parts[1] == "y" or parts[1] == "z"
@@ -48,7 +52,7 @@ worldeditadditions_core.register_command("scale", {
 				axis = axis:sub(2, 2)
 				anchor[axis] = -1
 			end
-			
+			-- BUG: POTENTIAL BUG HERE
 			scale[axis] = factor
 		elseif #parts >= 3 then
 			local success, val = parse_scale_component(parts[1])
@@ -102,14 +106,13 @@ worldeditadditions_core.register_command("scale", {
 		return volume * factor
 	end,
 	func = function(name, scale, anchor)
-		-- print("initial scale: "..worldeditadditions.vector.tostring(scale)..", anchor: "..worldeditadditions.vector.tostring(anchor))
 		
+		local start_time = wea_c.get_ms_time()
 		
-		local start_time = worldeditadditions.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		
-		local success, stats = worldeditadditions.scale(
-			worldedit.pos1[name],
-			worldedit.pos2[name],
+		local success, stats = wea.scale(
+			pos1, pos2,
 			scale, anchor
 		)
 		if not success then return success, stats end
@@ -118,10 +121,10 @@ worldeditadditions_core.register_command("scale", {
 		worldedit.pos2[name] = stats.pos2
 		worldedit.marker_update(name)
 		
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name.." used //scale at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", updating "..stats.updated.." nodes in "..time_taken.."s")
-		return true, stats.updated.." nodes updated in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //scale at "..pos1.." - "..pos2..", updating "..stats.updated.." nodes in "..time_taken.."s")
+		return true, stats.updated.." nodes updated in " .. wea_c.format.human_time(time_taken)
 	end
 })

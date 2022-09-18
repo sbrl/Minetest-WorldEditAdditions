@@ -21,7 +21,7 @@ local worldmt_settings = Settings(minetest.get_worldpath().."/world.mt")
 local should_override = worldmt_settings:get_bool("worldeditadditions_override_commands", false)
 if should_override then
 	minetest.log("info", "[WorldEditAdditions] Enabling override aliases")
-	worldeditadditions_core.register_alias("copy", "copy+", true)
-	worldeditadditions_core.register_alias("move", "move+", true)
-	worldeditadditions_core.register_alias("replace", "replacemix", true)
+	wea_c.register_alias("copy", "copy+", true)
+	wea_c.register_alias("move", "move+", true)
+	wea_c.register_alias("replace", "replacemix", true)
 end

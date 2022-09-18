@@ -6,7 +6,7 @@ local human_size = wea_c.format.human_size
 -- TODO: Reimplement worldedit.player_notify(player_name, msg_text)
 
 local function run_command_stage2(player_name, func, parse_result)
-	local success, result_message = func(player_name, unpack(parse_result))
+	local success, result_message = func(player_name, wea_c.table.unpack(parse_result))
 	if result_message then
 		-- TODO: If we were unsuccessfull, then colour the message red
 		worldedit.player_notify(player_name, result_message)
@@ -31,7 +31,7 @@ local function run_command(cmdname, options, player_name, paramtext)
 	end
 	
 	if options.nodes_needed then
-		local potential_changes = options.nodes_needed(player_name, unpack(parse_result))
+		local potential_changes = options.nodes_needed(player_name, wea_c.table.unpack(parse_result))
 		
 		local limit = wea_c.safe_region_limit_default
 		if wea_c.safe_region_limits[player_name] then

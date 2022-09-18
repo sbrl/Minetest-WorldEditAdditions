@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ██     ██  █████  ██      ██      ███████
 -- ██     ██ ██   ██ ██      ██      ██
 -- ██  █  ██ ███████ ██      ██      ███████
@@ -10,7 +13,7 @@ worldeditadditions_core.register_command("walls", {
 	require_pos = 2,
 	parse = function(params_text)
 		if not params_text or params_text == "" then params_text = "dirt" end
-		local parts = worldeditadditions.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		local target_node
 		local thickness = 1
@@ -42,14 +45,16 @@ worldeditadditions_core.register_command("walls", {
 		return worldedit.volume(pos1, pos2) - worldedit.volume(pos1, pos3)
 	end,
 	func = function(name, target_node, thickness)
-		local start_time = worldeditadditions.get_ms_time()
-		local success, replaced = worldeditadditions.walls(
-			worldedit.pos1[name], worldedit.pos2[name],
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		
+		local success, replaced = wea_c.walls(
+			pos1, pos2,
 			target_node, thickness
 		)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
-		minetest.log("action", name .. " used //walls from "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." to "..worldeditadditions.vector.tostring(worldedit.pos1[name])..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name .. " used //walls from "..pos1.." to "..pos2..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+		return true, replaced .. " nodes replaced in " .. wea_c.format.human_time(time_taken)
 	end
 })

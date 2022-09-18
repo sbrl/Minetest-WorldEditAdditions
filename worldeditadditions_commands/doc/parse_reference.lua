@@ -1,8 +1,8 @@
-
+local wea_c = worldeditadditions_core
 
 local function get_reference()
 	local lines = {}
-	for line in io.lines(worldeditadditions_commands.modpath.."/Chat-Command-Reference.md") do
+	for line in io.lines(wea_c.modpath.."/Chat-Command-Reference.md") do
 		table.insert(lines, line)
 	end
 	return lines
@@ -13,7 +13,7 @@ local function group_by_heading(lines, max_level)
 	local acc = {}
 	
 	for i,line in ipairs(lines) do
-		if worldeditadditions.str_starts(line, "#") then
+		if wea_c.str_starts(line, "#") then
 			local _, _, heading, headingtext = line:find("(#+)%s*(.*)")
 			if #heading <= max_level then
 				table.insert(groups, {
@@ -30,9 +30,9 @@ local function group_by_heading(lines, max_level)
 	return groups
 end
 
-function worldeditadditions.doc.parse_reference()
+local function parse_reference()
 	local lines = get_reference()
-	local headings = worldeditadditions.table.filter(
+	local headings = wea_c.table.filter(
 		group_by_heading(lines, 2),
 		function(item, i) return item.level ~= 2 end
 	)
@@ -41,5 +41,4 @@ function worldeditadditions.doc.parse_reference()
 	end
 end
 
-
-worldeditadditions.doc.parse_reference()
+return parse_reference

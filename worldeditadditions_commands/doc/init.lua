@@ -13,6 +13,7 @@
 -- Long-form article descriptions: Chat-Command-Reference.md
 -- Short descriptions: Undecided, but maybe from the registered command definition?
 
-worldeditadditions.doc = {}
+worldeditadditions.doc = {
+	parse_reference = dofile(worldeditadditions_commands.modpath.."/doc/parse_reference.lua")
+}
 
-dofile(worldeditadditions_commands.modpath.."/doc/parse_reference.lua")

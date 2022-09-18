@@ -1,0 +1,8 @@
+{
+	"Lua.diagnostics.disable": [
+		"trailing-space",
+		"undefined-global",
+		"lowercase-global",
+		"cast-local-type"
+	]
+}
