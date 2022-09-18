@@ -1,9 +1,13 @@
+local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 -- ███████ ███    ███  █████  ██   ██ ███████
 -- ██      ████  ████ ██   ██ ██  ██  ██
 -- ███████ ██ ████ ██ ███████ █████   █████
 --      ██ ██  ██  ██ ██   ██ ██  ██  ██
 -- ███████ ██      ██ ██   ██ ██   ██ ███████
-local wea = worldeditadditions
 worldeditadditions_core.register_command("smake", {
 	params = "<operation:odd|even|equal> <mode:grow|shrink|average> [<target=xyz> [<base>]]",
 	description = "Make one or more axes of the current selection odd, even, or equal to another.",
@@ -11,7 +15,7 @@ worldeditadditions_core.register_command("smake", {
 	require_pos = 2,
 	parse = function(params_text)
 		-- Split params_text, check for missing arguments and fill in empty spots
-		local parts = wea.split(params_text, "%s+", false)
+		local parts = wea_c.split(params_text, "%s+", false)
 		if #parts < 2 then
 			return false, "Error: Not enough arguments. Expected \"<operation> <mode> [<target=xyz> [<base>]]\"."
 		else
@@ -19,8 +23,8 @@ worldeditadditions_core.register_command("smake", {
 		end
 		
 		-- Initialize local variables and sets
-		local oper, mode, targ, base = wea.table.unpack(parts)
-		local operSet, modeSet = wea.table.makeset {"equal", "odd", "even"}, wea.table.makeset {"grow", "shrink", "avg"}
+		local oper, mode, targ, base = wea_c.table.unpack(parts)
+		local operSet, modeSet = wea_c.table.makeset {"equal", "odd", "even"}, wea_c.table.makeset {"grow", "shrink", "avg"}
 		
 		-- Main Logic
 		-- Check base if base is present and if so valid.
@@ -36,7 +40,7 @@ worldeditadditions_core.register_command("smake", {
 		if not targ then -- If no target set to default (xz)
 			targ = "xz"
 		elseif targ:match("[xyz]+") then -- ensure correct target syntax
-			targ = table.concat(wea.tochars(targ:match("[xyz]+"),true,true))
+			targ = table.concat(wea_c.tochars(targ:match("[xyz]+"),true,true))
 		else
 			return false, "Error: Invalid <target> \""..targ.."\". Expected \"x\" and or \"y\" and or \"z\"."
 		end
@@ -44,7 +48,7 @@ worldeditadditions_core.register_command("smake", {
 		if mode == "average" then -- If mode is average set to avg
 			mode = "avg"
 		elseif mode:match("[xyz]+") then -- If target is actually base set vars to correct values.
-			base, targ, mode = targ:sub(1,1), table.concat(wea.tochars(mode:match("[xyz]+"),true,true)), false
+			base, targ, mode = targ:sub(1,1), table.concat(wea_c.tochars(mode:match("[xyz]+"),true,true)), false
 		elseif not modeSet[mode] and not base then -- If mode is invalid and base isn't present throw error
 			return false, "Error: Invalid <mode> \""..mode.."\". Expected \"grow\", \"shrink\", or \"average\"/\"avg\"."
 		end
@@ -64,12 +68,12 @@ worldeditadditions_core.register_command("smake", {
 		return true, oper, mode, targ, base
 	end,
 	func = function(name, oper, mode, targ, base)
-		local p1, p2 = vector.new(worldedit.pos1[name]), vector.new(worldedit.pos2[name])
+		local pos1, pos2 = Vector3.clone(worldedit.pos1[name]), Vector3.clone(worldedit.pos2[name])
 		local eval -- Declare eval placeholder function to edit later
 		
-		local delta = vector.subtract(p2,p1) -- local delta equation: Vd(a) = V2(a) - V1(a)
+		local delta = pos2 - pos1 -- local delta equation: Vd(a) = V2(a) - V1(a)
 		local _tl = #targ -- Get targ length as a variable incase mode is "average"/"avg"
-		local targ = wea.tocharset(targ) -- Break up targ string into set table
+		local targ = wea_c.tocharset(targ) -- Break up targ string into set table
 		local _m =  0 -- _m is the container to hold the max, min or average (depending on the mode) of the axes in targ
 		
 		-- set _m to the max, min or mean of the target axes depending on mode or base if it exists
@@ -122,8 +126,8 @@ worldeditadditions_core.register_command("smake", {
 		
 		for k,v in pairs(targ) do delta[k] = eval(delta[k]) end
 		
-		worldedit.pos2[name] = vector.add(p1,delta)
+		worldedit.pos2[name] = pos1 + delta
 		worldedit.mark_pos2(name)
-		return true, "position 2 set to " .. minetest.pos_to_string(p2)
+		return true, "position 2 set to "..pos2
 	end
 })

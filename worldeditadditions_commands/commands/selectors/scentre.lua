@@ -1,9 +1,11 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ███████  ██████ ███████ ███    ██ ████████ ███████ ██████
 -- ██      ██      ██      ████   ██    ██    ██      ██   ██
 -- ███████ ██      █████   ██ ██  ██    ██    █████   ██████
 --      ██ ██      ██      ██  ██ ██    ██    ██      ██   ██
 -- ███████  ██████ ███████ ██   ████    ██    ███████ ██   ██
-local wea = worldeditadditions
 worldeditadditions_core.register_command("scentre", {
 	params = "",
 	description = "Set WorldEdit region positions 1 and 2 to the centre of the current selection.",
@@ -13,15 +15,17 @@ worldeditadditions_core.register_command("scentre", {
 		return true
 	end,
 	func = function(name)
-		local vecs = {}
-		vecs.mean = wea.vector.mean(worldedit.pos1[name],worldedit.pos2[name])
-		vecs.p1, vecs.p2 = vector.new(vecs.mean), vector.new(vecs.mean)
-		wea.vector.floor(vecs.p1)
-		wea.vector.ceil(vecs.p2)
-		worldedit.pos1[name], worldedit.pos2[name] = vecs.p1, vecs.p2
+		local mean = wea_c.vector.mean(worldedit.pos1[name],worldedit.pos2[name])
+		local pos1, pos2 = Vector3.new(mean), Vector3.new(mean)
+		
+		pos1 = pos1:floor()
+		pos2 = pos2:ceil()
+		
+		worldedit.pos1[name], worldedit.pos2[name] = pos1, pos2
 		worldedit.mark_pos1(name)
 		worldedit.mark_pos2(name)
-		return true, "position 1 set to " .. minetest.pos_to_string(vecs.p1) .. ", position 2 set to " .. minetest.pos_to_string(vecs.p2)
+		
+		return true, "position 1 set to "..pos1..", position 2 set to "..pos2
 	end,
 })
 

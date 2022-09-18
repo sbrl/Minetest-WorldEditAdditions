@@ -4,7 +4,7 @@ local v3 = worldeditadditions_core.Vector3
 -- @param	name	string	The name of the player to return facing direction of.
 -- @return	vector	Returns position.
 function wea_c.player_vector(name)
-	return minetest.get_player_by_name(name):get_pos()
+	return v3.clone(minetest.get_player_by_name(name):get_pos())
 end
 
 --- Returns the player's facing info including relative DIRs.

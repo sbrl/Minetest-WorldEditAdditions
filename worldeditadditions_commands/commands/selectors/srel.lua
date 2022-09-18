@@ -1,11 +1,15 @@
+local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 -- ███████ ██████  ███████ ██
 -- ██      ██   ██ ██      ██
 -- ███████ ██████  █████   ██
 --      ██ ██   ██ ██      ██
 -- ███████ ██   ██ ███████ ███████
-local wea = worldeditadditions
 local function parse_with_name(name,args)
-	local vec, tmp = vector.new(0, 0, 0), {}
+	local vec, tmp = Vector3.new(0, 0, 0), {}
 	local find, _, i = {}, 0, 0
 	repeat
 		_, i, tmp.proc = args:find("([%l%s+-]+%d+)%s*", i)
@@ -13,7 +17,7 @@ local function parse_with_name(name,args)
 			tmp.ax = tmp.proc:match("[xyz]")
 			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1)
 		else
-			tmp.ax, _ = wea.dir_to_xyz(name, tmp.proc:match("%l+"))
+			tmp.ax, _ = wea_c.dir_to_xyz(name, tmp.proc:match("%l+"))
 			if not tmp.ax then return false, _ end
 			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1) * _
 		end
@@ -36,17 +40,17 @@ worldeditadditions_core.register_command("srel", {
 		if not _ then return false, vec end
 		
 		if not worldedit.pos1[name] then
-			local pos = vector.add(wea.player_vector(name), vector.new(0.5,-0.5,0.5))
-			wea.vector.floor(pos)
+			local pos = wea_c.player_vector(name) + Vector3.new(0.5, -0.5, 0.5)
+			pos = pos:floor()
 			worldedit.pos1[name] = pos
 			worldedit.mark_pos1(name)
-			ret = "position 1 set to " .. minetest.pos_to_string(pos) .. ", "
+			ret = "position 1 set to "..pos..", "
 		end
 		
-		local p2 = vector.add(vec,worldedit.pos1[name])
+		local p2 = vec + Vector3.clone(worldedit.pos1[name])
 		worldedit.pos2[name] = p2
 		worldedit.mark_pos2(name)
-		return true, ret .. "position 2 set to " .. minetest.pos_to_string(p2)
+		return true, ret.."position 2 set to "..p2
 	end,
 })
 

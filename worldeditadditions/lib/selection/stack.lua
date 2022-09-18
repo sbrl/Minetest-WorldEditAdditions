@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 --- Holds the per-user selection stacks.
 worldeditadditions.sstack = {}
 
@@ -17,9 +20,11 @@ end
 --- Inserts a selection region onto the stack for the user with the given name.
 -- Stacks are per-user.
 -- @param	name	string	The name of the user to insert onto.
--- @param	pos1	Vector	Position 1
--- @param	pos2	Vector	Position 2
+-- @param	pos1	Vector3	Position 1
+-- @param	pos2	Vector3	Position 2
 function worldeditadditions.spush(name, pos1, pos2)
+	pos1 = Vector3.clon(pos1)
+	pos2 = Vector3.clon(pos2)
 	if not worldeditadditions.sstack[name] then
 		worldeditadditions.sstack[name] = {}
 	end

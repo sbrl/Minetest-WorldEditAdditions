@@ -1,3 +1,5 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 -- ███████ ███████ ██      ███████  ██████ ████████ ██  ██████  ███    ██
 -- ██      ██      ██      ██      ██         ██    ██ ██    ██ ████   ██
 -- ███████ █████   ██      █████   ██         ██    ██ ██    ██ ██ ██  ██
@@ -15,14 +17,18 @@ function selection.add_point(name, pos)
 	if pos ~= nil then
 		local created_new = not worldedit.pos1[name] or not worldedit.pos2[name]
 		-- print("[set_pos1]", name, "("..pos.x..", "..pos.y..", "..pos.z..")")
-		if not worldedit.pos1[name] then worldedit.pos1[name] = vector.new(pos) end
-		if not worldedit.pos2[name] then worldedit.pos2[name] = vector.new(pos) end
+		if not worldedit.pos1[name] then worldedit.pos1[name] = Vector3.new(pos) end
+		if not worldedit.pos2[name] then worldedit.pos2[name] = Vector3.new(pos) end
 		
 		worldedit.marker_update(name)
 		
 		local volume_before = worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 		
-		worldedit.pos1[name], worldedit.pos2[name] = worldeditadditions.vector.expand_region(worldedit.pos1[name], worldedit.pos2[name], pos)
+		worldedit.pos1[name], worldedit.pos2[name] = Vector3.expand_region(
+			Vector3.new(worldedit.pos1[name]),
+			Vector3.new(worldedit.pos2[name]),
+			pos
+		)
 		
 		local volume_after = worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 		

@@ -6,20 +6,20 @@
 
 -- Chat commands that operate on selections.
 
-local we_cm = worldeditadditions_commands.modpath .. "/commands/selectors/"
+local we_cmdpath = worldeditadditions_commands.modpath .. "/commands/selectors/"
 
-dofile(we_cm.."srel.lua")
-dofile(we_cm.."scentre.lua")
-dofile(we_cm.."scloud.lua")
-dofile(we_cm.."scol.lua")
-dofile(we_cm.."scube.lua")
-dofile(we_cm.."sfactor.lua")
-dofile(we_cm.."smake.lua")
-dofile(we_cm.."spop.lua")
-dofile(we_cm.."spush.lua")
-dofile(we_cm.."srect.lua")
-dofile(we_cm.."sshift.lua")
-dofile(we_cm.."sstack.lua")
+dofile(we_cmdpath.."srel.lua")
+dofile(we_cmdpath.."scentre.lua")
+dofile(we_cmdpath.."scloud.lua")
+dofile(we_cmdpath.."scol.lua")
+dofile(we_cmdpath.."scube.lua")
+dofile(we_cmdpath.."sfactor.lua")
+dofile(we_cmdpath.."smake.lua")
+dofile(we_cmdpath.."spop.lua")
+dofile(we_cmdpath.."spush.lua")
+dofile(we_cmdpath.."srect.lua")
+dofile(we_cmdpath.."sshift.lua")
+dofile(we_cmdpath.."sstack.lua")
 
 -- Aliases
 worldedit.alias_command("sfac", "sfactor")

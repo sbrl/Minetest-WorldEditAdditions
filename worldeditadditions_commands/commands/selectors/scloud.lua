@@ -1,14 +1,17 @@
+local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 --  ██████  ██████ ██       ██████  ██    ██ ██████
 -- ██      ██      ██      ██    ██ ██    ██ ██   ██
 -- ███████ ██      ██      ██    ██ ██    ██ ██   ██
 --      ██ ██      ██      ██    ██ ██    ██ ██   ██
 -- ██████   ██████ ███████  ██████   ██████  ██████
-local wea = worldeditadditions
 minetest.register_on_punchnode(function(pos, node, puncher)
 	local name = puncher:get_player_name()
 	if name ~= "" and wea.add_pos[name] ~= nil then
 		if wea.add_pos[name] > 0 then
-			wea.selection.add_point(name,pos)
+			wea.selection.add_point(name, pos)
 			wea.add_pos[name] = wea.add_pos[name] - 1
 			worldedit.player_notify(name, "You have "..wea.add_pos[name].." nodes left to punch")
 		else wea.add_pos[name] = nil end

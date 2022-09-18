@@ -1,18 +1,20 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ███████  ██████  ██████  ██
 -- ██      ██      ██    ██ ██
 -- ███████ ██      ██    ██ ██
 --      ██ ██      ██    ██ ██
 -- ███████  ██████  ██████  ███████
-local wea = worldeditadditions
 worldeditadditions_core.register_command("scol", {
 	params = "[<axis1>] <length>",
 	description = "Set WorldEdit region position 2 at a set distance along 1 axis.",
 	privs = {worldedit=true},
 	require_pos = 1,
 	parse = function(params_text)
-		local vec, tmp = vector.new(0, 0, 0), {}
-		local find = wea.split(params_text, "%s", false)
-		local ax1, sn1, len = (tostring(find[1]):match('[xyz]') or "g"):sub(1,1), wea.getsign(find[1]), find[table.maxn(find)]
+		local vec, tmp = Vector3.new(0, 0, 0), {}
+		local find = wea_c.split(params_text, "%s", false)
+		local ax1, sn1, len = (tostring(find[1]):match('[xyz]') or "g"):sub(1,1), wea_c.getsign(find[1]), find[table.maxn(find)]
 		
 		tmp.len = tonumber(len)
 		-- If len == nil cancel the operation
@@ -28,14 +30,14 @@ worldeditadditions_core.register_command("scol", {
 	end,
 	func = function(name, vec, tmp)
 		if tmp.get then
-			local ax, dir = wea.player_axis2d(name)
+			local ax, dir = wea_c.player_axis2d(name)
 			vec[ax] = tmp.len * dir
 		end
 		
-		local p2 = vector.add(vec,worldedit.pos1[name])
-		worldedit.pos2[name] = p2
+		local pos2 = vec + Vector3.clone(worldedit.pos1[name])
+		worldedit.pos2[name] = pos2
 		worldedit.mark_pos2(name)
-		return true, "position 2 set to " .. minetest.pos_to_string(p2)
+		return true, "position 2 set to "..pos2
 	end,
 })
 

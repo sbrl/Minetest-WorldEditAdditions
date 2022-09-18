@@ -1,3 +1,5 @@
+local wea_c = worldeditadditions_core
+
 -- ███████ ███████ ████████  █████   ██████ ██   ██
 -- ██      ██         ██    ██   ██ ██      ██  ██
 -- ███████ ███████    ██    ███████ ██      █████
@@ -20,8 +22,9 @@ worldeditadditions_core.register_command("sstack", {
 			table.insert(result, "(empty)")
 		else
 			for i,item in ipairs(worldeditadditions.sstack[name]) do
+				-- TODO: Implement a volume command....
 				local volume = worldedit.volume(item[1], item[2])
-				local volume_text = worldeditadditions.format.human_size(volume, 2)
+				local volume_text = wea_c.format.human_size(volume, 2)
 				if volume > 1000 then volume_text = "~"..volume_text end
 				
 				table.insert(result, i)
@@ -29,9 +32,9 @@ worldeditadditions_core.register_command("sstack", {
 				
 				table.insert(result, volume_text)
 				table.insert(result, " nodes - ")
-				table.insert(result, worldeditadditions.vector.tostring(item[1]))
+				table.insert(result, tostring(item[1])) -- Vector3 instance
 				table.insert(result, " - ")
-				table.insert(result, worldeditadditions.vector.tostring(item[2]))
+				table.insert(result, tostring(item[2])) -- Vector3 instance
 				table.insert(result, "\n")
 			end
 			table.insert(result, "========================\nTotal ")

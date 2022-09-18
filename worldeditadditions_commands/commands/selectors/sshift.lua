@@ -1,12 +1,15 @@
+local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = worldeditadditions.Vector3
+
 -- ███████ ███████ ██   ██ ██ ███████ ████████
 -- ██      ██      ██   ██ ██ ██         ██
 -- ███████ ███████ ███████ ██ █████      ██
 --      ██      ██ ██   ██ ██ ██         ██
 -- ███████ ███████ ██   ██ ██ ██         ██
-local wea = worldeditadditions
-local v3 = worldeditadditions.Vector3
+
 local function parse_with_name(name,args)
-	local vec, tmp = v3.new(0, 0, 0), {}
+	local vec, tmp = Vector3.new(0, 0, 0), {}
 	local find, _, i = {}, 0, 0
 	repeat
 		_, i, tmp.proc = args:find("([%l%s+-]+%d+)%s*", i)
@@ -14,7 +17,7 @@ local function parse_with_name(name,args)
 			tmp.ax = tmp.proc:match("[xyz]")
 			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1)
 		else
-			tmp.ax, _ = wea.dir_to_xyz(name, tmp.proc:match("%l+"))
+			tmp.ax, _ = wea_c.dir_to_xyz(name, tmp.proc:match("%l+"))
 			if not tmp.ax then return false, _ end
 			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1) * _
 		end
@@ -22,6 +25,7 @@ local function parse_with_name(name,args)
 	until not args:find("([%l%s+-]+%d+)%s*", i)
 	return true, vec
 end
+
 worldeditadditions_core.register_command("sshift", {
 	params = "<axis1> <distance1> [<axis2> <distance2> [<axis3> <distance3>]]",
 	description = "Shift the WorldEdit region in 3 dimensions.",
