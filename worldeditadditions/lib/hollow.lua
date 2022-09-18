@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ██   ██  ██████  ██      ██       ██████  ██     ██
 -- ██   ██ ██    ██ ██      ██      ██    ██ ██     ██
 -- ███████ ██    ██ ██      ██      ██    ██ ██  █  ██
@@ -8,7 +11,7 @@
 -- (think of the bits of the outermost parts of the defined region as the
 -- 'walls' to a box)
 function worldeditadditions.hollow(pos1, pos2, wall_thickness)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fetch the nodes in the specified area
@@ -18,8 +21,8 @@ function worldeditadditions.hollow(pos1, pos2, wall_thickness)
 	local node_id_ignore = minetest.get_content_id("ignore")
 	local node_id_air = minetest.get_content_id("air")
 	
-	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
-	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
+	-- minetest.log("action", "pos1: " ..pos1)
+	-- minetest.log("action", "pos2: " .. pos2)
 	
 	local changes = { replaced = 0 }
 	for z = pos2.z - wall_thickness, pos1.z + wall_thickness, -1 do
@@ -27,7 +30,7 @@ function worldeditadditions.hollow(pos1, pos2, wall_thickness)
 			for x = pos2.x - wall_thickness, pos1.x + wall_thickness, -1 do
 				local i = area:index(x, y, z)
 				
-				local is_air = worldeditadditions.is_airlike(data[i])
+				local is_air = wea_c.is_airlike(data[i])
 				local is_ignore = data[i] == node_id_ignore
 				
 				if not is_ignore and not is_air then

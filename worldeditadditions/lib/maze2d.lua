@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_commands
+local Vector3 = wea_c.Vector3
+
 --- Generates a maze.
 -- Algorithm origin: https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html
 -- @module worldeditadditions.maze
@@ -117,16 +120,17 @@ end
 -- local world = maze(os.time(), width, height)
 
 function worldeditadditions.maze2d(pos1, pos2, target_node, seed, path_length, path_width)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- getExtent() returns the number of nodes in the VoxelArea, which might be larger than we actually asked for
-	local extent = {
-		x = (pos2.x - pos1.x) + 1, path_length, path_width,
-		y = (pos2.y - pos1.y) + 1, -- not a dimension passed to the maze generator itself
-		z = (pos2.z - pos1.z) + 1, path_length, path_width
-	}
-	-- minetest.log("action", "extent: ("..extent.x..", "..extent.y..", "..extent.z..")")
+	local extent = (pos2 - pos1) + 1
+	--- Extent:
+	-- x = path_length, path_width
+	-- y = not a dimension passed to the maze generator itself
+	-- z = path_length, path_width
+	
+	-- minetest.log("action", "extent: "..extent)
 	
 	if extent.x < 3 or extent.y < 1 or extent.z < 3 then
 		minetest.log("error", "[worldeditadditions/maze] error: either x, y of the extent were less than 3, or z of the extent was less than 1")

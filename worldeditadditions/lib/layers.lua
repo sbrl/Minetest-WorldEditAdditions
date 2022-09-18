@@ -1,18 +1,20 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ██       █████  ██    ██ ███████ ██████  ███████
 -- ██      ██   ██  ██  ██  ██      ██   ██ ██
 -- ██      ███████   ████   █████   ██████  ███████
 -- ██      ██   ██    ██    ██      ██   ██      ██
 -- ███████ ██   ██    ██    ███████ ██   ██ ███████
 
-local wea = worldeditadditions
 
 local function print_slopes(slopemap, width)
-	local copy = wea.table.shallowcopy(slopemap)
+	local copy = wea_c.table.shallowcopy(slopemap)
 	for key,value in pairs(copy) do
-		copy[key] = wea.round(math.deg(value), 2)
+		copy[key] = wea_c.round(math.deg(value), 2)
 	end
 	
-	worldeditadditions.format.array_2d(copy, width)
+	wea_c.format.array_2d(copy, width)
 end
 
 --- Replaces the non-air nodes in each column with a list of nodes from top to bottom.
@@ -22,7 +24,7 @@ end
 -- @param	min_slope		number?		
 -- @param	max_slope		number?		
 function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slope)
-	pos1, pos2 = wea.Vector3.sort(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	if not min_slope then min_slope = math.rad(0) end
 	if not max_slope then max_slope = math.rad(180) end
 	-- pos2 will always have the highest co-ordinates now
@@ -33,13 +35,13 @@ function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slop
 	
 	local node_id_ignore = minetest.get_content_id("ignore")
 	
-	local node_ids, node_ids_count = wea.unwind_node_list(node_weights)
+	local node_ids, node_ids_count = wea_c.unwind_node_list(node_weights)
 	
-	local heightmap, heightmap_size = wea.terrain.make_heightmap(
+	local heightmap, heightmap_size = wea_c.terrain.make_heightmap(
 		pos1, pos2,
 		manip, area, data
 	)
-	local slopemap = wea.terrain.calculate_slopes(heightmap, heightmap_size)
+	local slopemap = wea_c.terrain.calculate_slopes(heightmap, heightmap_size)
 	-- worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
 	-- print_slopes(slopemap, heightmap_size.x)
 	--luacheck:ignore 311
@@ -68,7 +70,7 @@ function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slop
 				for y = pos2.y, pos1.y, -1 do
 					local i = area:index(x, y, z)
 					
-					local is_air = wea.is_airlike(data[i])
+					local is_air = wea_c.is_airlike(data[i])
 					local is_ignore = data[i] == node_id_ignore
 					
 					if not is_air and not is_ignore then

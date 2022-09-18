@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 --- Counts the nodes in a given area.
 -- @module worldeditadditions.count
 
@@ -7,7 +10,7 @@
 -- ██      ██    ██ ██    ██ ██  ██ ██    ██
 --  ██████  ██████   ██████  ██   ████    ██
 function worldeditadditions.count(pos1, pos2, do_human_counts)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fetch the nodes in the specified area
@@ -29,7 +32,7 @@ function worldeditadditions.count(pos1, pos2, do_human_counts)
 	for node_name, count in pairs(counts) do
 		table.insert(results, {
 			count,
-			tostring(worldeditadditions.round((count / total) * 100, 2)).."%",
+			tostring(wea_c.round((count / total) * 100, 2)).."%",
 			minetest.get_name_from_content_id(node_name)
 		})
 	end
@@ -37,7 +40,7 @@ function worldeditadditions.count(pos1, pos2, do_human_counts)
 	
 	if do_human_counts then
 		for key,item in pairs(results) do
-			item[1] = worldeditadditions.format.human_size(item[1], 2)
+			item[1] = wea_c.format.human_size(item[1], 2)
 		end
 	end
 	

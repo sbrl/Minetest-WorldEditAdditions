@@ -1,8 +1,8 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 --- Copies a region to another location, potentially overwriting the exiting region.
 -- @module worldeditadditions.copy
-
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
 
 --  ██████  ██████  ██████  ██    ██
 -- ██      ██    ██ ██   ██  ██  ██
@@ -32,7 +32,7 @@ function worldeditadditions.copy(source_pos1, source_pos2, target_pos1, target_p
 			for x = source_pos2.x, source_pos1.x, -1 do
 				local source = Vector3.new(x, y, z)
 				local source_i = area_source:index(x, y, z)
-				local target = source:subtract(offset)
+				local target = source - offset
 				local target_i = area_target:index(target.x, target.y, target.z)
 				
 				data_target[target_i] = data_source[source_i]

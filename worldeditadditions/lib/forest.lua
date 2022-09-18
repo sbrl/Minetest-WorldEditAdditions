@@ -1,9 +1,12 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 --- Overlap command. Places a specified node on top of each column.
 -- @module worldeditadditions.layers
 
 
 function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weights)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	
 	local weight_total = 0
 	for _name,weight in pairs(sapling_weights) do
@@ -33,7 +36,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 				local i = area:index(x, y, z)
 				local node_id = data[i]
 				if not group_cache[node_id] then
-					group_cache[node_id] = worldeditadditions.is_sapling(node_id)
+					group_cache[node_id] = wea_c.is_sapling(node_id)
 				end
 				
 				if group_cache[node_id] then
@@ -50,7 +53,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 						new_name_at_pos = minetest.get_node({ z = z, y = y, x = x }).name
 						new_id_at_pos = minetest.get_content_id(new_name_at_pos)
 						if not group_cache[new_id_at_pos] then
-							group_cache[new_id_at_pos] = worldeditadditions.is_sapling(new_id_at_pos)
+							group_cache[new_id_at_pos] = wea_c.is_sapling(new_id_at_pos)
 						end
 						if not group_cache[new_id_at_pos] then
 							did_grow = true
@@ -84,7 +87,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 			for y = pos2.y, pos1.y, -1 do
 				local i = area:index(x, y, z)
 				if not group_cache[data[i]] then
-					group_cache[data[i]] = worldeditadditions.is_sapling(data[i])
+					group_cache[data[i]] = wea_c.is_sapling(data[i])
 				end
 				
 				if group_cache[data[i]] then
@@ -95,7 +98,7 @@ function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weigh
 	end
 	
 	stats.successes = #stats.attempts
-	stats.attempts_avg = worldeditadditions.average(stats.attempts)
+	stats.attempts_avg = wea_c.average(stats.attempts)
 	
 	-- Save the modified nodes back to disk & return
 	worldedit.manip_helpers.finish(manip, data)

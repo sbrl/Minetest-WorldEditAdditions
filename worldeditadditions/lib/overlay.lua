@@ -1,8 +1,11 @@
+local wea_c = worldeditadditions_commands
+local Vector3 = wea_c.Vector3
+
 --- Overlap command. Places a specified node on top of each column.
 -- @module worldeditadditions.overlay
 
 function worldeditadditions.overlay(pos1, pos2, node_weights)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fetch the nodes in the specified area
@@ -11,7 +14,7 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 	
 	local node_id_ignore = minetest.get_content_id("ignore")
 	
-	local node_ids, node_ids_count = worldeditadditions.make_weighted(node_weights)
+	local node_ids, node_ids_count = wea_c.make_weighted(node_weights)
 	
 	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
 	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
@@ -26,11 +29,11 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 			-- print("\n\n[overlay] ****** column start ******")
 			for y = pos2.y, pos1.y, -1 do
 				local i = area:index(x, y, z)
-				-- print("[overlay] pos", x, y, z, "id", data[i], "name", minetest.get_name_from_content_id(data[i]), "is_liquid", worldeditadditions.is_liquidlike(data[i]))
+				-- print("[overlay] pos", x, y, z, "id", data[i], "name", minetest.get_name_from_content_id(data[i]), "is_liquid", wea_c.is_liquidlike(data[i]))
 				
-				local is_air = worldeditadditions.is_airlike(data[i])
-				local is_liquid = worldeditadditions.is_liquidlike(data[i])
-				-- wielded_light is now handled by worldeditadditions.is_airlike
+				local is_air = wea_c.is_airlike(data[i])
+				local is_liquid = wea_c.is_liquidlike(data[i])
+				-- wielded_light is now handled by wea_c.is_airlike
 				
 				local is_ignore = data[i] == node_id_ignore
 				

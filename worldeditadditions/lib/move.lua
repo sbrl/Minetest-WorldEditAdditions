@@ -1,8 +1,8 @@
 --- Copies a region to another location, potentially overwriting the exiting region.
 -- @module worldeditadditions.copy
 
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 -- ███    ███  ██████  ██    ██ ███████
 -- ████  ████ ██    ██ ██    ██ ██

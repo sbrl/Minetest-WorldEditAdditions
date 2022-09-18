@@ -1,13 +1,18 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 --- Flood-fill command for complex lakes etc.
 -- @module worldeditadditions.floodfill
 
-local wea = worldeditadditions
 
 function worldeditadditions.floodfill(start_pos, radius, replace_node)
+	start_pos = Vector3.clone(start_pos)
+	
 	-- Calculate the area we want to modify
-	local pos1 = vector.add(start_pos, { x = radius, y = 0, z = radius })
-	local pos2 = vector.subtract(start_pos, { x = radius, y = radius, z = radius })
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	local pos1 = start_pos + Vector3.new(radius, 0, radius)
+	local pos2 = start_pos - Vector3.new(radius, radius, radius)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	
@@ -27,7 +32,7 @@ function worldeditadditions.floodfill(start_pos, radius, replace_node)
 	end
 	
 	local count = 0
-	local remaining_nodes = wea.Queue.new() remaining_nodes:enqueue(start_pos_index)
+	local remaining_nodes = wea_c.Queue.new() remaining_nodes:enqueue(start_pos_index)
 	
 	-- Do the floodfill
 	while remaining_nodes:is_empty() == false do
@@ -41,35 +46,35 @@ function worldeditadditions.floodfill(start_pos, radius, replace_node)
 		-- We don't need to go upwards here, since we're filling in lake-style
 		local xplus = cur + 1 -- +X
 		if data[xplus] == search_id and
-			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(xplus), start_pos)) < radius_sq and
+			(Vector3.clone(area:position(xplus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(xplus) then
 			-- minetest.log("action", "[floodfill] [+X] index " .. xplus .. " is a " .. data[xplus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(xplus)
 		end
 		local xminus = cur - 1 -- -X
 		if data[xminus] == search_id and
-			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(xminus), start_pos)) < radius_sq and
+			(Vector3.new(area:position(xminus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(xminus) then
 			-- minetest.log("action", "[floodfill] [-X] index " .. xminus .. " is a " .. data[xminus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(xminus)
 		end
 		local zplus = cur + area.zstride -- +Z
 		if data[zplus] == search_id and
-			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(zplus), start_pos)) < radius_sq and
+			(Vector3.new(area:position(zplus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(zplus) then
 			-- minetest.log("action", "[floodfill] [+Z] index " .. zplus .. " is a " .. data[zplus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(zplus)
 		end
 		local zminus = cur - area.zstride -- -Z
 		if data[zminus] == search_id and
-			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(zminus), start_pos)) < radius_sq and
+			(Vector3.new(area:position(zminus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(zminus) then
 			-- minetest.log("action", "[floodfill] [-Z] index " .. zminus .. " is a " .. data[zminus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(zminus)
 		end
 		local yminus = cur - area.ystride -- -Y
 		if data[yminus] == search_id and
-			worldeditadditions.vector.lengthsquared(vector.subtract(area:position(yminus), start_pos)) < radius_sq and
+			(Vector3.new(area:position(yminus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(yminus)  then
 			-- minetest.log("action", "[floodfill] [-Y] index " .. yminus .. " is a " .. data[yminus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(yminus)

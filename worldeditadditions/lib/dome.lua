@@ -1,5 +1,5 @@
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 -- ██████   ██████  ███    ███ ███████
 -- ██   ██ ██    ██ ████  ████ ██
@@ -11,7 +11,7 @@ local Vector3 = wea.Vector3
 -- @param	pos				Vector3		The central point to start drawing the dome from.
 -- @param	radius			number		The radius of the dome to create.
 -- @param	replace_node	string		The fully qualified name of the node to use to make the dome with.
--- @param	pointing_dir	Vector3		Optional. The direction the dome should point. Defaults to (0, 1, 0). See also wea.parse.axis_name.
+-- @param	pointing_dir	Vector3		Optional. The direction the dome should point. Defaults to (0, 1, 0). See also wea_c.parse.axis_name.
 -- @param	hollow			boolean		Whether to make the dome hollow or not. Defaults to false.
 function worldeditadditions.dome(pos, radius, replace_node, pointing_dir, hollow)
 	pos = Vector3.clone(pos)

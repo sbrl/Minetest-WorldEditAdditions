@@ -95,7 +95,8 @@ function Vector3.mul(a, b) return Vector3.multiply(a, b) end
 -- @returns	Vector3				The result as a new Vector3 object.
 function Vector3.divide(a, b)
 	if type(a) == "number" then
-		return Vector3.new(b.x / a, b.y / a, b.z / a)
+		return Vector3.new(a / b.x, a/ b.y, a / b.z)
+		-- return Vector3.new(b.x / a, b.y / a, b.z / a) -- BUG: is this a bug?
 	elseif type(b) == "number" then
 		return Vector3.new(a.x / b, a.y / b, a.z / b)
 	end

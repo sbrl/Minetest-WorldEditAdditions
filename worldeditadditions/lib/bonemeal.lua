@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 --- Bonemeal command.
 -- Applies bonemeal to all notes 
 -- @module worldeditadditions.overlay
@@ -6,7 +9,7 @@
 -- chance		Positive integer that represents the chance bonemealing will occur
 function worldeditadditions.bonemeal(pos1, pos2, strength, chance, nodename_list)
 	if not nodename_list then nodename_list = {} end
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- This command requires the bonemeal mod to be installed
@@ -15,7 +18,7 @@ function worldeditadditions.bonemeal(pos1, pos2, strength, chance, nodename_list
 		return false, "Bonemeal mod not loaded"
 	end
 	
-	local node_list = worldeditadditions.table.map(nodename_list, function(nodename)
+	local node_list = wea_c.table.map(nodename_list, function(nodename)
 		return minetest.get_content_id(nodename)
 	end)
 	local node_list_count = #nodename_list
@@ -34,9 +37,9 @@ function worldeditadditions.bonemeal(pos1, pos2, strength, chance, nodename_list
 		for x = pos2.x, pos1.x, -1 do
 			for y = pos2.y, pos1.y, -1 do
 				local i = area:index(x, y, z)
-				if not worldeditadditions.is_airlike(data[i]) then
+				if not wea_c.is_airlike(data[i]) then
 					local should_bonemeal = true
-					if node_list_count > 0 and not worldeditadditions.table.contains(node_list, data[i]) then
+					if node_list_count > 0 and not wea_c.table.contains(node_list, data[i]) then
 						should_bonemeal = false
 					end
 					
@@ -45,7 +48,7 @@ function worldeditadditions.bonemeal(pos1, pos2, strength, chance, nodename_list
 					
 					if should_bonemeal and math.random(0, chance - 1) == 0 then
 						bonemeal:on_use(
-							{ x = x, y = y, z = z },
+							Vector3.new(x, y, z),
 							strength,
 							nil
 						)

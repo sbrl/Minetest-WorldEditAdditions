@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_commands
+local Vector3 = wea_c.Vector3
+
 --- Like //mix, but replaces a given node instead.
 -- @module worldeditadditions.replacemix
 
@@ -7,7 +10,7 @@
 -- ██   ██ ██      ██      ██      ██   ██ ██      ██      ██  ██  ██ ██  ██ ██
 -- ██   ██ ███████ ██      ███████ ██   ██  ██████ ███████ ██      ██ ██ ██   ██
 function worldeditadditions.replacemix(pos1, pos2, target_node, target_node_chance, replacements)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
 	-- Fetch the nodes in the specified area
@@ -22,7 +25,7 @@ function worldeditadditions.replacemix(pos1, pos2, target_node, target_node_chan
 	local distribution = {}
 	
 	-- Generate the list of node ids
-	local node_ids_replace, node_ids_replace_count = worldeditadditions.make_weighted(replacements)
+	local node_ids_replace, node_ids_replace_count = wea_c.make_weighted(replacements)
 	for node_name, weight in pairs(replacements) do
 		distribution[minetest.get_content_id(node_name)] = 0
 	end
