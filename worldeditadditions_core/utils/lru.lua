@@ -1,6 +1,6 @@
 local Queue
-if worldeditadditions then
-	Queue = dofile(worldeditadditions.modpath.."/utils/queue.lua")
+if worldeditadditions_core then
+	Queue = dofile(worldeditadditions_core.modpath.."/utils/queue.lua")
 else
 	Queue = require("queue")
 end

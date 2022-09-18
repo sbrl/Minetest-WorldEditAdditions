@@ -1,11 +1,11 @@
 
 --- Parses a list of strings as a list of weighted nodes - e.g. like in
 -- the //mix command. Example: "dirt 5 stone sand 2".
--- @param	parts	string[]	The list of strings to parse (try worldeditadditions.split)
+-- @param	parts	string[]	The list of strings to parse (try worldeditadditions_core.split)
 -- @param	as_list	bool		If true, then table.insert() successive { node = string, weight = number } subtables when parsing instead of populating as an associative array.
 -- @param	func_normalise	callable	If specified, the given function will be used to normalise node names instead of worldedit.normalize_nodename. A single argument is passed containing the un-normalised node name, and the return value is assumed to be the normalised node name.
 -- @returns	table	A table in the form node_name => weight.
-function worldeditadditions.parse.weighted_nodes(parts, as_list, func_normalise)
+local function parse_weighted_nodes(parts, as_list, func_normalise)
 	if as_list == nil then as_list = false end
 	local MODE_EITHER = 1
 	local MODE_NODE = 2
@@ -61,3 +61,6 @@ function worldeditadditions.parse.weighted_nodes(parts, as_list, func_normalise)
 	
 	return true, result
 end
+
+
+return parse_weighted_nodes

@@ -1,5 +1,5 @@
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 
 --- Calculates a normal map for the given heightmap.

@@ -1,5 +1,5 @@
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 
 --- Given a manip object and associates, generates a 2D x/z heightmap.
@@ -23,7 +23,7 @@ local function make_heightmap(pos1, pos2, manip, area, data)
 			-- Scan each column top to bottom
 			for y = pos2.y+1, pos1.y, -1 do
 				local i = area:index(x, y, z)
-				if not (wea.is_airlike(data[i]) and not wea.is_liquidlike(data[i])) then
+				if not (wea_c.is_airlike(data[i]) and not wea_c.is_liquidlike(data[i])) then
 					-- It's the first non-airlike node in this column
 					-- Start heightmap values from 1 (i.e. there's at least 1 node in the column)
 					heightmap[hi] = (y - pos1.y) + 1 

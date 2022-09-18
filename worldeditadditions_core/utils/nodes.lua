@@ -1,6 +1,8 @@
+local wea_c =  worldeditadditions_core
+
 --- Makes an associative table of node_name => weight into a list of node ids.
 -- Node names with a higher weight are repeated more times.
-function worldeditadditions.make_weighted(tbl)
+function wea_c.make_weighted(tbl)
 	local result = {}
 	for node_name, weight in pairs(tbl) do
 		local next_id = minetest.get_content_id(node_name)
@@ -17,7 +19,7 @@ end
 -- (e.g. an entry with a weight of 2 will be repeated twice).
 -- @param	list		table[]		The list to unwind.
 -- @return	number[],number			The unwound list of node ids, follows by the number of node ids in total.
-function worldeditadditions.unwind_node_list(list)
+function wea_c.unwind_node_list(list)
 	local result = {}
 	for i,item in ipairs(list) do
 		local node_id = minetest.get_content_id(item.node)
@@ -28,7 +30,7 @@ function worldeditadditions.unwind_node_list(list)
 	return result, #result
 end
 
-function worldeditadditions.registered_nodes_by_group(group)
+function wea_c.registered_nodes_by_group(group)
 	local result = {}
 	for name, def in pairs(minetest.registered_nodes) do
 		if def.groups[group] then
@@ -39,7 +41,7 @@ function worldeditadditions.registered_nodes_by_group(group)
 end
 
 --- Turns a node_name → weight table into a list of { node_name, weight } tables.
-function worldeditadditions.weighted_to_list(node_weights)
+function wea_c.weighted_to_list(node_weights)
 	local result = {}
 	for node_name, weight in pairs(node_weights) do
 		table.insert(result, { node_name, weight })
@@ -80,7 +82,7 @@ end
 -- @param	{Vector}	pos2		The second position defining the area to emerge.
 -- @param	{function}	callback	The callback to call when the emerging process is complete.
 -- @param	{any}		callback_state	A state object to pass to the callback as a 2nd parameter (the 1st parameter is the emerge_area progress tracking state object)
-function worldeditadditions.emerge_area(pos1, pos2, callback, callback_state)
+function wea_c.emerge_area(pos1, pos2, callback, callback_state)
 	local state = {
 		stats = { cancelled = 0, error = 0, from_memory = 0, from_disk = 0, generated = 0 },
 		callback = callback,

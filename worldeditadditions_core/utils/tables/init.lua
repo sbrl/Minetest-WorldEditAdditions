@@ -8,18 +8,18 @@
 -- Lua doesn't exactly come with batteries included, so this is quite an
 -- extensive collection of functions :P
 
-local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
-wea.table = {
-	apply		= dofile(wea.modpath.."/utils/tables/table_apply.lua"),
-	contains	= dofile(wea.modpath.."/utils/tables/table_contains.lua"),
-	deepcopy	= dofile(wea.modpath.."/utils/tables/deepcopy.lua"),
-	filter		= dofile(wea.modpath.."/utils/tables/table_filter.lua"),
-	get_last	= dofile(wea.modpath.."/utils/tables/table_get_last.lua"),
-	makeset		= dofile(wea.modpath.."/utils/tables/makeset.lua"),
-	map			= dofile(wea.modpath.."/utils/tables/table_map.lua"),
-	shallowcopy	= dofile(wea.modpath.."/utils/tables/shallowcopy.lua"),
-	tostring	= dofile(wea.modpath.."/utils/tables/table_tostring.lua"),
-	unique		= dofile(wea.modpath.."/utils/tables/table_unique.lua"),
-	unpack		= dofile(wea.modpath.."/utils/tables/table_unpack.lua"),
+wea_c.table = {
+	apply		= dofile(wea_c.modpath.."/utils/tables/table_apply.lua"),
+	contains	= dofile(wea_c.modpath.."/utils/tables/table_contains.lua"),
+	deepcopy	= dofile(wea_c.modpath.."/utils/tables/deepcopy.lua"),
+	filter		= dofile(wea_c.modpath.."/utils/tables/table_filter.lua"),
+	get_last	= dofile(wea_c.modpath.."/utils/tables/table_get_last.lua"),
+	makeset		= dofile(wea_c.modpath.."/utils/tables/makeset.lua"),
+	map			= dofile(wea_c.modpath.."/utils/tables/table_map.lua"),
+	shallowcopy	= dofile(wea_c.modpath.."/utils/tables/shallowcopy.lua"),
+	tostring	= dofile(wea_c.modpath.."/utils/tables/table_tostring.lua"),
+	unique		= dofile(wea_c.modpath.."/utils/tables/table_unique.lua"),
+	unpack		= dofile(wea_c.modpath.."/utils/tables/table_unpack.lua"),
 }

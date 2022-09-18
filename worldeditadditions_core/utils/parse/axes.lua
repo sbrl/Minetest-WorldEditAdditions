@@ -1,9 +1,11 @@
+---@diagnostic disable: cast-local-type
+-- ^--- we're using Vector3 here, so it gets confused
 local Vector3 
-if worldeditadditions then
-	local wea = worldeditadditions
-	Vector3 = dofile(wea.modpath.."/utils/vector3.lua")
+if worldeditadditions_core then
+	local wea_c = worldeditadditions_core
+	Vector3 = dofile(wea_c.modpath.."/utils/vector3.lua")
 else
-	Vector3 = require("worldeditadditions.utils.vector3")
+	Vector3 = require("worldeditadditions_core.utils.vector3")
 end
 
 --- Parses an absolute axis name to a Vector3 instance.
@@ -64,7 +66,8 @@ end
 
 --- Parses a relative or absolute axis name into a Vector3 instance.
 -- @param	axis_name	string	The axis name to parse.
--- @param	facing_dir	table	The direction the player is facing. Obtain this by calling worldeditadditions.
+-- @param	facing_dir	table	The direction the player is facing. Obtain this by calling worldeditadditions_core.?????
+-- TODO: Fix this comment.
 local function parse_axis_name(axis_name, facing_dir)
 	local success, result = parse_relative_axis_name(axis_name, facing_dir)
 	if not success then

@@ -1,4 +1,5 @@
-local wea = worldeditadditions
+---@diagnostic disable: cast-local-type
+local wea_c = worldeditadditions_core
 
 --- Parses a map of key-value pairs into a table.
 -- For example, "count 25000 speed 0.8 rate_erosion 0.006 doawesome true" would be parsed into
@@ -6,10 +7,10 @@ local wea = worldeditadditions
 -- @param	params_text	string		The string to parse.
 -- @param	keywords	string[]?	Optional. A list of keywords. Keywords can be present on their own without a value. If found, their value will be automatically set to bool true.
 -- @returns	table		A table of key-value pairs parsed out from the given string.
-function worldeditadditions.parse.map(params_text, keywords)
+local function parse_map(params_text, keywords)
 	if not keywords then keywords = {} end
 	local result = {}
-	local parts = wea.split(params_text, "%s+", false)
+	local parts = wea_c.split(params_text, "%s+", false)
 	
 	local last_key = nil
 	local mode = "KEY"
@@ -26,7 +27,7 @@ function worldeditadditions.parse.map(params_text, keywords)
 		else
 			last_key = part
 			-- Keyword support
-			if wea.table.contains(keywords, last_key) then
+			if wea_c.table.contains(keywords, last_key) then
 				result[last_key] = true
 			else
 				mode = "VALUE"
@@ -35,3 +36,5 @@ function worldeditadditions.parse.map(params_text, keywords)
 	end
 	return true, result
 end
+
+return parse_map

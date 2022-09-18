@@ -1,7 +1,7 @@
-local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
-dofile(wea.modpath.."/utils/strings/split.lua")
-dofile(wea.modpath.."/utils/strings/polyfill.lua")
-dofile(wea.modpath.."/utils/strings/tochars.lua")
-wea.split_shell = dofile(wea.modpath.."/utils/strings/split_shell.lua")
-wea.to_boolean = dofile(wea.modpath.."/utils/strings/to_boolean.lua")
+dofile(wea_c.modpath.."/utils/strings/split.lua")
+dofile(wea_c.modpath.."/utils/strings/polyfill.lua")
+dofile(wea_c.modpath.."/utils/strings/tochars.lua")
+wea_c.split_shell = dofile(wea_c.modpath.."/utils/strings/split_shell.lua")
+wea_c.to_boolean = dofile(wea_c.modpath.."/utils/strings/to_boolean.lua")

@@ -1,5 +1,5 @@
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 
 --- Converts a 2d heightmap into slope values in radians.
@@ -9,10 +9,10 @@ local Vector3 = wea.Vector3
 -- @param	heightmap_size	int[]	The size of the heightmap in the form [ z, x ]
 -- @return	Vector[]		The calculated slope map, in the same form as the input heightmap. Each element of the array is a (floating-point) number representing the slope in that cell in radians.
 local function calculate_slopes(heightmap, heightmap_size)
-	local normals = wea.terrain.calculate_normals(heightmap, heightmap_size)
+	local normals = wea_c.terrain.calculate_normals(heightmap, heightmap_size)
 	local slopes = {  }
 	
-	local up = wea.Vector3.new(0, 1, 0) -- Z & Y are flipped
+	local up = Vector3.new(0, 1, 0) -- Z & Y are flipped
 	
 	for z = heightmap_size.z-1, 0, -1 do
 		for x = heightmap_size.x-1, 0, -1 do

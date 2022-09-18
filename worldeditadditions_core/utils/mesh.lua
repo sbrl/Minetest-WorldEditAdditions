@@ -1,4 +1,4 @@
-local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
 
 -- ███████  █████   ██████ ███████
@@ -72,7 +72,7 @@ function Mesh.dedupe(self)
 		for j,face_next in ipairs(self.faces) do
 			if i ~= j	-- If we're not comparing a face to itself...
 				and face_check == face_next -- ....and the 2 faces are equal....
-				and not wea.table.contains(toremove, j) then -- ...and we haven't already marked it for removal...
+				and not wea_c.table.contains(toremove, j) then -- ...and we haven't already marked it for removal...
 				-- Mark it for removal
 				table.insert(toremove, j)
 			end

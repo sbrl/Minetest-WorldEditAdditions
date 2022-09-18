@@ -14,21 +14,17 @@ local function unpack(tbl)
 end
 ---------------
 
+local wea_c = worldeditadditions_core or nil
 local Vector3
-if worldeditadditions then
-	local wea = worldeditadditions
-	Vector3 = dofile(wea.modpath.."/utils/vector3.lua")
-else
-	Vector3 = require("worldeditadditions.utils.vector3")
-end
-
 local key_instance
-if worldeditadditions then
-	local wea = worldeditadditions
-	key_instance = dofile(wea.modpath.."/utils/parse/key_instance.lua")
+if worldeditadditions_core then
+	key_instance = dofile(wea_c.modpath.."/utils/parse/key_instance.lua")
+	Vector3 = dofile(wea_c.modpath.."/utils/vector3.lua")
 else
+	Vector3 = require("worldeditadditions_core.utils.vector3")
 	key_instance = require("worldeditadditions.utils.parse.key_instance")
 end
+
 
 --- Unified Axis Keywords banks
 local keywords = {
@@ -139,7 +135,7 @@ end
 
 --- Converts Unified Axis Keyword table into Vector3 instances.
 -- @param: tbl: Table: Keyword table to parse
--- @param: facing: Table: Output from worldeditadditions.player_dir(name)
+-- @param: facing: Table: Output from worldeditadditions_core.player_dir(name)
 -- @param: sum: Bool | String | nil: Return a single vector by summing the 2 output vectors together
 -- @returns: Vector3, [Vector3]: returns min, max Vector3s or sum Vector3 (if @param: sum ~= nil)
 -- if error: @returns: false, String: error message

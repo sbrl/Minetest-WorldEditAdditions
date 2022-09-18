@@ -1,5 +1,6 @@
--- worldeditadditions = { modpath="/home/sbrl/.minetest/worlds/Mod-Sandbox/worldmods/WorldEditAdditions/worldeditadditions/" }
-local table_map = dofile(worldeditadditions.modpath.."/utils/tables/table_map.lua")
+-- worldeditadditions_core = { modpath="/home/sbrl/.minetest/worlds/Mod-Sandbox/worldmods/WorldEditAdditions/worldeditadditions_core/" }
+local wea_c = worldeditadditions_core
+local table_map = dofile(wea_c.modpath.."/utils/tables/table_map.lua")
 
 local function is_whitespace(char)
 	return char:match("%s")
@@ -26,7 +27,7 @@ local function split_shell(text, autotrim)
 		
 		if mode == "NORMAL" then
 			if is_whitespace(curchar) and #acc > 0 then
-				local nextval = worldeditadditions.trim(table.concat(acc, ""))
+				local nextval = wea_c.trim(table.concat(acc, ""))
 				if #nextval > 0 then
 					table.insert(result, table.concat(acc, ""))
 				end

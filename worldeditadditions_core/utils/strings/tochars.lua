@@ -3,7 +3,7 @@
 -- @param	sort	bool	Sort characters
 -- @param	rem_dups	bool	Remove duplicate characters
 -- @returns	table	A sequence table containing the substrings
-function worldeditadditions.tochars(text,sort,rem_dups)
+function worldeditadditions_core.tochars(text,sort,rem_dups)
 	local t, set = {}, {}
 	if rem_dups then
 		text:gsub(".",function(c) set[c] = true end)
@@ -20,7 +20,7 @@ end
 --- Split into a set of characters.
 -- @param	text	string	The string to iterate over
 -- @returns	table	A sequence set table containing the substrings
-function worldeditadditions.tocharset(text)
+function worldeditadditions_core.tocharset(text)
 	local t = {}
 	text:gsub(".",function(c) t[c] = true end)
 	return t

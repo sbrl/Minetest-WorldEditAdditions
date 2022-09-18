@@ -1,3 +1,4 @@
+local wea_c = worldeditadditions_core
 
 --- Makes a human-readable table of data.
 -- Data should be a 2D array - i.e. a table of tables. The nested tables should
@@ -6,7 +7,7 @@
 -- useful when you want to print a node list.
 -- @param	data	table[]	A table of tables. Each subtable is a single row of the tabulated output.
 -- @returns	string	The input table of tables formatted into a nice ASCII table.
-function worldeditadditions.format.make_ascii_table(data)
+local function format_make_ascii_table(data)
 	local extra_padding = 2
 	local result = {}
 	local max_lengths = {}
@@ -22,7 +23,7 @@ function worldeditadditions.format.make_ascii_table(data)
 	for _key, row in ipairs(data) do
 		local row_result = {}
 		for i = 1, #row, 1 do
-			row_result[#row_result + 1] = worldeditadditions.str_padend(tostring(row[i]), max_lengths[i], " ")
+			row_result[#row_result + 1] = wea_c.str_padend(tostring(row[i]), max_lengths[i], " ")
 		end
 		result[#result+1] = table.concat(row_result, "")
 	end
@@ -30,3 +31,5 @@ function worldeditadditions.format.make_ascii_table(data)
 	-- TODO: Add multi-column support here
 	return table.concat(result, "\n")
 end
+
+return format_make_ascii_table

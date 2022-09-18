@@ -3,7 +3,7 @@
 -- Ported from PHP human_time from Pepperminty Wiki: https://github.com/sbrl/Pepperminty-Wiki/blob/fa81f0d/core/05-functions.php#L82-L104
 -- @param	ms		float	The number of milliseconds to convert.
 -- @return	string	A human-readable string representing the input ms.
-function worldeditadditions.format.human_time(ms)
+local function format_human_time(ms)
 	if type(ms) ~= "number" then return "unknown" end
 	local tokens = {
 		{ 31536000 * 1000, 'year' },
@@ -26,3 +26,6 @@ function worldeditadditions.format.human_time(ms)
 		end
 	end
 end
+
+
+return format_human_time

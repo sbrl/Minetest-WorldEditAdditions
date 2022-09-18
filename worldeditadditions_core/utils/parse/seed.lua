@@ -6,7 +6,7 @@
 -- (caution: certainlly NOT crypto-secure!).
 -- @param   {string}    str     The string to convert.
 -- @source https://stackoverflow.com/a/2624210/1460422 The idea came from here
-function worldeditadditions.parse.seed(str)
+local function parse_seed(str)
     if type(str) == "number" then return str end
     if tonumber(str) ~=  nil then return tonumber(str) end
     local result = 0
@@ -15,3 +15,6 @@ function worldeditadditions.parse.seed(str)
     end
     return result
 end
+
+
+return parse_seed
