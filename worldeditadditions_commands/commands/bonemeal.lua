@@ -69,11 +69,11 @@ worldeditadditions_core.register_command("bonemeal", {
 		if not success then return success, nodes_bonemealed end
 		
 		local percentage = wea_c.round((nodes_bonemealed / candidates)*100, 2)
-		local time_taken = wea_c.get_ms_time() - start_time
+		local time_taken = wea_c.format.human_time(wea_c.get_ms_time() - start_time)
 		-- Avoid nan% - since if there aren't any candidates then nodes_bonemealed will be 0 too
 		if candidates == 0 then percentage = 0 end
 		
-		minetest.log("action", name .. " used //bonemeal at "..pos1.." - "..pos2..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken.."s")
-		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..wea_c.format.human_time(time_taken)
+		minetest.log("action", name .. " used //bonemeal at "..pos1.." - "..pos2..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken)
+		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..time_taken
 	end
 })

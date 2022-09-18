@@ -1,10 +1,14 @@
+local wea = worldeditadditions
+local wea_c = worldeditadditions
+local Vector3 = worldeditadditions.Vector3
+
+
 -- ██     ██ ██████   ██████  ██   ██
 -- ██     ██ ██   ██ ██    ██  ██ ██
 -- ██  █  ██ ██████  ██    ██   ███
 -- ██ ███ ██ ██   ██ ██    ██  ██ ██
 --  ███ ███  ██████   ██████  ██   ██
-local wea = worldeditadditions
-local v3 = worldeditadditions.Vector3
+
 worldeditadditions_core.register_command("wbox", {
 	params = "<replace_node>",
 	description = "Sets the edges of the current selection to <replace_node>",
@@ -21,7 +25,7 @@ worldeditadditions_core.register_command("wbox", {
 		return true, node
 	end,
 	nodes_needed = function(name)
-		local delta = v3.subtract(worldedit.pos2[name], worldedit.pos1[name]):abs():add(1)
+		local delta = Vector3.subtract(worldedit.pos2[name], worldedit.pos1[name]):abs():add(1)
 		local total, mult, axes = 1, 4, {"x","y","z"}
 		for k,v in pairs(axes) do
 			if worldedit.pos1[name] ~= worldedit.pos2[name] then total = total*2
@@ -33,7 +37,16 @@ worldeditadditions_core.register_command("wbox", {
 		return total
 	end,
 	func = function(name, node)
-		local _, count = wea.wire_box(worldedit.pos1[name], worldedit.pos2[name], node)
-		return _, count .. " nodes set"
+		local start_time = wea_c.get_ms_time()
+		
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		local success, count = wea.wire_box(pos1, pos2, node)
+		if not success then return success, count end
+		
+		local time_taken = wea_c.format.human_time(wea_c.get_ms_time() - start_time)
+		
+		
+		minetest.log("action", name.." used //wbox at "..pos1.." - "..pos2..", taking "..time_taken)
+		return true, count .. " nodes set in "..time_taken
 	end,
 })

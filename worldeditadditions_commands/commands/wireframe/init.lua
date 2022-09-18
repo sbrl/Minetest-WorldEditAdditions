@@ -6,8 +6,8 @@
 
 -- 2d and 3d outlines of shapes.
 
-local we_cm = worldeditadditions_commands.modpath .. "/commands/wireframe/"
+local wea_cmd = worldeditadditions_commands.modpath .. "/commands/wireframe/"
 
-dofile(we_cm.."wbox.lua")
-dofile(we_cm.."wcompass.lua")
-dofile(we_cm.."wcorner.lua")
+dofile(wea_cmd.."wbox.lua")
+dofile(wea_cmd.."wcompass.lua")
+dofile(wea_cmd.."wcorner.lua")
