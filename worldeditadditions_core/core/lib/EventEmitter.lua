@@ -6,12 +6,11 @@ EventEmitter.__index = EventEmitter
 EventEmitter.__name = "EventEmitter" -- A hack to allow identification in wea.inspect
 
 
-function EventEmitter.new()
-	local result = {
-		events = {}
-	}
-	setmetatable(result, EventEmitter)
-	return result
+function EventEmitter.new(tbl)
+	if not tbl then tbl = {} end
+	tbl.events = {}
+	setmetatable(tbl, EventEmitter)
+	return tbl
 end
 
 function EventEmitter.addEventListener(this, event_name, func)
