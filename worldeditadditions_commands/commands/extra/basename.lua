@@ -15,6 +15,6 @@ worldeditadditions_core.register_command("basename", {
 	end,
 	func = function(name, params_text)
 		if name == nil then return end
-		return true, worldedit.normalize_nodename(params_text) or 'Error 404: "'..params_text..'" not found!'
+		return true, worldedit.normalize_nodename(params_text) or ('Error 404: "'..params_text..'" not found!')
 	end
 })
