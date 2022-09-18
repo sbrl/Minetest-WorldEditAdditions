@@ -35,7 +35,7 @@ function worldeditadditions.conv.kernel_gaussian(dimension, sigma)
 			-- http://en.wikipedia.org/w/index.php?title=Gaussian_blur&oldid=608793634#Mechanics
 			local gaussian = (1 / math.sqrt(
 				math.pi * two_sigma_square
-			)) * math.exp((-1) * (math.pow(distance, 2) / two_sigma_square));
+			)) * math.exp((-1) * ((distance ^ 2) / two_sigma_square));
 			
 			sum = sum + gaussian
 			kernel[i*dimension + j] = gaussian
