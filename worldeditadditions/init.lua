@@ -9,35 +9,6 @@ worldeditadditions = {}
 local wea = worldeditadditions
 wea.modpath = minetest.get_modpath("worldeditadditions")
 
-wea.Set = dofile(wea.modpath.."/utils/set.lua")
-
-wea.Vector3 = dofile(wea.modpath.."/utils/vector3.lua")
-wea.Mesh, wea.Face = dofile(wea.modpath.."/utils/mesh.lua")
-
-wea.Queue = dofile(wea.modpath.."/utils/queue.lua")
-wea.LRU = dofile(wea.modpath.."/utils/lru.lua")
-wea.inspect = dofile(wea.modpath.."/utils/inspect.lua")
-
--- I/O compatibility layer
-wea.io = dofile(wea.modpath.."/utils/io.lua")
-
-wea.bit = dofile(wea.modpath.."/utils/bit.lua")
-
-wea.terrain = dofile(wea.modpath.."/utils/terrain/init.lua")
-
-dofile(wea.modpath.."/utils/vector.lua")
-dofile(wea.modpath.."/utils/strings/init.lua")
-dofile(wea.modpath.."/utils/format/init.lua")
-dofile(wea.modpath.."/utils/parse/init.lua")
-dofile(wea.modpath.."/utils/tables/init.lua")
-
-dofile(wea.modpath.."/utils/numbers.lua")
-dofile(wea.modpath.."/utils/nodes.lua")
-dofile(wea.modpath.."/utils/node_identification.lua")
-
-dofile(wea.modpath.."/utils/raycast_adv.lua") -- For the farwand
-dofile(wea.modpath.."/utils/player.lua") -- Player info functions
-
 dofile(wea.modpath.."/lib/compat/saplingnames.lua")
 
 dofile(wea.modpath.."/lib/floodfill.lua")

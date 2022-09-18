@@ -1,10 +1,10 @@
-
+local wea_c = worldeditadditions_core
 --- Raycasts to find a node in the direction the given player is looking.
 -- @param	player			Player	The player object to raycast from.
 -- @param	maxdist			number	The maximum distance to raycast.
 -- @param	skip_liquid		bool	Whether to skip liquids when raycasting.
 -- @return	position, number		nil if nothing was found (or unloaded chunks were hit), or the position as an {x, y, z} table and the node id if something was found.
-function worldeditadditions.raycast(player, maxdist, skip_liquid)
+function wea_c.raycast(player, maxdist, skip_liquid)
 	if maxdist == nil then maxdist = 100 end
 	if skip_liquid == nil then skip_liquid = false end
 	local look_dir = player:get_look_dir()

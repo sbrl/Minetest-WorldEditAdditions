@@ -1,11 +1,13 @@
 worldeditadditions.vector = {}
 
+-- @deprecated	Use Vector3 instead.
 function worldeditadditions.vector.tostring(v)
 	if not v then return "(nil)" end
 	return "(" .. v.x ..", " .. v.y ..", " .. v.z ..")"
 end
 
 --- Calculates the length squared of the given vector.
+-- @deprecated	Use Vector3 instead.
 -- @param	v	Vector	The vector to operate on
 -- @return	number		The length of the given vector squared
 function worldeditadditions.vector.lengthsquared(v)
@@ -16,6 +18,7 @@ end
 --- Normalises the given vector such that its length is 1.
 -- Also known as calculating the unit vector.
 -- This method does *not* mutate.
+-- @deprecated	Use Vector3 instead.
 -- @param	v	Vector	The vector to calculate from.
 -- @return	Vector		A new normalised vector.
 function worldeditadditions.vector.normalize(v)
@@ -33,6 +36,7 @@ end
 
 --- Rounds the values in a vector down.
 -- Warning: This MUTATES the given vector!
+-- @deprecated	Use Vector3 instead.
 -- @param	v	Vector	The vector to operate on
 function worldeditadditions.vector.floor(v)
 	if v.x then v.x = math.floor(v.x) end
@@ -44,6 +48,7 @@ end
 
 --- Rounds the values in a vector up.
 -- Warning: This MUTATES the given vector!
+-- @deprecated	Use Vector3 instead.
 -- @param	v	Vector	The vector to operate on
 function worldeditadditions.vector.ceil(v)
 	if v.x then v.x = math.ceil(v.x) end
@@ -55,6 +60,7 @@ end
 
 --- Sets the values in a vector to their absolute values.
 -- Warning: This MUTATES the given vector!
+-- @deprecated	Use Vector3 instead.
 -- @param	v	Vector	The vector to operate on
 function worldeditadditions.vector.abs(v)
 	if v.x then v.x = math.abs(v.x) end
@@ -65,6 +71,7 @@ function worldeditadditions.vector.abs(v)
 end
 
 --- Determines if the target point is contained within the defined worldedit region.
+-- @deprecated	Use Vector3 instead.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
 -- @param	target	Vector	The target vector to check.
@@ -80,6 +87,7 @@ function worldeditadditions.vector.is_contained(pos1, pos2, target)
 end
 
 --- Expands the defined region to include the given point.
+-- @deprecated	Use Vector3 instead.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
 -- @param	target	Vector	The target vector to include.
@@ -98,6 +106,7 @@ function worldeditadditions.vector.expand_region(pos1, pos2, target)
 end
 
 --- Returns the mean (average) of 2 positions to give you the centre.
+-- @deprecated	Use Vector3 instead.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
 -- @param	target	Vector	Centre coordinates.
@@ -106,6 +115,7 @@ function worldeditadditions.vector.mean(pos1, pos2)
 end
 
 --- Returns a vector of the min values of 2 positions.
+-- @deprecated	Use Vector3 instead.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
 -- @return	Vector	Min values from input vectors.
@@ -114,6 +124,7 @@ function worldeditadditions.vector.min(pos1, pos2)
 end
 
 --- Returns a vector of the max values of 2 positions.
+-- @deprecated	Use Vector3 instead.
 -- @param	pos1	Vector	pos1 of the defined region.
 -- @param	pos2	Vector	pos2 of the defined region.
 -- @return	Vector	Max values from input vectors.

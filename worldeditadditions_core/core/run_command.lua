@@ -1,7 +1,7 @@
 -- WARNING: safe_region MUST NOT be imported more than once, as it defines chat commands. If you want to import it again elsewhere, check first that multiple dofile() calls don't execute a file more than once.
 local wea_c = worldeditadditions_core
 local safe_region = dofile(wea_c.modpath.."/core/safe_region.lua")
-local human_size = dofile(wea_c.modpath.."/core/lib/human_size.lua")
+local human_size = wea_c.format.human_size
 
 -- TODO: Reimplement worldedit.player_notify(player_name, msg_text)
 
