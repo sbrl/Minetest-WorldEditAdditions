@@ -10,8 +10,7 @@ Note to self: See the bottom of this file for the release template text.
  - Migrate from `depends.txt` to `mod.conf`
  - `//sculpt`: Fix undefined `default` brush
  - Commands that modify the terrain now ignore liquids
- - [API] Add new `EventEmitter` class modelled on `EventEmitter` from Node.js
-
+ - `//hollow`: Fix safe region bug
 
 ## v1.13: The transformational update (2nd January 2022)
  - Add [`//sfactor`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor) (_selection factor_) - Selection Tools by @VorTechnix are finished for now.
