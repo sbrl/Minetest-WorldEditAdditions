@@ -27,7 +27,7 @@ wea_c.register_command = dofile(modpath.."/core/register_command.lua")
 wea_c.fetch_command_def = dofile(modpath.."/core/fetch_command_def.lua")
 wea_c.register_alias = dofile(modpath.."/core/register_alias.lua")
 wea_c.pos = dofile(modpath.."/core/pos.lua")
-
+wea_c.EventEmitter = dofile(modpath.."/core/lib/EventEmitter.lua")
 print("WEA_C pos", wea_c.pos.push)
 
 -- Initialise WorldEdit stuff if the WorldEdit mod is not present
