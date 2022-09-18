@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ██   ██  ██████  ██      ██       ██████  ██     ██
 -- ██   ██ ██    ██ ██      ██      ██    ██ ██     ██
 -- ███████ ██    ██ ██      ██      ██    ██ ██  █  ██
@@ -20,8 +23,7 @@ worldeditadditions_core.register_command("hollow", {
 		return true, wall_thickness
 	end,
 	nodes_needed = function(name, wall_thickness)
-		-- //overlay only modifies up to 1 node per column in the selected region
-		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		return worldedit.volume(
 			{
 				x = pos2.x - wall_thickness,
@@ -29,20 +31,25 @@ worldeditadditions_core.register_command("hollow", {
 				z = pos2.z - wall_thickness
 			},
 			{
-				x = pos2.x + wall_thickness,
-				y = pos2.y + wall_thickness,
-				z = pos2.z + wall_thickness
+				x = pos1.x + wall_thickness,
+				y = pos1.y + wall_thickness,
+				z = pos1.z + wall_thickness
 			}
 		)
 	end,
 	func = function(name, wall_thickness)
-		local start_time = worldeditadditions.get_ms_time()
-		local success, changes = worldeditadditions.hollow(worldedit.pos1[name], worldedit.pos2[name], wall_thickness)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+
+		local success, changes = worldeditadditions.hollow(
+			pos1, pos2,
+			wall_thickness
+		)
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		if not success then return success, changes end
 		
-		minetest.log("action", name .. " used //hollow at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.replaced .. " nodes in " .. time_taken .. "s")
-		return true, changes.replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name .. " used //hollow at "..pos1.." - "..pos2..", replacing " .. changes.replaced .. " nodes in " .. time_taken .. "s")
+		return true, changes.replaced .. " nodes replaced in " .. wea_c.format.human_time(time_taken)
 	end
 })
