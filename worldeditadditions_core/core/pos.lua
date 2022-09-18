@@ -4,6 +4,9 @@ local positions_count_limit = 999
 local positions = {}
 
 local function ensure_player(player_name)
+	if player_name == nil then
+		minetest.log("error", "[wea core:pos:ensure_player] player_name is nil")
+	end
 	if not positions[player_name] then
 		positions[player_name] = {}
 	end
@@ -26,7 +29,7 @@ local function get_pos_all(player_name)
 end
 local function pos_count(player_name)
 	ensure_player(player_name)
-	return #pos_count[player_name]
+	return #positions[player_name]
 end
 
 local function set_pos(player_name, i, pos)
@@ -44,14 +47,25 @@ local function clear(player_name)
 		positions[player_name] = nil
 	end
 end
+local function pop_pos(player_name)
+	ensure_player(player_name)
+	if #positions[player_name] <= 0 then return nil end
+	return table.remove(positions[player_name])
+end
+local function push_pos(player_name, pos)
+	ensure_player(player_name)
+	table.insert(positions[player_name], pos)
+end
 
 return {
 	get = get_pos,
 	get1 = get_pos1,
 	get2 = get_pos2,
 	get_all = get_pos_all,
+	count = pos_count,
+	clear = clear,
+	pop = pop_pos,
+	push = push_pos,
 	set = set_pos,
 	set_all = set_pos_all,
-	count = pos_count,
-	clear = clear
 }
