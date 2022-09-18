@@ -1,9 +1,10 @@
 local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 local function parse_slope_range(text)
 	if string.match(text, "%.%.") then
 		-- It's in the form a..b
-		local parts = worldeditadditions.split(text, "..", true)
+		local parts = wea_c.split(text, "..", true)
 		if not parts then return nil end
 		if #parts ~= 2 then return false, "Error: Exactly 2 numbers may be separated by a double dot '..' (e.g. 10..45)" end
 		local min_slope = tonumber(parts[1])
@@ -38,7 +39,7 @@ worldeditadditions_core.register_command("layers", {
 			params_text = "dirt_with_grass dirt 3"
 		end
 		
-		local parts = worldeditadditions.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		local success, min_slope, max_slope
 		
 		if #parts > 0 then
@@ -52,7 +53,7 @@ worldeditadditions_core.register_command("layers", {
 		if not max_slope then max_slope = 180	end
 		
 		local node_list
-		success, node_list = worldeditadditions.parse.weighted_nodes(
+		success, node_list = wea_c.parse.weighted_nodes(
 			parts,
 			true
 		)
@@ -62,18 +63,20 @@ worldeditadditions_core.register_command("layers", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, node_list, min_slope, max_slope)
-		local start_time = worldeditadditions.get_ms_time()
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		
 		local changes = worldeditadditions.layers(
-			worldedit.pos1[name], worldedit.pos2[name],
+			pos1, pos2,
 			node_list,
 			min_slope, max_slope
 		)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		-- print("DEBUG min_slope", min_slope, "max_slope", max_slope)
 		-- print("DEBUG min_slope", math.deg(min_slope), "max_slope", math.deg(max_slope))
 		
-		minetest.log("action", name .. " used //layers at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. changes.replaced .. " nodes and skipping " .. changes.skipped_columns .. " columns ("..changes.skipped_columns_slope.." due to slope constraints) in " .. time_taken .. "s")
-		return true, changes.replaced .. " nodes replaced and " .. changes.skipped_columns .. " columns skipped ("..changes.skipped_columns_slope.." due to slope constraints) in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //layers at "..pos1.." - "..pos2..", replacing "..changes.replaced.." nodes and skipping "..changes.skipped_columns.." columns ("..changes.skipped_columns_slope.." due to slope constraints) in "..wea_c.format.human_time(time_taken))
+		return true, changes.replaced.." nodes replaced and "..changes.skipped_columns.." columns skipped ("..changes.skipped_columns_slope.." due to slope constraints) in "..wea_c.format.human_time(time_taken)
 	end
 })
