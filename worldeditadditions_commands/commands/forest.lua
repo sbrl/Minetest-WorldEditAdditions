@@ -1,4 +1,5 @@
-local wea = worldeditadditions
+local wea_c = worldeditadditions
+local Vector3 = wea_c.Vector3
 
 -- ███████  ██████  ██████  ███████ ███████ ████████
 -- ██      ██    ██ ██   ██ ██      ██         ██
@@ -19,12 +20,12 @@ worldeditadditions_core.register_command("forest", {
 			params_text = params_text:sub(#match_start + 1) -- everything starts at 1 in Lua :-/
 		end
 		
-		local success, sapling_list = wea.parse.weighted_nodes(
-			wea.split_shell(params_text),
+		local success, sapling_list = wea_c.parse.weighted_nodes(
+			wea_c.split_shell(params_text),
 			false,
 			function(name)
 				return worldedit.normalize_nodename(
-					wea.normalise_saplingname(name)
+					wea_c.normalise_saplingname(name)
 				)
 			end
 		)
@@ -33,26 +34,27 @@ worldeditadditions_core.register_command("forest", {
 	end,
 	nodes_needed = function(name)
 		-- //overlay only modifies up to 1 node per column in the selected region
-		local pos1, pos2 = worldedit.sort_pos(worldedit.pos1[name], worldedit.pos2[name])
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		return (pos2.x - pos1.x) * (pos2.y - pos1.y)
 	end,
 	func = function(name, density, sapling_list)
-		local start_time = wea.get_ms_time()
-		local success, stats = wea.forest(
-			worldedit.pos1[name], worldedit.pos2[name],
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		local success, stats = worldeditadditions.forest(
+			pos1, pos2,
 			density,
 			sapling_list
 		)
 		if not success then return success, stats end
-		local time_taken = wea.format.human_time(wea.get_ms_time() - start_time)
+		local time_taken = wea_c.format.human_time(wea_c.get_ms_time() - start_time)
 		
-		local distribution_display = wea.format.node_distribution(
+		local distribution_display = wea_c.format.node_distribution(
 			stats.placed,
 			stats.successes,
 			false -- no grand total at the bottom
 		)
 		
-		minetest.log("action", name.." used //forest at "..wea.vector.tostring(worldedit.pos1[name]).." - "..wea.vector.tostring(worldedit.pos2[name])..", "..stats.successes.." trees placed, averaging "..stats.attempts_avg.." growth attempts / tree and "..stats.failures.." failed attempts in "..time_taken)
+		minetest.log("action", name.." used //forest at "..pos1.." - "..pos2..", "..stats.successes.." trees placed, averaging "..stats.attempts_avg.." growth attempts / tree and "..stats.failures.." failed attempts in "..time_taken)
 		return true, distribution_display.."\n=========================\n"..stats.successes.." trees placed, averaging "..stats.attempts_avg.." growth attempts / tree and "..stats.failures.." failed attempts in "..time_taken
 	end
 })

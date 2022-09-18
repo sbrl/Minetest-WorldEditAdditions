@@ -1,5 +1,6 @@
-local we_c = worldeditadditions_commands
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 -- ██████   ██████  ███    ██ ███████ ███    ███ ███████  █████  ██
 -- ██   ██ ██    ██ ████   ██ ██      ████  ████ ██      ██   ██ ██
@@ -16,20 +17,20 @@ worldeditadditions_core.register_command("bonemeal", {
 			params_text = "1"
 		end
 		
-		local parts = wea.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		local strength = 1
 		local chance = 1
 		local node_names = {} -- An empty table means all nodes
 		
 		if #parts >= 1 then
-			strength = tonumber(wea.trim(table.remove(parts, 1)))
+			strength = tonumber(wea_c.trim(table.remove(parts, 1)))
 			if not strength then
 				return false, "Invalid strength value (value must be an integer)"
 			end
 		end
 		if #parts >= 1 then
-			chance = worldeditadditions.parse.chance(table.remove(parts, 1))
+			chance = wea_c.parse.chance(table.remove(parts, 1))
 			if not chance then
 				return false, "Invalid chance value (must be a positive integer)"
 			end
@@ -57,21 +58,22 @@ worldeditadditions_core.register_command("bonemeal", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name]) / 2
 	end,
 	func = function(name, strength, chance, node_names)
-		local start_time = worldeditadditions.get_ms_time()
-		local success, nodes_bonemealed, candidates = worldeditadditions.bonemeal(
-			worldedit.pos1[name], worldedit.pos2[name],
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		local success, nodes_bonemealed, candidates = wea.bonemeal(
+			pos1, pos2,
 			strength, chance,
 			node_names
 		)
 		-- nodes_bonemealed is an error message here if success == false
 		if not success then return success, nodes_bonemealed end
 		
-		local percentage = worldeditadditions.round((nodes_bonemealed / candidates)*100, 2)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local percentage = wea_c.round((nodes_bonemealed / candidates)*100, 2)
+		local time_taken = wea_c.get_ms_time() - start_time
 		-- Avoid nan% - since if there aren't any candidates then nodes_bonemealed will be 0 too
 		if candidates == 0 then percentage = 0 end
 		
-		minetest.log("action", name .. " used //bonemeal at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken.."s")
-		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name .. " used //bonemeal at "..pos1.." - "..pos2..", bonemealing " .. nodes_bonemealed.." nodes (out of "..candidates.." nodes) at strength "..strength.." in "..time_taken.."s")
+		return true, nodes_bonemealed.." out of "..candidates.." (~"..percentage.."%) candidates bonemealed in "..wea_c.format.human_time(time_taken)
 	end
 })

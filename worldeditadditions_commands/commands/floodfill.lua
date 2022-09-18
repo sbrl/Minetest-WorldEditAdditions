@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ███████ ██       ██████   ██████  ██████  ███████ ██ ██      ██
 -- ██      ██      ██    ██ ██    ██ ██   ██ ██      ██ ██      ██
 -- █████   ██      ██    ██ ██    ██ ██   ██ █████   ██ ██      ██
@@ -34,15 +37,20 @@ worldeditadditions_core.register_command("floodfill", {
 		return math.ceil(((4 * math.pi * (tonumber(radius) ^ 3)) / 3) / 2)
 	end,
 	func = function(name, replace_node, radius)
-		local start_time = worldeditadditions.get_ms_time()
-		local nodes_replaced = worldeditadditions.floodfill(worldedit.pos1[name], radius, replace_node)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local start_time = wea_c.get_ms_time()
+		local pos1 = Vector3.clone(worldedit.pos1[name])
+		local nodes_replaced = worldeditadditions.floodfill(
+			pos1,
+			radius,
+			replace_node
+		)
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		if nodes_replaced == false then
 			return false, "Error: The search node is the same as the replace node."
 		end
 		
-		minetest.log("action", name .. " used //floodfill at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. nodes_replaced .. " nodes in " .. time_taken .. "s")
-		return true, nodes_replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //floodfill at "..pos1..", replacing " .. nodes_replaced.." nodes in "..time_taken.."s")
+		return true, nodes_replaced.." nodes replaced in "..wea_c.format.human_time(time_taken)
 	end
 })

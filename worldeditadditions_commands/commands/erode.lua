@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ███████ ██████   ██████  ██████  ███████
 -- ██      ██   ██ ██    ██ ██   ██ ██
 -- █████   ██████  ██    ██ ██   ██ █████
@@ -22,7 +25,7 @@ worldeditadditions_core.register_command("erode", {
 			return false, "Failed to split params_text into 2 parts (this is probably a bug)"
 		end
 		
-		local success, map = worldeditadditions.parse.map(params)
+		local success, map = wea_c.parse.map(params)
 		if not success then return success, map end
 		return true, algorithm, map
 	end,
@@ -30,15 +33,16 @@ worldeditadditions_core.register_command("erode", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, algorithm, params)
-		local start_time = worldeditadditions.get_ms_time()
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		local success, msg, stats = worldeditadditions.erode.run(
-			worldedit.pos1[name], worldedit.pos2[name],
+			pos1, pos2,
 			algorithm, params
 		)
 		if not success then return success, msg end
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
-		minetest.log("action", name .. " used //erode "..algorithm.." at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", adding " .. stats.added .. " nodes and removing " .. stats.removed .. " nodes in " .. time_taken .. "s")
-		return true, msg.."\n"..stats.added .. " nodes added and " .. stats.removed .. " nodes removed in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //erode "..algorithm.." at "..pos1.." - "..pos2..", adding "..stats.added.." nodes and removing "..stats.removed.." nodes in "..time_taken.."s")
+		return true, msg.."\n"..stats.added.." nodes added and "..stats.removed.." nodes removed in "..wea_c.format.human_time(time_taken)
 	end
 })

@@ -1,3 +1,7 @@
+local wea_c = worldeditadditions_core
+local wea = worldeditadditions
+local Vector3 = wea_c.Vector3
+
 --  ██████  ██████  ██    ██ ███    ██ ████████
 -- ██      ██    ██ ██    ██ ████   ██    ██
 -- ██      ██    ██ ██    ██ ██ ██  ██    ██
@@ -17,21 +21,22 @@ worldeditadditions_core.register_command("count", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name)
-		local start_time = worldeditadditions.get_ms_time()
-		
-		local success, counts, total = worldeditadditions.count(
-			worldedit.pos1[name], worldedit.pos2[name],
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		local success, counts, total = wea.count(
+			pos1, pos2,
 			true
 		)
+		if not success then return success, counts end
 		
-		local result = worldeditadditions.format.make_ascii_table(counts).."\n"..
+		local result = wea_c.format.make_ascii_table(counts).."\n"..
 			string.rep("=", 6 + #tostring(total) + 6).."\n"..
 			"Total "..total.." nodes\n"
 		
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
-		minetest.log("action", name.." used //count at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name])..", counting "..total.." nodes in "..worldeditadditions.format.human_time(time_taken))
+		minetest.log("action", name.." used //count at "..pos1.." - "..pos2..", counting "..total.." nodes in "..wea_c.format.human_time(time_taken))
 		return true, result
 	end
 })

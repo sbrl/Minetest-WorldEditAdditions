@@ -1,5 +1,6 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 --  ██████  ██████  ███    ██ ██    ██  ██████  ██     ██    ██ ███████
 -- ██      ██    ██ ████   ██ ██    ██ ██    ██ ██     ██    ██ ██
@@ -15,7 +16,7 @@ worldeditadditions_core.register_command("convolve", {
 		if not params_text then params_text = "" end
 		
 		-- local parts = wea.split(params_text, "%s+", false)
-		local parts = wea.split_shell(params_text)
+		local parts = wea_c.split_shell(params_text)
 		
 		local kernel_name = "gaussian"
 		local width = 5
@@ -26,7 +27,7 @@ worldeditadditions_core.register_command("convolve", {
 			kernel_name = parts[1]
 		end
 		if #parts >= 2 then
-			local parts_dimension = wea.split(parts[2], ",%s*", false)
+			local parts_dimension = wea_c.split(parts[2], ",%s*", false)
 			width = tonumber(parts_dimension[1])
 			if not width then
 				return false, "Error: Invalid width (it must be a positive odd integer)."
@@ -53,9 +54,13 @@ worldeditadditions_core.register_command("convolve", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, kernel_name, kernel_width, kernel_height, sigma)
-		local start_time = wea.get_ms_time()
+		local start_time = wea_c.get_ms_time()
 		
-		local success, kernel = wea.get_conv_kernel(kernel_name, kernel_width, kernel_height, sigma)
+		local success, kernel = wea_c.get_conv_kernel(
+			kernel_name,
+			kernel_width, kernel_height,
+			sigma
+		)
 		if not success then return success, kernel end
 		
 		local kernel_size = Vector3.new(
@@ -76,10 +81,10 @@ worldeditadditions_core.register_command("convolve", {
 		)
 		if not success then return success, stats end
 		
-		local time_taken = wea.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
 		minetest.log("action", name.." used //convolve at "..pos1.." - "..pos2..", adding "..stats.added.." nodes and removing "..stats.removed.." nodes in "..time_taken.."s")
-		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes in " .. wea.format.human_time(time_taken)
+		return true, "Added "..stats.added.." and removed "..stats.removed.." nodes in " .. wea_c.format.human_time(time_taken)
 	end
 })

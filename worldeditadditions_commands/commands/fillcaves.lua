@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 -- ███████ ██ ██      ██       ██████  █████  ██    ██ ███████ ███████
 -- ██      ██ ██      ██      ██      ██   ██ ██    ██ ██      ██
 -- █████   ██ ██      ██      ██      ███████ ██    ██ █████   ███████
@@ -23,14 +26,18 @@ worldeditadditions_core.register_command("fillcaves", {
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
 	func = function(name, replace_node)
-		local start_time = worldeditadditions.get_ms_time()
+		local start_time = wea_c.get_ms_time()
+		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		
-		local success, stats = worldeditadditions.fillcaves(worldedit.pos1[name], worldedit.pos2[name], replace_node)
+		local success, stats = worldeditadditions.fillcaves(
+			pos1, pos2,
+			replace_node
+		)
 		if not success then return success, stats end
 		
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
-		minetest.log("action", name .. " used //fillcaves at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. stats.replaced .. " nodes in " .. time_taken .. "s")
-		return true, stats.replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name .. " used //fillcaves at "..pos1.." - "..pos2..", replacing "..stats.replaced.." nodes in "..time_taken.."s")
+		return true, stats.replaced.." nodes replaced in "..wea_c.format.human_time(time_taken)
 	end
 })

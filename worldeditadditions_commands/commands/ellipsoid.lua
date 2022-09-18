@@ -3,9 +3,11 @@
 -- █████   ██      ██      ██ ██████  ███████ ██    ██ ██ ██   ██
 -- ██      ██      ██      ██ ██           ██ ██    ██ ██ ██   ██
 -- ███████ ███████ ███████ ██ ██      ███████  ██████  ██ ██████
-local wea = worldeditadditions
+local wea_c = worldeditadditions
+local Vector3 = wea_c.Vector3
+
 local function parse_params_ellipsoid(params_text)
-	local parts = wea.split_shell(params_text)
+	local parts = wea_c.split_shell(params_text)
 	
 	if #parts < 4 then
 		return false, "Error: Not enough arguments. Expected \"<rx> <ry> <rz> <replace_node> [h[ollow]]\"."
@@ -15,7 +17,7 @@ local function parse_params_ellipsoid(params_text)
 	if not radius then
 		return false, "Error: 3 radii must be specified."
 	end
-	wea.vector.abs(radius)
+	wea_c.vector.abs(radius)
 	
 	local replace_node = worldedit.normalize_nodename(parts[4])
 	if not replace_node then
@@ -37,18 +39,19 @@ worldeditadditions_core.register_command("ellipsoid", {
 	require_pos = 1,
 	parse = function(params_text)
 		local values = {parse_params_ellipsoid(params_text)}
-		return wea.table.unpack(values)
+		return wea_c.table.unpack(values)
 	end,
 	nodes_needed = function(name, target_node, radius)
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
 	end,
 	func = function(name, target_node, radius, hollow)
-		local start_time = worldeditadditions.get_ms_time()
-		local replaced = worldeditadditions.ellipsoid(worldedit.pos1[name], radius, target_node, hollow)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local start_time = wea_c.get_ms_time()
+		local pos1 = Vector3.clone(worldedit.pos1[name])
+		local replaced = worldeditadditions.ellipsoid(pos1, radius, target_node, hollow)
+		local time_taken = wea_c.get_ms_time() - start_time
 		
-		minetest.log("action", name .. " used //ellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //ellipsoid at "..pos1..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+		return true, replaced .. " nodes replaced in " .. wea_c.format.human_time(time_taken)
 	end
 })
 
@@ -60,17 +63,18 @@ worldeditadditions_core.register_command("hollowellipsoid", {
 	require_pos = 1,
 	parse = function(params_text)
 		local values = {parse_params_ellipsoid(params_text)}
-		return wea.table.unpack(values)
+		return wea_c.table.unpack(values)
 	end,
 	nodes_needed = function(name, target_node, radius)
 		return math.ceil(4/3 * math.pi * radius.x * radius.y * radius.z)
 	end,
 	func = function(name, target_node, radius)
-		local start_time = worldeditadditions.get_ms_time()
-		local replaced = worldeditadditions.ellipsoid(worldedit.pos1[name], radius, target_node, true)
-		local time_taken = worldeditadditions.get_ms_time() - start_time
+		local start_time = wea_c.get_ms_time()
+		local pos1 = Vector3.clone(worldedit.pos1[name])
+		local replaced = worldeditadditions.ellipsoid(pos1, radius, target_node, true)
+		local time_taken = wea_c.get_ms_time() - start_time
 		
-		minetest.log("action", name .. " used //hollowellipsoid at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
-		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
+		minetest.log("action", name.." used //hollowellipsoid at "..pos1..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+		return true, replaced .. " nodes replaced in " .. wea_c.format.human_time(time_taken)
 	end
 })
