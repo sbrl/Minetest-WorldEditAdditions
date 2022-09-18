@@ -26,6 +26,7 @@ local wea_c = worldeditadditions_core
 wea_c.register_command = dofile(modpath.."/core/register_command.lua")
 wea_c.fetch_command_def = dofile(modpath.."/core/fetch_command_def.lua")
 wea_c.register_alias = dofile(modpath.."/core/register_alias.lua")
+wea_c.pos = dofile(modpath.."/core/pos.lua")
 
 
 -- Initialise WorldEdit stuff if the WorldEdit mod is not present
