@@ -4,7 +4,9 @@
 -- ██  ██  ██ ██   ██ ██      ██   ██ ██    ██
 -- ██      ██ ██   ██  ██████ ██   ██  ██████
 local wea = worldeditadditions
-local v3 = worldeditadditions.Vector3
+local wea_c = worldeditadditions
+local v3 = wea_c.Vector3
+
 local function step(params)
 	-- Initialize additional params on first call
 	if not params.first then
@@ -27,11 +29,11 @@ local function step(params)
 	end
 	
 	-- Start a timer
-	local start_time = wea.get_ms_time()
+	local start_time = wea_c.get_ms_time()
 	-- Execute command
 	cmd.func(params.player_name, args)
 	-- Finish timer and add to total
-	params.time = params.time + wea.get_ms_time() - start_time
+	params.time = params.time + wea_c.get_ms_time() - start_time
 	-- Increment iteration state
 	params.i = params.i + 1
 	
@@ -41,7 +43,7 @@ local function step(params)
 	else
 		worldedit.player_notify(params.player_name, "The macro \""..
 			params.file.."\" was completed in " ..
-			wea.format.human_time(params.time))
+			wea_c.format.human_time(params.time))
 	end
 end
 
@@ -51,7 +53,7 @@ worldeditadditions_core.register_command("macro", {
 	privs = {worldedit=true},
 	require_pos = 0,
 	parse = function(params_text)
-		local parts = wea.split(params_text,"%s")
+		local parts = wea_c.split(params_text,"%s")
 		local file_name, delay -- = params_text:match("^(.-)%s*(%d*%.?%d*)$")
 		-- Check for params and delay
 		if not parts[1] then
@@ -72,7 +74,7 @@ worldeditadditions_core.register_command("macro", {
 	end,
 	func = function(name, file_name, delay)
 		if not worldedit.pos1[name] then
-			worldedit.pos1[name] = v3.add(wea.player_vector(name), v3.new(0.5,-0.5,0.5)):floor()
+			worldedit.pos1[name] = v3.add(wea_c.player_vector(name), v3.new(0.5,-0.5,0.5)):floor()
 			worldedit.mark_pos1(name)
 		end
 		worldedit.pos2[name] = worldedit.pos1[name]
@@ -99,7 +101,7 @@ worldeditadditions_core.register_command("macro", {
 			player_name = name,
 			file = file_name:match("^[^%.]+"),
 			delay = delay,
-			commands = wea.split(value,"[\n\r]+")
+			commands = wea_c.split(value,"[\n\r]+")
 		})
 		
 	end,

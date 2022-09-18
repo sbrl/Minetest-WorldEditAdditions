@@ -1,30 +1,6 @@
 --- Executes multiple worldedit commands in sequence.
--- @module worldeditadditions.multi
-
--- explode(separator, string)
--- From http://lua-users.org/wiki/SplitJoin
-local function explode(delim, str)
-	local ll, is_done
-	local delim_length = string.len(delim)
-	ll = 0
-	is_done = false
-	
-	return function()
-		if is_done then return end
-		
-		local result
-		local loc = string.find(str, delim, ll, true) -- find the next d in the string
-		if loc ~= nil then -- if "not not" found then..
-			result = string.sub(str, ll, loc - 1) -- Save it in our array.
-			ll = loc + delim_length -- save just after where we found it for searching next time.
-		else
-			result = string.sub(str, ll) -- Save what's left in our array.
-			is_done = true
-		end
-		
-		return result
-	end
-end
+-- @module worldeditadditions_commands.multi
+local wea_c = worldeditadditions_core
 
 minetest.register_chatcommand("/multi", {
 	params = "/<command_a> <args> //<command_b> <args> /<command_c> <args>.....",
@@ -32,24 +8,24 @@ minetest.register_chatcommand("/multi", {
 	privs = { worldedit = true },
 	func = function(name, params_text)
 		if not params_text then return false, "Error: No commands specified, so there's nothing to do." end
-		params_text = worldeditadditions.trim(params_text)
+		params_text = wea_c.trim(params_text)
 		if #params_text == 0 then return false, "Error: No commands specified, so there's nothing to do." end
 		
-		local master_start_time = worldeditadditions.get_ms_time()
+		local master_start_time = wea_c.get_ms_time()
 		local times = {}
 		
 		-- Tokenise the input into a list of commands
-		local success, commands = worldeditadditions.parse.tokenise_commands(params_text)
+		local success, commands = wea_c.parse.tokenise_commands(params_text)
 		if not success then return success, commands end
 		
 		for i, command in ipairs(commands) do
 			-- print("[DEBUG] i", i, "command: '"..command.."'")
-			local start_time = worldeditadditions.get_ms_time()
+			local start_time = wea_c.get_ms_time()
 			
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
 			if not found then command_name = command end
 			-- Things start at 1, not 0 in Lua :-(
-			command_name = worldeditadditions.trim(command_name):sub(2) -- Strip the leading /
+			command_name = wea_c.trim(command_name):sub(2) -- Strip the leading /
 			if not args then args = "" end
 			-- print("command_name", command_name)
 			
@@ -66,21 +42,21 @@ minetest.register_chatcommand("/multi", {
 			minetest.log("action", name.." runs "..command)
 			cmd.func(name, args)
 			
-			times[#times + 1] = (worldeditadditions.get_ms_time() - start_time)
+			times[#times + 1] = (wea_c.get_ms_time() - start_time)
 			-- i = i + 1
 		end
 		
-		local total_time = (worldeditadditions.get_ms_time() - master_start_time)
+		local total_time = (wea_c.get_ms_time() - master_start_time)
 		local done_message = {}
 		table.insert(done_message,
 			string.format("Executed %d commands in %s (",
 				#times,
-				worldeditadditions.format.human_time(total_time)
+				wea_c.format.human_time(total_time)
 			)
 		)
 		local message_parts = {}
 		for j=1,#times do
-			table.insert(message_parts, worldeditadditions.format.human_time(times[j]))
+			table.insert(message_parts, wea_c.format.human_time(times[j]))
 		end
 		table.insert(done_message, table.concat(message_parts, ", "))
 		table.insert(done_message, ")")

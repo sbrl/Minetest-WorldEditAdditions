@@ -1,9 +1,12 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 -- ███████ ██      ██      ██ ██████  ███████ ███████  █████  ██████  ██████  ██   ██    ██
 -- ██      ██      ██      ██ ██   ██ ██      ██      ██   ██ ██   ██ ██   ██ ██    ██  ██
 -- █████   ██      ██      ██ ██████  ███████ █████   ███████ ██████  ██████  ██     ████
 -- ██      ██      ██      ██ ██           ██ ██      ██   ██ ██      ██      ██      ██
 -- ███████ ███████ ███████ ██ ██      ███████ ███████ ██   ██ ██      ██      ███████ ██
-local wea_c = worldeditadditions_core
 
 worldeditadditions_core.register_command("ellipsoidapply", {
 	params = "<command_name> <args>",
@@ -48,16 +51,17 @@ worldeditadditions_core.register_command("ellipsoidapply", {
 		if not minetest.check_player_privs(name, cmd.privs) then
 			return false, "Your privileges are insufficient to execute the command '"..cmd.."'."
 		end
-		
+		local pos1 = Vector3.clone(worldedit.pos1[name])
+		local pos2 = Vector3.clone(worldedit.pos2[name])
 		local success, stats_time = worldeditadditions.ellipsoidapply(
-			worldedit.pos1[name], worldedit.pos2[name],
+			pos1, pos2,
 			function()
-				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
+				cmd.func(name, wea_c.table.unpack(args_parsed))
 			end --, args_parsed
 		)
-		local time_overhead = 100 - worldeditadditions.round((stats_time.fn / stats_time.all) * 100, 3)
+		local time_overhead = 100 - wea_c.round((stats_time.fn / stats_time.all) * 100, 3)
 		
-		minetest.log("action", name.." used //ellipsoidapply at "..worldeditadditions.vector.tostring(worldedit.pos1[name]).." - "..worldeditadditions.vector.tostring(worldedit.pos2[name]).." in "..worldeditadditions.format.human_time(stats_time.all))
-		return true, "Complete in "..worldeditadditions.format.human_time(stats_time.all).." ("..worldeditadditions.format.human_time(stats_time.fn).." fn, "..time_overhead.."% ellipsoidapply overhead)"
+		minetest.log("action", name.." used //ellipsoidapply at "..pos1.." - "..pos2.." in "..wea_c.format.human_time(stats_time.all))
+		return true, "Complete in "..wea_c.format.human_time(stats_time.all).." ("..wea_c.format.human_time(stats_time.fn).." fn, "..time_overhead.."% ellipsoidapply overhead)"
 	end
 })

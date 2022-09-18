@@ -1,43 +1,20 @@
 --- Executes multiple worldedit commands in sequence.
--- @module worldeditadditions.multi
+-- @module worldeditadditions_commands.multi
 
--- explode(separator, string)
--- From http://lua-users.org/wiki/SplitJoin
--- TODO: Refactor this to use wea.split instead
-local function explode(delim, str)
-	local ll, is_done
-	local delim_length = string.len(delim)
-	ll = 0
-	is_done = false
-	
-	return function()
-		if is_done then return end
-		
-		local result
-		local loc = string.find(str, delim, ll, true) -- find the next d in the string
-		if loc ~= nil then -- if "not not" found then..
-			result = string.sub(str, ll, loc - 1) -- Save it in our array.
-			ll = loc + delim_length -- save just after where we found it for searching next time.
-		else
-			result = string.sub(str, ll) -- Save what's left in our array.
-			is_done = true
-		end
-		
-		return result
-	end
-end
+local wea_c = worldeditadditions_core
+
 
 local function step(params)
-	local start_time = worldeditadditions.get_ms_time()
+	local start_time = wea_c.get_ms_time()
 	
 	local full_cmd = params.cmd_name.." "..params.args
 	worldedit.player_notify(params.name, string.format("[ many | /%s ] %d / %d (~%.2f%%) complete | last: %s, average: %s, ETA: ~%s",
 		full_cmd,
 		(params.i + 1), params.count,
 		((params.i + 1) / params.count)*100,
-		worldeditadditions.format.human_time(params.times[#params.times] or 0),
-		worldeditadditions.format.human_time(worldeditadditions.average(params.times)),
-		worldeditadditions.format.human_time(worldeditadditions.eta(
+		wea_c.format.human_time(params.times[#params.times] or 0),
+		wea_c.format.human_time(wea_c.average(params.times)),
+		wea_c.format.human_time(wea_c.eta(
 			params.times,
 			params.i,
 			params.count
@@ -50,20 +27,20 @@ local function step(params)
 	cmd.func(params.name, params.args)
 	
 	
-	table.insert(params.times, worldeditadditions.get_ms_time() - start_time)
+	table.insert(params.times, wea_c.get_ms_time() - start_time)
 	
 	params.i = params.i + 1
 	if params.i < params.count then
 		minetest.after(0, step, params)
 	else
-		local total_time = (worldeditadditions.get_ms_time() - params.master_start_time)
+		local total_time = (wea_c.get_ms_time() - params.master_start_time)
 		local done_message = {}
 		table.insert(done_message,
 			string.format("Executed '"..full_cmd.."' %d times in %s (~%s / time)",
 				#params.times,
-				worldeditadditions.format.human_time(total_time),
-				worldeditadditions.format.human_time(
-					worldeditadditions.average(params.times)
+				wea_c.format.human_time(total_time),
+				wea_c.format.human_time(
+					wea_c.average(params.times)
 				)
 			)
 		)
@@ -71,7 +48,7 @@ local function step(params)
 		if #params.times < 10 then
 			local message_parts = {}
 			for j=1,#params.times do
-				table.insert(message_parts, worldeditadditions.format.human_time(params.times[j]))
+				table.insert(message_parts, wea_c.format.human_time(params.times[j]))
 			end
 			table.insert(done_message, "; ")
 			table.insert(done_message, table.concat(message_parts, ", "))
@@ -88,7 +65,7 @@ minetest.register_chatcommand("/many", {
 	func = function(name, params_text)
 		
 		local i = 1 -- For feedback only
-		local master_start_time = worldeditadditions.get_ms_time()
+		local master_start_time = wea_c.get_ms_time()
 		local times = {}
 		
 		local count, cmd_name, args = params_text:match("^(%d+)%s([^%s]+)%s(.+)$")
@@ -97,11 +74,11 @@ minetest.register_chatcommand("/many", {
 			if not count then return false, "Error: Invalid syntax" end
 		end
 		if not args then args = "" end
-		args = worldeditadditions.trim(args)
+		args = wea_c.trim(args)
 		-- print("[many] count", count, "cmd_name", cmd_name, "args", args)
 		
 		count = tonumber(count)
-		cmd_name = worldeditadditions.trim(cmd_name):sub(2) -- Things start at 1, not 0 in Lua :-(
+		cmd_name = wea_c.trim(cmd_name):sub(2) -- Things start at 1, not 0 in Lua :-(
 		
 		-- Check the command we're going to execute
 		local cmd = minetest.chatcommands[cmd_name]

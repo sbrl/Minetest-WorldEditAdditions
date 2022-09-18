@@ -1,10 +1,12 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 -- ███    ██  ██████  ██ ███████ ███████  █████  ██████  ██████  ██   ██    ██ ██████  ██████
 -- ████   ██ ██    ██ ██ ██      ██      ██   ██ ██   ██ ██   ██ ██    ██  ██       ██ ██   ██
 -- ██ ██  ██ ██    ██ ██ ███████ █████   ███████ ██████  ██████  ██     ████    █████  ██   ██
 -- ██  ██ ██ ██    ██ ██      ██ ██      ██   ██ ██      ██      ██      ██    ██      ██   ██
 -- ██   ████  ██████  ██ ███████ ███████ ██   ██ ██      ██      ███████ ██    ███████ ██████
-local wea_c = worldeditadditions_core
-
 
 worldeditadditions_core.register_command("noiseapply2d", {
 	params = "<threshold> <scale> <command_name> <args>",
@@ -30,7 +32,7 @@ worldeditadditions_core.register_command("noiseapply2d", {
 		
 		-- Run parsing of target command
 		-- Lifted from cubeapply in WorldEdit
-		local args_parsed = {cmd_we.parse(args_text)}
+		local args_parsed = { cmd_we.parse(args_text) }
 		if not table.remove(args_parsed, 1) then
 			return false, args_parsed[1]
 		end
@@ -60,7 +62,7 @@ worldeditadditions_core.register_command("noiseapply2d", {
 			return false, "Your privileges are insufficient to execute the command '"..cmd.."'."
 		end
 		
-		local pos1, pos2 = worldeditadditions.Vector3.sort(
+		local pos1, pos2 = Vector3.sort(
 			worldedit.pos1[name],
 			worldedit.pos2[name]
 		)
@@ -69,18 +71,18 @@ worldeditadditions_core.register_command("noiseapply2d", {
 		local success, stats_time = worldeditadditions.noiseapply2d(
 			pos1, pos2,
 			threshold,
-			worldeditadditions.Vector3.new(
+			Vector3.new(
 				scale, scale, scale
 			),
 			function()
-				cmd.func(name, worldeditadditions.table.unpack(args_parsed))
+				cmd.func(name, wea_c.table.unpack(args_parsed))
 			end
 		)
 		if not success then return success, stats_time end
 		
-		local time_overhead = 100 - worldeditadditions.round((stats_time.fn / stats_time.all) * 100, 3)
-		local text_time_all = worldeditadditions.format.human_time(stats_time.all)
-		local text_time_fn = worldeditadditions.format.human_time(stats_time.fn)
+		local time_overhead = 100 - wea_c.round((stats_time.fn / stats_time.all) * 100, 3)
+		local text_time_all = wea_c.format.human_time(stats_time.all)
+		local text_time_fn = wea_c.format.human_time(stats_time.fn)
 		
 		minetest.log("action", name.." used //noiseapply2d at "..pos1.." - "..pos2.." in "..text_time_all)
 		return true, "Complete in "..text_time_all.." ("..text_time_fn.." fn, "..time_overhead.."% noiseapply2d overhead)"

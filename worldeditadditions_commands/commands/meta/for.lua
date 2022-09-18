@@ -13,7 +13,7 @@
 -- ?Basename support for values
 -- ?Comma deliniation support for values
 
-local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 local function step(params)
 	-- Initialize additional params on first call
 	if not params.first then
@@ -26,11 +26,11 @@ local function step(params)
 	local v = params.values[params.i]
 	
 	-- Start a timer
-	local start_time = wea.get_ms_time()
+	local start_time = wea_c.get_ms_time()
 	-- Execute command
 	params.cmd.func(params.player_name, params.args:gsub("%%+",v))
 	-- Finish timer and add to total
-	params.time = params.time + wea.get_ms_time() - start_time
+	params.time = params.time + wea_c.get_ms_time() - start_time
 	-- Increment iteration state
 	params.i = params.i + 1
 	
@@ -41,7 +41,7 @@ local function step(params)
 		worldedit.player_notify(params.player_name, "For "..
 			table.concat(params.values,", ")..
 			", /"..params.cmd_name.." completed in " ..
-			wea.format.human_time(params.time))
+			wea_c.format.human_time(params.time))
 	end
 end
 
@@ -53,17 +53,17 @@ worldeditadditions_core.register_command("for", {
 		if not params_text:match("%sdo%s") then
 			return false, "Error: \"do\" argument is not present."
 		end
-		local parts = wea.split(params_text,"%sdo%s")
+		local parts = wea_c.split(params_text,"%sdo%s")
 		if not parts[1] == "" then
 			return false, "Error: No values specified."
 		end
 		if not parts[2] then
 			return false, "Error: No command specified."
 		end
-		local values = wea.split(parts[1],"%s")
+		local values = wea_c.split(parts[1],"%s")
 		local command, args = parts[2]:match("/([^%s]+)%s*(.*)$")
 		if not args then args = ""
-		else args = wea.trim(args) end
+		else args = wea_c.trim(args) end
 		
 		return true, values, command, args
 	end,
