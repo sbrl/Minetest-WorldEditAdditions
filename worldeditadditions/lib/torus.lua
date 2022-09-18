@@ -1,3 +1,6 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 --- Generates torus shapes.
 -- @module worldeditadditions.torus
 
@@ -45,7 +48,7 @@ function worldeditadditions.torus(position, major_radius, minor_radius, target_n
 			for x = -total_radius, total_radius do
 				local x_sq = x*x
 				
-				local sq = vector.new(x_sq, y_sq, z_sq)
+				local sq = Vector3.new(x_sq, y_sq, z_sq)
 				
 				-- Default: xy
 				if axes == "xz" then

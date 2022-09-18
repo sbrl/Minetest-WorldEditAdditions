@@ -1,4 +1,7 @@
-local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 -- ███████  ██████  █████  ██      ███████         ██    ██ ██████
 -- ██      ██      ██   ██ ██      ██              ██    ██ ██   ██
 -- ███████ ██      ███████ ██      █████           ██    ██ ██████
@@ -12,7 +15,7 @@ local wea = worldeditadditions
 -- @param	anchor		Vector	The direction to scale in - as a vector. e.g. { x = -1, y = 1, z = -1 } would mean scale in the negative x, positive y, and nevative z directions.
 -- @return	boolean, string|table	Whether the operation was successful or not. If not, then an error messagea as a string is also passed. If it was, then a statistics object is returned instead.
 function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	if (scale.x < 1 and scale.x > -1) and (scale.y < 1 and scale.y > -1) and (scale.z < 1 and scale.z > -1) then
 		return false, "Error: Scale factor vectors may not mix values -1 < factor < 1 and (1 < factor or factor < -1) - in other words, you can't scale both up and down at the same time (try worldeditadditions.scale, which automatically applies such scale factor vectors as 2 successive operations)"
 	end
@@ -20,10 +23,10 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 		return false, "Error: One of the components of the anchor vector was 0 (anchor components should either be greater than or less than 0 to indicate the anchor to scale in.)"
 	end
 	
-	local size = vector.add(vector.subtract(pos2, pos1), 1)
+	local size = (pos2 - pos1) + 1
 	
-	local pos1_big = vector.new(pos1)
-	local pos2_big = vector.new(pos2)
+	local pos1_big = Vector3.new(pos1)
+	local pos2_big = Vector3.new(pos2)
 	
 	if anchor.x < 1 then pos1_big.x = pos1_big.x - (size.x * (scale.x - 1))
 	else pos2_big.x = pos2_big.x + (size.x * (scale.x - 1)) end
@@ -32,9 +35,9 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 	if anchor.z < 1 then pos1_big.z = pos1_big.z - (size.z * (scale.z - 1))
 	else pos2_big.z = pos2_big.z + (size.z * (scale.z - 1)) end
 	
-	local size_big = vector.add(vector.subtract(pos2_big, pos1_big), 1)
+	local size_big = (pos2_big - pos1_big) + 1
 	
-	-- print("scale_up: scaling "..wea.vector.tostring(pos1).." to "..wea.vector.tostring(pos2).." (volume "..worldedit.volume(pos1, pos2).."; size "..wea.vector.tostring(size)..") to "..wea.vector.tostring(pos1_big).." to "..wea.vector.tostring(pos2_big).." (volume "..worldedit.volume(pos1_big, pos2_big).."; size "..wea.vector.tostring(size_big)..")")
+	-- print("scale_up: scaling "..pos1.." to "..pos2.." (volume "..worldedit.volume(pos1, pos2).."; size "..size..") to "..pos1_big.." to "..pos2_big.." (volume "..worldedit.volume(pos1_big, pos2_big).."; size "..size_big..")")
 	
 	local manip_small, area_small = worldedit.manip_helpers.init(pos1, pos2)
 	local manip_big, area_big = worldedit.manip_helpers.init(pos1_big, pos2_big)
@@ -47,18 +50,18 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 	for z = pos2.z, pos1.z, -1 do
 		for y = pos2.y, pos1.y, -1 do
 			for x = pos2.x, pos1.x, -1 do
-				local posi_rel = vector.subtract({ x = x, y = y, z = z }, pos1)
+				local posi_rel = Vector3.new(x, y, z) - pos1
 				
-				local kern_anchor = {
-					x = pos1_big.x + (posi_rel.x * scale.x) + (scale.x - 1),
-					y = pos1_big.y + (posi_rel.y * scale.y) + (scale.y - 1),
-					z = pos1_big.z + (posi_rel.z * scale.z) + (scale.z - 1)
-				}
+				local kern_anchor = Vector3.new(
+					pos1_big.x + (posi_rel.x * scale.x) + (scale.x - 1),
+					pos1_big.y + (posi_rel.y * scale.y) + (scale.y - 1),
+					pos1_big.z + (posi_rel.z * scale.z) + (scale.z - 1)
+				)
 				
 				-- print(
-				-- 	"posi", wea.vector.tostring(vector.new(x, y, z)),
-				-- 	"posi_rel", wea.vector.tostring(posi_rel),
-				-- 	"kern_anchor", wea.vector.tostring(kern_anchor)
+				-- 	"posi", Vector3.new(x, y, z)),
+				-- 	"posi_rel", posi_rel,
+				-- 	"kern_anchor", kern_anchor
 				-- )
 				
 				local source_val = data_source[area_small:index(x, y, z)]

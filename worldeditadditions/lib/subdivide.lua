@@ -3,6 +3,7 @@
 -- ███████ ██    ██ ██████  ██   ██ ██ ██    ██ ██ ██   ██ █████
 --      ██ ██    ██ ██   ██ ██   ██ ██  ██  ██  ██ ██   ██ ██
 -- ███████  ██████  ██████  ██████  ██   ████   ██ ██████  ███████
+local wea_c = worldeditadditions_core
 local wea = worldeditadditions
 
 -- Counts the number of chunks in the given area.
@@ -43,7 +44,7 @@ local function make_stats_obj(state)
 end
 
 local function subdivide_step_complete(state)
-	state.times.total = wea.get_ms_time() - state.times.start
+	state.times.total = wea_c.get_ms_time() - state.times.start
 	
 	state.callback_complete(
 		state.pos1,
@@ -77,18 +78,18 @@ local function subdivide_step_beforeload(state)
 	if state.cpos1.y < state.pos1.y then state.cpos1.y = state.pos1.y end
 	if state.cpos1.z < state.pos1.z then state.cpos1.z = state.pos1.z end
 	
-	state.times.emerge_last = wea.get_ms_time()
+	state.times.emerge_last = wea_c.get_ms_time()
 	
-	-- print("[BEFORE_EMERGE] c1", wea.vector.tostring(state.cpos1), "c2", wea.vector.tostring(state.cpos2), "volume", worldedit.volume(state.cpos1, state.cpos2))
+	-- print("[BEFORE_EMERGE] c1", state.cpos1, "c2", state.cpos2, "volume", worldedit.volume(state.cpos1, state.cpos2))
 	worldeditadditions.emerge_area(state.cpos1, state.cpos2, state.__afterload, state)
 end
 
 local function subdivide_step_afterload(state_emerge, state_ours)
-	-- print("[AFTER_EMERGE] c1", wea.vector.tostring(state_ours.cpos1), "c2", wea.vector.tostring(state_ours.cpos2), "volume", worldedit.volume(state_ours.cpos1, state_ours.cpos2))
-	state_ours.times.emerge_last = wea.get_ms_time() - state_ours.times.emerge_last
+	-- print("[AFTER_EMERGE] c1", state_ours.cpos1, "c2", state_ours.cpos2, "volume", worldedit.volume(state_ours.cpos1, state_ours.cpos2))
+	state_ours.times.emerge_last = wea_c.get_ms_time() - state_ours.times.emerge_last
 	table.insert(state_ours.times.emerge, state_ours.times.emerge_last)
 	if #state_ours.times.emerge > 25 then
-		state_ours.times.emerge = wea.table.get_last(state_ours.times.emerge, 100)
+		state_ours.times.emerge = wea_c.table.get_last(state_ours.times.emerge, 100)
 	end
 	state_ours.times.emerge_total = state_ours.times.emerge_total + state_ours.times.emerge_last
 	
@@ -96,23 +97,23 @@ local function subdivide_step_afterload(state_emerge, state_ours)
 	
 	state_ours.chunks_completed = state_ours.chunks_completed + 1
 	
-	local callback_last = wea.get_ms_time()
+	local callback_last = wea_c.get_ms_time()
 	state_ours.callback_subblock(
 		state_ours.cpos1,
 		state_ours.cpos2,
 		make_stats_obj(state_ours)
 	)
-	state_ours.times.callback_last = wea.get_ms_time() - callback_last
+	state_ours.times.callback_last = wea_c.get_ms_time() - callback_last
 	table.insert(state_ours.times.callback, state_ours.times.callback_last)
 	
-	state_ours.times.step_last = wea.get_ms_time() - state_ours.times.step_start_abs
+	state_ours.times.step_last = wea_c.get_ms_time() - state_ours.times.step_start_abs
 	table.insert(state_ours.times.steps, state_ours.times.step_last)
 	if #state_ours.times.steps > 25 then
-		state_ours.times.steps = wea.table.get_last(state_ours.times.steps, 100)
+		state_ours.times.steps = wea_c.table.get_last(state_ours.times.steps, 100)
 	end
 	state_ours.times.steps_total = state_ours.times.steps_total + state_ours.times.step_last
-	state_ours.times.step_start_abs = wea.get_ms_time()
-	state_ours.eta = wea.eta(
+	state_ours.times.step_start_abs = wea_c.get_ms_time()
+	state_ours.eta = wea_c.eta(
 		state_ours.times.steps,
 		state_ours.chunks_completed,
 		state_ours.chunks_total
@@ -159,14 +160,14 @@ function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock,
 		times = {
 			-- Total time per step
 			steps_total = 0,
-			steps = {}, step_last = 0, step_start_abs = wea.get_ms_time(),
+			steps = {}, step_last = 0, step_start_abs = wea_c.get_ms_time(),
 			-- Time per step spent on mineteest.emerge_area()
 			emerge_total = 0,
 			emerge = {}, emerge_last = 0,
 			-- Timme per step spent running the callback
 			callback = {}, callback_last = 0,
 			-- The start time (absolute)
-			start = wea.get_ms_time(),
+			start = wea_c.get_ms_time(),
 			-- The eta (in ms) until we're done
 			eta = 0
 		},

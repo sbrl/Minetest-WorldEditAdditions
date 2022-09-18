@@ -1,3 +1,5 @@
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 -- ██     ██  █████  ██      ██      ███████
 -- ██     ██ ██   ██ ██      ██      ██
@@ -12,7 +14,7 @@
 -- @param	node_name	string	The name of the node to use to create the walls with.
 -- @param	thickness	number?	The thickness of the walls to create. Default: 1
 function worldeditadditions.walls(pos1, pos2, node_name, thickness)
-	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
+	pos1, pos2 = Vector3.sort(pos1, pos2)
 	if not thickness then thickness = 1 end
 	-- pos2 will always have the highest co-ordinates now
 	
