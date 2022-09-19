@@ -3,7 +3,7 @@
 -- █████   ██      ██      ██ ██████  ███████ ██    ██ ██ ██   ██
 -- ██      ██      ██      ██ ██           ██ ██    ██ ██ ██   ██
 -- ███████ ███████ ███████ ██ ██      ███████  ██████  ██ ██████
-local wea_c = worldeditadditions
+local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
 local function parse_params_ellipsoid(params_text)
@@ -17,7 +17,7 @@ local function parse_params_ellipsoid(params_text)
 	if not radius then
 		return false, "Error: 3 radii must be specified."
 	end
-	wea_c.vector.abs(radius)
+	radius = Vector3.clone(radius):abs()
 	
 	local replace_node = worldedit.normalize_nodename(parts[4])
 	if not replace_node then
