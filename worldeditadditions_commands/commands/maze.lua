@@ -1,6 +1,6 @@
 local wea = worldeditadditions
 local wea_c = worldeditadditions_core
-local Vector3 = wea.Vector3
+local Vector3 = wea_c.Vector3
 
 local function parse_params_maze(params_text, is_3d)
 	if not params_text then params_text = "" end
@@ -115,7 +115,7 @@ wea_c.register_command("maze3d", {
 	func = function(name, replace_node, seed, path_length, path_width, path_depth)
 		local start_time = wea_c.get_ms_time()
 		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
-		local replaced = wea_c.maze3d(
+		local replaced = wea.maze3d(
 			pos1, pos2,
 			replace_node,
 			seed,

@@ -1,3 +1,4 @@
+local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
@@ -48,7 +49,7 @@ worldeditadditions_core.register_command("walls", {
 		local start_time = wea_c.get_ms_time()
 		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
 		
-		local success, replaced = wea_c.walls(
+		local success, replaced = wea.walls(
 			pos1, pos2,
 			target_node, thickness
 		)
