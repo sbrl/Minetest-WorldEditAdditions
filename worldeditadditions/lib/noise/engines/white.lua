@@ -1,4 +1,3 @@
-local wea = worldeditadditions
 
 
 local White = {}

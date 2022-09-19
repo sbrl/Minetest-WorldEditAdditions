@@ -1,5 +1,7 @@
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
+
 
 local metaballdata = {}
 
@@ -9,7 +11,7 @@ local metaballdata = {}
 -- @param	radius		number	The radius of the metaball.
 -- @returns	bool,number	The number of metaballs now defined for the given player.
 local function add(player_name, pos, radius)
-	local pos = Vector3.clone(pos)
+	pos = Vector3.clone(pos)
 	
 	if type(player_name) ~= "string" then
 		return false, "Error: Invalid player name specified."
@@ -63,7 +65,7 @@ local function list_pretty(player_name)
 		})
 	end
 	
-	return true, wea.format.make_ascii_table(rows).."\n---------------------------\nTotal "..tostring(#metaball_list).." metaballs"
+	return true, wea_c.format.make_ascii_table(rows).."\n---------------------------\nTotal "..tostring(#metaball_list).." metaballs"
 end
 
 --- Removes the metaball with the specified index for a given player.

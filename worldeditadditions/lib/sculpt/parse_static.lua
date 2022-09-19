@@ -1,5 +1,6 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 --- Parses a static brush definition.
 -- @param	source	string	The source string that contains the static brush, formatted as TSV.
@@ -11,12 +12,12 @@ return function(source)
 	
 	-- Parse out the TSV into a table of tables, while also parsing values as numbers
 	-- Also keeps track of the maximum/minimum values found for rescaling later.
-	local values = wea.table.map(
-		wea.split(source, "\n", false),
+	local values = wea_c.table.map(
+		wea_c.split(source, "\n", false),
 		function(line)
-			local row = wea.split(line, "%s+", false)
+			local row = wea_c.split(line, "%s+", false)
 			width = math.max(width, #row)
-			return wea.table.map(
+			return wea_c.table.map(
 				row,
 				function(pixel)
 					local value = tonumber(pixel)

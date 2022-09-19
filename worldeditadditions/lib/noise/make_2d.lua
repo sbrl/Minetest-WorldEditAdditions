@@ -1,10 +1,11 @@
+local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
 -- ███    ███  █████  ██   ██ ███████         ██████  ██████
 -- ████  ████ ██   ██ ██  ██  ██                   ██ ██   ██
 -- ██ ████ ██ ███████ █████   █████            █████  ██   ██
 -- ██  ██  ██ ██   ██ ██  ██  ██              ██      ██   ██
 -- ██      ██ ██   ██ ██   ██ ███████ ███████ ███████ ██████
-local wea = worldeditadditions
 
 -- Generate a flat array of 2D noise.
 -- Written with help from https://www.redblobgames.com/maps/terrain-from-noise/
@@ -55,7 +56,7 @@ function worldeditadditions.noise.make_2d(size, start_pos, params)
 	
 	
 	print("NOISE MAKE_2D\n")
-	worldeditadditions.format.array_2d(result, size.x)
+	wea_c.format.array_2d(result, size.x)
 	
 	
 	-- We don't round here, because otherwise when we apply it it'll be inaccurate

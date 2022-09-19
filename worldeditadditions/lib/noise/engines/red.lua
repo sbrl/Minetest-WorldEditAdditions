@@ -1,4 +1,5 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
 local White = dofile(wea.modpath.."/lib/noise/engines/white.lua")
 
@@ -33,7 +34,7 @@ function Red:noise( x, y, z )
 		self.white:noise(x + 1, y + 1, z),
 		self.white:noise(x + 1, y + 1, z + 1),
 	}
-	return wea.average(values)
+	return wea_c.average(values)
 end
 
 return Red

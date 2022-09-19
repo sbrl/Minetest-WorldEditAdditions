@@ -1,16 +1,19 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
+
 
 -- Test command: //multi //fp set1 1313 6 5540 //fp set2 1338 17 5521 //erode snowballs
 
 local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 	local sediment = 0
-	local pos = { x = startpos.x, z = startpos.z }
-	local pos_prev = { x = pos.x, z = pos.z }
-	local velocity = {
-		x = (math.random() * 2 - 1) * params.init_velocity,
-		z = (math.random() * 2 - 1) * params.init_velocity
-	}
+	local pos = Vector3.new(startpos.x, 0, startpos.z) -- X/Z
+	local pos_prev = Vector3.new(pos.x, 0, pos.z) -- X/Z
+	local velocity = Vector3.new(
+		(math.random() * 2 - 1) * params.init_velocity,
+		0,
+		(math.random() * 2 - 1) * params.init_velocity
+	) -- X/Z
 	local heightmap_length = #heightmap
 	
 	-- print("[snowball] startpos ("..pos.x..", "..pos.z.."), velocity: ("..velocity.x..", "..velocity.z..")")
@@ -29,7 +32,7 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 		end
 		
 		if #hist_velocity > 0 and i > 5
-			and wea.average(hist_velocity) < 0.03 then
+			and wea_c.average(hist_velocity) < 0.03 then
 			-- print("[snowball] It looks like we've stopped")
 			return true, i
 		end
@@ -50,13 +53,13 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 		end
 		
 		velocity.x = params.friction * velocity.x + normalmap[hi].x * params.speed
+		velocity.y = 0 -- Just in case
 		velocity.z = params.friction * velocity.z + normalmap[hi].y * params.speed
-		
 		-- print("[snowball] now at ("..x..", "..z..") velocity "..wea.vector.lengthsquared(velocity)..", sediment "..sediment)
-		local new_vel_sq = wea.vector.lengthsquared(velocity)
+		local new_vel_sq = velocity:length_squared()
 		if new_vel_sq > 1 then
 			-- print("[snowball] velocity squared over 1, normalising")
-			velocity = wea.vector.normalize(velocity)
+			velocity = velocity:normalise()
 		end
 		table.insert(hist_velocity, new_vel_sq)
 		if #hist_velocity > params.velocity_hist_count then table.remove(hist_velocity, 1) end
@@ -89,12 +92,12 @@ function wea.erode.snowballs(heightmap_initial, heightmap, heightmap_size, regio
 		count = 25000
 	}
 	-- Apply the custom settings
-	wea.table.apply(params_custom, params)
+	wea_c.table.apply(params_custom, params)
 	
 	-- print("[erode/snowballs] params: ")
-	-- print(wea.format.map(params))
+	-- print(wea_c.format.map(params))
 	
-	local normals = wea.terrain.calculate_normals(heightmap, heightmap_size)
+	local normals = wea_c.terrain.calculate_normals(heightmap, heightmap_size)
 	
 	local stats_steps = {}
 	for i = 1, params.count do
@@ -142,5 +145,5 @@ function wea.erode.snowballs(heightmap_initial, heightmap, heightmap_size, regio
 		)
 	end
 	
-	return true, ""..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps (averaged ~"..wea.average(stats_steps).." steps)"
+	return true, ""..#stats_steps.." snowballs simulated, max "..params.max_steps.." steps (averaged ~"..wea_c.average(stats_steps).." steps)"
 end

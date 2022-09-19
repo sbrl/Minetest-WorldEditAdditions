@@ -56,7 +56,7 @@ worldeditadditions_core.register_command("convolve", {
 	func = function(name, kernel_name, kernel_width, kernel_height, sigma)
 		local start_time = wea_c.get_ms_time()
 		
-		local success, kernel = wea_c.get_conv_kernel(
+		local success, kernel = wea.get_conv_kernel(
 			kernel_name,
 			kernel_width, kernel_height,
 			sigma

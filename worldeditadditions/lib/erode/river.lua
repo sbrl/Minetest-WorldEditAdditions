@@ -1,12 +1,13 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
 --- Parses a comma-separated side numbers list out into a list of numbers.
 -- @param	list	string	The command separated list to parse.
 -- @returns	number[]		A list of side numbers.
 local function parse_sides_list(list)
 	list = list:gsub("%s", "")	-- Spaces are not permitted
-	return wea.table.unique(wea.table.map(
-		wea.split(list, ","),
+	return wea_c.table.unique(wea_c.table.map(
+		wea_c.split(list, ","),
 		function(value) return tonumber(value) end
 	))
 end
@@ -20,7 +21,7 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 		dolower = true			-- Whether to do lower operations or not
 	}
 	-- Apply the custom settings
-	wea.table.apply(params_custom, params)
+	wea_c.table.apply(params_custom, params)
 	
 	params.lower_sides = parse_sides_list(params.lower_sides)
 	params.raise_sides = parse_sides_list(params.raise_sides)
@@ -30,8 +31,8 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 	local removed = 0
 	for i=1,params.steps do
 		-- print("[DEBUG:river] step ", i)
-		-- wea.format.array_2d(heightmap, heightmap_size.x)
-		local time_start = wea.get_ms_time()
+		-- wea_c.format.array_2d(heightmap, heightmap_size.x)
+		local time_start = wea_c.get_ms_time()
 		
 		-- Store up changes to make and make them at the end of the step
 		-- This is important, because decisions 
@@ -105,7 +106,7 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 					removed = removed + 1
 				end
 				-- print("[DEBUG:river] sides_higher", sides_higher, "sides_lower", sides_lower, "action", action)
-				-- wea.format.array_2d(heightmap, heightmap_size.x)
+				-- wea_c.format.array_2d(heightmap, heightmap_size.x)
 			end
 		end
 		
@@ -116,8 +117,8 @@ function worldeditadditions.erode.river(heightmap_initial, heightmap, heightmap_
 			heightmap[hi] = heightmap[hi] - 1
 		end
 		
-		table.insert(timings, wea.get_ms_time() - time_start)
+		table.insert(timings, wea_c.get_ms_time() - time_start)
 	end
 	
-	return true, params.steps.." steps made, raising "..filled.." and lowering "..removed.." columns in "..wea.format.human_time(wea.sum(timings)).." (~"..wea.format.human_time(wea.average(timings)).." per step)"
+	return true, params.steps.." steps made, raising "..filled.." and lowering "..removed.." columns in "..wea_c.format.human_time(wea_c.sum(timings)).." (~"..wea_c.format.human_time(wea_c.average(timings)).." per step)"
 end

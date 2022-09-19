@@ -1,5 +1,6 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 wea.conv = {}
 
@@ -62,8 +63,8 @@ function wea.convolve(pos1, pos2, kernel, kernel_size)
 	
 	local node_id_air = minetest.get_content_id("air")
 	
-	local heightmap, heightmap_size = wea.terrain.make_heightmap(pos1, pos2, manip, area, data)
-	local heightmap_conv = wea.table.shallowcopy(heightmap)
+	local heightmap, heightmap_size = wea_c.terrain.make_heightmap(pos1, pos2, manip, area, data)
+	local heightmap_conv = wea_c.table.shallowcopy(heightmap)
 	
 	wea.conv.convolve(
 		heightmap_conv,
@@ -77,7 +78,7 @@ function wea.convolve(pos1, pos2, kernel, kernel_size)
 	-- print("transformed")
 	-- wea.format.array_2d(heightmap_conv, (pos2.z - pos1.z) + 1)
 	
-	wea.terrain.apply_heightmap_changes(
+	wea_c.terrain.apply_heightmap_changes(
 		pos1, pos2, area, data,
 		heightmap, heightmap_conv, heightmap_size
 	)

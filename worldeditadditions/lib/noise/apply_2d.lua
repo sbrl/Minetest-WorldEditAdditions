@@ -1,9 +1,10 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 
 
 --- Applies the given noise field to the given heightmap.
 -- Mutates the given heightmap.
--- @param	heightmap		number[]			A table of ZERO indexed numbers representing the heghtmap - see worldeditadditions.terrain.make_heightmap().
+-- @param	heightmap		number[]			A table of ZERO indexed numbers representing the heghtmap - see wea_c.terrain.make_heightmap().
 -- @param	noise			number[]			An table identical in structure to the heightmap containing the noise values to apply.
 -- @param	heightmap_size	{x:number,z:number}	A 2d vector representing the size of the heightmap.
 -- @param	region_height	number				The height of the defined region.
@@ -18,7 +19,7 @@ function wea.noise.apply_2d(heightmap, noise, heightmap_size, pos1, pos2, apply_
 	
 	
 	-- print("NOISE APPLY_2D\n")
-	wea.format.array_2d(noise, heightmap_size.x)
+	wea_c.format.array_2d(noise, heightmap_size.x)
 	
 	
 	local height = tonumber(apply_mode)
@@ -29,15 +30,15 @@ function wea.noise.apply_2d(heightmap, noise, heightmap_size, pos1, pos2, apply_
 			local i = (z * heightmap_size.x) + x
 			
 			if apply_mode == "add" then
-				heightmap[i] = wea.round(heightmap[i] + noise[i])
+				heightmap[i] = wea_c.round(heightmap[i] + noise[i])
 			elseif apply_mode == "multiply" then
-				heightmap[i] = wea.round(heightmap[i] * noise[i])
+				heightmap[i] = wea_c.round(heightmap[i] * noise[i])
 			elseif height then
 				-- Rescale from 0 - 1 to -1 - +1
 				local rescaled = (noise[i] * 2) - 1
 				-- Rescale to match the height specified
 				rescaled = rescaled * height
-				rescaled = math.floor(wea.clamp(
+				rescaled = math.floor(wea_c.clamp(
 					heightmap[i] + rescaled,
 					0, region_height
 				))
@@ -54,7 +55,7 @@ function wea.noise.apply_2d(heightmap, noise, heightmap_size, pos1, pos2, apply_
 	-- end
 	
 	-- print("HEIGHTMAP\n")
-	-- worldeditadditions.format.array_2d(heightmap, heightmap_size.x)
+	-- wea_c.format.array_2d(heightmap, heightmap_size.x)
 	
 	
 	return true

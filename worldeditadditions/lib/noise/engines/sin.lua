@@ -1,5 +1,3 @@
-local wea = worldeditadditions
-
 
 local Sin = {}
 Sin.__index = Sin

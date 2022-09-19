@@ -1,4 +1,5 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 wea.erode = {}
 
 dofile(wea.modpath.."/lib/erode/snowballs.lua")
@@ -18,12 +19,12 @@ function wea.erode.run(pos1, pos2, algorithm, params)
 	
 	local region_height = (pos2.y - pos1.y) + 1
 	
-	local heightmap = wea.terrain.make_heightmap(pos1, pos2, manip, area, data)
-	local heightmap_eroded = wea.table.shallowcopy(heightmap)
+	local heightmap = wea_c.terrain.make_heightmap(pos1, pos2, manip, area, data)
+	local heightmap_eroded = wea_c.table.shallowcopy(heightmap)
 	
 	-- print("[erode.run] algorithm: "..algorithm..", params:");
-	-- print(wea.format.map(params))
-	-- wea.format.array_2d(heightmap, heightmap_size.x)
+	-- print(wea_c.format.map(params))
+	-- wea_c.format.array_2d(heightmap, heightmap_size.x)
 	local success, msg, stats
 	if algorithm == "snowballs" then
 		success, msg = wea.erode.snowballs(
@@ -49,7 +50,7 @@ function wea.erode.run(pos1, pos2, algorithm, params)
 		return false, "Error: Unknown algorithm '"..algorithm.."'. Currently implemented algorithms: snowballs (2d; hydraulic-like), river (2d; cellular automata-like; fills potholes and lowers towers). Ideas for algorithms to implement are welcome!"
 	end
 	
-	success, stats = wea.terrain.apply_heightmap_changes(
+	success, stats = wea_c.terrain.apply_heightmap_changes(
 		pos1, pos2, area, data,
 		heightmap, heightmap_eroded, heightmap_size
 	)

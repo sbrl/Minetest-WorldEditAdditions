@@ -1,3 +1,4 @@
+local wea_c = worldeditadditions_core
 -- Ported from Javascript by Starbeamrainbowlabs
 -- Original source: https://github.com/sidorares/gaussian-convolution-kernel/
 -- From 
@@ -27,7 +28,7 @@ function worldeditadditions.conv.kernel_gaussian(dimension, sigma)
 	local sum = 0
 	for i = 0, dimension-1 do
 		for j = 0, dimension-1 do
-			local distance = worldeditadditions.hypotenuse(i, j, centre, centre)
+			local distance = wea_c.hypotenuse(i, j, centre, centre)
 
 			-- The following is an algorithm that came from the gaussian blur
 			-- wikipedia page [1].

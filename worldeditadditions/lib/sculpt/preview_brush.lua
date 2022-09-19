@@ -1,5 +1,6 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 local make_brush = dofile(wea.modpath.."/lib/sculpt/make_brush.lua")
 local make_preview = dofile(wea.modpath.."/lib/sculpt/make_preview.lua")

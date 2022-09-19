@@ -1,4 +1,6 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 --- Perlin noise generation engine.
 -- Original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
@@ -58,9 +60,9 @@ end
 function Perlin:noise( x, y, z )
 	y = y or 0
 	z = z or 0
-	local xi = wea.bit.band(math.floor(x), 255)
-	local yi = wea.bit.band(math.floor(y), 255)
-	local zi = wea.bit.band(math.floor(z), 255)
+	local xi = wea_c.bit.band(math.floor(x), 255)
+	local yi = wea_c.bit.band(math.floor(y), 255)
+	local zi = wea_c.bit.band(math.floor(z), 255)
 	
 	-- print("x", x, "y", y, "z", z, "xi", xi, "yi", yi, "zi", zi)
 	-- print("p[xi]", self.p[xi])
@@ -118,7 +120,7 @@ function Perlin:lerp(t, a, b)
 end
 
 function Perlin:grad(hash, x, y, z)
-	local h = wea.bit.band(hash, 15)
+	local h = wea_c.bit.band(hash, 15)
 	local u = h < 8 and x or y
 	local v = h < 4 and y or ((h == 12 or h == 14) and x or z)
 	return ((h and 1) == 0 and u or - u) + ((h and 2) == 0 and v or - v)

@@ -1,5 +1,6 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 --- Applies the given brush with the given height and size to the given position.
 -- @param	pos1		Vector3		The position at which to apply the brush.
@@ -36,12 +37,12 @@ local function apply(pos1, brush_name, height, brush_size)
 	local manip, area = worldedit.manip_helpers.init(pos1_compute, pos2_compute)
 	local data = manip:get_data()
 	
-	local heightmap, heightmap_size = wea.terrain.make_heightmap(
+	local heightmap, heightmap_size = wea_c.terrain.make_heightmap(
 		pos1_compute, pos2_compute,
 		manip, area,
 		data
 	)
-	local heightmap_orig = wea.table.shallowcopy(heightmap)
+	local heightmap_orig = wea_c.table.shallowcopy(heightmap)
 	
 	local success2, added, removed = wea.sculpt.apply_heightmap(
 		brush, brush_size_actual,
@@ -52,7 +53,7 @@ local function apply(pos1, brush_name, height, brush_size)
 	if not success2 then return success2, added end
 	
 	-- 3: Save back to disk & return
-	local success3, stats = wea.terrain.apply_heightmap_changes(
+	local success3, stats = wea_c.terrain.apply_heightmap_changes(
 		pos1_compute, pos2_compute,
 		area, data,
 		heightmap_orig, heightmap,

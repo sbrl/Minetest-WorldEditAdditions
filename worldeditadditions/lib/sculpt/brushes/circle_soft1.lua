@@ -1,5 +1,6 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 
 return function(size)
@@ -30,14 +31,14 @@ return function(size)
 	local success, kernel = wea.conv.kernel_gaussian(kernel_size, 2)
 	if not success then return success, kernel end
 	
-	local success2, msg = worldeditadditions.conv.convolve(
+	local success2, msg = wea.conv.convolve(
 		brush, Vector3.new(size.x, 0, size.y),
 		kernel, Vector3.new(kernel_size, 0, kernel_size)
 	)
 	if not success2 then return success2, msg end
 	
 	-- Rescale to be between 0 and 1
-	local max_value = wea.max(brush)
+	local max_value = wea_c.max(brush)
 	for i,value in pairs(brush) do
 		brush[i] = brush[i] / max_value
 	end

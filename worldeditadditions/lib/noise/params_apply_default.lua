@@ -1,4 +1,6 @@
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 --- Makes sure that the default settings are all present in the given params table.
 -- This way not all params have to be specified by the user.
@@ -15,9 +17,9 @@ function worldeditadditions.noise.params_apply_default(params)
 		-- The backend noise algorithm to use
 		algorithm = "perlinmt",
 		-- Zooms in and out
-		scale = wea.Vector3.new(1, 1, 1),
+		scale = Vector3.new(1, 1, 1),
 		-- Offset the generated noise by this vector.
-		offset = wea.Vector3.new(0, 0, 0),
+		offset = Vector3.new(0, 0, 0),
 		-- Apply this exponent to the resulting noise value
 		exponent = 1,
 		-- Multiply the resulting noise value by this number. Changes the "strength" of the noise
@@ -34,7 +36,7 @@ function worldeditadditions.noise.params_apply_default(params)
 	-- If params[1] is thing, this is a list of params
 	-- This might be a thing if we're dealing with multiple octaves
 	for i,params_el in ipairs(params) do
-		local default_copy = wea.table.shallowcopy(params_default)
+		local default_copy = wea_c.table.shallowcopy(params_default)
 		
 		-- Keyword support
 		for _i, keyword in ipairs(wea.noise.engines.available) do
@@ -44,7 +46,7 @@ function worldeditadditions.noise.params_apply_default(params)
 		end
 		
 		-- Apply this table to fill in the gaps
-		wea.table.apply(
+		wea_c.table.apply(
 			params_el,
 			default_copy
 		)

@@ -1,4 +1,5 @@
-local wea = worldeditadditions
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 
 local PerlinMT = {}
@@ -25,7 +26,7 @@ function PerlinMT.new(seed, params)
 end
 
 function PerlinMT:noise( x, y, z )
-	local value = self.engine:get_3d(wea.Vector3.new(x, y, z))
+	local value = self.engine:get_3d(Vector3.new(x, y, z))
 	return value
 end
 

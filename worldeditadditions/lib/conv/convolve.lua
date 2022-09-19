@@ -1,5 +1,5 @@
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 --[[
 Convolves over a given 2D heightmap with a given matrix.
 Note that this *mutates* the given heightmap.
@@ -17,7 +17,7 @@ function worldeditadditions.conv.convolve(heightmap, heightmap_size, matrix, mat
 	-- We need to reference a *copy* of the heightmap when convolving
 	-- This is because we need the original values when we perform a
 	-- convolution on a given pixel
-	local heightmap_copy = wea.table.shallowcopy(heightmap)
+	local heightmap_copy = wea_c.table.shallowcopy(heightmap)
 	
 	local border_size = Vector3.new(
 		(matrix_size.x-1) / 2,		-- x = height

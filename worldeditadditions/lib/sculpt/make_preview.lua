@@ -1,5 +1,4 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
 
 local make_brush = dofile(wea.modpath.."/lib/sculpt/make_brush.lua")
 

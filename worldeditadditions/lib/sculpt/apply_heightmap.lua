@@ -1,5 +1,5 @@
-local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 --- Applies the given brush at the given x/z position to the given heightmap.
 -- Important: Where a Vector3 is mentioned in the parameter list, it reall MUST
@@ -26,6 +26,7 @@ local function apply_heightmap(brush, brush_size, height, position, heightmap, h
 	
 	local added = 0
 	local removed = 0
+	-- TODO: Make the strength of the brush depend on the height of the nodes in the heightmap?
 	
 	-- Iterate over the heightmap and apply the brush
 	-- Note that we do not iterate over the brush, because we don't know if the

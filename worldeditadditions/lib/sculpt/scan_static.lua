@@ -1,5 +1,6 @@
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 local import_static = dofile(wea.modpath.."/lib/sculpt/import_static.lua")
 
@@ -25,14 +26,14 @@ end
 -- @returns	bool,loaded,errors	A success boolean, followed by the number of brushes loaded, followed by the number of errors encountered while loading brushes (errors are logged as warnings with Minetest)
 return function(dirpath, overwrite_existing)
 	if overwrite_existing == nil then overwrite_existing = false end
-	local files = wea.io.scandir_files(dirpath)
+	local files = wea_c.io.scandir_files(dirpath)
 	
 	local brushes_loaded = 0
 	local errors = 0
 	
 	
 	for i, filename in pairs(files) do
-		if wea.str_ends(filename, ".brush.tsv") then
+		if wea_c.str_ends(filename, ".brush.tsv") then
 			local filepath = dirpath.."/"..filename
 			local name = filename:gsub(".brush.tsv", "")
 			
