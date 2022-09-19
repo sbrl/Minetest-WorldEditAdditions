@@ -58,7 +58,7 @@ function worldeditadditions.spiral_square(pos1, pos2, target_node, interval, acc
 		pos_current = pos_current:add(direction)
 		side_length = side_length + 1
 		
-		print("DEBUG cpos", pos_current, "side_length", side_length, "side_length_max", side_length_max, "direction", direction)
+		-- print("DEBUG cpos", pos_current, "side_length", side_length, "side_length_max", side_length_max, "direction", direction)
 		
 		if side_length >= side_length_max then
 			sides_complete = sides_complete + 1
