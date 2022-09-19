@@ -1,4 +1,4 @@
-local Vector3 = require("worldeditadditions.utils.vector3")
+local Vector3 = require("worldeditadditions_core.utils.vector3")
 
 local axes = require("worldeditadditions.utils.parse.axes")
 local parse_abs_axis_name = axes.parse_abs_axis_name

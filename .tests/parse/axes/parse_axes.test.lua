@@ -1,8 +1,8 @@
-local Vector3 = require("worldeditadditions.utils.vector3")
+local Vector3 = require("worldeditadditions_core.utils.vector3")
 
 local facing_dirs = dofile("./.tests/parse/axes/include_facing_dirs.lua")
 
-local axes = require("worldeditadditions.utils.parse.axes")
+local axes = require("worldeditadditions_core.utils.parse.axes")
 local parse_axes = axes.parse_axes
 
 --[[ Original idea for how this function was supposed to work from @VorTechnix

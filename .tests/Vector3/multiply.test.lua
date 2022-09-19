@@ -1,4 +1,4 @@
-local Vector3 = require("worldeditadditions.utils.vector3")
+local Vector3 = require("worldeditadditions_core.utils.vector3")
 
 describe("Vector3.multiply", function()
 	it("should multiply 2 positive vectors", function()

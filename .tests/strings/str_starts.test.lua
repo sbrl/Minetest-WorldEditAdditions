@@ -1,4 +1,4 @@
-local polyfill = require("worldeditadditions.utils.strings.polyfill")
+local polyfill = require("worldeditadditions_core.utils.strings.polyfill")
 
 describe("str_starts", function()
 	it("should return true for a single character", function()

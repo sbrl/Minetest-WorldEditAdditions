@@ -1,4 +1,4 @@
-local polyfill = require("worldeditadditions.utils.strings.polyfill")
+local polyfill = require("worldeditadditions_core.utils.strings.polyfill")
 
 describe("trim", function()
 	it("work for a string that's already trimmed", function()

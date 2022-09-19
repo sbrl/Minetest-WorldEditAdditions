@@ -1,4 +1,4 @@
-local Vector3 = require("worldeditadditions.utils.vector3")
+local Vector3 = require("worldeditadditions_core.utils.vector3")
 
 describe("Vector3.clamp", function()
 	it("should work by not changing values if it's already clamped", function()

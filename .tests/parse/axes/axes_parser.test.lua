@@ -1,8 +1,8 @@
-local Vector3 = require("worldeditadditions.utils.vector3")
+local Vector3 = require("worldeditadditions_core.utils.vector3")
 
 local facing_dirs = dofile("./.tests/parse/axes/include_facing_dirs.lua")
 
-local parse = require("worldeditadditions.utils.parse.axes_parser")
+local parse = require("worldeditadditions_core.utils.parse.axes_parser")
 local parse_axes = parse.keytable
 
 

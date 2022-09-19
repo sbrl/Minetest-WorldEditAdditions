@@ -1,4 +1,4 @@
-local polyfill = require("worldeditadditions.utils.strings.polyfill")
+local polyfill = require("worldeditadditions_core.utils.strings.polyfill")
 	
 describe("str_padend", function()
 	it("should pad a string", function()

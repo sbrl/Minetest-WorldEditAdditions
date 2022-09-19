@@ -1,4 +1,4 @@
-local Vector3 = require("worldeditadditions.utils.vector3")
+local Vector3 = require("worldeditadditions_core.utils.vector3")
 
 -- To find these numbers, in Javascript:
 -- function t(x) { return Math.sqrt((x*x)*3); }

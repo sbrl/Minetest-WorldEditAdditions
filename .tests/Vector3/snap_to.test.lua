@@ -1,4 +1,4 @@
-local Vector3 = require("worldeditadditions.utils.vector3")
+local Vector3 = require("worldeditadditions_core.utils.vector3")
 
 describe("Vector3.snap_to", function()
 	it("should snap_to a positive vector", function()
