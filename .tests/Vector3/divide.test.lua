@@ -18,10 +18,10 @@ describe("Vector3.divide", function()
 		)
 	end)
 	it("should work with scalar a", function()
-		local a = 2
-		local b = Vector3.new(12, 14, 16)
+		local a = 100
+		local b = Vector3.new(4, 5, 2)
 		assert.are.same(
-			Vector3.new(6, 7, 8),
+			Vector3.new(25, 20, 50),
 			a / b
 		)
 	end)

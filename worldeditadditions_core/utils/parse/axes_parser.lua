@@ -22,7 +22,7 @@ if worldeditadditions_core then
 	Vector3 = dofile(wea_c.modpath.."/utils/vector3.lua")
 else
 	Vector3 = require("worldeditadditions_core.utils.vector3")
-	key_instance = require("worldeditadditions.utils.parse.key_instance")
+	key_instance = require("worldeditadditions_core.utils.parse.key_instance")
 end
 
 
