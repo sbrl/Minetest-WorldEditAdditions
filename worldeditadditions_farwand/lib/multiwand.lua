@@ -1,6 +1,6 @@
 local wea_c = worldeditadditions_core
 local wea = worldeditadditions
-local Vector3 = wea.Vector3
+local Vector3 = wea_c.Vector3
 
 local function push_pos(player_name, pos)
 	if player_name == nil then return end

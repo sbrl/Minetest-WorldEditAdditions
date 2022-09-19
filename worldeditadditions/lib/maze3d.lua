@@ -192,11 +192,11 @@ function worldeditadditions.maze3d(pos1, pos2, target_node, seed, path_length, p
 	local node_id_air = minetest.get_content_id("air")
 	local node_id_target = minetest.get_content_id(target_node)
 
-	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
-	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
+	-- minetest.log("action", "pos1: " .. pos1)
+	-- minetest.log("action", "pos2: " .. pos2)
 
 
-	-- minetest.log("action", "Generating "..extent.x.."x"..extent.z.."x"..extent.z.." 3d maze from pos1 " .. worldeditadditions.vector.tostring(pos1).." to pos2 "..worldeditadditions.vector.tostring(pos2))
+	-- minetest.log("action", "Generating "..extent.x.."x"..extent.z.."x"..extent.z.." 3d maze from pos1 " .. pos1.." to pos2 "..pos2)
 
 	local maze = generate_maze3d(seed, extent.z, extent.y, extent.x, path_length, path_width, path_depth) -- x & z need to be the opposite way around to how we index it
 	-- printspace3d(maze, extent.z, extent.y, extent.x)

@@ -100,8 +100,9 @@ worldeditadditions_core.register_command("hollowtorus", {
 	end,
 	func = function(name, target_node, major_radius, minor_radius, axes)
 		local start_time = worldeditadditions.get_ms_time()
+		local pos1 = Vector3.clone(worldedit.pos1[name])
 		local replaced = worldeditadditions.torus(
-			worldedit.pos1[name],
+			pos1,
 			major_radius, minor_radius,
 			target_node,
 			axes,
@@ -109,7 +110,7 @@ worldeditadditions_core.register_command("hollowtorus", {
 		)
 		local time_taken = worldeditadditions.get_ms_time() - start_time
 		
-		minetest.log("action", name .. " used //hollowtorus at " .. worldeditadditions.vector.tostring(worldedit.pos1[name]) .. ", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
+		minetest.log("action", name .. " used //hollowtorus at "..pos1..", replacing " .. replaced .. " nodes in " .. time_taken .. "s")
 		return true, replaced .. " nodes replaced in " .. worldeditadditions.format.human_time(time_taken)
 	end
 })

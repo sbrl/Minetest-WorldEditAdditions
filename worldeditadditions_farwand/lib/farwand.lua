@@ -3,7 +3,7 @@ local function set_pos1(name, pos)
 		-- print("[set_pos1]", name, "("..pos.x..", "..pos.y..", "..pos.z..")")
 		worldedit.pos1[name] = pos
 		worldedit.mark_pos1(name)
-		worldedit.player_notify(name, "pos1 set to "..worldeditadditions.vector.tostring(pos))
+		worldedit.player_notify(name, "pos1 set to "..pos) -- pos is a Vector3
 	else
 		worldedit.player_notify(name, "Error: Too far away (try raising your maxdist with //farwand maxdist <number>)")
 		-- print("[set_pos1]", name, "nil")
@@ -14,7 +14,7 @@ local function set_pos2(name, pos)
 		-- print("[set_pos2]", name, "("..pos.x..", "..pos.y..", "..pos.z..")")
 		worldedit.pos2[name] = pos
 		worldedit.mark_pos2(name)
-		worldedit.player_notify(name, "pos2 set to "..worldeditadditions.vector.tostring(pos))
+		worldedit.player_notify(name, "pos2 set to "..pos)
 	else
 		worldedit.player_notify(name, "Error: Too far away (try raising your maxdist with //farwand maxdist <number>)")
 		-- print("[set_pos2]", name, "nil")

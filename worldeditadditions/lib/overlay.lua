@@ -16,8 +16,8 @@ function worldeditadditions.overlay(pos1, pos2, node_weights)
 	
 	local node_ids, node_ids_count = wea_c.make_weighted(node_weights)
 	
-	-- minetest.log("action", "pos1: " .. worldeditadditions.vector.tostring(pos1))
-	-- minetest.log("action", "pos2: " .. worldeditadditions.vector.tostring(pos2))
+	-- minetest.log("action", "pos1: " .. pos1)
+	-- minetest.log("action", "pos2: " .. pos2)
 	
 	-- z y x is the preferred loop order, but that isn't really possible here
 	
