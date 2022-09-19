@@ -37,6 +37,7 @@ When actually implementing stuff, here are a few guidelines that I recommend to 
 -- ██  ██ ██ ██   ██ ██  ██  ██ ██
 -- ██   ████ ██   ██ ██      ██ ███████
 local wea = worldeditadditions
+local wea_c = worldeditadditions_core
 worldeditadditions_core.register_command("{name}", {
 	params = "<argument> <argument=default> <option1|option2|...> [<optional_argument> <optional_argument2> ...] | [<optional_argument> [<optional_argument2>]]",
 	description = "A **brief** description of what this command does",
@@ -51,14 +52,14 @@ worldeditadditions_core.register_command("{name}", {
 	end,
 	func = function(name, param1, param2)
 		-- Start a timer
-		local start_time = wea.get_ms_time()
+		local start_time = wea_c.get_ms_time()
 		-- Do stuff
 		
 		-- Finish timer
-		local time_taken = wea.get_ms_time() - start_time
+		local time_taken = wea_c.get_ms_time() - start_time
 		
 		minetest.log("This is a logged message!")
-		return true, "Completed command in " .. wea.format.human_time(time_taken)
+		return true, "Completed command in " .. wea_c.format.human_time(time_taken)
 	end
 })
 ```

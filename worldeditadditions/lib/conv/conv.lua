@@ -74,9 +74,9 @@ function wea.convolve(pos1, pos2, kernel, kernel_size)
 	)
 	
 	-- print("original")
-	-- wea.format.array_2d(heightmap, (pos2.z - pos1.z) + 1)
+	-- wea_c.format.array_2d(heightmap, (pos2.z - pos1.z) + 1)
 	-- print("transformed")
-	-- wea.format.array_2d(heightmap_conv, (pos2.z - pos1.z) + 1)
+	-- wea_c.format.array_2d(heightmap_conv, (pos2.z - pos1.z) + 1)
 	
 	wea_c.terrain.apply_heightmap_changes(
 		pos1, pos2, area, data,
