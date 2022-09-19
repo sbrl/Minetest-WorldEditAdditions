@@ -14,7 +14,8 @@ local function ensure_player(player_name)
 	end
 end
 
-wea_c.pos:addEventListener("push", function(event)
+
+local function do_create(event)
 	ensure_player(event.player_name)
 	
 	local new_entity = wea_c.entities.pos_marker.create(
@@ -23,14 +24,31 @@ wea_c.pos:addEventListener("push", function(event)
 		event.i
 	)
 	position_entities[event.player_name][event.i] = new_entity
+end
+
+wea_c.pos:addEventListener("push", function(event)
+	do_create(event)
 end)
 
 wea_c.pos:addEventListener("pop", function(event)
 	ensure_player(event.player_name)
-	print("pos manage: pop", wea_c.inspect(event))
 	if not position_entities[event.player_name][event.i] then return end
 	wea_c.entities.pos_marker.delete(
 		position_entities[event.player_name][event.i]
 	)
 	position_entities[event.player_name][event.i] = nil
+end)
+
+wea_c.pos:addEventListener("set", function(event)
+	ensure_player(event.player_name)
+	-- Delete the old one, if it exists
+	-- This is safer than attempting to reuse an entity that might not exist
+	if position_entities[event.player_name][event.i] then
+		wea_c.entities.pos_marker.delete(
+			position_entities[event.player_name][event.i]
+		)
+		position_entities[event.player_name][event.i] = nil
+	end
+	
+	do_create(event) -- This works because the event obj for push and set is identical
 end)
