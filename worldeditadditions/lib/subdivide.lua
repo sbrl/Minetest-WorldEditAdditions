@@ -81,7 +81,7 @@ local function subdivide_step_beforeload(state)
 	state.times.emerge_last = wea_c.get_ms_time()
 	
 	-- print("[BEFORE_EMERGE] c1", state.cpos1, "c2", state.cpos2, "volume", worldedit.volume(state.cpos1, state.cpos2))
-	worldeditadditions.emerge_area(state.cpos1, state.cpos2, state.__afterload, state)
+	wea_c.emerge_area(state.cpos1, state.cpos2, state.__afterload, state)
 end
 
 local function subdivide_step_afterload(state_emerge, state_ours)

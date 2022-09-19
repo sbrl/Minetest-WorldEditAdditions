@@ -1,6 +1,8 @@
+local wea_c = worldeditadditions_core
+
 --- Uncomment these 2 lines to run in standalone mode
 -- worldeditadditions = { parse = {  } }
--- function worldeditadditions.trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
+-- function wea_c.trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
 
 
 --- The main tokeniser. Splits the input string up into space separated tokens, except when said spaces are inside { curly braces }.
@@ -73,7 +75,7 @@ local function recombine(parts)
 	local result = {}
 	local acc = {}
 	for i, value in ipairs(parts) do
-		value = worldeditadditions.trim(value)
+		value = wea_c.trim(value)
 		if value:sub(1, 1) == "/" and #acc > 0 then
 			table.insert(result, table.concat(acc, " "))
 			acc = {}
@@ -116,7 +118,7 @@ end
 -- end
 -- 
 -- local function test_input(input)
--- 	local success, result = worldeditadditions.parse.tokenise_commands(input)
+-- 	local success, result = wea_c.parse.tokenise_commands(input)
 -- 	if success then
 -- 		printparts(result)
 -- 

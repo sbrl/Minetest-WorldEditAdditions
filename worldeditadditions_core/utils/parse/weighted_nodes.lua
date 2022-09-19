@@ -1,4 +1,4 @@
-
+local wea_c = worldeditadditions_core
 --- Parses a list of strings as a list of weighted nodes - e.g. like in
 -- the //mix command. Example: "dirt 5 stone sand 2".
 -- @param	parts	string[]	The list of strings to parse (try worldeditadditions_core.split)
@@ -27,7 +27,7 @@ local function parse_weighted_nodes(parts, as_list, func_normalise)
 			mode = MODE_EITHER
 		elseif mode == MODE_EITHER then
 			-- print("mode: either");
-			local chance = worldeditadditions.parse.chance(part, "weight")
+			local chance = wea_c.parse.chance(part, "weight")
 			if not chance then
 				-- print("not a chance, trying a node name")
 				local node_name

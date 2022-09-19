@@ -23,8 +23,8 @@ end
 -- @param	pos1	Vector3	Position 1
 -- @param	pos2	Vector3	Position 2
 function worldeditadditions.spush(name, pos1, pos2)
-	pos1 = Vector3.clon(pos1)
-	pos2 = Vector3.clon(pos2)
+	pos1 = Vector3.clone(pos1)
+	pos2 = Vector3.clone(pos2)
 	if not worldeditadditions.sstack[name] then
 		worldeditadditions.sstack[name] = {}
 	end

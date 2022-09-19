@@ -59,7 +59,7 @@ worldeditadditions_core.register_command("airapply", {
 		local success, stats_time = worldeditadditions.airapply(
 			pos1, pos2,
 			function()
-				cmd.func(name, table.unpack(args_parsed))
+				cmd.func(name, wea_c.table.unpack(args_parsed))
 			end
 		)
 		if not success then return success, stats_time end
