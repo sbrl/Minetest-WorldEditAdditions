@@ -52,3 +52,13 @@ wea_c.pos:addEventListener("set", function(event)
 	
 	do_create(event) -- This works because the event obj for push and set is identical
 end)
+
+wea_c.pos:addEventListener("clear", function(event)
+	ensure_player(event.player_name)
+	if #position_entities[event.player_name] > 0 then
+		for _, entity in pairs(position_entities[event.player_name]) do
+			wea_c.entities.pos_marker.delete(entity)
+		end
+	end
+	position_entities[event.player_name] = nil
+end)
