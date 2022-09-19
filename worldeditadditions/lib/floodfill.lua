@@ -53,28 +53,28 @@ function worldeditadditions.floodfill(start_pos, radius, replace_node)
 		end
 		local xminus = cur - 1 -- -X
 		if data[xminus] == search_id and
-			(Vector3.new(area:position(xminus)) - start_pos):length_squared() < radius_sq and
+			(Vector3.clone(area:position(xminus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(xminus) then
 			-- minetest.log("action", "[floodfill] [-X] index " .. xminus .. " is a " .. data[xminus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(xminus)
 		end
 		local zplus = cur + area.zstride -- +Z
 		if data[zplus] == search_id and
-			(Vector3.new(area:position(zplus)) - start_pos):length_squared() < radius_sq and
+			(Vector3.clone(area:position(zplus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(zplus) then
 			-- minetest.log("action", "[floodfill] [+Z] index " .. zplus .. " is a " .. data[zplus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(zplus)
 		end
 		local zminus = cur - area.zstride -- -Z
 		if data[zminus] == search_id and
-			(Vector3.new(area:position(zminus)) - start_pos):length_squared() < radius_sq and
+			(Vector3.clone(area:position(zminus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(zminus) then
 			-- minetest.log("action", "[floodfill] [-Z] index " .. zminus .. " is a " .. data[zminus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(zminus)
 		end
 		local yminus = cur - area.ystride -- -Y
 		if data[yminus] == search_id and
-			(Vector3.new(area:position(yminus)) - start_pos):length_squared() < radius_sq and
+			(Vector3.clone(area:position(yminus)) - start_pos):length_squared() < radius_sq and
 			not remaining_nodes:contains(yminus)  then
 			-- minetest.log("action", "[floodfill] [-Y] index " .. yminus .. " is a " .. data[yminus] .. ", searching for a " .. search_id)
 			remaining_nodes:enqueue(yminus)
