@@ -66,6 +66,23 @@ local function set_pos(player_name, i, pos)
 	anchor:emit("set", { player_name = player_name, i = i, pos = pos })
 	return true
 end
+
+--- Convenience function that set position 1 for the given player.
+-- @param	player_name		string		The name of the player to set pos1 for.
+-- @param	pos				Vector3?	The new Vector3 for pos1 to set.
+-- @returns	bool			Whether the operation was successful or not, but in this case will always return true so can be ignored.
+local function set_pos1(player_name, pos)
+	return set_pos(player_name, 1, pos)
+end
+--- Convenience function that set position 2 for the given player.
+-- @param	player_name		string		The name of the player to set pos1 for.
+-- @param	pos				Vector3?	The new Vector3 for pos2 to set.
+-- @returns	bool			Whether the operation was successful or not, but in this case will always return true so can be ignored.
+local function set_pos2(player_name, pos)
+	return set_pos(player_name, 2, pos)
+end
+
+
 --- Sets the all the positions for the given player.
 -- You probably want push_pos, not this function.
 -- @param	player_name		string	The name of the player to set the positions for.
@@ -121,6 +138,8 @@ anchor = wea_c.EventEmitter.new({
 	pop = pop_pos,
 	push = push_pos,
 	set = set_pos,
+	set_pos1 = set_pos1,
+	set_pos2 = set_pos2,
 	set_all = set_pos_all
 })
 
