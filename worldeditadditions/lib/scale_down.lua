@@ -64,9 +64,6 @@ function worldeditadditions.scale_down(pos1, pos2, scale, anchor)
 			for x = pos2.x, pos1.x, -1 do
 				local posi_rel = Vector3.new(x, y, z) - pos1
 				
-				-- local posi_copy = wea_c.table.shallowcopy(posi_rel)
-				-- posi_copy = vector.floor(vector.divide(posi_rel/*, scale_down*/))
-				
 				local posi_copy = posi_rel / scale_down
 				
 				if anchor.x < 0 then posi_copy.x = size.x - posi_copy.x end

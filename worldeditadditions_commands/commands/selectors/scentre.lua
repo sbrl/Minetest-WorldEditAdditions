@@ -15,8 +15,11 @@ worldeditadditions_core.register_command("scentre", {
 		return true
 	end,
 	func = function(name)
-		local mean = wea_c.vector.mean(worldedit.pos1[name],worldedit.pos2[name])
-		local pos1, pos2 = Vector3.new(mean), Vector3.new(mean)
+		local mean = Vector3.mean(
+			Vector3.clone(worldedit.pos1[name]),
+			Vector3.clone(worldedit.pos2[name])
+		)
+		local pos1, pos2 = Vector3.clone(mean), Vector3.clone(mean)
 		
 		pos1 = pos1:floor()
 		pos2 = pos2:ceil()

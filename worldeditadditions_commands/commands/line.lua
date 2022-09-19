@@ -36,10 +36,8 @@ worldeditadditions_core.register_command("line", {
 		-- Volume of a hemisphere
 		return math.ceil(math.pi
 			* radius * radius
-			* vector.distance(
-				vector.new(worldedit.pos1[name]),
-				vector.new(worldedit.pos2[name])
-			)) -- Volume of a cylinder
+			* (Vector3.clone(worldedit.pos2[name]) - Vector3.clone(worldedit.pos1[name])):length()
+			) -- Volume of a cylinder
 	end,
 	func = function(name, replace_node, radius)
 		local start_time = wea_c.get_ms_time()

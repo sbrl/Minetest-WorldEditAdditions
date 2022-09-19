@@ -55,7 +55,7 @@ local function snowball(heightmap, normalmap, heightmap_size, startpos, params)
 		velocity.x = params.friction * velocity.x + normalmap[hi].x * params.speed
 		velocity.y = 0 -- Just in case
 		velocity.z = params.friction * velocity.z + normalmap[hi].y * params.speed
-		-- print("[snowball] now at ("..x..", "..z..") velocity "..wea.vector.lengthsquared(velocity)..", sediment "..sediment)
+		-- print("[snowball] now at ("..x..", "..z..") velocity "..velocity:length_squared()..", sediment "..sediment)
 		local new_vel_sq = velocity:length_squared()
 		if new_vel_sq > 1 then
 			-- print("[snowball] velocity squared over 1, normalising")

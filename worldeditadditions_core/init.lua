@@ -41,7 +41,6 @@ wea_c.bit = dofile(wea_c.modpath.."/utils/bit.lua")
 
 wea_c.terrain = dofile(wea_c.modpath.."/utils/terrain/init.lua")
 
-dofile(wea_c.modpath.."/utils/vector.lua")
 dofile(wea_c.modpath.."/utils/strings/init.lua")
 dofile(wea_c.modpath.."/utils/format/init.lua")
 dofile(wea_c.modpath.."/utils/parse/init.lua")

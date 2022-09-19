@@ -29,7 +29,7 @@ function wea_c.player_dir(name)
 	return dir
 end
 
--- /lua print(wea_c.vector.tostring(minetest.get_player_by_name(myname):get_look_dir()))
+-- /lua print(Vector3.clone(minetest.get_player_by_name(myname):get_look_dir()))
 
 --- DEPRECATED =================================================================
 -- TODO: Refactor commands that use the following functions to use player_dir then delete these functions

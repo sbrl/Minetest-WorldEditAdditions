@@ -25,8 +25,8 @@ function worldeditadditions.scale_up(pos1, pos2, scale, anchor)
 	
 	local size = (pos2 - pos1) + 1
 	
-	local pos1_big = Vector3.new(pos1)
-	local pos2_big = Vector3.new(pos2)
+	local pos1_big = Vector3.clone(pos1)
+	local pos2_big = Vector3.clone(pos2)
 	
 	if anchor.x < 1 then pos1_big.x = pos1_big.x - (size.x * (scale.x - 1))
 	else pos2_big.x = pos2_big.x + (size.x * (scale.x - 1)) end

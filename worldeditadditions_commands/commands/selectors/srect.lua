@@ -56,4 +56,4 @@ worldeditadditions_core.register_command("srect", {
 -- /multi //fp set1 -63 19 -20 //srect -z 5
 -- /multi //fp set1 -63 19 -20 //srect a -x 5
 -- /multi //fp set1 -63 19 -20 //srect -x -a 5
--- lua vec = vector.new(15,-12,17); vec["len"] = 5; vec.get = true; vec2 = vector.add(vector.new(1,1,1),vec) print(vec2.x,vec2.y,vec2.z,vec2.len)
+-- lua vec = Vector3.new(15,-12,17); vec["len"] = 5; vec.get = true; vec2 = Vector3.new(1,1,1) + vec; print(vec2.x,vec2.y,vec2.z,vec2.len)
