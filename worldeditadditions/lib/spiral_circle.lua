@@ -76,7 +76,7 @@ function worldeditadditions.spiral_circle(pos1, pos2, target_node, interval_init
 		interval = interval_initial + acceleration_constant
 		
 		
-		print("DEBUG cpos", pos_current:multiply(1000):floor():divide(1000), "angle", math.deg(angle), "step", wea_c.round(math.deg(step), 3), "radius", wea_c.round(radius, 3), "interval", wea_c.round(interval, 3), "accel_const", acceleration_constant)
+		-- print("DEBUG cpos", pos_current:multiply(1000):floor():divide(1000), "angle", math.deg(angle), "step", wea_c.round(math.deg(step), 3), "radius", wea_c.round(radius, 3), "interval", wea_c.round(interval, 3), "accel_const", acceleration_constant)
 		
 	end
 	
