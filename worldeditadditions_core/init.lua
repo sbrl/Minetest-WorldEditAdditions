@@ -58,11 +58,12 @@ dofile(wea_c.modpath.."/utils/player.lua") -- Player info functions
 
 
 
-wea_c.pos = dofile(modpath.."/core/pos.lua")
+wea_c.pos = dofile(modpath.."/core/pos.lua") -- AFTER EventEmitter
 wea_c.register_command = dofile(modpath.."/core/register_command.lua")
 wea_c.fetch_command_def = dofile(modpath.."/core/fetch_command_def.lua")
 wea_c.register_alias = dofile(modpath.."/core/register_alias.lua")
-print("WEA_C pos", wea_c.pos.push)
+wea_c.entities = dofile(modpath.."/core/entities/init.lua") -- AFTER pos
+dofile(modpath.."/core/pos_marker_manage.lua") -- AFTER pos, entities
 
 -- Initialise WorldEdit stuff if the WorldEdit mod is not present
 if minetest.global_exists("worldedit") then

@@ -1,6 +1,6 @@
 
 --- Event manager object.
--- @class
+-- @class	worldeditadditions_core.EventEmitter
 local EventEmitter = {}
 EventEmitter.__index = EventEmitter
 EventEmitter.__name = "EventEmitter" -- A hack to allow identification in wea.inspect
@@ -18,7 +18,7 @@ end
 --- Add a new listener to the given named event.
 -- @param	this		EventEmitter	The EventEmitter instance to add the listener to.
 -- @param	event_name	string			The name of the event to listen on.
--- @param	func		function		The callback function to call when the event is emitted.
+-- @param	func		function		The callback function to call when the event is emitted. Will be passed a single argument - the object passed as the second argument to .emit().
 -- @returns	number		The number of listeners attached to that event.
 function EventEmitter.addEventListener(this, event_name, func)
 	if this.events[event_name] == nil then this.events[event_name] = {} end
