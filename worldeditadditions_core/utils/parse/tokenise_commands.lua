@@ -100,7 +100,7 @@ end
 -- 
 -- @param	command_str		str		The command string to operate on.
 -- @returns	bool,(string[]|string)	If the operation was successful, then true followed by a table of strings is returned. If the operation was not successful, then false followed by an error message (as a single string) is returned instead.
-function worldeditadditions.parse.tokenise_commands(command_str)
+function worldeditadditions_core.parse.tokenise_commands(command_str)
 	local success, result = tokenise(command_str)
 	if not success then return success, result end
 	return true, recombine(result)

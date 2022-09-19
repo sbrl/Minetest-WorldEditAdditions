@@ -1,10 +1,11 @@
+local wea_c = worldeditadditions_core
 local farwand = worldeditadditions.farwand -- Convenience shurtcut
 
 local function parse_params_farwand(params_text)
 	if params_text == nil then
 		return false, "Can't parse nil value"
 	end
-	local parts = worldeditadditions.split(params_text, "%s+", false)
+	local parts = wea_c.split(params_text, "%s+", false)
 	
 	local key = nil
 	local value = nil

@@ -1,4 +1,4 @@
-local wea_c = worldeditadditions_commands
+local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
 --- Overlap command. Places a specified node on top of each column.
