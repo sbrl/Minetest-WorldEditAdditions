@@ -53,6 +53,8 @@ local function create(player_name, pos, display_number)
 end
 
 local function delete(entity)
+	if not entity.get_luaentity then return end -- Ensure the entity is still valid
+	
 	local player_name = entity:get_luaentity().player_name
 	local display_number = entity:get_luaentity().display_number
 	
@@ -67,9 +69,26 @@ end
 local function set_number(entity, display_number)
 	if type(display_number) ~= "number" then return false, "Error: The 'display_number' property must be of type number, but received value of unexpected type '"..type(display_number).."'." end
 	
-	-- marker:set_properties({  }) is our friend
-	print("DEBUG:pos_marker_set_number display_number", display_number)
-	print("DEBUG:pos_marker_set_number TODO_IMPLEMENT THIS. entity", wea_c.inspect(entity))
+	local texture_name = "worldeditadditions_bg.png"
+	
+	if display_number < 100 then
+		local number_right = display_number % 10
+		local number_left = (display_number - number_right) / 10
+		texture_name = texture_name.."^worldeditadditions_l"..number_left..".png"
+		texture_name = texture_name.."^worldeditadditions_r"..number_right..".png"
+		print("DEBUG:set_number number_left", number_left, "number_right", number_right)
+	end
+	
+	texture_name = "("..texture_name..")^[opacity:220"
+	
+	print("DEBUG:set_number texture_name", texture_name)
+	
+	entity:set_properties({
+		textures = {
+			texture_name, texture_name, texture_name,
+			texture_name, texture_name, texture_name,
+		}
+	})
 end
 
 anchor = EventEmitter.new({
