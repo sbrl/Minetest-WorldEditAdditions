@@ -150,6 +150,9 @@ Please update to v1.8+. There was a bug in earlier versions that caused a race c
 ### Why don't the [moretrees](https://content.minetest.net/packages/VanessaE/moretrees/) trees work with `//forest`?
 As far as I can tell, the saplings provided by the [`moretrees` mod](https://content.minetest.net/packages/VanessaE/moretrees/) don't properly interact with bonemeal from the [bonemeal mod](https://content.minetest.net/packages/TenPlus1/bonemeal/), which WorldEditAdditions uses to grow trees. As far as I can tell WorldEditAdditions has everything in place needed to support them, but until applying bonemeal to `moretrees` saplings results in a tree rather than waiting for one to grow over time, WorldEditAdditions will always fail to place trees provided by the `moretrees` mod, unfortunately.
 
+### The position markers disappear when far way
+This is a limitation of Minetest. You can workaround it though by setting [`active_block_range`](https://github.com/minetest/minetest/blob/5.6.1/minetest.conf.example#L2868) to a higher value - though be aware this also affects ABMs and other entities as well, so it can cause server lag.
+
 
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
