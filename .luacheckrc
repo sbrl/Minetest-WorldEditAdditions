@@ -3,7 +3,7 @@ codes = true
 
 exclude_files = {
 	".luarocks/*",
-	"worldeditadditions/utils/bit.lua"
+	"worldeditadditions_core/utils/bit.lua"
 }
 
 files["worldeditadditions_core/register/check.lua"] = { read_globals = { "table" } }
