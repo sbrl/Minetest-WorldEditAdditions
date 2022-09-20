@@ -68,14 +68,14 @@ end
 
 local number_colours = {
 	"#FF0000",
-	"#FF8800",
-	"#FFFF00",
-	"#88FF00",
+	"#ff6800",
+	"#FFD700",
+	"#CCFF00",
 	"#00FF00",
-	"#00FF88",
+	"#00FFAA",
 	"#00FFFF",
 	"#0088FF",
-	"#0000FF",
+	"#5058FF",
 	"#8800ff",
 	"#FF00ff",
 	"#FF0088"
@@ -93,7 +93,7 @@ local function set_number(entity, display_number)
 		texture_name = texture_name.."^worldeditadditions_r"..number_right..".png"
 		print("DEBUG:set_number number_left", number_left, "number_right", number_right)
 		
-		local colour_id = (display_number % 12) + 1 -- Lua starts from 1, not 0 :-/
+		local colour_id = ((display_number - 1) % 12) + 1 -- Lua starts from 1, not 0 :-/
 		texture_name = "("..texture_name..")^[colorize:"..number_colours[colour_id]..":255"
 	end
 	if #texture_name > 0 then
