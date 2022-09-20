@@ -1214,9 +1214,11 @@ Prevents the execution of a command if it could potentially affect a large numbe
 -->
 
 ### Far Wand
-The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/worldeditadditions_farwand/textures/worldeditadditions_farwand.png)
+The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_farwand.png)
 
 It functions very similarly to the regular WorldEdit wand, except that it has a _much_ longer range - which can be very useful for working on large-scale terrain for example. It also comes with an associated command to control it.
+
+Note that punching out the positions **does not unset them**. Use `//reset` to reset the defined region.
 
 ### `//farwand skip_liquid (true|false) | maxdist <number>`
 This command helps control the behaviour of the [WorldEditAdditions far wand](#far-wand) and [cloud wand](#cloud-wand). Calling it without any arguments shows the current status:
@@ -1243,8 +1245,23 @@ You can change the maximum range with the `maxdist` subcommand:
 Note that the number there isn't in blocks (because hard maths). It is however proportional to the distance the wand will raycast looks for nodes, so a higher value will result in it raycasting further.
 
 ### Cloud Wand
-The cloud wand (`worldeditadditions:cloudwand`) is a another variant the above _Far Wand_. It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/master/worldeditadditions_farwand/textures/worldeditadditions_cloudwand.png)
+The cloud wand (`worldeditadditions:cloudwand`) is a another variant the above _Far Wand_. It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_cloudwand.png)
 
 Unlike the other 2 wands, this wand functions in an additive manner. Left-click on a node to expand the currently defined region (creating a new one if one isn't defined already) to include that node. Right click to clear the currently defined region.
 
 It has the range of the _Far Wand_ mentioned above too, so you can select nodes from a great distance. It also abides by preferences set via the `//farwand` chat command.
+
+Note that punching out the positions **does not unset them**. Use `//reset` to reset the defined region.
+
+
+### Multi-Point Wand
+The third type of wand provided by WorldEditAdditions is completely different, in that it allows you to select up to **999 points** at once! It looks like this: ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png)
+
+It is important to note that (at present) the points selected by this wand **are not compatible with normal points**. This will change in the future, but requires a lot of work to implement.
+
+It has the following actions:
+
+ - **Left click:** Add a new point
+ - **Right click:** Undo adding a point
+
+It has the range of the other wands mentioned above though, so you can select nodes from a great distance. It also abides by preferences set via the `//farwand` chat command.
