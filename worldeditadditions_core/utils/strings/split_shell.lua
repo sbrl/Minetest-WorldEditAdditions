@@ -1,6 +1,6 @@
 -- worldeditadditions_core = { modpath="/home/sbrl/.minetest/worlds/Mod-Sandbox/worldmods/WorldEditAdditions/worldeditadditions_core/" }
 local wea_c = worldeditadditions_core
-local table_map = dofile(wea_c.modpath.."/utils/tables/table_map.lua")
+local table_map = dofile(wea_c.modpath.."/utils/table/table_map.lua")
 
 local function is_whitespace(char)
 	return char:match("%s")

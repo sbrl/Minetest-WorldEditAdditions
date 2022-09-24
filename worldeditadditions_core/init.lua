@@ -44,7 +44,7 @@ wea_c.terrain = dofile(wea_c.modpath.."/utils/terrain/init.lua")
 dofile(wea_c.modpath.."/utils/strings/init.lua")
 dofile(wea_c.modpath.."/utils/format/init.lua")
 dofile(wea_c.modpath.."/utils/parse/init.lua")
-dofile(wea_c.modpath.."/utils/tables/init.lua")
+dofile(wea_c.modpath.."/utils/table/init.lua")
 
 dofile(wea_c.modpath.."/utils/numbers.lua")
 dofile(wea_c.modpath.."/utils/nodes.lua")
