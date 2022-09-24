@@ -43,18 +43,10 @@ local function trim(str)
 end
 
 
-if worldeditadditions_core then
-	worldeditadditions_core.str_padend = str_padend
-	worldeditadditions_core.str_padstart = str_padstart
-	worldeditadditions_core.str_starts = str_starts
-	worldeditadditions_core.str_ends = str_ends
-	worldeditadditions_core.trim = trim
-else
-    return {
-        str_padend = str_padend,
-        str_padstart = str_padstart,
-		str_starts = str_starts,
-		str_ends = str_ends,
-		trim = trim
-    }
-end
+return {
+	str_padend = str_padend,
+	str_padstart = str_padstart,
+	str_starts = str_starts,
+	str_ends = str_ends,
+	trim = trim
+}

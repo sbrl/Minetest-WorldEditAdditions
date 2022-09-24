@@ -15,7 +15,7 @@
 -- for substr in gsplit(text, pattern, plain) do
 --   doSomething(substr)
 -- end
-function worldeditadditions_core.gsplit(text, pattern, plain)
+local function gsplit(text, pattern, plain)
 	local splitStart, length = 1, #text
 	return function ()
 		if splitStart then
@@ -48,9 +48,9 @@ end
 -- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
 -- 							plain string, not a Lua pattern
 -- @returns	table	A sequence table containing the substrings
-function worldeditadditions_core.dsplit(text, pattern, plain)
+local function dsplit(text, pattern, plain)
 	local ret = {}
-	for match in worldeditadditions_core.gsplit(text, pattern, plain) do
+	for match in gsplit(text, pattern, plain) do
 		table.insert(ret, match)
 	end
 	return ret
@@ -62,7 +62,7 @@ end
 -- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
 -- 							plain string, not a Lua pattern
 -- @returns	table	A sequence table containing the substrings
-function worldeditadditions_core.split(str,dlm,plain)
+local function split(str,dlm,plain)
 	local pos, ret = 0, {}
 	local ins, i = str:find(dlm,pos,plain)
 	-- "if plain" shaves off some time in the while statement
@@ -85,3 +85,5 @@ function worldeditadditions_core.split(str,dlm,plain)
 	end
 	return ret
 end
+
+return split
