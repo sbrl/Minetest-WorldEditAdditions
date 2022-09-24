@@ -1,6 +1,6 @@
 local parse_chance = require("worldeditadditions_core.utils.parse.chance")
 
-describe("parse.seed", function()
+describe("parse.chance", function()
 	it("should work in 1-in-n mode by default", function()
 		local source = "50%"
 		
