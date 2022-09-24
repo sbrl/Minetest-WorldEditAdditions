@@ -1,4 +1,5 @@
 local wea_c = worldeditadditions_core
+local Vector3 = wea_c.Vector3
 
 local positions_count_limit = 999
 local positions = {}
@@ -46,6 +47,23 @@ local function get_pos_all(player_name)
 	ensure_player(player_name)
 	return wea_c.table.deepcopy(positions[player_name])
 end
+
+--- Get a bounding box that encloses all the positions currently defined by a given player.
+-- @param	player_name		string	The name of the player to fetch the boudnign box for.
+-- @returns nil|(Vector3,Vector3)	2 positions that define opposite corners of a region that fully encloses all the defined points for the given player, or nil ir the specified player has no points currently defined.
+local function get_bounds(player_name)
+	ensure_player(player_name)
+	if #positions[player_name] < 1 then return nil end
+	local pos1, pos2 = positions[player_name][1], positions[player_name][1]
+	
+	for _, pos in pairs(positions[player_name]) do
+		pos1, pos2 = Vector3.expand_region(pos, pos1, pos2)
+	end
+	
+	return pos1, pos2
+end
+
+
 --- Counts the number of positioons registered to a given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	number			The number of positions registered for the given player.
@@ -133,6 +151,7 @@ anchor = wea_c.EventEmitter.new({
 	get1 = get_pos1,
 	get2 = get_pos2,
 	get_all = get_pos_all,
+	get_bounds = get_bounds,
 	count = pos_count,
 	clear = clear,
 	pop = pop_pos,
