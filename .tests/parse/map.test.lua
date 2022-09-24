@@ -1,7 +1,7 @@
 _G.worldeditadditions_core = {
 	split = require("worldeditadditions_core.utils.strings.split"),
 	table = {
-		contains = require("worldeditadditions_core.utils.tables.table_contains")
+		contains = require("worldeditadditions_core.utils.table.table_contains")
 	}
 }
 local parse_map = require("worldeditadditions_core.utils.parse.map")
