@@ -43,7 +43,7 @@ local function get_pos2(player_name) return get_pos(player_name, 2) end
 --- Gets a list of all the positions for the given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	Vector3[]		A list of positions for the given player.
-local function get_pos_all(player_name)
+local function get_all(player_name)
 	ensure_player(player_name)
 	return wea_c.table.deepcopy(positions[player_name])
 end
@@ -150,7 +150,7 @@ anchor = wea_c.EventEmitter.new({
 	get = get_pos,
 	get1 = get_pos1,
 	get2 = get_pos2,
-	get_all = get_pos_all,
+	get_all = get_all,
 	get_bounds = get_bounds,
 	count = pos_count,
 	clear = clear,
