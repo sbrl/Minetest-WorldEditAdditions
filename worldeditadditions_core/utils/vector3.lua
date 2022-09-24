@@ -164,6 +164,16 @@ function Vector3.length(a)
 	return math.sqrt(a:length_squared())
 end
 
+--- Calculates the volume of the region bounded by 1 points.
+-- @param	a		Vector3		The first point bounding the target region.
+-- @param	b		Vector3		The second point bounding the target region.
+-- @returns	number	The volume of the defined region.
+function Vector3.volume(a, b)
+	local pos1, pos2 = Vector3.sort(a, b)
+	local vol = pos2 - pos1
+	return vol.x * vol.y * vol.z
+end
+
 --- Calculates the dot product of this vector and another vector.
 -- @param	a		Vector3		The first vector to operate on.
 -- @param	a		Vector3		The second vector to operate on.
