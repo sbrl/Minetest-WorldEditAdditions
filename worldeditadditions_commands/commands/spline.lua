@@ -9,7 +9,7 @@ local Vector3 = wea_c.Vector3
 
 
 worldeditadditions_core.register_command("spline", {
-	params = "<replace_node> <width_start> [<width_end=width_start> [<steps=6>]]",
+	params = "<replace_node> <width_start> [<width_end=width_start> [<steps=3>]]",
 	description = "Draws a spline through the defined points. NOTE: Uses the NEW worldeditadditions position system, not the existing WorldEdit one!",
 	privs = { worldedit = true },
 	require_pos = 3,
