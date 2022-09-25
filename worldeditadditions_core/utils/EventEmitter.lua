@@ -1,4 +1,4 @@
-
+local wea_c = worldeditadditions_core
 --- Event manager object.
 -- @class	worldeditadditions_core.EventEmitter
 local EventEmitter = {}
@@ -10,7 +10,8 @@ EventEmitter.__name = "EventEmitter" -- A hack to allow identification in wea.in
 -- @returns	table	The new EventEmitter object. If a table is passed in, a new table is NOT created.
 function EventEmitter.new(tbl)
 	if not tbl then tbl = {} end
-	tbl.events = {}
+	tbl.events = {  }
+	tbl.debug = false 
 	setmetatable(tbl, EventEmitter)
 	return tbl
 end
@@ -58,6 +59,8 @@ end
 -- @param	args		table|any		The argument(s) to pass to listener functions. It is strongly advised you pass a table here.
 function EventEmitter.emit(this, event_name, args)
 	if this.events[event_name] == nil then return end
+	if this.debug then print("DEBUG:EventEmitter emit", event_name, "args", wea_c.inspect(args)) end
+	
 	for index,next_func in ipairs(this.events[event_name]) do
 		next_func(args)
 	end
