@@ -41,6 +41,10 @@ wea_c.bit = dofile(wea_c.modpath.."/utils/bit.lua")
 
 wea_c.terrain = dofile(wea_c.modpath.."/utils/terrain/init.lua")
 
+local chaikin = dofile(wea_c.modpath.."/utils/chaikin.lua")
+wea_c.chaikin = chaikin.chaikin
+wea_c.lerp = chaikin.linear_interpolate
+
 dofile(wea_c.modpath.."/utils/strings/init.lua")
 dofile(wea_c.modpath.."/utils/format/init.lua")
 dofile(wea_c.modpath.."/utils/parse/init.lua")
@@ -52,7 +56,6 @@ dofile(wea_c.modpath.."/utils/node_identification.lua")
 
 dofile(wea_c.modpath.."/utils/raycast_adv.lua") -- For the farwand
 dofile(wea_c.modpath.."/utils/player.lua") -- Player info functions
-
 
 
 
