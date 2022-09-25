@@ -37,9 +37,10 @@ local function run_command(cmdname, options, player_name, paramtext)
 		if wea_c.safe_region_limits[player_name] then
 			limit = wea_c.safe_region_limits[player_name]
 		end
-		
-		if potential_changes > limit then
-			worldedit.player_notify(player_name, "/"..cmdname.." "..paramtext.."' may affect up to "..human_size(potential_changes).." nodes. Type //y to continue, or //n to cancel (see the //saferegion command to control when this message appears).")
+		if type(potential_changes) == "string" then
+			worldedit.player_notify(player_name, "/"..cmdname.." "..paramtext.." "..potential_changes..". Type //y to continue, or //n to cancel (in this specific situation, your configured limit via the //saferegion command does not apply).")
+		elseif potential_changes > limit then
+			worldedit.player_notify(player_name, "/"..cmdname.." "..paramtext.." may affect up to "..human_size(potential_changes).." nodes. Type //y to continue, or //n to cancel (see the //saferegion command to control when this message appears).")
 			safe_region(player_name, cmdname, function()
 				run_command_stage2(player_name, options.func, parse_result)
 			end)
