@@ -32,25 +32,27 @@ minetest.register_tool(":worldeditadditions:multiwand", {
 	on_place = function(itemstack, player, pointed_thing)
 		-- Right click when pointing at something
 		-- Pointed thing: https://rubenwardy.com/minetest_modding_book/lua_api.html#pointed_thing
-		-- print("[farwand] on_place", name)
-		local name = player:get_player_name()
-		pop_pos(name)
+		local player_name = player:get_player_name()
+		wea_c.pos.compat_worldedit_get(player_name)
+		-- print("[farwand] on_place", player_name)
+		pop_pos(player_name)
 	end,
 	
 	on_use = function(itemstack, player, pointed_thing)
 		-- Left click when pointing at something or nothing
-		local name = player:get_player_name()
-		-- print("[farwand] on_use", name)
+		local player_name = player:get_player_name()
+		wea_c.pos.compat_worldedit_get(player_name)
+		-- print("[farwand] on_use", player_name)
 		local looking_pos, node_id = wea.farwand.do_raycast(player)
-		push_pos(name, looking_pos)
+		push_pos(player_name, looking_pos)
 	end,
 	
 	on_secondary_use = function(itemstack, player, pointed_thing)
 		-- Right click when pointing at nothing
-		-- print("[farwand] on_secondary_use", name)
-		local name = player:get_player_name()
-		
+		local player_name = player:get_player_name()
+		-- print("[farwand] on_secondary_use", player_name)
+		wea_c.pos.compat_worldedit_get(player_name)
 		-- local looking_pos, node_id = do_raycast(player)
-		pop_pos(name)
+		pop_pos(player_name)
 	end
 })

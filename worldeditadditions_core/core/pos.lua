@@ -29,7 +29,13 @@ end
 -- @returns	void
 local function compat_worldedit_pos1_get(player_name)
 	if worldedit and worldedit.pos1 and worldedit.pos1[player_name] then
-		positions[player_name][1] = Vector3.clone(worldedit.pos1[player_name])
+		ensure_player(player_name)
+		local new_pos1 = Vector3.clone(worldedit.pos1[player_name])
+		local existing_pos1 = positions[player_name][1]
+		positions[player_name][1] = new_pos1
+		if new_pos1 ~= existing_pos1 then
+			anchor:emit("set", { player_name = player_name, i = 1, pos = new_pos1 })
+		end
 	end
 end
 --- Transparently fetches from worldedit pos2 for compatibility.
@@ -39,7 +45,13 @@ end
 -- @returns	void
 local function compat_worldedit_pos2_get(player_name)
 	if worldedit and worldedit.pos2 and worldedit.pos2[player_name] then
-		positions[player_name][2] = Vector3.clone(worldedit.pos2[player_name])
+		ensure_player(player_name)
+		local new_pos2 = Vector3.clone(worldedit.pos2[player_name])
+		local existing_pos2 = positions[player_name][2]
+		positions[player_name][2] = new_pos2
+		if new_pos2 ~= existing_pos2 then
+			anchor:emit("set", { player_name = player_name, i = 2, pos = new_pos2 })
+		end
 	end
 end
 
@@ -48,14 +60,24 @@ end
 -- @param	i				number	The index of the position to set.
 -- @returns	Vector3?		The position to set.
 local function compat_worldedit_set(player_name, i, pos)
+	print("DEBUG:compat_worldedit_set i", i, "pos", pos)
 	if not worldedit then return end
 	if i == 1 and worldedit.pos1 then
+		worldedit.pos1[player_name] = nil
+		if worldedit.marker_update then worldedit.marker_update(player_name) end
 		worldedit.pos1[player_name] = pos:clone()
-		if worldedit.mark_pos1 then worldedit.mark_pos1(player_name) end
 	elseif i == 2 and worldedit.pos2 then
+		worldedit.pos2[player_name] = nil
+		if worldedit.marker_update then worldedit.marker_update(player_name) end
 		worldedit.pos2[player_name] = pos:clone()
-		if worldedit.mark_pos2 then worldedit.mark_pos2(player_name) end
 	end
+end
+
+--- Fetches pos1/pos2 from WorldEdit (if available) and sets them in WorldEditAdditions' postional subsystem
+-- @param	player_name		string	The name of the player to sync the positions for.
+local function compat_worldedit_get(player_name)
+	compat_worldedit_pos1_get(player_name)
+	compat_worldedit_pos2_get(player_name)
 end
 
 --- Gets the position with the given index for the given player.
@@ -64,7 +86,7 @@ end
 -- @returns	Vector3?		The position requested, or nil if it doesn't exist.
 local function get_pos(player_name, i)
 	ensure_player(player_name)
-	if i == 1 then compat_worldedit_pos1_get(player_name)
+	if i == 2 then compat_worldedit_pos1_get(player_name)
 	elseif i == 2 then compat_worldedit_pos2_get(player_name) end
 	
 	return positions[player_name][i]
@@ -201,7 +223,8 @@ end
 local function push_pos(player_name, pos)
 	ensure_player(player_name)
 	table.insert(positions[player_name], pos)
-	compat_worldedit_set(player_name, #positions, pos)
+	print("DEBUG poslist", wea_c.inspect(positions[player_name]))
+	compat_worldedit_set(player_name, #positions[player_name], pos)
 	
 	anchor:emit("push", { player_name = player_name, pos = pos, i = #positions[player_name] })
 	return #positions[player_name]
@@ -221,7 +244,8 @@ anchor = wea_c.EventEmitter.new({
 	set = set_pos,
 	set_pos1 = set_pos1,
 	set_pos2 = set_pos2,
-	set_all = set_pos_all
+	set_all = set_pos_all,
+	compat_worldedit_get = compat_worldedit_get
 })
 
 return anchor

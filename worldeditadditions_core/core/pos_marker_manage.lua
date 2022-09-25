@@ -2,6 +2,20 @@ local wea_c = worldeditadditions_core
 
 local position_entities = {}
 
+local function compat_worldedit_hide_pos1(player_name)
+	if not worldedit or not worldedit.pos1 or not worldedit.mark_pos1 then return end
+	local pos1 = worldedit.pos1[player_name]
+	worldedit.pos1[player_name] = nil
+	worldedit.mark_pos1(player_name)
+	worldedit.pos1[player_name] = nil
+end
+local function compat_worldedit_hide_pos2(player_name)
+	if not worldedit or not worldedit.pos2 or not worldedit.mark_pos2 then return end
+	local pos2 = worldedit.pos2[player_name]
+	worldedit.pos2[player_name] = nil
+	worldedit.mark_pos2(player_name)
+	worldedit.pos2[player_name] = nil
+end
 
 --- Ensures that a table exists for the given player.
 -- @param	player_name		string	The name of the player to check.
@@ -17,6 +31,9 @@ end
 
 local function do_create(event)
 	ensure_player(event.player_name)
+	
+	if event.i == 1 then compat_worldedit_hide_pos1(event.player_name) end
+	if event.i == 2 then compat_worldedit_hide_pos2(event.player_name) end
 	
 	local new_entity = wea_c.entities.pos_marker.create(
 		event.player_name,
