@@ -17,7 +17,7 @@ end
 -- @param	steps		number		The number of interpolatioon passes to do.
 -- @returns	Vector3[]	A (longer) list of interpolated points.
 local function chaikin(arr_pos, steps)
-	print("DEBUG:chaikin START", wea_c.inspect(arr_pos))
+	-- print("DEBUG:chaikin START", wea_c.inspect(arr_pos))
 	local result = wea_c.table.shallowcopy(arr_pos)
 	
 	local pos_start = result[1]
@@ -29,7 +29,7 @@ local function chaikin(arr_pos, steps)
 		for i = 1,#result-1,1 do
 			local pos_cur = result[i]
 			local pos_next = result[i+1]
-			print("DEBUG:chaikin SUBSTEP i", i, "pos_cur", pos_cur, "pos_next", pos_next)
+			-- print("DEBUG:chaikin SUBSTEP i", i, "pos_cur", pos_cur, "pos_next", pos_next)
 			
 			table.insert(result_nextpass, linear_interpolate(pos_cur, pos_next, 0.25))
 			table.insert(result_nextpass, linear_interpolate(pos_cur, pos_next, 0.75))
@@ -45,7 +45,7 @@ local function chaikin(arr_pos, steps)
 		result[1] = pos_start
 		result[#result] = pos_end
 		
-		print("DEBUG:chakin STEP", wea_c.inspect(result))
+		-- print("DEBUG:chakin STEP", wea_c.inspect(result))
 	end
 	
 	return result

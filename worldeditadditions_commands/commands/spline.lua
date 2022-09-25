@@ -35,18 +35,18 @@ worldeditadditions_core.register_command("spline", {
 		
 		width_start = tonumber(parts[2])
 		if not width_start then
-			return false, "Error: width_start must be an integer greater than or  equal to 1."
+			return false, "Error: width_start must be an integer greater than or  equal to 0."
 		end
-		if width_start < 1 then
+		if width_start < 0 then
 			return false, "Error: width_start must be an integer greater than 0, but you passed '"..parts[2].."'."
 		end
 		
 		if #parts >= 3 then
 			width_end = tonumber(parts[3])
 			if not width_end then
-				return false, "Error: width_end must be an integer greater than or  equal to 1."
+				return false, "Error: width_end must be an integer greater than or  equal to 0."
 			end
-			if width_end < 1 then
+			if width_end < 0 then
 				return false, "Error: width_end must be an integer greater than 0, but you passed '"..parts[3].."'."
 			end
 		else

@@ -59,17 +59,52 @@ function worldeditadditions.spline(pos_list, width_start, width_end, steps, targ
 	---
 	
 	local pos_prev = pos_list_chaikin[1]:floor()
-	for i = 1, #pos_list_chaikin do
+	local width_prev = widths_lerped[1]
+	for i = 2, #pos_list_chaikin do
 		local pos_next = pos_list_chaikin[i]:floor()
 		local width_next = widths_lerped[i]
 		
-		print("DEBUG:spline DRAW pos", pos_next, "width", width_next, "length", (pos_next - pos_prev):length())
 		-- For now, just plot a point at each node
-		local index_node = area:index(pos_next.x, pos_next.y, pos_next.z)
-		data[index_node] = node_id
+		data[area:indexp(pos_next)] = node_id
+		data[area:indexp(pos_prev)] = node_id
 		
-		count = count + 1
-		pos_prev = pos_next:clone()
+		local subline_length = (pos_next - pos_prev):length()
+		print("DEBUG:spline DRAW pos", pos_next, "width", width_next, "length", subline_length)
+		if subline_length > 0 then
+			
+			-- Iterate a box around the subline and draw it
+			local width_max = math.ceil(math.max(width_prev, width_next))
+			local subpos1, subpos2 = Vector3.sort(pos_next, pos_prev)
+			subpos1 = subpos1 - width_max
+			subpos2 = subpos2 + width_max
+			
+			print("subpos1", subpos1, "subpos2", subpos2, "width_prev", width_prev, "width_next", width_next)
+			
+			for z = subpos2.z, subpos1.z, -1 do
+				for y = subpos2.y, subpos1.y, -1 do
+					for x = subpos2.x, subpos1.x, -1 do
+						local here = Vector3.new(x, y, z)
+						local D = (pos_next - pos_prev):normalise()
+						local d = Vector3.dot(here - pos_prev, D)
+						local closest_on_line = pos_prev + (D * d)
+						local distance = (here - closest_on_line):length()
+						
+						local distance_to_prev = (closest_on_line - pos_prev):length()
+						
+						local percentage_along_line = distance_to_prev / subline_length
+						local width_here = wea_c.lerp(width_prev, width_next, percentage_along_line)
+						if distance < width_here then
+							-- print("POINT ", here, "width_here", width_here, "distance from line", distance)
+							data[area:indexp(here)] = node_id
+							-- May hit some nodes multiplle times, but there's nothing doing about that without a big performance (and/or memory) hit
+							count = count + 1
+						end
+					end
+				end
+			end
+			pos_prev = pos_next:clone()
+			width_prev = width_next
+		end
 	end
 	
 	---
