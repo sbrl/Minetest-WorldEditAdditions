@@ -15,8 +15,8 @@ function worldeditadditions.ellipsoid2(pos1, pos2, target_node, hollow)
 	
 	local radius = (pos2 - pos1) / 2
 	
-	print("DEBUG:ellipsoid2 | pos1: "..pos1..", pos2: "..pos2..", target_node: "..target_node)
-	print("DEBUG:ellipsoid2 radius", radius)
+	-- print("DEBUG:ellipsoid2 | pos1: "..pos1..", pos2: "..pos2..", target_node: "..target_node)
+	-- print("DEBUG:ellipsoid2 radius", radius)
 	
 	-- position = { x, y, z }
 	local hollow_inner_radius = radius - 1
@@ -35,7 +35,7 @@ function worldeditadditions.ellipsoid2(pos1, pos2, target_node, hollow)
 				local here = Vector3.new(x, y, z)
 				local pos_relative = (here - pos1) - volume_half
 				
-				print("DEBUG pos1", pos1, "pos2", pos2, "volume_half", volume_half, "pos_relative", pos_relative)
+				-- print("DEBUG pos1", pos1, "pos2", pos2, "volume_half", volume_half, "pos_relative", pos_relative)
 				
 				-- If we're inside the ellipse, then fill it in
 				local comp = pos_relative / radius

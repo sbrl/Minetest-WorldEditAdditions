@@ -28,7 +28,7 @@ function worldeditadditions.spiral_square(pos1, pos2, target_node, interval, acc
 	local volume = pos2:subtract(pos1)
 	local volume_half = volume:divide(2)
 	
-	print("DEBUG:spiral_square | pos1: "..pos1..", pos2: "..pos2..", target_node: "..target_node, "interval:"..interval..", acceleration: "..acceleration)
+	-- print("DEBUG:spiral_square | pos1: "..pos1..", pos2: "..pos2..", target_node: "..target_node, "interval:"..interval..", acceleration: "..acceleration)
 	
 	
 	-- Fetch the nodes in the specified area

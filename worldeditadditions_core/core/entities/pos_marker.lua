@@ -91,7 +91,7 @@ local function set_number(entity, display_number)
 		local number_left = (display_number - number_right) / 10
 		texture_name = texture_name.."worldeditadditions_l"..number_left..".png"
 		texture_name = texture_name.."^worldeditadditions_r"..number_right..".png"
-		print("DEBUG:set_number number_left", number_left, "number_right", number_right)
+		-- print("DEBUG:set_number number_left", number_left, "number_right", number_right)
 		
 		local colour_id = ((display_number - 1) % 12) + 1 -- Lua starts from 1, not 0 :-/
 		texture_name = "("..texture_name..")^[colorize:"..number_colours[colour_id]..":255"
@@ -102,7 +102,7 @@ local function set_number(entity, display_number)
 		texture_name = "worldeditadditions_bg.png"
 	end
 	
-	print("DEBUG:set_number texture_name", texture_name)
+	-- print("DEBUG:set_number texture_name", texture_name)
 	
 	entity:set_properties({
 		textures = {

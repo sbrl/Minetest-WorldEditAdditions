@@ -28,7 +28,7 @@ function worldeditadditions.spiral_circle(pos1, pos2, target_node, interval_init
 	local volume = pos2:subtract(pos1)
 	local volume_half = volume:divide(2)
 	
-	print("DEBUG:spiral_square | pos1", pos1, "pos2", pos2, "target_node", target_node, "interval_initial:", interval_initial, "acceleration", acceleration)
+	-- print("DEBUG:spiral_square | pos1", pos1, "pos2", pos2, "target_node", target_node, "interval_initial:", interval_initial, "acceleration", acceleration)
 	
 	interval_initial = interval_initial + 1
 	

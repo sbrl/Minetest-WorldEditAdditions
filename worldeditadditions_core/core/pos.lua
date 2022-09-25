@@ -60,7 +60,6 @@ end
 -- @param	i				number	The index of the position to set.
 -- @returns	Vector3?		The position to set.
 local function compat_worldedit_set(player_name, i, pos)
-	print("DEBUG:compat_worldedit_set i", i, "pos", pos)
 	if not worldedit then return end
 	if i == 1 and worldedit.pos1 then
 		worldedit.pos1[player_name] = nil
@@ -223,7 +222,6 @@ end
 local function push_pos(player_name, pos)
 	ensure_player(player_name)
 	table.insert(positions[player_name], pos)
-	print("DEBUG poslist", wea_c.inspect(positions[player_name]))
 	compat_worldedit_set(player_name, #positions[player_name], pos)
 	
 	anchor:emit("push", { player_name = player_name, pos = pos, i = #positions[player_name] })

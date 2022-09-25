@@ -31,7 +31,7 @@ function worldeditadditions.noiseapply2d(pos1, pos2, threshold, scale, func)
 	local data_after = manip_after:get_data()
 	
 	local size2d = pos2 - pos1 + Vector3.new(1, 1, 1)
-	print("DEBUG pos1", pos1, "pos2", pos2, "size2d", size2d)
+	-- print("DEBUG pos1", pos1, "pos2", pos2, "size2d", size2d)
 	local success, noise = worldeditadditions.noise.make_2d(size2d, pos1, {
 		algorithm = "perlinmt",
 		scale = scale
