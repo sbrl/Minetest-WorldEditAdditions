@@ -54,15 +54,15 @@ async function shortcode_image_urlpass(src) {
 	return `/img/${filename}`;
 }
 
-async function shortcode_gallerybox(content, src, idthis, idprev, idnext) {
-	return `<figure class="gallerybox-item" id="${idthis}">
+async function shortcode_gallerybox(content, src, id_this, id_prev, id_next) {
+	return `<figure class="gallerybox-item" id="${id_this}">
 <!-- ${await shortcode_image(src, "", "gallerybox-thumb", "300w")} -->
 	${await shortcode_image(src, "", "", "1920w")}
 	
 	<figcaption>${content}</figcaption>
 	
-<a class="gallerybox-prev" href="#${idprev}">❰</a>
-<a class="gallerybox-next" href="#${idnext}">❱</a>
+<a class="gallerybox-prev" href="#${id_prev}">❰</a>
+<a class="gallerybox-next" href="#${id_next}">❱</a>
 </figure>`;
 }
 
@@ -81,7 +81,7 @@ function fetch_file(url) {
 	return file_fetcher.fetch_file(url);
 }
 
-function do_minifycss(source, output_path) {
+function do_minify_css(source, output_path) {
 	if(!output_path.endsWith(".css") || !is_production) return source;
 	
 	const result = new CleanCSS({
@@ -91,7 +91,7 @@ function do_minifycss(source, output_path) {
 	return result;
 }
 
-async function do_minifyhtml(source, output_path) {
+async function do_minify_html(source, output_path) {
 	if(!output_path.endsWith(".html") || !is_production) return source;
 	
 	const result = await minify_html(source, {
@@ -121,8 +121,8 @@ async function do_minifyhtml(source, output_path) {
 if(is_production) console.log("Production environment detected, minifying content");
 
 module.exports = function(eleventyConfig) {
-	eleventyConfig.addTransform("cssmin", do_minifycss);
-	eleventyConfig.addTransform("htmlmin", do_minifyhtml);
+	eleventyConfig.addTransform("cssmin", do_minify_css);
+	eleventyConfig.addTransform("htmlmin", do_minify_html);
 	
 	eleventyConfig.addPassthroughCopy("img2brush/img2brush.js");
 	eleventyConfig.addAsyncShortcode("fetch", fetch);
