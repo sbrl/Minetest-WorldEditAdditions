@@ -205,14 +205,14 @@ end
 local function pop(player_name)
 	ensure_player(player_name)
 	if #positions[player_name] <= 0 then return nil end
-	local count = #positions[player_name]
+	local pos_count = #positions[player_name]
 	local last_pos = table.remove(positions[player_name])
 	if worldedit then
-		if count == 2 and worldedit.pos2 then worldedit.pos2[player_name] = nil
-		elseif count == 1 and worldedit.pos1 then worldedit.pos1[player_name] = nil end
+		if pos_count == 2 and worldedit.pos2 then worldedit.pos2[player_name] = nil
+		elseif pos_count == 1 and worldedit.pos1 then worldedit.pos1[player_name] = nil end
 	end
 	
-	anchor:emit("pop", { player_name = player_name, pos = last_pos, i = count })
+	anchor:emit("pop", { player_name = player_name, pos = last_pos, i = pos_count })
 	return last_pos
 end
 --- Adds a position to the list for a given player.
