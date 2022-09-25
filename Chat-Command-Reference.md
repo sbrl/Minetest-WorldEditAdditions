@@ -189,6 +189,21 @@ If `h` or `hollow` is specified at the end, then the resulting dome shape is mad
 ```
 
 
+### `//spline <replace_node> <width_start> [<width_end=width_start> [<steps=3>]]`
+Draws a curved line, using all the currently defined points as control points. The starting and ending widths of the line can be controlled, and the width will be linearly interpolated.
+
+**Note:** `//spline` uses the **new** WorldEditAdditions positions! Use the [multipoint wand](#multi-point-wand) to define the control points for the resulting line.
+
+For those interested, WorldEditAdditions uses the [chaikin curve algorithm](https://starbeamrainbowlabs.com/blog/article.php?article=posts/196-Chaikin-Curve-Generator.html) to draw the curve.
+
+```weacmd
+//spline dirt 5 2
+//spline glass 3
+//spline bakedclay:violet 3
+```
+
+![An example of what //spline can do.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/.docs/images/reference/spline.jpeg)
+
 ## Misc
 <!--
 ███    ███ ██ ███████  ██████
@@ -523,7 +538,7 @@ Currently implemented algorithms:
 Algorithm	| Mode	| Description
 ------------|-------|-------------------
 `snowballs`	| 2D	| The default - based on [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html). Simulates snowballs rolling across the terrain, eroding & depositing material. Then runs a 3x3 gaussian kernel over the result (i.e. like the `//conv` / `//smoothadv` command).
-`river`     | 2D    | Fills in potholes and lowers pillars using a cellular automata-like algorithm that analyses the height of neighouring columns.
+`river`     | 2D    | Fills in potholes and lowers pillars using a cellular automata-like algorithm that analyses the height of neighbouring columns.
 
 Usage examples:
 
@@ -609,7 +624,7 @@ The following algorithms are currently available:
 
 Algorithm	| Description
 ------------|--------------------------
-`perlinmt`  | **Default**.Perlin noise, backed by Minetest's inbuilt `PerlinNoise` class.
+`perlinmt`  | **Default**. Perlin noise, backed by Minetest's inbuilt `PerlinNoise` class.
 `perlin`	| Perlin noise, backed by a pure Lua perlin noise implementation. Functional, but currently contains artefacts I'm having difficulty tracking down.
 `sin`		| A sine wave created with `math.sin()`.
 `white`		| Random white noise.
