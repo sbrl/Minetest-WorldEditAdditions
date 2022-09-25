@@ -277,6 +277,7 @@ end
 -- @param	pos2	Vector3		The second vector to operate on.
 -- @returns	Vector3,Vector3		The 2 sorted vectors (min, max).
 function Vector3.sort(pos1, pos2)
+	-- Cloning is important because Vector3's API does not mutate
 	local pos1_new = Vector3.clone(pos1) -- This way we can accept non-Vector3 instances
 	local pos2_new = Vector3.clone(pos2) -- This way we can accept non-Vector3 instances
 	if pos1_new.x > pos2_new.x then
