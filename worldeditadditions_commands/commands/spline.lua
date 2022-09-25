@@ -19,7 +19,7 @@ worldeditadditions_core.register_command("spline", {
 		local replace_node
 		local width_start
 		local width_end
-		local steps = 6
+		local steps = 3
 		
 		if #parts < 1 then
 			return false, "Error: The replace_node (e.g. dirt) was not specified."
@@ -79,6 +79,7 @@ worldeditadditions_core.register_command("spline", {
 			pos_list,
 			width_start,
 			width_end,
+			steps,
 			replace_node
 		)
 		if not success then return success, nodes_replaced end

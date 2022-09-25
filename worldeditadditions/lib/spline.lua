@@ -58,15 +58,18 @@ function worldeditadditions.spline(pos_list, width_start, width_end, steps, targ
 	-- 3: Replace nodes
 	---
 	
+	local pos_prev = pos_list_chaikin[1]:floor()
 	for i = 1, #pos_list_chaikin do
-		local pos_next = pos_list_chaikin[i]
+		local pos_next = pos_list_chaikin[i]:floor()
 		local width_next = widths_lerped[i]
 		
+		print("DEBUG:spline DRAW pos", pos_next, "width", width_next, "length", (pos_next - pos_prev):length())
 		-- For now, just plot a point at each node
 		local index_node = area:index(pos_next.x, pos_next.y, pos_next.z)
 		data[index_node] = node_id
 		
 		count = count + 1
+		pos_prev = pos_next:clone()
 	end
 	
 	---

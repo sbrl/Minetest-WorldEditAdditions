@@ -245,5 +245,6 @@ anchor = wea_c.EventEmitter.new({
 	set_all = set_all,
 	compat_worldedit_get = compat_worldedit_get
 })
+anchor.debug = true
 
 return anchor
