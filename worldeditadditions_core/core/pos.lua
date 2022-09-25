@@ -83,7 +83,7 @@ end
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @param	i				number	The index of the position to fetch.
 -- @returns	Vector3?		The position requested, or nil if it doesn't exist.
-local function get_pos(player_name, i)
+local function get(player_name, i)
 	ensure_player(player_name)
 	if i == 2 then compat_worldedit_pos1_get(player_name)
 	elseif i == 2 then compat_worldedit_pos2_get(player_name) end
@@ -94,11 +94,11 @@ end
 --- Convenience function that returns position 1 for the given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	Vector3?		The position requested, or nil if it doesn't exist.
-local function get_pos1(player_name) return get_pos(player_name, 1) end
+local function get1(player_name) return get(player_name, 1) end
 --- Convenience function that returns position 1 for the given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	Vector3?		The position requested, or nil if it doesn't exist.
-local function get_pos2(player_name) return get_pos(player_name, 2) end
+local function get2(player_name) return get(player_name, 2) end
 
 --- Gets a list of all the positions for the given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
@@ -132,7 +132,7 @@ end
 --- Counts the number of positioons registered to a given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	number			The number of positions registered for the given player.
-local function pos_count(player_name)
+local function count(player_name)
 	ensure_player(player_name)
 	compat_worldedit_pos1_get(player_name)
 	compat_worldedit_pos2_get(player_name)
@@ -145,7 +145,7 @@ end
 -- @param	i				number	The index to set the position at.
 -- @param	pos				Vector3	The position to set.
 -- @returns	bool			Whether the operation was successful or not (players aren't allowed more than positions_count_limit number of positions at a time).
-local function set_pos(player_name, i, pos)
+local function set(player_name, i, pos)
 	if i > positions_count_limit then return false end
 	ensure_player(player_name)
 		
@@ -160,15 +160,15 @@ end
 -- @param	player_name		string		The name of the player to set pos1 for.
 -- @param	pos				Vector3?	The new Vector3 for pos1 to set.
 -- @returns	bool			Whether the operation was successful or not, but in this case will always return true so can be ignored.
-local function set_pos1(player_name, pos)
-	return set_pos(player_name, 1, pos)
+local function set1(player_name, pos)
+	return set(player_name, 1, pos)
 end
 --- Convenience function that set position 2 for the given player.
 -- @param	player_name		string		The name of the player to set pos1 for.
 -- @param	pos				Vector3?	The new Vector3 for pos2 to set.
 -- @returns	bool			Whether the operation was successful or not, but in this case will always return true so can be ignored.
-local function set_pos2(player_name, pos)
-	return set_pos(player_name, 2, pos)
+local function set2(player_name, pos)
+	return set(player_name, 2, pos)
 end
 
 
@@ -177,7 +177,7 @@ end
 -- @param	player_name		string	The name of the player to set the positions for.
 -- @param	pos_list		Vector3	The table of positions to set.
 -- @returns	bool			Whether the operation was successful or not (players aren't allowed more than positions_count_limit number of positions at a time).
-local function set_pos_all(player_name, pos_list)
+local function set_all(player_name, pos_list)
 	if #pos_list > positions_count_limit then return false end
 	positions[player_name] = pos_list
 	for i,pos_new in ipairs(positions[player_name]) do
@@ -202,7 +202,7 @@ end
 --- Removes the last position from the for a given player and returns it.
 -- @param	player_name		string	The name of the player to pop the position for.
 -- @returns	Vector3?		The position removed, or nil if it doesn't exist.
-local function pop_pos(player_name)
+local function pop(player_name)
 	ensure_player(player_name)
 	if #positions[player_name] <= 0 then return nil end
 	local count = #positions[player_name]
@@ -219,7 +219,7 @@ end
 -- @param	player_name		string	The name of the player to add the position for.
 -- @param	pos				Vector3	The position to add.
 -- @returns	number			The new number of positions for that player.
-local function push_pos(player_name, pos)
+local function push(player_name, pos)
 	ensure_player(player_name)
 	table.insert(positions[player_name], pos)
 	compat_worldedit_set(player_name, #positions[player_name], pos)
@@ -230,19 +230,19 @@ end
 
 
 anchor = wea_c.EventEmitter.new({
-	get = get_pos,
-	get1 = get_pos1,
-	get2 = get_pos2,
+	get = get,
+	get1 = get1,
+	get2 = get2,
 	get_all = get_all,
 	get_bounds = get_bounds,
-	count = pos_count,
+	count = count,
 	clear = clear,
-	pop = pop_pos,
-	push = push_pos,
-	set = set_pos,
-	set_pos1 = set_pos1,
-	set_pos2 = set_pos2,
-	set_all = set_pos_all,
+	pop = pop,
+	push = push,
+	set = set,
+	set1 = set1,
+	set2 = set2,
+	set_all = set_all,
 	compat_worldedit_get = compat_worldedit_get
 })
 
