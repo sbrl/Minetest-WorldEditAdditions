@@ -25,6 +25,7 @@ local function run_command(cmdname, options, player_name, paramtext)
 	local pos_count = wea_c.pos.count(player_name)
 	if options.require_pos > 2 and pos_count < options.require_pos then
 		worldedit.player_notify(player_name, "Error: At least "..options.require_pos.."positions must be defined to use this command, but you only have "..pos_count.." defined (try using the multiwand).")
+		return false
 	end
 	
 	local parse_result = { options.parse(paramtext) }
