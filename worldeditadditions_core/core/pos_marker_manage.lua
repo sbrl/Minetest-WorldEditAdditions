@@ -7,14 +7,14 @@ local function compat_worldedit_hide_pos1(player_name)
 	local pos1 = worldedit.pos1[player_name]
 	worldedit.pos1[player_name] = nil
 	worldedit.mark_pos1(player_name)
-	worldedit.pos1[player_name] = nil
+	worldedit.pos1[player_name] = pos1
 end
 local function compat_worldedit_hide_pos2(player_name)
 	if not worldedit or not worldedit.pos2 or not worldedit.mark_pos2 then return end
 	local pos2 = worldedit.pos2[player_name]
 	worldedit.pos2[player_name] = nil
 	worldedit.mark_pos2(player_name)
-	worldedit.pos2[player_name] = nil
+	worldedit.pos2[player_name] = pos2
 end
 
 --- Ensures that a table exists for the given player.
