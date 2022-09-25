@@ -14,13 +14,17 @@ local function run_command_stage2(player_name, func, parse_result)
 end
 
 local function run_command(cmdname, options, player_name, paramtext)
-	if options.require_pos > 0 and not worldedit.pos1[player_name] then
+	if options.require_pos > 0 and not worldedit.pos1[player_name] and not wea_c.pos.get1(player_name) then
 		worldedit.player_notify(player_name, "Error: pos1 must be selected to use this command.")
 		return false
 	end
-	if options.require_pos > 1 and not worldedit.pos2[player_name] then
+	if options.require_pos > 1 and not worldedit.pos2[player_name] and not wea_c.pos.get2(player_name) then
 		worldedit.player_notify(player_name, "Error: Both pos1 and pos2 must be selected (together making a region) to use this command.")
 		return false
+	end
+	local pos_count = wea_c.pos.count(player_name)
+	if options.require_pos > 2 and pos_count < options.require_pos then
+		worldedit.player_notify(player_name, "Error: At least "..options.require_pos.."positions must be defined to use this command, but you only have "..pos_count.." defined (try using the multiwand).")
 	end
 	
 	local parse_result = { options.parse(paramtext) }
