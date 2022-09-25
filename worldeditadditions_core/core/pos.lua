@@ -22,12 +22,51 @@ local function ensure_player(player_name)
 	end
 end
 
+--- Transparently fetches from worldedit pos1 for compatibility.
+-- Called whenever pos1 is accessed in this API.
+-- @private
+-- @param	player_name		string	The name of the player to fetch the position for.
+-- @returns	void
+local function compat_worldedit_pos1_get(player_name)
+	if worldedit and worldedit.pos1 and worldedit.pos1[player_name] then
+		positions[player_name][1] = Vector3.clone(worldedit.pos1[player_name])
+	end
+end
+--- Transparently fetches from worldedit pos2 for compatibility.
+-- Called whenever pos2 is accessed in this API.
+-- @private
+-- @param	player_name		string	The name of the player to fetch the position for.
+-- @returns	void
+local function compat_worldedit_pos2_get(player_name)
+	if worldedit and worldedit.pos2 and worldedit.pos2[player_name] then
+		positions[player_name][2] = Vector3.clone(worldedit.pos2[player_name])
+	end
+end
+
+--- Sets pos1/pos2 in worldedit for compatibility.
+-- @param	player_name		string	The name of the player to set the position for.
+-- @param	i				number	The index of the position to set.
+-- @returns	Vector3?		The position to set.
+local function compat_worldedit_set(player_name, i, pos)
+	if not worldedit then return end
+	if i == 1 and worldedit.pos1 then
+		worldedit.pos1[player_name] = pos:clone()
+		if worldedit.mark_pos1 then worldedit.mark_pos1(player_name) end
+	elseif i == 2 and worldedit.pos2 then
+		worldedit.pos2[player_name] = pos:clone()
+		if worldedit.mark_pos2 then worldedit.mark_pos2(player_name) end
+	end
+end
+
 --- Gets the position with the given index for the given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @param	i				number	The index of the position to fetch.
 -- @returns	Vector3?		The position requested, or nil if it doesn't exist.
 local function get_pos(player_name, i)
 	ensure_player(player_name)
+	if i == 1 then compat_worldedit_pos1_get(player_name)
+	elseif i == 2 then compat_worldedit_pos2_get(player_name) end
+	
 	return positions[player_name][i]
 end
 
@@ -45,6 +84,9 @@ local function get_pos2(player_name) return get_pos(player_name, 2) end
 -- @returns	Vector3[]		A list of positions for the given player.
 local function get_all(player_name)
 	ensure_player(player_name)
+	compat_worldedit_pos1_get(player_name)
+	compat_worldedit_pos2_get(player_name)
+	
 	return wea_c.table.deepcopy(positions[player_name])
 end
 
@@ -53,6 +95,8 @@ end
 -- @returns nil|(Vector3,Vector3)	2 positions that define opposite corners of a region that fully encloses all the defined points for the given player, or nil ir the specified player has no points currently defined.
 local function get_bounds(player_name)
 	ensure_player(player_name)
+	compat_worldedit_pos1_get(player_name)
+	compat_worldedit_pos2_get(player_name)
 	if #positions[player_name] < 1 then return nil end
 	local pos1, pos2 = positions[player_name][1], positions[player_name][1]
 	
@@ -69,6 +113,9 @@ end
 -- @returns	number			The number of positions registered for the given player.
 local function pos_count(player_name)
 	ensure_player(player_name)
+	compat_worldedit_pos1_get(player_name)
+	compat_worldedit_pos2_get(player_name)
+	
 	return #positions[player_name]
 end
 --- Sets the position at the given index for the given player.
@@ -80,7 +127,10 @@ end
 local function set_pos(player_name, i, pos)
 	if i > positions_count_limit then return false end
 	ensure_player(player_name)
+		
 	positions[player_name][i] = pos
+	compat_worldedit_set(player_name, i, pos)
+	
 	anchor:emit("set", { player_name = player_name, i = i, pos = pos })
 	return true
 end
@@ -110,6 +160,7 @@ local function set_pos_all(player_name, pos_list)
 	if #pos_list > positions_count_limit then return false end
 	positions[player_name] = pos_list
 	for i,pos_new in ipairs(positions[player_name]) do
+		compat_worldedit_set(player_name, i, pos_new)
 		anchor:emit("push", { player_name = player_name, pos = pos_new, i = i })
 	end
 	return true
@@ -121,6 +172,10 @@ local function clear(player_name)
 	if positions[player_name] then
 		positions[player_name] = nil
 	end
+	if worldedit then
+		if worldedit.pos1 then worldedit.pos1[player_name] = nil end
+		if worldedit.pos2 then worldedit.pos2[player_name] = nil end
+	end
 	anchor:emit("clear", { player_name = player_name })
 end
 --- Removes the last position from the for a given player and returns it.
@@ -131,6 +186,11 @@ local function pop_pos(player_name)
 	if #positions[player_name] <= 0 then return nil end
 	local count = #positions[player_name]
 	local last_pos = table.remove(positions[player_name])
+	if worldedit then
+		if count == 2 and worldedit.pos2 then worldedit.pos2[player_name] = nil
+		elseif count == 1 and worldedit.pos1 then worldedit.pos1[player_name] = nil end
+	end
+	
 	anchor:emit("pop", { player_name = player_name, pos = last_pos, i = count })
 	return last_pos
 end
@@ -141,6 +201,8 @@ end
 local function push_pos(player_name, pos)
 	ensure_player(player_name)
 	table.insert(positions[player_name], pos)
+	compat_worldedit_set(player_name, #positions, pos)
+	
 	anchor:emit("push", { player_name = player_name, pos = pos, i = #positions[player_name] })
 	return #positions[player_name]
 end
