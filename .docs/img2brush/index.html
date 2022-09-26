@@ -6,7 +6,17 @@ title: Image to brush converter
 <section class="panel-generic">
 	<h1>Image to sculpting brush converter</h1>
 	
-	<p>Convert any image to a sculpting brush here! The <strong>alpha (opacity) channel</strong> is used to determine the weight of the brush - <strong>all colour is ignored</strong>.</p>
+	<p>Convert any image to a sculpting brush here!</p>
+	<p>
+		<strong>Use this channel to convert:</strong>
+		<select name="img2brush-channel" id="img2brush-channel">
+			<option value="alpha" selected>Alpha (opacity)</option>
+			<option value="red">Red</option>
+			<option value="green">Green</option>
+			<option value="blue">Blue</option>
+		</select> 
+	</p>
+	<p>Only the selected channel is used to determine the weight of the brush - <strong>all other channels are ignored</strong>! Change the channel option <strong>before</strong> you drag + drop the image onto this page.</p>
 </section>
 
 <section id="dropzone" class="bigbox panel-generic">

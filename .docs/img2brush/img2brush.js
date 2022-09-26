@@ -13,6 +13,23 @@ window.addEventListener("load", () => {
 	})
 });
 
+function get_source_channel_offset() {
+	const select = document.querySelector("#img2brush-channel");
+	console.info(`get_source_channel_offset: channel is ${select.value}`)
+	switch(select.value) {
+		case "alpha":
+			return 3;
+		case "red":
+			return 0;
+		case "green":
+			return 1;
+		case "blue":
+			return 2;
+		default:
+			throw new Error(`Error : Unknown channel name ${select.value}.`);
+	}
+}
+
 function select_output() {
 	let output = document.querySelector("#brushimg-tsv");
 	
@@ -25,7 +42,6 @@ function select_output() {
 	range.selectNode(output);
 	selection.addRange(range);
 }
-
 
 function handle_drag_enter(event) {
 	event.target.classList.add("dropzone-active");
@@ -80,12 +96,15 @@ function handle_new_image(image) {
 }
 
 function pixels2tsv(pixels) {
+	const offset = get_source_channel_offset();
+	console.info(`pixels2tsv: offset is ${offset}`);
 	let result = "";
 	for(let y = 0; y < pixels.height; y++) {
 		let row = [];
 		for(let x = 0; x < pixels.width; x++) {
 			// No need to rescale here - this is done automagically by WorldEditAdditions.
-			row.push(pixels.data[((y*pixels.width + x) * 4) + 3] / 255);
+			// r/b/g/alpha
+			row.push(pixels.data[((y*pixels.width + x) * 4) + offset] / 255);
 		}
 		result += row.join(`\t`) + `\n`;
 	}
