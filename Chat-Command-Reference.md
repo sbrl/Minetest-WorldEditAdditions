@@ -194,7 +194,7 @@ Draws a curved line, using all the currently defined points as control points. T
 
 **Note:** `//spline` uses the **new** WorldEditAdditions positions! Use the [multipoint wand](#multi-point-wand) to define the control points for the resulting line.
 
-For those interested, WorldEditAdditions uses the [chaikin curve algorithm](https://starbeamrainbowlabs.com/blog/article.php?article=posts/196-Chaikin-Curve-Generator.html) to draw the curve.
+For those interested, WorldEditAdditions uses the [chaikin curve algorithm](https://starbeamrainbowlabs.com/blog/article.php?article=posts/196-Chaikin-Curve-Generator.html) with linear interpolation for the width to draw the curve.
 
 ```weacmd
 //spline dirt 5 2
