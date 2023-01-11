@@ -10,7 +10,17 @@ be (slightly) less hacky once :target-within lands in browsers.
 
 Exported to codepen: https://codepen.io/sbrl/details/YzZJYxg
  */
- 
+
+:root {
+	--gallerybox-bg: hsla(0, 0%, 95%, 0.75);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--gallerybox-bg: hsla(0, 0%, 30%, 0.75);
+	}
+}
+
 @media (orientation: landscape) {
 	.gallerybox-gallery {
 		max-width: 95vw;
@@ -58,7 +68,7 @@ Exported to codepen: https://codepen.io/sbrl/details/YzZJYxg
 }
 
 .gallerybox-item > figcaption {
-	background: hsla(0, 0%, 95%, 0.75);
+	background: var(--gallerybox-bg);
 	position: absolute;
 	bottom: 0.25em; left: 0; right: 0;
 	padding: 0.75em 1em;

@@ -32,6 +32,27 @@
 	--shadow-dark: hsla(0, 0%, 25%, 0.5);
 	
 	--highlight: hsl(353, 100%, 36%);
+	
+	--bg-image: url('{% image_urlpass "images/clouds.png" %}');
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-main: #020B18;
+		--bg-bright: hsl(108, 46%, 34%);
+		--bg-alt: hsl(228, 68%, 68%);
+		
+		--bg-transcluscent: hsla(224, 20%, 16%, 0.85);
+		--bg-transcluscent-alt: hsla(226, 79%, 70%, 0.8);
+		
+		--text-main: hsl(227, 80%, 95%);
+		
+		--bg-image: url('{% image_urlpass "images/clouds-night.png" %}');
+	}
+	
+	a { color: #7c7cff; }
+	a:active { color: #ee0000; }
+	a:not(.nav):not(.bigbutton):visited { color: hsl(296, 84%, 75%); }
 }
 
 /* rem is relative to the html element, and em is relative to the current element. */
@@ -42,7 +63,7 @@ body
 	margin: 0;
 	font-family: sans-serif; /* Serif is awful :( */
 	
-	background: url('{% image_urlpass "images/clouds.png" %}') center / cover fixed,
+	background: var(--bg-image) center / cover fixed,
 		var(--bg-main); /* Don't forget to update the @page one too for paged media */
 	color: var(--text-main);
 }
@@ -156,7 +177,6 @@ a { font-weight: bold; }
 a:not(.nav):hover { color: hsl(214, 67%, 50%); }
 a:not(.nav):active, a:focus { color: hsl(214, 87%, 60%); } */
 a:not(.nav):not(.bigbutton):visited { color: hsl(240, 77%, 60%); }
-
 pre {
 	page-break-inside: avoid;
 	break-inside: avoid;
