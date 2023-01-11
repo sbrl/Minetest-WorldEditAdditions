@@ -53,7 +53,7 @@ local function create(player_name, pos, display_number)
 end
 
 local function delete(entity)
-	if not entity.get_luaentity then return end -- Ensure the entity is still valid
+	if not entity.get_luaentity() then return end -- Ensure the entity is still valid
 	
 	local player_name = entity:get_luaentity().player_name
 	local display_number = entity:get_luaentity().display_number
