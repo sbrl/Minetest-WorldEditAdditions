@@ -125,6 +125,15 @@ function Vector3.round(a)
 	return Vector3.new(math.floor(a.x+0.5), math.floor(a.y+0.5), math.floor(a.z+0.5))
 end
 
+--- Rounds the components of this vector to the specified number of decimal places.
+-- @param	a		Vector3	The vector to round.
+-- @param	dp		number	The number of decimal places to round to.
+-- @returns	Vector3	A new instance with the components rounded to the specified number of decimal places.
+function Vector3.round_dp(a, dp)
+	local power = 10^dp
+	return (a * power):round() / power
+end
+
 
 --- Snaps this Vector3 to an imaginary square grid with the specified sized
 -- squares.
@@ -399,6 +408,43 @@ function Vector3.fromBearing(angle_x, angle_y, length)
 		length * math.sin(angle_x) * math.sin(angle_y),
 		length * math.sin(angle_x) * math.cos(angle_y)
 	)
+end
+
+--- Rotate a given point around an origin point in 3d space.
+-- Consider 3 axes (X, Y, and Z) that are centred on origin. This function
+-- rotates point around these axes in the aforementioned order.
+-- NOTE: This function is not as intuitive as it sounds.
+-- A whiteboard and a head for mathematics is recommended before using this
+-- function. Either that, or Blender 3 (https://blender.org/) is quite useful to visualise what's going on.
+-- @source	GitHub Copilot, generated 2023-01-17
+-- @warning	Not completely tested! Pending a thorough evaluation. Seems to basically work, after some tweaks to the fluff around the edges?
+-- @param	{Vector3}	origin	The origin point to rotate around
+-- @param	{Vector3}	point	The point to rotate.
+-- @param	{Vector3}	rotate	Rotate this much around the 3 different axes, x, y, and z. Axial rotations are handled in this order: X→Y→Z.
+-- @param	{Number}	x	Rotate this much around the X axis (yz plane), in radians.
+-- @param	{Number}	y	Rotate this much around the Y axis (xz plane), in radians.
+-- @param	{Number}	z	Rotate this much around the Z axis (xy plane), in radians.
+-- @return	{Vector3}	The rotated point.
+function Vector3.rotate3d(origin, point, rotate)
+	local point_norm = point - origin
+
+	-- rotate around x
+	local x1 = point_norm.x
+	local y1 = point_norm.y * math.cos(rotate.x) - point_norm.z * math.sin(rotate.x)
+	local z1 = point_norm.y * math.sin(rotate.x) + point_norm.z * math.cos(rotate.x)
+
+	-- rotate around y
+	local x2 = x1 * math.cos(rotate.y) + z1 * math.sin(rotate.y)
+	local y2 = y1
+	local z2 = -x1 * math.sin(rotate.y) + z1 * math.cos(rotate.y)
+
+	-- rotate around z
+	local x3 = x2 * math.cos(rotate.z) - y2 * math.sin(rotate.z)
+	local y3 = x2 * math.sin(rotate.z) + y2 * math.cos(rotate.z)
+	local z3 = z2
+
+	return Vector3.new(x3, y3, z3) + origin
+	-- return [x3+origin[0], y3+origin[1], z3+origin[2]];
 end
 
 
