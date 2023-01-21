@@ -106,6 +106,25 @@ function wea_c.clamp(value, min, max)
 	return value
 end
 
+--- Return a sequence of numbers as a list.
+-- @example
+-- local result = worldeditadditions_core.range(0, 10, 1)
+-- -- [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+-- @example
+-- local result = worldeditadditions_core.range(6, 12, 2)
+-- -- [ 6, 8, 10, 12 ]
+-- @param	min		number		The minimum value in the sequence.
+-- @param	max		number		The maximum value in the sequence.
+-- @param	step	number		The value to increment between each value in the sequence.
+-- @returns	number[]	The list of numbers.
+function wea_c.range(min, max, step)
+	local result = {}
+	for i = min, max, step do
+		table.insert(result, i)
+	end
+	return result
+end
+
 -- For Testing:
 -- wea_c = {}
 -- print(wea_c.getsign('-y'))
