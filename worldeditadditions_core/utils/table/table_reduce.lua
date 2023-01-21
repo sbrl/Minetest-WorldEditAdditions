@@ -11,3 +11,5 @@ local function table_reduce(tbl, func, initial_value)
 	end
 	return acc
 end
+
+return table_reduce
