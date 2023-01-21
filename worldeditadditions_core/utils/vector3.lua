@@ -126,6 +126,7 @@ function Vector3.round(a)
 end
 
 --- Rounds the components of this vector to the specified number of decimal places.
+-- TODO: Document this.
 -- @param	a		Vector3	The vector to round.
 -- @param	dp		number	The number of decimal places to round to.
 -- @returns	Vector3	A new instance with the components rounded to the specified number of decimal places.
