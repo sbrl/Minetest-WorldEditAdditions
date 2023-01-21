@@ -18,6 +18,7 @@ wea_c.table = {
 	get_last	= dofile(wea_c.modpath.."/utils/table/table_get_last.lua"),
 	makeset		= dofile(wea_c.modpath.."/utils/table/makeset.lua"),
 	map			= dofile(wea_c.modpath.."/utils/table/table_map.lua"),
+	reduce		= dofile(wea_c.modpath.."/utils/table/table_reduce.lua"),
 	shallowcopy	= dofile(wea_c.modpath.."/utils/table/shallowcopy.lua"),
 	tostring	= dofile(wea_c.modpath.."/utils/table/table_tostring.lua"),
 	unique		= dofile(wea_c.modpath.."/utils/table/table_unique.lua"),
