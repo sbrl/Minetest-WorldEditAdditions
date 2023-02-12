@@ -16,6 +16,9 @@ Note to self: See the bottom of this file for the release template text.
  - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once. **Not currently compatible with other wands**, as it's a work-in-progress (commands that support/require more than 2 points are hopefully coming soon)
  - Add `//spline`, for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
 
+### Bugfixes
+ - Cloud wand: fix typo in item description.
+
 
 ## v1.13: The transformational update (2nd January 2022)
  - Add [`//sfactor`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor) (_selection factor_) - Selection Tools by @VorTechnix are finished for now.

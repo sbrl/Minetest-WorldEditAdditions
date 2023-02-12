@@ -2,7 +2,7 @@ local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 
 minetest.register_tool(":worldeditadditions:cloudwand", {
-	description = "WorldEditAdditions far-reaching additive selectior wand",
+	description = "WorldEditAdditions far-reaching additive selector wand",
 	inventory_image = "worldeditadditions_cloudwand.png",
 	
 	on_place = function(itemstack, player, pointed_thing)
