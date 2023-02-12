@@ -58,7 +58,7 @@ function worldeditadditions.revolve(pos1, pos2, origin, times)
 							-- rotate on Z axis only, convert 0..1 → radians
 							-- TEST on Y axis, 'cause I'm confused
 							Vector3.new(0, rotation * math.pi * 2, 0)
-						):floor()
+						):round()
 						
 						local i_target = area_target:index(pos_target.x, pos_target.y, pos_target.z)
 						
