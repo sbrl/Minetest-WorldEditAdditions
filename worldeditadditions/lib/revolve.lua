@@ -46,22 +46,26 @@ function worldeditadditions.revolve(pos1, pos2, origin, times)
 	for z = pos2_source.z, pos1_source.z, -1 do
 		for y = pos2_source.y, pos1_source.y, -1 do
 			for x = pos2_source.x, pos1_source.x, -1 do
-				for index, rotation in ipairs(rotation_radians) do
-					local pos_source = Vector3.new(x, y, z)
-					local pos_target = Vector3.rotate3d(
-						origin,
-						pos_source,
-						-- rotate on Z axis only, convert 0..1 → radians
-						-- TEST on Y axis, 'cause I'm confused
-						Vector3.new(0, rotation * math.pi * 2, 0)
-					):floor()
-					
-					local i_source = area_source:index(x, y, z)
-					local i_target = area_target:index(pos_target.x, pos_target.y, pos_target.z)
-					
-					-- TODO: Rotate notes as appropriate
-					data_target[i_target] = data_source[i_source]
-					changed = changed + 1
+				local pos_source = Vector3.new(x, y, z)
+				local i_source = area_source:index(x, y, z)
+				
+				-- Lua really sucks sometimes... a continue statement would be v useful here
+				if not wea_c.is_airlike(data_source[i_source]) then
+					for index, rotation in ipairs(rotation_radians) do
+						local pos_target = Vector3.rotate3d(
+							origin,
+							pos_source,
+							-- rotate on Z axis only, convert 0..1 → radians
+							-- TEST on Y axis, 'cause I'm confused
+							Vector3.new(0, rotation * math.pi * 2, 0)
+						):floor()
+						
+						local i_target = area_target:index(pos_target.x, pos_target.y, pos_target.z)
+						
+						-- TODO: Rotate notes as appropriate
+						data_target[i_target] = data_source[i_source]
+						changed = changed + 1
+					end
 				end
 			end
 		end
