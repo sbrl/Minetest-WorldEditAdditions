@@ -437,6 +437,18 @@ Here are all the above examples together:
 ```
 
 
+### `//revolve <times> [<pivot_point_number=last_point>]`
+Makes a given number of copies of the currently defined region (bounded by pos1 and pos2) at a given number of equally spaced points rotated around a given pivot/origin point.
+
+For example, `//revolve 4` would make rotated copies of the currently defined region at intervals 0° (the source to copy), 90°, 180°, and 270° around the given pivot point.
+
+`pivot_point_number` is the number of the defined position that should act as the pivot point, or origin for the revolve operation. It defaults to the last position defined. Note that it cannot be pos1 or pos2, as these are used to define the region that should be rotated. Use the [multi-point wand](#multi) to define a position with an index of 3 or more.
+
+```weacmd
+//revolve 4
+//revolve 6 6
+```
+
 
 ## Terrain
 <!--
