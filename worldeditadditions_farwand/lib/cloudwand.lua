@@ -1,5 +1,5 @@
 local wea = worldeditadditions
--- local wea_c = worldeditadditions_core
+local wea_c = worldeditadditions_core
 
 minetest.register_tool(":worldeditadditions:cloudwand", {
 	description = "WorldEditAdditions far-reaching additive selectior wand",
@@ -26,6 +26,8 @@ minetest.register_tool(":worldeditadditions:cloudwand", {
 		-- Right click when pointing at nothing
 		-- print("[farwand] on_secondary_use", name)
 		
+		-- TODO: Move over to wea_c.pos completely
 		wea.selection.clear_points(name)
+		wea_c.pos.clear(name)
 	end
 })
