@@ -17,9 +17,9 @@ minetest.register_chatcommand("/multi", {
 		-- Tokenise the input into a list of commands
 		local success, commands = wea_c.parse.tokenise_commands(params_text)
 		if not success then return success, commands end
+		if type(commands) ~= "table" then return success, commands end
 		
 		for i, command in ipairs(commands) do
-			-- print("[DEBUG] i", i, "command: '"..command.."'")
 			local start_time = wea_c.get_ms_time()
 			
 			local found, _, command_name, args = command:find("^([^%s]+)%s(.+)$")
