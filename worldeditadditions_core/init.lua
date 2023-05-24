@@ -27,6 +27,8 @@ wea_c.EventEmitter = dofile(modpath.."/utils/EventEmitter.lua")
 
 wea_c.Set = dofile(wea_c.modpath.."/utils/set.lua")
 
+wea_c.setting_handler = dofile(wea_c.modpath.."/utils/setting_handler.lua")
+
 wea_c.Vector3 = dofile(wea_c.modpath.."/utils/vector3.lua")
 wea_c.Mesh, wea_c.Face = dofile(wea_c.modpath.."/utils/mesh.lua")
 
