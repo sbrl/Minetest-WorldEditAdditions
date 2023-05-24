@@ -29,7 +29,7 @@ worldeditadditions_core.register_command("count", {
 		)
 		if not success then return success, counts end
 		
-		local result = wea_c.format.make_ascii_table(counts).."\n"..
+		local result = "\n"..wea_c.format.make_ascii_table(counts).."\n"..
 			string.rep("=", 6 + #tostring(total) + 6).."\n"..
 			"Total "..total.." nodes\n"
 		
