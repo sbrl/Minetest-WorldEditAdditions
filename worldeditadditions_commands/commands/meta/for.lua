@@ -54,7 +54,7 @@ worldeditadditions_core.register_command("for", {
 			return false, "Error: \"do\" argument is not present."
 		end
 		local parts = wea_c.split(params_text,"%sdo%s")
-		if not parts[1] == "" then
+		if parts[1] == "" then
 			return false, "Error: No values specified."
 		end
 		if not parts[2] then
