@@ -1196,6 +1196,7 @@ Here are some more examples:
 ```
 //for meselamp brick snowblock bamboo:wood do //multi //maze %% //sshift y 5
 //for 5 10 15 do //torus %% 3 dirt xz
+//for 1 2 3 4 5 do //multi //hollowcylinder y 1 5 meselamp //shift y %%
 ```
 
 
