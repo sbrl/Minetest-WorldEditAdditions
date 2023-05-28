@@ -1,8 +1,8 @@
 --- A wrapper to simultaniously handle global and world settings.
 
 -- Initialize settings container
-local weac = worldeditadditions_core
-weac.settings = {}
+local wea_c = worldeditadditions_core
+wea_c.settings = {}
 
 -- Initialize wea world folder if not already existing
 local path = minetest.get_worldpath() .. "/worldeditadditions"
