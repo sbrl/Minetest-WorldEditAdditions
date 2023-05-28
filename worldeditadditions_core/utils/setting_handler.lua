@@ -16,7 +16,8 @@ setting_handler.read = function()
 	local file, err = io.open(path .. "/settings.conf", "rb")
 	if err then return false end
 	-- Split by newline
-	local settings = wea_c.split(file.read(),"[\n\r]+")
+	-- local settings = wea_c.split(file:read(),"[\n\r]+")
+	file:close()
 end
 
 --- Write setting to world settings

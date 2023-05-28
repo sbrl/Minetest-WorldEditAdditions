@@ -27,8 +27,6 @@ wea_c.EventEmitter = dofile(modpath.."/utils/EventEmitter.lua")
 
 wea_c.Set = dofile(wea_c.modpath.."/utils/set.lua")
 
-wea_c.setting_handler = dofile(wea_c.modpath.."/utils/setting_handler.lua")
-
 wea_c.Vector3 = dofile(wea_c.modpath.."/utils/vector3.lua")
 wea_c.Mesh, wea_c.Face = dofile(wea_c.modpath.."/utils/mesh.lua")
 
@@ -61,7 +59,7 @@ dofile(wea_c.modpath.."/utils/player.lua") -- Player info functions
 
 
 
-
+wea_c.setting_handler = dofile(wea_c.modpath.."/utils/setting_handler.lua") -- AFTER parser
 
 wea_c.pos = dofile(modpath.."/core/pos.lua") -- AFTER EventEmitter
 wea_c.register_command = dofile(modpath.."/core/register_command.lua")
