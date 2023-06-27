@@ -146,6 +146,7 @@ end
 -- @param	pos				Vector3	The position to set.
 -- @returns	bool			Whether the operation was successful or not (players aren't allowed more than positions_count_limit number of positions at a time).
 local function set(player_name, i, pos)
+	-- It's a shame that Lua doesn't have a throw/raise, 'cause we could sure use it here
 	if i > positions_count_limit then return false end
 	ensure_player(player_name)
 		
@@ -196,6 +197,7 @@ local function clear(player_name)
 	if worldedit then
 		if worldedit.pos1 then worldedit.pos1[player_name] = nil end
 		if worldedit.pos2 then worldedit.pos2[player_name] = nil end
+		if worldedit.set_pos then worldedit.set_pos[player_name] = nil end
 	end
 	anchor:emit("clear", { player_name = player_name })
 end
