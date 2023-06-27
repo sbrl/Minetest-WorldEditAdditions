@@ -227,6 +227,8 @@ Floods all connected nodes of the same type starting at _pos1_ with `<replace_no
 ### `//wbox <replace_node>`
 Sets the edges of the current selection to `<replace_node>`to create an outline of a rectangular prism. Useful for roughing in walls.
 
+In other words, creates a wireframe of a box defined by the current selection.
+
 ```weacmd
 //wbox silver_sandstone
 //wbox dirt
