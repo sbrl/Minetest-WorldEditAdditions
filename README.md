@@ -128,6 +128,8 @@ cd WorldEditAdditions
 git checkout "$(git describe --tags --abbrev=0)";
 ```
 
+If you do not checkout the latest release, you will be using the development version of WorldEditAdditions. While every effort is made to ensure that the development version is stable at all times, this is not a guarantee.
+
 Windows users, you'll need to check the [releases page](https://github.com/sbrl/Minetest-WorldEditAdditions/releases) and find the name of the latest release, then do this instead of the `git checkout` above:
 
 ```bash
