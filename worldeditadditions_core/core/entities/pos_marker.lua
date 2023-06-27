@@ -14,12 +14,12 @@ local WEAPositionMarker = {
 		static_save = false,
 		
 		textures = {
-			"worldeditadditions_bg.png",
-			"worldeditadditions_bg.png",
-			"worldeditadditions_bg.png",
-			"worldeditadditions_bg.png",
-			"worldeditadditions_bg.png",
-			"worldeditadditions_bg.png",
+			"worldeditadditions_core_bg.png",
+			"worldeditadditions_core_bg.png",
+			"worldeditadditions_core_bg.png",
+			"worldeditadditions_core_bg.png",
+			"worldeditadditions_core_bg.png",
+			"worldeditadditions_core_bg.png",
 		}
 	},
 	
@@ -89,17 +89,17 @@ local function set_number(entity, display_number)
 	if display_number < 100 then
 		local number_right = display_number % 10
 		local number_left = (display_number - number_right) / 10
-		texture_name = texture_name.."worldeditadditions_l"..number_left..".png"
-		texture_name = texture_name.."^worldeditadditions_r"..number_right..".png"
+		texture_name = texture_name .. "worldeditadditions_core_l" .. number_left .. ".png"
+		texture_name = texture_name .. "^worldeditadditions_core_r" .. number_right .. ".png"
 		-- print("DEBUG:set_number number_left", number_left, "number_right", number_right)
 		
 		local colour_id = ((display_number - 1) % 12) + 1 -- Lua starts from 1, not 0 :-/
 		texture_name = "("..texture_name..")^[colorize:"..number_colours[colour_id]..":255"
 	end
 	if #texture_name > 0 then
-		texture_name = "worldeditadditions_bg.png^("..texture_name..")"
+		texture_name = "worldeditadditions_core_bg.png^(" .. texture_name .. ")"
 	else
-		texture_name = "worldeditadditions_bg.png"
+		texture_name = "worldeditadditions_core_bg.png"
 	end
 	
 	-- print("DEBUG:set_number texture_name", texture_name)
