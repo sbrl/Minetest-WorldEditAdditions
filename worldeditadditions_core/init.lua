@@ -59,7 +59,7 @@ dofile(wea_c.modpath.."/utils/player.lua") -- Player info functions
 
 
 
-
+wea_c.setting_handler = dofile(wea_c.modpath.."/utils/setting_handler.lua") -- AFTER parser
 
 wea_c.pos = dofile(modpath.."/core/pos.lua") -- AFTER EventEmitter
 wea_c.register_command = dofile(modpath.."/core/register_command.lua")
