@@ -161,7 +161,17 @@ Contributions are welcome! Please state in your pull request(s) that you release
 
 Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc. More contributing help can be found in [the contributing guide](CONTRIBUTING.md).
 
-I, Starbeamrainbowlabs (@sbrl), have the ultimate final say.
+### Inspiration
+Want to contribute, but finding it tough to search for inspiration of what to implement? Here are some great places to look:
+
+- [**Our issue tracker:**](https://github.com/sbrl/Minetest-WorldEditAdditions/issues) There are always a bunch of issues open with cool commands and features that have yet to be implemented.
+- **Other software:** Software for Minecraft is often far more mature than that available for Minetest. As a result, it's full of cool ideas. A lot of the existing commands in WorldEditAdditions were sourced from here.
+	- WorldEdit for Minecraft
+	- VoxelSniper for Minecraft
+- **Do some building:** When you put WorldEditAdditions to use in building projects of your own, things will absolutely stand out to you what you want in the creative building process that WorldEditAdditions doesn't yet have.
+- **Watch others build stuff:** Doesn't even have to be Minetest! There are lots of talented Minecraft builders with videos and series on e.g. YouTube. From their creative building processes, many ideas can be derived.
+
+The ultimate goal is for WorldEditAdditions to support the creative building process in a way that enables builders of all backgrounds to create incredible things.
 
 
 ## WorldEditAdditions around the web
