@@ -38,16 +38,19 @@ local WEAPositionMarkerWall = {
 	end
 }
 
-minetest.register_entity(":worldeditadditions:marker_wall", WEAPositionMarker)
+minetest.register_entity(
+	":worldeditadditions:marker_wall",
+	WEAPositionMarkerWall
+)
 
 
 --- Updates the properties of a single wall to match it's side and size
 local function single_setup(entity, size, side)
 	local new_props = {
 		visual_size = {
-			x = math.min(10, size.x),
-			y = math.min(10, size.y),
-			z = math.min(10, size.z)
+			x = math.min(10, math.abs(size.x)+1),
+			y = math.min(10, math.abs(size.y)+1),
+			z = math.min(10, math.abs(size.z)+1)
 		}
 	}
 
@@ -79,7 +82,9 @@ local function single_setup(entity, size, side)
 		cpos1.x, cpos1.y, cpos1.z,
 		cpos2.x, cpos2.y, cpos2.z
 	}
-
+	
+	print("DEBUG:marker_wall setup_single new_props", wea_c.inspect(new_props))
+	
 	entity:set_properties(new_props)
 end
 
@@ -90,8 +95,19 @@ end
 -- @param	side		string	The side that this wall is on. Valid values: x, -x, y, -y, z, -z.
 -- @returns	Entity<WEAPositionMarkerWall>
 local function create_single(player_name, pos1, pos2, side)
-	local pos_centre = pos2 - pos1
-	local entity = minetest.add_entity(pos_centre, name)
+	print("DEBUG:marker_wall create_single --> START player_name", player_name, "pos1", pos1, "pos2", pos2, "side", side)
+	
+	local offset = Vector3.new()
+	if side == "x" then offset.x = 0.5
+	elseif side == "-x" then offset.x = -0.5
+	elseif side == "y" then offset.y = 0.5 
+	elseif side == "-y" then offset.y = -0.5
+	elseif side == "z" then offset.z = 0.5
+	elseif side == "-z" then offset.z = -0.5 end
+	
+	local pos_centre = ((pos2 - pos1) / 2) + pos1 + offset
+	local entity = minetest.add_entity(pos_centre, "worldeditadditions:marker_wall")
+	print("DEBUG:marker_wall create_single --> spawned at", pos_centre)
 	
 	entity:get_luaentity().player_name = player_name
 	
@@ -107,6 +123,7 @@ end
 -- @param	pos2				Vector3	pos2 of the defined region.
 -- @returns	table<entitylist>	A list of all created entities.
 local function create_wall(player_name, pos1, pos2)
+	print("DEBUG:marker_wall create_wall --> START player_name", player_name, "pos1", pos1, "pos2", pos2)
 	local pos1s, pos2s = Vector3.sort(pos1, pos2)
 	
 	local entities = {}
@@ -176,6 +193,7 @@ end
 --- Deletes all entities in the given entity list
 -- @param	entitylist	table<entity>	A list of wall entities that make up the wall to delete.
 local function delete(entitylist)
+	print("DEBUG:marker_wall delete --> START with "..#entitylist.." entities")
 	local player_name
 	for _, entity in ipairs(entitylist) do
 		if not entity.get_luaentity or not entity:get_luaentity() then return end -- Ensure the entity is still valid
@@ -183,6 +201,8 @@ local function delete(entitylist)
 		if not player_name then
 			player_name = entity:get_luaentity().player_name
 		end
+		
+		entity:remove()
 	end
 	
 	anchor:emit("delete", {
@@ -194,3 +214,5 @@ anchor = EventEmitter.new({
 	create = create_wall,
 	delete = delete
 })
+
+return anchor

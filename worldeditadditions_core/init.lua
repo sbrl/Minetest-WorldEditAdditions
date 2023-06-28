@@ -67,6 +67,7 @@ wea_c.fetch_command_def = dofile(modpath.."/core/fetch_command_def.lua")
 wea_c.register_alias = dofile(modpath.."/core/register_alias.lua")
 wea_c.entities = dofile(modpath.."/core/entities/init.lua") -- AFTER pos
 dofile(modpath.."/core/pos_marker_manage.lua") -- AFTER pos, entities
+dofile(modpath.."/core/pos_marker_wall_manage.lua") -- AFTER pos, entities
 
 -- Initialise WorldEdit stuff if the WorldEdit mod is not present
 if minetest.global_exists("worldedit") then
