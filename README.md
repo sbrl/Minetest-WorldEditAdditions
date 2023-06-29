@@ -167,7 +167,8 @@ Want to contribute, but finding it tough to search for inspiration of what to im
 - [**Our issue tracker:**](https://github.com/sbrl/Minetest-WorldEditAdditions/issues) There are always a bunch of issues open with cool commands and features that have yet to be implemented.
 - **Other software:** Software for Minecraft is often far more mature than that available for Minetest. As a result, it's full of cool ideas. A lot of the existing commands in WorldEditAdditions were sourced from here.
 	- WorldEdit for Minecraft
-	- VoxelSniper for Minecraft
+	- VoxelSniper(-Reimagined) for Minecraft
+	- WorldPainter for Minecraft
 - **Do some building:** When you put WorldEditAdditions to use in building projects of your own, things will absolutely stand out to you what you want in the creative building process that WorldEditAdditions doesn't yet have.
 - **Watch others build stuff:** Doesn't even have to be Minetest! There are lots of talented Minecraft builders with videos and series on e.g. YouTube. From their creative building processes, many ideas can be derived.
 
