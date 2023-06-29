@@ -9,20 +9,20 @@ local Vector3 = wea_c.Vector3
 --      ██ ██      ██    ██ ██      ██         ██
 -- ███████  ██████  ██████  ███████ ██         ██
 worldeditadditions_core.register_command("sculpt", {
-	params = "[<brush_name=default> [<height=5> [<brush_size=10>]]]",
+	params = "[<brush_name=default> [<height=1> [<brush_size=8>]]]",
 	description = "Applies a sculpting brush to the terrain with a given height. See //sculptlist to list all available brushes. Note that while the brush size is configurable, the actual brush size you end up with may be slightly different to that which you request due to brush size restrictions.",
 	privs = { worldedit = true },
 	require_pos = 1,
 	parse = function(params_text)
 		if not params_text or params_text == "" then
-			params_text = "circle_soft1"
+			params_text = "circle"
 		end
 		
 		local parts = wea_c.split_shell(params_text)
 		
-		local brush_name = "circle_soft1"
-		local height = 5
-		local brush_size = 10
+		local brush_name = "circle"
+		local height = 1
+		local brush_size = 8
 		
 		if #parts >= 1 then
 			brush_name = table.remove(parts, 1)

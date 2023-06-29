@@ -670,7 +670,7 @@ Lists all the available sculpting brushes for use with `//sculpt`. If the `previ
 ```
 
 
-### `//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`
+### `//sculpt [<brush_name=default> [<height=1> [<brush_size=8>]]]`
 Applies a specified brush to the terrain at position 1 with a given height and a given size. Multiple brushes exist (see [`//sculptlist`](#sculptlist)) - and are represented as a 2D grid of values between 0 and 1, which are  then scaled to the specified height. The terrain around position 1 is first converted to a 2D heightmap (as in [`//convolve`](#convolve) before the brush "heightmap" is applied to it.
 
 Similar to [`//sphere`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#sphere-radius-node), [`//cubeapply 10 set`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cubeapply-sizesizex-sizey-sizez-command-parameters), or [`//cylinder y 5 10 10 dirt`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cylinder-xyz-length-radius1-radius2-node) (all from [WorldEdit](https://content.minetest.net/packages/sfan5/worldedit/)), but has a number of added advantages:
