@@ -100,15 +100,8 @@ end
 -- @returns	Entity<WEAPositionMarkerWall>
 local function create_single(player_name, pos1, pos2, side)
 	
-	local offset = Vector3.new()
-	if side == "x" then offset.x = 0.5
-	elseif side == "-x" then offset.x = -0.5
-	elseif side == "y" then offset.y = 0.5 
-	elseif side == "-y" then offset.y = -0.5
-	elseif side == "z" then offset.z = 0.5
-	elseif side == "-z" then offset.z = -0.5 end
 	
-	local pos_centre = ((pos2 - pos1) / 2) + pos1 + offset
+	local pos_centre = ((pos2 - pos1) / 2) + pos1
 	local entity = minetest.add_entity(pos_centre, "worldeditadditions:marker_wall")
 	print("DEBUG:marker_wall create_single --> START player_name", player_name, "pos1", pos1, "pos2", pos2, "side", side, "SPAWN", pos_centre)
 	
@@ -147,12 +140,12 @@ local function create_wall(player_name, pos1, pos2)
 	--       ██   ██
 	-- First, do positive x
 	local posx_pos1 = Vector3.new(
-		math.max(pos1s.x, pos2s.x),
+		math.max(pos1s.x, pos2s.x) + 0.5,
 		math.min(pos1s.y, pos2s.y) - 0.5,
 		math.min(pos1s.z, pos2s.z) - 0.5
 	)
 	local posx_pos2 = Vector3.new(
-		math.max(pos1s.x, pos2s.x),
+		math.max(pos1s.x, pos2s.x) + 0.5,
 		math.max(pos1s.y, pos2s.y) + 0.5,
 		math.max(pos1s.z, pos2s.z) + 0.5
 	)
@@ -188,12 +181,12 @@ local function create_wall(player_name, pos1, pos2)
 	--       ██   ██
 	-- Now, do negative x
 	local negx_pos1 = Vector3.new(
-		math.min(pos1s.x, pos2s.x),
+		math.min(pos1s.x, pos2s.x) - 0.5,
 		math.min(pos1s.y, pos2s.y) - 0.5,
 		math.min(pos1s.z, pos2s.z) - 0.5
 	)
 	local negx_pos2 = Vector3.new(
-		math.min(pos1s.x, pos2s.x),
+		math.min(pos1s.x, pos2s.x) - 0.5,
 		math.max(pos1s.y, pos2s.y) + 0.5,
 		math.max(pos1s.z, pos2s.z) + 0.5
 	)
@@ -219,7 +212,169 @@ local function create_wall(player_name, pos1, pos2)
 			table.insert(entities, entity)
 		end
 	end
+	
+	
+	
+	--       ██    ██
+	--   ██   ██  ██ 
+	-- ██████  ████  
+	--   ██     ██   
+	--          ██   
+	-- Now, positive y
+	local posy_pos1 = Vector3.new(
+		math.min(pos1s.x, pos2s.x) - 0.5,
+		math.max(pos1s.y, pos2s.y) + 0.5,
+		math.min(pos1s.z, pos2s.z) - 0.5
+	)
+	local posy_pos2 = Vector3.new(
+		math.max(pos1s.x, pos2s.x) + 0.5,
+		math.max(pos1s.y, pos2s.y) + 0.5,
+		math.max(pos1s.z, pos2s.z) + 0.5
+	)
 
+	print("DEBUG ************ +Y pos1", posy_pos1, "pos2", posy_pos2)
+
+	for z = posy_pos2.z, posy_pos1.z, -entity_wall_size do
+		for x = posy_pos2.x, posy_pos1.x, -entity_wall_size do
+			local single_pos1 = Vector3.new(
+				x,
+				posy_pos1.y,
+				z
+			)
+			local single_pos2 = Vector3.new(
+				math.max(x - entity_wall_size, posy_pos1.x),
+				posy_pos1.y,
+				math.max(z - entity_wall_size, posy_pos1.z)
+			)
+
+			local entity = create_single(player_name,
+				single_pos1, single_pos2,
+				"y"
+			)
+			table.insert(entities, entity)
+		end
+	end
+	
+	--       ██    ██
+	--        ██  ██
+	-- ██████  ████
+	--          ██
+	--          ██
+	-- Now, negative y
+	local negy_pos1 = Vector3.new(
+		math.min(pos1s.x, pos2s.x) - 0.5,
+		math.min(pos1s.y, pos2s.y) - 0.5,
+		math.min(pos1s.z, pos2s.z) - 0.5
+	)
+	local negy_pos2 = Vector3.new(
+		math.max(pos1s.x, pos2s.x) + 0.5,
+		math.min(pos1s.y, pos2s.y) - 0.5,
+		math.max(pos1s.z, pos2s.z) + 0.5
+	)
+
+	print("DEBUG ************ -Y pos1", negy_pos1, "pos2", negy_pos2)
+
+	for z = negy_pos2.z, negy_pos1.z, -entity_wall_size do
+		for x = negy_pos2.x, negy_pos1.x, -entity_wall_size do
+			local single_pos1 = Vector3.new(
+				x,
+				negy_pos1.y,
+				z
+			)
+			local single_pos2 = Vector3.new(
+				math.max(x - entity_wall_size, negy_pos1.x),
+				negy_pos1.y,
+				math.max(z - entity_wall_size, negy_pos1.z)
+			)
+
+			local entity = create_single(player_name,
+				single_pos1, single_pos2,
+				"-y"
+			)
+			table.insert(entities, entity)
+		end
+	end
+	
+	--       ███████
+	--   ██     ███ 
+	-- ██████  ███  
+	--   ██   ███   
+	--       ███████
+	-- Now, positive z. Almost there!
+	local posz_pos1 = Vector3.new(
+		math.min(pos1s.x, pos2s.x) - 0.5,
+		math.min(pos1s.y, pos2s.y) - 0.5,
+		math.max(pos1s.z, pos2s.z) + 0.5
+	)
+	local posz_pos2 = Vector3.new(
+		math.max(pos1s.x, pos2s.x) + 0.5,
+		math.max(pos1s.y, pos2s.y) + 0.5,
+		math.max(pos1s.z, pos2s.z) + 0.5
+	)
+
+	print("DEBUG ************ +Z pos1", posz_pos1, "pos2", posz_pos2)
+
+	for x = posz_pos2.x, posz_pos1.x, -entity_wall_size do
+		for y = posz_pos2.y, posz_pos1.y, -entity_wall_size do
+			local single_pos1 = Vector3.new(
+				x,
+				y,
+				posz_pos1.z
+			)
+			local single_pos2 = Vector3.new(
+				math.max(x - entity_wall_size, posz_pos1.x),
+				math.max(y - entity_wall_size, posz_pos1.y),
+				posz_pos1.z
+			)
+
+			local entity = create_single(player_name,
+				single_pos1, single_pos2,
+				"z"
+			)
+			table.insert(entities, entity)
+		end
+	end
+	--       ███████
+	--          ███
+	-- ██████  ███
+	--        ███
+	--       ███████
+	-- Finally, negative z. Last one!
+	local negz_pos1 = Vector3.new(
+		math.min(pos1s.x, pos2s.x) - 0.5,
+		math.min(pos1s.y, pos2s.y) - 0.5,
+		math.min(pos1s.z, pos2s.z) - 0.5
+	)
+	local negz_pos2 = Vector3.new(
+		math.max(pos1s.x, pos2s.x) + 0.5,
+		math.max(pos1s.y, pos2s.y) + 0.5,
+		math.min(pos1s.z, pos2s.z) - 0.5
+	)
+
+	print("DEBUG ************ -Z pos1", negz_pos1, "pos2", negz_pos2)
+
+	for x = negz_pos2.x, negz_pos1.x, -entity_wall_size do
+		for y = negz_pos2.y, negz_pos1.y, -entity_wall_size do
+			local single_pos1 = Vector3.new(
+				x,
+				y,
+				negz_pos1.z
+			)
+			local single_pos2 = Vector3.new(
+				math.max(x - entity_wall_size, negz_pos1.x),
+				math.max(y - entity_wall_size, negz_pos1.y),
+				negz_pos1.z
+			)
+
+			local entity = create_single(player_name,
+				single_pos1, single_pos2,
+				"-z"
+			)
+			table.insert(entities, entity)
+		end
+	end
+	
+	
 	
 	-- TODO: All the other sides. For testing we're doing 1 side for now, so we can vaoid having to do everything all over again if we make a mistake.
 	
