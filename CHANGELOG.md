@@ -7,14 +7,15 @@ Note to self: See the bottom of this file for the release template text.
 ## v1.14: The untitled update (unreleased)
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
- - Add `//revolve`, which makes multiple evenly-spaced rotated copies of the defined region
  - Migrate from `depends.txt` to `mod.conf`
  - `//sculpt`: Fix undefined `default` brush
  - Commands that modify the terrain now ignore liquids
  - `//hollow`: Fix safe region bug
  - Significant backend refactoring to tidy things up
- - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once. **Not currently compatible with other wands**, as it's a work-in-progress (commands that support/require more than 2 points are hopefully coming soon)
- - Add `//spline`, for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
+ - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once.
+ - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands **work in progress**
+ - Add [`//spline`](https://worldeditadditions.mooncarrot.space/Reference/#spline), for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
+ - Add [`//revolve`](https://worldeditadditions.mooncarrot.space/Reference/#revolve), which makes multiple evenly-spaced rotated copies of the defined region **(uses the new multi-point wand)**
 
 ### Bugfixes
  - Cloud wand: fix typo in item description.
