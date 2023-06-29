@@ -18,7 +18,7 @@ end
 -- @returns	void
 local function do_delete(event)
 	if not wall_entity_lists[event.player_name] then return end
-	print("DEBUG:marker_wall_manage do_delete --> deleting pre-existing wall with "..tostring(#wall_entity_lists[event.player_name]).." entities")
+	-- print("DEBUG:marker_wall_manage do_delete --> deleting pre-existing wall with "..tostring(#wall_entity_lists[event.player_name]).." entities")
 	if #wall_entity_lists[event.player_name] > 0 then
 		weac.entities.pos_marker_wall.delete(wall_entity_lists[event.player_name])
 	end
@@ -30,17 +30,17 @@ end
 -- @param	event	EventArgs<wea_c.pos.set>	The event args for the set, push, or pop events on wea_c.pos.
 -- @returns	void
 local function do_update(event)
-	print("DEBUG:marker_wall_manage do_update --> START")
+	-- print("DEBUG:marker_wall_manage do_update --> START")
 	-- We don't dynamically update, as that'd be too much work.
 	-- Instead, we just delete & recreate each time.
 	if wall_entity_lists[event.player_name] then
-		print("DEBUG:marker_wall_manage do_update --> do_delete")
+		-- print("DEBUG:marker_wall_manage do_update --> do_delete")
 		do_delete(event)
 	end
 	
 	local pos1 = weac.pos.get1(event.player_name)
 	local pos2 = weac.pos.get2(event.player_name)
-	print("DEBUG:marker_wall_manage do_update --> pos1", pos1, "pos2", pos2)
+	-- print("DEBUG:marker_wall_manage do_update --> pos1", pos1, "pos2", pos2)
 	
 	if not pos1 or not pos2 then return end
 	
@@ -49,7 +49,7 @@ local function do_update(event)
 		pos1,
 		pos2
 	)
-	print("DEBUG:marker_wall_manage do_update --> entitylist", weac.inspect(wall_entity_lists[event.player_name]))
+	-- print("DEBUG:marker_wall_manage do_update --> entitylist", weac.inspect(wall_entity_lists[event.player_name]))
 end
 
 
