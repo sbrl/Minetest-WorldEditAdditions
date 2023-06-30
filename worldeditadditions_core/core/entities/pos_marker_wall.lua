@@ -117,8 +117,14 @@ end
 -- @param	player_name			string	The name of the player that the wall belongs to.
 -- @param	pos1				Vector3	pos1 of the defined region.
 -- @param	pos2				Vector3	pos2 of the defined region.
+-- @param	sides_to_display	string	The sides of the marker wall that should actually be displayed, squished together into a single string. Defaults to "+x-x+z-z". Use "+x-x+z-z+y-y" to display all sides; add and remove sides as desired.
 -- @returns	table<entitylist>	A list of all created entities.
-local function create_wall(player_name, pos1, pos2)
+local function create_wall(player_name, pos1, pos2, sides_to_display)
+	if not sides_to_display then
+		sides_to_display = "+x-x+z-z" -- this matches WorldEdit
+		-- To display all of them:
+		-- sides_to_display = "+x-x+z-z+y-y"
+	end
 	print("DEBUG:marker_wall create_wall --> START player_name", player_name, "pos1", pos1, "pos2", pos2)
 	local pos1s, pos2s = Vector3.sort(pos1, pos2)
 	
@@ -139,38 +145,41 @@ local function create_wall(player_name, pos1, pos2)
 	--   ██   ██ ██
 	--       ██   ██
 	-- First, do positive x
-	local posx_pos1 = Vector3.new(
-		math.max(pos1s.x, pos2s.x) + 0.5,
-		math.min(pos1s.y, pos2s.y) - 0.5,
-		math.min(pos1s.z, pos2s.z) - 0.5
-	)
-	local posx_pos2 = Vector3.new(
-		math.max(pos1s.x, pos2s.x) + 0.5,
-		math.max(pos1s.y, pos2s.y) + 0.5,
-		math.max(pos1s.z, pos2s.z) + 0.5
-	)
-	
-	print("DEBUG ************ +X pos1", posx_pos1, "pos2", posx_pos2)
+	if string.find(sides_to_display, "+x") then
+		local posx_pos1 = Vector3.new(
+			math.max(pos1s.x, pos2s.x) + 0.5,
+			math.min(pos1s.y, pos2s.y) - 0.5,
+			math.min(pos1s.z, pos2s.z) - 0.5
+		)
+		local posx_pos2 = Vector3.new(
+			math.max(pos1s.x, pos2s.x) + 0.5,
+			math.max(pos1s.y, pos2s.y) + 0.5,
+			math.max(pos1s.z, pos2s.z) + 0.5
+		)
+		
+		print("DEBUG ************ +X pos1", posx_pos1, "pos2", posx_pos2)
 
-	for z = posx_pos2.z, posx_pos1.z, -entity_wall_size do
-		for y = posx_pos2.y, posx_pos1.y, -entity_wall_size do
-			local single_pos1 = Vector3.new(
-				posx_pos1.x,
-				y,
-				z
-			)
-			local single_pos2 = Vector3.new(
-				posx_pos1.x,
-				math.max(y - entity_wall_size, posx_pos1.y),
-				math.max(z - entity_wall_size, posx_pos1.z)
-			)
+		for z = posx_pos2.z, posx_pos1.z, -entity_wall_size do
+			for y = posx_pos2.y, posx_pos1.y, -entity_wall_size do
+				local single_pos1 = Vector3.new(
+					posx_pos1.x,
+					y,
+					z
+				)
+				local single_pos2 = Vector3.new(
+					posx_pos1.x,
+					math.max(y - entity_wall_size, posx_pos1.y),
+					math.max(z - entity_wall_size, posx_pos1.z)
+				)
 
-			local entity = create_single(player_name,
-				single_pos1, single_pos2,
-				"x"
-			)
-			table.insert(entities, entity)
+				local entity = create_single(player_name,
+					single_pos1, single_pos2,
+					"x"
+				)
+				table.insert(entities, entity)
+			end
 		end
+		
 	end
 	
 	
@@ -180,39 +189,41 @@ local function create_wall(player_name, pos1, pos2)
 	--        ██ ██
 	--       ██   ██
 	-- Now, do negative x
-	local negx_pos1 = Vector3.new(
-		math.min(pos1s.x, pos2s.x) - 0.5,
-		math.min(pos1s.y, pos2s.y) - 0.5,
-		math.min(pos1s.z, pos2s.z) - 0.5
-	)
-	local negx_pos2 = Vector3.new(
-		math.min(pos1s.x, pos2s.x) - 0.5,
-		math.max(pos1s.y, pos2s.y) + 0.5,
-		math.max(pos1s.z, pos2s.z) + 0.5
-	)
-	print("DEBUG ************ -X pos1", negx_pos1, "pos2", negx_pos2)
+	if string.find(sides_to_display, "-x") then
+		local negx_pos1 = Vector3.new(
+			math.min(pos1s.x, pos2s.x) - 0.5,
+			math.min(pos1s.y, pos2s.y) - 0.5,
+			math.min(pos1s.z, pos2s.z) - 0.5
+		)
+		local negx_pos2 = Vector3.new(
+			math.min(pos1s.x, pos2s.x) - 0.5,
+			math.max(pos1s.y, pos2s.y) + 0.5,
+			math.max(pos1s.z, pos2s.z) + 0.5
+		)
+		print("DEBUG ************ -X pos1", negx_pos1, "pos2", negx_pos2)
 
-	for z = negx_pos2.z, negx_pos1.z, -entity_wall_size do
-		for y = negx_pos2.y, negx_pos1.y, -entity_wall_size do
-			local single_pos1 = Vector3.new(
-				negx_pos1.x,
-				y,
-				z
-			)
-			local single_pos2 = Vector3.new(
-				negx_pos1.x,
-				math.max(y - entity_wall_size, negx_pos1.y),
-				math.max(z - entity_wall_size, negx_pos1.z)
-			)
+		for z = negx_pos2.z, negx_pos1.z, -entity_wall_size do
+			for y = negx_pos2.y, negx_pos1.y, -entity_wall_size do
+				local single_pos1 = Vector3.new(
+					negx_pos1.x,
+					y,
+					z
+				)
+				local single_pos2 = Vector3.new(
+					negx_pos1.x,
+					math.max(y - entity_wall_size, negx_pos1.y),
+					math.max(z - entity_wall_size, negx_pos1.z)
+				)
 
-			local entity = create_single(player_name,
-				single_pos1, single_pos2,
-				"-x"
-			)
-			table.insert(entities, entity)
+				local entity = create_single(player_name,
+					single_pos1, single_pos2,
+					"-x"
+				)
+				table.insert(entities, entity)
+			end
 		end
-	end
 	
+	end
 	
 	
 	--       ██    ██
@@ -221,38 +232,41 @@ local function create_wall(player_name, pos1, pos2)
 	--   ██     ██   
 	--          ██   
 	-- Now, positive y
-	local posy_pos1 = Vector3.new(
-		math.min(pos1s.x, pos2s.x) - 0.5,
-		math.max(pos1s.y, pos2s.y) + 0.5,
-		math.min(pos1s.z, pos2s.z) - 0.5
-	)
-	local posy_pos2 = Vector3.new(
-		math.max(pos1s.x, pos2s.x) + 0.5,
-		math.max(pos1s.y, pos2s.y) + 0.5,
-		math.max(pos1s.z, pos2s.z) + 0.5
-	)
+	if string.find(sides_to_display, "+y") then
+		local posy_pos1 = Vector3.new(
+			math.min(pos1s.x, pos2s.x) - 0.5,
+			math.max(pos1s.y, pos2s.y) + 0.5,
+			math.min(pos1s.z, pos2s.z) - 0.5
+		)
+		local posy_pos2 = Vector3.new(
+			math.max(pos1s.x, pos2s.x) + 0.5,
+			math.max(pos1s.y, pos2s.y) + 0.5,
+			math.max(pos1s.z, pos2s.z) + 0.5
+		)
 
-	print("DEBUG ************ +Y pos1", posy_pos1, "pos2", posy_pos2)
+		print("DEBUG ************ +Y pos1", posy_pos1, "pos2", posy_pos2)
 
-	for z = posy_pos2.z, posy_pos1.z, -entity_wall_size do
-		for x = posy_pos2.x, posy_pos1.x, -entity_wall_size do
-			local single_pos1 = Vector3.new(
-				x,
-				posy_pos1.y,
-				z
-			)
-			local single_pos2 = Vector3.new(
-				math.max(x - entity_wall_size, posy_pos1.x),
-				posy_pos1.y,
-				math.max(z - entity_wall_size, posy_pos1.z)
-			)
+		for z = posy_pos2.z, posy_pos1.z, -entity_wall_size do
+			for x = posy_pos2.x, posy_pos1.x, -entity_wall_size do
+				local single_pos1 = Vector3.new(
+					x,
+					posy_pos1.y,
+					z
+				)
+				local single_pos2 = Vector3.new(
+					math.max(x - entity_wall_size, posy_pos1.x),
+					posy_pos1.y,
+					math.max(z - entity_wall_size, posy_pos1.z)
+				)
 
-			local entity = create_single(player_name,
-				single_pos1, single_pos2,
-				"y"
-			)
-			table.insert(entities, entity)
+				local entity = create_single(player_name,
+					single_pos1, single_pos2,
+					"y"
+				)
+				table.insert(entities, entity)
+			end
 		end
+		
 	end
 	
 	--       ██    ██
@@ -261,38 +275,41 @@ local function create_wall(player_name, pos1, pos2)
 	--          ██
 	--          ██
 	-- Now, negative y
-	local negy_pos1 = Vector3.new(
-		math.min(pos1s.x, pos2s.x) - 0.5,
-		math.min(pos1s.y, pos2s.y) - 0.5,
-		math.min(pos1s.z, pos2s.z) - 0.5
-	)
-	local negy_pos2 = Vector3.new(
-		math.max(pos1s.x, pos2s.x) + 0.5,
-		math.min(pos1s.y, pos2s.y) - 0.5,
-		math.max(pos1s.z, pos2s.z) + 0.5
-	)
+	if string.find(sides_to_display, "-y") then
+		local negy_pos1 = Vector3.new(
+			math.min(pos1s.x, pos2s.x) - 0.5,
+			math.min(pos1s.y, pos2s.y) - 0.5,
+			math.min(pos1s.z, pos2s.z) - 0.5
+		)
+		local negy_pos2 = Vector3.new(
+			math.max(pos1s.x, pos2s.x) + 0.5,
+			math.min(pos1s.y, pos2s.y) - 0.5,
+			math.max(pos1s.z, pos2s.z) + 0.5
+		)
 
-	print("DEBUG ************ -Y pos1", negy_pos1, "pos2", negy_pos2)
+		print("DEBUG ************ -Y pos1", negy_pos1, "pos2", negy_pos2)
 
-	for z = negy_pos2.z, negy_pos1.z, -entity_wall_size do
-		for x = negy_pos2.x, negy_pos1.x, -entity_wall_size do
-			local single_pos1 = Vector3.new(
-				x,
-				negy_pos1.y,
-				z
-			)
-			local single_pos2 = Vector3.new(
-				math.max(x - entity_wall_size, negy_pos1.x),
-				negy_pos1.y,
-				math.max(z - entity_wall_size, negy_pos1.z)
-			)
+		for z = negy_pos2.z, negy_pos1.z, -entity_wall_size do
+			for x = negy_pos2.x, negy_pos1.x, -entity_wall_size do
+				local single_pos1 = Vector3.new(
+					x,
+					negy_pos1.y,
+					z
+				)
+				local single_pos2 = Vector3.new(
+					math.max(x - entity_wall_size, negy_pos1.x),
+					negy_pos1.y,
+					math.max(z - entity_wall_size, negy_pos1.z)
+				)
 
-			local entity = create_single(player_name,
-				single_pos1, single_pos2,
-				"-y"
-			)
-			table.insert(entities, entity)
+				local entity = create_single(player_name,
+					single_pos1, single_pos2,
+					"-y"
+				)
+				table.insert(entities, entity)
+			end
 		end
+		
 	end
 	
 	--       ███████
@@ -301,79 +318,86 @@ local function create_wall(player_name, pos1, pos2)
 	--   ██   ███   
 	--       ███████
 	-- Now, positive z. Almost there!
-	local posz_pos1 = Vector3.new(
-		math.min(pos1s.x, pos2s.x) - 0.5,
-		math.min(pos1s.y, pos2s.y) - 0.5,
-		math.max(pos1s.z, pos2s.z) + 0.5
-	)
-	local posz_pos2 = Vector3.new(
-		math.max(pos1s.x, pos2s.x) + 0.5,
-		math.max(pos1s.y, pos2s.y) + 0.5,
-		math.max(pos1s.z, pos2s.z) + 0.5
-	)
+	if string.find(sides_to_display, "+z") then
+		local posz_pos1 = Vector3.new(
+			math.min(pos1s.x, pos2s.x) - 0.5,
+			math.min(pos1s.y, pos2s.y) - 0.5,
+			math.max(pos1s.z, pos2s.z) + 0.5
+		)
+		local posz_pos2 = Vector3.new(
+			math.max(pos1s.x, pos2s.x) + 0.5,
+			math.max(pos1s.y, pos2s.y) + 0.5,
+			math.max(pos1s.z, pos2s.z) + 0.5
+		)
 
-	print("DEBUG ************ +Z pos1", posz_pos1, "pos2", posz_pos2)
+		print("DEBUG ************ +Z pos1", posz_pos1, "pos2", posz_pos2)
 
-	for x = posz_pos2.x, posz_pos1.x, -entity_wall_size do
-		for y = posz_pos2.y, posz_pos1.y, -entity_wall_size do
-			local single_pos1 = Vector3.new(
-				x,
-				y,
-				posz_pos1.z
-			)
-			local single_pos2 = Vector3.new(
-				math.max(x - entity_wall_size, posz_pos1.x),
-				math.max(y - entity_wall_size, posz_pos1.y),
-				posz_pos1.z
-			)
+		for x = posz_pos2.x, posz_pos1.x, -entity_wall_size do
+			for y = posz_pos2.y, posz_pos1.y, -entity_wall_size do
+				local single_pos1 = Vector3.new(
+					x,
+					y,
+					posz_pos1.z
+				)
+				local single_pos2 = Vector3.new(
+					math.max(x - entity_wall_size, posz_pos1.x),
+					math.max(y - entity_wall_size, posz_pos1.y),
+					posz_pos1.z
+				)
 
-			local entity = create_single(player_name,
-				single_pos1, single_pos2,
-				"z"
-			)
-			table.insert(entities, entity)
+				local entity = create_single(player_name,
+					single_pos1, single_pos2,
+					"z"
+				)
+				table.insert(entities, entity)
+			end
 		end
+		
 	end
+	
+	
 	--       ███████
 	--          ███
 	-- ██████  ███
 	--        ███
 	--       ███████
 	-- Finally, negative z. Last one!
-	local negz_pos1 = Vector3.new(
-		math.min(pos1s.x, pos2s.x) - 0.5,
-		math.min(pos1s.y, pos2s.y) - 0.5,
-		math.min(pos1s.z, pos2s.z) - 0.5
-	)
-	local negz_pos2 = Vector3.new(
-		math.max(pos1s.x, pos2s.x) + 0.5,
-		math.max(pos1s.y, pos2s.y) + 0.5,
-		math.min(pos1s.z, pos2s.z) - 0.5
-	)
+	if string.find(sides_to_display, "-z") then
+		local negz_pos1 = Vector3.new(
+			math.min(pos1s.x, pos2s.x) - 0.5,
+			math.min(pos1s.y, pos2s.y) - 0.5,
+			math.min(pos1s.z, pos2s.z) - 0.5
+		)
+		local negz_pos2 = Vector3.new(
+			math.max(pos1s.x, pos2s.x) + 0.5,
+			math.max(pos1s.y, pos2s.y) + 0.5,
+			math.min(pos1s.z, pos2s.z) - 0.5
+		)
 
-	print("DEBUG ************ -Z pos1", negz_pos1, "pos2", negz_pos2)
+		print("DEBUG ************ -Z pos1", negz_pos1, "pos2", negz_pos2)
 
-	for x = negz_pos2.x, negz_pos1.x, -entity_wall_size do
-		for y = negz_pos2.y, negz_pos1.y, -entity_wall_size do
-			local single_pos1 = Vector3.new(
-				x,
-				y,
-				negz_pos1.z
-			)
-			local single_pos2 = Vector3.new(
-				math.max(x - entity_wall_size, negz_pos1.x),
-				math.max(y - entity_wall_size, negz_pos1.y),
-				negz_pos1.z
-			)
+		for x = negz_pos2.x, negz_pos1.x, -entity_wall_size do
+			for y = negz_pos2.y, negz_pos1.y, -entity_wall_size do
+				local single_pos1 = Vector3.new(
+					x,
+					y,
+					negz_pos1.z
+				)
+				local single_pos2 = Vector3.new(
+					math.max(x - entity_wall_size, negz_pos1.x),
+					math.max(y - entity_wall_size, negz_pos1.y),
+					negz_pos1.z
+				)
 
-			local entity = create_single(player_name,
-				single_pos1, single_pos2,
-				"-z"
-			)
-			table.insert(entities, entity)
+				local entity = create_single(player_name,
+					single_pos1, single_pos2,
+					"-z"
+				)
+				table.insert(entities, entity)
+			end
 		end
+		
 	end
-	
 	
 	
 	-- TODO: All the other sides. For testing we're doing 1 side for now, so we can vaoid having to do everything all over again if we make a mistake.
