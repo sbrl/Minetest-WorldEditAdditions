@@ -11,7 +11,7 @@ Note to self: See the bottom of this file for the release template text.
  - `//sculpt`:
  	- Fix undefined `default` brush
 	- Change defaults to `circle`, `height=1`, and `brushsize=8`.
-	- **TODO:** change ordering to put `height` after `brushsize` instead of the other way around
+	- Change argument ordering to put `height` after `brushsize` instead of the other way around
  - Commands that modify the terrain now ignore liquids
  - `//hollow`: Fix safe region bug
  - Significant backend refactoring to tidy things up

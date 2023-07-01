@@ -5,10 +5,10 @@ local Vector3 = wea_c.Vector3
 --- Applies the given brush with the given height and size to the given position.
 -- @param	pos1		Vector3		The position at which to apply the brush.
 -- @param	brush_name	string		The name of the brush to apply.
--- @param	height		number		The height of the brush application.
 -- @param	brush_size	Vector3		The size of the brush application. Values are interpreted on the X/Y coordinates, and NOT X/Z!
+-- @param	height		number		The height of the brush application.
 -- @returns	bool, string|{ added: number, removed: number }	A bool indicating whether the operation was successful or not, followed by either an error message as a string (if it was not successful) or a table of statistics (if it was successful).
-local function apply(pos1, brush_name, height, brush_size)
+local function apply(pos1, brush_name, brush_size, height)
 	-- 1: Get & validate brush
 	local success, brush, brush_size_actual = wea.sculpt.make_brush(brush_name, brush_size)
 	if not success then return success, brush end
