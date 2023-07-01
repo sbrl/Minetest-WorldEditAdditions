@@ -15,7 +15,7 @@ local selection = {}
 -- @param	pos	vector	The position to include.
 function selection.add_point(name, newpos)
 	if newpos ~= nil then
-		print("DEBUG:selection.add_point newpos", newpos)
+		-- print("DEBUG:selection.add_point newpos", newpos)
 		local has_pos1 = not not wea_c.pos.get1(name)
 		local has_pos2 = not not wea_c.pos.get2(name)
 		local created_new = not has_pos1 or not has_pos2

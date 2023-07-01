@@ -31,10 +31,10 @@ local WEAPositionMarkerWall = {
 
 	on_activate = function(self, staticdata)
 		if staticdata ~= last_reset then
-			print("DEBUG:marker_wall/remove staticdata", staticdata, "last_reset", last_reset)
+			-- print("DEBUG:marker_wall/remove staticdata", staticdata, "last_reset", last_reset)
 			self.object:remove()
-		else
-			print("DEBUG:marker_wall/ok staticdata", staticdata, "type", type(staticdata), "last_reset", last_reset, "type", type(last_reset))
+		-- else
+			-- print("DEBUG:marker_wall/ok staticdata", staticdata, "type", type(staticdata), "last_reset", last_reset, "type", type(last_reset))
 		end
 	end,
 	on_punch = function(self, _)
@@ -94,7 +94,7 @@ local function single_setup(entity, size, side)
 		cpos2.x, cpos2.y, cpos2.z
 	}
 	
-	print("DEBUG:setup_single size", size, "side", side, "new_props", wea_c.inspect(new_props))
+	-- print("DEBUG:setup_single size", size, "side", side, "new_props", wea_c.inspect(new_props))
 	
 	entity:set_properties(new_props)
 end
@@ -110,7 +110,7 @@ local function create_single(player_name, pos1, pos2, side)
 	
 	local pos_centre = ((pos2 - pos1) / 2) + pos1
 	local entity = minetest.add_entity(pos_centre, "worldeditadditions:marker_wall", last_reset)
-	print("DEBUG:marker_wall create_single --> START player_name", player_name, "pos1", pos1, "pos2", pos2, "side", side, "SPAWN", pos_centre, "last_reset", last_reset)
+	-- print("DEBUG:marker_wall create_single --> START player_name", player_name, "pos1", pos1, "pos2", pos2, "side", side, "SPAWN", pos_centre, "last_reset", last_reset)
 	
 	entity:get_luaentity().player_name = player_name
 	
@@ -132,7 +132,7 @@ local function create_wall(player_name, pos1, pos2, sides_to_display)
 		-- To display all of them:
 		-- sides_to_display = "+x-x+z-z+y-y"
 	end
-	print("DEBUG:marker_wall create_wall --> START player_name", player_name, "pos1", pos1, "pos2", pos2)
+	-- print("DEBUG:marker_wall create_wall --> START player_name", player_name, "pos1", pos1, "pos2", pos2)
 	local pos1s, pos2s = Vector3.sort(pos1, pos2)
 	
 	local entities = {}
@@ -164,7 +164,7 @@ local function create_wall(player_name, pos1, pos2, sides_to_display)
 			math.max(pos1s.z, pos2s.z) + 0.5
 		)
 		
-		print("DEBUG ************ +X pos1", posx_pos1, "pos2", posx_pos2)
+		-- print("DEBUG ************ +X pos1", posx_pos1, "pos2", posx_pos2)
 
 		for z = posx_pos2.z, posx_pos1.z, -entity_wall_size do
 			for y = posx_pos2.y, posx_pos1.y, -entity_wall_size do
@@ -207,7 +207,7 @@ local function create_wall(player_name, pos1, pos2, sides_to_display)
 			math.max(pos1s.y, pos2s.y) + 0.5,
 			math.max(pos1s.z, pos2s.z) + 0.5
 		)
-		print("DEBUG ************ -X pos1", negx_pos1, "pos2", negx_pos2)
+		-- print("DEBUG ************ -X pos1", negx_pos1, "pos2", negx_pos2)
 
 		for z = negx_pos2.z, negx_pos1.z, -entity_wall_size do
 			for y = negx_pos2.y, negx_pos1.y, -entity_wall_size do
@@ -251,7 +251,7 @@ local function create_wall(player_name, pos1, pos2, sides_to_display)
 			math.max(pos1s.z, pos2s.z) + 0.5
 		)
 
-		print("DEBUG ************ +Y pos1", posy_pos1, "pos2", posy_pos2)
+		-- print("DEBUG ************ +Y pos1", posy_pos1, "pos2", posy_pos2)
 
 		for z = posy_pos2.z, posy_pos1.z, -entity_wall_size do
 			for x = posy_pos2.x, posy_pos1.x, -entity_wall_size do
@@ -294,7 +294,7 @@ local function create_wall(player_name, pos1, pos2, sides_to_display)
 			math.max(pos1s.z, pos2s.z) + 0.5
 		)
 
-		print("DEBUG ************ -Y pos1", negy_pos1, "pos2", negy_pos2)
+		-- print("DEBUG ************ -Y pos1", negy_pos1, "pos2", negy_pos2)
 
 		for z = negy_pos2.z, negy_pos1.z, -entity_wall_size do
 			for x = negy_pos2.x, negy_pos1.x, -entity_wall_size do
@@ -337,7 +337,7 @@ local function create_wall(player_name, pos1, pos2, sides_to_display)
 			math.max(pos1s.z, pos2s.z) + 0.5
 		)
 
-		print("DEBUG ************ +Z pos1", posz_pos1, "pos2", posz_pos2)
+		-- print("DEBUG ************ +Z pos1", posz_pos1, "pos2", posz_pos2)
 
 		for x = posz_pos2.x, posz_pos1.x, -entity_wall_size do
 			for y = posz_pos2.y, posz_pos1.y, -entity_wall_size do
@@ -381,7 +381,7 @@ local function create_wall(player_name, pos1, pos2, sides_to_display)
 			math.min(pos1s.z, pos2s.z) - 0.5
 		)
 
-		print("DEBUG ************ -Z pos1", negz_pos1, "pos2", negz_pos2)
+		-- print("DEBUG ************ -Z pos1", negz_pos1, "pos2", negz_pos2)
 
 		for x = negz_pos2.x, negz_pos1.x, -entity_wall_size do
 			for y = negz_pos2.y, negz_pos1.y, -entity_wall_size do
@@ -426,7 +426,7 @@ end
 --- Deletes all entities in the given entity list
 -- @param	entitylist	table<entity>	A list of wall entities that make up the wall to delete.
 local function delete(entitylist)
-	print("DEBUG:marker_wall delete --> START with "..#entitylist.." entities")
+	-- print("DEBUG:marker_wall delete --> START with "..#entitylist.." entities")
 	local player_name
 	for _, entity in ipairs(entitylist) do
 		if not entity.get_luaentity or not entity:get_luaentity() then return end -- Ensure the entity is still valid
@@ -439,7 +439,7 @@ local function delete(entitylist)
 	end
 	
 	last_reset = tostring(wea_c.get_ms_time())
-	print("DEBUG:marker_wall delete --> LAST_RESET is now", last_reset, "type", type(last_reset))
+	-- print("DEBUG:marker_wall delete --> LAST_RESET is now", last_reset, "type", type(last_reset))
 	
 	anchor:emit("delete", {
 		player_name = player_name
