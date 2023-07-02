@@ -5,11 +5,31 @@ local positions_count_limit = 999
 local positions = {}
 
 --- Position manager.
--- @event	set		{ player_name: string, i: number, pos: Vector3 }	A new position has been set in a player's list at a specific position.
--- @event	push	{ player_name: string, i: number, pos: Vector3 }	A new position has been pushed onto a player's stack.
--- @event	pop		{ player_name: string, i: number, pos: Vector3 }	A new position has been pushed onto a player's stack.
--- @event	clear	{ player_name: string }	The positions for a player have been cleared.
+-- @namespace worldeditadditions_core.pos
 local anchor = nil
+
+
+--- A new position has been set in a player's list at a specific position.
+-- @event	set
+-- @format	{ player_name: string, i: number, pos: Vector3 }
+-- @example
+-- {
+-- 	player_name = "some_player_name",
+-- 	i = 3,
+-- 	pos = <Vector3> { x = 456, y = 64, z = 9045 }
+-- }
+
+--- A new position has been pushed onto a player's stack.
+-- @event	push
+-- @format	{ player_name: string, i: number, pos: Vector3 }
+
+--- A new position has been pushed onto a player's stack.
+-- @event	pop
+-- @format	{ player_name: string, i: number, pos: Vector3 }
+
+--- The positions for a player have been cleared.
+-- @event	clear
+-- @format	{ player_name: string }
 
 --- Ensures that a table exists for the given player.
 -- @param	player_name		string	The name of the player to check.
