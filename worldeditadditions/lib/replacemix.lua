@@ -3,12 +3,14 @@ local Vector3 = wea_c.Vector3
 
 --- Like //mix, but replaces a given node instead.
 -- @module worldeditadditions.replacemix
+-- TODO: Implement //replacesplat, which picks seeder nodes with a percentage chance, and then some growth passes with e.g. cellular automata? We should probably be pushing towards a release though round about now
 
 -- ██████  ███████ ██████  ██       █████   ██████ ███████ ███    ███ ██ ██   ██
 -- ██   ██ ██      ██   ██ ██      ██   ██ ██      ██      ████  ████ ██  ██ ██
 -- ██████  █████   ██████  ██      ███████ ██      █████   ██ ████ ██ ██   ███
 -- ██   ██ ██      ██      ██      ██   ██ ██      ██      ██  ██  ██ ██  ██ ██
 -- ██   ██ ███████ ██      ███████ ██   ██  ██████ ███████ ██      ██ ██ ██   ██
+
 function worldeditadditions.replacemix(pos1, pos2, target_node, target_node_chance, replacements)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now

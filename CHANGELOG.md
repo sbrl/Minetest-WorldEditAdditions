@@ -7,22 +7,23 @@ Note to self: See the bottom of this file for the release template text.
 ## v1.14: The untitled update (unreleased)
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
- - Migrate from `depends.txt` to `mod.conf`
- - `//sculpt`:
- 	- Fix undefined `default` brush
-	- Change defaults to `circle`, `height=1`, and `brushsize=8`.
-	- Change argument ordering to put `height` after `brushsize` instead of the other way around
- - Commands that modify the terrain now ignore liquids
- - `//hollow`: Fix safe region bug
  - Significant backend refactoring to tidy things up
  - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once.
- - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands **work in progress**
+ - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands.
+ 	- Is backwards compatible with regular WorldEdit wands and tools, as WorldEditAdditions keeps the new positioning system in sync with WorldEdit's.
  - Add [`//spline`](https://worldeditadditions.mooncarrot.space/Reference/#spline), for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
  - Add [`//revolve`](https://worldeditadditions.mooncarrot.space/Reference/#revolve), which makes multiple evenly-spaced rotated copies of the defined region **(uses the new multi-point wand)**
  - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move): Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use
 
-### Bugfixes
+### Bugfixes and changes
+ - Migrate from `depends.txt` to `mod.conf`
  - Cloud wand: fix typo in item description.
+ - Commands that modify the terrain now ignore liquids
+ - `//sculpt`:
+ 	- Fix undefined `default` brush
+	- Change defaults to `circle`, `height=1`, and `brushsize=8`.
+	- Change argument ordering to put `height` after `brushsize` instead of the other way around
+ - `//hollow`: Fix safe region bug
 
 
 ## v1.13: The transformational update (2nd January 2022)
