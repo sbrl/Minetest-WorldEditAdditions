@@ -13,7 +13,7 @@ local Vector3 = wea_c.Vector3
 -- ██   ██ ██      ██      ██      ██
 -- ██   ██ ██      ██      ███████ ██
 
---- Similar to cubeapply, except that it takes 2 positions and only keeps an ellipsoid-shaped area defined by the boundaries of the defined region.
+--- Like ellipsoidapply, but only keeps changes that replace airlike nodes, and discards any other changes made.
 -- Takes a backup copy of the defined region, runs the given function, and then
 -- restores the bits around the edge that aren't inside the largest ellipsoid that will fit inside the defined region.
 -- @param	{Position}	pos1	The 1st position defining the region boundary
