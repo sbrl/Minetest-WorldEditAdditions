@@ -116,9 +116,11 @@ worldeditadditions_core.register_command("subdivide", {
 			end
 			
 			worldedit.player_notify_suppress(name)
-			worldedit.pos1[name] = cpos1
-			worldedit.pos2[name] = cpos2
-			worldedit.marker_update(name)
+			wea_c.pos.set1(name, cpos1)
+			wea_c.pos.set2(name, cpos2)
+			-- worldedit.pos1[name] = cpos1
+			-- worldedit.pos2[name] = cpos2
+			-- worldedit.marker_update(name)
 			cmd.func(name, wea_c.table.unpack(cmd_args_parsed))
 			if will_trigger_saferegion(name, cmd_name, args) then
 				minetest.chatcommands["/y"].func(name)
@@ -141,9 +143,12 @@ worldeditadditions_core.register_command("subdivide", {
 				time_last_msg = wea_c.get_ms_time()
 			end
 		end, function(_, _, stats)
-			worldedit.pos1[name] = pos1
-			worldedit.pos2[name] = pos2
-			worldedit.marker_update(name)
+			
+			wea_c.pos.set1(name, pos1)
+			wea_c.pos.set2(name, pos2)
+			-- worldedit.pos1[name] = pos1
+			-- worldedit.pos2[name] = pos2
+			-- worldedit.marker_update(name)
 			
 			-- Called on completion
 			minetest.log("action", string.format("%s used //subdivide at %s - %s, with %d chunks and %d total nodes in %s",
