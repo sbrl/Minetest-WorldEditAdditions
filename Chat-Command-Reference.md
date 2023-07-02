@@ -333,7 +333,7 @@ By adding 3 extra numbers for the x, y, and z axes respectively, we can control 
 So in the above example, we scale in the positive x and z directions, and the negative y direction.
 
 
-### `//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`
+### `//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]] [aa|airapply]`
 Fully backwards-compatible with `//copy` from regular WorldEdit, but allows you to specify multiple axes at once in a single copy operation. Each successive axis in the list is specified in the form `<axis> <count>`, where:
 
  - `<axis>` is the name of the axis to move the defined region along
@@ -356,6 +356,8 @@ All of the following values are valid axes:
 
 Additionally all the absolute axis names (`x`/`y`/`z`/`-x`/`-y`/`-z`) may also be specified multiple times under the same count - e.g. `xy-z 6`.
 
+Finally, if the word `airapply` (or `aa` for short) is present at the end of the command invocation it enables the integrated airapply mode, which replaces target nodes only if they are air-like.
+
 ```
 //copy+ x 6
 //copy+ y 10 z 4
@@ -364,11 +366,16 @@ Additionally all the absolute axis names (`x`/`y`/`z`/`-x`/`-y`/`-z`) may also b
 //copy+ xz 50 front 22
 //copy+ yx 25
 //copy+ -xz-y 10
+//copy+ y 45 aa
+//copy+ -y 15 z 5 airapply
 ```
 
 
-### `//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`
+### `//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]] [aa|airapply]`
 Identical to [`//copy+`](#copy), but instead moves the defined region instead of copying it.
+
+Note that the integrated `airapply` (`aa` for short) also works as in [`//copy+`](#copy), but remember that if a given target node is not *not* air-like and the integrated `airapply` mode is enabled, the source node is still moved from the source, but destroyed because it is can't be set at the target.
+
 
 ```
 //move+ x 6
@@ -378,6 +385,8 @@ Identical to [`//copy+`](#copy), but instead moves the defined region instead of
 //move+ xz 50 front 22
 //move+ yx 25
 //move+ -xz-y 10
+//move+ back 20 aa
+//move+ -z 45 y 3 airapply
 ```
 
 

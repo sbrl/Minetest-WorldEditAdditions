@@ -3,6 +3,12 @@ local wea = worldeditadditions
 local Vector3 = wea_c.Vector3
 
 local function parse_stage2(name, parts)
+	local do_airapply = false
+	if parts[#parts] == "aa" or parts[#parts] == "airapply" then
+		do_airapply = true
+		table.remove(parts, #parts)
+	end
+	
 	local success, vpos1, vpos2 = wea_c.parse.axes(
 		parts,
 		wea_c.player_dir(name)
@@ -17,7 +23,7 @@ local function parse_stage2(name, parts)
 		return false, "Refusing to copy region a distance of 0 nodes"
 	end
 	
-	return true, offset:floor()
+	return true, offset:floor(), do_airapply
 end
 
 --  ██████  ██████  ██████  ██    ██
@@ -26,7 +32,7 @@ end
 -- ██      ██    ██ ██         ██
 --  ██████  ██████  ██         ██
 worldeditadditions_core.register_command("copy+", { -- TODO: Make this an override
-	params = "<axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]",
+	params = "<axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]] [aa|airapply]",
 	description = "Copies the defined region to another location - potentially across multiple axes at once.",
 	privs = { worldedit = true },
 	require_pos = 2,
@@ -43,7 +49,7 @@ worldeditadditions_core.register_command("copy+", { -- TODO: Make this an overri
 	func = function(name, parts)
 		local start_time = wea_c.get_ms_time()
 		
-		local success_a, copy_offset = parse_stage2(name, parts)
+		local success_a, copy_offset, do_airapply = parse_stage2(name, parts)
 		if not success_a then return success_a, copy_offset end
 		
 		local source_pos1 = Vector3.clone(worldedit.pos1[name])
@@ -54,7 +60,8 @@ worldeditadditions_core.register_command("copy+", { -- TODO: Make this an overri
 		
 		local success_b, nodes_modified = wea.copy(
 			source_pos1, source_pos2,
-			target_pos1, target_pos2
+			target_pos1, target_pos2,
+			do_airapply
 		)
 		if not success_b then return success_b, nodes_modified end
 		

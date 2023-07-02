@@ -19,6 +19,7 @@ Note to self: See the bottom of this file for the release template text.
  - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands **work in progress**
  - Add [`//spline`](https://worldeditadditions.mooncarrot.space/Reference/#spline), for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
  - Add [`//revolve`](https://worldeditadditions.mooncarrot.space/Reference/#revolve), which makes multiple evenly-spaced rotated copies of the defined region **(uses the new multi-point wand)**
+ - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move): Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use
 
 ### Bugfixes
  - Cloud wand: fix typo in item description.
