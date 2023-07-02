@@ -4,7 +4,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
-## v1.14: The untitled update (unreleased)
+## v1.14: The multipoint update (unreleased)
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
  - Significant backend refactoring to tidy things up
@@ -42,10 +42,10 @@ Note to self: See the bottom of this file for the release template text.
  - Add [`//sculpt`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt) and [`//sculptlist`](https://worldeditadditions.mooncarrot.space/Reference/#sculptlist) for sculpting terrain using a number of custom brushes.
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues [code quality from now on will be significantly improved]
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
- - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
- - `//bonemeal`: Add optional node list constraint
- - `//walls`: Add optional thickness argument
- - `//sstack`: Add human-readable approx volumes of regions in the selection stack
+ - [`//layers`](https://worldeditadditions.mooncarrot.space/Reference/#layers): Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
+ - [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal): Add optional node list constraint
+ - [`//walls`](https://worldeditadditions.mooncarrot.space/Reference/#walls): Add optional thickness argument
+ - [`//sstack`](https://worldeditadditions.mooncarrot.space/Reference/#sstack): Add human-readable approx volumes of regions in the selection stack
 
 
 ### Bugfixes
