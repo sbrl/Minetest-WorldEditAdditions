@@ -22,6 +22,8 @@ end
 
 --- Scans the given directory and imports all static brushes found.
 -- Static brushes have the file extension ".brush.tsv" (without quotes).
+-- @name	scan_static
+-- @internal
 -- @param	dirpath	string		The path to directory that contains the static brushs to import.
 -- @returns	bool,loaded,errors	A success boolean, followed by the number of brushes loaded, followed by the number of errors encountered while loading brushes (errors are logged as warnings with Minetest)
 return function(dirpath, overwrite_existing)
