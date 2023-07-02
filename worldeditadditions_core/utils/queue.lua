@@ -1,8 +1,7 @@
 -------------------------------------------------------------------------------
 --- A Queue implementation
 -- Taken & adapted from https://www.lua.org/pil/11.4.html
--- @submodule worldeditadditions.utils.queue
--- @class
+-- @class	worldeditadditions_core.Queue
 local Queue = {}
 Queue.__index = Queue
 

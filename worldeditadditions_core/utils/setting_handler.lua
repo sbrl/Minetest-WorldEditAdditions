@@ -1,4 +1,3 @@
---- A wrapper to simultaniously handle global and world settings.
 
 -- Initialize settings container
 local wea_c = worldeditadditions_core
@@ -8,7 +7,8 @@ wea_c.settings = {}
 local path = minetest.get_worldpath() .. "/worldeditadditions"
 minetest.mkdir(path)
 
--- @class
+--- A wrapper to simultaniously handle global and world settings.
+-- @namespace worldeditadditions_core.setting_handler
 local setting_handler = {}
 
 --- Reads world settings into WEA core settings object

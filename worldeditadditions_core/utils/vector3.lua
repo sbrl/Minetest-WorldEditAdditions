@@ -1,5 +1,5 @@
 --- A 3-dimensional vector.
--- @class
+-- @class	worldeditadditions_core.Vector3
 local Vector3 = {}
 Vector3.__index = Vector3
 Vector3.__name = "Vector3" -- A hack to allow identification in wea.inspect
