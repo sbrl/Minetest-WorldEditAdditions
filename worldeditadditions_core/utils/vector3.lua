@@ -173,7 +173,7 @@ function Vector3.length(a)
 	return math.sqrt(a:length_squared())
 end
 
---- Calculates the volume of the region bounded by 1 points.
+--- Calculates the volume of the region bounded by 2 points.
 -- @param	a		Vector3		The first point bounding the target region.
 -- @param	b		Vector3		The second point bounding the target region.
 -- @returns	number	The volume of the defined region.

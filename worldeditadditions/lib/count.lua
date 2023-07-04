@@ -1,14 +1,19 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
---- Counts the nodes in a given area.
--- @module worldeditadditions.count
-
 --  ██████  ██████  ██    ██ ███    ██ ████████
 -- ██      ██    ██ ██    ██ ████   ██    ██
 -- ██      ██    ██ ██    ██ ██ ██  ██    ██
 -- ██      ██    ██ ██    ██ ██  ██ ██    ██
 --  ██████  ██████   ██████  ██   ████    ██
+
+--- Counts the nodes in a given area.
+-- @param	pos1			Vector3		pos1 of the defined region to count nodes in.
+-- @param	pos2			Vector3		pos2 of the defined region to count nodes in.
+-- @param	do_human_counts	bool		Whether to return human-readable counts (as a string) instead of the raw numbers.
+-- @returns	bool,table<number,number>,number	1. Whether the operation was successful or not.
+-- 												2. A table mapping node ids to the number of that node id seen.
+-- 												3. The total number of nodes counted.
 function worldeditadditions.count(pos1, pos2, do_human_counts)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now

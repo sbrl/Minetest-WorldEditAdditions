@@ -2,11 +2,12 @@ local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
 --- Bonemeal command.
--- Applies bonemeal to all notes 
--- @module worldeditadditions.overlay
-
--- strength		The strength to apply - see bonemeal:on_use
--- chance		Positive integer that represents the chance bonemealing will occur
+-- Applies bonemeal to all nodes with an air bloc above then.
+-- @param	strength	The strength to apply - see bonemeal:on_use
+-- @param	chance		Positive integer that represents the chance bonemealing will occur
+-- @returns	bool,number,number	1. Whether the command succeeded or not.
+-- 								2. The number of nodes actually bonemealed
+-- 								3. The number of possible candidates we could have bonemealed
 function worldeditadditions.bonemeal(pos1, pos2, strength, chance, nodename_list)
 	if not nodename_list then nodename_list = {} end
 	pos1, pos2 = Vector3.sort(pos1, pos2)

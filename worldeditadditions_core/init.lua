@@ -1,13 +1,9 @@
 --- WorldEditAdditions-Core
--- @module worldeditadditions_core
+-- @namespace worldeditadditions_core
 -- @release 1.13
 -- @copyright 2021 Starbeamrainbowlabs and VorTechnix
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs and VorTechnix
-
--- local temp = true
--- if temp then return end
--- This mod isn't finished yet, so it will not be executed for now.
 
 
 local modpath = minetest.get_modpath("worldeditadditions_core")
