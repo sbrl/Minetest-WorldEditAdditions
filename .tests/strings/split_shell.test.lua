@@ -52,8 +52,100 @@ describe("split_shell", function()
 	
 	it("should handle a complex case", function()
 		assert.are.same(
-			{ "y\"ay", "yay", "in\"side quotes", "yay", "y\"ay" },
+			{ "y\"ay", "yay 'in\"side quotes' yay", "y\"ay" },
 			split_shell("y\"ay \"yay 'in\\\"side quotes' yay\" y\\\"ay")
+		)
+	end)
+	it("should handle a subtly different complex case", function()
+		assert.are.same(
+			{ "y\"ay", "yay", "in\"side quotes", "yay", "y\"ay" },
+			split_shell("y\"ay yay 'in\\\"side quotes' yay y\\\"ay")
+		)
+	end)
+	it("should handle redundant double quotes", function()
+		assert.are.same(
+			{ "cake" },
+			split_shell("\"cake\"")
+		)
+	end)
+	it("should handle redundant double quotes multi", function()
+		assert.are.same(
+			{ "cake", "cake", "cake" },
+			split_shell("\"cake\" \"cake\" \"cake\"")
+		)
+	end)
+	it("should handle redundant single quotes", function()
+		assert.are.same(
+			{ "cake" },
+			split_shell("'cake'")
+		)
+	end)
+	it("should handle redundant single quotes multi", function()
+		assert.are.same(
+			{ "cake", "cake", "cake" },
+			split_shell("'cake' 'cake' 'cake'")
+		)
+	end)
+	it("should handle redundant double and single quotes", function()
+		assert.are.same(
+			{ "cake", "cake", "cake" },
+			split_shell("'cake' \"cake\" 'cake'")
+		)
+	end)
+	
+	it("should handle redundant double and single quotes opposite", function()
+		assert.are.same(
+			{ "cake", "cake", "cake" },
+			split_shell("\"cake\" 'cake' \"cake\"")
+		)
+	end)
+	it("should handle a random backslash single quotes", function()
+		assert.are.same(
+			{ "cake", "ca\\ke" },
+			split_shell("\"cake\" 'ca\\ke'")
+		)
+	end)
+	it("should handle a random backslash double quotes", function()
+		assert.are.same(
+			{ "cake", "ca\\ke" },
+			split_shell("\"cake\" \"ca\\ke\"")
+		)
+	end)
+	it("should handle a backslash after double quotes", function()
+		assert.are.same(
+			{ "\\cake", "cake" },
+			split_shell("\"\\cake\" \"cake\"")
+		)
+	end)
+	it("should handle a double backslash before double quotes", function()
+		assert.are.same(
+			{ "\\\"cake\"", "cake" },
+			split_shell("\\\\\"cake\" \"cake\"")
+		)
+	end)
+	it("should handle a single backslash before double quotes", function()
+		assert.are.same(
+			{ "\"cake\"", "cake" },
+			split_shell("\\\"cake\" \"cake\"")
+		)
+	end)
+	it("should handle a double backslash before single quotes", function()
+		assert.are.same(
+			{ "\\'cake'", "cake" },
+			split_shell("\\\\'cake' 'cake'")
+		)
+	end)
+	it("should handle a single backslash before single quotes", function()
+		assert.are.same(
+			{ "\"cake\"", "cake" },
+			split_shell("\\\"cake\" \"cake\"")
+		)
+	end)
+	
+	it("should handle redundant double and single quotes again", function()
+		assert.are.same(
+			{ "cake", "cake", "cake", "is", "a", "li\\e" },
+			split_shell("\"cake\" 'cake' \"cake\" is a \"li\\e\"")
 		)
 	end)
 	
