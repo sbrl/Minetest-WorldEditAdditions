@@ -2,8 +2,11 @@ local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
 --- Fill caves command. Fills underneath non-air nodes in the defined region.
--- @module worldeditadditions.overlay
-
+-- @param	pos1		Vector3		pos1 of the defined region to fill caves in.
+-- @param	pos2		Vector3		pos2 of the defined region to fill caves in.
+-- @param	node_name	string		The name of the node to replace air nodes with. Should have been already normalised, as with all other worldeditadditions.* functions.
+-- @returns	bool,{replaced=number}	1. Whether the fill caves operation was successful or not.
+-- 									2. A table of statistics about the operation. Currently the only key in this table is `replaced`, which is the number of (air-like) nodes that were replaced during the operation.
 function worldeditadditions.fillcaves(pos1, pos2, node_name)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
