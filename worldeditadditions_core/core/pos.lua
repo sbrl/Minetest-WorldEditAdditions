@@ -5,11 +5,31 @@ local positions_count_limit = 999
 local positions = {}
 
 --- Position manager.
--- @event	set		{ player_name: string, i: number, pos: Vector3 }	A new position has been set in a player's list at a specific position.
--- @event	push	{ player_name: string, i: number, pos: Vector3 }	A new position has been pushed onto a player's stack.
--- @event	pop		{ player_name: string, i: number, pos: Vector3 }	A new position has been pushed onto a player's stack.
--- @event	clear	{ player_name: string }	The positions for a player have been cleared.
+-- @namespace worldeditadditions_core.pos
 local anchor = nil
+
+
+--- A new position has been set in a player's list at a specific position.
+-- @event	set
+-- @format	{ player_name: string, i: number, pos: Vector3 }
+-- @example
+-- {
+-- 	player_name = "some_player_name",
+-- 	i = 3,
+-- 	pos = <Vector3> { x = 456, y = 64, z = 9045 }
+-- }
+
+--- A new position has been pushed onto a player's stack.
+-- @event	push
+-- @format	{ player_name: string, i: number, pos: Vector3 }
+
+--- A new position has been pushed onto a player's stack.
+-- @event	pop
+-- @format	{ player_name: string, i: number, pos: Vector3 }
+
+--- The positions for a player have been cleared.
+-- @event	clear
+-- @format	{ player_name: string }
 
 --- Ensures that a table exists for the given player.
 -- @param	player_name		string	The name of the player to check.
@@ -146,6 +166,7 @@ end
 -- @param	pos				Vector3	The position to set.
 -- @returns	bool			Whether the operation was successful or not (players aren't allowed more than positions_count_limit number of positions at a time).
 local function set(player_name, i, pos)
+	-- It's a shame that Lua doesn't have a throw/raise, 'cause we could sure use it here
 	if i > positions_count_limit then return false end
 	ensure_player(player_name)
 		
@@ -196,6 +217,7 @@ local function clear(player_name)
 	if worldedit then
 		if worldedit.pos1 then worldedit.pos1[player_name] = nil end
 		if worldedit.pos2 then worldedit.pos2[player_name] = nil end
+		if worldedit.set_pos then worldedit.set_pos[player_name] = nil end
 	end
 	anchor:emit("clear", { player_name = player_name })
 end
@@ -245,6 +267,6 @@ anchor = wea_c.EventEmitter.new({
 	set_all = set_all,
 	compat_worldedit_get = compat_worldedit_get
 })
-anchor.debug = true
+anchor.debug = false
 
 return anchor

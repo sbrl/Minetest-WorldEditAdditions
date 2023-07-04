@@ -117,9 +117,11 @@ wea_c.register_command("scale", {
 		)
 		if not success then return success, stats end
 		
-		worldedit.pos1[name] = stats.pos1
-		worldedit.pos2[name] = stats.pos2
-		worldedit.marker_update(name)
+		wea_c.pos.set1(name, stats.pos1)
+		wea_c.pos.set2(name, stats.pos2)
+		-- worldedit.pos1[name] = stats.pos1
+		-- worldedit.pos2[name] = stats.pos2
+		-- worldedit.marker_update(name)
 		
 		local time_taken = wea_c.get_ms_time() - start_time
 		

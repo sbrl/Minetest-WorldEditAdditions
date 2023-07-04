@@ -77,5 +77,9 @@ wea_c.pos:addEventListener("clear", function(event)
 			wea_c.entities.pos_marker.delete(entity)
 		end
 	end
+	-- For compatibility, ensure that we also clear the legacy worldedit region too
+	if worldedit and worldedit.marker_update then
+		worldedit.marker_update(event.player_name)
+	end
 	position_entities[event.player_name] = nil
 end)

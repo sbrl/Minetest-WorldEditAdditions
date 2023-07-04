@@ -3,6 +3,12 @@ local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
 local function parse_stage2(name, parts)
+	local do_airapply = false
+	if parts[#parts] == "aa" or parts[#parts] == "airapply" then
+		do_airapply = true
+		table.remove(parts, #parts)
+	end
+	
 	local success, vpos1, vpos2 = wea_c.parse.axes(
 		parts,
 		wea_c.player_dir(name)
@@ -17,7 +23,7 @@ local function parse_stage2(name, parts)
 		return false, "Refusing to move region a distance of 0 nodes"
 	end
 	
-	return true, offset:floor()
+	return true, offset:floor(), do_airapply
 end
 
 -- ███    ███  ██████  ██    ██ ███████
@@ -26,7 +32,7 @@ end
 -- ██  ██  ██ ██    ██  ██  ██  ██
 -- ██      ██  ██████    ████   ███████
 worldeditadditions_core.register_command("move+", { -- TODO: Make this an override
-	params = "<axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]",
+	params = "<axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]] [aa|airapply]",
 	description = "Moves the defined region to another location - potentially across multiple axes at once.",
 	privs = { worldedit = true },
 	require_pos = 2,
@@ -43,7 +49,7 @@ worldeditadditions_core.register_command("move+", { -- TODO: Make this an overri
 	func = function(name, parts)
 		local start_time = wea_c.get_ms_time()
 		
-		local success_a, copy_offset = parse_stage2(name, parts)
+		local success_a, copy_offset, do_airapply = parse_stage2(name, parts)
 		if not success_a then return success_a, copy_offset end
 		
 		--- 1: Calculate the source & target regions
@@ -58,15 +64,18 @@ worldeditadditions_core.register_command("move+", { -- TODO: Make this an overri
 		-----------------------------------------------------------------------
 		local success_b, nodes_modified = wea.move(
 			source_pos1, source_pos2,
-			target_pos1, target_pos2
+			target_pos1, target_pos2,
+			do_airapply
 		)
 		if not success_b then return success_b, nodes_modified end
 		
 		-- 3: Update the defined region
 		-----------------------------------------------------------------------
-		worldedit.pos1[name] = target_pos1
-		worldedit.pos2[name] = target_pos2
-		worldedit.marker_update(name)
+		wea_c.pos.set1(name, target_pos1)
+		wea_c.pos.set2(name, target_pos2)
+		-- worldedit.pos1[name] = target_pos1
+		-- worldedit.pos2[name] = target_pos2
+		-- worldedit.marker_update(name)
 		
 		local time_taken = wea_c.get_ms_time() - start_time
 		

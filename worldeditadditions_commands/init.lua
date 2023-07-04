@@ -1,5 +1,5 @@
 --- WorldEditAdditions-ChatCommands
--- @module worldeditadditions_commands
+-- @namespace worldeditadditions_commands
 -- @release 0.1
 -- @copyright 2018 Starbeamrainbowlabs
 -- @license Mozilla Public License, 2.0

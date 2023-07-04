@@ -1,7 +1,16 @@
 -- worldeditadditions_core = { modpath="/home/sbrl/.minetest/worlds/Mod-Sandbox/worldmods/WorldEditAdditions/worldeditadditions_core/" }
-local wea_c = worldeditadditions_core
-local table_map = dofile(wea_c.modpath.."/utils/table/table_map.lua")
 
+local table_map, polyfill
+
+if minetest then
+	local wea_c = worldeditadditions_core
+	table_map = dofile(wea_c.modpath.."/utils/table/table_map.lua")
+	polyfill = wea_c
+else
+	table_map = require("worldeditadditions_core.utils.table.table_map")
+	polyfill = require("worldeditadditions_core.utils.strings.polyfill")
+end
+	
 local function is_whitespace(char)
 	return char:match("%s")
 end
@@ -13,6 +22,7 @@ local function split_shell(text, autotrim)
 	local acc = {}
 	local mode = "NORMAL"	-- NORMAL, INSIDE_QUOTES_SINGLE, INSIDE_QUOTES_DOUBLE
 	
+	-- print("\n\n\n\n\nDEBUG:split_shell START text", text, "autotrim", autotrim)
 	
 	for i=1,text_length do
 		local prevchar = ""
@@ -27,7 +37,7 @@ local function split_shell(text, autotrim)
 		
 		if mode == "NORMAL" then
 			if is_whitespace(curchar) and #acc > 0 then
-				local nextval = wea_c.trim(table.concat(acc, ""))
+				local nextval = polyfill.trim(table.concat(acc, ""))
 				if #nextval > 0 then
 					table.insert(result, table.concat(acc, ""))
 				end
@@ -54,7 +64,7 @@ local function split_shell(text, autotrim)
 				table.insert(acc, curchar)
 			end
 		elseif mode == "INSIDE_QUOTES_SINGLE" then
-			if curchar == "'" and prevchar ~= "\\" and is_whitespace(nextchar) then
+			if curchar == "'" and prevchar ~= "\\" and (is_whitespace(nextchar) or nextchar == "") then
 				-- It's the end of a quote!
 				mode = "NORMAL"
 			elseif (curchar == "\\" and (

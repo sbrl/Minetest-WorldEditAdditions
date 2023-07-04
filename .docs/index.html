@@ -100,7 +100,10 @@ date: 2000-01-01
 			
 			<pre><code>cd path/to/worldmods;
 git clone https://github.com/Uberi/Minetest-WorldEdit.git worldedit;
-git clone https://github.com/sbrl/Minetest-WorldEditAdditions.git worldeditadditions;</code></pre>
+git clone https://github.com/sbrl/Minetest-WorldEditAdditions.git worldeditadditions;
+cd worldeditadditions;
+git checkout "$(git describe --tags --abbrev=0)";</code></pre>
+			
 			
 			<p><a class="bigbutton" href="https://github.com/sbrl/Minetest-WorldEditAdditions">Source code on GitHub</a></p>
 		</div>

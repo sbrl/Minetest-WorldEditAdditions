@@ -1,6 +1,7 @@
 --- A container for transmitting (axis table, sign) or (dir, sign) pairs
 -- and other data within parsing functions.
--- @class
+-- @internal
+-- @class worldeditadditions_core.parse.key_instance
 local key_instance = {}
 key_instance.__index = key_instance
 key_instance.__name = "Key Instance"

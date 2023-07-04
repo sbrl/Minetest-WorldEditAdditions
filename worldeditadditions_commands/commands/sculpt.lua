@@ -9,20 +9,20 @@ local Vector3 = wea_c.Vector3
 --      ██ ██      ██    ██ ██      ██         ██
 -- ███████  ██████  ██████  ███████ ██         ██
 worldeditadditions_core.register_command("sculpt", {
-	params = "[<brush_name=default> [<height=5> [<brush_size=10>]]]",
+	params = "[<brush_name=default> [<brush_size=8> [<height=1>]]]",
 	description = "Applies a sculpting brush to the terrain with a given height. See //sculptlist to list all available brushes. Note that while the brush size is configurable, the actual brush size you end up with may be slightly different to that which you request due to brush size restrictions.",
 	privs = { worldedit = true },
 	require_pos = 1,
 	parse = function(params_text)
 		if not params_text or params_text == "" then
-			params_text = "circle_soft1"
+			params_text = "circle"
 		end
 		
 		local parts = wea_c.split_shell(params_text)
 		
-		local brush_name = "circle_soft1"
-		local height = 5
-		local brush_size = 10
+		local brush_name = "circle"
+		local brush_size = 8
+		local height = 1
 		
 		if #parts >= 1 then
 			brush_name = table.remove(parts, 1)
@@ -31,23 +31,24 @@ worldeditadditions_core.register_command("sculpt", {
 			end
 		end
 		if #parts >= 1 then
-			height = tonumber(table.remove(parts, 1))
-			if not height then
-				return false, "Invalid height value (must be an integer - negative values lower terrain instead of raising it)"
-			end
-		end
-		if #parts >= 1 then
 			brush_size = tonumber(table.remove(parts, 1))
 			if not brush_size or brush_size < 1 then
 				return false, "Invalid brush size. Brush sizes must be a positive integer."
 			end
 		end
+		if #parts >= 1 then
+			height = tonumber(table.remove(parts, 1))
+			if not height then
+				return false,
+					"Invalid height value (must be an integer - negative values lower terrain instead of raising it)"
+			end
+		end
 		
 		brush_size = Vector3.new(brush_size, brush_size, 0):floor()
 		
-		return true, brush_name, math.floor(height), brush_size
+		return true, brush_name, brush_size, math.floor(height)
 	end,
-	nodes_needed = function(name, brush_name, height, brush_size)
+	nodes_needed = function(name, brush_name, brush_size, height)
 		local success, brush, size_actual = wea.sculpt.make_brush(brush_name, brush_size)
 		if not success then return 0 end
 		
@@ -60,13 +61,13 @@ worldeditadditions_core.register_command("sculpt", {
 		
 		return size_actual.x * size_actual.y * range_nodes
 	end,
-	func = function(name, brush_name, height, brush_size)
+	func = function(name, brush_name, brush_size, height)
 		local start_time = wea_c.get_ms_time()
 		
 		local pos1 = wea_c.Vector3.clone(worldedit.pos1[name])
 		local success, stats = wea.sculpt.apply(
 			pos1,
-			brush_name, height, brush_size
+			brush_name, brush_size, height
 		)
 		if not success then return success, stats.added end
 		

@@ -4,20 +4,26 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
-## v1.14: The untitled update (unreleased)
+## v1.14: The multipoint update (unreleased)
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
- - Add `//revolve`, which makes multiple evenly-spaced rotated copies of the defined region
- - Migrate from `depends.txt` to `mod.conf`
- - `//sculpt`: Fix undefined `default` brush
- - Commands that modify the terrain now ignore liquids
- - `//hollow`: Fix safe region bug
  - Significant backend refactoring to tidy things up
- - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once. **Not currently compatible with other wands**, as it's a work-in-progress (commands that support/require more than 2 points are hopefully coming soon)
- - Add `//spline`, for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
+ - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once.
+ - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands.
+ 	- Is backwards compatible with regular WorldEdit wands and tools, as WorldEditAdditions keeps the new positioning system in sync with WorldEdit's.
+ - Add [`//spline`](https://worldeditadditions.mooncarrot.space/Reference/#spline), for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
+ - Add [`//revolve`](https://worldeditadditions.mooncarrot.space/Reference/#revolve), which makes multiple evenly-spaced rotated copies of the defined region **(uses the new multi-point wand)**
+ - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move): Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use
 
-### Bugfixes
+### Bugfixes and changes
+ - Migrate from `depends.txt` to `mod.conf`
  - Cloud wand: fix typo in item description.
+ - Commands that modify the terrain now ignore liquids
+ - `//sculpt`:
+ 	- Fix undefined `default` brush
+	- Change defaults to `circle`, `height=1`, and `brushsize=8`.
+	- Change argument ordering to put `height` after `brushsize` instead of the other way around
+ - `//hollow`: Fix safe region bug
 
 
 ## v1.13: The transformational update (2nd January 2022)
@@ -36,10 +42,10 @@ Note to self: See the bottom of this file for the release template text.
  - Add [`//sculpt`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt) and [`//sculptlist`](https://worldeditadditions.mooncarrot.space/Reference/#sculptlist) for sculpting terrain using a number of custom brushes.
  - Use [luacheck](https://github.com/mpeterv/luacheck) to find and fix a large number of bugs and other issues [code quality from now on will be significantly improved]
  - Multiple commands: Allow using quotes (`"thing"`, `'thing'`) to quote values when splitting
- - `//layers`: Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
- - `//bonemeal`: Add optional node list constraint
- - `//walls`: Add optional thickness argument
- - `//sstack`: Add human-readable approx volumes of regions in the selection stack
+ - [`//layers`](https://worldeditadditions.mooncarrot.space/Reference/#layers): Add optional slope constraint (inspired by [WorldPainter](https://worldpainter.net/))
+ - [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal): Add optional node list constraint
+ - [`//walls`](https://worldeditadditions.mooncarrot.space/Reference/#walls): Add optional thickness argument
+ - [`//sstack`](https://worldeditadditions.mooncarrot.space/Reference/#sstack): Add human-readable approx volumes of regions in the selection stack
 
 
 ### Bugfixes

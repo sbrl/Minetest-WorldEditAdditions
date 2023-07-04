@@ -3,6 +3,8 @@ local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
 --- Parses a static brush definition.
+-- @name parse_static
+-- @internal
 -- @param	source	string	The source string that contains the static brush, formatted as TSV.
 -- @returns	true,table,Vector3|false,string		A success boolean, followed either by an error message as a string or the brush (as a table) and it's size (as an X/Y Vector3)
 return function(source)

@@ -5,7 +5,7 @@ local Vector3 = wea_c.Vector3
 --- Perlin noise generation engine.
 -- Original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
 -- Port from this StackOverflow answer: https://stackoverflow.com/a/33425812/1460422
--- @class
+-- @class	worldeditadditions.noise.engines.Perlin
 local Perlin = {}
 Perlin.__index = Perlin
 

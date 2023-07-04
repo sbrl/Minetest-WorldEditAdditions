@@ -10,11 +10,12 @@ local Vector3 = wea_c.Vector3
 -- ██  ██  ██ ██    ██  ██  ██  ██
 -- ██      ██  ██████    ████   ███████
 
-function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_pos2)
+function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_pos2, airapply)
 	---
 	-- 0: Preamble
 	---
 	
+	if airapply == nil then airapply = false end
 	source_pos1, source_pos2 = Vector3.sort(source_pos1, source_pos2)
 	target_pos1, target_pos2 = Vector3.sort(target_pos1, target_pos2)
 	
@@ -45,9 +46,13 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 				local target = source:subtract(offset)
 				local target_i = area_target:index(target.x, target.y, target.z)
 				
-				
-				data_target[target_i] = data_source[source_i]
-				
+				local should_replace = true
+				if airapply then
+					should_replace = wea_c.is_airlike(data_target[target_i])
+				end
+				if should_replace then
+					data_target[target_i] = data_source[source_i]
+				end
 			end
 		end
 	end

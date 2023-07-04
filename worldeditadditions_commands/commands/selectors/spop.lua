@@ -1,4 +1,5 @@
 local wea = worldeditadditions
+local weac = worldeditadditions_core
 
 
 -- ███████ ██████   ██████  ██████
@@ -20,9 +21,11 @@ worldeditadditions_core.register_command("spop", {
 		local success, pos1, pos2 = wea.spop(name)
 		if not success then return success, pos1 end
 		
-		worldedit.pos1[name] = pos1
-		worldedit.pos2[name] = pos2
-		worldedit.marker_update(name)
+		weac.pos.set1(name, pos1)
+		weac.pos.set2(name, pos2)
+		-- worldedit.pos1[name] = pos1
+		-- worldedit.pos2[name] = pos2
+		-- worldedit.marker_update(name)
 		
 		local new_count = wea.scount(name)
 		local plural = "s are"

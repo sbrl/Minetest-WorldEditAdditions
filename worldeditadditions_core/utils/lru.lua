@@ -6,7 +6,7 @@ else
 end
 
 --- A least-recently-used cache implementation.
--- @class
+-- @class	worldeditadditions_core.LRU
 local LRU = {}
 LRU.__index = LRU
 

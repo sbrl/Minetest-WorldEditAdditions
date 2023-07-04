@@ -1,5 +1,5 @@
 --- A 3-dimensional vector.
--- @class
+-- @class	worldeditadditions_core.Vector3
 local Vector3 = {}
 Vector3.__index = Vector3
 Vector3.__name = "Vector3" -- A hack to allow identification in wea.inspect
@@ -126,7 +126,6 @@ function Vector3.round(a)
 end
 
 --- Rounds the components of this vector to the specified number of decimal places.
--- TODO: Document this.
 -- @param	a		Vector3	The vector to round.
 -- @param	dp		number	The number of decimal places to round to.
 -- @returns	Vector3	A new instance with the components rounded to the specified number of decimal places.
@@ -174,7 +173,7 @@ function Vector3.length(a)
 	return math.sqrt(a:length_squared())
 end
 
---- Calculates the volume of the region bounded by 1 points.
+--- Calculates the volume of the region bounded by 2 points.
 -- @param	a		Vector3		The first point bounding the target region.
 -- @param	b		Vector3		The second point bounding the target region.
 -- @returns	number	The volume of the defined region.
@@ -419,13 +418,13 @@ end
 -- function. Either that, or Blender 3 (https://blender.org/) is quite useful to visualise what's going on.
 -- @source	GitHub Copilot, generated 2023-01-17
 -- @warning	Not completely tested! Pending a thorough evaluation. Seems to basically work, after some tweaks to the fluff around the edges?
--- @param	{Vector3}	origin	The origin point to rotate around
--- @param	{Vector3}	point	The point to rotate.
--- @param	{Vector3}	rotate	Rotate this much around the 3 different axes, x, y, and z. Axial rotations are handled in this order: X→Y→Z.
--- @param	{Number}	x	Rotate this much around the X axis (yz plane), in radians.
--- @param	{Number}	y	Rotate this much around the Y axis (xz plane), in radians.
--- @param	{Number}	z	Rotate this much around the Z axis (xy plane), in radians.
--- @return	{Vector3}	The rotated point.
+-- @param	origin	Vector3	The origin point to rotate around
+-- @param	point	Vector3	The point to rotate.
+-- @param	rotate	Vector3	Rotate this much around the 3 different axes, x, y, and z. Axial rotations are handled in this order: X→Y→Z.
+-- @param	x		number	Rotate this much around the X axis (yz plane), in radians.
+-- @param	y		number	Rotate this much around the Y axis (xz plane), in radians.
+-- @param	z		number	Rotate this much around the Z axis (xy plane), in radians.
+-- @return	Vector3	The rotated point.
 function Vector3.rotate3d(origin, point, rotate)
 	local point_norm = point - origin
 
