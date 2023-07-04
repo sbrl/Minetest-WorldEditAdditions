@@ -33,7 +33,7 @@ local function split_shell(text, autotrim)
 		if i < text_length then nextchar = text:sub(i+1, i+1) end
 		if i+1 < text_length then nextnextchar = text:sub(i+2, i+2) end
 		
-		print("mode", mode, "prevchar", prevchar, "curchar", curchar, "nextchar", nextchar)
+		-- print("mode", mode, "prevchar", prevchar, "curchar", curchar, "nextchar", nextchar)
 		
 		if mode == "NORMAL" then
 			if is_whitespace(curchar) and #acc > 0 then
