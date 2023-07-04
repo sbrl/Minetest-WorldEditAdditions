@@ -1,10 +1,23 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
---- Overlap command. Places a specified node on top of each column.
--- @module worldeditadditions.layers
-
-
+--- Places saplings and bonemeals them automatically to create a forest.
+-- Note that the defined region is *the region that saplings are placed in*, so nodes may ultimately end up being replaced outside the defined region depending on the size of the tree that grows.
+-- @param	pos1		Vector3		pos1 of the defined region to place saplings in.
+-- @param	pos2		Vector3		pos2 of the defined region to place saplings in.
+-- @param	density_multiplier	number	The density of the forest to create. Nominally 1. Higher values increase the density at which saplings are placed, thereby increasing the density of the resulting forest.
+-- 
+-- Note that sapling growth rules are respected, so there is a limit to the maximum density at which a forest can be generated.
+-- @param	sapling_weights		table<string,number>	A table mapping (normalised) sapling names to their relative weight. Higher weights mean an increased chance of that particular sapling being chosen. Weights need not add up to any particular value. worldeditadditions.overlay() is used under the hood to place saplings.
+-- @returns	bool,table<string,number>	1. Whether the operation was successful or not. For example, this command might fail if the `bonemeal` mod is not installed.
+-- 										2. A table of statistics about the operation:
+-- | Key			| Meaning	|
+-- |----------------|-----------|
+-- | `attempts`		| A table of numbers indicating how many bonemeal attempts each sapling took to grow. Saplings that failed to grow within 100 attempts are considered a failure and not logged in this table. |
+-- | `attempts_avg`	| The average number of attempts saplings took to grow. |
+-- | `failures`		| The number of saplings placed that failed to grow within the 100 attempts limit.	|
+-- | `successes`	| The number of saplings that were placed and successfully grow into a tree. |
+-- | `placed`		| A `table<number,number>` map of sapling node ids and how many of that sapling type successfully grew.
 function worldeditadditions.forest(pos1, pos2, density_multiplier, sapling_weights)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	
