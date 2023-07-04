@@ -141,11 +141,37 @@ describe("split_shell", function()
 			split_shell("\\\"cake\" \"cake\"")
 		)
 	end)
-	
 	it("should handle redundant double and single quotes again", function()
 		assert.are.same(
 			{ "cake", "cake", "cake", "is", "a", "li\\e" },
 			split_shell("\"cake\" 'cake' \"cake\" is a \"li\\e\"")
+		)
+	end)
+	
+	-- Unclosed quotes are currently considered to last until the end of the string.
+	
+	it("should handle an unclosed double quote", function()
+		assert.are.same(
+			{ "the", "cake is a lie" },
+			split_shell("the \"cake is a lie")
+		)
+	end)
+	it("should handle an unclosed single quote", function()
+		assert.are.same(
+			{ "the", "cake is a lie" },
+			split_shell("the 'cake is a lie")
+		)
+	end)
+	it("should handle an unclosed single quote at the end", function()
+		assert.are.same(
+			{ "the", "cake is a lie'" },
+			split_shell("the \"cake is a lie'")
+		)
+	end)
+	it("should handle an unclosed single and double quote", function()
+		assert.are.same(
+			{ "the", "cake is \"a lie" },
+			split_shell("the 'cake is \"a lie")
 		)
 	end)
 	
