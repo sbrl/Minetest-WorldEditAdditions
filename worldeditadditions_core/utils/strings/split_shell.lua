@@ -22,7 +22,7 @@ local function split_shell(text, autotrim)
 	local acc = {}
 	local mode = "NORMAL"	-- NORMAL, INSIDE_QUOTES_SINGLE, INSIDE_QUOTES_DOUBLE
 	
-	print("\n\n\n\n\nDEBUG:split_shell START text", text, "autotrim", autotrim)
+	-- print("\n\n\n\n\nDEBUG:split_shell START text", text, "autotrim", autotrim)
 	
 	for i=1,text_length do
 		local prevchar = ""
@@ -64,7 +64,7 @@ local function split_shell(text, autotrim)
 				table.insert(acc, curchar)
 			end
 		elseif mode == "INSIDE_QUOTES_SINGLE" then
-			if curchar == "'" and prevchar ~= "\\" and is_whitespace(nextchar) then
+			if curchar == "'" and prevchar ~= "\\" and (is_whitespace(nextchar) or nextchar == "") then
 				-- It's the end of a quote!
 				mode = "NORMAL"
 			elseif (curchar == "\\" and (
