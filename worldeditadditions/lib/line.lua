@@ -1,8 +1,6 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
---- Counts the nodes in a given area.
--- @module worldeditadditions.count
 
 -- ██      ██ ███    ██ ███████
 -- ██      ██ ████   ██ ██
@@ -10,7 +8,13 @@ local Vector3 = wea_c.Vector3
 -- ██      ██ ██  ██ ██ ██
 -- ███████ ██ ██   ████ ███████
 
-
+--- Counts the nodes in a given area.
+-- @param	pos1		Vector3		The position to start drawing the line from.
+-- @param	pos2		Vector3		The position to draw the line to.
+-- @param	thickness	number		The thickness of the line to draw.
+-- @param	node_name	string		The (normalised) name of the node to draw the line with.
+-- @returns	bool,{replaced=number}	1. A bool indicating whether the operation was successful or not.
+-- 									2. A table containing statistics. At present the only key in this table is `replaced`, which indicates the number of nodes replaced when drawing the line.
 function worldeditadditions.line(pos1, pos2, thickness, node_name)
 	local pos1_sorted, pos2_sorted = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now

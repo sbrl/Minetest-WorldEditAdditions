@@ -3,9 +3,10 @@ local Vector3 = wea_c.Vector3
 
 
 --- Flood-fill command for complex lakes etc.
--- @module worldeditadditions.floodfill
-
-
+-- @param	start_pos		Vector3		The position to start floodfilling from.
+-- @param	radius			number		The maximum radius to limit the floodfill operation too.
+-- @param	replace_node	string		The (normalised) name of the node to replace with when floodfilling.
+-- @returns	number			The number of nodes replaced.
 function worldeditadditions.floodfill(start_pos, radius, replace_node)
 	start_pos = Vector3.clone(start_pos)
 	
