@@ -13,6 +13,8 @@ if minetest.global_exists("worldedit") then
 end
 
 --- A table that holds at most 1 pending function call per player.
+-- @value	table<string,function>
+-- @internal
 local pending_calls = {}
 
 --- Captures the given function in the safe_region subsystem for later execution.
