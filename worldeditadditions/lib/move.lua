@@ -1,5 +1,3 @@
---- Copies a region to another location, potentially overwriting the exiting region.
--- @module worldeditadditions.copy
 
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
@@ -10,6 +8,15 @@ local Vector3 = wea_c.Vector3
 -- ██  ██  ██ ██    ██  ██  ██  ██
 -- ██      ██  ██████    ████   ███████
 
+--- Moves a region to another location, overwriting any nodes at the target location.
+-- @param	source_pos1		Vector3		pos1 of the source region to move.
+-- @param	source_pos2		Vector3		pos2 of the source region to move.
+-- @param	target_pos1		Vector3		pos1 of the target region to move to.
+-- @param	target_pos2		Vector3		pos2 of the target region to move to.
+-- @param	airapply=false	bool		Whether to only replace target nodes that are air-like, leaving those that are not air-like. If false, then all target nodes are replaced regardless of whether they are air-like nodes or not.
+-- **Caution:** If true, then **nodes in the source region will be removed and replaced with air, even if they are unable to be placed in the target location!**
+-- @returns	bool,numbers	1. Whether the move operation was successful or not
+-- 							2. The total number of nodes actually placed in the target region.
 function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_pos2, airapply)
 	---
 	-- 0: Preamble
@@ -38,6 +45,7 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 	---
 	
 	-- z y x is the preferred loop order (because CPU cache, since then we're iterating linearly through the data array backwards. This only holds true for little-endian machines however)
+	local total_placed = 0
 	for z = source_pos2.z, source_pos1.z, -1 do
 		for y = source_pos2.y, source_pos1.y, -1 do
 			for x = source_pos2.x, source_pos1.x, -1 do
@@ -52,6 +60,7 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 				end
 				if should_replace then
 					data_target[target_i] = data_source[source_i]
+					total_placed = total_placed + 1
 				end
 			end
 		end
@@ -96,7 +105,6 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 				local source = Vector3.new(x, y, z)
 				local source_i = area_source:index(x, y, z)
 				local target = source:subtract(offset)
-				local target_i = area_target:index(target.x, target.y, target.z)
 				
 				if not source:is_contained(target_pos1, target_pos2) then
 					data_source[source_i] = node_id_air
@@ -118,5 +126,5 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 	-- 6: Finish up and return
 	---
 	
-	return true, worldedit.volume(target_pos1, target_pos2)
+	return true, total_placed
 end

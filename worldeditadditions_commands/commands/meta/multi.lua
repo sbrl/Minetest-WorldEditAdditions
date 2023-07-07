@@ -1,5 +1,5 @@
---- Executes multiple worldedit commands in sequence.
--- @module worldeditadditions_commands.multi
+-- Executes multiple worldedit commands in sequence.
+-- **Warning:** If a command is asynchronous (i.e. it doesn't finish when the function registered in the chat command returns), the next command will be executed before the previous one is finished! The solution to this is an implementation of Promise<any> and then ensuring that all functions registered are thenable as in JS, but this has not been implemented yet.
 local wea_c = worldeditadditions_core
 
 minetest.register_chatcommand("/multi", {

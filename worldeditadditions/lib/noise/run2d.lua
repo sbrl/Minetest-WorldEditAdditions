@@ -2,19 +2,19 @@ local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
---- Applies a layer of 2D noise over the terrain in the defined region.
--- @module worldeditadditions.noise2d
-
 
 -- ███    ██  ██████  ██ ███████ ███████ ██████  ██████
 -- ████   ██ ██    ██ ██ ██      ██           ██ ██   ██
 -- ██ ██  ██ ██    ██ ██ ███████ █████    █████  ██   ██
 -- ██  ██ ██ ██    ██ ██      ██ ██      ██      ██   ██
 -- ██   ████  ██████  ██ ███████ ███████ ███████ ██████
+
 --- Applies a layer of 2d noise over the terrain in the defined region.
 -- @param	pos1			Vector	pos1 of the defined region
 -- @param	pos2			Vector	pos2 of the defined region
 -- @param	noise_params	table	A noise parameters table.
+-- @returns	bool,table	1. Whether the operation was successful or not.
+-- 2. A table of statistics from the operation. See `worldeditadditions.noise.apply_2d` for the format of this table.
 function wea.noise.run2d(pos1, pos2, noise_params)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now

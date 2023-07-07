@@ -1,10 +1,6 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
---- Generates a maze.
--- Algorithm origin: https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html
--- @module worldeditadditions.maze
-
 ----------------------------------
 -- function to print out the world
 ----------------------------------
@@ -171,6 +167,20 @@ end
 
 -- local world = maze(os.time(), width, height)
 
+
+--- Generates a 3D maze.
+-- **Algorithm origin:** https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html
+-- 
+-- The defined region must be at least 3 x 3 x 3 (x, y, z) for a maze to generate.
+-- @param	pos1			Vector3		pos1 of the defined region to draw the 3D maze in in.
+-- @param	pos2			Vector3		pos2 of the defined region to draw the 3D maze in in.
+-- @param	target_node		string		The (normalised) node name to draw the maze in.
+-- @param	path_length=2	number		Step this many nodes forwards at once when generating the maze.  Higher values create long thin corridors.
+-- @param	path_width=1	number		Make all corridors this number of nodes wide when generating the maze. Higher values result in wider corridors.
+-- **Caution:** Make sure this value is not higher than `path_length - 1`, otherwise the maze algorithm won't work right!
+-- @param	path_depth=1	number		Make all corridors this number of nodes tall when generating the maze. Higher values results in higher ceilings in the maze.
+-- **Caution:** The same warning as with `path_width` applies here also!
+-- @returns	number			The number of nodes replaced (i.e. the volume fo the region defined by pos1 and pos2).
 function worldeditadditions.maze3d(pos1, pos2, target_node, seed, path_length, path_width, path_depth)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now

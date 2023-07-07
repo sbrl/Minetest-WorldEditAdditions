@@ -2,8 +2,16 @@ local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
 --- Overlap command. Places a specified node on top of each column.
--- @module worldeditadditions.overlay
-
+-- @param	pos1			Vector3		pos1 of the defined region to perform the overlay operation in.
+-- @param	pos2			Vector3		pos2 of the defined region to perform the overlay operation in.
+-- @param	node_weights	table<string,number>	A table mapping (normalised) node names to their relative weight. Nodes with a higher weight are placed more often than those with a lower weighting.
+-- Consider it like a ratio.
+-- @returns	table<string,number|table<number,number>>	A table of statistics about the operation performed.
+-- | Key		| Value Type	| Meaning		|
+-- |------------|---------------|---------------|
+-- | `updated`	| number		| The number of nodes placed. |
+-- | `skipped_columns` | number	| The number of columns skipped. This could be because there is no airlike not in that column, or the top node is not airlike. |
+-- | `placed`	| table<number,number> | A map of node ids to the number of that node that was placed. |
 function worldeditadditions.overlay(pos1, pos2, node_weights)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now

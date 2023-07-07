@@ -23,6 +23,7 @@ end
 -- @param	node_weights	string[]	
 -- @param	min_slope		number?		
 -- @param	max_slope		number?		
+-- @returns	table<string,number>
 function worldeditadditions.layers(pos1, pos2, node_weights, min_slope, max_slope)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	if not min_slope then min_slope = math.rad(0) end

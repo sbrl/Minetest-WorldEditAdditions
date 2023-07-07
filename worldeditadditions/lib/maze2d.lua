@@ -117,6 +117,8 @@ end
 
 --- Generates a 2D maze.
 -- **Algorithm origin:** https://starbeamrainbowlabs.com/blog/article.php?article=posts/070-Language-Review-Lua.html
+-- 
+-- The defined region must be at least 3 x 1 x 3 (x, y, z) for a maze to generate successfully.
 -- @param	pos1		Vector3		pos1 of the defined region to draw the 2D maze in in.
 -- @param	pos2		Vector3		pos2 of the defined region to draw the 2D maze in in.
 -- @param	target_node		string		The (normalised) node name to draw the maze in.

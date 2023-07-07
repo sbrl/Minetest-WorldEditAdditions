@@ -1,5 +1,4 @@
---- Executes multiple worldedit commands in sequence.
--- @module worldeditadditions_commands.multi
+-- Executes multiple worldedit commands in sequence.
 
 local wea_c = worldeditadditions_core
 
