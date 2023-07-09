@@ -20,6 +20,7 @@ dofile(we_cmdpath.."spush.lua")
 dofile(we_cmdpath.."srect.lua")
 dofile(we_cmdpath.."sshift.lua")
 dofile(we_cmdpath.."sstack.lua")
+dofile(we_cmdpath.."unmark.lua")
 
 -- Aliases
 worldedit.alias_command("sfac", "sfactor")

@@ -250,6 +250,14 @@ local function push(player_name, pos)
 	return #positions[player_name]
 end
 
+--- Hides the visual markers for the given player's positions and defined region, but does not clear the points.
+-- @param	player_name		string	The name of the player to operate on.
+local function unmark(player_name)
+	anchor:emit("unmark", {
+		player_name = player_name
+	})
+end
+
 
 anchor = wea_c.EventEmitter.new({
 	get = get,
@@ -265,7 +273,8 @@ anchor = wea_c.EventEmitter.new({
 	set1 = set1,
 	set2 = set2,
 	set_all = set_all,
-	compat_worldedit_get = compat_worldedit_get
+	unmark = unmark,
+	compat_worldedit_get = compat_worldedit_get,
 })
 anchor.debug = false
 
