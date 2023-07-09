@@ -2,7 +2,7 @@
 
 --- Fetches the definition of a WorldEditAdditions or WorldEdit command
 -- Does not support fetching generic Minetest commands - check
--- minetest.chatcommands for this.
+-- minetest.registered_chatcommands for this.
 -- @param	cmdname		string		The name of the command to fetch the definition for.
 local function fetch_command_def(cmdname)
 	local wea_c = worldeditadditions_core

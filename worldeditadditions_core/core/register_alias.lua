@@ -18,15 +18,15 @@ local function register_alias(cmdname_target, cmdname_source, override)
 	
 	-- print("DEBUG ALIAS source "..cmdname_source.." target "..cmdname_target)
 	
-	if minetest.chatcommands["/"..cmdname_target] then
+	if minetest.registered_chatcommands["/" .. cmdname_target] then
 		minetest.override_chatcommand(
 			"/"..cmdname_target,
-			minetest.chatcommands["/"..cmdname_source]
+			minetest.registered_chatcommands["/" .. cmdname_source]
 		)
 	else
 		minetest.register_chatcommand(
 			"/"..cmdname_target,
-			minetest.chatcommands["/"..cmdname_source]
+			minetest.registered_chatcommands["/" .. cmdname_source]
 		)
 	end
 	wea_c.registered_commands[cmdname_target] = wea_c.registered_commands[cmdname_source]

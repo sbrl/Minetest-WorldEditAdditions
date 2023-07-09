@@ -20,7 +20,7 @@ local function step(params)
 		))
 	))
 	
-	local cmd = minetest.chatcommands[params.cmd_name]
+	local cmd = minetest.registered_chatcommands[params.cmd_name]
 	
 	minetest.log("action", params.name.." runs "..full_cmd.." (time "..tostring(params.i).." of "..tostring(params.count)..")")
 	cmd.func(params.name, params.args)
@@ -80,7 +80,7 @@ minetest.register_chatcommand("/many", {
 		cmd_name = wea_c.trim(cmd_name):sub(2) -- Things start at 1, not 0 in Lua :-(
 		
 		-- Check the command we're going to execute
-		local cmd = minetest.chatcommands[cmd_name]
+		local cmd = minetest.registered_chatcommands[cmd_name]
 		if not cmd then
 			return false, "Error: "..cmd_name.." isn't a valid command."
 		end

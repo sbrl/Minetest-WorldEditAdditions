@@ -20,7 +20,7 @@ local function step(params)
 	if not args then args = ""
 	else args = args:match("^%s*(.*)%s*$") end
 	-- Get command and test privs
-	local cmd = minetest.chatcommands[command]
+	local cmd = minetest.registered_chatcommands[command]
 	if not cmd then
 		return false, "Error: "..command.." isn't a valid command."
 	end

@@ -31,7 +31,7 @@ minetest.register_chatcommand("/multi", {
 			
 			worldedit.player_notify(name, "#"..i..": "..command)
 			
-			local cmd = minetest.chatcommands[command_name]
+			local cmd = minetest.registered_chatcommands[command_name]
 			if not cmd then
 				return false, "Error: "..command_name.." isn't a valid command."
 			end

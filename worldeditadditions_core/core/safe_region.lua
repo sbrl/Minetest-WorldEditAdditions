@@ -8,8 +8,8 @@
 local worldedit_command_y, worldedit_command_n
 
 if minetest.global_exists("worldedit") then
-	worldedit_command_y = minetest.chatcommands["/y"].func
-	worldedit_command_n = minetest.chatcommands["/n"].func
+	worldedit_command_y = minetest.registered_chatcommands["/y"].func
+	worldedit_command_n = minetest.registered_chatcommands["/n"].func
 end
 
 --- A table that holds at most 1 pending function call per player.

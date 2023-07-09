@@ -68,7 +68,7 @@ worldeditadditions_core.register_command("for", {
 		return true, values, command, args
 	end,
 	func = function(name, values, command, args)
-		local cmd = minetest.chatcommands[command]
+		local cmd = minetest.registered_chatcommands[command]
 		if not cmd then
 			return false, "Error: "..command.." isn't a valid command."
 		end

@@ -123,7 +123,7 @@ worldeditadditions_core.register_command("subdivide", {
 			-- worldedit.marker_update(name)
 			cmd.func(name, wea_c.table.unpack(cmd_args_parsed))
 			if will_trigger_saferegion(name, cmd_name, args) then
-				minetest.chatcommands["/y"].func(name)
+				minetest.registered_chatcommands["/y"].func(name)
 			end
 			worldedit.player_notify_unsuppress(name)
 			
