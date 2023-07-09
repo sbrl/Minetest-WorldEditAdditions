@@ -105,6 +105,8 @@ Generates a maze using replace_node as the walls and air as the paths. Uses [an 
 
 Requires the currently selected area to be at least 3x3 on the x and z axes respectively.
 
+Mazes are generated from the bottom to the top of the defined region. In other words, the height of the walls of the maze is equal to the height of the defined region.
+
 The optional `path_length` and `path_width` arguments require additional explanation. When generating a maze, a multi-headed random walk is performed. When the generator decides to move forwards from a point, it does so `path_length` nodes at a time. `path_length` defaults to `2`.
 
 `path_width` is easier to explain. It defaults to `1`, and is basically the number of nodes wide the path generated is.
@@ -126,7 +128,7 @@ The last example below shows how to set the path length and width:
 ### `//maze3d <replace_node> [<path_length> [<path_width> [<path_depth> [<seed>]]]]`
 Same as `//maze`, but instead generates mazes in 3 dimensions instead of 2. Requires the currently selected area to be at least 3x3x3.
 
-The optional `path_depth` parameter defaults to `1` and allows customisation of the height of the paths generated.
+The optional `path_depth` parameter defaults to `1` and allows customisation of the height of the paths generated. In other words, it customises the ceiling height, or the distance from the floor to the ceiling of the paths generated.
 
 To get a better look at the generated maze, try inverting it like so:
 
