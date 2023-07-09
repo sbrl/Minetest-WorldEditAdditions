@@ -11,6 +11,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once.
  - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands.
  	- Is backwards compatible with regular WorldEdit wands and tools, as WorldEditAdditions keeps the new positioning system in sync with WorldEdit's.
+	- The new multipoint wand required this as a prerequisite
  - Add [`//spline`](https://worldeditadditions.mooncarrot.space/Reference/#spline), for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
  - Add [`//revolve`](https://worldeditadditions.mooncarrot.space/Reference/#revolve), which makes multiple evenly-spaced rotated copies of the defined region **(uses the new multi-point wand)**
  - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move): Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use
