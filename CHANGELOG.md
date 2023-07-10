@@ -18,6 +18,7 @@ Note to self: See the bottom of this file for the release template text.
  - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move):
 	- Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use
 	- Respect node rotation (i.e. param2) when copying/moving
+	- Override `//move` and `//copy` by default
 
 ### Bugfixes and changes
  - Migrate from `depends.txt` to `mod.conf`
