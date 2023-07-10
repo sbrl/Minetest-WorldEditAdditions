@@ -78,16 +78,21 @@ end
 --- Sets pos1/pos2 in worldedit for compatibility.
 -- @param	player_name		string	The name of the player to set the position for.
 -- @param	i				number	The index of the position to set.
--- @returns	Vector3?		The position to set.
-local function compat_worldedit_set(player_name, i, pos)
+-- @param	pos				Vector3	The position to set.
+-- @param	do_update=true	bool	Whether to call worldedit.marker_update() or not.
+-- @returns	nil
+local function compat_worldedit_set(player_name, i, pos, do_update)
+	if do_update == nil then do_update = false end
 	if not worldedit then return end
 	if i == 1 and worldedit.pos1 then
 		worldedit.pos1[player_name] = nil
-		if worldedit.marker_update then worldedit.marker_update(player_name) end
+		if do_update and worldedit.marker_update then
+			worldedit.marker_update(player_name) end
 		worldedit.pos1[player_name] = pos:clone()
 	elseif i == 2 and worldedit.pos2 then
 		worldedit.pos2[player_name] = nil
-		if worldedit.marker_update then worldedit.marker_update(player_name) end
+		if do_update and worldedit.marker_update then
+			worldedit.marker_update(player_name) end
 		worldedit.pos2[player_name] = pos:clone()
 	end
 end
@@ -231,7 +236,10 @@ local function pop(player_name)
 	local last_pos = table.remove(positions[player_name])
 	if worldedit then
 		if pos_count == 2 and worldedit.pos2 then worldedit.pos2[player_name] = nil
-		elseif pos_count == 1 and worldedit.pos1 then worldedit.pos1[player_name] = nil end
+		elseif pos_count == 1 and worldedit.pos1 then
+			worldedit.pos1[player_name] = nil
+			worldedit.marker_update(player_name)
+		end
 	end
 	
 	anchor:emit("pop", { player_name = player_name, pos = last_pos, i = pos_count })
