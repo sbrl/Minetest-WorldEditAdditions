@@ -34,10 +34,12 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 	-- Fetch the nodes in the source area
 	local manip_source, area_source = worldedit.manip_helpers.init(source_pos1, source_pos2)
 	local data_source = manip_source:get_data()
+	local data_source_param2 = manip_source:get_param2_data()
 	
 	-- Fetch a manip for the target area
 	local manip_target, area_target = worldedit.manip_helpers.init(target_pos1, target_pos2)
 	local data_target = manip_target:get_data()
+	local data_target_param2 = manip_target:get_param2_data()
 	
 	
 	---
@@ -60,6 +62,7 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 				end
 				if should_replace then
 					data_target[target_i] = data_source[source_i]
+					data_target_param2[target_i] = data_source_param2[source_i]
 					total_placed = total_placed + 1
 				end
 			end
@@ -83,7 +86,7 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 	---
 	-- 2: Save target
 	---
-	
+	manip_target:set_param2_data(data_target_param2)
 	worldedit.manip_helpers.finish(manip_target, data_target)
 	
 	
@@ -93,6 +96,7 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 	
 	manip_source, area_source = worldedit.manip_helpers.init(source_pos1, source_pos2)
 	data_source = manip_source:get_data()
+	data_source_param2 = manip_source:get_param2_data()
 	
 	
 	---
@@ -108,6 +112,7 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 				
 				if not source:is_contained(target_pos1, target_pos2) then
 					data_source[source_i] = node_id_air
+					data_source_param2[source_i] = 0
 				end
 			end
 		end
@@ -118,6 +123,7 @@ function worldeditadditions.move(source_pos1, source_pos2, target_pos1, target_p
 	-- 5: Save source
 	---
 	
+	manip_source:set_param2_data(data_source_param2)
 	worldedit.manip_helpers.finish(manip_source, data_source)
 	
 	

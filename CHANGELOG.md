@@ -15,7 +15,9 @@ Note to self: See the bottom of this file for the release template text.
  - Add [`//pos`](https://worldeditadditions.mooncarrot.space/Reference/#pos), for setting any numbered point (i.e. not just pos1 and pos2, but pos3 and beyond)
  - Add [`//spline`](https://worldeditadditions.mooncarrot.space/Reference/#spline), for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
  - Add [`//revolve`](https://worldeditadditions.mooncarrot.space/Reference/#revolve), which makes multiple evenly-spaced rotated copies of the defined region **(uses the new multi-point wand)**
- - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move): Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use
+ - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move):
+	- Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use
+	- Respect node rotation (i.e. param2) when copying/moving
 
 ### Bugfixes and changes
  - Migrate from `depends.txt` to `mod.conf`
