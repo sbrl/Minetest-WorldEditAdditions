@@ -12,6 +12,7 @@ Note to self: See the bottom of this file for the release template text.
  - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands.
  	- Is backwards compatible with regular WorldEdit wands and tools, as WorldEditAdditions keeps the new positioning system in sync with WorldEdit's.
 	- The new multipoint wand required this as a prerequisite
+ - Add [`//pos`](https://worldeditadditions.mooncarrot.space/Reference/#pos), for setting any numbered point (i.e. not just pos1 and pos2, but pos3 and beyond)
  - Add [`//spline`](https://worldeditadditions.mooncarrot.space/Reference/#spline), for drawing curved lines with an arbitrary number of points **(uses the new multi-point wand)**
  - Add [`//revolve`](https://worldeditadditions.mooncarrot.space/Reference/#revolve), which makes multiple evenly-spaced rotated copies of the defined region **(uses the new multi-point wand)**
  - [`//copy+`](https://worldeditadditions.mooncarrot.space/Reference/#copy), [`//move+`](https://worldeditadditions.mooncarrot.space/Reference/#move): Added support for integrated `airapply` mode, which replaces nodes at the target only if they are air - append `airapply`/`aa` to the command to use

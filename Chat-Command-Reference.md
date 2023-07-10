@@ -868,7 +868,75 @@ Returns the absolute canonical name of a node, given an alias or partial node na
 ███████ ███████ ███████ ███████  ██████    ██    ██  ██████  ██   ████
 -->
 
+### `//unmark`
+Hides the in-game UI that indicates where the current positions and region are located.
 
+This hides both the WorldEditAdditions *and* the WorldEdit UI if displayed, but does **not** change or remove any points that are registered.
+
+Should more than 2 points be defined, they are all hidden.
+
+```weacmd
+//unmark
+```
+
+### `//mark`
+Shows the in-game UI that indicates where the current positions and region are located once more.
+
+Should more than 2 points be defined, they are all shown once more.
+
+Often used after calling [`//unmark`](#unmark)
+
+```weacmd
+//mark
+```
+
+
+### `//pos1`
+Sets pos1 to the location of the calling player.
+
+This is, as with all other WorldEditAdditions commands, seamlessly synchronised with WorldEdit, allowing you to use any combination of WorldEditAdditions and WorldEdit commands and tools without them desynchronising from one another.
+
+**Aliases:** `//1`
+
+```weacmd
+//pos2
+```
+
+### `//pos2`
+Sets pos1 to the location of the calling player.
+
+This is, as with all other WorldEditAdditions commands, seamlessly synchronised with WorldEdit, allowing you to use any combination of WorldEditAdditions and WorldEdit commands and tools without them desynchronising from one another.
+
+**Aliases:** `//2`
+
+```weacmd
+//pos2
+```
+
+### `//pos <index>`
+Sets position with the given index `<index>` to the location of the calling player.
+
+Should the index be less than or equal to 2, then as with all other WorldEditAdditions commands, seamlessly synchronised with WorldEdit, allowing you to use any combination of WorldEditAdditions and WorldEdit commands and tools without them desynchronising from one another.
+
+Should the index be greater than 2, the position will only be registered in WorldEditAdditions, as WorldEdit does not support defining more than 2 points.
+
+If no index is specified, an error is returned and nothing is done.
+
+```weacmd
+//pos 1
+//pos 3
+//pos 45
+//pos 2
+```
+
+### `//reset`
+Clears all positions defined and the defined region.
+
+This also synchronises with WorldEdit, as all other WorldEditAdditions commands do.
+
+```weacmd
+//reset
+```
 
 
 ### `//scol [<axis1> ] <length>`

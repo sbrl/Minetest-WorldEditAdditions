@@ -70,4 +70,6 @@ weac.pos:addEventListener("set", handle_event)
 weac.pos:addEventListener("pop", handle_event)
 weac.pos:addEventListener("push", handle_event)
 weac.pos:addEventListener("clear", do_delete)
+
 weac.pos:addEventListener("unmark", do_delete)
+weac.pos:addEventListener("mark", do_update)

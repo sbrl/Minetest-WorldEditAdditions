@@ -43,6 +43,15 @@ local function do_create(event)
 	position_entities[event.player_name][event.i] = new_entity
 end
 
+local function do_delete_all(player_name)
+	if #position_entities[player_name] > 0 then
+		for _, entity in pairs(position_entities[player_name]) do
+			wea_c.entities.pos_marker.delete(entity)
+		end
+	end
+	position_entities[player_name] = nil
+end
+
 wea_c.pos:addEventListener("push", function(event)
 	do_create(event)
 end)
@@ -72,26 +81,32 @@ end)
 
 wea_c.pos:addEventListener("clear", function(event)
 	ensure_player(event.player_name)
-	if #position_entities[event.player_name] > 0 then
-		for _, entity in pairs(position_entities[event.player_name]) do
-			wea_c.entities.pos_marker.delete(entity)
-		end
-	end
+	do_delete_all(event.player_name)
+	
 	-- For compatibility, ensure that we also clear the legacy worldedit region too
 	if worldedit and worldedit.marker_update then
 		worldedit.marker_update(event.player_name)
 	end
-	position_entities[event.player_name] = nil
 end)
 
 wea_c.pos:addEventListener("unmark", function(event)
 	ensure_player(event.player_name)
 	
-	if #position_entities[event.player_name] > 0 then
-		for _, entity in pairs(position_entities[event.player_name]) do
-			wea_c.entities.pos_marker.delete(entity)
-		end
-	end
+	do_delete_all(event.player_name)
 	
 	-- Note that this function is NOT WorldEdit compatible, because it is only called through our override of WorldEdit's `//unmark`, and WorldEdit doesn't have an API function to call to unmark and everything is complicated.
+end)
+
+wea_c.pos:addEventListener("mark", function(event)
+	ensure_player(event.player_name)
+	
+	do_delete_all(event.player_name)
+	
+	for i, pos in pairs(wea_c.pos.get_all(event.player_name)) do
+		do_create({
+			player_name = event.player_name,
+			i = i,
+			pos = pos
+		})
+	end
 end)

@@ -31,6 +31,14 @@ local anchor = nil
 -- @event	clear
 -- @format	{ player_name: string }
 
+--- It is requested that all position/region marker UI elements be hidden for the given player.
+-- @event	unmark
+-- @format	{ player_name: string }
+
+--- It is requested that all position/region marker UI elements be shown once more for the given player.
+-- @event	mark
+-- @format	{ player_name: string }
+
 --- Ensures that a table exists for the given player.
 -- @param	player_name		string	The name of the player to check.
 local function ensure_player(player_name)
@@ -266,6 +274,14 @@ local function unmark(player_name)
 	})
 end
 
+--- Shows the visual markers for the given player's positions and defined region once more.
+-- Often used some time after calling worldeditadditions_core.pos.unmark().
+-- @param	player_name		string	The name of the player to operate on.
+local function mark(player_name)
+	anchor:emit("mark", {
+		player_name = player_name
+	})
+end
 
 anchor = wea_c.EventEmitter.new({
 	get = get,
@@ -282,6 +298,7 @@ anchor = wea_c.EventEmitter.new({
 	set2 = set2,
 	set_all = set_all,
 	unmark = unmark,
+	mark = mark,
 	compat_worldedit_get = compat_worldedit_get,
 })
 anchor.debug = false
