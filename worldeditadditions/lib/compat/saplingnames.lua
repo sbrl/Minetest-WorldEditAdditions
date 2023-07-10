@@ -34,21 +34,21 @@ end
 
 if minetest.get_modpath("moretrees") then
 	wea_c.register_sapling_alias_many({
-		{ "moretrees:spruce_sapling_ongen", "spruce" },
-		{ "moretrees:rubber_tree_sapling_ongen", "rubber" },
-		{ "moretrees:beech_sapling_ongen", "beech" },
-		{ "moretrees:jungletree_sapling_ongen", "jungle_moretrees" },
-		{ "moretrees:fir_sapling_ongen", "fir" },
-		{ "moretrees:willow_sapling_ongen", "willow_moretrees" },
-		{ "moretrees:poplar_sapling_ongen", "poplar" },
-		{ "moretrees:poplar_small_sapling_ongen", "poplar_small" },
-		{ "moretrees:apple_tree_sapling_ongen", "apple_moretrees" },
-		{ "moretrees:birch_sapling_ongen", "birch_moretrees" },
-		{ "moretrees:palm_sapling_ongen", "palm_moretrees" },
-		{ "moretrees:date_palm_sapling_ongen", "palm_date" },
-		{ "moretrees:sequoia_sapling_ongen", "sequoia" },
-		{ "moretrees:oak_sapling_ongen", "oak_moretrees" },
-		{ "moretrees:cedar_sapling_ongen", "cedar" }
+		{ "moretrees:spruce_sapling", "spruce" },
+		{ "moretrees:rubber_tree_sapling", "rubber" },
+		{ "moretrees:beech_sapling", "beech" },
+		{ "moretrees:jungletree_sapling", "jungle_moretrees" },
+		{ "moretrees:fir_sapling", "fir" },
+		{ "moretrees:willow_sapling", "willow_moretrees" },
+		{ "moretrees:poplar_sapling", "poplar" },
+		{ "moretrees:poplar_small_sapling", "poplar_small" },
+		{ "moretrees:apple_tree_sapling", "apple_moretrees" },
+		{ "moretrees:birch_sapling", "birch_moretrees" },
+		{ "moretrees:palm_sapling", "palm_moretrees" },
+		{ "moretrees:date_palm_sapling", "palm_date" },
+		{ "moretrees:sequoia_sapling", "sequoia" },
+		{ "moretrees:oak_sapling", "oak_moretrees" },
+		{ "moretrees:cedar_sapling", "cedar" }
 	})
 end
 
