@@ -57,7 +57,7 @@ module.exports = function parse_sections(source) {
 	for(let line of lines) {
 		
 		if(line.startsWith(`#`)) {
-			let heading_level = line.match(/^#+/)[0].length
+			let heading_level = line.match(/^#+/)[0].length;
 			
 			// 1: Deal with the previous section
 			if(acc.length > 0) {

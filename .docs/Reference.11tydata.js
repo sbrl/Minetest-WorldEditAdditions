@@ -17,7 +17,7 @@ let { sections, categories } = parse_sections(fs.readFileSync(
 		"utf-8"
 	))
 
-sections = sections.slice(1).sort((a, b) => a.title.replace(/^\/+/g, "").localeCompare(
+sections = sections.sort((a, b) => a.title.replace(/^\/+/g, "").localeCompare(
 	b.title.replace(/^\/+/g, "")));
 
 
