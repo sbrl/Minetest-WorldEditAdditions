@@ -162,8 +162,15 @@ Please update to v1.8+. There was a bug in earlier versions that caused a race c
 ### Why don't the [moretrees](https://content.minetest.net/packages/VanessaE/moretrees/) trees work with `//forest`?
 As far as I can tell, the saplings provided by the [`moretrees` mod](https://content.minetest.net/packages/VanessaE/moretrees/) don't properly interact with bonemeal from the [bonemeal mod](https://content.minetest.net/packages/TenPlus1/bonemeal/), which WorldEditAdditions uses to grow trees. As far as I can tell WorldEditAdditions has everything in place needed to support them, but until applying bonemeal to `moretrees` saplings results in a tree rather than waiting for one to grow over time, WorldEditAdditions will always fail to place trees provided by the `moretrees` mod, unfortunately.
 
+### The region markers look weird!
+We've implemented a custom replacement for the WorldEdit region markers that supports selecting more than 2 points. This new WorldEditAdditions positioning system synchronises with WorldEdit's positioning system, so you can use both WorldEdit and WorldEditAdditions tools and commands interchangeably and they will seamlessly sync with each other.
+
+The only side effect of this is that WorldEdit commands such as `//shift` are not aware of the new WorldEditAdditions positioning system, so you may encounter a situation where both WorldEdit and WorldEditAdditions region markers may display until you use another WorldEditAdditions command or tool to update them. This will be fixed in time as more commands and tools are implemented.
+
 ### The position markers disappear when far way
 This is a limitation of Minetest. You can workaround it though by setting [`active_block_range`](https://github.com/minetest/minetest/blob/5.6.1/minetest.conf.example#L2868) to a higher value - though be aware this also affects ABMs and other entities as well, so it can cause server lag.
+
+The new positioning system now partially rectifies this issue with the region marker walls by creating a grid of entities instead of a single entity, such that a portion of them are more likely to be in range.
 
 
 ## Contributing
