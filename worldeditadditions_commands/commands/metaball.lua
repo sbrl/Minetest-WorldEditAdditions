@@ -113,7 +113,7 @@ worldeditadditions_core.register_command("metaball", {
 			message = #metaballs_list.." metaballs will take up to "..tostring(volume).." nodes of space"
 		elseif subcommand == "clear" then
 			local metaballs_cleared = wea.metaballs.clear(name)
-			message = tostring(metaballs_cleared).." metaball cleared"
+			message = tostring(metaballs_cleared).." metaballs cleared"
 		elseif subcommand == "remove" then
 			local index = subargs[1]
 			
