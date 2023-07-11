@@ -22,6 +22,74 @@ Other useful links:
  ██████  ███████  ██████  ██      ██ ███████    ██    ██   ██    ██
 -->
 
+### `//metaball add <radius> | remove <index> | render <replace_node> [<threshold=1>] | list | clear | volume`
+Draws two or more [metaballs](https://en.wikipedia.org/wiki/Metaballs). Based on a subcommand system, since each metaball may have a different radius.
+
+Calling `//metaball render <replace_node>` actually makes changes to the world - all others manipulate an internal player-local list of metaballs to be drawn.
+
+#### `//metaball add <radius>`
+Adds a new metaball to the (player-local) list of metaballs to be draw with the given radius. The position of the new metaball is taken from pos1.
+
+```weacmd
+//metaball add 5
+//metaball add 10
+//metaball add 65
+```
+
+#### `//metaball remove <index>`
+Removes the metaball with the given index from the list. See also `//metaball list`.
+
+```weacmd
+//metaball remove 1
+//metaball remove 2
+//metaball remove 5
+```
+
+#### `//metaball render <replace_node> [<threshold=1>]`
+Renders the current list of metaballs to the world using replace_node to draw with.
+
+Threshold is a value that acts as an offset for large or small the metaballs should be. Defaults to 1, with larger values resulting in **smaller** metaballs and smaller values resulting in **larger** metaballs. It is not recommended to set threshold to a negative number.
+
+Does not clear the list of metaballs after rendering - see `//metaball clear` for that.
+
+```weacmd
+//metaball render dirt
+//metaball render glass
+//metaball render stone
+//metaball render stone 2
+//metaball render cobble 0.5
+```
+
+#### `//metaball list`
+Lists all the metaballs currently registered for the current player (all `//metaball` commands operate on the current player's metaball list only), and their indexes, positions, and sizes. Useful when using `//metaball remove <index>` to identify which metaball you want to remove.
+
+Example output:
+
+```
+Index	Position		Radius
+1		(-495, 37, 150)	7
+2		(-506, 33, 142)	7
+3		(-516, 35, 152)	10
+```
+
+```weacmd
+//metaball list
+```
+
+#### `//metaball clear`
+Clears the list of metaballs for the current player.
+
+```weacmd
+//metaball clear
+```
+
+#### `//metaball volume`
+Calculate an estimated volume of the metaballs currently in the list.
+
+```weacmd
+//metaball volume
+```
+
 
 ### `//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`
 Creates a solid ellipsoid at position 1 with the radius `(rx, ry, rz)`.
