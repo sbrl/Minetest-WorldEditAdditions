@@ -28,6 +28,9 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 The detailed explanations have moved! Check them out [here](https://worldeditadditions.mooncarrot.space/Reference/) (or edit at [Chat-Command-Reference.md](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md)), or click the links below.
 
 ### Geometry
+ - [`//spline <replace_node> <width_start> [<width_end=width_start> [<steps=3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#spline)
+ - [`//dome+ <radius> <replace_node> [<pointing_dir:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> ...] [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#dome)
+ - [`//metaball add <radius> | remove <index> | render <replace_node> [<threshold=1>] | list | clear | volume`](https://worldeditadditions.mooncarrot.space/Reference/#metaball)
  - [`//ellipsoid <rx> <ry> <rz> <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid)
  - [`//ellipsoid2 <node_name> [h[ollow]]`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoid2)
  - [`//hollowellipsoid <rx> <ry> <rz> <node_name>`](https://worldeditadditions.mooncarrot.space/Reference/#hollowellipsoid)
@@ -44,6 +47,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//wcorner <replace_node>`](https://worldeditadditions.mooncarrot.space/Reference/#wcorner)
 
 ### Misc
+ - [`//revolve <times> [<pivot_point_number=last_point>]`](https://worldeditadditions.mooncarrot.space/Reference/#revolve)
  - [`//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#copy)
  - [`//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#move)
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://worldeditadditions.mooncarrot.space/Reference/#replacemix)
@@ -57,7 +61,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//convolve <kernel> [<width>[,<height>]] [<sigma>]`](https://worldeditadditions.mooncarrot.space/Reference/#convolve)
  - [`//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#erode) **experimental**
  - [`//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d)
- - [`//sculpt [<brush_name=default> [<height=5> [<brush_size=10>]]]`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt)
+ - [`//sculpt [[<brush_name=default> [<brush_size=8> [<height=1>]]]`](https://worldeditadditions.mooncarrot.space/Reference/#sculpt)
  - [`//sculptlist [preview]`](https://worldeditadditions.mooncarrot.space/Reference/#sculptlist)
 
 ### Flora
@@ -82,6 +86,12 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)
  - [`//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#sshift)
  - [`//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor)
+ - [`//pos <index>`](https://worldeditadditions.mooncarrot.space/Reference/#pos)
+ - [`//pos1`](https://worldeditadditions.mooncarrot.space/Reference/#pos1)
+ - [`//pos2`](https://worldeditadditions.mooncarrot.space/Reference/#pos2)
+ - [`//mark`](https://worldeditadditions.mooncarrot.space/Reference/#mark)
+ - [`//unmark`](https://worldeditadditions.mooncarrot.space/Reference/#unmark)
+ - [`//reset`](https://worldeditadditions.mooncarrot.space/Reference/#reset)
  
 ### Measure
  - [`//mface`](https://worldeditadditions.mooncarrot.space/Reference/#mface) _(new in v1.13)_

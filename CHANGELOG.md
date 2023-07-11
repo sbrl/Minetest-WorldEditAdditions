@@ -29,6 +29,7 @@ Note to self: See the bottom of this file for the release template text.
 	- Change defaults to `circle`, `height=1`, and `brushsize=8`.
 	- Change argument ordering to put `height` after `brushsize` instead of the other way around
  - `//hollow`: Fix safe region bug
+ - Make `//pos1`, `//1`, `//pos2`, `//2`, `//mark`, `//unmark`, and `//reset` aware of the new WEA positioning system
 
 
 ## v1.13: The transformational update (2nd January 2022)
