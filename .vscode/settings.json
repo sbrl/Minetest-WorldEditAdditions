@@ -4,5 +4,9 @@
 		"undefined-global",
 		"lowercase-global",
 		"cast-local-type"
+	],
+	"cSpell.words": [
+		"ollow",
+		"weacmd"
 	]
 }
