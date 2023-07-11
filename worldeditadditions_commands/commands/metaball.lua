@@ -18,7 +18,7 @@ worldeditadditions_core.register_command("metaball", {
 		local parts = wea_c.split_shell(params_text)
 		
 		if #parts < 1 then
-			return false, "Error: Not enough arguments (see /help /dome for usage information)."
+			return false, "Error: Not enough arguments (see /help /metaball for usage information)."
 		end
 		
 		local subcommand = parts[1]
@@ -83,7 +83,14 @@ worldeditadditions_core.register_command("metaball", {
 	end,
 	nodes_needed = function(name, subcommand)
 		if subcommand == "render" then
-			return wea.metaballs.volume(name)
+			local success, value = wea.metaballs.volume(name)
+			
+			if not success then
+				worldedit.player_notify(name, value)
+				return -1
+			end
+			
+			return value
 		else
 			return 0
 		end
@@ -103,21 +110,19 @@ worldeditadditions_core.register_command("metaball", {
 			local success2, volume = wea.metaballs.volume(name)
 			if not success2 then return success2, volume end
 			
-			message = #metaballs_list.." will take up to "..tostring(volume).." nodes of space"
+			message = #metaballs_list.." metaballs will take up to "..tostring(volume).." nodes of space"
 		elseif subcommand == "clear" then
-			local success, metaballs_cleared = wea.metaballs.clear(name)
-			if not success then return success, metaballs_cleared end
-			
-			message = tostring(metaballs_cleared).." cleared"
+			local metaballs_cleared = wea.metaballs.clear(name)
+			message = tostring(metaballs_cleared).." metaball cleared"
 		elseif subcommand == "remove" then
 			local index = subargs[1]
 			
 			local success, metaballs_count = wea.metaballs.remove(name, index)
 			if not success then return success, metaballs_count end
 			
-			message = "metaball at index "..tostring(index).." removed - "..metaballs_count.." metaballs remain"
+			message = "metaball at index "..tostring(index).." removed - "..tostring(metaballs_count).." metaballs remain"
 		elseif subcommand == "add" then
-			local pos = Vector3.clone(worldedit.pos1[name])
+			local pos = Vector3.clone(worldedit.pos1[name]):round()
 			local radius = subargs[1]
 			
 			local success, metaballs_count = wea.metaballs.add(name, pos, radius)

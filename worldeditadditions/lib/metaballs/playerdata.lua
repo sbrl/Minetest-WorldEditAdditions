@@ -55,6 +55,9 @@ end
 local function list_pretty(player_name)
 	local success, metaball_list = list(player_name)
 	if not success then return success, metaball_list end
+	if not metaball_list or type(metaball_list) ~= "table" then
+		return false, "Invalid metaball list returned"
+	end
 	
 	local rows = { { "Index", "Position", "Radius" } }
 	for i,metaball in ipairs(metaball_list) do
@@ -75,6 +78,9 @@ end
 local function remove(player_name, index)
 	local success, metaball_list = list(player_name)
 	if not success then return success, metaball_list end
+	if not metaball_list or type(metaball_list) ~= "table" then
+		return false, "Invalid metaball list returned"
+	end
 	
 	if index > #metaball_list then
 		return false, "Error: Requested the removal of metaball "..tostring(index)..", but there are "..tostring(#metaball_list).." metaballs defined."
@@ -82,7 +88,7 @@ local function remove(player_name, index)
 	
 	table.remove(metaball_list, index)
 	
-	return #metaball_list
+	return true, #metaball_list
 end
 
 --- Removes all the currently defined metaballs for the given player.
@@ -104,7 +110,10 @@ local function volume(player_name)
 	local success, metaball_list = list(player_name)
 	if not success then return success, metaball_list end
 	
+	if not metaball_list or not metaball_list[1] or type(metaball_list) ~= "table" then return false, "Error: Invalid metaball list returned" end
+	
 	if #metaball_list == 0 then return 0 end
+	
 	
 	local pos1 = metaball_list[1].pos
 	local pos2 = pos1
@@ -114,7 +123,7 @@ local function volume(player_name)
 		pos2 = Vector3.max(pos2, metaball.pos + metaball.radius)
 	end
 	
-	return (pos2 - pos1):area()
+	return true, (pos2 - pos1):area()
 end
 
 return {
