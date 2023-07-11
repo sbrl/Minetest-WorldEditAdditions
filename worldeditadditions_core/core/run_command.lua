@@ -37,6 +37,10 @@ local function run_command(cmdname, options, player_name, paramtext)
 	
 	if options.nodes_needed then
 		local potential_changes = options.nodes_needed(player_name, wea_c.table.unpack(parse_result))
+		if type(potential_changes) ~= "number" then
+			worldedit.player_notify(player_name, "Error: The command '"..cmdname.."' returned a "..type(potential_changes).." instead of a number when asked how many nodes might be changed. Abort. This is a bug.")
+			return
+		end
 		
 		local limit = wea_c.safe_region_limit_default
 		if wea_c.safe_region_limits[player_name] then
