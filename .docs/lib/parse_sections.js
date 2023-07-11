@@ -39,6 +39,8 @@ function make_section(acc, cat_current, cats) {
 			.replace(/\s+/g, "-")
 			.replace(/-.*$/, ""),
 		content: markdown.render(acc.slice(1).join("\n"))
+			.replace(/<h4(\/?)>/g, "<h3$1>")
+			.replace(/<h5(\/?)>/g, "<h4$1>")
 	};
 }
 

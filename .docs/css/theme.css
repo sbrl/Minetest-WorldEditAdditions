@@ -88,6 +88,7 @@ h1, h2, h3, h4, h5, h6 {
 	text-align: center;
 	word-wrap: break-word;
 }
+
 .linked-section-heading {
 	display: flex;
 }
@@ -110,6 +111,18 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0 0.5em;
 	line-height: 1.5;
 	align-self: flex-start;
+}
+h3 {
+	margin-top: 2em;
+	padding-bottom: 0.2em;
+	border-bottom: 0.1em solid var(--cat-colour);
+}
+h3, h3 > code {
+	font-size: 1.1em;
+	text-align: left;
+}
+h3 > code {
+	background: transparent;
 }
 
 nav {
