@@ -4,7 +4,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
-## v1.14: The multipoint update (unreleased)
+## v1.14: The multipoint update (11th July 2023)
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
  - Significant backend refactoring to tidy things up
