@@ -8,5 +8,9 @@
 	"cSpell.words": [
 		"ollow",
 		"weacmd"
-	]
+	],
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"editor.trimAutoWhitespace": false,
+	"files.eol": "\n"
 }
