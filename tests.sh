@@ -90,6 +90,11 @@ run_test() {
 	fi
 	"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
 	
+	# If it doesn't begin with a dot, then Minetest *will* complain
+	if [[ -d "luacov-html" ]]; then
+		mv "luacov-html" ".luacov-html";
+	fi
+	
 	# Remove, but only if empty
 	if [[ -s "luacov.report.out" ]]; then :
 	else rm "luacov.report.out"; fi
