@@ -1,0 +1,31 @@
+reporter = "html"
+
+return {
+	modules = {
+		["worldeditadditions_core.**"] = "worldeditadditions_core",
+	},
+	include = {
+		"worldeditadditions_core$",
+		"worldeditadditions_core%/.+$",
+		"worldeditadditions",
+		"worldeditadditions_commands",
+	},
+	exclude = {
+		".tests$",
+		".tests%/.+$",
+		".docs$",
+		".docs%/.+$",
+		".github$",
+		".github%/.+$",
+		".luarocks$",
+		".luarocks%/.+$",
+		".luacov-html$",
+		".luacov-html%/.+$",
+		".vscode$",
+		".vscode%/.+$",
+	},
+	runreport = true,
+	deletestats = true,
+	-- includeuntestedfiles = true -- currently causes a crash
+	-- reportfile = "luacov.report.html"
+}

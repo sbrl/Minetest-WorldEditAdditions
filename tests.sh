@@ -5,8 +5,6 @@ cd "$(dirname "$(readlink -f "$0")")" || { echo "Error: Failed to cd to script d
 # To run Luacheck:
 # 
 # luacheck . --ignore 631 61[124] 412 21[123] --globals minetest worldedit worldeditadditions worldeditadditions_commands worldeditadditions_core vector assert bit it describe bonemeal  --codes -j "$(nproc)" --quiet --exclude-files .luarocks/*
-# 
-# This is a work-in-progress, as it currently throws an *enormous* number of warnings.
 
 ###############################################################################
 
@@ -22,6 +20,27 @@ check_command() {
 		log_msg "Error: Couldn't locate $1. Make sure it's installed and in your path.";
 	fi
 	set -e;
+}
+
+# Display a url in the terminal.
+# See https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
+# $1 - The url to link to.
+# $2 - The display text to show.
+display_url() {
+	local URL_START='\e]8;;';
+	#shellcheck disable=SC1003
+	local URL_DISPLAY_TEXT='\e\\';
+	#shellcheck disable=SC1003
+	local URL_END='\e]8;;\e\\';
+	
+	url="$1";
+	display_text="$2";
+	
+	if [[ -z "$display_text" ]]; then
+		display_text="${url}";
+	fi
+	
+	echo -e "${URL_START}${url}${URL_DISPLAY_TEXT}${display_text}${URL_END}";
 }
 
 ###############################################################################
@@ -47,6 +66,9 @@ run_setup() {
 	log_msg "Installing busted";
 	
 	luarocks --tree "${luarocks_root}" install busted;
+	luarocks --tree "${luarocks_root}" install luacov;
+	luarocks --tree "${luarocks_root}" install cluacov;
+	luarocks --tree "${luarocks_root}" install luacov-html;
 }
 
 run_syntax_check() {
@@ -54,6 +76,10 @@ run_syntax_check() {
 }
 
 run_test() {
+	if [[ -r "luacov.stats.out" ]]; then rm "luacov.stats.out"; fi
+	if [[ -r "luacov.report.out" ]]; then rm "luacov.report.out"; fi
+	if [[ -d "luacov-html" ]]; then rm -r "luacov-html"; fi
+	
 	busted_path=".luarocks/bin/busted";
 	if [[ ! -r "${busted_path}" ]]; then
 		busted_path=".luarocks/bin/busted.bat";
@@ -62,7 +88,13 @@ run_test() {
 		echo "Error: Failed to find busted at .luarocks/bin/busted or .luarocks/bin/busted.bat" >&2;
 		exit 1;
 	fi
-	"${busted_path}" --no-auto-insulate --pattern ".test.lua" .tests;
+	"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
+	
+	# Remove, but only if empty
+	if [[ -s "luacov.report.out" ]]; then :
+	else rm "luacov.report.out"; fi
+	
+	echo -e "Output written to $(display_url "file://$PWD/luacov-html/index.html" "./luacov-html/index.html")";
 }
 
 case "${mode}" in
