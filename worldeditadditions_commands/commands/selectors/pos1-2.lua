@@ -4,7 +4,8 @@ local Vector3 = weac.Vector3
 
 local function do_set(name, i)
 	local player = minetest.get_player_by_name(name)
-	weac.pos.set(name, i, Vector3.clone(player:get_pos()))
+	local addend = Vector3.new(0,1,0) -- Add one on the y axis
+	weac.pos.set(name, i, Vector3.floor(player:get_pos()) + addend)
 end
 
 local function do_set1(name, params_text)
