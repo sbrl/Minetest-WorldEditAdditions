@@ -239,3 +239,41 @@ temp/
 
 # VorTechnix stuff
 .vdev/
+# Created by https://www.toptal.com/developers/gitignore/api/archives
+# Edit at https://www.toptal.com/developers/gitignore?templates=archives
+
+### Archives ###
+# It's better to unpack these files and commit the raw source because
+# git has its own built in compression methods.
+*.7z
+*.jar
+*.rar
+*.zip
+*.gz
+*.gzip
+*.tgz
+*.bzip
+*.bzip2
+*.bz2
+*.xz
+*.lzma
+*.cab
+*.xar
+
+# Packing-only formats
+*.iso
+*.tar
+
+# Package management formats
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+*.msi
+*.msm
+*.msp
+*.txz
+
+# End of https://www.toptal.com/developers/gitignore/api/archives
