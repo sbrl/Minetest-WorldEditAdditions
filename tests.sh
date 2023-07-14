@@ -66,9 +66,11 @@ run_setup() {
 	log_msg "Installing busted";
 	
 	luarocks --tree "${luarocks_root}" install busted;
-	luarocks --tree "${luarocks_root}" install luacov;
-	luarocks --tree "${luarocks_root}" install cluacov;
-	luarocks --tree "${luarocks_root}" install luacov-html;
+	if [[ "${OSTYPE}" != *"msys"* ]]; then
+		luarocks --tree "${luarocks_root}" install luacov;
+		luarocks --tree "${luarocks_root}" install cluacov;
+		luarocks --tree "${luarocks_root}" install luacov-html;
+	fi
 }
 
 run_syntax_check() {
@@ -88,18 +90,24 @@ run_test() {
 		echo "Error: Failed to find busted at .luarocks/bin/busted or .luarocks/bin/busted.bat" >&2;
 		exit 1;
 	fi
-	"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
 	
-	# If it doesn't begin with a dot, then Minetest *will* complain
-	if [[ -d "luacov-html" ]]; then
-		mv "luacov-html" ".luacov-html";
+	if [[ "${OSTYPE}" == *"msys"* ]]; then
+		"${busted_path}" --no-auto-insulate --pattern ".test.lua" .tests;
+	else
+		"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
+		
+		
+		# If it doesn't begin with a dot, then Minetest *will* complain
+		if [[ -d "luacov-html" ]]; then
+			mv "luacov-html" ".luacov-html";
+		fi
+		
+		# Remove, but only if empty
+		if [[ -s "luacov.report.out" ]]; then :
+		else rm "luacov.report.out"; fi
+		
+		echo -e "Output written to $(display_url "file://$PWD/luacov-html/index.html" "./luacov-html/index.html")";
 	fi
-	
-	# Remove, but only if empty
-	if [[ -s "luacov.report.out" ]]; then :
-	else rm "luacov.report.out"; fi
-	
-	echo -e "Output written to $(display_url "file://$PWD/luacov-html/index.html" "./luacov-html/index.html")";
 }
 
 case "${mode}" in
