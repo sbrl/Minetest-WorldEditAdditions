@@ -3,6 +3,11 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
+
+## v1.14.2: The multipoint update, hotfix 2 (15th July 2023)
+- Fix crash in `//subdivide`, again due to the new position system
+
+
 ## v1.14.1: The multipoint update, hotfix 1 (12th July 2023)
  - Fix issue #100, which caused a crash as `//pos1` and `//pos2` allowed non-integer positions to be set
 

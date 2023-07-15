@@ -5,17 +5,18 @@
 -- ███████  ██████  ██████  ██████  ██   ████   ██ ██████  ███████
 local wea_c = worldeditadditions_core
 local wea = worldeditadditions
+local Vector3 = wea_c.Vector3
 
 -- Counts the number of chunks in the given area.
 -- Maths is now done properly. Values from this new implementation were tested
 -- with 1000 random pos1, pos2, and chunk_size combinations and found to be identical.
 local function count_chunks(pos1, pos2, chunk_size)
 	-- Assume pos1 & pos2 are sorted
-	local dimensions = {
-		x = pos2.x - pos1.x + 1,
-		y = pos2.y - pos1.y + 1,
-		z = pos2.z - pos1.z + 1,
-	}
+	local dimensions = Vector3.new(
+		pos2.x - pos1.x + 1,
+		pos2.y - pos1.y + 1,
+		pos2.z - pos1.z + 1
+	)
 	-- print("[new] dimensions", dimensions.x, dimensions.y, dimensions.z)
 	return math.ceil(dimensions.x / chunk_size.x)
 		* math.ceil(dimensions.y / chunk_size.y)
@@ -68,12 +69,12 @@ local function subdivide_step_beforeload(state)
 		end
 	end
 	
-	state.cpos2 = { x = state.cpos.x, y = state.cpos.y, z = state.cpos.z }
-	state.cpos1 = {
-		x = state.cpos.x - state.chunk_size.x,
-		y = state.cpos.y - state.chunk_size.y,
-		z = state.cpos.z - state.chunk_size.z
-	}
+	state.cpos2 = Vector3.new(state.cpos.x, state.cpos.y, state.cpos.z)
+	state.cpos1 = Vector3.new(
+		state.cpos.x - state.chunk_size.x,
+		state.cpos.y - state.chunk_size.y,
+		state.cpos.z - state.chunk_size.z
+	)
 	if state.cpos1.x < state.pos1.x then state.cpos1.x = state.pos1.x end
 	if state.cpos1.y < state.pos1.y then state.cpos1.y = state.pos1.y end
 	if state.cpos1.z < state.pos1.z then state.cpos1.z = state.pos1.z end
@@ -151,7 +152,7 @@ function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock,
 	local state = {
 		pos1 = pos1, pos2 = pos2,
 		-- Note that we start 1 over on the Z axis because we increment *before* calling the callback, so if we don't fiddle it here, we'll miss the first chunk
-		cpos = { x = pos2.x, y = pos2.y, z = pos2.z + chunk_size.z + 1 },
+		cpos = Vector3.new(pos2.x, pos2.y, pos2.z + chunk_size.z + 1),
 		-- The size of a single subblock
 		chunk_size = chunk_size,
 		-- The total number of nodes in the defined region
