@@ -4,6 +4,13 @@ local EventEmitter = worldeditadditions_core.EventEmitter
 
 local anchor
 
+local function make_id()
+	return tostring(wea_c.get_ms_time()) .. "_" .. tostring(math.floor(math.random() * 1000000))
+end
+
+local last_reset = make_id()
+
+
 local WEAPositionMarker = {
 	initial_properties = {
 		visual = "cube",
@@ -11,7 +18,6 @@ local WEAPositionMarker = {
 		collisionbox = { -0.55, -0.55, -0.55, 0.55, 0.55, 0.55 },
 		physical = false,
 		collide_with_objects = false,
-		static_save = false,
 		
 		textures = {
 			"worldeditadditions_core_bg.png",
@@ -24,25 +30,55 @@ local WEAPositionMarker = {
 	},
 	
 	on_activate = function(self, staticdata)
-		-- noop
+		local data = minetest.parse_json(staticdata)
+		if type(data) ~= "table" or data.id ~= last_reset then
+			-- print("DEBUG:marker_wall/remove staticdata", staticdata, "last_reset", last_reset)
+			self.object:remove()
+			-- else
+			-- print("DEBUG:marker_wall/ok staticdata", staticdata, "type", type(staticdata), "last_reset", last_reset, "type", type(last_reset))
+			return
+		end
+		
+		self.__id = data.id
+		self.player_name = data.player_name
+		self.display_number = data.display_number
+		
+		anchor:emit("update_entity", {
+			entity = self.object,
+			id = self.__id,
+			player_name = self.player_name,
+			i = self.display_number
+		})
+		anchor.set_number(self.object, self.display_number)
 	end,
 	on_punch = function(self, _)
 		anchor.delete(self)
 	end,
 	on_blast = function(self, damage)
 		return false, false, {} -- Do not damage or knockback the player
+	end,
+	get_staticdata = function(self)
+		return minetest.write_json({
+			id = self.__id,
+			display_number = self.display_number,
+			player_name = self.player_name
+		})
 	end
 }
 
 minetest.register_entity(":worldeditadditions:position", WEAPositionMarker)
 
 local function create(player_name, pos, display_number)
-	local entity = minetest.add_entity(pos, "worldeditadditions:position")
+	local entity = minetest.add_entity(pos, "worldeditadditions:position", minetest.write_json({
+		id = last_reset,
+		display_number = display_number,
+		player_name = player_name
+	}))
 	
-	entity:get_luaentity().player_name = player_name
-	entity:get_luaentity().display_number = display_number
+	-- entity:get_luaentity().player_name = player_name
+	-- entity:get_luaentity().display_number = display_number
 	
-	anchor.set_number(entity, display_number)
+	-- anchor.set_number(entity, display_number)
 	
 	anchor:emit("create", {
 		player_name = player_name,
@@ -53,10 +89,12 @@ local function create(player_name, pos, display_number)
 end
 
 local function delete(entity)
-	if not entity.get_luaentity or not entity:get_luaentity() then return end -- Ensure the entity is still valid
+	if not entity or not entity.get_luaentity or not entity:get_luaentity() then return end -- Ensure the entity is still valid
 	
 	local player_name = entity:get_luaentity().player_name
 	local display_number = entity:get_luaentity().display_number
+	
+	last_reset = make_id()
 	
 	entity:remove()
 	

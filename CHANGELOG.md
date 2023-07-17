@@ -4,6 +4,9 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
+## v1.14.3: The multipoint update, hotfix 3 (18th July 2023)
+- Fix regions not remembering their state and being unresettable
+
 ## v1.14.2: The multipoint update, hotfix 2 (15th July 2023)
 - Fix crash in `//subdivide`, again due to the new position system
 

@@ -7,7 +7,12 @@ local anchor
 local entity_wall_size = 10
 local collision_thickness = 0.2
 
-local last_reset = tostring(wea_c.get_ms_time())
+local function make_id()
+	return tostring(wea_c.get_ms_time()) .. "_" .. tostring(math.floor(math.random() * 1000000))
+end
+
+local last_reset = make_id()
+
 
 local WEAPositionMarkerWall = {
 	initial_properties = {
@@ -17,7 +22,6 @@ local WEAPositionMarkerWall = {
 		-- ^^ { xmin, ymin, zmin, xmax, ymax, zmax } relative to obj pos
 		physical = false,
 		collide_with_objects = false,
-		static_save = false,
 
 		textures = {
 			"worldeditadditions_core_marker_wall.png",
@@ -30,18 +34,37 @@ local WEAPositionMarkerWall = {
 	},
 
 	on_activate = function(self, staticdata)
-		if staticdata ~= last_reset then
-			-- print("DEBUG:marker_wall/remove staticdata", staticdata, "last_reset", last_reset)
+		local data = minetest.parse_json(staticdata)
+		if type(data) ~= "table" or data.id ~= last_reset then
 			self.object:remove()
-		-- else
-			-- print("DEBUG:marker_wall/ok staticdata", staticdata, "type", type(staticdata), "last_reset", last_reset, "type", type(last_reset))
+			return
 		end
+		
+		self.__id = data.id
+		self._size = Vector3.clone(data.size)
+		self._side = data.side
+		self.player_name = data.player_name
+		
+		anchor.__single_setup(self.object, self._size, self._side)
+		
+		anchor:emit("update_entity", {
+			entity = self.object,
+			player_name = self.player_name
+		})
 	end,
 	on_punch = function(self, _)
 		anchor.delete(self)
 	end,
 	on_blast = function(self, damage)
 		return false, false, {} -- Do not damage or knockback the player
+	end,
+	get_staticdata = function(self)
+		return minetest.write_json({
+			id = self.__id,
+			size = self._size,
+			side = self._side,
+			player_name = self.player_name
+		})
 	end
 }
 
@@ -109,12 +132,17 @@ local function create_single(player_name, pos1, pos2, side)
 	
 	
 	local pos_centre = ((pos2 - pos1) / 2) + pos1
-	local entity = minetest.add_entity(pos_centre, "worldeditadditions:marker_wall", last_reset)
+	local entity = minetest.add_entity(pos_centre, "worldeditadditions:marker_wall", minetest.write_json({
+		id = last_reset,
+		size = pos2 - pos1,
+		side = side,
+		player_name = player_name
+	}))
 	-- print("DEBUG:marker_wall create_single --> START player_name", player_name, "pos1", pos1, "pos2", pos2, "side", side, "SPAWN", pos_centre, "last_reset", last_reset)
 	
-	entity:get_luaentity().player_name = player_name
+	-- entity:get_luaentity().player_name = player_name
 	
-	single_setup(entity, pos2 - pos1, side)
+	-- single_setup(entity, pos2 - pos1, side)
 	
 	return entity
 end
@@ -438,7 +466,7 @@ local function delete(entitylist)
 		entity:remove()
 	end
 	
-	last_reset = tostring(wea_c.get_ms_time())
+	last_reset = make_id()
 	-- print("DEBUG:marker_wall delete --> LAST_RESET is now", last_reset, "type", type(last_reset))
 	
 	anchor:emit("delete", {
@@ -450,7 +478,8 @@ end
 
 anchor = EventEmitter.new({
 	create = create_wall,
-	delete = delete
+	delete = delete,
+	__single_setup = single_setup
 })
 
 return anchor

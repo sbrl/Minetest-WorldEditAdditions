@@ -53,6 +53,26 @@ local function do_update(event)
 end
 
 
+local function garbage_collect(player_name)
+	if not wall_entity_lists[player_name] then return end -- Nothing to do
+	
+	for i, entity in ipairs(wall_entity_lists[player_name]) do
+		if not entity:get_pos() then
+			table.remove(wall_entity_lists[player_name], i)
+		end
+	end
+end
+
+local function update_entity(event)
+	print("DEBUG:pos_marker_wall_manage UPDATE_ENTITY event", weac.inspect(event))
+	garbage_collect(event.player_name)
+	
+	ensure_player(event.player_name)
+	table.insert(
+		wall_entity_lists[event.player_name],
+		event.entity
+	)
+end
 
 local function needs_update(event)
 	if event.i > 2 then
@@ -73,3 +93,5 @@ weac.pos:addEventListener("clear", do_delete)
 
 weac.pos:addEventListener("unmark", do_delete)
 weac.pos:addEventListener("mark", do_update)
+
+weac.entities.pos_marker_wall:addEventListener("update_entity", update_entity)
