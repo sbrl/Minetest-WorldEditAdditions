@@ -110,3 +110,11 @@ wea_c.pos:addEventListener("mark", function(event)
 		})
 	end
 end)
+
+
+wea_c.entities.pos_marker:addEventListener("update_entity", function(event)
+	wea_c.entities.pos_marker.delete(
+		position_entities[event.player_name][event.i]
+	)
+	position_entities[event.player_name][event.i] = event.entity
+end)

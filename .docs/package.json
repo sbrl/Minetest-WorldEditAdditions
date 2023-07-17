@@ -1,6 +1,6 @@
 {
 	"name": "worldeditadditions",
-	"version": "1.14.1",
+	"version": "1.14.3",
 	"description": "Documentation website for WorldEditAdditions",
 	"main": "index.js",
 	"private": true,
