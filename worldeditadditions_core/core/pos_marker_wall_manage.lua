@@ -64,7 +64,6 @@ local function garbage_collect(player_name)
 end
 
 local function update_entity(event)
-	print("DEBUG:pos_marker_wall_manage UPDATE_ENTITY event", weac.inspect(event))
 	garbage_collect(event.player_name)
 	
 	ensure_player(event.player_name)
