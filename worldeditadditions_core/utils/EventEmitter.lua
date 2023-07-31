@@ -58,8 +58,12 @@ end
 -- @param	event_name	string			The name of the event to emit.
 -- @param	args		table|any		The argument(s) to pass to listener functions. It is strongly advised you pass a table here.
 function EventEmitter.emit(this, event_name, args)
+	if this.debug then
+		listeners = 0
+		if this.events[event_name] ~= nil then listeners = #this.events[event_name] end
+		print("DEBUG:EventEmitter emit", event_name, "listeners", listeners, "args", wea_c.inspect(args))
+	end
 	if this.events[event_name] == nil then return end
-	if this.debug then print("DEBUG:EventEmitter emit", event_name, "args", wea_c.inspect(args)) end
 	
 	for index,next_func in ipairs(this.events[event_name]) do
 		next_func(args)
