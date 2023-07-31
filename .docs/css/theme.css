@@ -261,6 +261,8 @@ footer {
 	/* color: var(--text-bright); */
 }
 
+.badge			{ padding: 0 0.25em; }
+
 .text-left		{ text-align: left;		}
 .text-centre	{ text-align: center;	}
 .text-right		{ text-align: right;	}
