@@ -1,6 +1,6 @@
 --- WorldEditAdditions
 -- @namespace worldeditadditions
--- @release 1.14.3
+-- @release 1.14.4
 -- @copyright 2023 Starbeamrainbowlabs
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs

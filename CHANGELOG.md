@@ -4,7 +4,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
-## v1.14.4: The multipoint update, hotfix 4 (unreleased)
+## v1.14.4: The multipoint update, hotfix 4 (31st July 2023)
 - When any segment of the marker wall is punched, unmark the entire wall
 
 
