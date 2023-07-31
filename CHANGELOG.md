@@ -3,7 +3,8 @@ It's about time I started a changelog! This will serve from now on as the main c
 
 Note to self: See the bottom of this file for the release template text.
 
-## v1.14.5: The multipoint update, hotfix 5 (unreleased)
+
+## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)
 - Added `//listentities`, which lists all currently loaded `ObjectRef`s. This is intended for debugging mods.
 
 
