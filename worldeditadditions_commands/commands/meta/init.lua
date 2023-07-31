@@ -16,3 +16,5 @@ dofile(we_cmdpath.."many.lua")
 dofile(we_cmdpath.."multi.lua")
 dofile(we_cmdpath.."noiseapply2d.lua")
 dofile(we_cmdpath.."subdivide.lua")
+
+dofile(we_cmdpath.."listentities.lua")

@@ -22,7 +22,8 @@ local WEAPositionMarkerWall = {
 		-- ^^ { xmin, ymin, zmin, xmax, ymax, zmax } relative to obj pos
 		physical = false,
 		collide_with_objects = false,
-
+		hp_max = 1,
+		
 		textures = {
 			"worldeditadditions_core_marker_wall.png",
 			"worldeditadditions_core_marker_wall.png",
@@ -53,6 +54,7 @@ local WEAPositionMarkerWall = {
 		})
 	end,
 	on_punch = function(self, _)
+		print("DEBUG:pos_marker_wall on_punch")
 		anchor.delete(self)
 		-- Only unmark the rest of the walls
 		-- Unmark for the player that created this wall.... NOT the player who punched it!
