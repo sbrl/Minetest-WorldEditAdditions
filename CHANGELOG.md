@@ -4,6 +4,10 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
+## v1.14.4: The multipoint update, hotfix 4 (unreleased)
+- When any segment of the marker wall is punched, unmark the entire wall
+
+
 ## v1.14.3: The multipoint update, hotfix 3 (18th July 2023)
 - Fix regions not remembering their state and being unresettable
 
