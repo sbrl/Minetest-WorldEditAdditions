@@ -33,7 +33,7 @@ local anchor = nil
 
 --- It is requested that all position/region marker UI elements be hidden for the given player.
 -- @event	unmark
--- @format	{ player_name: string }
+-- @format	{ player_name: string, markers: bool, walls: bool }
 
 --- It is requested that all position/region marker UI elements be shown once more for the given player.
 -- @event	mark
@@ -268,15 +268,24 @@ end
 
 --- Hides the visual markers for the given player's positions and defined region, but does not clear the points.
 -- @param	player_name		string	The name of the player to operate on.
-local function unmark(player_name)
+-- @param	markers=true	bool	Whether to hide positional markers.
+-- @param	walls=true		bool	Whether to hide the marker walls.
+-- @returns	void
+local function unmark(player_name, markers, walls)
+	if markers == nil then markers = true end
+	if walls == nil then walls = true end
+
 	anchor:emit("unmark", {
-		player_name = player_name
+		player_name = player_name,
+		markers = markers,
+		walls = walls
 	})
 end
 
 --- Shows the visual markers for the given player's positions and defined region once more.
 -- Often used some time after calling worldeditadditions_core.pos.unmark().
 -- @param	player_name		string	The name of the player to operate on.
+-- @returns	void
 local function mark(player_name)
 	anchor:emit("mark", {
 		player_name = player_name

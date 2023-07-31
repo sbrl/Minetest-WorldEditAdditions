@@ -92,8 +92,9 @@ end)
 wea_c.pos:addEventListener("unmark", function(event)
 	ensure_player(event.player_name)
 	
-	do_delete_all(event.player_name)
-	
+	if event.markers then
+		do_delete_all(event.player_name)
+	end
 	-- Note that this function is NOT WorldEdit compatible, because it is only called through our override of WorldEdit's `//unmark`, and WorldEdit doesn't have an API function to call to unmark and everything is complicated.
 end)
 

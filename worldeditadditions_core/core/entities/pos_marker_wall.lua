@@ -54,6 +54,9 @@ local WEAPositionMarkerWall = {
 	end,
 	on_punch = function(self, _)
 		anchor.delete(self)
+		-- Only unmark the rest of the walls
+		-- Unmark for the player that created this wall.... NOT the player who punched it!
+		wea_c.pos.unmark(self.player_name, false, true)
 	end,
 	on_blast = function(self, damage)
 		return false, false, {} -- Do not damage or knockback the player

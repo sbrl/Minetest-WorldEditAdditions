@@ -85,13 +85,16 @@ local function handle_event(event)
 	if needs_update(event) then do_update(event) end
 end
 
+local function handle_unmark(event)
+	if event.walls then do_delete(event) end
+end
 
 weac.pos:addEventListener("set", handle_event)
 weac.pos:addEventListener("pop", handle_event)
 weac.pos:addEventListener("push", handle_event)
 weac.pos:addEventListener("clear", do_delete)
 
-weac.pos:addEventListener("unmark", do_delete)
+weac.pos:addEventListener("unmark", handle_unmark)
 weac.pos:addEventListener("mark", do_update)
 
 weac.entities.pos_marker_wall:addEventListener("update_entity", update_entity)
