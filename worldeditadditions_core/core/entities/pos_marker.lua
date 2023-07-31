@@ -18,6 +18,7 @@ local WEAPositionMarker = {
 		collisionbox = { -0.55, -0.55, -0.55, 0.55, 0.55, 0.55 },
 		physical = false,
 		collide_with_objects = false,
+		health = 0,
 		
 		textures = {
 			"worldeditadditions_core_bg.png",
@@ -31,6 +32,7 @@ local WEAPositionMarker = {
 	
 	on_activate = function(self, staticdata)
 		local data = minetest.parse_json(staticdata)
+		print("DEBUG:pos_marker ON_ACTIVATE data", data)
 		if type(data) ~= "table" or data.id ~= last_reset then
 			-- print("DEBUG:marker_wall/remove staticdata", staticdata, "last_reset", last_reset)
 			self.object:remove()
@@ -155,5 +157,5 @@ anchor = EventEmitter.new({
 	delete = delete,
 	set_number = set_number
 })
-
+anchor.debug = true
 return anchor
