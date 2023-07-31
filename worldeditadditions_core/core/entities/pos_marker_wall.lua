@@ -53,6 +53,7 @@ local WEAPositionMarkerWall = {
 		})
 	end,
 	on_punch = function(self, _)
+		print("DEBUG:pos_marker_wall on_punch")
 		anchor.delete(self)
 		-- Only unmark the rest of the walls
 		-- Unmark for the player that created this wall.... NOT the player who punched it!

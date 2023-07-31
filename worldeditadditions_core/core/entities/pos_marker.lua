@@ -54,6 +54,7 @@ local WEAPositionMarker = {
 		anchor.set_number(self.object, self.display_number)
 	end,
 	on_punch = function(self, _)
+		print("DEBUG:pos_marker on_punch")
 		anchor.delete(self)
 	end,
 	on_blast = function(self, damage)
