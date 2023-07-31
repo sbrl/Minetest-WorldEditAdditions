@@ -1,5 +1,5 @@
-# ![](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions-64.png) Minetest-WorldEditAdditions
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/sbrl/Minetest-WorldEditAdditions?color=green&label=latest%20release) [![View the changelog](https://img.shields.io/badge/%F0%9F%93%B0-Changelog-informational)](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/CHANGELOG.md) [![ContentDB](https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/shields/downloads/)](https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/)
+# ![](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions-64.png) WorldEditAdditions
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/sbrl/Minetest-WorldEditAdditions?color=green&label=latest%20release) [![View the changelog](https://img.shields.io/badge/%F0%9F%93%B0-Changelog-informational)](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/CHANGELOG.md) [![ContentDB](https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/shields/downloads/)](https://content.minetest.net/packages/Starbeamrainbowlabs/worldeditadditions/) [![Join the official discord server](https://worldeditadditions.mooncarrot.space/img/shield-discord.svg)](https://discord.gg/FzD73kuhsk)
 
 > Extra tools and commands to extend WorldEdit for Minetest
 
