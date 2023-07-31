@@ -18,7 +18,7 @@ local WEAPositionMarker = {
 		collisionbox = { -0.55, -0.55, -0.55, 0.55, 0.55, 0.55 },
 		physical = false,
 		collide_with_objects = false,
-		health = 0,
+		hp_max = 1,
 		
 		textures = {
 			"worldeditadditions_core_bg.png",
