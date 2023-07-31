@@ -5,11 +5,11 @@ Note to self: See the bottom of this file for the release template text.
 
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)
-- Added `//listentities`, which lists all currently loaded `ObjectRef`s. This is intended for debugging mods.
+- Added `//listentities`, which lists all currently loaded `ObjectRef`s. This is intended for debugging mods - thanks to @Zughy in #103
 
 
 ## v1.14.4: The multipoint update, hotfix 4 (31st July 2023)
-- When any segment of the marker wall is punched, unmark the entire wall
+- When any segment of the marker wall is punched, unmark the entire wall - thanks to @Zughy in #102
 
 
 ## v1.14.3: The multipoint update, hotfix 3 (18th July 2023)
