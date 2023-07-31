@@ -4,7 +4,7 @@ set -e;
 # current_branch="$(git rev-parse --abbrev-ref HEAD)";
 is_main="$(git branch --contains HEAD | awk '/HEAD/ { next } /dev/ { print $1 }')";
 
-if [[ "${1}" == "ci" ]] && [[ ! -z "${is_main}" ]]; then
+if [[ "${1}" == "ci" ]] && [[ -n "${is_main}" ]]; then
 	echo "Skipping build, because this commit does not appear to be on the 'dev' branch, and we only deploy commits on the 'main' branch.";
 fi
 
@@ -108,7 +108,7 @@ fi
 # ██   ██ ██   ██ ██      ██   ██ ██  ██  ██  ██
 # ██   ██ ██   ██  ██████ ██   ██ ██   ████   ███████
 
-if [[ ! -z "${ARCHIVE}" ]]; then
+if [[ -n "${ARCHIVE}" ]]; then
 	log_msg "Archiving content";
 	check_command tar;
 	check_command gzip;
