@@ -1349,6 +1349,17 @@ Here are some more examples:
 ```
 
 
+### `//listentities`
+Lists all currently loaded ObjectRefs. Displays their IDs, Names (if possible), and possitions.
+
+This command is intended for development and modding. You will not normally need to use this command using WorldEditAdditions.
+
+`//listentities` takes no arguments.
+
+```
+//listentities
+```
+
 
 ## Extras
 <!--
