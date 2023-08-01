@@ -1,5 +1,8 @@
 local wea = worldeditadditions
 
+
+--- System to manipulate the world using noise generation functions.
+-- @namespace worldeditadditions.noise
 wea.noise = {}
 
 -- The command itself

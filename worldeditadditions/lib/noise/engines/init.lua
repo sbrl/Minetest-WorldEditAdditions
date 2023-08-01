@@ -1,6 +1,7 @@
 local wea = worldeditadditions
 
-
+--- Noise generation algorithm engines.
+-- @namespace worldeditadditions.noise.engines
 return {
 	available = { "perlin", "perlinmt", "sin", "white", "red", "infrared" },
 	Perlin = dofile(wea.modpath.."/lib/noise/engines/perlin.lua"),
