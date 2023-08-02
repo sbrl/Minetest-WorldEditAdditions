@@ -1,5 +1,7 @@
 local wea = worldeditadditions
 
+--- Sculpting brush engine.
+-- @namespace worldeditadditions.sculpt
 local sculpt = {
 	brushes = {
 		circle_soft1 = dofile(wea.modpath.."/lib/sculpt/brushes/circle_soft1.lua"),
