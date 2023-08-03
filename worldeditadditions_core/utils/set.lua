@@ -1,6 +1,6 @@
---- Sets for lua!
+--= Sets for lua!
 -- local Set = {}
---- Option 1:
+--= Option 1:
 -- Set.__index = Set
 -- Set.__newindex = function(tbl, key, value)
 -- 	if not tbl.__protected[key] then
@@ -18,6 +18,9 @@
 -- }
 
 --- Option 2:
+
+--- Set implementation for Lua.
+-- @class worldeditadditions_core.Set
 local Set = {}
 Set.__index = Set
 Set.__newindex = function(tbl, key, value)

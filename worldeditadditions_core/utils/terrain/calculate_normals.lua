@@ -1,6 +1,8 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions_core.terrain
 
 --- Calculates a normal map for the given heightmap.
 -- Caution: This method (like worldeditadditions.make_heightmap) works on

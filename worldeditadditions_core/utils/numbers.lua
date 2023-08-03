@@ -1,17 +1,27 @@
 local wea_c = worldeditadditions_core
+---
+-- @module	worldeditadditions_core
 
--- From http://lua-users.org/wiki/SimpleRound
+--- Rounds a number to a given number of decimal places.
+-- @source http://lua-users.org/wiki/SimpleRound
+-- @param	num					number	The number to round.
+-- @param	numDecimalPlaces 	number	The number of decimal places to round to. Should be an integer greater than or equal to 0.
 function wea_c.round(num, numDecimalPlaces)
 	local mult = 10^(numDecimalPlaces or 0)
 	return math.floor(num * mult + 0.5) / mult
 end
 
+--- Calculates the length of the hypoentuse of a right-angled triangle.
+-- TODO: Document this function
 function wea_c.hypotenuse(x1, y1, x2, y2)
 	local xSquare = (x1 - x2) ^ 2;
 	local ySquare = (y1 - y2) ^ 2;
 	return math.sqrt(xSquare + ySquare);
 end
 
+--- Adds up all the numbers in the given list
+-- @param	number[]	The list of numbers to add.
+-- @returns	number		The sum total of all the numbers in the given list.
 function wea_c.sum(list)
 		if #list == 0 then return 0 end
 	local sum = 0

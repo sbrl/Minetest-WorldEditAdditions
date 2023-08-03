@@ -21,7 +21,7 @@ local function round(num, numDecimalPlaces)
 	return math.floor(num * mult + 0.5) / mult
 end
 
---- Pads str to length len with char from right
+-- Pads str to length len with char from right
 -- @source https://snipplr.com/view/13092/strlpad--pad-string-to-the-left
 local function str_padend(str, len, char)
 	if char == nil then char = ' ' end

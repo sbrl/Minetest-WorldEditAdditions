@@ -1,5 +1,11 @@
 local wea_c = worldeditadditions_core
 local v3 = worldeditadditions_core.Vector3
+
+---
+-- @module	worldeditadditions_core
+
+
+
 --- Returns the player's position (at leg level).
 -- @param	name	string	The name of the player to return facing direction of.
 -- @return	vector	Returns position.

@@ -1,6 +1,12 @@
 local wea_c = worldeditadditions_core
 
+--- 
+-- @module worldeditadditions_core
+
+
 --- Interpolates between the 2 given points
+-- 
+-- TODO: refactor numbers.lua and move this function into there instead
 -- @param	a		Vector3|number		The starting point.
 -- @param	b		Vector3|number		The ending point.
 -- @param	time	number				The percentage between 0 and 1 to interpolate to.

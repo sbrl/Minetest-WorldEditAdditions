@@ -1,6 +1,10 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions_core.terrain
+
+
 --- Applies changes to a heightmap to a Voxel Manipulator data block.
 -- @param	pos1	vector		Position 1 of the defined region
 -- @param	pos2	vector		Position 2 of the defined region

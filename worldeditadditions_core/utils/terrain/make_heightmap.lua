@@ -1,6 +1,8 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions_core.terrain
 
 --- Given a manip object and associates, generates a 2D x/z heightmap.
 -- Note that pos1 and pos2 should have already been pushed through

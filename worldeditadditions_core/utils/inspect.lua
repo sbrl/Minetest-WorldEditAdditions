@@ -1,3 +1,12 @@
+-- ██ ███    ██ ███████ ██████  ███████  ██████ ████████ 
+-- ██ ████   ██ ██      ██   ██ ██      ██         ██    
+-- ██ ██ ██  ██ ███████ ██████  █████   ██         ██    
+-- ██ ██  ██ ██      ██ ██      ██      ██         ██    
+-- ██ ██   ████ ███████ ██      ███████  ██████    ██    
+
+---
+-- @module worldeditadditions_core
+
 --- Serialises an arbitrary value to a string.
 -- Note that although the resulting table *looks* like valid Lua, it isn't.
 -- Completely arbitrarily, if a table (or it's associated metatable) has the

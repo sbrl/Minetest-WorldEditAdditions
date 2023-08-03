@@ -1,6 +1,12 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
+
+---
+-- @module	worldeditadditions_core
+
 --- Raycasts to find a node in the direction the given player is looking.
+-- 
+-- This function is not currently aware of custom hitboxes.
 -- @param	player			Player	The player object to raycast from.
 -- @param	maxdist			number	The maximum distance to raycast.
 -- @param	skip_liquid		bool	Whether to skip liquids when raycasting.

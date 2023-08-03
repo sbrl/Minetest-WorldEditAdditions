@@ -4,14 +4,19 @@
 -- ██   ██ ██    ██
 -- ██████  ██    ██
 
--- LuaJIT bit polyfill
--- @source https://github.com/Rabios/polyfill.lua/blob/master/polyfill.lua
--- Adapted for Minetest by Starbeamrainbowlabs
--- Note that this file is MIT licenced, and NOT MPL-2.0!
--- @licence MIT
--- Docs: http://bitop.luajit.org/api.html
 
--- module: bit
+--- LuaJIT bit polyfill
+-- Adapted for Minetest by Starbeamrainbowlabs
+-- 
+-- Note that this file is MIT licenced, and NOT MPL-2.0!
+-- 
+-- Docs: http://bitop.luajit.org/api.html
+-- 
+-- TODO: Document these.
+-- @module worldeditadditions_core.bit
+-- @source https://github.com/Rabios/polyfill.lua/blob/master/polyfill.lua
+-- @licence MIT
+
 
 local bit_local
 

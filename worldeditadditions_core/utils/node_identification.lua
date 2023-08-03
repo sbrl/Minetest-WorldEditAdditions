@@ -1,5 +1,7 @@
 local wea_c =  worldeditadditions_core
 
+--- 
+-- @module	worldeditadditions_core
 
 local node_id_air = minetest.get_content_id("air")
 local node_id_ignore = minetest.get_content_id("ignore")
@@ -104,6 +106,7 @@ function wea_c.register_sapling_alias_many(tbl)
 	end
 	return true
 end
+
 --- Returns the current key ⇒ value table of sapling names and aliases.
 -- @return	table
 function wea_c.get_all_sapling_aliases()

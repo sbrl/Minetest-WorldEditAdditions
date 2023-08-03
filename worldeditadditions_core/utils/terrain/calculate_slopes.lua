@@ -1,6 +1,8 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+--- 
+-- @module worldeditadditions_core.terrain
 
 --- Converts a 2d heightmap into slope values in radians.
 -- Convert a radians to degrees by doing (radians*math.pi) / 180 for display,

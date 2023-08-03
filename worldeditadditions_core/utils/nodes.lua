@@ -1,5 +1,9 @@
 local wea_c =  worldeditadditions_core
 
+--- 
+-- @module	worldeditadditions_core
+
+
 --- Makes an associative table of node_name => weight into a list of node ids.
 -- Node names with a higher weight are repeated more times.
 function wea_c.make_weighted(tbl)
