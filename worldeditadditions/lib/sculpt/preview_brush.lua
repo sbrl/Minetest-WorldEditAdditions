@@ -5,6 +5,9 @@ local Vector3 = wea_c.Vector3
 local make_brush = dofile(wea.modpath.."/lib/sculpt/make_brush.lua")
 local make_preview = dofile(wea.modpath.."/lib/sculpt/make_preview.lua")
 
+---
+-- @module worldeditadditions.sculpt
+
 --- Generates a textual preview of a given brush.
 -- @param	brush_name	string	The name of the brush to create a preview for.
 -- @param	target_size	Vector3	The target size of the brush to create. Default: (10, 10, 0).
