@@ -1,3 +1,6 @@
+--- 
+-- @module worldeditadditions_core
+
 -- WARNING: safe_region MUST NOT be imported more than once, as it defines chat commands. If you want to import it again elsewhere, check first that multiple dofile() calls don't execute a file more than once.
 local wea_c = worldeditadditions_core
 local safe_region = dofile(wea_c.modpath.."/core/safe_region.lua")
@@ -13,6 +16,11 @@ local function run_command_stage2(player_name, func, parse_result)
 	end
 end
 
+--- Runs a command with the given name and options for the given player.
+-- @param	cmdname		string	The name of the command to run.
+-- @param	options		table	The table of options associated with the command. See worldeditadditions_core.register_command for more information.
+-- @param	player_name	string	The name of the player to execute the command for.
+-- @param	paramtext	string	The unparsed argument string to pass to the command when executing it.
 local function run_command(cmdname, options, player_name, paramtext)
 	if options.require_pos > 0 and not worldedit.pos1[player_name] and not wea_c.pos.get1(player_name) then
 		worldedit.player_notify(player_name, "Error: pos1 must be selected to use this command.")

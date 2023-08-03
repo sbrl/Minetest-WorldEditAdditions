@@ -1,9 +1,11 @@
 local wea_c = worldeditadditions_core
 
---- Uncomment these 2 lines to run in standalone mode
+--= Uncomment these 2 lines to run in standalone mode
 -- worldeditadditions = { parse = {  } }
 -- function wea_c.trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
 
+---
+-- @module worldeditadditions_core.parse
 
 --- The main tokeniser. Splits the input string up into space separated tokens, except when said spaces are inside { curly braces }.
 -- Note that the outermost set of curly braces are stripped.

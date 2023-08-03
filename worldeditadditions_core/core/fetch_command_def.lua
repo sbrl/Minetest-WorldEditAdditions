@@ -1,3 +1,5 @@
+---
+-- @module worldeditadditions_core
 
 
 --- Fetches the definition of a WorldEditAdditions or WorldEdit command

@@ -1,3 +1,6 @@
+---
+-- @module worldeditadditions_core.parse
+
 --- Makes a seed from a string.
 -- If the input is a number, it is returned as-is.
 -- If the input is a string and can be converted to a number with tonumber(),

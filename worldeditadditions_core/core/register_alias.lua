@@ -1,6 +1,14 @@
 
 local wea_c = worldeditadditions_core
+---
+-- @module worldeditadditions_core
 
+
+--- Register an alias of an existing worldeditadditions/worldedit command.
+-- @param	cmdname_target	string	The target name for the alias
+-- @param	cmdname_source	string	The source name of the command to alias the target to.
+-- @param	override=false	bool	Whether to override the target command name if it exists. Defaults to false, which results in an error being thrown if the target command name already exists.
+-- @returns	bool			Whether the override operation was successful or not.
 local function register_alias(cmdname_target, cmdname_source, override)
 	if override == nil then override = false end
 	
@@ -34,6 +42,8 @@ local function register_alias(cmdname_target, cmdname_source, override)
 	if minetest.global_exists("worldedit") then
 		worldedit.registered_commands[cmdname_target] = worldedit.registered_commands[cmdname_source]
 	end
+	
+	return true
 end
 
 

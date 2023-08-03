@@ -2,6 +2,8 @@ local wea_c = worldeditadditions_core
 local EventEmitter = worldeditadditions_core.EventEmitter
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions_core.entities.pos_marker_wall
 local anchor
 
 local entity_wall_size = 10

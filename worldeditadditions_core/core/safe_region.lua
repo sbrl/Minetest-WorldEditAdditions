@@ -5,6 +5,8 @@
 --      ██ ██   ██ ██      ██          ██   ██ ██      ██    ██ ██ ██    ██ ██  ██ ██
 -- ███████ ██   ██ ██      ███████     ██   ██ ███████  ██████  ██  ██████  ██   ████
 
+--- 
+-- @module worldeditadditions_core
 local worldedit_command_y, worldedit_command_n
 
 if minetest.global_exists("worldedit") then
@@ -18,9 +20,11 @@ end
 local pending_calls = {}
 
 --- Captures the given function in the safe_region subsystem for later execution.
+-- CAUTION: This command is not available for general use.
+-- @internal
 -- @param	player_name		string		The name of the player.
 -- @param	cmdname			string		The name of the command being executed.
--- @param	func			function	The function to execute later. Will be passed NO ARGUMENTS should it ever get executed in the future (this is not guaranteed).
+-- @param	func			function	The function to execute later. Will be passed NO ARGUMENTS should it ever get executed in the future (though its future execution is not guaranteed).
 -- @returns	nil
 local function safe_region(player_name, cmdname, func)
 	pending_calls[player_name] = {

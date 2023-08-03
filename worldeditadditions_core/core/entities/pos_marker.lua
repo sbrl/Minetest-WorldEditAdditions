@@ -1,7 +1,8 @@
 local wea_c = worldeditadditions_core
 local EventEmitter = worldeditadditions_core.EventEmitter
 
-
+---
+-- @module worldeditadditions_core.entities.pos_marker_wall
 local anchor
 
 local function make_id()

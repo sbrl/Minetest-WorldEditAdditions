@@ -1,4 +1,9 @@
 local wea_c = worldeditadditions_core
+
+---
+-- @module worldeditadditions_core.parse
+
+
 --- Parses a list of strings as a list of weighted nodes - e.g. like in
 -- the //mix command. Example: "dirt 5 stone sand 2".
 -- @param	parts	string[]	The list of strings to parse (try worldeditadditions_core.split)

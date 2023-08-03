@@ -11,6 +11,8 @@ local uak_parse = dofile(wea_c.modpath.."/utils/parse/axes_parser.lua")
 -- Old axis parsing functions
 local axes = dofile(wea_c.modpath.."/utils/parse/axes.lua")
 
+--- Functions for parsing things.
+-- @namespace worldeditadditions_core.parse
 wea_c.parse = {
 	direction_keyword = uak_parse.keyword,
 	directions = uak_parse.keytable,

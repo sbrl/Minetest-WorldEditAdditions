@@ -1,3 +1,7 @@
+---
+-- @module worldeditadditions_core.parse
+
+
 
 --- Parses a chance value, and returns the 1-in-N value thereof.
 -- @param	str		string	The string to parse.

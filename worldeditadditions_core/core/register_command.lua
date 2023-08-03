@@ -4,7 +4,8 @@
 -- ██   ██ ██      ██    ██ ██      ██    ██    ██      ██   ██
 -- ██   ██ ███████  ██████  ██ ███████    ██    ███████ ██   ██
 
--- WorldEditAdditions chat command registration
+--- WorldEditAdditions chat command registration
+-- @module worldeditadditions_core
 local wea_c = worldeditadditions_core
 local run_command = dofile(wea_c.modpath.."/core/run_command.lua")
 
@@ -12,6 +13,7 @@ local function log_error(cmdname, error_message)
 	minetest.log("error", "register_command("..cmdname..") error: "..error_message)
 end
 
+--- TODO: Document this function
 local function register_command(cmdname, options)
 	
 	---

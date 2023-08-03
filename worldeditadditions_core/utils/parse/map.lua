@@ -1,6 +1,9 @@
 ---@diagnostic disable: cast-local-type
 local wea_c = worldeditadditions_core
 
+--- 
+-- @module worldeditadditions_core.parse
+
 --- Parses a map of key-value pairs into a table.
 -- For example, "count 25000 speed 0.8 rate_erosion 0.006 doawesome true" would be parsed into
 -- the following table: { count = 25000, speed = 0.8, rate_erosion = 0.006, doawesome = true }.
