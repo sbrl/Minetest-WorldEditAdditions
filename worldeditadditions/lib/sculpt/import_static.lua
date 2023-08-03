@@ -2,6 +2,9 @@ local wea = worldeditadditions
 
 local parse_static = dofile(wea.modpath.."/lib/sculpt/parse_static.lua")
 
+---
+-- @module worldeditadditions.sculpt
+
 --- Reads and parses the brush stored in the specified file.
 -- @name import_static
 -- @internal

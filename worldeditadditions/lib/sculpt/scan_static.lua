@@ -4,6 +4,10 @@ local Vector3 = wea_c.Vector3
 
 local import_static = dofile(wea.modpath.."/lib/sculpt/import_static.lua")
 
+---
+-- @module worldeditadditions.sculpt
+
+
 local function import_filepath(filepath, name, overwrite_existing)
 	if overwrite_existing and wea.sculpt.brushes[name] ~= nil then
 		return false, "Error: A brush with the name '"..name.."' already exists."

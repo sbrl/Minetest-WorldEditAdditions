@@ -2,6 +2,9 @@ local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions.sculpt
+
 --- Applies the given brush with the given height and size to the given position.
 -- @param	pos1		Vector3		The position at which to apply the brush.
 -- @param	brush_name	string		The name of the brush to apply.

@@ -21,6 +21,12 @@ local sculpt = {
 	parse_static = dofile(wea.modpath.."/lib/sculpt/parse_static.lua")
 }
 
+--- Brushes for use with the sculpting system.
+-- Dump your own in the directory `worldeditadditions/lib/sculpt/brushes` (relative to the WorldEditAdditions git repository root), and WorldEditAdditions will automatically read them!
+-- 
+-- See the documentation for more information: <https://worldeditadditions.mooncarrot.space/Reference/#sculpt>
+-- @namespace worldeditadditions.sculpt.brushes
+
 -- scan_sculpt is called after everything is loaded in the main init file
 
 return sculpt

@@ -1,6 +1,10 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions.sculpt
+
+
 --- Applies the given brush at the given x/z position to the given heightmap.
 -- Important: Where a Vector3 is mentioned in the parameter list, it reall MUST
 -- be a Vector3 instance.

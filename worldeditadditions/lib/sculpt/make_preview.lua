@@ -2,6 +2,9 @@ local wea = worldeditadditions
 
 local make_brush = dofile(wea.modpath.."/lib/sculpt/make_brush.lua")
 
+---
+-- @module worldeditadditions.sculpt
+
 --- Generates a textual preview of a given brush.
 -- @param	brush		table	The brush in question to preview.
 -- @param	size		Vector3	The size of the brush.

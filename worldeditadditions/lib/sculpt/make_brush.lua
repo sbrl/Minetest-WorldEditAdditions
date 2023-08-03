@@ -1,5 +1,8 @@
 local wea = worldeditadditions
 
+---
+-- @module worldeditadditions.sculpt
+
 --- Makes a sculpting brush that is as close to a target size as possible.
 -- @param	brush_name	string	The name of the brush to create.
 -- @param	target_size	Vector3	The target size of the brush to create.
