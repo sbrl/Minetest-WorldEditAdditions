@@ -10,7 +10,8 @@ Name							| Description
 --------------------------------|------------------------
 `worldeditadditions`			| The main mod. Core world manipulation implementations should go in here.
 `worldeditadditions_commands`	| Chat commands. These interact with the core manipulators in `worldeditadditions` mod.
-`worldeditadditions_farwand`	| Everything to do with the far wand tool. It's different enough to everything else that it warrants it's own separate mod to avoid muddling things.
+`worldeditadditions_farwand`	| Everything to do with the far wand tool, and now other tools like the cloud wand, multi-point wand, etc. It's different enough to everything else that it warrants it's own separate mod to avoid muddling things.
+`worldeditadditions_core`		| Core components such as the positioning system (`worldeditadditions_core.pos`), the command registration function, and utility functions go in here.
 
 Additionally, every command should be implemented in its own file. This helps keep things organised and files short.
 
