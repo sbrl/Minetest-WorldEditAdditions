@@ -1,3 +1,5 @@
+*.pdf
+
 luacov-html
 .luacov-html
 _site/
