@@ -72,7 +72,7 @@ Stands for the ASCII character new line U+0A. Wherever this symbol appears, subs
 ## Overview
 The format can be divided into 4 sequential parts:
 
-1. **Magic bytes:** The string `WEASCHEM1\n` is always the beginning of the file.
+1. **Magic bytes:** The string `WEASCHEM 1\n` is always the beginning of the file.
 2. **Header:** Contains metadata about the schematic.
 3. **ID map:** The map of node ids to their respective node names.
 4. **Data tables:** The actual data itself.
@@ -80,7 +80,7 @@ The format can be divided into 4 sequential parts:
 As an example:
 
 ```
-WEASCHEM1
+WEASCHEM 1
 <json_header>
 <id_map>
 <data_table_data>
@@ -94,7 +94,7 @@ WEASCHEM1
 
 <nl> ::= "\n"
 
-<magic_bytes> ::= WEASCHEM <version> <nl>
+<magic_bytes> ::= WEASCHEM " " <version> <nl>
 
 <version> ::= <number>
 <number> ::= <digit> | <digit> <number>
@@ -109,16 +109,18 @@ The non-terminal tokens `<header>`, `<id_map>`, and `<data_table>` are defined b
 A full (trivial) example file is given below:
 
 ```
-WEASCHEM
+WEASCHEM 1
 {"name":"Test schematic","description": "Some description","size":{"x":5,"y":3,"z":4},"offset":{"x":1,"y":0,"z":2},"type":"full","generator": "WorldEditAdditions v1.14"}
 {"0":"default:air","5":"default:stone","14":"default:dirt"}
 10x5,40x14,0,5,14,5,14,5x0
 ```
 
 ## Magic bytes
-The string `WEASCHEM` is always present at the beginning of a WorldEditAdditions schematic file, followed directly by an integer version number.
+The string `WEASCHEM` is always present at the beginning of a WorldEditAdditions schematic file, followed a a single space ` ` U+20, then an integer version number.
 
 This specification, as noted above, described WorldEditAdditions schematic files version `1`. It is RECOMMENDED that implementers reject schematic files with a version number that they do not support parsing with a useful error message.
+
+For example, `WEASCHEM 1` defines a schematic file of version 1.
 
 ## Header
 The header of the file contains all the metadata about the schematic required to restore it into the world. The header is defined as a JSON object on a single line, followed by a new line (`\n` U+0A):
