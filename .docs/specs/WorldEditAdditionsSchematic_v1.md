@@ -6,6 +6,8 @@ DRAFT SPEC DRAFT SPEC DRAFT SPEC DRAFT SPEC DRAFT SPEC DRAFT SPEC DRAFT SPEC
 
 This file format specification describes the format of WorldEditAdditions schematic files. The words `MUST`, `MAY`, `SHALL`, `MUST NOT`, etc that are used in this document are defined as in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
+Implementers MUST clearly specify which version(s) of this specific they support.
+
 Explanations and descriptions have both a technical description and a formal BNF description. Where the two differ, the formal BNF will always take precedence.
 
 ## Purpose
@@ -65,8 +67,8 @@ As an example:
 
 ```
 WEASCHEM
-<json_header_here>
-<id_map_here>
+<json_header>
+<id_map>
 <data_table_data>
 <data_table_param1>
 ```
@@ -74,7 +76,7 @@ WEASCHEM
 ....where text in the form `<abc>` are placeholders. More formally:
 
 ```bnf
-<weaschem> ::= <magic_bytes> <header> <nl> <id_map> <nl> <data_table_list>
+<weaschem> ::= <magic_bytes> <header> <id_map> <data_table_list>
 
 <nl> ::= "\n"
 
@@ -86,8 +88,21 @@ WEASCHEM
 
 The non-terminal tokens `<header>`, `<id_map>`, and `<data_table>` are defined below.
 
+A full (trivial) example file is given below:
+
+```
+WEASCHEM
+{"name":"Test schematic","description": "Some description","size":{"x":5,"y":3,"z":4},"offset":{"x":1,"y":0,"z":2},"type":"full","generator": "WorldEditAdditions v1.14"}
+{"0":"default:air","5":"default:stone","14":"default:dirt"}
+TODO: Add the data tables
+```
+
 ## Header
-The header of the file contains all the metadata about the schematic required to restore it into the world. The header is defined as a JSON object on a single line, followed by a new line (`\n`):
+The header of the file contains all the metadata about the schematic required to restore it into the world. The header is defined as a JSON object on a single line, followed by a new line (`\n` U+0A):
+
+```bnf
+<header> ::= <the_actual_header_json_obj> <nl>
+```
 
 ```
 {"foo":"bar"}\n
@@ -163,6 +178,82 @@ A specific example of a header JSON object is noted below. This example is prett
 }
 ```
 
+**Note:** Implementers MUST ignore any additional unexpected properties in the header JSON object.
 
-### Positioning
-TODO: Describe schematic pos1/pos2 positioning here.
+
+### Size and positioning
+Schematic size and positioning are controlled by 2 properties in the header JSON object:
+
+1. **`size`:** The size of the schematic stored in the schematic
+2. **`offset`:** The offset to apply to the schematic when placing it back in the world.
+
+Sizing is measured from the negative (-x, -y, -z) corner of the region.
+
+**Writing:** In Minetest `VoxelManipulator`s do not always load the exact area you ask them for, and load additional area around them. Therefore, it is necessary to first extract the exact area you want to save before encoding the data array in a WorldEditAdditions Schematic file.
+
+**Reading:** When reading a schematic file from disk, is mentioned above the (-x, -y, -z) corner of the schematic SHOULD be translated to match the (-x, -y, -z) corner, or position 1 if position 2 is defined. Then, the offset in the `offset` field of the header MUST be applied to translate the schematic into the final position it will be written to the target Minetest world.
+
+Implementers MAY choose to add a disabled-by-default option to disable the application of `offset`.
+
+
+### Types of schematic
+WorldEditAdditions Schematic files support two types of schematic:
+
+1. **`full`:** Full schematics that contain a static snapshot of the world.
+2. **`delta`:** A schematic that contains only the changes between some previous state of the world and the current state of the world.
+
+TODO: Explain the differences more fully.
+
+
+## ID map
+Like the [header](#header), the ID map is also defined as a JSON object on a single line, followed by a new line character (`\n` U+0A):
+
+```bnf
+<id_map> ::= <the_actual_id_map_json_obj> <nl>
+```
+
+```
+{"5": "foo"}\n
+```
+
+The ID map's purpose is to map node IDs in the schematic file to canonical node names, since Minetest does not guarantee that node names will remain the same across different worlds.
+
+Node names in a schematic file MUST be the full canonical node name, and not an abbreviation. For example, `default:stone` is valid, but `stone` is invalid (does not specify the mod).
+
+Implementers MAY perform arbitrary transformations on node names when reading or writing a WorldEditAdditions schematic file, but any such transformations are beyond the scope of this specification.
+
+When loading a schematic, it is RECOMMENDED that implementers use a cache when translating schematic node ids (from this ID map) to node ids from the target world.
+
+Formally, the ID map can be described by the following JSON schema:
+
+```json
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"title": "ID Map",
+	"description": "The JSON schema for the ID Map of a WorldEditAdditions Schematic file.",
+	
+	"patternProperties": {
+		"^[0-9]+$": {
+			"type": "string",
+			"pattern": "^[^\s]+:[^\s]+$"
+		}
+	},
+	"additionalProperties": false
+}
+```
+
+In other words, an example ID map might look like this (pretty-printed for convenience, but in an actual file this would compacted and all on one line):
+
+```json
+{
+	"0": "default:air",
+	"5": "default:stone",
+	"14": "default:dirt"
+}
+```
+
+It is not required that Node IDs in the schematic file be sequential.
+
+
+##
