@@ -195,7 +195,7 @@ A specific example of a header JSON object is noted below. This example is prett
 ```json
 {
 	"name": "A castle",
-	"description": "A grand fairy tale-style castle with multiple towers.",
+	"description": "A grand fairy-tale style castle with multiple towers.",
 	"size": { "x": 50, "y": 25, "z": 75 },
 	"offset": { "x": 3, "y": 0, "z": 5 },
 	"type": "full",
