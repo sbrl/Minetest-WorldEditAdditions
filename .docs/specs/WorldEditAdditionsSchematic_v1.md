@@ -33,6 +33,14 @@ The voxel-based sandbox building game [Minetest](https://minetest.net/).
 
 The differences between a given region of the world at a given time and the same region some time later.
 
+> Schematic origin
+
+The origin of the schematic itself. This is always (0, 0, 0). Any schematic generated from the main Minetest world MUST be translated such that the negative X, Y, and Z corner of the defined region to be converted to a schematic is (0, 0, 0) in the generated schematic file.
+
+> Offset
+
+An offset, expressed as a `Vector3`, that MUST be applied to a schematic upon loading it back into the world, though implementers MAY offer an option to disable this (but applying the offset MUST be enabled by default).
+
 > BNF
 
 [Backus-Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form). Used to formally describe the file format.
@@ -90,7 +98,6 @@ This JSON object follows the following JSON schema:
 ```json
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"$id": "TODO: FILL THIS OUT",
 	"title": "Header",
 	"description": "The header that contains the schematic's metadata.",
 	"type": "object",
@@ -103,24 +110,43 @@ This JSON object follows the following JSON schema:
 			"description": "A short description of the schematic.",
 			"type": "string"
 		},
-		"pos1": {
-			"description": "Position 1 of the defined region that this schematic takes up. MAY be in object space, or MAY be in world space.",
-			"type": "object"
+		"offset": {
+			"description": "The offset to place the schematic at in the world, relative to the schematic origin, which is always (0, 0, 0).",
+			"$ref": "#/$defs/Vector3"
 		},
-		"pos2": {
-			"description": "Position 2 of the defined region that this schematic takes up. MAY be in object space, or MAY be in world space, but whatever space its in it MUST match pos1.",
-			"type": "object"
+		"size": {
+			"description": "The size of the schematic, INDEXED from 0.",
+			"$ref": "#/$defs/Vector3"
 		},
 		"type": {
 			"description": "The type of schematic this is. Valid values: full, delta.",
-			"type": "string"
+			"type": "string",
+			"pattern": "^(?:full|delta)$"
 		},
 		"generator": {
 			"description": "The name and version of the software that generated this schematic.",
 			"type": "string"
 		}
 	},
-	"required": [ "name", "pos1", "pos2", "type", "generator" ],
+	"required": [ "name", "size", "offset", "type", "generator" ],
+	"$defs": {
+		"Vector3": {
+			"properties": {
+				"x": {
+					"description": "The x co-ordinate of the Vector3.",
+					"type": "integer",
+				},
+				"y": {
+					"description": "The y co-ordinate of the Vector3.",
+					"type": "integer",
+				},
+				"z": {
+					"description": "The z co-ordinate of the Vector3.",
+					"type": "integer",
+				}
+			}
+		}
+	}
 }
 ```
 
@@ -130,8 +156,8 @@ A specific example of a header JSON object is noted below. This example is prett
 {
 	"name": "A castle",
 	"description": "A grand fairy tale-style castle with multiple towers.",
-	"pos1": { "x": 450, "y": 11, "z": 2301 },
-	"pos2": { "x": 1026, "y": 11, "z": 3017 },
+	"size": { "x": 50, "y": 25, "z": 75 },
+	"offset": { "x": 3, "y": 0, "z": 5 },
 	"type": "full",
 	"generator": "WorldEditAdditions v1.14"
 }
