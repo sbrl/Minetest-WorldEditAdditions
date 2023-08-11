@@ -11,7 +11,9 @@ Implementers MUST clearly specify which version(s) of this specific they support
 Explanations and descriptions have both a technical description and a formal BNF description. Where the two differ, the formal BNF will always take precedence.
 
 ## Purpose
-The WorldEditAdditions Schematic file format is designed to store schematics of structures in the Minetest world in an efficient text-based format. It is also designed to store just the changes from one copy of the world to another (deltas).
+The WorldEditAdditions Schematic file format is designed to store schematics of structures in the Minetest world in an efficient text-based format. It is also designed to optionally store just the changes from one state of the world to another (deltas).
+
+In an example situation, a structure in a Minetest world is copied into a WorldEditAdditions Schematic file and saved to disk. At some later time, the resulting schematic file may be parsed and the structure written to a given Minetest world (not necessarily the same world) once more.
 
 The rationale behind this format are as follows:
 
@@ -31,9 +33,21 @@ WorldEditAdditions Schematics MAY be gzip-compressed. In such cases, the file ex
 
 The voxel-based sandbox building game [Minetest](https://minetest.net/).
 
+> Schematic file
+
+A WorldEdit Additions schematic file.
+
+> Full schematic file(s)
+
+A WorldEdit Additions schematic file with a header value `type` equal to `full`. See [types of schematic](#types-of-schematic).
+
+> Delta schematic file(s)
+
+A WorldEdit Additions schematic file with a header value `type` equal to `delta`. See [types of schematic](#types-of-schematic) and [delta schematics](#delta-schematic-files).
+
 > Deltas
 
-The differences between a given region of the world at a given time and the same region some time later.
+The differences between a given region of the world in some previous state and the current state.
 
 > Schematic origin
 
@@ -58,7 +72,7 @@ Stands for the ASCII character new line U+0A. Wherever this symbol appears, subs
 ## Overview
 The format can be divided into 4 sequential parts:
 
-1. **Magic bytes:** The string `WEASCHEM\n` is always the beginning of the file.
+1. **Magic bytes:** The string `WEASCHEM1\n` is always the beginning of the file.
 2. **Header:** Contains metadata about the schematic.
 3. **ID map:** The map of node ids to their respective node names.
 4. **Data tables:** The actual data itself.
@@ -66,7 +80,7 @@ The format can be divided into 4 sequential parts:
 As an example:
 
 ```
-WEASCHEM
+WEASCHEM1
 <json_header>
 <id_map>
 <data_table_data>
@@ -80,7 +94,11 @@ WEASCHEM
 
 <nl> ::= "\n"
 
-<magic_bytes> ::= WEASCHEM <nl>
+<magic_bytes> ::= WEASCHEM <version> <nl>
+
+<version> ::= <number>
+<number> ::= <digit> | <digit> <number>
+<digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 <data_table_list> ::= <data_table>
 	| <data_table> <nl> <data_table_list>
@@ -94,8 +112,13 @@ A full (trivial) example file is given below:
 WEASCHEM
 {"name":"Test schematic","description": "Some description","size":{"x":5,"y":3,"z":4},"offset":{"x":1,"y":0,"z":2},"type":"full","generator": "WorldEditAdditions v1.14"}
 {"0":"default:air","5":"default:stone","14":"default:dirt"}
-TODO: Add the data tables
+10x5,40x14,0,5,14,5,14,5x0
 ```
+
+## Magic bytes
+The string `WEASCHEM` is always present at the beginning of a WorldEditAdditions schematic file, followed directly by an integer version number.
+
+This specification, as noted above, described WorldEditAdditions schematic files version `1`. It is RECOMMENDED that implementers reject schematic files with a version number that they do not support parsing with a useful error message.
 
 ## Header
 The header of the file contains all the metadata about the schematic required to restore it into the world. The header is defined as a JSON object on a single line, followed by a new line (`\n` U+0A):
@@ -180,7 +203,6 @@ A specific example of a header JSON object is noted below. This example is prett
 
 **Note:** Implementers MUST ignore any additional unexpected properties in the header JSON object.
 
-
 ### Size and positioning
 Schematic size and positioning are controlled by 2 properties in the header JSON object:
 
@@ -199,11 +221,27 @@ Implementers MAY choose to add a disabled-by-default option to disable the appli
 ### Types of schematic
 WorldEditAdditions Schematic files support two types of schematic:
 
-1. **`full`:** Full schematics that contain a static snapshot of the world.
+1. **`full`:** Full schematic files that contain a static snapshot of the world.
 2. **`delta`:** A schematic that contains only the changes between some previous state of the world and the current state of the world.
 
-TODO: Explain the differences more fully.
+From here on, these differing types of WorldEditAdditions schematic files will be referred to as follows:
 
+- **`full`:** Full schematic file(s)
+- **`delta`:** Delta schematic file(s)
+
+Specifically, the node id value of `-2` represents the fact that no change was made between the previous state and the current state of the world.
+
+### Delta schematic files
+Delta schematic files, as described above, store only the changes made to a given Minetest world between 2 different states. The format of delta schematic files differs slightly in that they store both the node id of the previous state *and* the node id of the current state.
+
+**Writing:** When writing out a delta schematic file, the node ID in the previous state *and* the node ID of the current state must be written as described in [the section on data tables](#data-tables).
+
+**Reading:** When reading and parsing a delta schematic file, nodes with a node id of `-2` MUST NOT be changed in the target world. Depending on the operation desired, the implementer may choose to discard either the node id of the previous or the current state:
+
+- **Undo operations:** Node ids of the **previous** state should be kept and used, and node ids of the current state discarded.
+- **Redo operations:** Node ids of the **current** state should be kept and used, with node ids of the previous state discarded.
+
+See also the specific notes in the sections below.
 
 ## ID map
 Like the [header](#header), the ID map is also defined as a JSON object on a single line, followed by a new line character (`\n` U+0A):
@@ -257,4 +295,54 @@ It is not required that Node IDs in the schematic file be sequential.
 
 
 ## Data tables
-TODO: Describe data tables here.
+The data tables store the actual data in the schematic. This data is stored in flat arrays with optional run-length encoding. Using the `size` given in the header, it is possible to read the data and understand where in the array each block is located. Each data table occupies a single line (delimited with `\n` U+0A as with everything else above). 
+
+```bnf
+<data_table> ::= <data_table_item>
+	| <data_table_item> "," <data_table>
+
+<data_table_item> ::= <number>
+	| <number> x <number>
+
+<number> ::= <digit>
+	| <digit> <number>
+
+<digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+```
+
+There are currently 2 data tables that are stored in schematics, that MUST be present in the following orders.
+
+For **full** schematic files:
+
+1. **`data`:** The list of node IDs
+2. **`param2`:** The list of [`param2`](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#nodes) values
+
+For [**delta** schematic files](#delta-schematic-files):
+
+1. **`data` (previous state):** The list of node IDs for the **previous** state
+2. **`data` (current state):** The list of node IDs for the **current** state
+3. **`param2`:** The list of [`param2`](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#nodes) values
+
+**Note:** Either type of schematic file MAY contain additional data tables beyond those described here. In such cases, implementers MUST ignore them, and any such tables MUST be present only *after* the data tables described above.
+
+Here's a specific example of the data tables for a sample **full** schematic file:
+
+```
+10x5,40x14,0,5,14,5,14,5x0
+51x0,255,8x0
+```
+
+The first line is the node IDs table (`data`), and the second line are the `param2` values.
+
+Implementers MAY choose to optimise filesize by compacting the node IDs used (e.g. mapping the node id 456 to an id of 5).
+
+**Note:** Node IDs in a schematic file need to be mapped to the node IDs of the target world when writing a schematic to a Minetest world, as they are unlikely to match.
+
+### Special node ids
+The following node id values have specific meaning:
+
+Node ID	| Purpose
+--------|-----------------
+-1		| Represents a value of null/nil. This node id value indicates that no node is stored in this cell. When reading a schematic and writing it to the world, implementers MUST NOT alter the pre-existing node in the world that corresponds with this cell.
+-2		| **In a delta schematic only,** This node id value indicates that no change was made between the time the schematic was written and the previous time it was compared against. Using this value as a node in a schematic with a `type` of `full` is **invalid**, and in such a case implementers MUST raise an error message and abort reading of the schematic.
+
