@@ -72,7 +72,7 @@ Stands for the ASCII character new line U+0A. Wherever this symbol appears, subs
 ## Overview
 The format can be divided into 4 sequential parts:
 
-1. **Magic bytes:** The string `WEASCHEM 1\n` is always the beginning of the file.
+1. **Magic bytes:** The string `WEASCHEM` is always the beginning of the file, followed by exactly 1 space (` ` U+20) and an integer version number
 2. **Header:** Contains metadata about the schematic.
 3. **ID map:** The map of node ids to their respective node names.
 4. **Data tables:** The actual data itself.
@@ -117,6 +117,8 @@ WEASCHEM 1
 
 ## Magic bytes
 The string `WEASCHEM` is always present at the beginning of a WorldEditAdditions schematic file, followed a a single space ` ` U+20, then an integer version number.
+
+If the string `WEASCHEM` is *not* present at the very beginning of a file, then it MUST be considered invalid and a clear error message returned.
 
 This specification, as noted above, described WorldEditAdditions schematic files version `1`. It is RECOMMENDED that implementers reject schematic files with a version number that they do not support parsing with a useful error message.
 
