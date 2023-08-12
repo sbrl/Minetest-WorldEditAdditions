@@ -106,7 +106,7 @@ WEASCHEM 1
 
 The non-terminal tokens `<header>`, `<id_map>`, and `<data_table>` are defined below.
 
-A full (trivial) example file is given below:
+A complete (trivial) example full schematic file is given below:
 
 ```
 WEASCHEM 1
@@ -314,7 +314,7 @@ The data tables store the actual data in the schematic. This data is stored in f
 <digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
 
-There are currently 2 data tables that are stored in schematics, that MUST be present in the following orders.
+There are currently the following data tables that are stored in schematics, that MUST be present in the following orders, depending on the type of schematic file (see [types of schematic](#types-of-schematic)).
 
 For **full** schematic files:
 
@@ -324,8 +324,9 @@ For **full** schematic files:
 For [**delta** schematic files](#delta-schematic-files):
 
 1. **`data` (previous state):** The list of node IDs for the **previous** state
-2. **`data` (current state):** The list of node IDs for the **current** state
-3. **`param2`:** The list of [`param2`](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#nodes) values
+2. **`param2` (previous state):** The list of [`param2`](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#nodes) values for the **previous** state
+3. **`data` (current state):** The list of node IDs for the **current** state
+4. **`param2`  (current state):** The list of [`param2`](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#nodes) values for the **current** state
 
 **Note:** Either type of schematic file MAY contain additional data tables beyond those described here. In such cases, implementers MUST ignore them, and any such tables MUST be present only *after* the data tables described above.
 
