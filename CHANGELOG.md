@@ -4,6 +4,10 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
+## v1.15: The untitled update (unreleased)
+- Added the optional argument `all` to [`//unmark`](https://worldeditadditions.mooncarrot.space/Reference/#unmark)
+
+
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)
 - Fix a bug where creative players in survival couldn't punch out position markers
 - Added `//listentities`, which lists all currently loaded `ObjectRef`s. This is intended for debugging mods - thanks to @Zughy in #103
