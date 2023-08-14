@@ -3,6 +3,7 @@ reporter = "html"
 return {
 	modules = {
 		["worldeditadditions_core.**"] = "worldeditadditions_core",
+		["worldeditadditions_core.utils.parse.**"] = "worldeditadditions_core.parse"
 	},
 	include = {
 		"worldeditadditions_core$",

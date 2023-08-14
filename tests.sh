@@ -94,7 +94,11 @@ run_test() {
 	if [[ "${OSTYPE}" == *"msys"* ]]; then
 		"${busted_path}" --no-auto-insulate --pattern ".test.lua" .tests;
 	else
+		if [[ -r "luacov.stats.out" ]]; then rm "luacov.stats.out"; fi
+		
+		set +e;
 		"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
+		set -e;
 		
 		# Delete any pre-existing coverage info from any prev runs
 		if [[ -d "luacov-html" ]]; then rm -r "luacov-html"; fi
@@ -106,7 +110,7 @@ run_test() {
 		
 		# Remove, but only if empty
 		if [[ -s "luacov.report.out" ]]; then :
-		else rm "luacov.report.out"; fi
+		elif [[ -e "luacov.report.out" ]]; then rm "luacov.report.out"; fi
 		
 		echo -e "Output written to $(display_url "file://$PWD/luacov-html/index.html" "./luacov-html/index.html")";
 	fi
