@@ -96,6 +96,8 @@ run_test() {
 	else
 		"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
 		
+		# Delete any pre-existing coverage info from any prev runs
+		if [[ -d "luacov-html" ]]; then rm -r "luacov-html"; fi
 		
 		# If it doesn't begin with a dot, then Minetest *will* complain
 		if [[ -d "luacov-html" ]]; then
