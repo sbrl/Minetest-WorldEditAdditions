@@ -1,5 +1,11 @@
 local weac = worldeditadditions_core
-local Vector3 = weac.Vector3
+local Vector3
+if worldeditadditions_core then
+	Vector3 = weac.Vector3
+else
+	Vector3 = require("worldeditadditions_core.utils.vector3")
+end
+
 
 --- Library for parsing .weaschem WorldEditAdditions Schematic files.
 -- 
@@ -25,6 +31,12 @@ function weaschem.parse_vector3(source_obj)
 	if type(source_obj.z) ~= "number" then return false, "VECTOR3_INVALID_Z", "Vector3: The type of the z coordinate was expected to be number, but found '"..type(source_obj.z).."'." end
 	
 	local result = Vector3.clone(source_obj)
+	
+	local rounded = result:floor()
+	if math.abs(result.x - rounded.x) > 0.0000001 then return false, "VECTOR3_X_FLOAT", "The x coordinate appears to be a floating-point number and not an integer. Only integer values in schematics are supported." end
+	if math.abs(result.y - rounded.y) > 0.0000001 then return false, "VECTOR3_Y_FLOAT", "The y coordinate appears to be a floating-point number and not an integer. Only integer values in schematics are supported." end
+	if math.abs(result.z - rounded.z) > 0.0000001 then return false, "VECTOR3_Z_FLOAT", "The z coordinate appears to be a floating-point number and not an integer. Only integer values in schematics are supported." end
+	
 	return true, "SUCCESS", result
 end
 
