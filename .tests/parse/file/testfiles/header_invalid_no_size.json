@@ -1,0 +1,10 @@
+{
+	"name": "A castle",
+	"offset": {
+		"x": 50,
+		"y": 25,
+		"z": 75
+	},
+	"type": "full",
+	"generator": "WorldEditAdditions v1.14"
+}
