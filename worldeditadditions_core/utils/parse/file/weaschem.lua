@@ -45,7 +45,7 @@ end
 
 function weaschem.parse_header(source)
 	local raw_obj = parse_json(source)
-	if raw_obj == nil then return false, "HEADER_INVALID", "The header is invalid JSON." end
+	if raw_obj == nil then return false, "HEADER_INVALID_JSON", "The header is invalid JSON." end
 	
 	local header = {}
 	
@@ -88,7 +88,7 @@ function weaschem.parse_header(source)
 		header["type"] = raw_obj["type"]
 		if type(header["type"]) ~= "string" then
 			return false, "HEADER_TYPE_INVALID",
-				"Invalid type in header: expected string, but found value of type '" .. type(raw_obj["type"]) "'."
+				"Invalid type in header: expected string, but found value of type '" .. type(raw_obj["type"]).."'."
 		end
 		if header["type"] ~= "full" and header["type"] ~= "delta" then
 			return false, "HEADER_TYPE_INVALID",
