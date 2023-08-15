@@ -55,14 +55,14 @@ function weaschem.parse_header(source)
 		header["name"] = raw_obj["name"]
 		if type(header["name"]) ~= "string" then
 			return false, "HEADER_NAME_INVALID",
-				"Invalid name in header: expected string, but found value of type '"..type(raw_obj["name"])"'."
+				"Invalid name in header: expected string, but found value of type '"..type(raw_obj["name"]).."'."
 		end
 	end
 	if raw_obj["description"] ~= nil then
 		header["description"] = raw_obj["description"]
 		if type(header["description"]) ~= "string" then
 			return false, "HEADER_DESCRIPTION_INVALID",
-				"Invalid description in header: expected string, but found value of type '" .. type(raw_obj["description"]) "'."
+				"Invalid description in header: expected string, but found value of type '"..type(raw_obj["description"]).."'."
 		end
 	end
 	
@@ -104,7 +104,7 @@ function weaschem.parse_header(source)
 		header["generator"] = raw_obj["generator"]
 		if type(header["generator"]) ~= "string" then
 			return false, "HEADER_GENERATOR_INVALID",
-				"Invalid generator in header: expected string, but found value of generator '" .. type(raw_obj["generator"]) "'."
+				"Invalid generator in header: expected string, but found value of generator '"..type(raw_obj["generator"]).."'."
 		end
 	end
 	
