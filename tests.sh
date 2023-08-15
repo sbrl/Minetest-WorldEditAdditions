@@ -64,11 +64,16 @@ mode="${1}"; if [[ "$#" -gt 0 ]]; then shift; fi
 
 run_setup() {
 	log_msg "Installing busted";
-	
 	luarocks --tree "${luarocks_root}" install busted;
+	log_msg "Installing lua-json";
+	luarocks --tree "${luarocks_root}" install lua-json;
+	
 	if [[ "${OSTYPE}" != *"msys"* ]]; then
+		log_msg "Installing luacov";
 		luarocks --tree "${luarocks_root}" install luacov;
+		log_msg "Installing cluacov";
 		luarocks --tree "${luarocks_root}" install cluacov;
+		log_msg "Installing luacov-html";
 		luarocks --tree "${luarocks_root}" install luacov-html;
 	fi
 }

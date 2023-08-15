@@ -1,9 +1,12 @@
 local weac = worldeditadditions_core
 local Vector3
+local parse_json
 if worldeditadditions_core then
 	Vector3 = weac.Vector3
+	parse_json = weac.parse.json
 else
 	Vector3 = require("worldeditadditions_core.utils.vector3")
+	parse_json = require("worldeditadditions_core.utils.parse.json")
 end
 
 
@@ -41,7 +44,7 @@ function weaschem.parse_vector3(source_obj)
 end
 
 function weaschem.parse_header(source)
-	local raw_obj = minetest.parse_json(source)
+	local raw_obj = parse_json(source)
 	if raw_obj == nil then return false, "HEADER_INVALID", "The header is invalid JSON." end
 	
 	local header = {}
@@ -113,7 +116,7 @@ end
 
 
 function weaschem.parse_id_map(source)
-	local raw_obj = minetest.parse_json(source)
+	local raw_obj = parse_json(source)
 	if raw_obj == nil then return false, "ID_MAP_INVALID", "The node id map is invalid JSON." end
 	
 	local result = {}
