@@ -101,12 +101,13 @@ run_test() {
 	else
 		if [[ -r "luacov.stats.out" ]]; then rm "luacov.stats.out"; fi
 		
+		# Delete any pre-existing coverage info from any prev runs
+		if [[ -d "luacov-html" ]]; then rm -r "luacov-html"; fi
+		
 		set +e;
 		"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
 		set -e;
 		
-		# Delete any pre-existing coverage info from any prev runs
-		if [[ -d "luacov-html" ]]; then rm -r "luacov-html"; fi
 		
 		# If it doesn't begin with a dot, then Minetest *will* complain
 		if [[ -d "luacov-html" ]]; then
@@ -117,7 +118,7 @@ run_test() {
 		if [[ -s "luacov.report.out" ]]; then :
 		elif [[ -e "luacov.report.out" ]]; then rm "luacov.report.out"; fi
 		
-		echo -e "Output written to $(display_url "file://$PWD/luacov-html/index.html" "./luacov-html/index.html")";
+		echo -e "Output written to $(display_url "file://$PWD/.luacov-html/index.html" "./.luacov-html/index.html")";
 	fi
 }
 
