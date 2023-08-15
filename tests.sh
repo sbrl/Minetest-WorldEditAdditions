@@ -103,6 +103,7 @@ run_test() {
 		
 		# Delete any pre-existing coverage info from any prev runs
 		if [[ -d "luacov-html" ]]; then rm -r "luacov-html"; fi
+		if [[ -d ".luacov-html" ]]; then rm -r ".luacov-html"; fi
 		
 		set +e;
 		"${busted_path}" --coverage --no-auto-insulate --pattern ".test.lua" .tests;
