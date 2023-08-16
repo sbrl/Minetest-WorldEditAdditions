@@ -115,17 +115,30 @@ end
 
 
 
-function weaschem.parse_id_map(source)
+function weaschem.parse_id_map(source, is_delta)
 	local raw_obj = parse_json(source)
-	if raw_obj == nil then return false, "ID_MAP_INVALID", "The node id map is invalid JSON." end
+	if raw_obj == nil then return false, "ID_MAP_INVALID_JSON", "The node id map is invalid JSON." end
 	
 	local result = {}
 	for id_str, node_name in pairs(raw_obj) do
 		local id = tonumber(id_str)
-		if id == nil then return false, "ID_MAP_INVALID_ID", "A node id in the node id map is not parsable as a number." end
-		if string.find(node_name, ":") == nil then return false, "ID_MAP_RELATIVE_NODE_NAME", "A node name does not contain a colon, suggesting it is a relative node id. Relative node ids are not supported." end
+		if id == nil then
+			return false, "ID_MAP_INVALID_ID", "A node id in the node id map is not parsable as a number."
+		end
+		if string.find(node_name, ":") == nil then
+			return false, "ID_MAP_RELATIVE_NODE_NAME", "A node name does not contain a colon, suggesting it is a relative node id. Relative node ids are not supported."
+		end
+		if id - math.floor(id) > 0.0000001 then
+			return false, "ID_MAP_FLOATING_POINT_NODE_NAME", "Error: All node ids in the node id map must be integers."
+		end
+		if id < 0 then
+			return false, "ID_MAP_NEGATIVE_NODE_ID", "Error: All node ids in the node id map must be integers greater than or equal to 0."
+		end
 		
-		if result[id] ~= nil then return false, "ID_MAP_DUPLICATE", "Multiple node ids in the node id map parse to the same number." end
+		if result[id] ~= nil then
+			return false, "ID_MAP_DUPLICATE", "Multiple node ids in the node id map parse to the same number."
+		end
+		
 		result[id] = node_name
 	end
 	
