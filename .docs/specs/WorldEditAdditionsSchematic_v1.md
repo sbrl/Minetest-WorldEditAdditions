@@ -247,6 +247,7 @@ Delta schematic files, as described above, store only the changes made to a give
 
 See also the specific notes in the sections below.
 
+
 ## ID map
 Like the [header](#header), the ID map is also defined as a JSON object on a single line, followed by a new line character (`\n` U+0A):
 
@@ -261,6 +262,8 @@ Like the [header](#header), the ID map is also defined as a JSON object on a sin
 The ID map's purpose is to map node IDs in the schematic file to canonical node names, since Minetest does not guarantee that node names will remain the same across different worlds.
 
 Node names in a schematic file MUST be the full canonical node name, and not an abbreviation. For example, `default:stone` is valid, but `stone` is invalid (does not specify the mod).
+
+Node IDs in the id map MUST be an integer, and MUST NOT be less than 0. Specifically, node ids in the id map that are less than 0 are considered invalid, and node ids greater than -1 are considered valid. See also [special node ids](#special-node-ids).
 
 Implementers MAY perform arbitrary transformations on node names when reading or writing a WorldEditAdditions schematic file, but any such transformations are beyond the scope of this specification.
 
@@ -350,4 +353,3 @@ Node ID	| Purpose
 --------|-----------------
 -1		| Represents a value of null/nil. This node id value indicates that no node is stored in this cell. When reading a schematic and writing it to the world, implementers MUST NOT alter the pre-existing node in the world that corresponds with this cell.
 -2		| **In a delta schematic only,** This node id value indicates that no change was made between the time the schematic was written and the previous time it was compared against. Using this value as a node in a schematic with a `type` of `full` is **invalid**, and in such a case implementers MUST raise an error message and abort reading of the schematic.
-
