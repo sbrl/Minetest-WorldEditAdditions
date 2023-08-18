@@ -13,7 +13,19 @@ local function make_id()
 	return tostring(wea_c.get_ms_time()) .. "_" .. tostring(math.floor(math.random() * 1000000))
 end
 
-local last_reset = make_id()
+local last_resets = {}
+
+--- Gets the last_reset value for the given player.
+-- @internal
+-- @param	player_name		string	The name of the player to fetch the last_reset value for.
+-- @param	update=false	bool	If true, then update the last_reset value for the given player to a new value.
+local function get_last_reset(player_name, update)
+	if update == nil then update = false end
+	if last_resets[player_name] == nil or update then
+		last_resets[player_name] = make_id()
+	end
+	return last_resets[player_name]
+end
 
 
 local WEAPositionMarkerWall = {
@@ -38,7 +50,7 @@ local WEAPositionMarkerWall = {
 
 	on_activate = function(self, staticdata)
 		local data = minetest.parse_json(staticdata)
-		if type(data) ~= "table" or data.id ~= last_reset then
+		if type(data) ~= "table" or data.id ~= get_last_reset(data.player_name) then
 			self.object:remove()
 			return
 		end
@@ -56,7 +68,6 @@ local WEAPositionMarkerWall = {
 		})
 	end,
 	on_punch = function(self, _)
-		print("DEBUG:pos_marker_wall on_punch")
 		anchor.delete(self)
 		-- Only unmark the rest of the walls
 		-- Unmark for the player that created this wall.... NOT the player who punched it!
@@ -80,6 +91,20 @@ minetest.register_entity(
 	WEAPositionMarkerWall
 )
 
+--- Checks the given entity for whether it's in the current generation of wall markers or not.
+-- Only entities of type worldeditadditions:marker_wall will be removed.
+-- @param	entity	ObjectRef	The entity to check.
+local function check_entity(entity)
+	if entity == nil
+		or entity.name ~= "worldeditadditions:marker_wall"
+		or entity.__id == nil then
+		return
+	end
+	
+	if entity.__id ~= get_last_reset(entity.player_name) then
+		entity.object:remove()
+	end
+end
 
 --- Updates the properties of a single wall to match it's side and size
 local function single_setup(entity, size, side)
@@ -140,12 +165,12 @@ local function create_single(player_name, pos1, pos2, side)
 	
 	local pos_centre = ((pos2 - pos1) / 2) + pos1
 	local entity = minetest.add_entity(pos_centre, "worldeditadditions:marker_wall", minetest.write_json({
-		id = last_reset,
+		id = get_last_reset(player_name),
 		size = pos2 - pos1,
 		side = side,
 		player_name = player_name
 	}))
-	-- print("DEBUG:marker_wall create_single --> START player_name", player_name, "pos1", pos1, "pos2", pos2, "side", side, "SPAWN", pos_centre, "last_reset", last_reset)
+	-- print("DEBUG:marker_wall create_single --> START player_name", player_name, "pos1", pos1, "pos2", pos2, "side", side, "SPAWN", pos_centre, "last_reset", get_last_reset(playyer_name))
 	
 	-- entity:get_luaentity().player_name = player_name
 	
@@ -473,8 +498,9 @@ local function delete(entitylist)
 		entity:remove()
 	end
 	
-	last_reset = make_id()
-	-- print("DEBUG:marker_wall delete --> LAST_RESET is now", last_reset, "type", type(last_reset))
+	-- BUG: There can be multiple sets of walls, but this last_reset solution does not handle that.......
+	get_last_reset(player_name, true)
+	-- print("DEBUG:marker_wall delete --> LAST_RESET is now", last_reset, "type", type(get_last_reset(last_reset)))
 	
 	anchor:emit("delete", {
 		player_name = player_name
@@ -486,6 +512,7 @@ end
 anchor = EventEmitter.new({
 	create = create_wall,
 	delete = delete,
+	check_entity = check_entity,
 	__single_setup = single_setup
 })
 

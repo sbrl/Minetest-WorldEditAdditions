@@ -13,6 +13,17 @@ local function ensure_player(player_name)
 	end
 end
 
+--- Check every single ObjectRef that is currently loaded to make sure that all rogue marker walls are properly disposed of.
+-- @internal
+local function garbage_collect_all()
+	for id, obj in pairs(minetest.object_refs) do
+		if obj.get_luaentity then
+			local luaentity = obj:get_luaentity()
+			weac.entities.pos_marker_wall.check_entity(luaentity)
+		end
+	end
+end
+
 --- Deletes the currently displayed marker wall.
 -- @param	event	EventArgs<wea_c.pos.set>	The event args for the set, push, pop, or clear events on wea_c.pos.
 -- @returns	void
@@ -24,6 +35,8 @@ local function do_delete(event)
 	end
 
 	wall_entity_lists[event.player_name] = nil
+	
+	garbage_collect_all()
 end
 
 --- Updates the marker wall as appropriate.

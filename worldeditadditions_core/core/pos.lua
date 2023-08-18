@@ -52,7 +52,7 @@ end
 
 --- Transparently fetches from worldedit pos1 for compatibility.
 -- Called whenever pos1 is accessed in this API.
--- @private
+-- @internal
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	void
 local function compat_worldedit_pos1_get(player_name)
@@ -68,7 +68,7 @@ local function compat_worldedit_pos1_get(player_name)
 end
 --- Transparently fetches from worldedit pos2 for compatibility.
 -- Called whenever pos2 is accessed in this API.
--- @private
+-- @internal
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	void
 local function compat_worldedit_pos2_get(player_name)
