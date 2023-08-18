@@ -206,7 +206,7 @@ end
 --- Parses the WorldEditAdditions schematic file from the given handle.
 -- This requires a file handle, as significant optimisations can be made in the case of invalid files.
 -- @param	handle		File	A Lua file handle to read from.
--- @param	delta_which	string	If the schematic file is of type delta (i.e. as opposed to full), then this indicates which state is desired. Useful to significantly optimise both CPU and memory usage by avoiding parsing more than necessary if only one state is desired. Possible values: both (default; read both the previous and current states), prev (read only the previous state), current (read only the current state).
+-- @param	[delta_which=both]	string	If the schematic file is of type delta (i.e. as opposed to full), then this indicates which state is desired. Useful to significantly optimise both CPU and memory usage by avoiding parsing more than necessary if only one state is desired. Possible values: both (default; read both the previous and current states), prev (read only the previous state), current (read only the current state).
 -- @returns TODO DOCUMENT THIS.
 function weaschem.parse(handle, delta_which)
 	if delta_which == nil then delta_which = "both" end

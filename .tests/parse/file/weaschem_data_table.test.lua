@@ -2,7 +2,6 @@
 local weaschem = require("worldeditadditions_core.utils.parse.file.weaschem")
 
 local parse_json = require("worldeditadditions_core.utils.parse.json")
-
 local inspect = require("worldeditadditions_core.utils.inspect")
 
 local function get_string(test_name)
