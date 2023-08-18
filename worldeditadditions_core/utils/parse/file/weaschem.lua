@@ -153,15 +153,16 @@ function weaschem.parse_data_table(source, is_delta)
 	local i = 0
 	for _, next_val in pairs(values) do
 		if next_val:find("x") ~= nil then
-			local multi_count, multi_node_id = string.match(next_val, "(%d+)x(%d+)")
+			local multi_count, multi_node_id = string.match(next_val, "^(%d+)x(-?[%d]+)$")
+			-- print("DEBUG:parse_data_table next_val", next_val, "multi_count", multi_count, "multi_node_id", multi_node_id)
+			
+			if multi_count == nil or multi_node_id == nil then
+				return false, "DATA_TABLE_INVALID_VALUE", "Error: Encountered an invalid node id / count pair at position '"..tostring(i).."'."
+			end
+			-- These tonumber() calls are guaranteed to work since we only pass a number here
 			multi_count = tonumber(multi_count)
-			if type(multi_count) ~= "number" then
-				return false, "DATA_TABLE_INVALID_COUNT", "Encountered count value in data table at position '"..tostring(i).."'."
-			end
 			multi_node_id = tonumber(multi_node_id)
-			if type(multi_node_id) ~= "number" then
-				return false, "DATA_TABLE_INVALID_NODE_ID", "Encountered node id value in data table at position '"..tostring(i).."'."
-			end
+			
 			if is_delta then
 				if multi_node_id < -2 then
 					return false, "DATA_TABLE_INVALID_NODE_ID", "Error: When type=delta, then node ids must not be less then -2."
@@ -181,6 +182,17 @@ function weaschem.parse_data_table(source, is_delta)
 			if type(node_id) ~= "number" then
 				return false, "DATA_TABLE_INVALID_NODE_ID",
 					"Encountered node id value in data table at position '" .. tostring(i) .. "'."
+			end
+			if is_delta then
+				if node_id < -2 then
+					return false, "DATA_TABLE_INVALID_NODE_ID",
+						"Error: When type=delta, then node ids must not be less then -2."
+				end
+			else
+				if node_id < -1 then
+					return false, "DATA_TABLE_INVALID_NODE_ID",
+						"Error: When type=delta, then node ids must not be less then -1."
+				end
 			end
 			
 			data_table[i] = node_id
@@ -236,13 +248,13 @@ function weaschem.parse(handle, delta_which)
 	if header["type"] == "full" then
 		temp = handle:read("*l")
 		if temp == nil then return false, "NO_DATA_TABLE", "Unable to read the data table full:data from the file." end
-		success, code, temp2 = weaschem.parse_data_table(temp)
+		success, code, temp2 = weaschem.parse_data_table(temp, false)
 		if not success then return success, code, temp2 end
 		data_tables["data"] = temp2
 		
 		temp = handle:read("*l")
 		if temp == nil then return false, "NO_DATA_TABLE", "Unable to read the data table full:param2 from the file." end
-		success, code, temp2 = weaschem.parse_data_table(temp)
+		success, code, temp2 = weaschem.parse_data_table(temp, false)
 		if not success then return success, code, temp2 end
 		data_tables["param2"] = temp2
 	else
@@ -250,7 +262,7 @@ function weaschem.parse(handle, delta_which)
 		if temp == nil then return false, "NO_DATA_TABLE", "Unable to read the data table delta:data_previous from the file." end
 		-- delta_which="current" is the only state in which we would NOT want to parse the previous state. Regardless, we still need to read the line in though even if we immediately discard it otherwise we'll be out of sync.
 		if delta_which ~= "current" then
-			success, code, temp2 = weaschem.parse_data_table(temp)
+			success, code, temp2 = weaschem.parse_data_table(temp, true)
 			if not success then return success, code, temp2 end
 			data_tables["data_prev"] = temp2
 		end
@@ -258,7 +270,7 @@ function weaschem.parse(handle, delta_which)
 		temp = handle:read("*l")
 		if temp == nil then return false, "NO_DATA_TABLE", "Unable to read the data table delta:param2_previous from the file." end
 		if delta_which ~= "current" then
-			success, code, temp2 = weaschem.parse_data_table(temp)
+			success, code, temp2 = weaschem.parse_data_table(temp, true)
 			if not success then return success, code, temp2 end
 			data_tables["param2_prev"] = temp2
 		end
@@ -266,7 +278,7 @@ function weaschem.parse(handle, delta_which)
 		temp = handle:read("*l")
 		if temp == nil then return false, "NO_DATA_TABLE", "Unable to read the data table delta:data_current from the file." end
 		if delta_which ~= "prev" then
-			success, code, temp2 = weaschem.parse_data_table(temp)
+			success, code, temp2 = weaschem.parse_data_table(temp, true)
 			if not success then return success, code, temp2 end
 			data_tables["data_current"] = temp2
 		end
@@ -274,7 +286,7 @@ function weaschem.parse(handle, delta_which)
 		temp = handle:read("*l")
 		if temp == nil then return false, "NO_DATA_TABLE", "Unable to read the data table delta:param2_current from the file." end
 		if delta_which ~= "prev" then
-			success, code, temp2 = weaschem.parse_data_table(temp)
+			success, code, temp2 = weaschem.parse_data_table(temp, true)
 			if not success then return success, code, temp2 end
 			data_tables["param2_current"] = temp2
 		end
