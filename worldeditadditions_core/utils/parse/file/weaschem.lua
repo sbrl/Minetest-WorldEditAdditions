@@ -1,12 +1,14 @@
 local weac = worldeditadditions_core
 local Vector3
-local parse_json
+local parse_json, split
 if worldeditadditions_core then
 	Vector3 = weac.Vector3
 	parse_json = weac.parse.json
+	split = weac.split
 else
 	Vector3 = require("worldeditadditions_core.utils.vector3")
 	parse_json = require("worldeditadditions_core.utils.parse.json")
+	split = require("worldeditadditions_core.utils.strings.split")
 end
 
 
@@ -148,7 +150,7 @@ end
 
 function weaschem.parse_data_table(source)
 	local data_table = {}
-	local values = weac.split(source, ",", true)
+	local values = split(source, ",", true)
 	local i = 0
 	for _, next_val in pairs(values) do
 		if next_val:find("x") ~= nil then
