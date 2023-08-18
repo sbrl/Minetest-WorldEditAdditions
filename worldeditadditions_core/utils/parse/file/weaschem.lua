@@ -147,8 +147,7 @@ function weaschem.parse_id_map(source, is_delta)
 	return true, "SUCCESS", result
 end
 
-
-function weaschem.parse_data_table(source)
+function weaschem.parse_data_table(source, is_delta)
 	local data_table = {}
 	local values = split(source, ",", true)
 	local i = 0
@@ -163,6 +162,15 @@ function weaschem.parse_data_table(source)
 			if type(multi_node_id) ~= "number" then
 				return false, "DATA_TABLE_INVALID_NODE_ID", "Encountered node id value in data table at position '"..tostring(i).."'."
 			end
+			if is_delta then
+				if multi_node_id < -2 then
+					return false, "DATA_TABLE_INVALID_NODE_ID", "Error: When type=delta, then node ids must not be less then -2."
+				end
+			else
+				if multi_node_id < -1 then
+					return false, "DATA_TABLE_INVALID_NODE_ID", "Error: When type=delta, then node ids must not be less then -1."
+				end
+			end
 			
 			for _ = 1,multi_count do
 				data_table[i] = multi_node_id
@@ -170,7 +178,7 @@ function weaschem.parse_data_table(source)
 			end
 		else
 			local node_id = tonumber(next_val)
-			if type(multi_count) ~= "number" then
+			if type(node_id) ~= "number" then
 				return false, "DATA_TABLE_INVALID_NODE_ID",
 					"Encountered node id value in data table at position '" .. tostring(i) .. "'."
 			end
