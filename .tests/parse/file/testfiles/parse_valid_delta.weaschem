@@ -1,0 +1,7 @@
+WEASCHEM 1
+{"name":"Test schematic","description": "Some description","size":{"x":5,"y":3,"z":4},"offset":{"x":1,"y":0,"z":2},"type":"delta","generator": "WorldEditAdditions v1.14"}
+{"0":"default:air","5":"default:stone","14":"default:dirt"}
+10x5,40x14,0,5,14,5,-1,5x0
+10x0,1,0,2x1,0,5x0,40x1
+10x5,40x-2,0,5,14,5,14,5x0
+10x0,1,0,2x1,0,5x0,40x1
