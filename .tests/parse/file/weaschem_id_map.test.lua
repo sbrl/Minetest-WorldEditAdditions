@@ -15,16 +15,12 @@ local function get_string(test_name)
 end
 
 local epsilon = 0.000001
-local function validate_id_map(idmap, is_delta)
+local function validate_id_map(idmap)
 	for node_id, node_name in pairs(idmap) do
 		assert.are.same("number", type(node_id))
 		assert.are.same("string", type(node_name))
 		assert.is_true(node_id - math.floor(node_id) < epsilon)
-		if is_delta then
-			assert.is_true(node_id >= -2)
-		else
-			assert.is_true(node_id >= -1)
-		end
+		assert.is_true(node_id >= 0)
 	end
 end
 
