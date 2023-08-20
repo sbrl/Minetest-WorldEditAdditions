@@ -20,6 +20,7 @@ local last_resets = {}
 -- @param	player_name		string	The name of the player to fetch the last_reset value for.
 -- @param	update=false	bool	If true, then update the last_reset value for the given player to a new value.
 local function get_last_reset(player_name, update)
+	if player_name == nil then return nil end
 	if update == nil then update = false end
 	if last_resets[player_name] == nil or update then
 		last_resets[player_name] = make_id()
