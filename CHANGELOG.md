@@ -7,6 +7,7 @@ Note to self: See the bottom of this file for the release template text.
 ## v1.15: The untitled update (unreleased)
 - Added the optional argument `all` to [`//unmark`](https://worldeditadditions.mooncarrot.space/Reference/#unmark)
 - Added a (rather nuclear) fix (attempt 4) at finally exterminating all zombie region marker walls forever
+	- This is not a hotfix to avoid endless small releases fixing the bug, as it's clear it's much more difficult to fix on all systems than initially expected
 
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)
