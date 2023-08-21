@@ -45,6 +45,12 @@ function weaschem.parse_vector3(source_obj)
 	return true, "SUCCESS", result
 end
 
+
+--- Parses the header out of the given source string.
+-- @param	source		string	The source string to parse.
+-- @returns	bool,string,table|string	1. Success bool (`true` == success)
+-- 2. Error code. "SUCCESS" is passed if the operation was successful.
+-- 3. Either the resulting Lua table if parsing was successful, or an error message as a string if not.
 function weaschem.parse_header(source)
 	local raw_obj = parse_json(source)
 	if raw_obj == nil then return false, "HEADER_INVALID_JSON", "The header is invalid JSON." end
@@ -116,8 +122,12 @@ end
 
 
 
-
-function weaschem.parse_id_map(source, is_delta)
+--- Parses the ID map out of the given source string.
+-- @param	source		string	The source string to parse.
+-- @returns	bool,string,table|string	1. Success bool (`true` == success)
+-- 2. Error code. "SUCCESS" is passed if the operation was successful.
+-- 3. Either the resulting Lua table if parsing was successful, or an error message as a string if not.
+function weaschem.parse_id_map(source)
 	local raw_obj = parse_json(source)
 	if raw_obj == nil then return false, "ID_MAP_INVALID_JSON", "The node id map is invalid JSON." end
 	
@@ -147,6 +157,13 @@ function weaschem.parse_id_map(source, is_delta)
 	return true, "SUCCESS", result
 end
 
+--- Parses a data table string into a Lua table.
+-- @internal
+-- @param	source		string	The source string to parse.
+-- @param	is_delta	bool	Whether the provided data table is of type delta or not. Used for validation.
+-- @returns	bool,string,table|string	1. Success bool (`true` == success)
+-- 2. Error code. "SUCCESS" is passed if the operation was successful.
+-- 3. Either the resulting Lua table if parsing was successful, or an error message as a string if not.
 function weaschem.parse_data_table(source, is_delta)
 	local data_table = {}
 	local values = split(source, ",", true)
@@ -207,7 +224,9 @@ end
 -- This requires a file handle, as significant optimisations can be made in the case of invalid files.
 -- @param	handle		File	A Lua file handle to read from.
 -- @param	[delta_which=both]	string	If the schematic file is of type delta (i.e. as opposed to full), then this indicates which state is desired. Useful to significantly optimise both CPU and memory usage by avoiding parsing more than necessary if only one state is desired. Possible values: both (default; read both the previous and current states), prev (read only the previous state), current (read only the current state).
--- @returns TODO DOCUMENT THIS.
+-- @returns	bool,string,table|string	1. Success bool (`true` == success)
+-- 2. Error code. "SUCCESS" is passed if the operation was successful.
+-- 3. Either the resulting Lua table if parsing was successful, or an error message as a string if not.
 function weaschem.parse(handle, delta_which)
 	if delta_which == nil then delta_which = "both" end
 	if delta_which ~= "both" and delta_which ~= "prev" and delta_which ~= "current" then
