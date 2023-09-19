@@ -9,7 +9,14 @@ StagedVoxelRegion.__index = StagedVoxelRegion
 StagedVoxelRegion.__name = "StagedVoxelRegion" -- A hack to allow identification in wea.inspect
 
 
-
+local function make_instance(tbl) {
+	local result = tbl
+	if result == nil then
+		result = {}
+	end
+	setmetatable(result, StagedVoxelRegion)
+	return result
+}
 
 
 ------------------------------------------------------------------------------
@@ -24,45 +31,57 @@ StagedVoxelRegion.__name = "StagedVoxelRegion" -- A hack to allow identification
 
 --- Creates a new StagedVoxelRegion from the data in a VoxelManipulator.
 -- To save data, you probably want to call the save() method.
--- @param	voxelmanip	VoxelManipulator	The voxel manipulator to take data from and save to disk.
 -- @param	pos1		Vector3				The position in WORLD SPACE of pos1 of the defined region to stage for saving.
 -- @param	pos2		Vector3				The position in WORLD SPACE of pos2 of the defined region to stage for saving.
+-- @param	voxelmanip	VoxelManipulator	The voxel manipulator to take data from and save to disk.
 -- @returns	bool,StagedVoxelRegion	A success boolean, followed by the new StagedVoxelRegion instance.
-function StagedVoxelRegion.NewFromVoxelManip(voxelmanip, pos1, pos2)
+function StagedVoxelRegion.NewFromVoxelManip(pos1, pos2, voxelmanip)
 	
 end
 
 --- Creates a new StagedVoxelRegion from the given VoxelManipulator data.
 -- To save data, you probably want to call the save() method.
+-- @param	pos1		Vector3				The position in WORLD SPACE of pos1 of the defined region to stage for saving.
+-- @param	pos2		Vector3				The position in WORLD SPACE of pos2 of the defined region to stage for saving.
 -- @param	area	VoxelArea	The VoxelArea associated with the data.
 -- @param	data	number[]	A table of numbers representing the node ids.
 -- @param	param2	number[]	A table of numbers representing the param2 data. Should exactly match the data number[] in size.
--- @param	pos1		Vector3				The position in WORLD SPACE of pos1 of the defined region to stage for saving.
--- @param	pos2		Vector3				The position in WORLD SPACE of pos2 of the defined region to stage for saving.
 -- @returns	bool,StagedVoxelRegion	A success boolean, followed by the new StagedVoxelRegion instance.
-function StagedVoxelRegion.NewFromTable(area, data, param2, pos1, pos2)
+function StagedVoxelRegion.NewFromTable(pos1, pos2, area, data, param2)
 	
 end
 
 --- Creates a new StagedVoxelRegion from raw data/param2 tables.
--- @param	data	number[]	A table of numbers representing the node ids. Must be ALREADY TRIMMED, NOT just taken straight from a VoxelManip!
--- @param	param2	number[]	A table of numbers representing the param2 data. Should exactly match the data number[] in size. Must be ALREADY TRIMMED, NOT just taken straight from a VoxelManip!
 -- @static
 -- @param	pos1		Vector3				The position in WORLD SPACE of pos1 of the defined region to stage for saving.
 -- @param	pos2		Vector3				The position in WORLD SPACE of pos2 of the defined region to stage for saving.
+-- @param	data	number[]	A table of numbers representing the node ids. Must be ALREADY TRIMMED, NOT just taken straight from a VoxelManip!
+-- @param	param2	number[]	A table of numbers representing the param2 data. Should exactly match the data number[] in size. Must be ALREADY TRIMMED, NOT just taken straight from a VoxelManip!
 -- @returns	bool,StagedVoxelRegion	A success boolean, followed by the new StagedVoxelRegion instance.
-function StagedVoxelRegion.NewFromRaw(data, param2, pos1, pos2)
-	
+function StagedVoxelRegion.NewFromRaw(pos1, pos2, data, param2)
+	return make_instance({
+		name = "untitled",
+		description = "",
+		pos1 = pos1:clone()
+		pos2 = pos2:clone()
+		tables = {
+			data = data,
+			param2 = param2
+		}
+	})
 end
+
+
+
 
 --- Loads voxel data from disk, returning padded arrays suitable for use with VoxelManipulator instances.
 --
 -- **Note:** This function DOES NOT call finish on the VoxelManipulator!
 -- @static
--- @param	voxelmanip	VoxelManipulator	The VoxelManipulator to load the data into.
--- @param	filepath		string	The filepath to load data from.
 -- @param	pos1			Vector3	Position 1 in WORLD space to load the data into.
 -- @param	pos2			Vector3	Position 2 in WORLD space to load the data into.
+-- @param	voxelmanip	VoxelManipulator	The VoxelManipulator to load the data into.
+-- @param	filepath		string	The filepath to load data from.
 -- @param	format="auto"	string	The format that the source data is in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information.
 -- @returns	bool,table	A success/failure bool, followed by TODO: The format of this table is still to be decided.
 function StagedVoxelRegion.LoadIntoVoxelManip(filepath, voxelmanip, pos1, pos2, format)
@@ -113,6 +132,13 @@ end
 -- @param	format="auto"	string	The format to save in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information.
 -- @returns	bool			Whether the operation was successful or not.
 function StagedVoxelRegion.save(filepath, format)
+	
+end
+
+--- Loads a file of the an array.
+-- @param	filepath		string	The filepath to load the .weaschem file from.
+-- @param	format="auto"	string	The format in which the target is written in.
+function StagedVoxelRegion.load(filepath, format)
 	
 end
 
