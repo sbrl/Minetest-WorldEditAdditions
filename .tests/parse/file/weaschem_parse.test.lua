@@ -105,7 +105,7 @@ describe("parse.file.weaschem.parse", function()
 		
 		local success, code, result = weaschem.parse(handle)
 		
-		print("DEBUG:parse", inspect(result))
+		-- print("DEBUG:parse", inspect(result))
 		
 		assert.are.same(true, success)
 		assert.are.same("SUCCESS", code)
