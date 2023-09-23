@@ -14,14 +14,14 @@ StagedVoxelRegion.__index = StagedVoxelRegion
 StagedVoxelRegion.__name = "StagedVoxelRegion" -- A hack to allow identification in wea.inspect
 
 
-local function make_instance(tbl) {
+local function make_instance(tbl)
 	local result = tbl
 	if result == nil then
 		result = {}
 	end
 	setmetatable(result, StagedVoxelRegion)
 	return result
-}
+end
 
 
 ------------------------------------------------------------------------------
@@ -67,8 +67,8 @@ function StagedVoxelRegion.NewFromRaw(pos1, pos2, data, param2)
 	return make_instance({
 		name = "untitled",
 		description = "",
-		pos1 = pos1:clone()
-		pos2 = pos2:clone()
+		pos1 = pos1:clone(),
+		pos2 = pos2:clone(),
 		tables = {
 			data = data,
 			param2 = param2
