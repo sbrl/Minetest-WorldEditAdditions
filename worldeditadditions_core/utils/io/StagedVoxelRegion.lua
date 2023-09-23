@@ -1,3 +1,8 @@
+local weac = worldeditadditions_core
+
+local weaschem = weac.parse.file.weaschem
+
+
 --- A region of the world that is to be or has been saved to/from disk.
 -- This class exists to make moving things to/from disk easier and less complicated.
 -- 

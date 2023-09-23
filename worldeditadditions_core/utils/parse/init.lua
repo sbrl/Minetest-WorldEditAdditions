@@ -24,7 +24,9 @@ wea_c.parse = {
 	seed = dofile(wea_c.modpath.."/utils/parse/seed.lua"),
 	chance = dofile(wea_c.modpath.."/utils/parse/chance.lua"),
 	map = dofile(wea_c.modpath.."/utils/parse/map.lua"),
-	weighted_nodes = dofile(wea_c.modpath.."/utils/parse/weighted_nodes.lua")
+	weighted_nodes = dofile(wea_c.modpath.."/utils/parse/weighted_nodes.lua"),
+	
+	file = dofile(wea_c.modpath.."/utils/parse/file/init.lua")
 }
 
 dofile(wea_c.modpath.."/utils/parse/tokenise_commands.lua")
