@@ -1,6 +1,7 @@
+local weac = worldeditadditions_core
 
 
-local localpath = wea_c.modpath.."/utils/parse/file/"
+local localpath = weac.modpath.."/utils/parse/file/"
 
 --- Parsers specifically for file formats.
 -- @namespace worldeditadditions_core.parse.file

@@ -42,3 +42,80 @@ local function voxelmanip2raw(voxelmanip, pos1, pos2)
 	
 	return result_data, result_param2
 end
+
+--- Makes a node id map for saving to disk based on a given RAW data array of node ids.
+-- Also sequentially packs node ids to save space and potentially improve compression ratio, though this is unproven.
+-- @param	data	table	The RAW data table to read ids from to build the map.
+-- @returns table,table	A pair of maps to transform node ids from the world to the schematic file.
+-- 
+-- 1. The sID: number → node_name: string map to be saved in the schematic. sID stands for *schematic* id, which is NOT the same as the node id in the world.
+-- 2. The wID → sID node id map. wID = the node id in the current Minetest world, and sID = the *schematic* id as in #1. All world node ids MUST be pushed through this map before being saved to the schematic file.
+local function make_id_maps(data)
+	local map = {}
+	local id2id = {}
+	local next_id = 0
+	for _, wid in pairs(data) do
+		if id2id[wid] == nil then
+			id2id[wid] = next_id
+			next_id = next_id + 1
+			local sid = id2id[wid]
+			map[sid] = minetest.get_name_from_content_id(wid)
+		end
+	end
+	return map, id2id
+end
+
+--- Encodes a table of numbers (ZERO INDEXED) with run-length encoding.
+-- The reason for the existence of this function is avoiding very long strings when serialising / deserialising. Long strings can be a problem in more ways than one.
+-- @param	tbl		number[]	The table of numbers to runlength encode.
+local function runlength_encode(tbl)
+	local result = {}
+	local next = 0
+	local prev, count = nil, 0
+	for i, val in pairs(tbl) do
+		if prev ~= val then
+			local msg = tostring(prev)
+			if count > 1 then msg = tostring(count).."x"..msg end
+			result[next] = msg
+			next = next + 1
+			count = 0
+		end
+		prev = val
+		count = count + 1
+	end
+	local msg_last = tostring(prev)
+	if count > 1 then msg_last = tostring(count) .. "x" .. msg_last end
+	result[next] = msg_last
+	
+	return result
+end
+
+
+local function runlength_decode(tbl)
+	local unpacked = {}
+	local next = 0
+	
+	for i, val in pairs(tbl) do
+		local count, sid = string.match(val, "(%d+)x(%d+)")
+		if count == nil then
+			unpacked[next] = tonumber(val)
+			next = next + 1
+		else
+			sid = tonumber(sid)
+			for _ = 1, count do
+				unpacked[next] = sid
+				next = next + 1
+			end
+		end
+	end
+	
+	return unpacked
+end
+
+return {
+	voxelmanip2raw,
+	make_id_maps,
+	
+	runlength_encode,
+	runlength_decode
+}

@@ -9,6 +9,7 @@
 local modpath = minetest.get_modpath("worldeditadditions_core")
 
 worldeditadditions_core = {
+	version = "1.15-dev",
 	modpath = modpath,
 	registered_commands = {},
 	-- Storage for per-player node limits before safe_region kicks in.

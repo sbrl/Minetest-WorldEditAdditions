@@ -3,7 +3,7 @@ local Vector3
 local parse_json, split
 if worldeditadditions_core then
 	Vector3 = weac.Vector3
-	parse_json = weac.parse.json
+	parse_json = dofile(weac.modpath.."/utils/parse/json.lua")
 	split = weac.split
 else
 	Vector3 = require("worldeditadditions_core.utils.vector3")
