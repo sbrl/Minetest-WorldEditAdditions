@@ -173,6 +173,11 @@ iframe, object, embed, img, table
 }
 picture img { height: initial; }
 
+/* For some reason bold text doesn't look like it has enough of a space in between words, which is odd */
+strong {
+	padding: 0 0.25em;
+}
+
 /* Turn the user's cursor into a hand when over things they can click */
 button, summary
 {
@@ -185,7 +190,7 @@ th, td
 	padding: 4px 6px;
 }
 
-a { font-weight: bold; }
+a { font-weight: bold; padding: 0 0.25em; }
 /* a:not(.nav) { color: hsl(208, 67%, 40%); }
 a:not(.nav):hover { color: hsl(214, 67%, 50%); }
 a:not(.nav):active, a:focus { color: hsl(214, 87%, 60%); } */
@@ -214,6 +219,7 @@ code {
 	background: var(--bg-transcluscent-alt-slight);
 	border-radius: 0.25em;
 	padding: 0.15em;
+	margin: 0 0.25em;
 }
 /* pre.language-weacmd {
 	background: var(--bg-transcluscent-alt-vdark);
