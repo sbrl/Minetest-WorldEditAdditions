@@ -8,11 +8,12 @@ Note to self: See the bottom of this file for the release template text.
 - Added the optional argument `all` to [`//unmark`](https://worldeditadditions.mooncarrot.space/Reference/#unmark)
 - Added a (rather nuclear) fix (attempt 4) at finally exterminating all zombie region marker walls forever
 	- This is not a hotfix to avoid endless small releases fixing the bug, as it's clear it's much more difficult to fix on all systems than initially expected
+- Added [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply), a generalisation of [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) that works with a defined list of nodes (thanks for suggesting, @kliv91 from the Discord server!)
 
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)
 - Fix a bug where creative players in survival couldn't punch out position markers
-- Added `//listentities`, which lists all currently loaded `ObjectRef`s. This is intended for debugging mods - thanks to @Zughy in #103
+- Added [`//listentities`](https://worldeditadditions.mooncarrot.space/Reference/#listentities), which lists all currently loaded `ObjectRef`s. This is intended for debugging mods - thanks to @Zughy in #103
 
 
 ## v1.14.4: The multipoint update, hotfix 4 (31st July 2023)

@@ -1309,6 +1309,38 @@ As with `//ellipsoidapply` for advanced users `//multi` is also supported - but 
 ```
 
 
+### `//nodeapply <node_a> [<node_b>] [... <node_N>] -- <command_name> <args>`
+It's got `apply` in the name, so as you might imagine it works the same as [`//ellipsoidapply`](#ellipsoidapply), [`//airapply`](#airapply), [`//noiseapply2d`](#noiseapply2d), etc. Only changes made by the given command that replace nodes on the list given will be replaced. For example:
+
+```weacmd
+//nodeapply dirt -- set stone
+```
+
+....is equivalent to `//replace dirt stone`, in that although `//set stone` will set all nodes to stone, `//nodeapply` will only keep the changes made by `//set` that affect dirt.
+
+There are some special keywords you can use too:
+
+Keyword			| Meaning
+----------------|-----------------------------------
+`liquidlike`	| Targets all nodes that behave like a liquid.
+`airlike`		| Targets all nodes that behave like air. Basically like [`//airapply`](#airapply).
+
+To give a further example, consider this:
+
+```weacmd
+//nodeapply liquidlike -- set river_water_source
+```
+
+...this will replace all liquid-like nodes (e.g. water, lava, etc) with river water.
+
+```weacmd
+//nodeapply stone -- layers dirt_with_grass dirt 3
+//nodeapply stone dirt sand -- layers bakedclay:natural 3 bakedclay:orange 2 bakedclay:red 3 bakedclay:natural 3
+//nodeapply liquidlike -- set air
+//nodeapply airlike -- mix stone 3 dirt 2
+```
+
+
 ### `//noiseapply2d <threshold> <scale> <command_name> <args>`
 Like [`//ellipsoidapply`](#ellipsoidapply), but instead only keeps changes where a noise function (defaults to `perlinmt`, see [`//noise2d`](#noise2d)) returns a value greater than a given threshold value.
 

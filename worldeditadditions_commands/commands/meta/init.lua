@@ -8,6 +8,7 @@
 
 local we_cmdpath = worldeditadditions_commands.modpath .. "/commands/meta/"
 
+dofile(we_cmdpath.."nodeapply.lua")
 dofile(we_cmdpath.."airapply.lua")
 dofile(we_cmdpath.."ellipsoidapply.lua")
 dofile(we_cmdpath.."for.lua")
