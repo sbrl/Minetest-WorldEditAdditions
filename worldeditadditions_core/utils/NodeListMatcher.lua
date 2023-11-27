@@ -116,7 +116,7 @@ function NodeListMatcher.match_group(matcher, node_id, group_name)
 	
 	-- 2: Nope, not in the cache. Time to query!
 	local node_name = minetest.get_name_from_content_id(node_id)
-	local group_value = minetest.get_item_group(node_name, group_name)
+	local group_value = minetest.get_item_group(node_name, "group:"..group_name)
 	if group_value == 0 then group_value = false
 	else group_value = true end
 	
