@@ -926,6 +926,42 @@ Returns the absolute canonical name of a node, given an alias or partial node na
 ```
 
 
+### `//ngroups <node_name> [v[erbose]]`
+Lists the groups that a given node is a member of. For example:
+
+```weacmd
+//ngroups sand
+```
+
+Might return:
+
+```
+default:sand ∈ sand crumbly falling_node
+```
+
+Groups in Minetest can also have a numerical value greater than 0. Append `v` or `verbose` to see those values:
+
+```weacmd
+//ngroups sand v
+//ngroups sand verbose
+```
+
+...both of the above might produce an output like this:
+
+```
+default:sand ∈ sand=1 crumbly=3 falling_node=1
+```
+
+Finally, the customary misc examples:
+
+```weacmd
+//ngroups sand
+//ngroups bakedclay:orange v
+//ngroups cactus
+//ngroups default:dry_shrub v
+```
+
+
 
 ## Selection
 <!--
@@ -1398,42 +1434,6 @@ This command is intended for development and modding. You will not normally need
 
 ```
 //listentities
-```
-
-
-### `//ngroups <node_name> [v[erbose]]`
-Lists the groups that a given node is a member of. For example:
-
-```weacmd
-//ngroups sand
-```
-
-Might return:
-
-```
-default:sand ∈ sand crumbly falling_node
-```
-
-Groups in Minetest can also have a numerical value greater than 0. Append `v` or `verbose` to see those values:
-
-```weacmd
-//ngroups sand v
-//ngroups sand verbose
-```
-
-...both of the above might produce an output like this:
-
-```
-default:sand ∈ sand=1 crumbly=3 falling_node=1
-```
-
-Finally, the customary misc examples:
-
-```weacmd
-//ngroups sand
-//ngroups bakedclay:orange v
-//ngroups cactus
-//ngroups default:dry_shrub v
 ```
 
 
