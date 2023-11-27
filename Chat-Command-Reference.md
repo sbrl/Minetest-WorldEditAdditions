@@ -1333,6 +1333,14 @@ To give a further example, consider this:
 
 ...this will replace all liquid-like nodes (e.g. water, lava, etc) with river water.
 
+In addition, any node names prefixed an at sign `@` are considered group names. For example: `@crumbly` would allow changes only to nodes that are a member of the `crumbly` group:
+
+```weacmd
+//nodeapply @crumbly -- layers dirt_with_grass dirt 3 stone 10
+```
+
+More misc examples to end this command description, as is customary:
+
 ```weacmd
 //nodeapply stone -- layers dirt_with_grass dirt 3
 //nodeapply stone dirt sand -- layers bakedclay:natural 3 bakedclay:orange 2 bakedclay:red 3 bakedclay:natural 3

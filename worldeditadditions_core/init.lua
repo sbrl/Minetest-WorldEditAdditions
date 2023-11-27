@@ -29,6 +29,7 @@ wea_c.Mesh, wea_c.Face = dofile(wea_c.modpath.."/utils/mesh.lua")
 
 wea_c.Queue = dofile(wea_c.modpath.."/utils/queue.lua")
 wea_c.LRU = dofile(wea_c.modpath.."/utils/lru.lua")
+wea_c.NodeListMatcher = dofile(wea_c.modpath.."/utils/NodeListMatcher.lua")
 wea_c.inspect = dofile(wea_c.modpath.."/utils/inspect.lua")
 
 -- I/O compatibility layer

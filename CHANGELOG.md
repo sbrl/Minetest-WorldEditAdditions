@@ -8,7 +8,7 @@ Note to self: See the bottom of this file for the release template text.
 - Added the optional argument `all` to [`//unmark`](https://worldeditadditions.mooncarrot.space/Reference/#unmark)
 - Added a (rather nuclear) fix (attempt 4) at finally exterminating all zombie region marker walls forever
 	- This is not a hotfix to avoid endless small releases fixing the bug, as it's clear it's much more difficult to fix on all systems than initially expected
-- Added [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply), a generalisation of [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) that works with a defined list of nodes (thanks for suggesting, @kliv91 from the Discord server!)
+- Added [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply), a generalisation of [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) that works with a defined list of nodes. Check out [the reference](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply) - it has some cool tricks to it! (thanks for suggesting, @kliv91 from the Discord server!)
 
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)

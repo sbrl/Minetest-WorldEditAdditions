@@ -1,6 +1,6 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
-
+local NodeListMatcher = wea_c.NodeListMatcher
 
 
 
@@ -40,14 +40,8 @@ function worldeditadditions.nodeapply(pos1, pos2, nodelist, func)
 	local data_after = manip_after:get_data()
 	
 	-- Cache node ids for speed. Even if minetest.get_content_id is efficient, an extra function call is still relatively expensive when called 10K+ times on a large region.
-	local nodeids = {}
-	for i,nodename in ipairs(nodelist) do
-		if nodename == "liquidlike" or nodename == "airlike" then
-			table.insert(nodeids, nodename)
-		else
-			table.insert(nodeids, minetest.get_content_id(nodename))
-		end
-	end
+	local success, matcher = NodeListMatcher.new(nodelist)
+	if not success then return success, matcher end
 	
 	local allowed_changes = 0
 	local denied_changes = 0
@@ -56,20 +50,9 @@ function worldeditadditions.nodeapply(pos1, pos2, nodelist, func)
 			for x = pos2.x, pos1.x, -1 do
 				local i_before = area_before:index(x, y, z)
 				local i_after = area_after:index(x, y, z)
-				local old_is_airlike = wea_c.is_airlike(data_before[i_before])
 				
 				-- Filter on the list of node ids
-				local allow_replacement = false
-				for i,nodeid in ipairs(nodeids) do
-					if nodeid == "airlike" then
-						allow_replacement = wea_c.is_airlike(data_before[i_before])
-					elseif nodeid == "liquidlike" then
-						allow_replacement = wea_c.is_liquidlike(data_before[i_before])
-					else
-						allow_replacement = data_before[i_before] == nodeid
-					end
-					if allow_replacement then break end
-				end
+				local allow_replacement = matcher:match_id(data_before[i_before])
 				
 				-- Roll back any changes that aren't allowed 
 				-- ...but ensure we only count changed nodes
