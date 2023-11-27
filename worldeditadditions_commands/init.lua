@@ -40,7 +40,10 @@ dofile(wea_cmd.modpath.."/commands/spline.lua")
 dofile(wea_cmd.modpath.."/commands/revolve.lua")
 
 -- Meta Commands
-dofile(wea_cmd.modpath.."/commands/meta/init.lua")
+dofile(wea_cmd.modpath .. "/commands/meta/init.lua")
+
+-- Node Informational Commands
+dofile(wea_cmd.modpath .. "/commands/nodes/init.lua")
 
 -- Selection Tools
 dofile(wea_cmd.modpath.."/commands/selectors/init.lua")
