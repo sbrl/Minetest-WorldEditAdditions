@@ -55,6 +55,9 @@ worldeditadditions_core.register_command("nodeapply", {
 		for i,part in ipairs(parts) do
 			if part == "airlike" or part == "liquidlike" then
 				table.insert(nodelist, part)
+			elseif part:sub(1, 1) == "@" then
+				-- Groups start with an @
+				table.insert(nodelist, part)
 			else
 				local nodeid = worldedit.normalize_nodename(part)
 				if not nodeid then
