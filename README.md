@@ -72,6 +72,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
 ### Statistics
  - [`//count`](https://worldeditadditions.mooncarrot.space/Reference/#count)
  - [`//basename <name>`](https://worldeditadditions.mooncarrot.space/Reference/#basename)
+ - [`//ngroups <node_name> [v[erbose]]`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups)
 
 ### Selection
  - [`//scol [<axis1> ] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#scol)
@@ -106,6 +107,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//ellipsoidapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#ellipsoidapply) _(new in v1.9)_
  - [`//airapply <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) _(new in v1.9)_
  - [`//noiseapply2d <threshold> <scale> <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#noiseapply2d) _(new in v1.13)_
+ - [`//nodeapply <node_a> [<node_b>] [... <node_N>] -- <command_name> <args>`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)
  - [`//for <value1> <value2> <value3>... do //<command> <arg> %% <arg>`](https://worldeditadditions.mooncarrot.space/Reference/#for) _(new in v1.13)_
 
 ### Extras
