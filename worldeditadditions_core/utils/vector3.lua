@@ -413,6 +413,7 @@ end
 --- Rotate a given point around an origin point in 3d space.
 -- Consider 3 axes (X, Y, and Z) that are centred on origin. This function
 -- rotates point around these axes in the aforementioned order.
+-- 
 -- NOTE: This function is not as intuitive as it sounds.
 -- A whiteboard and a head for mathematics is recommended before using this
 -- function. Either that, or Blender 3 (https://blender.org/) is quite useful to visualise what's going on.
