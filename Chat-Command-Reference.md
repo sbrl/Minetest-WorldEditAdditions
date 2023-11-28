@@ -1281,7 +1281,7 @@ While other server commands can be executed while a `//subdivide` is running, `/
 
 ```weacmd
 //subdivide 10 10 10 set dirt
-//subdivice 25 25 25 fixlight
+//subdivide 25 25 25 fixlight
 ```
 
 
@@ -1426,7 +1426,7 @@ Here are some more examples:
 
 
 ### `//listentities`
-Lists all currently loaded ObjectRefs. Displays their IDs, Names (if possible), and possitions.
+Lists all currently loaded ObjectRefs. Displays their IDs, Names (if possible), and positions.
 
 This command is intended for development and modding. You will not normally need to use this command using WorldEditAdditions.
 
