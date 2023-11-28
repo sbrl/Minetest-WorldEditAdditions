@@ -7,7 +7,7 @@ local Vector3 = wea_c.Vector3
 -- 2. Error message if success bool == false, otherwise the string from before the delimiter
 -- 3. The command name
 -- 4. Any arguments to pass to the child command
-function extract_parts(params_text)
+local function extract_parts(params_text)
 	-- 1: Find delimiter
 	local index, _, match = string.find(params_text, "(%s+--%s+)")
 	if index == nil then
