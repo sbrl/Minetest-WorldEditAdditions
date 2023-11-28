@@ -34,6 +34,7 @@ read_globals = {
 	"bonemeal",
 	"dofile",
 	"PerlinNoise",
-	"Settings"
+	"Settings",
+	"VoxelArea"
 }
 std = "max"
