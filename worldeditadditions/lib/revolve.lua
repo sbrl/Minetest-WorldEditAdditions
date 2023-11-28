@@ -9,8 +9,9 @@ local Vector3 = wea_c.Vector3
 
 --- Make <times> copies of the region defined by pos1-pos2 at equal angles around a circle.
 -- The defined region works best if it's a thin slice that's 1 or 2 blocks thick.
--- For example, if one provided a times value of 3, copies would be rotated 0, 120, and 240 degrees.
--- TODO: implement support to rotate around arbitrary axes.
+-- For example, if one provided a times value of 3, copies would be rotated 0, 120, and 240 degrees.  
+-- TODO: implement support to rotate around arbitrary axes.  
+-- TODO: implement support for stairs, and slabs when we get arbitrary axis rotation support done.
 -- @param	pos1	Vector3		The first position defining the source region.
 -- @param	pos2	Vector3		The second position defining the source region.
 -- @param	origin	Vector3		The pivot point to rotate around.
