@@ -175,7 +175,7 @@ function StagedVoxelRegion.save(svr, filepath, format)
 	-- Data tables
 	---
 	local data, param2 = weac.table.map(svr.tables.data, function(val)
-		return wid2sid[data]
+		return wid2sid[val]
 	end), svr.tables.param2
 	
 	table.insert(parts, table.concat(voxeltools.runlength_encode(data), ","))
