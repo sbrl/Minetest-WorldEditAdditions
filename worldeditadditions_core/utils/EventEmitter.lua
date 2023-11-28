@@ -59,7 +59,7 @@ end
 -- @param	args		table|any		The argument(s) to pass to listener functions. It is strongly advised you pass a table here.
 function EventEmitter.emit(this, event_name, args)
 	if this.debug then
-		listeners = 0
+		local listeners = 0
 		if this.events[event_name] ~= nil then listeners = #this.events[event_name] end
 		print("DEBUG:EventEmitter emit", event_name, "listeners", listeners, "args", wea_c.inspect(args))
 	end
