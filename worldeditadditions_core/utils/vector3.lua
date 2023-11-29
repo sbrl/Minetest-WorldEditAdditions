@@ -421,7 +421,7 @@ end
 -- @warning	Not completely tested! Pending a thorough evaluation. Seems to basically work, after some tweaks to the fluff around the edges?
 -- @param	origin	Vector3	The origin point to rotate around
 -- @param	point	Vector3	The point to rotate.
--- @param	rotate	Vector3	Rotate this much around the 3 different axes, x, y, and z. Axial rotations are handled in this order: X→Y→Z.
+-- @param	rotate	Vector3	Rotate this much around the 3 different axes, x, y, and z. Axial rotations are handled in this order: X→Y→Z. Values MUST be in radians!
 -- @param	x		number	Rotate this much around the X axis (yz plane), in radians.
 -- @param	y		number	Rotate this much around the Y axis (xz plane), in radians.
 -- @param	z		number	Rotate this much around the Z axis (xy plane), in radians.
