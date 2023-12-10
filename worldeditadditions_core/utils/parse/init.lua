@@ -21,6 +21,8 @@ wea_c.parse = {
 	axes = axes.parse_axes,
 	axis_name = axes.parse_axis_name,
 	
+	axes_rotation = dofile(wea_c.modpath .. "/utils/parse/axes_rotation.lua"),
+	
 	seed = dofile(wea_c.modpath.."/utils/parse/seed.lua"),
 	chance = dofile(wea_c.modpath.."/utils/parse/chance.lua"),
 	map = dofile(wea_c.modpath.."/utils/parse/map.lua"),

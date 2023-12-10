@@ -9,12 +9,15 @@ local Vector3 = weac.Vector3
 
 --- Compiles a list of rotations into something we can iteratively pass to Vector3.rotate3d.
 -- TODO Learn Quaternions.
--- @param	rotlist		table<{axis: string, rad: number}>	The list of rotations. Rotations will be processed in order. Each rotation is a table with a SINGLE axis as a string (x, y, z, -x, -y, or -z; the axis parameter), and an amount in radians to rotate by (the rad parameter.
+-- @param	rotlist		table<{axis: string|Vector3, rad: number}>	The list of rotations. Rotations will be processed in order. Each rotation is a table with a SINGLE axis as a string (x, y, z, -x, -y, or -z; the axis parameter) or a Vector3 (only a SINGLE AXIS set to anything other than 0, and ONLY with a value of 1 or -1), and an amount in radians to rotate by (the rad parameter.
 -- @returns	Vector3[]	The list of the compiled rotations, in a form that Vector3.rotate3d understands.
 local function __compile_rotlist(rotlist)
 	return weac.table.map(rotlist, function(rot)
 		--- 1: Construct a Vector3 to represent which axis we want to rotate on
 		local rotval = Vector3.new(0, 0, 0)
+		-- Assume that if it's a table, it's a Vector3 instance
+		if type(rot) == "table" then rotval = rot:clone() end
+		
 		if rot.axis:find("x", 1, true) then rotval.x = 1
 		elseif rot.axis:find("y", 1, true) then rotval.y = 1
 		elseif rot.axis:find("z", 1, true) then rotval.z = 1 end
@@ -33,7 +36,7 @@ end
 -- @param	pos1	Vector3		Position 1 of the defined region to rotate.
 -- @param	pos2	Vector3		Position 2 of the defined region to rotate.
 -- @param	origin	Vector3		The coordinates of the origin point around which we should rotate the region defined by pos1..pos2.
--- @param	rotlist		table<{axis: string, rad: number}>	The list of rotations. Rotations will be processed in order. Each rotation is a table with a SINGLE axis as a string (x, y, z, -x, -y, or -z; the axis parameter), and an amount in radians to rotate by (the rad parameter.
+-- @param	rotlist		table<{axis: string, rad: number}>	The list of rotations. Rotations will be processed in order. Each rotation is a table with a SINGLE axis as a string (x, y, z, -x, -y, or -z; the axis parameter), and an amount in radians to rotate by (the rad parameter).
 -- @returns	bool,string|table<{changed: number}>	A success boolean (true == success; false == failure), followed by either an error message as a string if success == false or a table of statistics if success == true.
 -- 
 -- Currently the only parameter in the statistics table is changed, which is a number representing the number of nodes that were rotated.
