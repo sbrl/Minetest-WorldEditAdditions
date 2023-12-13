@@ -7,7 +7,10 @@ wea_c.register_alias("conv", "convolve")
 wea_c.register_alias("naturalise", "layers")
 wea_c.register_alias("naturalize", "layers")
 
-wea_c.register_alias("flora", "bonemeal")
+if wea_c.command_exists("/bonemeal") then
+	-- No need to log here, since we notify the server admin in the server logs in the dofile() for the main //bonemeal command
+	wea_c.register_alias("flora", "bonemeal")
+end
 
 -- Measure Tools
 wea_c.register_alias("mcount", "count")

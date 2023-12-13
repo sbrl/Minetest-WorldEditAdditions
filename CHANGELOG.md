@@ -11,6 +11,9 @@ Note to self: See the bottom of this file for the release template text.
 - Added [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply), a generalisation of [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) that works with a defined list of nodes. Check out [the reference](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply) - it has some cool tricks to it! (thanks for suggesting, @kliv91 from the Discord server!)
 - Added [`//ngroups`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups), which lists the groups that a given node is a member of. Useful when paired with [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)!
 
+### Bugfixes and changes
+- Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
+
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)
 - Fix a bug where creative players in survival couldn't punch out position markers

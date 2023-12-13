@@ -61,6 +61,7 @@ wea_c.setting_handler = dofile(wea_c.modpath.."/utils/setting_handler.lua") -- A
 
 wea_c.pos = dofile(modpath.."/core/pos.lua") -- AFTER EventEmitter
 wea_c.register_command = dofile(modpath.."/core/register_command.lua")
+wea_c.command_exists = dofile(modpath.."/core/command_exists.lua")
 wea_c.fetch_command_def = dofile(modpath.."/core/fetch_command_def.lua")
 wea_c.register_alias = dofile(modpath.."/core/register_alias.lua")
 wea_c.entities = dofile(modpath.."/core/entities/init.lua") -- AFTER pos

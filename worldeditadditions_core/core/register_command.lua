@@ -5,7 +5,7 @@
 -- ██   ██ ███████  ██████  ██ ███████    ██    ███████ ██   ██
 
 --- WorldEditAdditions chat command registration
--- @module worldeditadditions_core
+-- @namespace worldeditadditions_core
 local wea_c = worldeditadditions_core
 local run_command = dofile(wea_c.modpath.."/core/run_command.lua")
 
