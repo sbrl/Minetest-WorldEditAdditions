@@ -8,7 +8,7 @@ local Vector3 = wea_c.Vector3
 -- ██   ██ ██    ██    ██    ██   ██    ██    ██      
 -- ██   ██  ██████     ██    ██   ██    ██    ███████ 
 
-worldeditadditions_core.register_command("rotate", {
+worldeditadditions_core.register_command("rotate+", {
 	params = "<axis> <degrees> [<axis> <degrees> ...] [origin|o [<pos_number>]]",
 	description = "Rotates the defined region arounnd the given axis by the given number of degrees. Angles are NOT limited to 90-degree increments. When multiple axes and angles are specified, these transformations are applied in order. If o [<pos_number>] is specified, then the specific position number (default: 3) is considered a custom rotation origin instead of the centre of the region. CAUTION: Rotating large areas of memory by 45° can be memory intensive!",
 	privs = { worldedit = true },
@@ -16,6 +16,8 @@ worldeditadditions_core.register_command("rotate", {
 	parse = function (params_text)
 		if not params_text then params_text = "" end
 		local parts = wea_c.split_shell(params_text)
+		
+		print("DEBUG:rotate/parse parts", wea_c.inspect(parts))
 		
 		local mode_store
 		local mode = "AXIS"
@@ -27,7 +29,14 @@ worldeditadditions_core.register_command("rotate", {
 		for i,part in ipairs(parts) do
 			if part == "origin" or part == "o" then
 				mode_store = mode
-				mode = "ORIGIN"
+				
+				-- If the NEXT item is a number, then parse it.
+				if i < #parts and tonumber(parts[i+1]) ~= nil then
+					mode = "ORIGIN"
+				else
+					-- If not, then default to pos3 and continue in the original mode
+					origin = 3
+				end
 			elseif mode == "ORIGIN" then
 				origin = tonumber(part)
 				if not origin or origin < 1 then
@@ -38,7 +47,7 @@ worldeditadditions_core.register_command("rotate", {
 				mode = mode_store
 				mode_store = nil
 			elseif mode == "AXIS" then
-				axis_next = wea_c.parse.axis_rotation.axis_name(part)
+				success, axis_next = wea_c.parse.axes_rotation.axis_name(part)
 				if not success then return success, axis_next end
 				mode = "ANGLE"
 			elseif mode == "ANGLE" then
@@ -75,21 +84,32 @@ worldeditadditions_core.register_command("rotate", {
 			end
 		end
 		
+		print("DEBUG:rotate/parse ORIGIN", origin, "rotlist", wea_c.inspect(rotlist))
+		
 		return true, origin, rotlist
 	end,
-	nodes_needed = function(name, times)
-		-- TODO: .......this is a good question, actually.
+	nodes_needed = function(name, origin, rotlist)
+		-- BUG: .......this is a good question, actually. This naïve is flawed, since if we rotate by e.g. 45° we could end up replacing more nodes than if we rotate by 90° increments. This is further complicated by the allowance of a custom point of origin.
+		return Vector3.volume(wea_c.pos.get1(name), wea_c.pos.get2(name)) * 2
 	end,
 	func = function(name, origin, rotlist)
 		local start_time = wea_c.get_ms_time()
-
-		-- TODO: Do rotation operation here.
+		-------------------------------------------------
+		local pos_origin = wea_c.pos.get(name, origin)
+		local pos1, pos2 = wea_c.pos.get1(name), wea_c.pos.get2(name)
 		
+		
+		local success, stats = worldeditadditions.rotate(
+			pos1, pos2,
+			pos_origin,
+			rotlist
+		)
+		if not success then return success, stats end
+		-------------------------------------------------
 		local time_taken = wea_c.get_ms_time() - start_time
 		
 		
-		-- TODO: Update logging below. This will obviously crash due to unknown variables right now.
-		minetest.log("action", name .. " used //rotate at "..pos1.." - "..pos2.." with origin "..origin..", replacing "..changed.." nodes in "..time_taken.."s")
-		return true, changed.." nodes replaced in "..wea_c.format.human_time(time_taken)
+		minetest.log("action", name .. " used //rotate at "..pos1.." - "..pos2.." with origin "..pos_origin..", rotating "..stats.count_rotated.." nodes in "..time_taken.."s")
+		return true, stats.count_rotated.." nodes rotated through "..tostring(#rotlist).." rotations in "..wea_c.format.human_time(time_taken)
 	end
 })

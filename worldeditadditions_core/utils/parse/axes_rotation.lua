@@ -21,7 +21,7 @@ function rot_axis_left(axis)
 	elseif axis.z == 1 or axis.z == -1 then
 		axis.x, axis.z = -axis.z, 0
 	end
-	return axis -- CAUDION, this function mutates!
+	return axis -- CAUTION, this function mutates!
 end
 
 --- Parses an axis name into a string.
@@ -40,12 +40,12 @@ local function parse_rotation_axis_name(str, player)
 	
 	-- At most ONE of these cases is true at a time.
 	-- Even if it were possible to handle more than one (which it isn't without quaternions which aren't used in the backend), we would have an undefined ordering problem with the application of such rotations. Rotations ≠ translations in this case!
-	if		str:find("x", 1, true)		then rotval.x = 1
-	elseif	str:find("y", 1, true)		then rotval.y = 1
-	elseif	str:find("z", 1, true)		then rotval.z = 1
-	elseif	str:find("left", 1, true)	then rotval.z = -1
+	if		str:find("x", 1, true)		then vector.x = 1
+	elseif	str:find("y", 1, true)		then vector.y = 1
+	elseif	str:find("z", 1, true)		then vector.z = 1
+	elseif	str:find("left", 1, true)	then vector.z = -1
 	elseif	str:find("right", 1, true)
-			or str:find("yaw")			then rotval.z = 1
+			or str:find("yaw")			then vector.z = 1
 	elseif type(player) ~= "nil"			then
 		local player_rotation_h = calc_rotation_text(player:get_look_horizontal())
 		

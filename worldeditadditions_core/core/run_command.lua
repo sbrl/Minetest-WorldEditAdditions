@@ -37,9 +37,6 @@ local function run_command(cmdname, options, player_name, paramtext)
 	end
 	
 	local parse_result = { options.parse(paramtext) }
-	if #parse_result >= 2 and parse_result[1] == false and type(parse_result[2]) ~= "string" then
-		minetest.log("warning", "[WorldEditAdditions:core] This is a bug. Parsing function for cmd "..cmdname.." failed but provided value of type "..type(parse_result[2]).." as an error message instead of the expected value of type string.All output from the parsing function: "..wea_c.inspect(parse_result))
-	end
 	local success = table.remove(parse_result, 1)
 	if not success then
 		worldedit.player_notify(player_name, tostring(parse_result[1]) or "Invalid usage (no further error message was provided by the command. This is probably a bug.)")
