@@ -95,8 +95,20 @@ worldeditadditions_core.register_command("rotate+", {
 	func = function(name, origin, rotlist)
 		local start_time = wea_c.get_ms_time()
 		-------------------------------------------------
-		local pos_origin = wea_c.pos.get(name, origin)
+		
+		
 		local pos1, pos2 = wea_c.pos.get1(name), wea_c.pos.get2(name)
+		
+		local pos_origin = nil
+		if type(origin) == "number" then
+			pos_origin = wea_c.pos.get(name, origin)
+		elseif type(origin) == "string" and origin == "__AUTO__" then
+			pos_origin = Vector3.mean(pos1, pos2)
+		end
+		if pos_origin == nil then
+			-- There's a very small chance that this could be a bug here if origin is (NOT type("number") and NOT type("string") and ~= "__AUTO__"), but this shouldn't happen because we constrain the output of the above parser. This means we can safely make this assumption here
+			return false, "Error: Failed to get origin point from position "..tostring(origin).." because it doesn't exist."
+		end
 		
 		
 		local success, stats = worldeditadditions.rotate(
