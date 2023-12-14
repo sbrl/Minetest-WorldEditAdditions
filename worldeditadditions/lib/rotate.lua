@@ -73,6 +73,9 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	local manip_src, area_src = worldedit.manip_helpers.init(pos1, pos2)
 	local data_src = manip_src:get_data()
 	
+	-- TODO: grab only an area at this point for dest and a blank target table. Then copy over to the real dest later to ensure consistency. This is important because we are dealing in (potentially) non-cardinal rectangles here
+	-- local area = VoxelArea:new({MinEdge=emerged_pos1, MaxEdge=emerged_pos2})
+	
 	local manip_dest, area_dest = worldedit.manip_helpers.init(pos1_dstvm, pos2_dstvm)
 	local data_dest = manip_dest:get_data()
 	-- TODO: Also carry param2 along for the ride

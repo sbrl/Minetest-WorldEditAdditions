@@ -117,6 +117,8 @@ worldeditadditions_core.register_command("rotate+", {
 			rotlist
 		)
 		if not success then return success, stats end
+		
+		-- TODO: Adjust the defined area to match the target here? Maybe make this optional somehow given the target may or may nor be axis-aligned
 		-------------------------------------------------
 		local time_taken = wea_c.get_ms_time() - start_time
 		
