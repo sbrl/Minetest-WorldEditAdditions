@@ -63,7 +63,7 @@ worldeditadditions_core.register_command("nodeapply", {
 				if not nodeid then
 					return false, "Error: Unknown node name '"..part.."' at position "..tostring(i).." in node list."
 				end
-				table.insert(nodelist, part)
+				table.insert(nodelist, nodeid)
 			end
 		end
 		
