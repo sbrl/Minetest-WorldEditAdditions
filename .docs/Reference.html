@@ -35,13 +35,8 @@
 		<input type="hidden" id="category-names" value="{{ categories }}" />
 		<div class="command-container">
 			<h3>Alphabetical</h3>
-			<ul class="command-list">
-				{% for section in sections_help %}
-				<li data-filtermode-force="all" data-category="{{ section.category }}" style="--cat-colour: {{ section.category_colour }};"><a href="#{{ section.slug }}">
-					<code>{{ section.title }}</code>
-				</a></li>
-				{% endfor %}
-			</ul>
+			<ul class="command-list">{% for section in sections_help %}
+				<li data-filtermode-force="all" data-category="{{ section.category }}" style="--cat-colour: {{ section.category_colour }};"><a href="#{{ section.slug }}"><code>{{ section.title }}</code></a></li>{% endfor %}</ul>
 		</div>
 	</section>
 	
