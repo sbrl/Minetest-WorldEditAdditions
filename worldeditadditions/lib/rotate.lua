@@ -17,7 +17,6 @@ local function __compile_rotlist(rotlist)
 		local rotval = Vector3.new(0, 0, 0)
 		-- Assume that if it's a table, it's a Vector3 instance
 		if type(rot) == "table" then
-			print("DEBUG:__compile_rotlist rot is talble, ROT", weac.inspect(rot))
 			rotval = rot.axis:clone()
 		else
 			-- Otherwise, treat it as a string
@@ -58,7 +57,6 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	-- First, rotate the defined region to find the target region
 	local pos1_rot, pos2_rot = pos1:clone(), pos2:clone()
 	for i, rot in ipairs(rotlist_c) do
-		print("DEBUG origin", weac.inspect(origin), "pos1_rot", weac.inspect(pos1_rot), "pos2_rot", weac.inspect(pos2_rot), "rot", weac.inspect(rot))
 		pos1_rot = Vector3.rotate3d(origin, pos1_rot, rot)
 		pos2_rot = Vector3.rotate3d(origin, pos2_rot, rot)
 	end
@@ -70,14 +68,17 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	
 	
 	--- 3: Check out a VoxelManipulator for the source and target regions
+	-- TODO support param2 here
 	local manip_src, area_src = worldedit.manip_helpers.init(pos1, pos2)
 	local data_src = manip_src:get_data()
 	
 	-- TODO: grab only an area at this point for dest and a blank target table. Then copy over to the real dest later to ensure consistency. This is important because we are dealing in (potentially) non-cardinal rectangles here
 	-- local area = VoxelArea:new({MinEdge=emerged_pos1, MaxEdge=emerged_pos2})
 	
+	-- BUT WAIT.... the we hafta write to a blank table first!
+	-- We HAVE to grab a VoxelManip here, since there's no other way to confirm the actual area the VoxelManip actually loaded given VoxelManip instances can load more than you ask them for 'cause chunks are a thing
 	local manip_dest, area_dest = worldedit.manip_helpers.init(pos1_dstvm, pos2_dstvm)
-	local data_dest = manip_dest:get_data()
+	local data_dest = {}
 	-- TODO: Also carry param2 along for the ride
 	
 	
@@ -118,13 +119,22 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	manip_src, area_src, data_src = nil, nil, nil
 	
 	
+	--- 6: Reinitialise the destination VoxelManip and copy data over
+	-- This has the net effect of changing ONLY the nodes we rotate to, whle preserving changes from wiping the source
+	manip_dest, area_dest = worldedit.manip_helpers.init(pos1_dstvm, pos2_dstvm)
+	data_dest_real = manip_dest:get_data()
 	
-	--- 6: Save the destination back to disk
+	for index, value in pairs(data_dest) do
+		data_dest_real[index] = value
+	end
+	
+	
+	--- 7: Save the destination back to disk
 	-- Note that this MUST be AFTER the source is saved to disk, since the rotated region needs to overwrite the WIPED source area to avoid leaving an unrotated copy behind
-	worldedit.manip_helpers.finish(manip_dest, data_dest)
+	worldedit.manip_helpers.finish(manip_dest, data_dest_real)
 	
 	
-	--- 5: Return
+	--- 8: Return
 	return true, {
 		count_rotated = count_rotated
 	}
