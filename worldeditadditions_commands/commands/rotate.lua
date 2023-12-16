@@ -47,6 +47,7 @@ worldeditadditions_core.register_command("rotate+", {
 				mode = mode_store
 				mode_store = nil
 			elseif mode == "AXIS" then
+				-- TODO: Somehow move this parsing ----> main func to get player reference to allow for relative stuff
 				success, axis_next = wea_c.parse.axes_rotation.axis_name(part)
 				if not success then return success, axis_next end
 				mode = "ANGLE"

@@ -43,9 +43,11 @@ local function parse_rotation_axis_name(str, player)
 	if		str:find("x", 1, true)		then vector.x = 1
 	elseif	str:find("y", 1, true)		then vector.y = 1
 	elseif	str:find("z", 1, true)		then vector.z = 1
-	elseif	str:find("left", 1, true)	then vector.z = -1
+	elseif	str:find("left", 1, true)
+			or str:find("l$")			then vector.y = -1
 	elseif	str:find("right", 1, true)
-			or str:find("yaw")			then vector.z = 1
+			or str:find("r$")
+			or str:find("yaw")			then vector.y = 1
 	elseif type(player) ~= "nil"			then
 		local player_rotation_h = calc_rotation_text(player:get_look_horizontal())
 		
@@ -53,12 +55,12 @@ local function parse_rotation_axis_name(str, player)
 		
 		if str:find("front", 1, true)
 			or str:find("f$")
-			or str:find("pitch")	then
+			or str:find("pitch", 1, true)	then
 			vector = rot_axis_left(player_rotation_h)
 		elseif str:find("back", 1, true)
 				or str:find("b$")	then
 			vector = rot_axis_left(player_rotation_h) * -1
-		elseif str:find("roll")	then
+		elseif str:find("roll", 1, true)	then
 			vector = player_rotation_h
 		else
 			return false, "Error: Could not understand rotational axis keyword '"..str.."'."

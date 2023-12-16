@@ -284,6 +284,50 @@ For those interested, WorldEditAdditions uses the [chaikin curve algorithm](http
 -->
 
 
+### `//rotate+ <axis> <degrees> [<axis> <degrees> ...] [origin|o [<pos_number>]]`
+Rotates the defined region using the specified list of rotation operations, optionally around the defined rotation origin. For example, the following:
+
+```weacmd
+//rotate+ y 45
+```
+
+...will rotate the defined region around it's centre by 45° on the Y (vertical) axis.
+
+> [!IMPORTANT]
+> There is a known issue in which holes appear in previously flat surfaces when rotating through non-axis-aligned rotations. The cause for this is currently unclear.
+> 
+> If you can shed any light on this issue or make any suggestions, please get in touch.
+
+We can also extend this to rotate on multiple axes:
+
+```weacmd
+//rotate+ z 90 y 45
+```
+
+The rotations will be processed in order as specified from left to right. The following relative keywords are currently supported in place of an absolute axis name:
+
+Keyword		| Meaning
+------------|--------------------
+`right`		| Rotates around the Y axis to the right - aka clockwise.
+`left`		| Rotates around the Y axis to the left - aka anticlockwise.
+
+A custom rotation origin can be specified too. This is done via the `origin` keyword and takes the form of specifying a position to rotate around instead of the default (picking the centre point between pos1 and pos2). For example:
+
+```weacmd
+//rotate+ x 20 origin 3
+```
+
+....will rotate 20° on the X axis around position 3. See the [multi-point wand](#multipoint) for more information on setting positions other than pos1 and pos2.
+
+The `origin` keyword's argument is optional, and if no position number is specified defaults to position 3.
+
+```weacmd
+//rotate+ y 90 x 45 origin
+//rotate+ y 90 x 45 o
+//rotate+ x 60 origin 5 z 20
+```
+
+
 ### `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with `<replace_node>` (which defaults to `water_source`), in a sphere with a radius of `<radius>` (which defaults to 50).
 
@@ -1518,7 +1562,7 @@ It has the range of the _Far Wand_ mentioned above too, so you can select nodes 
 Note that punching out the positions **does not unset them**. Use `//reset` to reset the defined region.
 
 
-### Multi-Point Wand
+### MultiPoint Wand
 The third type of wand provided by WorldEditAdditions is completely different, in that it allows you to select up to **999 points** at once! It looks like this: ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png)
 
 It is important to note that (at present) the points selected by this wand **are not compatible with normal points**. This will change in the future, but requires a lot of work to implement.
