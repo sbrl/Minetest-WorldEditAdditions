@@ -74,10 +74,7 @@ local function find_rotated_vm(pos1, pos2, origin, rotlist)
 	end, corners_rot[1]:clone())
 	
 	print("DEBUG:find_rotated_vm pos1_dstvm", pos1_dstvm, "pos2_dstvm", pos2_dstvm)
-	
-	pos1_dstvm = pos1_dstvm:floor() - Vector3.new(1, 1, 1)
-	pos2_dstvm = pos2_dstvm:ceil() + Vector3.new(1, 1, 1)
-	
+		
 	return pos1_dstvm, pos2_dstvm
 end
 
