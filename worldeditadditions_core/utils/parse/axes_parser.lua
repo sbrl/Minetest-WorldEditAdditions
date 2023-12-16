@@ -137,7 +137,7 @@ end
 -- @param: tbl: Table: Keyword table to parse
 -- @param: facing: Table: Output from worldeditadditions_core.player_dir(name)
 -- @param: sum: Bool | String | nil: Return a single vector by summing the 2 output vectors together
--- @returns: Vector3, [Vector3]: returns min, max Vector3s or sum Vector3 (if @param: sum ~= nil)
+-- @returns: Vector3, [Vector3]: returns min, max Vector3 or sum Vector3 (if @param: sum ~= nil)
 -- if error: @returns: false, String: error message
 function parse.keytable(tbl, facing, sum)
 	local min, max = Vector3.new(), Vector3.new()

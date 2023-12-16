@@ -7,32 +7,6 @@ local Vector3 = weac.Vector3
 -- ██   ██ ██    ██    ██    ██   ██    ██    ██     
 -- ██   ██  ██████     ██    ██   ██    ██    ███████
 
---- Compiles a list of rotations into something we can iteratively pass to Vector3.rotate3d.
--- TODO Learn Quaternions.
--- @param	rotlist		table<{axis: string|Vector3, rad: number}>	The list of rotations. Rotations will be processed in order. Each rotation is a table with a SINGLE axis as a string (x, y, z, -x, -y, or -z; the axis parameter) or a Vector3 (only a SINGLE AXIS set to anything other than 0, and ONLY with a value of 1 or -1), and an amount in radians to rotate by (the rad parameter.
--- @returns	Vector3[]	The list of the compiled rotations, in a form that Vector3.rotate3d understands.
-local function __compile_rotlist(rotlist)
-	return weac.table.map(rotlist, function(rot)
-		--- 1: Construct a Vector3 to represent which axis we want to rotate on
-		local rotval = Vector3.new(0, 0, 0)
-		-- Assume that if it's a table, it's a Vector3 instance
-		if type(rot) == "table" then
-			rotval = rot.axis:clone()
-		else
-			-- Otherwise, treat it as a string
-			if rot.axis:find("x", 1, true) then rotval.x = 1
-			elseif rot.axis:find("y", 1, true) then rotval.y = 1
-			elseif rot.axis:find("z", 1, true) then rotval.z = 1 end
-			if rot.axis:sub(1, 1) == "-" then
-				rotval = rotval * -1
-			end
-		end
-		
-		
-		--- 2: Rotate & apply amount of rotation to apply in radians
-		return rotval * rot.rad
-	end)
-end
 
 
 --- Rotates the given region around a given origin point using a set of rotations.
@@ -50,21 +24,24 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	
 	--- 1: Compile the rotation list
-	local rotlist_c = __compile_rotlist(rotlist)
+	local rotlist_c = weac.rotation.rotlist_compile(rotlist)
 	
 	
 	--- 2: Find the target area we will be rotating into
 	-- First, rotate the defined region to find the target region
-	local pos1_rot, pos2_rot = pos1:clone(), pos2:clone()
-	for i, rot in ipairs(rotlist_c) do
-		pos1_rot = Vector3.rotate3d(origin, pos1_rot, rot)
-		pos2_rot = Vector3.rotate3d(origin, pos2_rot, rot)
-	end
+	-- local pos1_rot, pos2_rot = pos1:clone(), pos2:clone()
+	-- for i, rot in ipairs(rotlist_c) do
+	-- 	pos1_rot = Vector3.rotate3d(origin, pos1_rot, rot)
+	-- 	pos2_rot = Vector3.rotate3d(origin, pos2_rot, rot)
+	-- end
+	
 	-- Then, align it to the world axis so we can grab a VoxelManipulator
 	-- We add 1 node either side for safety just in case of rounding errors when actually rotating
-	local pos1_dstvm, pos2_dstvm = Vector3.sort(pos1_rot, pos2_rot)
+	local pos1_dstvm, pos2_dstvm = weac.rotation.find_rotated_vm(pos1, pos2, origin, rotlist)
 	pos1_dstvm = pos1_dstvm:floor() - Vector3.new(1, 1, 1)
 	pos2_dstvm = pos2_dstvm:ceil() + Vector3.new(1, 1, 1)
+	
+	-- print("DEBUG:rotate pos1", pos1, "pos1_rot", pos1_rot, "pos1_dstvm", pos1_dstvm, "pos2", pos2, "pos2_rot", pos2_rot, "pos2_dstvm", pos2_dstvm)
 	
 	
 	--- 3: Check out a VoxelManipulator for the source and target regions
@@ -137,7 +114,8 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	--- 8: Return
 	return true, {
 		count_rotated = count_rotated,
-		pos1_dstvm = pos1_dstvm,
-		pos2_dstvm = pos2_dstvm
+		-- Undo the +/-1 when passing back
+		pos1_dstvm = pos1_dstvm + Vector3.new(1, 1, 1),
+		pos2_dstvm = pos2_dstvm - Vector3.new(1, 1, 1)
 	}
 end

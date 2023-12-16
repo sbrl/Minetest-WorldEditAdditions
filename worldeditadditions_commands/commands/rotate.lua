@@ -119,8 +119,8 @@ worldeditadditions_core.register_command("rotate+", {
 		if not success then return success, stats end
 		
 		
-		wea_c.pos.set1(name, stats.pos1_dstvm + Vector3.new(1, 1, 1))
-		wea_c.pos.set2(name, stats.pos2_dstvm - Vector3.new(1, 1, 1))
+		wea_c.pos.set1(name, stats.pos1_dstvm)
+		wea_c.pos.set2(name, stats.pos2_dstvm)
 		-- TODO: Adjust the defined area to match the target here? Maybe make this optional somehow given the target may or may nor be axis-aligned
 		-------------------------------------------------
 		local time_taken = wea_c.get_ms_time() - start_time
