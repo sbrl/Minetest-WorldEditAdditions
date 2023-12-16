@@ -136,6 +136,8 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	
 	--- 8: Return
 	return true, {
-		count_rotated = count_rotated
+		count_rotated = count_rotated,
+		pos1_dstvm = pos1_dstvm,
+		pos2_dstvm = pos2_dstvm
 	}
 end
