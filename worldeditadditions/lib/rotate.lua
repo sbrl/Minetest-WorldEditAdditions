@@ -45,9 +45,10 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	
 	
 	--- 3: Check out a VoxelManipulator for the source and target regions
-	-- TODO support param2 here
+	-- TODO support param2 here. We zero out the source.... but don't carry over to the target. This probably requires //orient+ first.
 	local manip_src, area_src = worldedit.manip_helpers.init(pos1, pos2)
 	local data_src = manip_src:get_data()
+	local param2_src = manip_src:get_param2_data()
 	
 	-- TODO: grab only an area at this point for dest and a blank target table. Then copy over to the real dest later to ensure consistency. This is important because we are dealing in (potentially) non-cardinal rectangles here
 	-- local area = VoxelArea:new({MinEdge=emerged_pos1, MaxEdge=emerged_pos2})
@@ -88,12 +89,15 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	for z = pos2.z, pos1.z, -1 do
 		for y = pos2.y, pos1.y, -1 do
 			for x = pos2.x, pos1.x, -1 do
-				data_src[area_src:index(x, y, z)] = id_air
+				local src_i = area_src:index(x, y, z)
+				data_src[src_i] = id_air
+				param2_src[src_i] = 0
 			end
 		end
 	end
+	manip_src:set_param2_data(param2_src)
 	worldedit.manip_helpers.finish(manip_src, data_src)
-	manip_src, area_src, data_src = nil, nil, nil
+	manip_src, area_src, data_src, param2_src = nil, nil, nil, nil
 	
 	
 	--- 6: Reinitialise the destination VoxelManip and copy data over
