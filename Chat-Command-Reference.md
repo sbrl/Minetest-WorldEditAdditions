@@ -838,7 +838,7 @@ To assist with the creation of static brushes, a tool exists to convert any imag
 
 <https://worldeditadditions.mooncarrot.space/img2brush/>
 
-The tool operates on the **alpha channel only**, so it's recommended to use an image format that supports transparency. All colours in the R, G, and B channels are ignored.
+The tool can operate on the colour channel of your choice - red, green, blue, or alpha.
 
 If you've created a cool new brush (be it static or dynamic), **please contribute it to WorldEditAdditions**! That way, everyone can enjoy using your awesome brush. [WorldPainter](https://www.worldpainter.net/) has many brushes available in the community, but `//sculpt` for WorldEditAdditions is new so don't have the same sized collection yet :-)
 
