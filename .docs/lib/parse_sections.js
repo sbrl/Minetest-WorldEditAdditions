@@ -21,6 +21,9 @@ markdown.use(markdown_prism, {
 	}
 });
 
+const alerts = require("markdown-it-github-alerts");
+markdown.use(alerts);
+
 function extract_title(line) {
 	return line.match(/#+\s+(.+)\s*/)[1].replace(/^`*|`*$/g, "")
 }

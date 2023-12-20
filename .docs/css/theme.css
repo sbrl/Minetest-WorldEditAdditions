@@ -442,26 +442,50 @@ footer {
 	border: 0.2em solid var(--cat-colour);
 }
 
-.note, .tip, .important, .warning, .caution {
+.note, .tip, .important, .warning, .caution
+.markdown-alert-note,
+.markdown-alert-tip,
+.markdown-alert-important,
+.markdown-alert-warning,
+.markdown-alert-caution
+{
 	padding: 0.4em 0.6em;
 	border-radius: 0 0.2em 0.2em 0;
 }
+.markdown-alert-note::before,
 .note::before		{ color: #31a0fc; content: "\0024d8\0000a0Note"; }
+.markdown-alert-tip::before,
 .tip::before		{ color: #25cb1c; content: "\01f4a1\0000a0Tip"; }
-.important::before	{ color: #911ccb; content: "\01f53a\0000a0Important"; }
+.markdown-alert-important::before,
+.important::before	{ color: #911ccb; content: "\01f7e3\0000a0Important"; }
+.markdown-alert-warning::before,
 .warning::before	{ color: #e0b840; content: "\0026a0\0000a0Warning"; }
+.markdown-alert-caution::before,
 .caution::before	{ color: #e04040; content: "\00203c\0000a0Caution"; }
+
+.markdown-alert-note::before,
+.markdown-alert-tip::before,
+.markdown-alert-important::before,
+.markdown-alert-warning::before,
+.markdown-alert-caution::before,
 .note::before, .tip::before, .important::before, .warning::before, .caution::before {
 	display: block;
 	font-weight: bold;
 	margin-bottom: 0.3em;
 }
+.markdown-alert-note,
 .note		{ border-left: 0.2em solid #31a0fc; background: #31a1fc1f; }
+.markdown-alert-tip,
 .tip		{ border-left: 0.2em solid #25cb1c; background: #31fc491f; }
+.markdown-alert-important,
 .important	{ border-left: 0.2em solid #911ccb; background: #bc31fc1f; }
+.markdown-alert-warning,
 .warning	{ border-left: 0.2em solid #e0b840; background: #efc7461f; }
+.markdown-alert-caution,
 .caution	{ border-left: 0.2em solid #e04040; background: #ef5f461f; }
 
+/* markdown-it-alert-title. We *should* use their provided styles really.... but meh */
+.markdown-alert-title { display: none; }
 
 .contributor-list {
 	list-style-type: none;
