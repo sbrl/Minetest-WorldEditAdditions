@@ -381,7 +381,8 @@ Scale Factor    | Meaning
 
 In short, you can specify the scale factor directly, as a percentage, or as 1 number divided by another number.
 
-**Note:** `//scale` always scales in the _positive direction_ by default. This can be changed however - see below.
+> [!NOTE]
+> `//scale` always scales in the _positive direction_ by default. This can be changed however - see below.
 
 With this in mind, there are 3 forms that you can tell `//scale` how you want to scale the defined region:
 
@@ -948,7 +949,8 @@ Since WorldEditAdditions v1.13, a list of node names is also optionally supporte
 ### `//count`
 Counts all the nodes in the defined region and returns the result along with calculated percentages (note that if the chat window used a monospace font, the returned result would be a perfect table. If someone has a ~~hack~~ solution to make the columns line up neatly, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) :D)
 
-**Note:** The output of `//count` can be rather long sometimes, and Minetest by default only shows the last few lines of chat. Press <kbd>F10</kbd> to show the full chat window that you can then scroll through to inspect the full output.
+> [!NOTE]
+> The output of `//count` can be rather long sometimes, and Minetest by default only shows the last few lines of chat. Press <kbd>F10</kbd> to show the full chat window that you can then scroll through to inspect the full output.
 
 ```weacmd
 //count
@@ -1321,7 +1323,8 @@ Note also that `<cmd_name>` should _not_ be prefixed with _any_ forward  slashes
 
 While other server commands can be executed while a `//subdivide` is running, `//subdivide` manipulates your player's defined region when running. This has the side-effect that you can check on where it has got up to with `//p get` for example - but means that attempting to change your pos1 & pos2 manually will have no effect until the `//subdivide` completes.
 
-**Warning:** Once started, this command cannot be stopped without restarting your server! This is the case with all WorldEdit commands, but it's worth a special mention here.
+> [!WARNING]
+> Once started, this command cannot be stopped without restarting your server! This is the case with all WorldEdit commands, but it's worth a special mention here.
 
 ```weacmd
 //subdivide 10 10 10 set dirt

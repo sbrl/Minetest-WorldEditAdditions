@@ -442,13 +442,8 @@ footer {
 	border: 0.2em solid var(--cat-colour);
 }
 
-.note, .tip, .important, .warning, .caution
-.markdown-alert-note,
-.markdown-alert-tip,
-.markdown-alert-important,
-.markdown-alert-warning,
-.markdown-alert-caution
-{
+.note, .tip, .important, .warning, .caution,
+.markdown-alert {
 	padding: 0.4em 0.6em;
 	border-radius: 0 0.2em 0.2em 0;
 }
@@ -486,6 +481,8 @@ footer {
 
 /* markdown-it-alert-title. We *should* use their provided styles really.... but meh */
 .markdown-alert-title { display: none; }
+
+
 
 .contributor-list {
 	list-style-type: none;
