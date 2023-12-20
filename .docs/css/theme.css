@@ -444,7 +444,17 @@ footer {
 
 .note, .tip, .important, .warning, .caution {
 	padding: 0.4em 0.6em;
-	
+	border-radius: 0 0.2em 0.2em 0;
+}
+.note::before		{ color: #31a0fc; content: "\0024d8\0000a0Note"; }
+.tip::before		{ color: #25cb1c; content: "\01f4a1\0000a0Tip"; }
+.important::before	{ color: #911ccb; content: "\01f53a\0000a0Important"; }
+.warning::before	{ color: #e0b840; content: "\0026a0\0000a0Warning"; }
+.caution::before	{ color: #e04040; content: "\00203c\0000a0Caution"; }
+.note::before, .tip::before, .important::before, .warning::before, .caution::before {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 0.3em;
 }
 .note		{ border-left: 0.2em solid #31a0fc; background: #31a1fc1f; }
 .tip		{ border-left: 0.2em solid #25cb1c; background: #31fc491f; }
