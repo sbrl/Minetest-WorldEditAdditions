@@ -118,7 +118,6 @@ async function picture(source_image, alt, target_dir, urlpath, formats = "__AUTO
 	}
 	
 	const target_original = path.join(target_dir, source_parsed.base);
-	console.error(`DEBUG:target_original`, target_original, `DIRNAME`, path.dirname(target_original));
 	if (!fs.existsSync(path.dirname(target_original)))
 		await fs.promises.mkdir(path.dirname(target_original), { recursive: true });
 	await fs.promises.copyFile(source_image, target_original);
@@ -137,7 +136,7 @@ async function picture(source_image, alt, target_dir, urlpath, formats = "__AUTO
 		};
 	}));
 	
-	let result = `<picture>\n\t`;
+	let result = `<picture data-zoomable="true">\n\t`;
 	result += sources.map(source => `<source srcset="${source.srcset}" type="${source.mime}" />`).join(`\n\t`);
 	result += `\n\t<img loading="lazy" decoding="async" src="${urlpath}/${source_parsed.base}" alt="${htmlentities.encode(alt)}" />\n`;
 	result += `</picture>\n`
