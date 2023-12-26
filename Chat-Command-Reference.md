@@ -1494,6 +1494,23 @@ This command is intended for development and modding. You will not normally need
 -->
 
 
+### `//speed [<value=1>]`
+Adjusts your player movement speed to the specified value. In other words:
+
+```weacmd
+//speed 2
+```
+
+...will double your movement speed.
+
+This command also takes Minetest's "Fast mode" into account and adjusts accordingly. Relative adjustments can be done by prepending either a `+` to increase or `-` to decrease respectively.
+
+```weacmd
+//speed +0.5
+//speed -3
+```
+
+
 ### `//y`
 Confirms the execution of a command if it could potentially affect a large number of nodes and take a while. This is a regular WorldEdit command.
 

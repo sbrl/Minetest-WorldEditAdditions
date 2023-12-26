@@ -11,6 +11,7 @@ Note to self: See the bottom of this file for the release template text.
 - Added [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply), a generalisation of [`//airapply`](https://worldeditadditions.mooncarrot.space/Reference/#airapply) that works with a defined list of nodes. Check out [the reference](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply) - it has some cool tricks to it! (thanks for suggesting, @kliv91 from the Discord server!)
 - Added [`//ngroups`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups), which lists the groups that a given node is a member of. Useful when paired with [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)!
 - Added [`//rotate+`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) to rotate regions through arbitrary series of potentially non-axis-aligned rotations.
+- Added [`//speed`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) to adjust your own movement speed
 
 ### Bugfixes and changes
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
