@@ -1541,6 +1541,15 @@ Prevents the execution of a command if it could potentially affect a large numbe
    ██     ██████   ██████  ███████ ███████
 -->
 
+### Movement speed adjustment tool
+The movement speed adjustment tool, as the name suggests, adjusts your local player movement speed. It looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_farwand/textures/worldeditadditions_movement.png).
+
+Primary (left) clicking will increase your movement speed, and secondary (right) clicking will decrease it in x0.5 increments, down to a minimum of x0.5.
+
+Note this only affects **you**, and **not any other player**.
+
+See also [`//speed`](#speed).
+
 ### Far Wand
 The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_farwand.png)
 

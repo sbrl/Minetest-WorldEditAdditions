@@ -12,6 +12,7 @@ Note to self: See the bottom of this file for the release template text.
 - Added [`//ngroups`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups), which lists the groups that a given node is a member of. Useful when paired with [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)!
 - Added [`//rotate+`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) to rotate regions through arbitrary series of potentially non-axis-aligned rotations.
 - Added [`//speed`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) to adjust your own movement speed
+	- Also added an associated [movement speed adjustment tool](https://worldeditadditions.mooncarrot.space/Reference/#movement), which looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_farwand/textures/worldeditadditions_movement.png)
 
 ### Bugfixes and changes
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
