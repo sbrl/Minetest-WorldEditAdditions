@@ -398,7 +398,7 @@ footer {
 	cursor: default;
 }
 
-.gallerybox {
+.gallery {
 	background: var(--pattern-hex), var(--bg-transcluscent);
 }
 

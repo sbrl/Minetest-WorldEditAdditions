@@ -54,16 +54,15 @@ async function shortcode_image_urlpass(src) {
 	return `/img/${filename}`;
 }
 
-async function shortcode_gallerybox(content, src, id_this, id_prev, id_next) {
-	return `<figure class="gallerybox-item" id="${id_this}">
+async function shortcode_gallerybox(content, src) {
+	return `<div class="keen-slider__slide"><figure class="gallery-item">
 <!-- ${await shortcode_image(src, "", "gallerybox-thumb", "300w")} -->
 	${await shortcode_image(src, "", "", "1920w")}
 	
 	<figcaption>${content}</figcaption>
-	
-<a class="gallerybox-prev" href="#${id_prev}">❰</a>
-<a class="gallerybox-next" href="#${id_next}">❱</a>
-</figure>`;
+</figure></div>`;
+	// <a class="gallerybox-prev" href="#${id_prev}">❰</a>
+	// <a class="gallerybox-next" href="#${id_next}">❱</a>
 }
 
 async function fetch(url) {
@@ -137,4 +136,8 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addAsyncShortcode("image_urlpass", shortcode_image_urlpass);
 	eleventyConfig.addNunjucksAsyncShortcode("image_urlpass", shortcode_image_urlpass);
 	eleventyConfig.addPairedShortcode("gallerybox", shortcode_gallerybox);
+	
+	eleventyConfig.addPassthroughCopy({
+		"node_modules/keen-slider/keen-slider.es.js": "."
+	});
 }
