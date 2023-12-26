@@ -138,6 +138,6 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPairedShortcode("gallerybox", shortcode_gallerybox);
 	
 	eleventyConfig.addPassthroughCopy({
-		"node_modules/keen-slider/keen-slider.es.js": "."
+		"node_modules/keen-slider/keen-slider.es.js": "./keen-slider.es.js"
 	});
 }

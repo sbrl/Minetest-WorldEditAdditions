@@ -118,6 +118,7 @@ async function picture(source_image, alt, target_dir, urlpath, formats = "__AUTO
 	}
 	
 	const target_original = path.join(target_dir, source_parsed.base);
+	console.error(`DEBUG:target_original`, target_original, `DIRNAME`, path.dirname(target_original));
 	if (!fs.existsSync(path.dirname(target_original)))
 		await fs.promises.mkdir(path.dirname(target_original), { recursive: true });
 	await fs.promises.copyFile(source_image, target_original);
