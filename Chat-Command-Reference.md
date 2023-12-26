@@ -737,10 +737,32 @@ Usage examples:
 ### `//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
 Applies 2D noise to the terrain in the defined region. Like `//erode`, this command accepts a number of different key-value parameters and provides a number of different underlying algorithms.
 
+In other words, this command changes the height of the terrain according to some noise function (e.g. Perlin noise):
+
+![//noise2d applies 2D noise as a modifier to terrain height.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/.docs/images/reference/noise2d.jpeg)
+
+It does so like this:
+
+1. Take coordinates of each column
+2. Plug them through a noise function (see below)
+3. Apply the generated noise value to the terrain.
+
+`//noise2d` has a number of parameters that let you adjust the mathematical properties of step 2, which are explained in the table below.
+
+Some terms that are useful to know:
+
+- **Scale:** How big or small the noise is. Lower values stretch it out to be bigger, and higher values squash it in.
+- **Offset:** Noise is calculated by passing some coordinates into a function.
+- **Perlin:** A noise algorithm. `//noise2d` defaults to this.
+
+
+#### Table of parameters
+
 Parameter	| Type		| Default Value	| Description
 ------------|-----------|---------------|-----------------------
 algorithm	| `string`	| perlinmt		| The 2D noise algorithm to apply - see below.
 apply		| `string¦integer` | 5		| How to apply the noise to the terrain - see below.
+scale		| `float`	| 1				| Sets `scalex`, `scaley`, and `scalez` all at once. Consider also `//apply`.
 scalex		| `float`	| 1				| The scale of the noise on the x axis.
 scaley		| `float`	| 1				| The scale of the noise on the y axis.
 scalez		| `float`	| 1				| The scale of the noise on the z axis.
@@ -751,12 +773,29 @@ exponent	| `float`	| 0				| Raise the generated noise value (with a range of 0 t
 multiply	| `float`	| 1				| Multiply the generated noise value by this number
 add			| `float`	| 0				| Add this number to the generated noise value.
 
-
+#### Apply
 Different values of the `apply` parameter result in the generated noise values being applied in different ways:
 
- - An integer indicates that the noise should be rescaled to a given amplitude (equal parts of the range above and below 0) before being added to the terrain heightmap.`
- - The exact string `add`: Noise values are added to each heightmap pixel.
- - The exact string `multiply`: Each heightmap pixel is multiplied by the corresponding noise value.
+1. An integer indicates that the noise should be rescaled to a given amplitude (equal parts of the range above and below 0) before being added to the terrain heightmap.`
+2. The exact string `add`: Noise values are added to each heightmap pixel.
+3. The exact string `multiply`: Each heightmap pixel is multiplied by the corresponding noise value.
+
+An integer is the most common way to use `//noise2d`. So, for example:
+
+```weacmd
+//noise2d apply 5
+```
+
+...would alter the height of each column of nodes by at most 5 blocks either side, while:
+
+```weacmd
+//noise2d apply 10
+```
+
+...would alter the height by 10 blocks instead of 5.
+
+#### Types of noise
+Another thing that can be changed is the noise algorithm. This changes what the noise that is applied to the terrain looks like.
 
 The following algorithms are currently available:
 
@@ -765,7 +804,7 @@ Algorithm	| Description
 `perlinmt`  | **Default**. Perlin noise, backed by Minetest's inbuilt `PerlinNoise` class.
 `perlin`	| Perlin noise, backed by a pure Lua perlin noise implementation. Functional, but currently contains artefacts I'm having difficulty tracking down.
 `sin`		| A sine wave created with `math.sin()`.
-`white`		| Random white noise.
+`white`		| Random white noise. In other words, just random values.
 `red`		| Red noise - has a lower frequency than white noise. Ref [Noise Functions and Map Generation by Red Blob Games](https://www.redblobgames.com/articles/noise/introduction.html).
 `infrared`	| Even smoother than red noise. Tends to also be quite flat unless you use a slightly higher `apply` value (e.g. `20`).
 
@@ -776,6 +815,7 @@ When specifying algorithm names, the `algorithm` parameter name is optional. For
 //noise2d offsetx 4 algorithm perlin scale 0.2
 ```
 
+#### Further examples
 Example invocations:
 
 ```weacmd
