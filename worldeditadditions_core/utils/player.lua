@@ -37,6 +37,47 @@ end
 
 -- /lua print(Vector3.clone(minetest.get_player_by_name(myname):get_look_dir()))
 
+function wea_c.player_get_physics_override(player, purpose_str)
+	if type(player) == "string" then
+		player = minetest.get_player_by_name(player)
+	end
+	
+	if minetest.global_exists("pova") then
+		return pova.get_override(player:get_player_name(), purpose_str)
+	else
+		return minetest.get_physics_override(player:get_player_name())
+	end
+end
+
+function wea_c.player_set_physics_override(player, purpose_str, overrides)
+	if type(player) == "string" then
+		player = minetest.get_player_by_name(player)
+	end
+	local player_name = player:get_player_name()
+	
+	if minetest.global_exists("pova") then
+		local overrides_old = wea_c.player_get_physics_override(player, purpose_str)
+		local do_set = false
+		
+		if overrides_old == nil then
+			overrides_old = {}
+			do_set = true
+		end
+		
+		for key, value in pairs(overrides) do
+			overrides_old[key] = value
+		end
+		
+		-- Only set if this is the first time adding an override with this purpose_str for this player. On subsequent alterations, we update the existing overrides table
+		if do_set then
+			pova.add_override(player:get_player_name(), purpose_str, overrides_old)
+		end
+		pova.do_override(player)
+	else
+		minetest.set_physics_override(player_name, overrides)
+	end
+end
+
 --- DEPRECATED =================================================================
 -- TODO: Refactor commands that use the following functions to use player_dir then delete these functions
 

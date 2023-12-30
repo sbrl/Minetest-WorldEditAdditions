@@ -49,23 +49,36 @@ worldeditadditions_core.register_command("speed", {
 		local player = minetest.get_player_by_name(name)
 		
 		if mode == "absolute" then
-			player:set_physics_override({
-				speed = speed,
-				climb_speed = speed
-			})
+			weac.player_set_physics_override(player,
+				"worldeditadditions_movetool", {
+					speed = speed,
+					climb_speed = speed
+				}
+			)
+			-- player:set_physics_override({
+			-- })
 		elseif mode == "relative" then
-			local overrides = player:get_physics_override()
+			local overrides = weac.player_get_physics_override(
+				player, "worldeditadditions_movetool"
+			)
 			local src_speed = overrides.speed or 1
 			local src_climb_speed = overrides.climb_speed or 1
-			player:set_physics_override({
-				speed = src_speed + speed,
-				climb_speed = src_climb_speed + speed
-			})
+			weac.player_set_physics_override(player,
+				"worldeditadditions_movetool", {
+					speed = src_speed + speed,
+					climb_speed = src_climb_speed + speed
+				}
+			)
+			-- player:set_physics_override({
+			-- })
 		else
 			return false, "Error: Unknown adjustment mode '"..tostring(mode).."'. This is a bug."
 		end
 		
-		local overrides_after = player:get_physics_override()
+		local overrides_after = weac.player_get_physics_override(
+			player, "worldeditadditions_movetool"
+		)
+		-- local overrides_after = player:get_physics_override()
 		
 		local time_taken = weac.get_ms_time() - start_time
 
