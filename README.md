@@ -149,6 +149,21 @@ git checkout TAG_NAME_HERE
 ```
 
 
+## Integrations
+WorldEditAdditions tries to be compatible with as many other mods and games as possible. If things aren't working as expected with your mod/game, please do [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new) and let us know.
+
+Currently, we have explicit compatibility code added to support the following mods:
+
+- [`bonemeal`](https://content.minetest.net/packages/TenPlus1/bonemeal/): For `//forest`, `//bonemeal`, and other commands that use bonemeal to grow things.
+- [`pova`](https://content.minetest.net/packages/TenPlus1/pova/) for adjusting player movement speed.
+
+All compatibility code is optional: you don't *have* to have any of these mods installed in order to use WorldEditAdditions.
+
+The following mods have known issues:
+
+- [`moretrees`](https://content.minetest.net/packages/mt-mods/moretrees/): Saplings are incompatible with bonemeal. See [this FAQ](https://github.com/sbrl/Minetest-WorldEditAdditions/#why-dont-the-moretrees-trees-work-with-forest).
+
+
 ## Troubleshooting
 If you're experiencing issues with this mod, try checking this FAQ before opening an issue.
 
@@ -172,7 +187,9 @@ The only side effect of this is that WorldEdit commands such as `//shift` are no
 ### The position markers disappear when far way
 This is a limitation of Minetest. You can workaround it though by setting [`active_block_range`](https://github.com/minetest/minetest/blob/5.6.1/minetest.conf.example#L2868) to a higher value - though be aware this also affects ABMs and other entities as well, so it can cause server lag.
 
-The new positioning system now partially rectifies this issue with the region marker walls by creating a grid of entities instead of a single entity, such that a portion of them are more likely to be in range.
+The new positioning system now rectifies this issue with the region marker walls by creating a grid of entities instead of a single entity, such that a portion of them are more likely to be in range.
+
+If this is not showing for you, please update WorldEditAdditions and try again.
 
 
 ## Contributing
