@@ -181,13 +181,14 @@ Contributions are welcome! Please state in your pull request(s) that you release
 Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc. More contributing help can be found in [the contributing guide](CONTRIBUTING.md).
 
 ### Inspiration
-Want to contribute, but finding it tough to search for inspiration of what to implement? Here are some great places to look:
+Want to contribute, but finding it tough to find inspiration of what to implement? Here are some great places to look:
 
 - [**Our issue tracker:**](https://github.com/sbrl/Minetest-WorldEditAdditions/issues) There are always a bunch of issues open with cool commands and features that have yet to be implemented.
 - **Other software:** Software for Minecraft is often far more mature than that available for Minetest. As a result, it's full of cool ideas. A lot of the existing commands in WorldEditAdditions were sourced from here.
 	- WorldEdit for Minecraft
 	- VoxelSniper(-Reimagined) for Minecraft
 	- WorldPainter for Minecraft
+	- Axiom
 - **Do some building:** When you put WorldEditAdditions to use in building projects of your own, things will absolutely stand out to you what you want in the creative building process that WorldEditAdditions doesn't yet have.
 - **Watch others build stuff:** Doesn't even have to be Minetest! There are lots of talented Minecraft builders with videos and series on e.g. YouTube. From their creative building processes, many ideas can be derived.
 
@@ -197,7 +198,9 @@ The ultimate goal is for WorldEditAdditions to support the creative building pro
 ## WorldEditAdditions around the web
 Are you using WorldEditAdditions for a project? Open an issue and I'll add your project to the below list!
 
- - _(None that I'm aware of yet! Open an issue or get in touch and I'll link to your project (-:)_
+- [@notsowow has built a magical mountain castle](https://worldeditadditions.mooncarrot.space/img/gallery-notsowow_100pcent.jpeg)
+- _(No others that I'm aware of yet! Open an issue or get in touch and I'll link to your project (-:)_
+
 
 ## License
 This mod is licensed under the _Mozilla Public License 2.0_, a copy of which (along with a helpful summary as to what you can and can't do with it) can be found in the `LICENSE` file in this repository.
