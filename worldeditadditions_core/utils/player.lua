@@ -45,7 +45,7 @@ function wea_c.player_get_physics_override(player, purpose_str)
 	if minetest.global_exists("pova") then
 		return pova.get_override(player:get_player_name(), purpose_str)
 	else
-		return minetest.get_physics_override(player:get_player_name())
+		return player:get_physics_override()
 	end
 end
 
@@ -53,7 +53,6 @@ function wea_c.player_set_physics_override(player, purpose_str, overrides)
 	if type(player) == "string" then
 		player = minetest.get_player_by_name(player)
 	end
-	local player_name = player:get_player_name()
 	
 	if minetest.global_exists("pova") then
 		local overrides_old = wea_c.player_get_physics_override(player, purpose_str)
@@ -74,7 +73,7 @@ function wea_c.player_set_physics_override(player, purpose_str, overrides)
 		end
 		pova.do_override(player)
 	else
-		minetest.set_physics_override(player_name, overrides)
+		player:set_physics_override(overrides)
 	end
 end
 
