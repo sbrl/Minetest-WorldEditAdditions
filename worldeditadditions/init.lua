@@ -1,7 +1,15 @@
---- WorldEditAdditions
+--- WorldEditAdditions Lua API
+-- 
+-- This is the documentation for the Lua API of WorldEditAdditions. It was generated automatically from comments spread across the codebase with [moondoc](https://github.com/sbrl/moondoc).
+-- 
+-- **Current version:** 1.15-dev 
+-- 
+-- These docs are a work-in-progress. **Not all functions are documented here yet.** If anything is unclear, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new).
+-- 
+-- © 2023 Starbeamrainbowlabs and contributors. Licenced under the Mozilla Public License 2.0.
 -- @namespace worldeditadditions
 -- @release 1.14.5
--- @copyright 2023 Starbeamrainbowlabs
+-- @copyright 2023 Starbeamrainbowlabs and contributors
 -- @license Mozilla Public License, 2.0
 -- @author Starbeamrainbowlabs
 

@@ -262,7 +262,8 @@ footer {
 	margin: 3em 0 0 0;
 	padding: 1em;
 	text-align: center;
-	background: var(--pattern-jigsaw-green),
+	background: linear-gradient(to left, #fff2, #fff2),
+		var(--pattern-jigsaw-green),
 		var(--bg-bright);
 	/* color: var(--text-bright); */
 }

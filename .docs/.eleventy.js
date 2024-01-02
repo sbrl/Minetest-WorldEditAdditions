@@ -10,6 +10,7 @@ const phin = require("phin");
 const CleanCSS = require("clean-css");
 const { minify: minify_html } = require("html-minifier-terser");
 
+const moondoc_runner = require("./lib/moondoc_runner.js");
 const HTMLPicture = require("./lib/HTMLPicture.js");
 const FileFetcher = require("./lib/FileFetcher.js");
 
@@ -120,6 +121,10 @@ async function do_minify_html(source, output_path) {
 if(is_production) console.log("Production environment detected, minifying content");
 
 module.exports = function(eleventyConfig) {
+	moondoc_runner(
+		path.resolve(__dirname, "_site/api/index.html")
+	);
+	
 	eleventyConfig.addTransform("cssmin", do_minify_css);
 	eleventyConfig.addTransform("htmlmin", do_minify_html);
 	
@@ -140,4 +145,5 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy({
 		"node_modules/keen-slider/keen-slider.es.js": "./keen-slider.es.js"
 	});
+	
 }
