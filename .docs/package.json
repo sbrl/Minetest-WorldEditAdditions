@@ -31,7 +31,7 @@
 		"keen-slider": "^6.8.6",
 		"markdown-it-github-alerts": "^0.2.0",
 		"markdown-it-prism": "^2.3.0",
-		"moondoc": "^1.0.1",
+		"moondoc": "^1.1.0",
 		"p-memoize": "^7.1.1",
 		"p-queue": "^7.3.4",
 		"phin": "^3.7.0",
