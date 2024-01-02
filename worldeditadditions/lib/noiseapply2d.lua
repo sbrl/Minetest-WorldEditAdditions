@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 -- ███    ██  ██████  ██ ███████ ███████  █████  ██████  ██████  ██   ██    ██ ██████  ██████
 -- ████   ██ ██    ██ ██ ██      ██      ██   ██ ██   ██ ██   ██ ██    ██  ██       ██ ██   ██
 -- ██ ██  ██ ██    ██ ██ ███████ █████   ███████ ██████  ██████  ██     ████    █████  ██   ██
@@ -9,10 +12,10 @@ local Vector3 = wea_c.Vector3
 
 --- Similar to cubeapply, except that it takes 2 positions and randomly keeps changes based on a noise pattern.
 -- Takes a backup copy of the defined region, runs the given function, and then
--- restores the bits that aren't above the nosie threshold.
--- @param	{Position}	pos1	The 1st position defining the region boundary
--- @param	{Position}	pos2	The 2nd positioon defining the region boundary 
--- @param	{Function}	func	The function to call that performs the action in question. It is expected that the given function will accept no arguments.
+-- restores the bits that aren't above the noise threshold.
+-- @param	pos1	Vector3		The 1st position defining the region boundary
+-- @param	pos2	Vector3		The 2nd positioon defining the region boundary 
+-- @param	func	function	The function to call that performs the action in question. It is expected that the given function will accept no arguments.
 function worldeditadditions.noiseapply2d(pos1, pos2, threshold, scale, func)
 	local time_taken_all = wea_c.get_ms_time()
 	pos1, pos2 = Vector3.sort(pos1, pos2)

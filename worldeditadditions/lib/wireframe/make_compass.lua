@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 -- ███    ███  █████  ██   ██ ███████      ██████  ██████  ███    ███ ██████   █████  ███████ ███████
 -- ████  ████ ██   ██ ██  ██  ██          ██      ██    ██ ████  ████ ██   ██ ██   ██ ██      ██
 -- ██ ████ ██ ███████ █████   █████       ██      ██    ██ ██ ████ ██ ██████  ███████ ███████ ███████
@@ -8,9 +11,9 @@ local Vector3 = wea_c.Vector3
 -- ██      ██ ██   ██ ██   ██ ███████      ██████  ██████  ██      ██ ██      ██   ██ ███████ ███████
 
 --- Makes a compass with a bead pointing north (+Z).
--- @param	{Position}	pos1	The 1st position defining the WorldEdit selection
--- @param	{string}	node1	Name of the node to place
--- @param	{string}	node2	Name of the node of the bead
+-- @param	pos1	Vector3	The 1st position defining the WorldEdit selection
+-- @param	node1	string	Name of the node to place
+-- @param	node2	string	Name of the node of the bead
 function worldeditadditions.make_compass(pos1,node1,node2)
 	pos1 = Vector3.clone(pos1)
 	minetest.set_node(pos1 + Vector3.new(0,1,3), { name = node2 })

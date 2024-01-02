@@ -1,5 +1,11 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
+
+--- Functions for handling selections of the defined pos1/pos2 region.
+-- 
+-- These functions primarily back the [cloud wand](https://worldeditadditions.mooncarrot.space/Reference/#cloud). To manipulate positions directly, see the [`worldeditadditions_core.pos`]() namespace.
+-- @namespace worldeditadditions.selection
+
 -- ███████ ███████ ██      ███████  ██████ ████████ ██  ██████  ███    ██
 -- ██      ██      ██      ██      ██         ██    ██ ██    ██ ████   ██
 -- ███████ █████   ██      █████   ██         ██    ██ ██    ██ ██ ██  ██
@@ -13,6 +19,7 @@ local selection = {}
 -- makes a selection from the provided point.
 -- @param	name	string	Player name.
 -- @param	pos	vector	The position to include.
+-- @returns	void
 function selection.add_point(name, newpos)
 	if newpos ~= nil then
 		-- print("DEBUG:selection.add_point newpos", newpos)
@@ -64,6 +71,7 @@ end
 
 --- Clears current selection, *but only pos1 and pos2!
 -- @param	name	string	Player name.
+-- @returns	void
 function selection.clear_points(name)
 	wea_c.pos.clear(name)
 	-- worldedit.marker_update(name)

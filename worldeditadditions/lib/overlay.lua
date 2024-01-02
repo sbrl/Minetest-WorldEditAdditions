@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 --- Overlap command. Places a specified node on top of each column.
 -- @param	pos1			Vector3		pos1 of the defined region to perform the overlay operation in.
 -- @param	pos2			Vector3		pos2 of the defined region to perform the overlay operation in.

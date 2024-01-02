@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 
 --- Flood-fill command for complex lakes etc.
 -- @param	start_pos		Vector3		The position to start floodfilling from.

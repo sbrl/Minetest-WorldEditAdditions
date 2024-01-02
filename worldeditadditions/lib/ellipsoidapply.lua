@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 -- ███████ ██      ██      ██ ██████  ███████  ██████  ██ ██████
 -- ██      ██      ██      ██ ██   ██ ██      ██    ██ ██ ██   ██
 -- █████   ██      ██      ██ ██████  ███████ ██    ██ ██ ██   ██
@@ -16,9 +19,9 @@ local Vector3 = wea_c.Vector3
 --- Similar to cubeapply, except that it takes 2 positions and only keeps an ellipsoid-shaped area defined by the boundaries of the defined region.
 -- Takes a backup copy of the defined region, runs the given function, and then
 -- restores the bits around the edge that aren't inside the largest ellipsoid that will fit inside the defined region.
--- @param	{Position}	pos1	The 1st position defining the region boundary
--- @param	{Position}	pos2	The 2nd positioon defining the region boundary 
--- @param	{Function}	func	The function to call that performs the action in question. It is expected that the given function will accept no arguments.
+-- @param	pos1	Vector3		The 1st position defining the region boundary
+-- @param	pos2	Vector3		The 2nd positioon defining the region boundary 
+-- @param	func	function	The function to call that performs the action in question. It is expected that the given function will accept no arguments.
 function worldeditadditions.ellipsoidapply(pos1, pos2, func)
 	local time_taken_all = wea_c.get_ms_time()
 	pos1, pos2 = Vector3.sort(pos1, pos2)

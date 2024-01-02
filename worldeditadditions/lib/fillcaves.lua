@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 --- Fill caves command. Fills underneath non-air nodes in the defined region.
 -- @param	pos1		Vector3		pos1 of the defined region to fill caves in.
 -- @param	pos2		Vector3		pos2 of the defined region to fill caves in.

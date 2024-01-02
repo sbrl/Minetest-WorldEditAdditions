@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 --- Generates a torus shape at the given position with the given parameters.
 -- @param	position		Vector		The position at which to generate the torus.
 -- @param	major_radius	number		The major radius of the torus - i.e. the distance from the middle to the ring.

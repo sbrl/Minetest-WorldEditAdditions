@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 --- Places saplings and bonemeals them automatically to create a forest.
 -- Note that the defined region is *the region that saplings are placed in*, so nodes may ultimately end up being replaced outside the defined region depending on the size of the tree that grows.
 -- @param	pos1		Vector3		pos1 of the defined region to place saplings in.

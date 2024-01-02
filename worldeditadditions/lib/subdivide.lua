@@ -1,15 +1,24 @@
+local wea_c = worldeditadditions_core
+local wea = worldeditadditions
+local Vector3 = wea_c.Vector3
+
+---
+-- @module worldeditadditions
+
 -- ███████ ██    ██ ██████  ██████  ██ ██    ██ ██ ██████  ███████
 -- ██      ██    ██ ██   ██ ██   ██ ██ ██    ██ ██ ██   ██ ██
 -- ███████ ██    ██ ██████  ██   ██ ██ ██    ██ ██ ██   ██ █████
 --      ██ ██    ██ ██   ██ ██   ██ ██  ██  ██  ██ ██   ██ ██
 -- ███████  ██████  ██████  ██████  ██   ████   ██ ██████  ███████
-local wea_c = worldeditadditions_core
-local wea = worldeditadditions
-local Vector3 = wea_c.Vector3
 
+-- NOTE this isn't a trip dash --- 'cause it's local-only to this file
 -- Counts the number of chunks in the given area.
 -- Maths is now done properly. Values from this new implementation were tested
 -- with 1000 random pos1, pos2, and chunk_size combinations and found to be identical.
+-- @internal
+-- @param	pos1	Vector3	Position 1 of the defined region.
+-- @param	pos2	Vector3	Position 2 of the defined region.
+-- @param	chunk_size	Vector3	Size of the chunks to subdivide into..
 local function count_chunks(pos1, pos2, chunk_size)
 	-- Assume pos1 & pos2 are sorted
 	local dimensions = Vector3.new(
@@ -136,11 +145,11 @@ end
 -- The emerge property contains a table that holds a running total of statistics
 -- about what Minetest did to emerge the requested blocks in the world.
 -- callback_complete is called at the end of the process, and pos1 + pos2 will be set to that of the entire region.
--- @param	{Vector}	pos1		The first position defining the area to emerge.
--- @param	{Vector}	pos2		The second position defining the area to emerge.
--- @param	{Vector}	chunk_size	The size of the chunks to subdivide into.
--- @param	{function}	callback	The callback to call for each block.
--- @param	{function}	callback	The callback to call upon completion.
+-- @param	pos1		Vector		The first position defining the area to emerge.
+-- @param	pos2		Vector		The second position defining the area to emerge.
+-- @param	chunk_size	Vector		The size of the chunks to subdivide into.
+-- @param	callback	function	The callback to call for each block.
+-- @param	callback	function	The callback to call upon completion.
 function worldeditadditions.subdivide(pos1, pos2, chunk_size, callback_subblock, callback_complete)
 	pos1, pos2 = worldedit.sort_pos(pos1, pos2)
 	local chunks_total = count_chunks(pos1, pos2, chunk_size)

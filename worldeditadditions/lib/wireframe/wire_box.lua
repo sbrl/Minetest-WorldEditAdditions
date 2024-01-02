@@ -1,5 +1,8 @@
 local v3 = worldeditadditions_core.Vector3
 
+---
+-- @module worldeditadditions
+
 -- ██     ██ ██ ██████  ███████     ██████   ██████  ██   ██
 -- ██     ██ ██ ██   ██ ██          ██   ██ ██    ██  ██ ██
 -- ██  █  ██ ██ ██████  █████       ██████  ██    ██   ███
@@ -7,9 +10,9 @@ local v3 = worldeditadditions_core.Vector3
 --  ███ ███  ██ ██   ██ ███████     ██████   ██████  ██   ██
 
 --- Fills the edges of the selection box with nodes.
--- @param	{Position}	pos1	The 1st position defining the WorldEdit selection
--- @param	{Position}	pos2	The 2nd positioon defining the WorldEdit selection
--- @param	{string}	node	Name of the node to place
+-- @param	pos1	Vector3	The 1st position defining the WorldEdit selection
+-- @param	pos2	Vector3	The 2nd positioon defining the WorldEdit selection
+-- @param	node	string	Name of the node to place
 function worldeditadditions.wire_box(pos1,pos2,node)
 	local node_id_replace = minetest.get_content_id(node)
 	local ps1, ps2 = v3.sort(pos1,pos2)

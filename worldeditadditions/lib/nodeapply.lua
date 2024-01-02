@@ -2,6 +2,8 @@ local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 local NodeListMatcher = wea_c.NodeListMatcher
 
+---
+-- @module worldeditadditions
 
 
 -- ███    ██  ██████  ██████  ███████

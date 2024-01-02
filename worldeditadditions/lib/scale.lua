@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 --- Scales the defined region by the given scale factor in the given anchors.
 -- Scale factor vectors containing both scale up and scale down operations are
 -- split into 2 different scale operations automatically.

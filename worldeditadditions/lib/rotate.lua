@@ -1,6 +1,9 @@
 local weac = worldeditadditions_core
 local Vector3 = weac.Vector3
 
+---
+-- @module worldeditadditions
+
 -- ██████   ██████  ████████  █████  ████████ ███████
 -- ██   ██ ██    ██    ██    ██   ██    ██    ██     
 -- ██████  ██    ██    ██    ███████    ██    █████  

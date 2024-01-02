@@ -1,6 +1,9 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 -- ███████  ██████  █████  ██      ███████         ██████   ██████  ██     ██ ███    ██
 -- ██      ██      ██   ██ ██      ██              ██   ██ ██    ██ ██     ██ ████   ██
 -- ███████ ██      ███████ ██      █████           ██   ██ ██    ██ ██  █  ██ ██ ██  ██
@@ -8,6 +11,7 @@ local Vector3 = wea_c.Vector3
 -- ███████  ██████ ██   ██ ███████ ███████ ███████ ██████   ██████   ███ ███  ██   ████
 
 --- Scales the defined region down by the given scale factor in the given directions.
+-- You probably want worldeditadditions.scale, which scales in both directions.
 -- @param	pos1		Vector	Position 1 of the defined region,
 -- @param	pos2		Vector	Position 2 of the defined region.
 -- @param	scale		Vector	The scale factor - as a vector - by which to scale down.

@@ -1,10 +1,13 @@
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
+---
+-- @module worldeditadditions
+
 --- Bonemeal command.
 -- Applies bonemeal to all nodes with an air bloc above then.
--- @param	strength	The strength to apply - see bonemeal:on_use
--- @param	chance		Positive integer that represents the chance bonemealing will occur
+-- @param	strength	number	The strength to apply - see bonemeal:on_use
+-- @param	chance		number		Positive integer that represents the chance bonemealing will occur
 -- @returns	bool,number,number	1. Whether the command succeeded or not.
 -- 								2. The number of nodes actually bonemealed
 -- 								3. The number of possible candidates we could have bonemealed
