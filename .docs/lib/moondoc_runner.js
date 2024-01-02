@@ -17,6 +17,7 @@ module.exports = function moondoc_runner(filepath_output) {
 	child_process.execFileSync(filepath_moondoc, [
 		"build",
 		"--input", dirpath_root,
-		"--output", filepath_output
+		"--output", filepath_output,
+		"--branch", "dev"
 	]);
 }
