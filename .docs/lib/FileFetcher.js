@@ -7,7 +7,7 @@ const os = require("os");
 const phin = require("phin");
 
 const a = require("./Ansi.js");
-const pretty_ms = require("pretty-ms");
+var pretty_ms = null;
 
 class FileFetcher {
 	#cache = [];
@@ -32,6 +32,8 @@ class FileFetcher {
 	
 	async download_file(url) {
 		const time_start = new Date();
+		if(pretty_ms === null)
+			pretty_ms = (await import("pretty-ms")).default;
 		
 		if(this.#pkg_obj === null) {
 			this.#pkg_obj = JSON.parse(await fs.promises.readFile(

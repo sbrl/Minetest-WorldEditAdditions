@@ -4,7 +4,6 @@ const os = require(`os`);
 const fs = require("fs");
 const path = require("path");
 
-const pretty_ms = require("pretty-ms");
 const debug = require("debug")("image");
 const imagickal = require("imagickal");
 const htmlentities = require("html-entities");
@@ -144,6 +143,7 @@ async function picture(source_image, alt, target_dir, urlpath, formats = "__AUTO
 }
 
 var picture_memoize = null;
+var pretty_ms;
 
 async function setup_memoize() {
 	const pMemoize = (await import("p-memoize")).default;
@@ -152,5 +152,6 @@ async function setup_memoize() {
 
 module.exports = async function(...args) {
 	if(picture_memoize === null) await setup_memoize();
+	pretty_ms = (await import("pretty-ms")).default;
 	return await picture_memoize(...args);
 };
