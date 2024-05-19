@@ -1,6 +1,10 @@
 local weac = worldeditadditions_core
 local Vector3 = weac.Vector3
 
+---
+-- @module	worldeditadditions_core.rotation
+
+
 --- Compiles a list of rotations into something we can iteratively pass to Vector3.rotate3d.
 -- This function is called internally. You are unlikely to need to call this function unless you are implementing something like worldeditadditions.rotate() or similar.
 --
