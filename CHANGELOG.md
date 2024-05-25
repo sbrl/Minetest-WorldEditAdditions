@@ -13,10 +13,15 @@ Note to self: See the bottom of this file for the release template text.
 - Added [`//rotate+`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) to rotate regions through arbitrary series of potentially non-axis-aligned rotations. **Does not support slabs/stairs yet,** but this is on the todo list!
 - Added [`//speed`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) to adjust your own movement speed
 	- Also added an associated [movement speed adjustment tool](https://worldeditadditions.mooncarrot.space/Reference/#movement), which looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_farwand/textures/worldeditadditions_movement.png)
+- Added [`//set+`](https://worldeditadditions.mooncarrot.space/Reference/#set) for setting nodes and param2/light levels quickly.
+	- NOTE TO SELF: Setting light values doesn't appear to be working very well for some reason
 
 ### Bugfixes and changes
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
 - Improve documentation of [`//noise2d`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d). If it still doesn't make sense, please let me know. It's a complicated command that needs reworking a bit to be easier to use.
+
+### Lua API changes
+- Add `core.pos.get12(player_name, sort=false)`
 
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)

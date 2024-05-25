@@ -133,6 +133,19 @@ local function get1(player_name) return get(player_name, 1) end
 -- @returns	Vector3?		The position requested, or nil if it doesn't exist.
 local function get2(player_name) return get(player_name, 2) end
 
+--- Convenience function that returns pos1 and pos2 with the coordinates sorted for the given player.
+-- @param	player_name		string	The name of the player to fetch the position for.
+-- @param	sort=false			bool	If true, the pos1 and pos2 are run through Vector3.sort() automatically.
+-- @returns	Vector3?,Vector3		The positions requested, or nil if either of them don't exist.
+local function get12(player_name, sort)
+	if sort == nil then sort = false end
+	local pos1 = get(player_name, 1)
+	local pos2 = get(player_name, 2)
+	if pos1 == nil or pos2 == nil then return nil, nil end
+	if sort then pos1, pos2 = Vector3.sort(pos1, pos2) end
+	return pos1, pos2
+end
+
 --- Gets a list of all the positions for the given player.
 -- @param	player_name		string	The name of the player to fetch the position for.
 -- @returns	Vector3[]		A list of positions for the given player.
@@ -296,6 +309,7 @@ anchor = wea_c.EventEmitter.new({
 	get = get,
 	get1 = get1,
 	get2 = get2,
+	get12 = get12,
 	get_all = get_all,
 	get_bounds = get_bounds,
 	count = count,
