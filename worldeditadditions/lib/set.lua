@@ -30,16 +30,11 @@ function worldeditadditions.set(pos1, pos2, mode, value)
 	pos1, pos2 = Vector3.sort(pos1, pos2)
 	-- pos2 will always have the highest co-ordinates now
 	
-	print("SET mode", mode, "value", value)
-	
 	local setvalue = value
 	if mode == "param" and type(setvalue) == "string" then
 		setvalue = minetest.get_content_id(setvalue)
-		print("SET TRANSFORM setvalue TO", setvalue)
 	end
-	
-	print("SET setvalue", setvalue)
-	
+		
 	-- Initialise statistics
 	local stats = { changed = 0 }
 	

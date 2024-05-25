@@ -2,11 +2,11 @@ local wea = worldeditadditions
 local core = worldeditadditions_core
 local Vector3 = core.Vector3
 
--- ███████ ███████ ████████    █
--- ██      ██         ██       █
--- ███████ █████      ██    ████████
---      ██ ██         ██       █
--- ███████ ███████    ██       █
+-- ███████ ███████ ████████
+-- ██      ██         ██      █
+-- ███████ █████      ██    █████
+--      ██ ██         ██      █
+-- ███████ ███████    ██
 core.register_command("set+", {
 	params =
 	"[param|param2|p2|light|l] <value>",
@@ -20,8 +20,7 @@ core.register_command("set+", {
 		end
 		
 		local parts = core.split_shell(params_text)
-		print("parts", core.inspect(parts))
-		
+				
 		local mode = "param"
 		local value = nil
 		
@@ -32,9 +31,6 @@ core.register_command("set+", {
 			table.remove(parts, 1)
 		end
 		value = table.concat(parts, " ")
-		
-		print("mode", core.inspect(mode))
-		print("value", core.inspect(value))
 		
 		-- Normalise mode
 		if mode == "p" then mode = "param"
@@ -51,9 +47,6 @@ core.register_command("set+", {
 			if not value then return false, tostring(val_raw).." does not appear to be a valid number." end
 			value = math.floor(value)
 		end
-		
-		print("AFTER mode", core.inspect(mode))
-		print("AFTER value", core.inspect(value))
 		
 		return true, mode, value
 	end,
