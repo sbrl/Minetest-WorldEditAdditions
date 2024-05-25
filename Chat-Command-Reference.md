@@ -1047,6 +1047,77 @@ Finally, the customary misc examples:
 //ngroups default:dry_shrub v
 ```
 
+### `//ndef <node_name>`
+Short for *Node Definition*. Prints the definition table for the node with the given name. In other words. the output could look a little like this:
+
+```
+stairs:stair_birch_wood {
+	description = (string) "Birch Wood Stair"
+	sounds = (table) {
+		dig = (table) {
+			name = (string) "default_dig_choppy"
+			gain = (number) 0.4
+		}
+		place = (table) {
+			name = (string) "default_place_node_hard"
+			gain = (number) 1
+		}
+		dug = (table) {
+			name = (string) "default_wood_footstep"
+			gain = (number) 1
+		}
+		footstep = (table) {
+			name = (string) "default_wood_footstep"
+			gain = (number) 0.15
+		}
+	}
+	name = (string) "stairs:stair_birch_wood"
+	light_source = (number) 0
+	mod_origin = (string) "ethereal"
+	selection_box = (table) {
+		fixed = (table) {
+			1 = (table) [truncated]
+			2 = (table) [truncated]
+		}
+		type = (string) "fixed"
+	}
+	paramtype = (string) "light"
+	groups = (table) {
+		flammable = (number) 3
+		stair = (number) 1
+		choppy = (number) 2
+		oddly_breakable_by_hand = (number) 1
+	}
+	is_ground_content = (boolean) false
+	on_place = (function) function: 0x765b01d0edb8
+	drawtype = (string) "nodebox"
+	tiles = (table) {
+		1 = (table) {
+			name = (string) "moretrees_birch_wood.png"
+			backface_culling = (boolean) true
+		}
+	}
+	paramtype2 = (string) "facedir"
+	sunlight_propagates = (boolean) false
+	node_box = (table) {
+		fixed = (table) {
+			1 = (table) [truncated]
+			2 = (table) [truncated]
+		}
+		type = (string) "fixed"
+	}
+	type = (string) "node"
+}
+```
+
+This command is intended for debugging and development purposes, but if you're implementing a mod yourself you might find it useful too.
+
+```weacmd
+//ndef stone
+//ndef stairs:stair_birch_wood
+//ndef glass
+```
+
 
 
 ## Selection

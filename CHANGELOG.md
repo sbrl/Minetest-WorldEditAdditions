@@ -15,6 +15,7 @@ Note to self: See the bottom of this file for the release template text.
 	- Also added an associated [movement speed adjustment tool](https://worldeditadditions.mooncarrot.space/Reference/#movement), which looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_farwand/textures/worldeditadditions_movement.png)
 - Added [`//set+`](https://worldeditadditions.mooncarrot.space/Reference/#set) for setting nodes and param2/light levels quickly.
 	- NOTE TO SELF: Setting light values doesn't appear to be working very well for some reason
+- Added [`//ndef`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) to print a given node's definition table. This is for debugging and development purposes.
 
 ### Bugfixes and changes
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
