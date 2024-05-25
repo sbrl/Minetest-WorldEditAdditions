@@ -5,6 +5,10 @@ A good rule of thumb is to ask "does Javascript have a built-in function for
 this?". If yes, then your implementation probably belongs here.
 ]]--
 
+---
+-- @module worldeditadditions_core
+
+
 --- Pads str to length len with char from right
 -- @source https://snipplr.com/view/13092/strlpad--pad-string-to-the-left
 local function str_padend(str, len, char)
