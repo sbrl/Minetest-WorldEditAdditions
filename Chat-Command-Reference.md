@@ -1433,6 +1433,8 @@ As with `//ellipsoidapply` for advanced users `//multi` is also supported - but 
 
 
 ### `//nodeapply <node_a> [<node_b>] [... <node_N>] -- <command_name> <args>`
+**Aliases:** `//napply`
+
 It's got `apply` in the name, so as you might imagine it works the same as [`//ellipsoidapply`](#ellipsoidapply), [`//airapply`](#airapply), [`//noiseapply2d`](#noiseapply2d), etc. Only changes made by the given command that replace nodes on the list given will be replaced. For example:
 
 ```weacmd

@@ -19,6 +19,8 @@ Note to self: See the bottom of this file for the release template text.
 ### Bugfixes and changes
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
 - Improve documentation of [`//noise2d`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d). If it still doesn't make sense, please let me know. It's a complicated command that needs reworking a bit to be easier to use.
+- Alias `//napply` to [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)
+
 
 ### Lua API changes
 - Add `core.pos.get12(player_name, sort=false)`
