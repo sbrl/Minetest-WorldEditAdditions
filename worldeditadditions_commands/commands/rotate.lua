@@ -10,7 +10,7 @@ local Vector3 = wea_c.Vector3
 
 worldeditadditions_core.register_command("rotate+", {
 	params = "<axis> <degrees> [<axis> <degrees> ...] [origin|o [<pos_number>]]",
-	description = "Rotates the defined region arounnd the given axis by the given number of degrees. Angles are NOT limited to 90-degree increments. When multiple axes and angles are specified, these transformations are applied in order. If o [<pos_number>] is specified, then the specific position number (default: 3) is considered a custom rotation origin instead of the centre of the region. CAUTION: Rotating large areas of memory by 45° can be memory intensive!",
+	description = "Rotates the defined region around the given axis by the given number of degrees. Angles are NOT limited to 90-degree increments. When multiple axes and angles are specified, these transformations are applied in order. If o [<pos_number>] is specified, then the specific position number (default: 3) is considered a custom rotation origin instead of the centre of the region. CAUTION: Rotating large areas of memory by 45° can be memory intensive!",
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function (params_text)
