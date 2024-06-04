@@ -94,6 +94,7 @@ log_msg "Building website";
 # This causes the eleventy docs site to minify stuff
 # Note that this is NOT before the npm install, as npm doesn't install everything if we do that
 export NODE_ENV=production;
+export MAX_CONCURRENT=2; # Resizing 10 images at once is not going to end well on a raspberry pi
 npm run build;
 
 if [[ ! -d "_site" ]]; then
