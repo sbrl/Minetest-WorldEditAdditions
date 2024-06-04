@@ -27,6 +27,7 @@ wea_c.Set = dofile(wea_c.modpath.."/utils/set.lua")
 wea_c.Vector3 = dofile(wea_c.modpath.."/utils/vector3.lua")
 wea_c.Mesh, wea_c.Face = dofile(wea_c.modpath.."/utils/mesh.lua")
 wea_c.rotation = dofile(wea_c.modpath .. "/utils/rotation.lua")
+wea_c.param2 = dofile(wea_c.modpath .. "/utils/param2.lua")
 
 wea_c.Queue = dofile(wea_c.modpath.."/utils/queue.lua")
 wea_c.LRU = dofile(wea_c.modpath.."/utils/lru.lua")

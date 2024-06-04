@@ -17,6 +17,7 @@ local Vector3 = wea_c.Vector3
 -- @param	pos1	Vector3		Position 1 of the define region to operate on.
 -- @param	pos2	Vector3		Position 2 of the define region to operate on.
 -- @param	param	string="param|param2"	The name of the parameter to set. Currently possible values:
+-- 
 -- - **`param`:** Param1, aka the node id.
 -- - **`param2`:** The supplementary parameter that each node has. See also <https://api.minetest.net/nodes/#node-paramtypes>. The node type is set by the mod or game that provides each node in question.
 -- - **`light`:** Sets the light value of all nodes in the defined region.

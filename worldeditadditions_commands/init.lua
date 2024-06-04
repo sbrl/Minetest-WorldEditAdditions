@@ -39,6 +39,7 @@ dofile(wea_cmd.modpath.."/commands/sculpt.lua")
 dofile(wea_cmd.modpath.."/commands/spline.lua")
 dofile(wea_cmd.modpath.."/commands/revolve.lua")
 dofile(wea_cmd.modpath.."/commands/rotate.lua")
+dofile(wea_cmd.modpath.."/commands/orient.lua")
 dofile(wea_cmd.modpath.."/commands/set.lua")
 
 -- Meta Commands

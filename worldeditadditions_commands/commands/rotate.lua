@@ -90,7 +90,7 @@ worldeditadditions_core.register_command("rotate+", {
 		return true, origin, rotlist
 	end,
 	nodes_needed = function(name, origin, rotlist)
-		-- BUG: .......this is a good question, actually. This naïve is flawed, since if we rotate by e.g. 45° we could end up replacing more nodes than if we rotate by 90° increments. This is further complicated by the allowance of a custom point of origin.
+		-- BUG: .......this is a good question, actually. This naïve implementation is flawed, since if we rotate by e.g. 45° we could end up replacing more nodes than if we rotate by 90° increments. This is further complicated by the allowance of a custom point of origin.
 		return Vector3.volume(wea_c.pos.get1(name), wea_c.pos.get2(name)) * 2
 	end,
 	func = function(name, origin, rotlist)
