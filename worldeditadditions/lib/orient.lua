@@ -48,17 +48,20 @@ function worldeditadditions.orient(pos1, pos2, rotlist)
 		-- nodeid = data[i]
 		local param2_type = "none"
 		if cache_nodeid_2_param2_type[data[i]] == nil then
-			local nodeid = minetest.get_name_from_content_id(data[i])
-			local ndef = minetest.registered_nodes[nodeid]
+			local node_name = minetest.get_name_from_content_id(data[i])
+			local ndef = minetest.registered_nodes[node_name]
 			if type(ndef.paramtype2) ~= nil then
 				param2_type = ndef.paramtype2
 			end
 			cache_nodeid_2_param2_type[data[i]] = param2_type
+			print("DEBUG orient CACHE:PARAM2 MISS node", node_name, "param2_type", param2_type)
 		else
 			param2_type = cache_nodeid_2_param2_type[data[i]]
 		end
 		
-		if param2_type ~= "none" then	
+		print("DEBUG orient NODEID", data[i], "PARAM2_TYPE", param2_type)
+		
+		if param2_type ~= "none" then
 			local key = param2_type.."|"..data_param2[i]
 			if cache_orient[key] == nil then
 				cache_orient[key] = core.param2.orient(
@@ -67,6 +70,7 @@ function worldeditadditions.orient(pos1, pos2, rotlist)
 					rotlist_c
 				)
 			end
+			print("DEBUG orient KEY", key, "BEFORE", data_param2[i], "AFTER", cache_orient[key])
 			
 			data_param2[i] = cache_orient[key]
 			
