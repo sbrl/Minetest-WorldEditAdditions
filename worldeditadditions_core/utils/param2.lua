@@ -3,6 +3,8 @@ local Vector3 = core.Vector3
 ---
 -- @module worldeditadditions_core.param2
 
+-- TODO Reimplement for facedir ref https://github.com/12Me21/screwdriver2/blob/master/init.lua#L75-L79
+
 -- //set <nodename>
 -- //set param2|p2 <param2>
 
@@ -23,6 +25,7 @@ local function dir_to_param2(param2_type, dir)
 		return nil
 	end
 end
+
 
 
 --- Rotates the given param2 value of the given type by the given COMPILED list of rotations.
