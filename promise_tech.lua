@@ -55,7 +55,7 @@ Promise.then_ = function(self, onFulfilled, onRejected)
 	end
 	-- If self.state is not "pending" then error
 	if self.state ~= "pending" then
-		error("Error (Promise.then_): Promise is already " .. self.state)
+		return Promise.reject("Error (Promise.then_): Promise is already " .. self.state)
 	end
 	
 	-- Make locals to collect the results of self.fn
@@ -74,9 +74,11 @@ Promise.then_ = function(self, onFulfilled, onRejected)
 	-- Return a new promise with the results
 	if success and not force_reject then
 		onFulfilled(result[1])
+		self.state = "fulfilled"
 		return Promise.resolve(result[1])
 	else
 		onRejected(result[1])
+		self.state = "rejected"
 		return Promise.reject(success and result[1] or err)
 	end
 end
@@ -137,10 +139,10 @@ return Promise
 Promise = require "promise_tech"
 
 tmp = Promise.resolve(5)
-tmp:then_(print, nil)
+tmp:then_(print, nil):then_(print, nil):then_(print, nil)
 
 tmp = Promise.reject(7)
-tmp:then_(nil, print)
+tmp:then_(nil, print):then_(nil, print):then_(nil, print)
 
 --- BIG TESTS
 
@@ -166,4 +168,8 @@ function do_if_fails(err)
 end
 
 test():then_(do_if_passes, do_if_fails)
+Vx2 = 0
+test():then_(function(value) Vx2 = value end, function(value) print("caught rejection, value", value) end):
+	then_(function(value) print("Sqrt is", math.sqrt(value)) end)
+if Vx2 ~= 0 then print("Vx2", Vx2) end
 ]]
