@@ -20,6 +20,7 @@ Promise.new = function(fn)
 	
 	local result = {
 		state = "pending",
+		force_reject = false,
 		fn = fn
 	}
 	setmetatable(result, Promise)
@@ -34,17 +35,22 @@ end
 	*************************
 --]]
 
+--- A dummy function
+local f = function(val) end
+
 --- Then function for promises
 -- @param onFulfilled <function>: The function to call if the promise is fulfilled
 -- @param onRejected <function>: The function to call if the promise is rejected
--- @return A promise object
+-- @return A promise object containing a table of results
 Promise.then_ = function(self, onFulfilled, onRejected)
-	-- onFulfilled must be a function
-	if type(onFulfilled) ~= "function" and onRejected ~= nil then
+	-- onFulfilled must be a function or nil
+	if onFulfilled == nil then onFulfilled = f
+	elseif type(onFulfilled) ~= "function" then
 		error("Error (Promise.then_): First argument (onFulfilled) must be a function or nil")
 	end
 	-- onRejected must be a function or nil
-	if type(onRejected) ~= "function" and onRejected ~= nil then
+	if onRejected == nil then onRejected = f
+	elseif type(onRejected) ~= "function" then
 		error("Error (Promise.then_): Second argument (onRejected) must be a function or nil")
 	end
 	-- If self.state is not "pending" then error
@@ -52,20 +58,27 @@ Promise.then_ = function(self, onFulfilled, onRejected)
 		error("Error (Promise.then_): Promise is already " .. self.state)
 	end
 	
-	local result = function()
-		local success, value = pcall(self.fn, onFulfilled, onRejected)
-		return Promise.new(function(resolve, reject)
-			if success then
-				resolve(value)
-				self.state = "fulfilled"
-			else
-				reject(value)
-				self.state = "rejected"
-			end
-		end)
+	-- Make locals to collect the results of self.fn
+	local result, force_reject = {nil}, self.force_reject
+	
+	-- Local resolve and reject functions
+	local _resolve = function(value) result[1] = value end
+	local _reject = function(value)
+		result[1] = value
+		force_reject = true
 	end
 	
-	return result()
+	-- Call self.fn
+	local success, err = pcall(self.fn, _resolve, _reject)
+	
+	-- Return a new promise with the results
+	if success and not force_reject then
+		onFulfilled(result[1])
+		return Promise.resolve(result[1])
+	else
+		onRejected(result[1])
+		return Promise.reject(success and result[1] or err)
+	end
 end
 
 --- Catch function for promises
@@ -107,9 +120,50 @@ end
 -- @param value <any>: The value to reject the promise with
 -- @return A promise object
 Promise.reject = function(value)
-	return Promise.new(function(resolve, reject)
+	local promise = Promise.new(function(resolve, reject)
 		reject(value)
 	end)
+	promise.force_reject = true
+	return promise
 end
 
 -- TODO: Implement static methods (all, any, race etc.)
+
+
+return Promise
+
+--- TESTS
+--[[
+Promise = require "promise_tech"
+
+tmp = Promise.resolve(5)
+tmp:then_(print, nil)
+
+tmp = Promise.reject(7)
+tmp:then_(nil, print)
+
+--- BIG TESTS
+
+function test()
+  return Promise.new(function(resolve, reject)
+    local value = math.random() -- imagine this was async
+    if value > 0.5 then
+      reject(value)
+    else
+      resolve(value)
+    end
+  end)
+end
+
+function do_if_passes(val)
+  print("I passed!")
+  print("My value was " .. tostring(val))
+end
+
+function do_if_fails(err)
+  print("I failed!")
+  print("My error was " .. tostring(err))
+end
+
+test():then_(do_if_passes, do_if_fails)
+]]
