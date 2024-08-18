@@ -43,7 +43,7 @@ function worldeditadditions.orient(pos1, pos2, rotlist)
 	local cache_orient = {}
 	
 	local param2_cache = {}
-	
+	-- TODO rewrite with ref https://github.com/12Me21/screwdriver2/blob/master/init.lua#L75-L79 'cause this doesn't account for rotation properly
 	for i in area:iterp(pos1, pos2) do
 		-- nodeid = data[i]
 		local param2_type = "none"
