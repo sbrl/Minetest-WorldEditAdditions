@@ -114,6 +114,12 @@ end)
 
 
 wea_c.entities.pos_marker:addEventListener("update_entity", function(event)
+	ensure_player(event.player_name)
+	
+	if position_entities[event.player_name][event.i] == nil then
+		minetest.log("warning", "[wea core:pos_manage:EL/update_entity] position_entities".."["..tostring(event.player_name).."]["..tostring(event.i).."] doesnt exist, event object "..wea.inspect(event).."\nPlease check WEA is up to date and then report this in https://github.com/sbrl/Minetest-WorldEditAdditions/issues/105.")
+	end
+	
 	wea_c.entities.pos_marker.delete(
 		position_entities[event.player_name][event.i]
 	)
