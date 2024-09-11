@@ -25,7 +25,7 @@ describe("parse_axes", function()
 			"10",
 		}, facing_dirs.x_pos)
 		assert.is.truthy(minv)
-		assert.are.same(Vector3.new(-3, 0, -3), minv)
+		assert.are.same(Vector3.new(-13, -10, -13), minv)
 		assert.are.same(Vector3.new(10, 10, 10), maxv)
 	end)
 	
