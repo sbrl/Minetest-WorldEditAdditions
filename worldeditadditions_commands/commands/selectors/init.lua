@@ -9,13 +9,15 @@
 local wea_cmdpath = worldeditadditions_commands.modpath .. "/commands/selectors/"
 local weac = worldeditadditions_core
 
-dofile(wea_cmdpath.."srel.lua")
 dofile(wea_cmdpath.."scentre.lua")
 dofile(wea_cmdpath.."scloud.lua")
+dofile(wea_cmdpath.."sgrow.lua")
 dofile(wea_cmdpath.."smake.lua")
 dofile(wea_cmdpath.."spop.lua")
 dofile(wea_cmdpath.."spush.lua")
+dofile(wea_cmdpath.."srel.lua")
 dofile(wea_cmdpath.."sshift.lua")
+dofile(wea_cmdpath.."sshrink.lua")
 dofile(wea_cmdpath.."sstack.lua")
 
 --- DEPRECATED ---
