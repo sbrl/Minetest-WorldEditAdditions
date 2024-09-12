@@ -143,7 +143,7 @@ end
 -- if error: @returns: false, String: error message
 function parse.keytable(tbl, facing, sum)
 	local min, max = Vector3.new(), Vector3.new()
-	local expected, d = 1, {"x", "y", "z"}
+	local expected = 1
 	local tmp = {axes = {}, num = 0, sign = 1, mirror = false}
 	
 	--- Processes a number and adds it to the min and max vectors.
@@ -168,7 +168,7 @@ function parse.keytable(tbl, facing, sum)
 		
 		if expected == 1 then
 			if tmp.num then
-				parseNumber(tmp.num, {d, rev=d}, tmp.sign)
+				parseNumber(tmp.num, {"x", "y", "z", rev={"x", "y", "z"}}, tmp.sign)
 			else
 				local key_type, key_entry, key_sign = parse.keyword(v)
 				
