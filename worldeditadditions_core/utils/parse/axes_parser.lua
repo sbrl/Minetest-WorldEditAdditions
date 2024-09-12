@@ -66,22 +66,16 @@ local parse = {}
 -- @param: str: String: Axis declaration to parse
 -- @returns: Table|Bool: axis | axes | false
 function parse.axis(str)
-	local ret = {}
+	local ret = { rev={} }
 	if str:match("[^hvxyz]") then return false end
 	
-	if str:match("v") then 
-		ret["v"] = true
-		str = "y"..str
+	for _,v in ipairs({{"x","h"},{"y","v"},{"z","h"}}) do
+		if str:match(v[2]) then table.insert(ret.rev,v[1])
+			str = str..v[1] end
+		if str:match(v[1]) then table.insert(ret,v[1]) end
 	end
-	if str:match("h") then 
-		ret["h"] = true
-		str = "xz"..str
-	end
-
-	for _,v in ipairs({"x", "y", "z"}) do
-		if str:match(v) then table.insert(ret,v) end
-	end
-
+	
+	if #ret.rev < 1 then ret.rev = nil end
 	return ret
 end
 
@@ -149,18 +143,15 @@ end
 -- if error: @returns: false, String: error message
 function parse.keytable(tbl, facing, sum)
 	local min, max = Vector3.new(), Vector3.new()
-	local expected = 1
+	local expected, d = 1, {"x", "y", "z"}
 	local tmp = {axes = {}, num = 0, sign = 1, mirror = false}
-	
-	function tmp:reset() 
-		self.axis, self.sign = "", 1 
-	end
 	
 	--- Processes a number and adds it to the min and max vectors.
 	-- @param num The number to process.
 	-- @param axes The axes to apply the number to.
 	-- @param sign The sign of the number.
 	local function parseNumber(num, axes, sign)
+		if axes.rev then parseNumber(num, axes.rev, -sign) end
 		if num * sign >= 0 then
 			max = max:add(parse.vectorize(axes, num, sign))
 		else
@@ -177,7 +168,7 @@ function parse.keytable(tbl, facing, sum)
 		
 		if expected == 1 then
 			if tmp.num then
-				parseNumber(tmp.num, {"x", "y", "z", h = true, v = true}, tmp.sign)
+				parseNumber(tmp.num, {d, rev=d}, tmp.sign)
 			else
 				local key_type, key_entry, key_sign = parse.keyword(v)
 				
@@ -210,10 +201,10 @@ function parse.keytable(tbl, facing, sum)
 		min = max:multiply(-1)
 	end
 	
-	if sum then 
+	if sum then
 		return min:add(max)
-	else 
-		return min, max 
+	else
+		return min, max
 	end
 end
 
