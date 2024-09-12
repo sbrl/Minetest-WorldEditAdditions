@@ -10,9 +10,9 @@ local Vector3 = wea_c.Vector3
 -- ███████  ███████  ██   ██  ██   ██  ██  ██   ████  ██   ██ 
 
 
-worldeditadditions_core.register_command("srel", {
+worldeditadditions_core.register_command("shrink", {
 	params = "[<axis1>] <length1> [[<axis2>] <length2> [...]]",
-	description = "Set WorldEdit region position 2 relative to position 1 and player facing.",
+	description = "Shrink selection region",
 	privs = { worldedit = true },
 	require_pos = 0,
 	parse = function(params_text)
