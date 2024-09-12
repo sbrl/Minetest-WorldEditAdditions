@@ -34,16 +34,5 @@ dofile(wea_cmdpath.."reset.lua")
 -- Aliases
 weac.register_alias("sfac", "sfactor")
 
--- Pre-subcommand aliases
-weac.register_alias("s rel", "srel")
-weac.register_alias("s centre", "scentre")
-weac.register_alias("s cloud", "scloud")
-weac.register_alias("s factor", "sfactor")
-weac.register_alias("s make", "smake")
-weac.register_alias("s pop", "spop")
-weac.register_alias("s push", "spush")
-weac.register_alias("s shift", "sshift")
-weac.register_alias("s stack", "sstack")
-
 weac.register_alias("1", "pos1", true) -- true = override target
 weac.register_alias("2", "pos2", true) -- true = override target
