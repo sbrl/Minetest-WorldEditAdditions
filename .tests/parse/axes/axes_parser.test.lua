@@ -25,14 +25,24 @@ describe("parse_axes", function()
 			"10",
 		}, facing_dirs.x_pos)
 		assert.is.truthy(minv)
-		assert.are.same(Vector3.new(-3, 0, -3), minv)
+		assert.are.same(Vector3.new(-13, -10, -13), minv)
 		assert.are.same(Vector3.new(10, 10, 10), maxv)
+	end)
+	
+	it("should work for h and v", function()
+		local minv, maxv = parse_axes({
+			"h", "3",
+			"-v", "4",
+		}, facing_dirs.x_pos)
+		assert.is.truthy(minv)
+		assert.are.same(Vector3.new(-3, -4, -3), minv)
+		assert.are.same(Vector3.new(3, 4, 3), maxv)
 	end)
 	
 	it("should work on directions and their abriviations", function()
 		local minv, maxv = parse_axes({
 			"l", "3",	-- +z
-			"-r", "-3",	-- +z
+			"-right", "-3",	-- +z
 			"b", "-10",	-- -x
 		}, facing_dirs.x_pos)
 		assert.is.truthy(minv)
