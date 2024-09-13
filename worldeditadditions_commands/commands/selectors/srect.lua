@@ -8,15 +8,15 @@ local Vector3 = wea_c.Vector3
 --      ██ ██   ██ ██      ██         ██
 -- ███████ ██   ██ ███████  ██████    ██
 worldeditadditions_core.register_command("srect", {
-	params = "[<axis1> [<axis2>]] <length>",
-	description = "Set WorldEdit region position 2 at a set distance along 2 axes.",
+	params = "None",
+	description = "Deprecated.",
 	privs = { worldedit = true },
 	require_pos = 1,
 	parse = function(params_text)
-		-------------------------
+		return params_text
 	end,
-	func = function(name)
-		return true, "DEPRECATED: please use //srel instead..."
+	func = function(name, paramtext)
+		return false, "DEPRECATED: please use //srel instead..."
 	end,
 })
 
