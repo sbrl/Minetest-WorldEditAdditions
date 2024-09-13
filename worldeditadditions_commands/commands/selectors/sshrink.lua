@@ -29,8 +29,9 @@ worldeditadditions_core.register_command("shrink", {
 		if not pos2 then wea_c.pos.set(name, 2, pos1)
 		else pos1, pos2 = Vector3.sort(pos1, pos2) end
 		
-		pos1, pos2 = pos1:add(max), pos1:add(min)
+		pos1, pos2 = pos1:add(max), pos2:add(min)
 		
+		wea_c.pos.clear(name)
 		wea_c.pos.set_all(name, {pos1, pos2})
 		return true, "Pos1 set to "..pos1..", Pos2 set to "..pos2
 	end,
