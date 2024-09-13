@@ -17,7 +17,7 @@ local human_size = wea_c.format.human_size
 -- @param	tbl_event	table		Internal event table used when calling `worldeditadditions_core.emit(event_name, tbl_event)`.
 -- @returns	nil
 local function run_command_stage2(player_name, func, parse_result, tbl_event)
-	wea_c.emit("pre-execute", tbl_event)
+	wea_c:emit("pre-execute", tbl_event)
 	local success, result_message = func(player_name, wea_c.table.unpack(parse_result))
 	if result_message then
 		-- TODO: If we were unsuccessful, then colour the message red
@@ -26,7 +26,7 @@ local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	
 	tbl_event.success = success
 	tbl_event.result = result_message
-	wea_c.emit("post-execute", tbl_event)
+	wea_c:emit("post-execute", tbl_event)
 end
 
 --- Command execution pipeline: before `paramtext` parsing but after validation.
@@ -105,7 +105,7 @@ local function run_command(cmdname, options, player_name, paramtext)
 		player_name = player_name
 	}
 	
-	wea_c.emit("pre-parse", tbl_event)
+	wea_c:emit("pre-parse", tbl_event)
 	
 	local parse_result = { options.parse(paramtext) }
 	local success = table.remove(parse_result, 1)
@@ -115,14 +115,14 @@ local function run_command(cmdname, options, player_name, paramtext)
 	end
 	
 	tbl_event.paramargs = parse_result
-	weac.emit("post-parse", tbl_event)
+	wea_c:emit("post-parse", tbl_event)
 	
 	
 	if options.nodes_needed then
 		local potential_changes = options.nodes_needed(player_name, wea_c.table.unpack(parse_result))
 		
 		tbl_event.potential_changes = potential_changes
-		wea_c.emit("post-nodesneeded", tbl_event)
+		wea_c:emit("post-nodesneeded", tbl_event)
 		
 		if type(potential_changes) ~= "number" then
 			worldedit.player_notify(player_name, "Error: The command '"..cmdname.."' returned a "..type(potential_changes).." instead of a number when asked how many nodes might be changed. Abort. This is a bug.")
