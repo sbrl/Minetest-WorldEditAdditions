@@ -10,14 +10,14 @@ local Vector3 = wea_c.Vector3
 -- ███████  ███████  ██   ██  ██   ██  ██  ██   ████  ██   ██ 
 
 
-worldeditadditions_core.register_command("shrink", {
+worldeditadditions_core.register_command("sshrink", {
 	params = "[<axis1>] <length1> [[<axis2>] <length2> [...]]",
 	description = "Shrink selection region",
 	privs = { worldedit = true },
 	require_pos = 0,
 	parse = function(params_text)
 		local ret = wea_c.split(params_text)
-		if #ret < 1 then return false, "SREL: No params found!"
+		if #ret < 1 then return false, "SSHRINK: No params found!"
 		else return true, ret end
 	end,
 	func = function(name, params_text)
