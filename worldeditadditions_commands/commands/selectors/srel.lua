@@ -28,7 +28,6 @@ worldeditadditions_core.register_command("srel", {
 		local pos1 = wea_c.pos.get(name, 1)
 		local pos2 = pos1:add(vec)
 		
-		wea_c.pos.clear(name)
 		wea_c.pos.set_all(name, {pos1, pos2})
 		return true, "Pos1 set to "..pos1..", Pos2 set to "..pos2
 	end,

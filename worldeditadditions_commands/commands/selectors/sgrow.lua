@@ -31,7 +31,6 @@ worldeditadditions_core.register_command("sgrow", {
 		
 		pos1, pos2 = pos1:add(min), pos2:add(max)
 		
-		wea_c.pos.clear(name)
 		wea_c.pos.set_all(name, {pos1, pos2})
 		return true, "Pos1 set to "..pos1..", Pos2 set to "..pos2
 	end,
