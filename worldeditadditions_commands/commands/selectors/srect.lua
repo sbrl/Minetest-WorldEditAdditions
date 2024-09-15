@@ -1,4 +1,3 @@
-local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 

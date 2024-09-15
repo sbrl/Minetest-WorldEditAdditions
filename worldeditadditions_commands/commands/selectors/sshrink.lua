@@ -23,6 +23,8 @@ worldeditadditions_core.register_command("sshrink", {
 	func = function(name, params_text)
 		local facing = wea_c.player_dir(name)
 		local min, max = wea_c.parse.directions(params_text, facing)
+		if not min then return false, max end
+		
 		local pos1 = wea_c.pos.get(name, 1)
 		local pos2 = wea_c.pos.get(name, 2)
 		
