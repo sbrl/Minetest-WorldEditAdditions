@@ -1,4 +1,3 @@
-local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
 
@@ -68,7 +67,7 @@ worldeditadditions_core.register_command("smake", {
 		return true, oper, mode, targ, base
 	end,
 	func = function(name, oper, mode, targ, base)
-		local pos1, pos2 = Vector3.clone(worldedit.pos1[name]), Vector3.clone(worldedit.pos2[name])
+		local pos1, pos2 = Vector3.clone(wea_c.pos.get(name, 1)), Vector3.clone(wea_c.pos.get(name, 2))
 		local eval -- Declare eval placeholder function to edit later
 		
 		local delta = pos2 - pos1 -- local delta equation: Vd(a) = V2(a) - V1(a)
@@ -124,10 +123,9 @@ worldeditadditions_core.register_command("smake", {
 			end
 		end
 		
-		for k,v in pairs(targ) do delta[k] = eval(delta[k]) end
+		for k,_ in pairs(targ) do delta[k] = eval(delta[k]) end
 		
-		worldedit.pos2[name] = pos1 + delta
-		worldedit.mark_pos2(name)
-		return true, "position 2 set to "..pos2
+		wea_c.pos.set(name, 2, pos1 + delta)
+		return true, "Pos2 set to "..pos2
 	end
 })
