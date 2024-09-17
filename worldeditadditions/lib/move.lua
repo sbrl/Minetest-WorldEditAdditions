@@ -5,6 +5,8 @@ local Vector3 = wea_c.Vector3
 ---
 -- @module worldeditadditions
 
+-- TODO add `minetest.find_nodes_with_meta(pos1, pos2)` support ref https://github.com/minetest/minetest/blob/5.9.1/doc/lua_api.md?plain=1#L6112 for locked chests, inventories etc. Perhaps for copy add a flag to allow for disabling such support?
+
 -- ███    ███  ██████  ██    ██ ███████
 -- ████  ████ ██    ██ ██    ██ ██
 -- ██ ████ ██ ██    ██ ██    ██ █████
