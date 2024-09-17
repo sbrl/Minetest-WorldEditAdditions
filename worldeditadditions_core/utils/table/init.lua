@@ -23,5 +23,6 @@ wea_c.table = {
 	shallowcopy	= dofile(wea_c.modpath.."/utils/table/shallowcopy.lua"),
 	tostring	= dofile(wea_c.modpath.."/utils/table/table_tostring.lua"),
 	unique		= dofile(wea_c.modpath.."/utils/table/table_unique.lua"),
+	find		= dofile(wea_c.modpath.."/utils/table/table_find.lua"),
 	unpack		= dofile(wea_c.modpath.."/utils/table/table_unpack.lua"),
 }
