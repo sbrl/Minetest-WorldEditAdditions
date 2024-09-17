@@ -8,7 +8,7 @@ local Vector3 = worldeditadditions.Vector3
 -- ███████ ███████ ██   ██ ██ ██         ██
 
 worldeditadditions_core.register_command("sshift", {
-	params = "[<axis1>] <distance1> [[<axis2>] <distance2> [...]]",
+	params = "<Unified Axis Keywords>",
 	description = "Shift the WorldEdit region in 3 dimensions.",
 	privs = { worldedit = true },
 	require_pos = 2,

@@ -11,7 +11,7 @@ local Vector3 = wea_c.Vector3
 
 
 worldeditadditions_core.register_command("srel", {
-	params = "[<axis1>] <length1> [[<axis2>] <length2> [...]]",
+	params = "<Unified Axis Keywords>",
 	description = "Set WorldEdit region position 2 relative to position 1 and player facing.",
 	privs = { worldedit = true },
 	require_pos = 0,
