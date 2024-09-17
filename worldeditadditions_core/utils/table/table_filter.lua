@@ -1,3 +1,6 @@
+---
+-- @module worldeditadditions_core.table
+
 --- Filters the items in the given table using the given function.
 -- The function is executed for each item in the list. If it returns true, the
 -- item is kept. If it returns false, the item is discarded.

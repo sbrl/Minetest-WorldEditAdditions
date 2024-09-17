@@ -1,6 +1,7 @@
+---
+-- @module worldeditadditions_core.table
 
-
---- Lua implementation of array.reduce() from Javascript.
+--- Lua implementation of `array.reduce()` from Javascript.
 -- @param	tbl				The table to iterate over.
 -- @param	func			The function to call for every element in tbl. Will be passed the following arguments: accumulator, value, index, table. Of course, the provided function need not take this many arguments.
 -- @param	initial_value	The initial value of the accumulator.

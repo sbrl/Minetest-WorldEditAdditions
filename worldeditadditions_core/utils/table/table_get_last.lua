@@ -2,6 +2,8 @@ local wea_c = worldeditadditions_core
 
 local table_unpack = dofile(wea_c.modpath.."/utils/table/table_unpack.lua")
 
+---
+-- @module worldeditadditions_core.table
 
 --- Returns only the last count items in a given numerical table-based list.
 -- @param	tbl		table		The table to fetch items from.

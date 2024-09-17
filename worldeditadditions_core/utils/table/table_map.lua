@@ -1,3 +1,6 @@
+---
+-- @module worldeditadditions_core.table
+
 --- Executes the given function on every item in the given table.
 -- Ignores return values that are nil and doesn't insert them into the table.
 -- @param	tbl		table		The table to operate on.

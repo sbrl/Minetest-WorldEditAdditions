@@ -1,3 +1,5 @@
+---
+-- @module worldeditadditions_core.table
 
 --- Looks to see whether a given table contains a given value.
 -- @param	tbl		table	The table to look in.

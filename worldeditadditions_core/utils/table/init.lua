@@ -4,9 +4,10 @@
 --    ██    ██   ██ ██   ██ ██      ██           ██
 --    ██    ██   ██ ██████  ███████ ███████ ███████
 
--- Functions that operate on tables.
+--- Functions that operate on tables.
 -- Lua doesn't exactly come with batteries included, so this is quite an
 -- extensive collection of functions :P
+-- @namespace worldeditadditions_core.table
 
 local wea_c = worldeditadditions_core
 

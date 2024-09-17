@@ -1,3 +1,5 @@
+---
+-- @module worldeditadditions_core.table
 
 
 -- 4. Supporting recursive structures.

@@ -1,4 +1,9 @@
+---
+-- @module worldeditadditions_core.table
+
+
 --- Creates a table that stores data in keys.
+-- See also `worldeditadditions_core.Set`.
 -- @source	https://riptutorial.com/lua/example/13407/search-for-an-item-in-a-list
 -- @param	list	table	The table of values to convert to keys.
 -- @return	table	The table of (key => true) pairs.

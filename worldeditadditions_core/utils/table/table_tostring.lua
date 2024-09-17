@@ -1,3 +1,6 @@
+---
+-- @module worldeditadditions_core.table
+
 --- Returns the key value pairs in a table as a single string
 -- @param	tbl	table	input table
 -- @param	sep	string	key value seperator

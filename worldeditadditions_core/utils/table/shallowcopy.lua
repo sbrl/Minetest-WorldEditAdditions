@@ -1,3 +1,6 @@
+---
+-- @module worldeditadditions_core.table
+
 
 --- Shallow clones a table.
 -- @source	http://lua-users.org/wiki/CopyTable
