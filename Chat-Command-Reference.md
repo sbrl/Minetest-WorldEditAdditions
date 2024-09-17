@@ -1129,6 +1129,65 @@ This command is intended for debugging and development purposes, but if you're i
 ███████ ███████ ███████ ███████  ██████    ██    ██  ██████  ██   ████
 -->
 
+### Unified Axis Keyword (UAK) System
+The Unified Axis Keyword (UAK) System is an attempt to allow users to input direction and distance information in three dimensions using "natural" language. The key features include axis clumping, double negatives, relative directions, mirroring and compass directions (more information below).
+
+*Note: negatives can be applied to axes, directions **AND** distances*
+
+#### Relative Directions
+|Key Words | Interpretation|
+|----------|---------------|
+|f[ront]\|facing\|? | The direction the player is facing most toward in the world
+|b[ack]\|behind\|rear | The opposite of the direction the player is facing most toward in the world
+|l[eft] | The direction to the left of the player
+|r[ight] | The direction to the right of the player
+
+```weacmd
+back 1
+f r 4
+-facing 13
+```
+
+#### Compass Directions
+|Key Words | Interpretation|
+|----------|---------------|
+|n[orth] | z
+|s[outh] | -z
+|e[ast] | x
+|w[est] | -x
+|u[p] | y
+|d[own] | -y
+
+```weacmd
+south 3
+north west 5
+e d -2
+```
+
+#### Axis Clumping
+Supported axes are `x`, `y`, `z`, `h`, `v`. All horizontal axes are covered by `h` and both vertical ones are covered by `v`.
+
+```weacmd
+h 5 == xz -xz 5 == x 5 z 5 x -5 z -5
+v 5 == up down 5 == y -y 5
+vxz 5 == xyz -y 5 == xyz 5 y -5
+```
+
+#### Inference and Omnidirectionality
+The UAK parser takes command input that is split by whitespace and interprets it as a series of values preceded by directional cues. If a number is preceded by another number or nothing it assumes that the number is to be applied on all axes in both positive and negative directions.
+
+```weacmd
+10 == hv 10 == xyz -xyz 10
+x 3 6 == x 3 hv 6
+```
+
+From the above examples you can also see the principle of inference. All direction modifiers before a value are interpreted as belonging to that value. So `x v 5` is equivalent to `x 5 v 5` and `xv 5`.
+
+Because UAK attempts to parse "natural" language, there are many ways to express the same direction and distance. This caters to users with different ways of thinking and different play styles which will hopefully make the tools easier to use.
+
+---
+---
+
 ### `//unmark`
 Hides the in-game UI that indicates where the current positions and region are located.
 
@@ -1232,17 +1291,39 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 //scentre
 ```
 
-### `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+### `//srel <Unified Axis Keywords>`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
 //srel front 5
-//srel  y 12 right -2
+//srel y 12 right -2
 //srel left 3 up 5 -front 7
 //srel -z 12 -y -2 x -2
 ```
 
-### `//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+### `//sgrow <Unified Axis Keywords>`
+Short for _selection grow_. Grows the current selection along specified axes/directions.
+Aliases: `//extend`, `//outset`.
+
+```weacmd
+//sgrow back 4
+//sgrow left -2 v r 2
+//sgrow h 4
+//sgrow -zy -2 x -2
+```
+
+### `//sshrink <Unified Axis Keywords>`
+Short for _selection shrink_. Shrinks the current selection along specified axes/directions.
+Aliases: `//contract`, `//inset`.
+
+```weacmd
+//sshrink left 4
+//sshrink right -2 up 2
+//sshrink v 4
+//sshrink -hy 2 x -3 true
+```
+
+### `//sshift <Unified Axis Keywords>`
 Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1302,22 +1383,8 @@ Name		| Description
 `<base>`: If `<operation>` == equal			| Overrides `<mode>` and sets all `<target>` axes equal to itself
 
 ### `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`
-Short for _selection factor_; alias: `//sfac`. Built specifically for use with `//maze`, this command sets targeted axes equal to the nearest multiple of `<factor>` based on the `<mode>`.
-
-Usage examples:
-
-```weacmd
-//sfac grow 5
-//sfac avg 3 xy
-```
-
-#### `<mode>`: grow|shrink|average
-
-Value	|	Description
---------|--------------
-`grow` | Rounds the length of each target axis up to the nearest multiple of `<factor>`
-`shrink` | Rounds the length of each target axis down to the nearest multiple of `<factor>`
-`average`/`avg` | Takes the average of all axes specified in `<target>` and then for each specified axis grows or shrinks it, depending on whether it is less than or greater than the average, to the nearest multiple of `<factor>`
+#### === Deprecated ===
+Use `//sgrow` and `//sshrink` instead.
 
 ### `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
