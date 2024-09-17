@@ -29,44 +29,53 @@ end
 -- 
 -- Ref <https://github.com/12Me21/screwdriver2/blob/master/init.lua#L75-L79> and <https://forum.minetest.net/viewtopic.php?p=73195&sid=1d2d2e4e76ce2ef9c84646481a4b84bc#p73195>
 -- @namespace worldeditadditions_core.orientation
-local orientation = {
-	--- Facedir: lower 5 bits used for direction, 0 - 23
-	-- @param	param2	number	`param2` value to rotate.
-	-- @param	axis	string	The name of the axis to rotate around. Valid values: `x`, `y`, `z`
-	-- @param	amount	The number of radians to rotate around the given `axis`. Only right angles are supported (i.e. 90° increments). Any value that isn't a 90° increment will be **rounded**!
-	-- @returns	number	A new param2 value that is rotated the given number of degrees around the given `axis`
-	facedir = function(param2, axis, amount_rad)
-		local amount = convert_normalise_rad(amount_rad)
-		print("DEBUG:core/orientation:facedir AMOUNT rad "..tostring(amount_rad).." norm "..tostring(amount))
-		local facedir = param2 % 32
-		for _, cycle in ipairs(facedir_cycles[axis]) do
-			-- Find the current facedir
-			-- Minetest adds table.indexof, but I refuse to use it because it returns -1 rather than nil
-			for i, fd in ipairs(cycle) do
-				if fd == facedir then
-					return param2 - facedir + cycle[1 + (i - 1 + amount) % 4] -- If only Lua didn't use 1 indexing...
-				end
+
+--- Facedir: lower 5 bits used for direction, 0 - 23
+-- @param	param2	number	`param2` value to rotate.
+-- @param	axis	string	The name of the axis to rotate around. Valid values: `x`, `y`, `z`
+-- @param	amount	The number of radians to rotate around the given `axis`. Only right angles are supported (i.e. 90° increments). Any value that isn't a 90° increment will be **rounded**!
+-- @returns	number	A new param2 value that is rotated the given number of degrees around the given `axis`
+function facedir(param2, axis, amount_rad)
+	local amount = convert_normalise_rad(amount_rad)
+	print("DEBUG:core/orientation:facedir AMOUNT rad "..tostring(amount_rad).." norm "..tostring(amount))
+	local facedir = param2 % 32
+	for _, cycle in ipairs(facedir_cycles[axis]) do
+		-- Find the current facedir
+		-- Minetest adds table.indexof, but I refuse to use it because it returns -1 rather than nil
+		for i, fd in ipairs(cycle) do
+			if fd == facedir then
+				return param2 - facedir + cycle[1 + (i - 1 + amount) % 4] -- If only Lua didn't use 1 indexing...
 			end
 		end
-		return param2
-	end,
-	-- Wallmounted: lower 3 bits used, 0 - 5
-	wallmounted = function(param2, axis, amount_rad)
-		local amount = convert_normalise_rad(amount_rad)
-		print("DEBUG:core/orientation:wallmounted AMOUNT rad " .. tostring(amount_rad) .. " norm " .. tostring(amount))
-		
-		local wallmounted = param2 % 8
-		for i, wm in ipairs(wallmounted_cycles[axis]) do
-			if wm == wallmounted then
-				return param2 - wallmounted + wallmounted_cycles[axis][1 + (i - 1 + amount) % 4]
-			end
-		end
-		return param2
 	end
+	return param2
+end
+
+--- Wallmounted: lower 3 bits used, 0 - 5
+-- @param	param2	number	`param2` value to rotate.
+-- @param	axis	string	The name of the axis to rotate around. Valid values: `x`, `y`, `z`
+-- @param	amount	The number of radians to rotate around the given `axis`. Only right angles are supported (i.e. 90° increments). Any value that isn't a 90° increment will be **rounded**!
+-- @returns	number	A new param2 value that is rotated the given number of degrees around the given `axis`
+function wallmounted(param2, axis, amount_rad)
+	local amount = convert_normalise_rad(amount_rad)
+	print("DEBUG:core/orientation:wallmounted AMOUNT rad " .. tostring(amount_rad) .. " norm " .. tostring(amount))
+
+	local wallmounted = param2 % 8
+	for i, wm in ipairs(wallmounted_cycles[axis]) do
+		if wm == wallmounted then
+			return param2 - wallmounted + wallmounted_cycles[axis][1 + (i - 1 + amount) % 4]
+		end
+	end
+	return param2
+end
+
+local orientation = {
+	facedir = facedir,
+	wallmounted = wallmounted,
+	-- From the original codebase (linked above):
+	--colorfacedir = facedir,
+	--colorwallmounted = wallmounted
+	-- ...we'll need to know this later
 }
--- From the original codebase (linked above):
---orientation.colorfacedir = orientation.facedir
---orientation.colorwallmounted = orientation.wallmounted
--- ...we'll need to know this later
 
 return orientation
