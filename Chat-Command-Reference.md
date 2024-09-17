@@ -1129,8 +1129,8 @@ This command is intended for debugging and development purposes, but if you're i
 ███████ ███████ ███████ ███████  ██████    ██    ██  ██████  ██   ████
 -->
 
-### Unified Axis Keyword (UAK) System
-The Unified Axis Keyword (UAK) System is an attempt to allow users to input direction and distance information in three dimensions using "natural" language. The key features include axis clumping, double negatives, relative directions, mirroring and compass directions (more information below).
+### Unified Axis Syntax (UAS)
+The Unified Axis Syntax system allows users to input direction and distance information in three dimensions using "natural" language. The key features include axis clumping, double negatives, relative directions, mirroring and compass directions (more information below).
 
 *Note: negatives can be applied to axes, directions **AND** distances*
 
@@ -1184,9 +1184,6 @@ x 3 6 == x 3 hv 6
 From the above examples you can also see the principle of inference. All direction modifiers before a value are interpreted as belonging to that value. So `x v 5` is equivalent to `x 5 v 5` and `xv 5`.
 
 Because UAK attempts to parse "natural" language, there are many ways to express the same direction and distance. This caters to users with different ways of thinking and different play styles which will hopefully make the tools easier to use.
-
----
----
 
 ### `//unmark`
 Hides the in-game UI that indicates where the current positions and region are located.
@@ -1291,7 +1288,7 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 //scentre
 ```
 
-### `//srel <Unified Axis Keywords>`
+### `//srel <unified axis syntax>`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1301,7 +1298,7 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 //srel -z 12 -y -2 x -2
 ```
 
-### `//sgrow <Unified Axis Keywords>`
+### `//sgrow <unified axis syntax>`
 Short for _selection grow_. Grows the current selection along specified axes/directions.
 Aliases: `//extend`, `//outset`.
 
@@ -1312,7 +1309,7 @@ Aliases: `//extend`, `//outset`.
 //sgrow -zy -2 x -2
 ```
 
-### `//sshrink <Unified Axis Keywords>`
+### `//sshrink <unified axis syntax>`
 Short for _selection shrink_. Shrinks the current selection along specified axes/directions.
 Aliases: `//contract`, `//inset`.
 
@@ -1323,7 +1320,7 @@ Aliases: `//contract`, `//inset`.
 //sshrink -hy 2 x -3 true
 ```
 
-### `//sshift <Unified Axis Keywords>`
+### `//sshift <unified axis syntax>`
 Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
