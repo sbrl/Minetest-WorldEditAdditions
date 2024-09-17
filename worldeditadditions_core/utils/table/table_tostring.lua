@@ -7,7 +7,7 @@
 -- @param	new_line	string	key value pair delimiter
 -- @param	max_depth	number	max recursion depth (optional)
 -- @return	string	concatenated table pairs
-local function table_tostring(tbl, sep, new_line, max_depth)
+local function tostring(tbl, sep, new_line, max_depth)
 	if type(sep) ~= "string" then sep = ": " end
 	if type(new_line) ~= "string" then new_line = ", " end
 	if type(max_depth) == "number" then max_depth = {depth=0,max=max_depth}
@@ -28,4 +28,4 @@ end
 -- Test:
 -- /lua v1 = { x= 0.335, facing= { axis= "z", sign= -1 } }; print(worldeditadditions.table.tostring(v1))
 
-return table_tostring
+return tostring

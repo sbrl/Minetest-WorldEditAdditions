@@ -6,7 +6,7 @@
 -- @param	tbl		table		The table to operate on.
 -- @param	func	function<any>:any|nil	The function to execute on every item in the table.
 -- @returns	table	A new table containing the return values of the function.
-local function table_map(tbl, func)
+local function map(tbl, func)
 	local result = {}
 	for i,value in ipairs(tbl) do
 		local newval = func(value, i)
@@ -15,4 +15,4 @@ local function table_map(tbl, func)
 	return result
 end
 
-return table_map
+return map

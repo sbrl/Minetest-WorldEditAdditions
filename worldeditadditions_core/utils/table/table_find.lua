@@ -12,10 +12,7 @@
 -- 2. `i` (number): The index in the table that the value can be found at
 -- 3. `tbl` (table): The original table.
 -- @return any|nil The first element in the table that satisfies the predicate, or nil if no such element is found.
-function table_find(tbl, func)
-end
-
-function table_find(tbl, func)
+function find(tbl, func)
 	for i,value in ipairs(tbl) do
 		if func(value, i, tbl) then
 			return value
@@ -23,4 +20,4 @@ function table_find(tbl, func)
 	end
 end
 
-return table_find
+return find

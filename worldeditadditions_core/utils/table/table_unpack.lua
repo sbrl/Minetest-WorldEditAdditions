@@ -12,6 +12,8 @@
 -- @param	[offset=0]	number	The offset at which to start unpacking.
 -- @param	[count=nil]	number	The number of items to unpack. Defaults to unpack all remaining items after `offset`.
 -- @returns any...		The selected items unpacked from the table.
+-- @example Lua version agnostic unpack
+-- print(worldeditadditions_core.table.unpack({1 = "apple", 2 = "orange"}))
 local function table_unpack(tbl, offset, count)
 	---@diagnostic disable-next-line: deprecated
 	if type(unpack) == "function" then
