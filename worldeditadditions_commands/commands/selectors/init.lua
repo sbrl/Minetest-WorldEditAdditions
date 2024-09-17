@@ -36,5 +36,12 @@ dofile(wea_cmdpath.."reset.lua")
 -- Aliases
 weac.register_alias("sfac", "sfactor")
 
+weac.register_alias("sgrow", "expand", true) -- true = override target
+weac.register_alias("sgrow", "outset", true) -- true = override target
+weac.register_alias("sshrink", "contract", true) -- true = override target
+weac.register_alias("sshrink", "inset", true) -- true = override target
+
+weac.register_alias("sshift", "shift", true) -- true = override target
+
 weac.register_alias("1", "pos1", true) -- true = override target
 weac.register_alias("2", "pos2", true) -- true = override target
