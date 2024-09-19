@@ -11,7 +11,7 @@ local Vector3 = wea_c.Vector3
 
 
 worldeditadditions_core.register_command("sgrow", {
-	params = "<Unified Axis Keywords>",
+	params = "<unified axis syntax>",
 	description = "Grow selection region",
 	privs = { worldedit = true },
 	require_pos = 0,
