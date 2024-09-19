@@ -19,6 +19,7 @@ Note to self: See the bottom of this file for the release template text.
 - Added `//sgrow` and `//sshrink` commands to enlarge and shrink selection regions and aliased them over WorldEdit equivalents (`//expand`, `//outset` and `//contract`, `//inset` respectively).
 - Added Unified Axis Syntax (UAS) parser. - Implementation by @VorTechnix
 	- See [UAS System reference] for details. (Note to self hook up hyperlink)
+- Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
 
 ### Bugfixes and changes
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106

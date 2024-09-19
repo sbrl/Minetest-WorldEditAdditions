@@ -73,6 +73,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//count`](https://worldeditadditions.mooncarrot.space/Reference/#count)
  - [`//basename <name>`](https://worldeditadditions.mooncarrot.space/Reference/#basename)
  - [`//ngroups <node_name> [v[erbose]]`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups)
+ - [`//uasparse <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#uasparse) _(new in v1.15)_
 
 ### Selection
  - [~~`//scol`~~ DEPRECATED](https://worldeditadditions.mooncarrot.space/Reference/#scol)
@@ -80,10 +81,10 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [~~`//scube`~~ DEPRECATED](https://worldeditadditions.mooncarrot.space/Reference/#scube)
  - [`//scloud <0-6|stop|reset>`](https://worldeditadditions.mooncarrot.space/Reference/#scloud)
  - [`//scentre`](https://worldeditadditions.mooncarrot.space/Reference/#scentre)
- - [`//sgrow <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sgrow)
+ - [`//sgrow <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sgrow) _(new in v1.15)_
  - [`//srel <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#srel)
  - [`//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`](https://worldeditadditions.mooncarrot.space/Reference/#smake)
- - [`//sshrink <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sshrink)
+ - [`//sshrink <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sshrink) _(new in v1.15)_
  - [`//sstack`](https://worldeditadditions.mooncarrot.space/Reference/#sstack)
  - [`//spush`](https://worldeditadditions.mooncarrot.space/Reference/#spush)
  - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)

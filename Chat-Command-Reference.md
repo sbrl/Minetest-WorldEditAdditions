@@ -1118,6 +1118,16 @@ This command is intended for debugging and development purposes, but if you're i
 //ndef glass
 ```
 
+### `//uasparse <unified axis syntax>`
+Short for *Unified Axis Syntax Parse*. Parses the given UAS expression and prints the resulting vectors to the chat window.
+
+```weacmd
+//uasparse front right 5
+//uasparse y 12 h -2
+//uasparse left 3 up 5 -front 7
+//uasparse -z 12 -y -2 x -2
+```
+
 
 
 ## Selection
