@@ -1262,7 +1262,7 @@ This also synchronises with WorldEdit, as all other WorldEditAdditions commands 
 ```
 
 
-### `//scol [<axis1> ] <length> {REMOVED (v1.15)}`
+### `//scol [<axis1> ] <length>` (**REMOVED** in v1.15)
 Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1271,7 +1271,7 @@ Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos
 //scol x 3
 ```
 
-### `//srect [<axis1> [<axis2>]] <length> {REMOVED (v1.15)}`
+### `//srect [<axis1> [<axis2>]] <length>` (**REMOVED** in v1.15)
 Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1282,7 +1282,7 @@ Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from 
 ```
 
 
-### `//scube [<axis1> [<axis2> [<axis3>]]] <length> {REMOVED (v1.15)}`
+### `//scube [<axis1> [<axis2> [<axis3>]]] <length>` (**REMOVED** in v1.15)
 Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1. If the axes aren't specified, defaults to positive y, the direction you are facing and the axis to the left of facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1402,7 +1402,7 @@ Name		| Description
 `<base>`: If `<operation>` == odd or even	| Does nothing
 `<base>`: If `<operation>` == equal			| Overrides `<mode>` and sets all `<target>` axes equal to itself
 
-### `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>] {REMOVED (v1.15)}`
+### `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]` (**REMOVED** in v1.15)
 Short for _selection factor_; alias: `//sfac`. Built specifically for use with `//maze`, this command sets targeted axes equal to the nearest multiple of `<factor>` based on the `<mode>`.
 
 Usage examples:
