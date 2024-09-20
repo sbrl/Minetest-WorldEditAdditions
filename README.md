@@ -76,9 +76,9 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//uasparse <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#uasparse) _(new in v1.15)_
 
 ### Selection
- - [~~`//scol`~~ DEPRECATED](https://worldeditadditions.mooncarrot.space/Reference/#scol)
- - [~~`//srect`~~ DEPRECATED](https://worldeditadditions.mooncarrot.space/Reference/#srect)
- - [~~`//scube`~~ DEPRECATED](https://worldeditadditions.mooncarrot.space/Reference/#scube)
+ - [~~`//scol [<axis1> ] <length>`~~](https://worldeditadditions.mooncarrot.space/Reference/#scol) (REMOVED in v1.15)
+ - [~~`//srect [<axis1> [<axis2>]] <length>`~~](https://worldeditadditions.mooncarrot.space/Reference/#srect) (REMOVED in v1.15)
+ - [~~`//scube [<axis1> [<axis2> [<axis3>]]] <length>`~~](https://worldeditadditions.mooncarrot.space/Reference/#scube) (REMOVED in v1.15)
  - [`//scloud <0-6|stop|reset>`](https://worldeditadditions.mooncarrot.space/Reference/#scloud)
  - [`//scentre`](https://worldeditadditions.mooncarrot.space/Reference/#scentre)
  - [`//sgrow <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sgrow) _(new in v1.15)_
@@ -89,7 +89,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//spush`](https://worldeditadditions.mooncarrot.space/Reference/#spush)
  - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)
  - [`//sshift <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sshift)
- - [~~`//sfactor`~~ DEPRECATED](https://worldeditadditions.mooncarrot.space/Reference/#sfactor)
+ - [~~`//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`~~](https://worldeditadditions.mooncarrot.space/Reference/#sfactor) (REMOVED in v1.15)
  - [`//pos <index>`](https://worldeditadditions.mooncarrot.space/Reference/#pos)
  - [`//pos1`](https://worldeditadditions.mooncarrot.space/Reference/#pos1)
  - [`//pos2`](https://worldeditadditions.mooncarrot.space/Reference/#pos2)

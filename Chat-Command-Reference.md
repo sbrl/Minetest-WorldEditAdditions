@@ -1262,19 +1262,36 @@ This also synchronises with WorldEdit, as all other WorldEditAdditions commands 
 ```
 
 
-### `//scol [<axis1> ] <length>`
-#### === DEPRECATED === 
-Please use `//srel` instead.
+### `//scol [<axis1> ] <length> {REMOVED (v1.15)}`
+Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
+
+```weacmd
+**REMOVED** in favour of `//srel`
+//scol 10
+//scol x 3
+```
+
+### `//srect [<axis1> [<axis2>]] <length> {REMOVED (v1.15)}`
+Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
+
+```weacmd
+**REMOVED** in favour of `//srel`
+//srect x z 10
+//srect 3
+//srect -z y 25
+```
 
 
-### `//srect [<axis1> [<axis2>]] <length>`
-#### === DEPRECATED === 
-Please use `//srel` instead.
+### `//scube [<axis1> [<axis2> [<axis3>]]] <length> {REMOVED (v1.15)}`
+Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1. If the axes aren't specified, defaults to positive y, the direction you are facing and the axis to the left of facing. Implementation thanks to @VorTechnix.
 
-
-### `//scube [<axis1> [<axis2> [<axis3>]]] <length>`
-#### === DEPRECATED === 
-Please use `//srel` instead.
+```weacmd
+**REMOVED** in favour of `//srel`
+//scube 5
+//scube z a y 12
+//scube x z 3
+//scube -z 12
+```
 
 
 ### `//scloud <0-6|stop|reset>`
@@ -1385,9 +1402,24 @@ Name		| Description
 `<base>`: If `<operation>` == odd or even	| Does nothing
 `<base>`: If `<operation>` == equal			| Overrides `<mode>` and sets all `<target>` axes equal to itself
 
-### `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`
-#### === Deprecated ===
-Use `//sgrow` and `//sshrink` instead.
+### `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>] {REMOVED (v1.15)}`
+Short for _selection factor_; alias: `//sfac`. Built specifically for use with `//maze`, this command sets targeted axes equal to the nearest multiple of `<factor>` based on the `<mode>`.
+
+Usage examples:
+
+```weacmd
+**REMOVED** in favour of `//sgrow` and `//sshrink`
+//sfac grow 5
+//sfac avg 3 xy
+```
+
+#### `<mode>`: grow|shrink|average
+
+Value	|	Description
+--------|--------------
+`grow` | Rounds the length of each target axis up to the nearest multiple of `<factor>`
+`shrink` | Rounds the length of each target axis down to the nearest multiple of `<factor>`
+`average`/`avg` | Takes the average of all axes specified in `<target>` and then for each specified axis grows or shrinks it, depending on whether it is less than or greater than the average, to the nearest multiple of `<factor>`
 
 ### `//sstack`
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
