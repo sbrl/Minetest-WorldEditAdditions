@@ -218,9 +218,20 @@ local function set2(player_name, pos)
 	return set(player_name, 2, pos)
 end
 
+--- Sets multiple positions for the given player.
+-- @param	player_name		string				The name of the player to set the positions for.
+-- @param	pos_list		table<int, Vector3>	A table of Vector3 positions to set, where the key is the index and the value is the position.
+local function set_multi(player_name, pos_list)
+	for i,pos_new in pairs(pos_list) do
+		set(player_name, i, pos_new)
+	end
+end
 
 --- Sets the all the positions for the given player.
 -- You probably want push_pos, not this function.
+-- 
+-- WARNING: Will DELETE all points registered for the given player!
+-- 
 -- @param	player_name		string	The name of the player to set the positions for.
 -- @param	pos_list		Vector3	The table of positions to set.
 -- @returns	bool			Whether the operation was successful or not (players aren't allowed more than positions_count_limit number of positions at a time).
@@ -319,6 +330,7 @@ anchor = wea_c.EventEmitter.new({
 	set = set,
 	set1 = set1,
 	set2 = set2,
+	set_multi = set_multi,
 	set_all = set_all,
 	unmark = unmark,
 	mark = mark,
