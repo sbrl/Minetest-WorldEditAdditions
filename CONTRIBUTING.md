@@ -2,13 +2,14 @@
 
 Hey there! So you like WorldEditAdditions enough to consider helping out? That's awesome! This guide should get you up and running in no time.
 
+**Lua API documentation:** <https://worldeditadditions.mooncarrot.space/api/>
 
 ## Code structure
 The WorldEditAdditions codebase is split into 3 main submods:
 
 Name							| Description
 --------------------------------|------------------------
-`worldeditadditions`			| The main mod. Core world manipulation implementations should go in here.
+`worldeditadditions`			| The main mod. Core world manipulation implementations (backed by the `*_core` mod ref core and utility functions) should go in here.
 `worldeditadditions_commands`	| Chat commands. These interact with the core manipulators in `worldeditadditions` mod.
 `worldeditadditions_farwand`	| Everything to do with the far wand tool, and now other tools like the cloud wand, multi-point wand, etc. It's different enough to everything else that it warrants it's own separate mod to avoid muddling things.
 `worldeditadditions_core`		| Core components such as the positioning system (`worldeditadditions_core.pos`), the command registration function, and utility functions go in here.

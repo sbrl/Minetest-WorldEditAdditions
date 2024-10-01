@@ -4,9 +4,10 @@
 --    ██    ██   ██ ██   ██ ██      ██           ██
 --    ██    ██   ██ ██████  ███████ ███████ ███████
 
--- Functions that operate on tables.
+--- Functions that operate on tables.
 -- Lua doesn't exactly come with batteries included, so this is quite an
 -- extensive collection of functions :P
+-- @namespace worldeditadditions_core.table
 
 local wea_c = worldeditadditions_core
 
@@ -22,5 +23,6 @@ wea_c.table = {
 	shallowcopy	= dofile(wea_c.modpath.."/utils/table/shallowcopy.lua"),
 	tostring	= dofile(wea_c.modpath.."/utils/table/table_tostring.lua"),
 	unique		= dofile(wea_c.modpath.."/utils/table/table_unique.lua"),
+	find		= dofile(wea_c.modpath.."/utils/table/table_find.lua"),
 	unpack		= dofile(wea_c.modpath.."/utils/table/table_unpack.lua"),
 }

@@ -1,4 +1,5 @@
---- WorldEditAdditions-Core
+--- WorldEditAdditions core engine
+-- This namespace contains the core command processing engine used by WorldEditAdditions and associated parsing, formatting, and utility functions. It does not contain any of the commands themselves - see the namespace/'mod' simply called 'worldeditadditions' for that.
 -- @namespace worldeditadditions_core
 -- @release 1.14.5
 -- @copyright 2021 Starbeamrainbowlabs and VorTechnix
@@ -8,7 +9,9 @@
 
 local modpath = minetest.get_modpath("worldeditadditions_core")
 
-worldeditadditions_core = {
+local EventEmitter = dofile(modpath .. "/utils/EventEmitter.lua")
+
+worldeditadditions_core = EventEmitter.new({
 	version = "1.15-dev",
 	modpath = modpath,
 	registered_commands = {},
@@ -17,9 +20,9 @@ worldeditadditions_core = {
 	safe_region_limits = {},
 	-- The default limit for new players on the number of potential nodes changed before safe_region kicks in.
 	safe_region_limit_default = 100000,
-}
+})
 local wea_c = worldeditadditions_core
-wea_c.EventEmitter = dofile(modpath.."/utils/EventEmitter.lua")
+wea_c.EventEmitter = EventEmitter
 
 
 wea_c.Set = dofile(wea_c.modpath.."/utils/set.lua")
@@ -27,6 +30,7 @@ wea_c.Set = dofile(wea_c.modpath.."/utils/set.lua")
 wea_c.Vector3 = dofile(wea_c.modpath.."/utils/vector3.lua")
 wea_c.Mesh, wea_c.Face = dofile(wea_c.modpath.."/utils/mesh.lua")
 wea_c.rotation = dofile(wea_c.modpath .. "/utils/rotation.lua")
+wea_c.orientation = dofile(wea_c.modpath .. "/utils/orientation.lua")
 wea_c.param2 = dofile(wea_c.modpath .. "/utils/param2.lua")
 
 wea_c.Queue = dofile(wea_c.modpath.."/utils/queue.lua")

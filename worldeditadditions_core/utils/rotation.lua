@@ -40,7 +40,7 @@ local function rotlist_compile(rotlist)
 end
 
 
---- Applies a given list of rotatiosn rotlist to rotate pos1 and pos2 around a given origin, and returns a pos1/pos2 pair of a region that bounds the rotated area.
+--- Applies a given list of rotations rotlist to rotate pos1 and pos2 around a given origin, and returns a pos1/pos2 pair of a region that bounds the rotated area.
 -- The returned pos1/pos2 are guaranteed to be integer values that fully enclose the rotated region. This function is designed to be used to e.g. find the bounds of a region to pass to a VoxelManip to ensure we grab everything.
 -- @param	pos1	Vector3		Position 1 to rotate.
 -- @param	pos2	Vector3		Position 2 to rotate.

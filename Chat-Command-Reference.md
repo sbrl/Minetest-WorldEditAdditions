@@ -23,6 +23,8 @@ Other useful links:
 -->
 
 ### `//metaball add <radius> | remove <index> | render <replace_node> [<threshold=1>] | list | clear | volume`
+> Added in v1.14
+
 Draws two or more [metaballs](https://en.wikipedia.org/wiki/Metaballs). Based on a subcommand system, since each metaball may have a different radius.
 
 Calling `//metaball render <replace_node>` actually makes changes to the world - all others manipulate an internal player-local list of metaballs to be drawn.
@@ -111,6 +113,8 @@ Creates a hollow ellipsoid at position 1 with the radius `(rx, ry, rz)`. Works t
 ```
 
 ### `//ellipsoid2 [<node_name:dirt> [h[ollow]]]`
+> Added in v1.13
+
 Creates an (optionally hollow) solid ellipsoid that fills the defined region.
 
 ```weacmd
@@ -145,6 +149,8 @@ Creates a hollow torus at position 1 with the radius major and minor radii. Work
 ```
 
 ### `//line [<replace_node> [<radius>]]`
+> Added in v1.10
+
 Draw a line from position 1 to position 2, optionally with a given thickness.
 
 The radius can be thought of as the thickness of the line, and is defined as the distance from a given node to an imaginary line from pos1 to pos2. Defaults to drawing with dirt and a radius of 1.
@@ -159,6 +165,8 @@ Floating-point values are fully supported for the radius.
 ```
 
 ### `//hollow [<wall_thickness>]`
+> Added in v1.11
+
 Replaces nodes inside the defined region with air, but leaving a given number of nodes near the outermost edges alone. In other words, it makes the defined region hollow, while leaving walls around the edges of a given thickness (defaulting to a wall thickness of 1).
 
 Note that all air-like nodes are also left alone.
@@ -230,6 +238,8 @@ Creates vertical walls of `<replace_node>` around the inside edges of the define
 
 
 ### `//spiral2 [<circle|square>] [<replace_node=dirt> [<interval=3> [<acceleration=0>] ] ]`
+> Added in v1.13
+
 Generates both square and circular spiral shapes with the given `<replace_node>` - defaulting to square spirals. The interval defines the gap between the spiral in nodes, and the acceleration defines by how much the interval should be increased (a value of 1 means 1 node per revolution).
 
 ```
@@ -243,6 +253,8 @@ Generates both square and circular spiral shapes with the given `<replace_node>`
 
 
 ### `//dome+ <radius> <replace_node> [<pointing_dir:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> ...] [h[ollow]]`
+> Added in v1.14
+
 Creates a dome shape (i.e. a hemisphere; half a sphere) with a specified radius of the defined node, optionally specifying the direction it should be pointing in (defaults to the positive y direction).
 
 For example, `//dome+ 5 stone y` creates a dome shape pointing upwards, but `//dome+ 5 stone -y` creates a dome shape pointing downwards.
@@ -260,6 +272,8 @@ If `h` or `hollow` is specified at the end, then the resulting dome shape is mad
 
 
 ### `//spline <replace_node> <width_start> [<width_end=width_start> [<steps=3>]]`
+> Added in v1.14
+
 Draws a curved line, using all the currently defined points as control points. The starting and ending widths of the line can be controlled, and the width will be linearly interpolated.
 
 **Note:** `//spline` uses the **new** WorldEditAdditions positions! Use the [multipoint wand](#multi-point-wand) to define the control points for the resulting line.
@@ -285,6 +299,8 @@ For those interested, WorldEditAdditions uses the [chaikin curve algorithm](http
 
 
 ### `//rotate+ <axis> <degrees> [<axis> <degrees> ...] [origin|o [<pos_number>]]`
+> Added in v1.15
+
 Rotates the defined region using the specified list of rotation operations, optionally around the defined rotation origin. For example, the following:
 
 ```weacmd
@@ -339,6 +355,8 @@ Floods all connected nodes of the same type starting at _pos1_ with `<replace_no
 
 
 ### `//wbox <replace_node>`
+> Added in v1.13
+
 Sets the edges of the current selection to `<replace_node>`to create an outline of a rectangular prism. Useful for roughing in walls.
 
 In other words, creates a wireframe of a box defined by the current selection.
@@ -349,6 +367,8 @@ In other words, creates a wireframe of a box defined by the current selection.
 ```
 
 ### `//wcompass <replace_node> [<bead_node>]`
+> Added in v1.13
+
 Creates a compass around pos1 with a single node bead pointing north (+Z).
 
 ```weacmd
@@ -358,6 +378,8 @@ Creates a compass around pos1 with a single node bead pointing north (+Z).
 ```
 
 ### `//wcorner <replace_node>`
+> Added in v1.13
+
 Set the corners of the current selection to `<replace_node>`. Useful for outlining building sites and setting boundaries.
 
 ```weacmd
@@ -366,6 +388,8 @@ Set the corners of the current selection to `<replace_node>`. Useful for outlini
 ```
 
 ### `//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>`
+> Added in v1.11
+
 Advanced version of [`//stretch` from WorldEdit](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#stretch-stretchx-stretchy-stretchz) that can scale both up and down at the same time by transparently splitting it into 2 different operations. Scaling up is *always* done before scaling down.
 
 Although the syntax looks complicated, it's really quite simple. The key concept to understand is that of the scale factor. It refers to how much the defined region should be scaled up or down by, and can be specified in multiple different ways:
@@ -449,6 +473,8 @@ So in the above example, we scale in the positive x and z directions, and the ne
 
 
 ### `//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]] [aa|airapply]`
+> Added in v1.13; param2 support added in v1.14
+
 Fully backwards-compatible with `//copy` from regular WorldEdit, but allows you to specify multiple axes at once in a single copy operation. Each successive axis in the list is specified in the form `<axis> <count>`, where:
 
  - `<axis>` is the name of the axis to move the defined region along
@@ -487,6 +513,8 @@ Finally, if the word `airapply` (or `aa` for short) is present at the end of the
 
 
 ### `//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]] [aa|airapply]`
+> Added in v1.13; param2 support added in v1.14
+
 Identical to [`//copy+`](#copy), but instead moves the defined region instead of copying it.
 
 Note that the integrated `airapply` (`aa` for short) also works as in [`//copy+`](#copy), but remember that if a given target node is not *not* air-like and the integrated `airapply` mode is enabled, the source node is still moved from the source, but destroyed because it is can't be set at the target.
@@ -503,6 +531,39 @@ Note that the integrated `airapply` (`aa` for short) also works as in [`//copy+`
 //move+ back 20 aa
 //move+ -z 45 y 3 airapply
 ```
+
+
+### `//set+ [param|param2|p2|light|l] <value>`
+Sets the node, param2, or light level to a fixed value in the defined region. Defaults to setting the node. If `param2`/`p2` is specified, the param2 value associated with nodes is set instead. If `light`/`l` is specified, the light level is set.
+
+For example, the follow will set the node for every block in the currently defined region:
+
+```weacmd
+//set+ stone
+//set+ glass
+```
+
+See also [`//replacemix`](#replacemix), which extends the simple set functionality implemented in this command with a powerful chance-based find-and-replace system.
+
+See also [`//nodeapply`](#nodeapply), which implements a wrapper around most WorldEditAdditions commands that filters changes made within the defined region to those affecting a defined set of nodes or nodes with the given group name.
+
+The following examples set param2 for all blocks in the defined region to a given value:
+
+```weacmd
+//set+ param2 34
+//set+ p2 2
+//set+ param2 0
+```
+
+...finally, the following examples set the light level for all blocks within the currently defined region:
+
+```weacmd
+//set+ light 3
+//set+ l 10
+//set+ light 15
+```
+
+At an indeterminate point in the future, `//set` may be aliased to this command.Your feedback is valuable on this topic as no decision has yet been reached, so please do start a conversation in our Discord server ([link here on the website homepage](https://worldeditadditions.mooncarrot.space/)) or on the [GitHub discussion board](https://github.com/sbrl/Minetest-WorldEditAdditions/discussions).
 
 
 ### `//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...`
@@ -564,6 +625,8 @@ Here are all the above examples together:
 
 
 ### `//revolve <times> [<pivot_point_number=last_point>]`
+> Added in v1.14
+
 Makes a given number of copies of the currently defined region (bounded by pos1 and pos2) at a given number of equally spaced points rotated around a given pivot/origin point.
 
 For example, `//revolve 4` would make rotated copies of the currently defined region at intervals 0° (the source to copy), 90°, 180°, and 270° around the given pivot point.
@@ -587,6 +650,8 @@ For example, `//revolve 4` would make rotated copies of the currently defined re
 
 
 ### `//convolve <kernel> [<width>[,<height>]] [<sigma>]`
+> Added in v1.7
+
 Advanced version of `//smooth` from we_env, and one of the few WorldEditAdditions commands to have any aliases (`//smoothadv` and `//conv`).
 
 Extracts a heightmap from the defined region and then proceeds to [convolve](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over it with the specified kernel. The kernel can be thought of as the filter that will be applied to the heightmap. Once done, the newly convolved heightmap is applied to the terrain.
@@ -636,6 +701,8 @@ Note also that columns without any air nodes in them at all are also skipped, so
 
 
 ### `//fillcaves [<node_name>]`
+> Added in v1.9
+
 Fills in all airlike nodes beneath non airlike nodes, which gives the effect of filling in caves. Defaults to filling in with stone, but this can be customised.
 
 Note that the *entire* cave you want filling must be selected, as `//fillcaves` only operates within the defined region (ref #50).
@@ -649,6 +716,8 @@ Note that the *entire* cave you want filling must be selected, as `//fillcaves` 
 
 
 ### `//layers [<max_slope|min_slope..max_slope>] [<node_name_1> [<layer_count_1>]] [<node_name_2> [<layer_count_2>]] ...`
+> Added in v1.7
+
 Finds the first non-air node in each column and works downwards, replacing non-air nodes with a defined list of nodes in sequence. Like WorldEdit for Minecraft's `//naturalize` command, and also similar to [`we_env`'s `//populate`](https://github.com/sfan5/we_env). Speaking of, this command has `//naturalise` and `//naturalize` as aliases. Defaults to 1 layer of grass followed by 3 layers of dirt.
 
 Since WorldEditAdditions v1.13, a maximum and minimum slope is optionally accepted, and constrains the columns in the defined region that `//layers` will operate on. For example, specifying a value of `20` would mean that only columns with a slop less than or equal to 20° (degrees, not radians) will be operated on. A value of `45..60` would mean that only columns with a slope between 45° and 60° will be operated on.
@@ -667,6 +736,8 @@ The list of nodes has a form similar to that of a chance list you might find in 
 
 
 ### `//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+> Added in v1.9
+
 Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
 
 Works best if you run `//fillcaves` first, or otherwise have no air nodes below the top non-air node in each column.
@@ -735,6 +806,8 @@ Usage examples:
 
 
 ### `//noise2d [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+> Added in v1.13
+
 Applies 2D noise to the terrain in the defined region. Like `//erode`, this command accepts a number of different key-value parameters and provides a number of different underlying algorithms.
 
 In other words, this command changes the height of the terrain according to some noise function (e.g. Perlin noise):
@@ -826,6 +899,8 @@ Example invocations:
 
 
 ### `//sculptlist [preview]`
+> Added in v1.13
+
 Lists all the available sculpting brushes for use with `//sculpt`. If the `preview` keyword is specified as an argument, then the brushes are also rendered in ASCII as a preview. See [`//sculpt`](#sculpt).
 
 ```
@@ -835,6 +910,8 @@ Lists all the available sculpting brushes for use with `//sculpt`. If the `previ
 
 
 ### `//sculpt [<brush_name=default> [<brush_size=8> [<height=1>]]]`
+> Added in v1.13
+
 Applies a specified brush to the terrain at position 1 with a given height and a given size. Multiple brushes exist (see [`//sculptlist`](#sculptlist)) - and are represented as a 2D grid of values between 0 and 1, which are  then scaled to the specified height. The terrain around position 1 is first converted to a 2D heightmap (as in [`//convolve`](#convolve) before the brush "heightmap" is applied to it.
 
 Similar to [`//sphere`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#sphere-radius-node), [`//cubeapply 10 set`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cubeapply-sizesizex-sizey-sizez-command-parameters), or [`//cylinder y 5 10 10 dirt`](https://github.com/Uberi/Minetest-WorldEdit/blob/master/ChatCommands.md#cylinder-xyz-length-radius1-radius2-node) (all from [WorldEdit](https://content.minetest.net/packages/sfan5/worldedit/)), but has a number of added advantages:
@@ -898,6 +975,8 @@ To contribute your new brush back, you can either [open a pull request](https://
 
 
 ### `//forest [<density>] <sapling_a> [<chance_a>] <sapling_b> [<chance_b>] [<sapling_N> [<chance_N>]] ...`
+> Added in v1.9
+
 Plants and grows saplings to generate a forest. A density value is optionally taken, which controls the overall density of the forest that is generated. The `bonemeal` mod is required - just like for the [`//bonemeal`](#bonemeal-strength-chance) command.
 
 The density defaults to 1, acts like a multiplier, and is not affected by the chances of all saplings listed (e.g. you can have a sapling with a chance of 1-in-50, and the overall density of the forest will be unaffected). For example, 2 results in a forest twice as dense as the default, and 0.5 a forest half as dense as the default density.
@@ -1013,6 +1092,8 @@ Returns the absolute canonical name of a node, given an alias or partial node na
 
 
 ### `//ngroups <node_name> [v[erbose]]`
+> Added in v1.15
+
 Lists the groups that a given node is a member of. For example:
 
 ```weacmd
@@ -1048,6 +1129,8 @@ Finally, the customary misc examples:
 ```
 
 ### `//ndef <node_name>`
+> Added in v1.15
+
 Short for *Node Definition*. Prints the definition table for the node with the given name. In other words. the output could look a little like this:
 
 ```
@@ -1192,6 +1275,8 @@ From the above examples you can also see the principle of inference. All directi
 Because UAS parses "natural" measurement syntax, there are many ways to express the same direction and distance. This caters to users with different ways of thinking and different play styles which will hopefully make the tools easier to use.
 
 ### `//unmark`
+> First overridden in v1.14
+
 Hides the in-game UI that indicates where the current positions and region are located.
 
 This hides both the WorldEditAdditions *and* the WorldEdit UI if displayed, but does **not** change or remove any points that are registered.
@@ -1203,6 +1288,8 @@ Should more than 2 points be defined, they are all hidden.
 ```
 
 ### `//mark`
+> WorldEditAdditions-native version first implemented in v1.14
+
 Shows the in-game UI that indicates where the current positions and region are located once more.
 
 Should more than 2 points be defined, they are all shown once more.
@@ -1215,28 +1302,34 @@ Often used after calling [`//unmark`](#unmark)
 
 
 ### `//pos1`
+> WorldEditAdditions-native version first implemented in v1.14
+
+**Aliases:** `//1`
+
 Sets pos1 to the location of the calling player.
 
 This is, as with all other WorldEditAdditions commands, seamlessly synchronised with WorldEdit, allowing you to use any combination of WorldEditAdditions and WorldEdit commands and tools without them desynchronising from one another.
-
-**Aliases:** `//1`
 
 ```weacmd
 //pos2
 ```
 
 ### `//pos2`
+> WorldEditAdditions-native version first implemented in v1.14
+
+**Aliases:** `//2`
+
 Sets pos1 to the location of the calling player.
 
 This is, as with all other WorldEditAdditions commands, seamlessly synchronised with WorldEdit, allowing you to use any combination of WorldEditAdditions and WorldEdit commands and tools without them desynchronising from one another.
-
-**Aliases:** `//2`
 
 ```weacmd
 //pos2
 ```
 
 ### `//pos <index>`
+> Added in v1.14
+
 Sets position with the given index `<index>` to the location of the calling player.
 
 Should the index be less than or equal to 2, then as with all other WorldEditAdditions commands, seamlessly synchronised with WorldEdit, allowing you to use any combination of WorldEditAdditions and WorldEdit commands and tools without them desynchronising from one another.
@@ -1253,6 +1346,8 @@ If no index is specified, an error is returned and nothing is done.
 ```
 
 ### `//reset`
+> WorldEditAdditions-native version first implemented in v1.14
+
 Clears all positions defined and the defined region.
 
 This also synchronises with WorldEdit, as all other WorldEditAdditions commands do.
@@ -1263,8 +1358,13 @@ This also synchronises with WorldEdit, as all other WorldEditAdditions commands 
 
 
 ### `//scol [<axis1> ] <length>`
+> Added in v1.12
+
 > [!WARNING]
-> **REMOVED** in v1.15 in favour of [`//srel`](#srel)
+> This command has been deprecated in v1.15 in favour of [`//srel`](#srel).
+> 
+> Users of earlier versions of WorldEditAdditions should update if possible, or continue to use this command if not.
+
 Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1273,8 +1373,13 @@ Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos
 ```
 
 ### `//srect [<axis1> [<axis2>]] <length>`
+> Added in v1.12; deprecated in favour of [`//srel`](#srel) in v1.15
+
 > [!WARNING]
-> **REMOVED** in v1.15 in favour of [`//srel`](#srel)
+> This command has been deprecated in v1.15 in favour of [`//srel`](#srel).
+> 
+> Users of earlier versions of WorldEditAdditions should update if possible, or continue to use this command if not.
+
 Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1285,8 +1390,13 @@ Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from 
 
 
 ### `//scube [<axis1> [<axis2> [<axis3>]]] <length>`
+> Added in v1.12
+
 > [!WARNING]
-> **REMOVED** in v1.15 in favour of [`//srel`](#srel)
+> This command has been deprecated in v1.15 in favour of [`//srel`](#srel).
+> 
+> Users of earlier versions of WorldEditAdditions should update if possible, or continue to use this command if not.
+
 Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1. If the axes aren't specified, defaults to positive y, the direction you are facing and the axis to the left of facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1298,6 +1408,8 @@ Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1.
 
 
 ### `//scloud <0-6|stop|reset>`
+> Added in v1.12
+
 Short for _select point cloud_. Sets pos1 and pos2 to include the nodes you punch. Numbers 1-6 designate how many nodes you want to punch before the operation ends. 0 or stop terminate the operation so that any further nodes you punch won't be added to selection. Reset terminates operation if one is running and resets the selection area.
 
 ```weacmd
@@ -1325,6 +1437,8 @@ Short for _select relative_. Sets the pos2 at set distances along 3 axes relativ
 ```
 
 ### `//sgrow <unified axis syntax>`
+> Added in v1.15
+
 Short for _selection grow_. Grows the current selection along specified axes/directions.
 Aliases: `//extend`, `//outset`.
 
@@ -1336,6 +1450,8 @@ Aliases: `//extend`, `//outset`.
 ```
 
 ### `//sshrink <unified axis syntax>`
+> Added in v1.15
+
 Short for _selection shrink_. Shrinks the current selection along specified axes/directions.
 Aliases: `//contract`, `//inset`.
 
@@ -1347,6 +1463,8 @@ Aliases: `//contract`, `//inset`.
 ```
 
 ### `//sshift <unified axis syntax>`
+> Added in v1.13
+
 Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
@@ -1357,6 +1475,8 @@ Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis 
 ```
 
 ### `//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`
+> Added in v1.12
+
 Short for _selection make_. Modifies existing selection by moving pos2. Allows you to make the selection an odd or even length on one or more axes or set two or more axes equal to each other or the longest, shortest or average of them. Implementation thanks to @VorTechnix.
 
 Usage examples:
@@ -1406,8 +1526,13 @@ Name		| Description
 `<base>`: If `<operation>` == equal			| Overrides `<mode>` and sets all `<target>` axes equal to itself
 
 ### `//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`
+> Added in v1.13
+
 > [!WARNING]
-> **REMOVED** in v1.15 in favour of [`//sgrow`](#sgrow) and [`//sshrink`](#sshrink)
+> This command has been deprecated in v1.15 in favour of [`//srel`](#srel).
+> 
+> Users of earlier versions of WorldEditAdditions should update if possible, or continue to use this command if not.
+
 Short for _selection factor_; alias: `//sfac`. Built specifically for use with `//maze`, this command sets targeted axes equal to the nearest multiple of `<factor>` based on the `<mode>`.
 
 Usage examples:
@@ -1426,6 +1551,8 @@ Value	|	Description
 `average`/`avg` | Takes the average of all axes specified in `<target>` and then for each specified axis grows or shrinks it, depending on whether it is less than or greater than the average, to the nearest multiple of `<factor>`
 
 ### `//sstack`
+> Added in v1.12
+
 Displays the contents of your per-user selection stack. This stack can be pushed to and popped from rather like a stack of plates. See also `//spush` (for pushing to the selection stack) and `//spop` (for popping from the selection stack).
 
 ```weacmd
@@ -1433,6 +1560,8 @@ Displays the contents of your per-user selection stack. This stack can be pushed
 ```
 
 ### `//spush`
+> Added in v1.12
+
 Pushes the currently defined region onto your per-user selection stack. Does not otherwise alter the defined region.
 
 If the stack is full (currently the limit is set to 100 regions in the stack), then it will complain at you but otherwise will have no effect.
@@ -1444,6 +1573,8 @@ Note that pos2 does _not_ need to be defined in order to use this. if it isn't d
 ```
 
 ### `//spop`
+> Added in v1.12
+
 Pops a selection off your per-user selection stack and applies it to the currently defined region. If pos2 from the item popped from the stack is nil, then pos2 is explicitly unset. If the stack is empty, this has no effect.
 
 ```weacmd
@@ -1471,6 +1602,8 @@ Alias for [`//count`](#count).
 
 
 ### `//mface`
+> Added in v1.13
+
 Returns the horizontal (X/Z) axis or axes the player is looking along.
 Aliases: `//mfacing`.
 
@@ -1480,6 +1613,8 @@ Aliases: `//mfacing`.
 
 
 ### `//midpos`
+> Added in v1.13
+
 Returns the coordinates of the centre of the current selection.
 
 ```
@@ -1488,6 +1623,8 @@ Returns the coordinates of the centre of the current selection.
 
 
 ### `//msize`
+> Added in v1.13
+
 Returns the lengths of the current selection on the X, Y and Z axes.
 
 ```
@@ -1559,6 +1696,8 @@ In addition, this also allows for including a double forward slash in the argume
 
 
 ### `//many <times> <command>`
+> Added in v1.9
+
 Executes a single chat command many times in a row. Uses `minetest.after()` to yield to the main server thread to allow other things to happen at the same time, so technically you could have multiple `//many` calls going at once (but multithreading support is out of reach, so only a single one will be executing at the same time).
 
 Note that this isn't necessarily limited to executing WorldEdit / WorldEditAdditions commands. Combine with `//multi` (see above) execute multiple commands at once for even more power and flexibility!
@@ -1570,6 +1709,8 @@ Note that this isn't necessarily limited to executing WorldEdit / WorldEditAddit
 
 
 ### `//ellipsoidapply <command_name> <args>`
+> Added in v1.9
+
 Executes the given command, and then clips the result to the largest ellipsoid that will fit inside the defined region. The specified command must obviously take 2 positions - so for example `//set`, `//replacemix`, and `//maze3d` will work, but `//sphere`, `//torus`, and `//floodfill` won't.
 
 For advanced users, `//multi` is also supported - but make sure your modifications stay within the defined region - otherwise they will not be affected by the ellipsoidal clipping operation.
@@ -1584,6 +1725,8 @@ For advanced users, `//multi` is also supported - but make sure your modificatio
 
 
 ### `//airapply <command_name> <args>`
+> Added in v1.13
+
 Like [`//ellipsoidapply`](#ellipsoidapply), but instead only keeps changes that replace airlike nodes, and discards any other changes made.
 
 As with `//ellipsoidapply` for advanced users `//multi` is also supported - but make sure your modifications stay within the defined region - otherwise they be kept regardless, as `//airapply` only applies the masking to the nodes in the defined region.
@@ -1595,6 +1738,8 @@ As with `//ellipsoidapply` for advanced users `//multi` is also supported - but 
 
 
 ### `//nodeapply <node_a> [<node_b>] [... <node_N>] -- <command_name> <args>`
+> Added in v1.15
+
 **Aliases:** `//napply`
 
 It's got `apply` in the name, so as you might imagine it works the same as [`//ellipsoidapply`](#ellipsoidapply), [`//airapply`](#airapply), [`//noiseapply2d`](#noiseapply2d), etc. Only changes made by the given command that replace nodes on the list given will be replaced. For example:
@@ -1637,6 +1782,8 @@ More misc examples to end this command description, as is customary:
 
 
 ### `//noiseapply2d <threshold> <scale> <command_name> <args>`
+> Added in v1.13
+
 Like [`//ellipsoidapply`](#ellipsoidapply), but instead only keeps changes where a noise function (defaults to `perlinmt`, see [`//noise2d`](#noise2d)) returns a value greater than a given threshold value.
 
 Also takes a scale value that controls the scale of the noise - -higher values result in smaller "blobs". If you're operating on small areas, then a value of at least 10 is advised as "blobs" are by default on the scale of ~50 nodes.
@@ -1651,6 +1798,8 @@ Any suggestions on  how to provide more customisability without making this comm
 ```
 
 ### `//for <value1> <value2> <value3>... do //<command> <arg> %% <arg>`
+> Added in v1.13
+
 For a given list of values, executes the specified command for each value, replacing `%%` with each value. Implementation thanks to @VorTechnix.
 
 To better illustrate what happens, consider the following command:
@@ -1699,6 +1848,8 @@ This command is intended for development and modding. You will not normally need
 
 
 ### `//speed [<value=1>]`
+> Added in v1.15
+
 Adjusts your player movement speed to the specified value. In other words:
 
 ```weacmd
@@ -1755,6 +1906,8 @@ Note this only affects **you**, and **not any other player**.
 See also [`//speed`](#speed).
 
 ### Far Wand
+> Added in v1.7
+
 The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_farwand.png)
 
 It functions very similarly to the regular WorldEdit wand, except that it has a _much_ longer range - which can be very useful for working on large-scale terrain for example. It also comes with an associated command to control it.
@@ -1786,6 +1939,8 @@ You can change the maximum range with the `maxdist` subcommand:
 Note that the number there isn't in blocks (because hard maths). It is however proportional to the distance the wand will raycast looks for nodes, so a higher value will result in it raycasting further.
 
 ### Cloud Wand
+> Added in v1.11
+
 The cloud wand (`worldeditadditions:cloudwand`) is a another variant the above _Far Wand_. It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_cloudwand.png)
 
 Unlike the other 2 wands, this wand functions in an additive manner. Left-click on a node to expand the currently defined region (creating a new one if one isn't defined already) to include that node. Right click to clear the currently defined region.
@@ -1796,6 +1951,8 @@ Note that punching out the positions **does not unset them**. Use `//reset` to r
 
 
 ### MultiPoint Wand
+> Added in v1.14
+
 The third type of wand provided by WorldEditAdditions is completely different, in that it allows you to select up to **999 points** at once! It looks like this: ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png)
 
 It is important to note that (at present) the points selected by this wand **are not compatible with normal points**. This will change in the future, but requires a lot of work to implement.

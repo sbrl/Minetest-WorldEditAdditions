@@ -1,7 +1,12 @@
+---
+-- @module worldeditadditions_core.table
+
+
 --- Builds a new table with the elements of the given table appearing at most once.
+-- See also `worldeditadditions_core.Set`.
 -- @param	tbl		table	The table of values to make unique.
 -- @returns	table	A new table containing the values of the given table appearing at most once.
-local function table_unique(tbl)
+local function unique(tbl)
 	local newtbl = {}
 	for i,value in ipairs(tbl) do
 		local seen = false
@@ -18,4 +23,4 @@ local function table_unique(tbl)
 	return newtbl
 end
 
-return table_unique
+return unique

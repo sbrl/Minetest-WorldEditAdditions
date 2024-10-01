@@ -16,7 +16,8 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
  - [Quick Command Reference](#quick-command-reference) (including links to detailed explanations)
  - [Using the Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#far-wand)
  - [Using the Cloud Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#cloud-wand)
- - [Detailed Chat Command Explanations](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md)
+ - [Interactive Chat Command Reference](https://worldeditadditions.mooncarrot.space/Reference/) ([git](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md))
+ - [Lua API Reference](https://worldeditadditions.mooncarrot.space/api/)
  - [Chat Command Cookbook](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Cookbook.md)
  - [Troubleshooting](#troubleshooting)
  - [Contributing](#contributing)
@@ -26,6 +27,9 @@ _(Do you have a cool build that you used WorldEditAdditions to build? [Get in to
 
 ## Quick Command Reference
 The detailed explanations have moved! Check them out [here](https://worldeditadditions.mooncarrot.space/Reference/) (or edit at [Chat-Command-Reference.md](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md)), or click the links below.
+
+- **Full chat command reference:** <https://worldeditadditions.mooncarrot.space/Reference/>
+- **Lua API documentation** (for mod developers and hackers)**:** <https://worldeditadditions.mooncarrot.space/api/>
 
 ### Geometry
  - [`//spline <replace_node> <width_start> [<width_end=width_start> [<steps=3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#spline)
@@ -47,9 +51,11 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//wcorner <replace_node>`](https://worldeditadditions.mooncarrot.space/Reference/#wcorner)
 
 ### Misc
+ - [`//rotate+ <axis> <degrees> [<axis> <degrees> ...] [origin|o [<pos_number>]]`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) _(new in v1.15)_
  - [`//revolve <times> [<pivot_point_number=last_point>]`](https://worldeditadditions.mooncarrot.space/Reference/#revolve)
  - [`//copy+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#copy)
  - [`//move+ <axis:x|y|z|-x|-y|-z|?|front|back|left|right|up|down> <count> [<axis> <count> [...]]`](https://worldeditadditions.mooncarrot.space/Reference/#move)
+ - [`//set+ [param|param2|p2|light|l] <value>`](https://worldeditadditions.mooncarrot.space/Reference/#set) _(new in v1.15)_
  - [`//replacemix <target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ....`](https://worldeditadditions.mooncarrot.space/Reference/#replacemix)
  - [`//floodfill [<replace_node> [<radius>]]`](https://worldeditadditions.mooncarrot.space/Reference/#floodfill)
  - [`//scale <axis> <scale_factor> | <factor_x> [<factor_y> <factor_z> [<anchor_x> <anchor_y> <anchor_z>]]`](https://worldeditadditions.mooncarrot.space/Reference/#scale) **experimental**
@@ -72,7 +78,8 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
 ### Statistics
  - [`//count`](https://worldeditadditions.mooncarrot.space/Reference/#count)
  - [`//basename <name>`](https://worldeditadditions.mooncarrot.space/Reference/#basename)
- - [`//ngroups <node_name> [v[erbose]]`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups)
+ - [`//ngroups <node_name> [v[erbose]]`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups) _(new in v1.15)_
+ - [`//ndef <node_name>`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) _(new in v1.15)_
  - [`//uasparse <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#uasparse) _(new in v1.15)_
 
 ### Selection
@@ -116,6 +123,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
 ### Extras
  - [`//y`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#y)
  - [`//n`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#n)
+ - [`//speed [<value=1>]`](https://worldeditadditions.mooncarrot.space/Reference/#speed) _(new in v1.15)_
 
 ### Tools
  - [WorldEditAdditions Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#far-wand)
@@ -194,11 +202,19 @@ The new positioning system now rectifies this issue with the region marker walls
 
 If this is not showing for you, please update WorldEditAdditions and try again.
 
+### Where's the documentation?
+As linked above:
+
+ - [Interactive Chat Command Reference](https://worldeditadditions.mooncarrot.space/Reference/) ([git](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md))
+ - [Lua API Reference](https://worldeditadditions.mooncarrot.space/api/) (built with [moondoc](https://github.com/sbrl/moondoc))
+
 
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
 
 Please also make sure that the logic for every new command has it's own file. For example, the logic for `//floodfill` goes in `worldeditadditions/floodfill.lua`, the logic for `//overlay` goes in `worldeditadditions/overlay.lua`, etc. More contributing help can be found in [the contributing guide](CONTRIBUTING.md).
+
+**Lua API Documentation:** <https://worldeditadditions.mooncarrot.space/api/>
 
 ### Inspiration
 Want to contribute, but finding it tough to find inspiration of what to implement? Here are some great places to look:
@@ -208,7 +224,7 @@ Want to contribute, but finding it tough to find inspiration of what to implemen
 	- WorldEdit for Minecraft
 	- VoxelSniper(-Reimagined) for Minecraft
 	- WorldPainter for Minecraft
-	- Axiom
+	- Axiom for Minecraft
 - **Do some building:** When you put WorldEditAdditions to use in building projects of your own, things will absolutely stand out to you what you want in the creative building process that WorldEditAdditions doesn't yet have.
 - **Watch others build stuff:** Doesn't even have to be Minetest! There are lots of talented Minecraft builders with videos and series on e.g. YouTube. From their creative building processes, many ideas can be derived.
 
