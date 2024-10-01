@@ -1,6 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const htmlentities = require("html-entities");
+"use strict";
+
+import fs from 'fs';
+import path from 'path';
+import htmlentities from 'html-entities';
+
+// HACK: Make sure __dirname is defined when using es6 modules. I forget where I found this - a PR with a source URL would be great!
+const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf("/"));
 
 function read_contributors() {
 	return fs.readFileSync(path.resolve(__dirname, "../../CONTRIBUTORS.tsv"), "utf-8")
@@ -20,4 +25,4 @@ const contributors = read_contributors();
 
 console.log(`CONTRIBUTORS`, contributors);
 
-module.exports = contributors;
+export default contributors;

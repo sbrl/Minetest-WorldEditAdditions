@@ -1,12 +1,16 @@
 "use strict";
 
-const path = require("path");
-const fs = require("fs");
-const os = require("os");
+import fs from "fs";
+import path from "path";
+import os from "os";
 
-const phin = require("phin");
+import phin from "phin";
 
-const a = require("./Ansi.js");
+import a from "./Ansi.mjs";
+
+// HACK: Make sure __dirname is defined when using es6 modules. I forget where I found this - a PR with a source URL would be great!
+const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf("/"));
+
 var pretty_ms = null;
 
 class FileFetcher {
@@ -19,7 +23,7 @@ class FileFetcher {
 	}
 	
 	fetch_file(url) {
-		let target_client = path.join(`/img`, path.basename(url));
+		const target_client = path.join(`/img`, path.basename(url));
 		
 		if(this.#cache.includes(url)) return target_client;
 		
@@ -37,11 +41,11 @@ class FileFetcher {
 		
 		if(this.#pkg_obj === null) {
 			this.#pkg_obj = JSON.parse(await fs.promises.readFile(
-				path.join(path.dirname(__dirname), "package.json"), "utf8"
+				path.resolve(path.dirname(__dirname), "package.json"), "utf8"
 			));
 		}
 		
-		let target_download = path.join(`_site/img`, path.basename(url));
+		const target_download = path.join(`_site/img`, path.basename(url));
 		
 		const response = await phin({
 			url,
@@ -64,4 +68,4 @@ class FileFetcher {
 
 }
 
-module.exports = FileFetcher;
+export default FileFetcher;

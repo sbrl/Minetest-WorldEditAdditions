@@ -85,4 +85,4 @@ class Ansi {
 	}
 }
 
-module.exports = new Ansi();
+export default new Ansi();

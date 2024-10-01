@@ -1,13 +1,15 @@
 "use strict";
+import fs from "fs";
+import path from "path";
 
-const fs = require("fs");
-const path = require("path");
+import columnify from "columnify";
+import htmlentities from "html-entities";
 
-const columnify = require("columnify");
-const htmlentities = require("html-entities");
+import a from "./lib/Ansi.mjs";
+import parse_sections from "./lib/parse_sections.mjs";
 
-const a = require("./lib/Ansi.js");
-const parse_sections = require("./lib/parse_sections.js");
+// HACK: Make sure __dirname is defined when using es6 modules. I forget where I found this - a PR with a source URL would be great!
+const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf("/"));
 
 let { sections, categories } = parse_sections(fs.readFileSync(
 		path.resolve(
@@ -36,7 +38,7 @@ console.log(columnify(Array.from(categories).map(el => { return {
 	colour: el[1]
 } })));
 
-module.exports = {
+export default {
 	layout: "theme.njk",
 	title: "Reference",
 	tags: "navigable",

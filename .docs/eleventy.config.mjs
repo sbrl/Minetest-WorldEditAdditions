@@ -10,11 +10,9 @@ import phin from "phin";
 import CleanCSS from "clean-css";
 import { minify as minify_html } from "html-minifier-terser";
 
-import UpgradeHelper from "@11ty/eleventy-upgrade-help";
-
-import moondoc_runner from "./lib/moondoc_runner.js";
-import HTMLPicture from "./lib/HTMLPicture.js";
-import FileFetcher from "./lib/FileFetcher.js";
+import moondoc_runner from "./lib/moondoc_runner.mjs";
+import HTMLPicture from "./lib/HTMLPicture.mjs";
+import FileFetcher from "./lib/FileFetcher.mjs";
 const file_fetcher = new FileFetcher();
 
 // HACK: Make sure __dirname is defined when using es6 modules. I forget where I found this - a PR with a source URL would be great!
@@ -129,7 +127,6 @@ export default function config(eleventyConfig) {
 		path.resolve(__dirname, "_site/api/index.html")
 	);
 	
-	eleventyConfig.addPlugin(UpgradeHelper);
 	eleventyConfig.addTransform("cssmin", do_minify_css);
 	eleventyConfig.addTransform("htmlmin", do_minify_html);
 	

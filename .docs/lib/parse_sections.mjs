@@ -1,14 +1,18 @@
 "use strict";
 
-const crypto = require("crypto");
+import crypto from "crypto";
 
-const htmlentities = require("html-entities");
-const markdown = require("markdown-it")({
+import htmlentities from "html-entities";
+import MarkdownIt from "markdown-it";
+import chroma from "chroma-js";
+
+import markdown_prism from "markdown-it-prism";
+import markdown_alerts from "markdown-it-github-alerts";
+
+const markdown = new MarkdownIt({
 	xhtmlOut: true
 });
-const chroma = require("chroma-js");
 
-const markdown_prism = require("markdown-it-prism");
 markdown.use(markdown_prism, {
 	init: (Prism) => {
 		Prism.languages.weacmd = {
@@ -21,8 +25,7 @@ markdown.use(markdown_prism, {
 	}
 });
 
-const alerts = require("markdown-it-github-alerts");
-markdown.use(alerts);
+markdown.use(markdown_alerts);
 
 function extract_title(line) {
 	return line.match(/#+\s+(.+)\s*/)[1].replace(/^`*|`*$/g, "")
@@ -47,7 +50,7 @@ function make_section(acc, cat_current, cats) {
 	};
 }
 
-module.exports = function parse_sections(source) {
+export default function parse_sections(source) {
 	const cats = new Map();
 	source.match(/^##\s+.*$/gm)
 		.map(extract_title)

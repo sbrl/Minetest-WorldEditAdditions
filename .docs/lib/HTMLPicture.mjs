@@ -1,14 +1,18 @@
 "use strict";
 
-const os = require(`os`);
-const fs = require("fs");
-const path = require("path");
+import os from 'os';
+import fs from 'fs';
+import path from 'path';
 
-const debug = require("debug")("image");
-const imagickal = require("imagickal");
-const htmlentities = require("html-entities");
+import imagickal from 'imagickal'; 
+import htmlentities from "html-entities";
+import PQueue from "p-queue";
+import pMemoize from "p-memoize";
+import pretty_ms from "pretty-ms";
+import Debug from 'debug';
+const debug = Debug("image");
 
-const a = require("./Ansi.js");
+import a from './Ansi.mjs';
 
 function calculate_size(width, height, size_spec) {
 	if(size_spec.indexOf("%") > -1) {
@@ -34,7 +38,6 @@ var queue = null;
 
 async function make_queue() {
 	// 1: Setup task queue
-	const PQueue = (await import("p-queue")).default;
 	let concurrency = os.cpus().length;
 	if(process.env["MAX_CONCURRENT"])
 		concurrency = parseInt(process.env["MAX_CONCURRENT"], 10);
@@ -142,16 +145,8 @@ async function picture(source_image, alt, target_dir, urlpath, formats = "__AUTO
 	return result;
 }
 
-var picture_memoize = null;
-var pretty_ms;
+var picture_memoize = pMemoize(picture);
 
-async function setup_memoize() {
-	const pMemoize = (await import("p-memoize")).default;
-	picture_memoize = pMemoize(picture);
-}
-
-module.exports = async function(...args) {
-	if(picture_memoize === null) await setup_memoize();
-	pretty_ms = (await import("pretty-ms")).default;
+export default async function(...args) {
 	return await picture_memoize(...args);
 };
