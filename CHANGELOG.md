@@ -22,6 +22,7 @@ Note to self: See the bottom of this file for the release template text.
 - Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
 
 ### Bugfixes and changes
+- When commands produce an error, the name of the command that produced the error is now also printed. Useful when using e.g. [`//multi`](https://worldeditadditions.mooncarrot.space/Reference/#multi) etc.
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
 - Improve documentation of [`//noise2d`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d). If it still doesn't make sense, please let me know. It's a complicated command that needs reworking a bit to be easier to use.
 - Alias `//napply` to [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)

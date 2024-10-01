@@ -19,11 +19,16 @@ local human_size = wea_c.format.human_size
 local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	wea_c:emit("pre-execute", tbl_event)
 	local success, result_message = func(player_name, wea_c.table.unpack(parse_result))
+	print("DEBUG:run_command_stage2 SUCCESS", success, "RESULT_MESSAGE", result_message)
+	if not success then
+		
+		result_message = "[//"..tostring(tbl_event.cmdname).."] "..result_message
+	end
+	
 	if result_message then
 		-- TODO: If we were unsuccessful, then colour the message red
 		worldedit.player_notify(player_name, result_message)
 	end
-	
 	tbl_event.success = success
 	tbl_event.result = result_message
 	wea_c:emit("post-execute", tbl_event)
@@ -110,7 +115,7 @@ local function run_command(cmdname, options, player_name, paramtext)
 	local parse_result = { options.parse(paramtext) }
 	local success = table.remove(parse_result, 1)
 	if not success then
-		worldedit.player_notify(player_name, tostring(parse_result[1]) or "Invalid usage (no further error message was provided by the command. This is probably a bug.)")
+		worldedit.player_notify(player_name, ("[//"..tostring(cmdname).."] "..tostring(parse_result[1])) or "Invalid usage (no further error message was provided by the command. This is probably a bug.)")
 		return false
 	end
 	
