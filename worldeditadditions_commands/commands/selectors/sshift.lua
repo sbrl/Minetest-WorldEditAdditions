@@ -14,7 +14,7 @@ worldeditadditions_core.register_command("sshift", {
 	require_pos = 2,
 	parse = function(params_text)
 		local ret = wea_c.split(params_text)
-		if #ret < 1 then return false, "SSHIFT: No params found!"
+		if #ret < 1 then return false, "Error: No params found!"
 		else return true, ret end
 	end,
 	func = function(name, params_text)
