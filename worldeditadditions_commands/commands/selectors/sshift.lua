@@ -26,7 +26,7 @@ worldeditadditions_core.register_command("sshift", {
 		local pos2 = vec:add(wea_c.pos.get(name, 2))
 		
 		wea_c.pos.set_all(name, {pos1, pos2})
-		return true, "Pos1 set to "..pos1..", Pos2 set to "..pos2
+		return true, "Position 1 to "..pos1..", Position 2 to "..pos2
 	end,
 })
 

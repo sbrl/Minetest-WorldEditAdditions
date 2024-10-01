@@ -126,6 +126,6 @@ worldeditadditions_core.register_command("smake", {
 		for k,_ in pairs(targ) do delta[k] = eval(delta[k]) end
 		
 		wea_c.pos.set(name, 2, pos1 + delta)
-		return true, "Pos2 set to "..pos2
+		return true, "Position 2 to "..pos2
 	end
 })
