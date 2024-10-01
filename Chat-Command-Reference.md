@@ -1268,7 +1268,6 @@ This also synchronises with WorldEdit, as all other WorldEditAdditions commands 
 Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos1. If the axis isn't specified, defaults the direction you are facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
-**REMOVED** in favour of `//srel`
 //scol 10
 //scol x 3
 ```
@@ -1279,7 +1278,6 @@ Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos
 Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from pos1. If the axes aren't specified, defaults to positive y and the direction you are facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
-**REMOVED** in favour of `//srel`
 //srect x z 10
 //srect 3
 //srect -z y 25
@@ -1292,7 +1290,6 @@ Short for _select rectangle_. Sets the pos2 at a set distance along 2 axes from 
 Short for _select cube_. Sets the pos2 at a set distance along 3 axes from pos1. If the axes aren't specified, defaults to positive y, the direction you are facing and the axis to the left of facing. Implementation thanks to @VorTechnix.
 
 ```weacmd
-**REMOVED** in favour of `//srel`
 //scube 5
 //scube z a y 12
 //scube x z 3
@@ -1416,7 +1413,6 @@ Short for _selection factor_; alias: `//sfac`. Built specifically for use with `
 Usage examples:
 
 ```weacmd
-**REMOVED** in favour of `//sgrow` and `//sshrink`
 //sfac grow 5
 //sfac avg 3 xy
 ```
