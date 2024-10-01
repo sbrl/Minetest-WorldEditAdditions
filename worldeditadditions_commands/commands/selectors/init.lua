@@ -24,7 +24,6 @@ dofile(wea_cmdpath.."sstack.lua")
 dofile(wea_cmdpath.."scol.lua")
 dofile(wea_cmdpath.."scube.lua")
 dofile(wea_cmdpath.."srect.lua")
--- TODO: Deprecate this.
 dofile(wea_cmdpath.."sfactor.lua")
 --- END DEPRECATED ---
 
