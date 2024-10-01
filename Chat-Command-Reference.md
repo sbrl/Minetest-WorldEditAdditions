@@ -1201,6 +1201,16 @@ This command is intended for debugging and development purposes, but if you're i
 //ndef glass
 ```
 
+### `//uasparse <unified axis syntax>`
+Short for *Unified Axis Syntax Parse*. Parses the given UAS expression and prints the resulting vectors to the chat window.
+
+```weacmd
+//uasparse front right 5
+//uasparse y 12 h -2
+//uasparse left 3 up 5 -front 7
+//uasparse -z 12 -y -2 x -2
+```
+
 
 
 ## Selection
@@ -1211,6 +1221,58 @@ This command is intended for debugging and development purposes, but if you're i
      ██ ██      ██      ██      ██         ██    ██ ██    ██ ██  ██ ██
 ███████ ███████ ███████ ███████  ██████    ██    ██  ██████  ██   ████
 -->
+
+### Unified Axis Syntax (UAS)
+The Unified Axis Syntax system allows users to input direction and distance information in three dimensions using "natural" measurement syntax. The key features include axis clumping, double negatives, relative directions, mirroring and compass directions (more information below).
+
+*Note: negatives can be applied to axes, directions **AND** distances*
+
+#### Relative Directions
+|Key Words | Interpretation|
+|----------|---------------|
+|`f[ront]\|facing\|?` | The direction the player is facing most toward in the world
+|`b[ack]\|behind\|rear` | The opposite of the direction the player is facing most toward in the world
+|`l[eft]` | The direction to the left of the player
+|`r[ight]` | The direction to the right of the player
+
+```weacmd
+back 1
+f r 4
+-facing 13
+```
+
+#### Compass Directions
+|Key Words | Interpretation|
+|----------|---------------|
+|`n[orth]` | z
+|`s[outh]` | -z
+|`e[ast]` | x
+|`w[est]` | -x
+|`u[p]` | y
+|`d[own]` | -y
+
+```weacmd
+south 3
+north west 5
+e d -2
+```
+
+#### Axis Clumping
+Supported axes are `x`, `y`, `z`, `h`, `v`. All horizontal axes are covered by `h` and both vertical ones are covered by `v`.
+
+- `h 5` == `xz -xz 5` == `x 5 z 5 x -5 z -5`
+- `v 5` == `up down 5` == `y -y 5`
+- `vxz 5` == `xyz -y 5` == `xyz 5 y -5`
+
+#### Inference and Omnidirectionality
+The UAS parser takes command input that is split by whitespace and interprets it as a series of numbers preceded by directional cues. If a number is preceded by another number or nothing it assumes that the number is to be applied on all axes in both positive and negative directions.
+
+- `10` == `hv 10` == `xyz -xyz 10`
+- `x 3 6` == `x 3 hv 6`
+
+From the above examples you can also see the principle of inference. All direction modifiers before a value are interpreted as belonging to that value. So `x v 5` is equivalent to `x 5 v 5` and `xv 5`.
+
+Because UAS parses "natural" measurement syntax, there are many ways to express the same direction and distance. This caters to users with different ways of thinking and different play styles which will hopefully make the tools easier to use.
 
 ### `//unmark`
 > First overridden in v1.14
@@ -1310,7 +1372,6 @@ Short for _select column_. Sets the pos2 at a set distance along 1 axis from pos
 //scol x 3
 ```
 
-
 ### `//srect [<axis1> [<axis2>]] <length>`
 > Added in v1.12; deprecated in favour of [`//srel`](#srel) in v1.15
 
@@ -1365,17 +1426,43 @@ Short for _select center_. Sets pos1 and pos2 to the centre point(s) of the curr
 //scentre
 ```
 
-### `//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+### `//srel <unified axis syntax>`
 Short for _select relative_. Sets the pos2 at set distances along 3 axes relative to pos1. If pos1 is not set it will default to the node directly under the player. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.
 
 ```weacmd
 //srel front 5
-//srel  y 12 right -2
+//srel y 12 right -2
 //srel left 3 up 5 -front 7
 //srel -z 12 -y -2 x -2
 ```
 
-### `//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`
+### `//sgrow <unified axis syntax>`
+> Added in v1.15
+
+Short for _selection grow_. Grows the current selection along specified axes/directions.
+Aliases: `//extend`, `//outset`.
+
+```weacmd
+//sgrow back 4
+//sgrow left -2 v r 2
+//sgrow h 4
+//sgrow -zy -2 x -2
+```
+
+### `//sshrink <unified axis syntax>`
+> Added in v1.15
+
+Short for _selection shrink_. Shrinks the current selection along specified axes/directions.
+Aliases: `//contract`, `//inset`.
+
+```weacmd
+//sshrink left 4
+//sshrink right -2 up 2
+//sshrink v 4
+//sshrink -hy 2 x -3 true
+```
+
+### `//sshift <unified axis syntax>`
 > Added in v1.13
 
 Short for _selection shift_. Shifts the WorldEdit region along 3 axes. The axis arguments accept `x, y, z` as well as `up, down, left, right, front, back`. Left, right, front and back are relative to player facing direction. Negative (`-`) can be applied to the axis, the length or both. Implementation thanks to @VorTechnix.

@@ -1,4 +1,3 @@
-local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 local Vector3 = worldeditadditions.Vector3
 
@@ -8,46 +7,26 @@ local Vector3 = worldeditadditions.Vector3
 --      ██      ██ ██   ██ ██ ██         ██
 -- ███████ ███████ ██   ██ ██ ██         ██
 
-local function parse_with_name(name,args)
-	local vec, tmp = Vector3.new(0, 0, 0), {}
-	local find, _, i = {}, 0, 0
-	repeat
-		_, i, tmp.proc = args:find("([%l%s+-]+%d+)%s*", i)
-		if tmp.proc:match("[xyz]") then
-			tmp.ax = tmp.proc:match("[xyz]")
-			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1)
-		else
-			tmp.ax, _ = wea_c.dir_to_xyz(name, tmp.proc:match("%l+"))
-			if not tmp.ax then return false, _ end
-			tmp.dir = tonumber(tmp.proc:match("[+-]?%d+")) * (tmp.proc:match("-%l+") and -1 or 1) * _
-		end
-		vec[tmp.ax] = tmp.dir
-	until not args:find("([%l%s+-]+%d+)%s*", i)
-	return true, vec
-end
-
 worldeditadditions_core.register_command("sshift", {
-	params = "<axis1> <distance1> [<axis2> <distance2> [<axis3> <distance3>]]",
+	params = "<unified axis syntax>",
 	description = "Shift the WorldEdit region in 3 dimensions.",
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
-		if params_text:match("([%l%s+-]+%d+)") then return true, params_text
-		else return false, "No acceptable params found" end
+		local ret = wea_c.split(params_text)
+		if #ret < 1 then return false, "Error: No params found!"
+		else return true, ret end
 	end,
 	func = function(name, params_text)
-		local _, vec = parse_with_name(name,params_text)
-		if not _ then return false, vec end
+		local facing = wea_c.player_dir(name)
+		local vec, err = wea_c.parse.directions(params_text, facing, true)
+		if not vec then return false, err end
 		
-		local pos1 = vec:add(worldedit.pos1[name])
-		worldedit.pos1[name] = pos1
-		worldedit.mark_pos1(name)
+		local pos1 = vec:add(wea_c.pos.get(name, 1))
+		local pos2 = vec:add(wea_c.pos.get(name, 2))
 		
-		local pos2 = vec:add(worldedit.pos2[name])
-		worldedit.pos2[name] = pos2
-		worldedit.mark_pos2(name)
-		
-		return true, "Region shifted by  " .. (vec.x + vec.y + vec.z) .. " nodes."
+		wea_c.pos.set_all(name, {pos1, pos2})
+		return true, "Position 1 to "..pos1..", Position 2 to "..pos2
 	end,
 })
 

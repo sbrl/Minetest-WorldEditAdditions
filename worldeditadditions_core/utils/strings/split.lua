@@ -58,11 +58,12 @@ end
 
 --- Split a string into substrings separated by a pattern.
 -- @param	str	string	The string to iterate over
--- @param	dlm	string	The delimiter (separator) pattern
+-- @param	dlm="%s+"	string	The delimiter (separator) pattern. If a falsey value is passed, then the default value is used.
 -- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
 -- 							plain string, not a Lua pattern
 -- @returns	table	A sequence table containing the substrings
 local function split(str,dlm,plain)
+	if not dlm then dlm = "%s+" end
 	local pos, ret = 0, {}
 	local ins, i = str:find(dlm,pos,plain)
 	-- "if plain" shaves off some time in the while statement

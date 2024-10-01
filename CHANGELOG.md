@@ -4,7 +4,7 @@ It's about time I started a changelog! This will serve from now on as the main c
 Note to self: See the bottom of this file for the release template text.
 
 
-## v1.15: The untitled update (unreleased)
+## v1.15: The direction update (unreleased)
 - Added the optional argument `all` to [`//unmark`](https://worldeditadditions.mooncarrot.space/Reference/#unmark)
 - Added a (rather nuclear) fix (attempt 4) at finally exterminating all zombie region marker walls forever
 	- This is not a hotfix to avoid endless small releases fixing the bug, as it's clear it's much more difficult to fix on all systems than initially expected
@@ -16,11 +16,21 @@ Note to self: See the bottom of this file for the release template text.
 - Added [`//set+`](https://worldeditadditions.mooncarrot.space/Reference/#set) for setting nodes and param2/light levels quickly.
 	- NOTE TO SELF: Setting light values doesn't appear to be working very well for some reason
 - Added [`//ndef`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) to print a given node's definition table. This is for debugging and development purposes.
+- Added `//sgrow` and `//sshrink` commands to enlarge and shrink selection regions and aliased them over WorldEdit equivalents (`//expand`, `//outset` and `//contract`, `//inset` respectively).
+- Added Unified Axis Syntax (UAS) parser. - Implementation by @VorTechnix
+	- See [UAS System reference] for details. (Note to self hook up hyperlink)
+- Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
 
 ### Bugfixes and changes
 - Don't warn on failed registration of `//flora` → [`//bonemeal`](https://worldeditadditions.mooncarrot.space/Reference/#bonemeal) if the `bonemeal` mod isn't installed (e.g. in MineClone2) - thanks @VorTechnix in #106
 - Improve documentation of [`//noise2d`](https://worldeditadditions.mooncarrot.space/Reference/#noise2d). If it still doesn't make sense, please let me know. It's a complicated command that needs reworking a bit to be easier to use.
 - Alias `//napply` to [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)
+- Re-factored selection tools to all use WEA position system and UAS Parser if applicable. - Re-factor by @VorTechnix
+- `//sshift` now overrides `//shift` from WorldEdit. - Re-factor by @VorTechnix
+
+### Deprecations
+- Deprecated `//scol`, `//srect` and `//scube`. Now that `//srel` is using UAS parser there is no need for them. - Deprecated by @VorTechnix
+- Deprecated `//sfactor`. Now that `//sgrow` and `//sshrink` exist it is no longer needed. - Deprecated by @VorTechnix
 
 
 ### Lua API changes

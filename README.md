@@ -80,20 +80,23 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [`//basename <name>`](https://worldeditadditions.mooncarrot.space/Reference/#basename)
  - [`//ngroups <node_name> [v[erbose]]`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups) _(new in v1.15)_
  - [`//ndef <node_name>`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) _(new in v1.15)_
+ - [`//uasparse <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#uasparse) _(new in v1.15)_
 
 ### Selection
- - [`//scol [<axis1> ] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#scol)
- - [`//srect [<axis1> [<axis2>]] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#srect)
- - [`//scube [<axis1> [<axis2> [<axis3>]]] <length>`](https://worldeditadditions.mooncarrot.space/Reference/#scube)
+ - [~~`//scol [<axis1> ] <length>`~~](https://worldeditadditions.mooncarrot.space/Reference/#scol) (REMOVED in v1.15)
+ - [~~`//srect [<axis1> [<axis2>]] <length>`~~](https://worldeditadditions.mooncarrot.space/Reference/#srect) (REMOVED in v1.15)
+ - [~~`//scube [<axis1> [<axis2> [<axis3>]]] <length>`~~](https://worldeditadditions.mooncarrot.space/Reference/#scube) (REMOVED in v1.15)
  - [`//scloud <0-6|stop|reset>`](https://worldeditadditions.mooncarrot.space/Reference/#scloud)
  - [`//scentre`](https://worldeditadditions.mooncarrot.space/Reference/#scentre)
- - [`//srel <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#srel)
+ - [`//sgrow <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sgrow) _(new in v1.15)_
+ - [`//srel <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#srel)
  - [`//smake <operation:odd|even|equal> <mode:grow|shrink|average> [<target=xz> [<base>]]`](https://worldeditadditions.mooncarrot.space/Reference/#smake)
+ - [`//sshrink <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sshrink) _(new in v1.15)_
  - [`//sstack`](https://worldeditadditions.mooncarrot.space/Reference/#sstack)
  - [`//spush`](https://worldeditadditions.mooncarrot.space/Reference/#spush)
  - [`//spop`](https://worldeditadditions.mooncarrot.space/Reference/#spop)
- - [`//sshift <axis1> <length1> [<axis2> <length2> [<axis3> <length3>]]`](https://worldeditadditions.mooncarrot.space/Reference/#sshift)
- - [`//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`](https://worldeditadditions.mooncarrot.space/Reference/#sfactor)
+ - [`//sshift <unified axis syntax>`](https://worldeditadditions.mooncarrot.space/Reference/#sshift)
+ - [~~`//sfactor <mode:grow|shrink|average> <factor> [<target=xz>]`~~](https://worldeditadditions.mooncarrot.space/Reference/#sfactor) (REMOVED in v1.15)
  - [`//pos <index>`](https://worldeditadditions.mooncarrot.space/Reference/#pos)
  - [`//pos1`](https://worldeditadditions.mooncarrot.space/Reference/#pos1)
  - [`//pos2`](https://worldeditadditions.mooncarrot.space/Reference/#pos2)

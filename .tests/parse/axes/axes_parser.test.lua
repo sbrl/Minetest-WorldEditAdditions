@@ -96,6 +96,15 @@ describe("parse_axes", function()
 		assert.are.same(Vector3.new(40, 77, 99), maxv)
 	end)
 	
+	it("should infer that directions before a value are connected to that value", function()
+		local minv, maxv = parse_axes({
+			"xy", "-x", "5"
+		}, facing_dirs.z_neg)
+		assert.is.truthy(minv)
+		assert.are.same(Vector3.new(-5, 0, 0), minv)
+		assert.are.same(Vector3.new(5, 5, 0), maxv)
+	end)
+	
 	it("should return 2 0,0,0 vectors if no input", function()
 		local minv, maxv = parse_axes({
 			-- No input
