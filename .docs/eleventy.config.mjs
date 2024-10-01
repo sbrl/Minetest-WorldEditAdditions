@@ -1,20 +1,24 @@
 "use strict";
 
-const os = require("os");
-const fs = require("fs");
-const path = require("path");
+import os from "os";
+import fs from "fs";
+import path from "path";
 
-const debug = require("debug");
-const htmlentities = require("html-entities");
-const phin = require("phin");
-const CleanCSS = require("clean-css");
-const { minify: minify_html } = require("html-minifier-terser");
+import debug from "debug";
+import htmlentities from "html-entities";
+import phin from "phin";
+import CleanCSS from "clean-css";
+import { minify as minify_html } from "html-minifier-terser";
 
-const moondoc_runner = require("./lib/moondoc_runner.js");
-const HTMLPicture = require("./lib/HTMLPicture.js");
-const FileFetcher = require("./lib/FileFetcher.js");
+import UpgradeHelper from "@11ty/eleventy-upgrade-help";
 
+import moondoc_runner from "./lib/moondoc_runner.js";
+import HTMLPicture from "./lib/HTMLPicture.js";
+import FileFetcher from "./lib/FileFetcher.js";
 const file_fetcher = new FileFetcher();
+
+// HACK: Make sure __dirname is defined when using es6 modules. I forget where I found this - a PR with a source URL would be great!
+const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf("/"));
 
 const is_production = typeof process.env.NODE_ENV === "string" && process.env.NODE_ENV === "production";
 
@@ -120,11 +124,12 @@ async function do_minify_html(source, output_path) {
 
 if(is_production) console.log("Production environment detected, minifying content");
 
-module.exports = function(eleventyConfig) {
+export default function config(eleventyConfig) {
 	moondoc_runner(
 		path.resolve(__dirname, "_site/api/index.html")
 	);
 	
+	eleventyConfig.addPlugin(UpgradeHelper);
 	eleventyConfig.addTransform("cssmin", do_minify_css);
 	eleventyConfig.addTransform("htmlmin", do_minify_html);
 	
