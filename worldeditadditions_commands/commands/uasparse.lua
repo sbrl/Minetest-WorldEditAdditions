@@ -9,12 +9,12 @@ local wea_c = worldeditadditions_core
 
 worldeditadditions_core.register_command("uasparse", {
 	params = "<unified axis syntax>",
-	description = "Returns min and max vectors for given inputs",
+	description = "Debug command. Returns min and max vectors for given inputs",
 	privs = { worldedit = true },
 	-- require_pos = 2,
 	parse = function(params_text)
 		local ret = wea_c.split(params_text)
-		if #ret < 1 then return false, "UASPARSE: No params found!"
+		if #ret < 1 then return false, "Error: No params found!"
 		else return true, ret end
 	end,
 	func = function(name, params_text)
