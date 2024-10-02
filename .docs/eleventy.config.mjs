@@ -47,10 +47,10 @@ async function shortcode_image_url(src) {
 }
 
 async function shortcode_image_urlpass(src) {
-	let target_dir = `./_site/img`;
+	const target_dir = `./_site/img`;
 	if(!fs.existsSync(target_dir))
 		await fs.promises.mkdir(target_dir, { recursive: true });
-	let filename = path.basename(src);
+	const filename = path.basename(src);
 	// Generally speaking we optimise PNGs *very* well with oxipng/Zopfli,
 	// and the Image plugin doesn't respect this
 	await fs.promises.copyFile(src, path.join(target_dir, filename));

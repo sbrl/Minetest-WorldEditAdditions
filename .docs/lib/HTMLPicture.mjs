@@ -62,10 +62,10 @@ async function srcset(source_image, target_dir, urlpath, format = "__AUTO__", si
 	
 	debug(`SOURCE_SIZE`, source_size, `TARGET_FORMAT`, target_format);
 	
-	let setitems = await Promise.all(sizes.map(async (size) => {
-		let target_filename = `${source_parsed.name}_${size}.${target_format}`
+	const setitems = await Promise.all(sizes.map(async (size) => {
+		const target_filename = `${source_parsed.name}_${size}.${target_format}`
 			.replace(/%/, "pcent");
-		let target_current = path.join(
+		const target_current = path.join(
 			target_dir,
 			target_filename
 		);

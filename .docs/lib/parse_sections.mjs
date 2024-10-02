@@ -32,7 +32,7 @@ function extract_title(line) {
 }
 
 function make_section(acc, cat_current, cats) {
-	let title = extract_title(acc[0]);
+	const title = extract_title(acc[0]);
 	return {
 		category: cat_current,
 		category_colour: cats.get(cat_current),
@@ -62,14 +62,14 @@ export default function parse_sections(source) {
 	const result = [];
 	let acc = [];
 	let cat_current = null;
-	for(let line of lines) {
+	for(const line of lines) {
 		
 		if(line.startsWith(`#`)) {
-			let heading_level = line.match(/^#+/)[0].length;
+			const heading_level = line.match(/^#+/)[0].length;
 			
 			// 1: Deal with the previous section
 			if(acc.length > 0) {
-				let heading_level_prev = acc[0].match(/^#+/)[0].length;
+				const heading_level_prev = acc[0].match(/^#+/)[0].length;
 				if(heading_level_prev === 3 && acc.length > 0 && heading_level <= 3) {
 					result.push(make_section(acc, cat_current, cats));
 				}
