@@ -15,7 +15,7 @@ local function calc_rotation_text(rotation)
 	end
 end
 
-function rot_axis_left(axis)
+local function rot_axis_left(axis)
 	if axis.x == 1 or axis.x == -1 then
 		axis.x, axis.z = 0, axis.x
 	elseif axis.z == 1 or axis.z == -1 then

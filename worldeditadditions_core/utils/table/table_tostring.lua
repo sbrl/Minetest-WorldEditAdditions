@@ -3,7 +3,7 @@
 
 --- Returns the key value pairs in a table as a single string
 -- @param	tbl	table	input table
--- @param	sep	string	key value seperator
+-- @param	sep	string	key value separator
 -- @param	new_line	string	key value pair delimiter
 -- @param	max_depth	number	max recursion depth (optional)
 -- @return	string	concatenated table pairs
@@ -17,7 +17,7 @@ local function tostring(tbl, sep, new_line, max_depth)
 	for key,value in pairs(tbl) do
 		if type(value) == "table" and max_depth.depth < max_depth.max then
 			table.insert(ret,tostring(key) .. sep ..
-			"{" .. table_tostring(value,sep,new_line,{max_depth.depth+1,max_depth.max}) .. "}")
+			"{" .. tostring(value,sep,new_line,{max_depth.depth+1,max_depth.max}) .. "}")
 		else
 			table.insert(ret,tostring(key) .. sep .. tostring(value))
 		end

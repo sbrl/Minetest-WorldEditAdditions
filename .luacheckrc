@@ -21,7 +21,7 @@ globals = {
 	"worldedit",
 	"worldeditadditions",
 	"worldeditadditions_commands",
-	"worldeditadditions_core"
+	"worldeditadditions_core",
 }
 -- Read-only globals
 read_globals = {
@@ -35,6 +35,7 @@ read_globals = {
 	"dofile",
 	"PerlinNoise",
 	"Settings",
-	"VoxelArea"
+	"VoxelArea",
+	"pova" -- optional mod support
 }
 std = "max"

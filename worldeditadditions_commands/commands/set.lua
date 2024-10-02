@@ -22,7 +22,7 @@ core.register_command("set+", {
 		local parts = core.split_shell(params_text)
 				
 		local mode = "param"
-		local value = nil
+		local value -- defaults to nil
 		
 		local possible_modes = { "param", "p", "param2", "p2", "light", "l" }
 		

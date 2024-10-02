@@ -17,7 +17,7 @@ local wallmounted_cycles = {
 }
 
 -- We have standardised on radians for other rotation operations, so it wouldn't make sense for the API-facing functions in this file to use a number of times or degrees, as this would be inconsistent
-function convert_normalise_rad(rad)
+local function convert_normalise_rad(rad)
 	local deg = math.deg(rad)
 	local times = worldeditadditions_core.round(deg / 90)
 	return math.floor(times) -- ensure it's an integer and not e.g. a float 1.0
@@ -35,16 +35,16 @@ end
 -- @param	axis	string	The name of the axis to rotate around. Valid values: `x`, `y`, `z`
 -- @param	amount	The number of radians to rotate around the given `axis`. Only right angles are supported (i.e. 90° increments). Any value that isn't a 90° increment will be **rounded**!
 -- @returns	number	A new param2 value that is rotated the given number of degrees around the given `axis`
-function facedir(param2, axis, amount_rad)
+local function facedir(param2, axis, amount_rad)
 	local amount = convert_normalise_rad(amount_rad)
 	print("DEBUG:core/orientation:facedir AMOUNT rad "..tostring(amount_rad).." norm "..tostring(amount))
-	local facedir = param2 % 32
+	local facedir_this = param2 % 32
 	for _, cycle in ipairs(facedir_cycles[axis]) do
 		-- Find the current facedir
 		-- Minetest adds table.indexof, but I refuse to use it because it returns -1 rather than nil
 		for i, fd in ipairs(cycle) do
-			if fd == facedir then
-				return param2 - facedir + cycle[1 + (i - 1 + amount) % 4] -- If only Lua didn't use 1 indexing...
+			if fd == facedir_this then
+				return param2 - facedir_this + cycle[1 + (i - 1 + amount) % 4] -- If only Lua didn't use 1 indexing...
 			end
 		end
 	end
@@ -56,14 +56,14 @@ end
 -- @param	axis	string	The name of the axis to rotate around. Valid values: `x`, `y`, `z`
 -- @param	amount	The number of radians to rotate around the given `axis`. Only right angles are supported (i.e. 90° increments). Any value that isn't a 90° increment will be **rounded**!
 -- @returns	number	A new param2 value that is rotated the given number of degrees around the given `axis`
-function wallmounted(param2, axis, amount_rad)
+local function wallmounted(param2, axis, amount_rad)
 	local amount = convert_normalise_rad(amount_rad)
 	print("DEBUG:core/orientation:wallmounted AMOUNT rad " .. tostring(amount_rad) .. " norm " .. tostring(amount))
 
-	local wallmounted = param2 % 8
+	local wallmounted_this = param2 % 8
 	for i, wm in ipairs(wallmounted_cycles[axis]) do
-		if wm == wallmounted then
-			return param2 - wallmounted + wallmounted_cycles[axis][1 + (i - 1 + amount) % 4]
+		if wm == wallmounted_this then
+			return param2 - wallmounted_this + wallmounted_cycles[axis][1 + (i - 1 + amount) % 4]
 		end
 	end
 	return param2

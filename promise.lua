@@ -145,7 +145,7 @@ end
 
 -- TEST example code, TODO test this
 
-function test()
+local function test()
 	return Promise.new(function(resolve, reject)
 		-- TODO do something asyncy here
 		print("DEBUG running test function")
