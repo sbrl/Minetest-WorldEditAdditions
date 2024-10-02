@@ -104,7 +104,7 @@ function worldeditadditions.rotate(pos1, pos2, origin, rotlist)
 	
 	
 	--- 6: Reinitialise the destination VoxelManip and copy data over
-	-- This has the net effect of changing ONLY the nodes we rotate to, whle preserving changes from wiping the source
+	-- This has the net effect of changing ONLY the nodes we rotate to, while preserving changes from wiping the source
 	manip_dest, area_dest = worldedit.manip_helpers.init(pos1_dstvm, pos2_dstvm)
 	data_dest_real = manip_dest:get_data()
 	

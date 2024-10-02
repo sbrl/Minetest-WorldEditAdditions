@@ -33,7 +33,7 @@ end
 -- - right → rotate around Z to right
 -- - pitch, yaw, roll - clockwise is considered positive.
 -- @param	str				string	The axis to parse, as a single (pre-trimmed) string.
--- @param	[player=nil]	Player	Optional. A Minetest Player object representing the player to make any relative keywords like front-back/pitch/roll/etc relative to in parsing. Defautls to nil, which disables parsing of relatiive terms. Any object passed just needs to support player:get_look_horizontal(): https://github.com/minetest/minetest/blob/master/doc/lua_api.md#player-only-no-op-for-other-objects
+-- @param	[player=nil]	Player	Optional. A Minetest Player object representing the player to make any relative keywords like front-back/pitch/roll/etc relative to in parsing. Defaults to nil, which disables parsing of relatiive terms. Any object passed just needs to support player:get_look_horizontal(): https://github.com/minetest/minetest/blob/master/doc/lua_api.md#player-only-no-op-for-other-objects
 -- @returns	bool,Vector3|string			A success bool (false=failure) followed by either an error message (if success=false) or otherwise the axis name, parsed into a Vector3 instance.
 local function parse_rotation_axis_name(str, player)
 	local vector = Vector3.new(0, 0, 0)

@@ -63,7 +63,7 @@ local function do_run(promise, args, depth, origin_resolve)
 	local results
 	if depth == 1 then
 		-- This function is the inner one of a promise already.
-		-- It has already recieved arguments, so it expected resolve/reject instead
+		-- It has already received arguments, so it expected resolve/reject instead
 		next.fn_then_(function(...) -- RESOLVE
 			if getmetatable(arg[1]) == Promise then
 				promise.state = "rejected"
