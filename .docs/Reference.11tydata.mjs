@@ -11,6 +11,7 @@ import parse_sections from "./lib/parse_sections.mjs";
 // HACK: Make sure __dirname is defined when using es6 modules. I forget where I found this - a PR with a source URL would be great!
 const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf("/"));
 
+// eslint-disable-next-line prefer-const
 let { sections, categories } = parse_sections(fs.readFileSync(
 		path.resolve(
 			__dirname,
