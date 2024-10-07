@@ -4,6 +4,8 @@ local wea_c = worldeditadditions_core
 --- 
 -- @module worldeditadditions_core.parse
 
+
+
 --- Parses a map of key-value pairs into a table.
 -- For example, "count 25000 speed 0.8 rate_erosion 0.006 doawesome true" would be parsed into
 -- the following table: { count = 25000, speed = 0.8, rate_erosion = 0.006, doawesome = true }.
@@ -25,6 +27,9 @@ local function parse_map(params_text, keywords)
 			-- Look for bools
 			if part_converted == "true" then part_converted = true end
 			if part_converted == "false" then part_converted = false end
+			if last_key == nil then
+				return false, "Error: nil check assertion in worldeditadditions_core.parse.map:state/mode/VALUE failed."
+			end
 			result[last_key] = part_converted
 			mode = "KEY"
 		else
