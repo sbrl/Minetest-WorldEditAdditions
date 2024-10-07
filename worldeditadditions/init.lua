@@ -2,6 +2,8 @@
 -- 
 -- This is the documentation for the Lua API of WorldEditAdditions. It was generated automatically from comments spread across the codebase with [moondoc](https://github.com/sbrl/moondoc).
 -- 
+-- You can save this documentation to your local device by pressing Ctrl + S on your keyboard.
+-- 
 -- **Current version:** 1.15-dev 
 -- 
 -- These docs are a work-in-progress. **Not all functions are documented here yet.** If anything is unclear, please [open an issue](https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new).
