@@ -208,6 +208,22 @@ As linked above:
  - [Interactive Chat Command Reference](https://worldeditadditions.mooncarrot.space/Reference/) ([git](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md))
  - [Lua API Reference](https://worldeditadditions.mooncarrot.space/api/) (built with [moondoc](https://github.com/sbrl/moondoc))
 
+#### Building the website
+The website that contains both of the above can be generated like so.
+
+First, clone this git repository:
+
+```bash
+git clone git@git.github.com:sbrl/Minetest-WorldEditAdditions worldeditadditions;
+cd worldeditadditions/.docs; # cd into the docs folder
+```
+
+Then, build the docs:
+
+```bash
+npm install
+npm run build
+```
 
 ## Contributing
 Contributions are welcome! Please state in your pull request(s) that you release your contribution under the _Mozilla Public License 2.0_.
