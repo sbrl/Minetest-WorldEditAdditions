@@ -18,8 +18,8 @@ worldeditadditions_core.register_command("midpos", {
 	func = function(name, params_text)
 		local str = "The centre of the current selection is at "
 		
-		local pos1 = Vector3.clone(worldedit.pos1[name])
-		local pos2 = Vector3.clone(worldedit.pos2[name])
+		local pos1 = Vector3.clone(wea_c.pos.get(name, 1))
+		local pos2 = Vector3.clone(wea_c.pos.get(name, 2))
 		
 		
 		local vec = Vector3.mean(pos1, pos2)
