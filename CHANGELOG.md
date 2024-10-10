@@ -18,8 +18,10 @@ Note to self: See the bottom of this file for the release template text.
 - Added [`//ndef`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) to print a given node's definition table. This is for debugging and development purposes.
 - Added `//sgrow` and `//sshrink` commands to enlarge and shrink selection regions and aliased them over WorldEdit equivalents (`//expand`, `//outset` and `//contract`, `//inset` respectively).
 - Added Unified Axis Syntax (UAS) parser. - Implementation by @VorTechnix
-	- See [UAS System reference] for details. (Note to self hook up hyperlink)
+	- See [UAS System reference](https://worldeditadditions.mooncarrot.space/Reference/#unified-axis-syntax-uas) for details.
 - Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
+- Added `//tool` command to list available tools and give tools to players. (Requires players to have the `weatool` privilege) - Implementation by @VorTechnix
+- Added `weatool` privilege. - Implementation by @VorTechnix
 
 ### Bugfixes and changes
 - When commands produce an error, the name of the command that produced the error is now also printed. Useful when using e.g. [`//multi`](https://worldeditadditions.mooncarrot.space/Reference/#multi) etc.
@@ -36,6 +38,7 @@ Note to self: See the bottom of this file for the release template text.
 
 ### Lua API changes
 - Add `core.pos.get12(player_name, sort=false)`
+- Add `tools.register_tool(name, tool_def)` - Implementation by @VorTechnix
 
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)

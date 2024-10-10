@@ -1896,6 +1896,17 @@ Prevents the execution of a command if it could potentially affect a large numbe
    ██     ██████   ██████  ███████ ███████
 -->
 
+### `//tool list || give|exists <tool name>`
+> Added in v1.15
+
+Lists available tools, allowes player to check if a specific tool exists and gives tools on demand as long as the player doesn't already have them, has room in their inventory, and has the `weatool` privilege.
+
+```weacmd
+//tool list
+//tool give cloudwand
+//tool exists multiwand
+```
+
 ### Movement speed adjustment tool
 The movement speed adjustment tool, as the name suggests, adjusts your local player movement speed. It looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_tools/textures/worldeditadditions_movement.png).
 
@@ -1908,7 +1919,7 @@ See also [`//speed`](#speed).
 ### Far Wand
 > Added in v1.7
 
-The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_tools/textures/worldeditadditions_tools.png)
+The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_tools/textures/worldeditadditions_farwand.png)
 
 It functions very similarly to the regular WorldEdit wand, except that it has a _much_ longer range - which can be very useful for working on large-scale terrain for example. It also comes with an associated command to control it.
 

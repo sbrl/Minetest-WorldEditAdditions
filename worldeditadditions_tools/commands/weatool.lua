@@ -10,7 +10,7 @@ local wea_t = worldeditadditions_tools
 worldeditadditions_core.register_command("tool", {
 	params = "list || give|exists <tool name> ",
 	description = "Give WEA tools by name to the calling player or list available tools.",
-	privs = { worldedit = true, give = true },
+	privs = { worldedit = true, weatool = true },
 	require_pos = 0,
 	parse = function(params_text)
 		local ret = wea_c.split(params_text)

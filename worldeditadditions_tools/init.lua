@@ -4,6 +4,11 @@ worldeditadditions_tools = {
 }
 local wea_t = worldeditadditions_tools
 
+minetest.register_privilege("weatool", {
+	description = "Allows players to use WEA tools.",
+	give_to_singleplayer = true,
+	give_to_admin = true,
+})
 local modpath = minetest.get_modpath("worldeditadditions_tools")
 
 

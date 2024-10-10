@@ -129,6 +129,7 @@ The detailed explanations have moved! Check them out [here](https://worldeditadd
  - [WorldEditAdditions Far Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#far-wand)
  - [WorldEditAdditions Cloud Wand](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#cloud-wand)
  - [`//farwand skip_liquid (true|false) | maxdist <number>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#farwand-skip_liquid-truefalse--maxdist-number)
+ - [`//tool list || give|exists <tool name>`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/main/Chat-Command-Reference.md#tool-list-giveexists-tool-name) _(new in v1.15)_
 
 
 ## Installation
