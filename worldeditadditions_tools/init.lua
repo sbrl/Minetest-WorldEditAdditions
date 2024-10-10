@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: lowercase-global
 worldeditadditions_tools = {
 	player_data = {},
 	registered_tools = {},

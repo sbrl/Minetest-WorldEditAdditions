@@ -27,7 +27,13 @@ end
 
 
 --- Registers a new WorldEditAdditions tool.
--- @param	tool		string	The name of the tool to register.
+-- @param	tool		string	The name of the tool to register (sans the ":worldeditadditions:" prefix).
+--[[
+	=== WARNING ===
+	":worldeditadditions:" will be prepended to the `tool` param so
+	calling `register_tool(":worldeditadditions:<toolname>", def_table)`
+	may cause errors.
+--]]
 -- @param	options		table	A table of options for the tool:
 -- - `description` (string) A description of the tool.
 -- - `inventory_image` (string) The path to the image for the tool.
