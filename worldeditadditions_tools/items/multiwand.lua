@@ -44,7 +44,7 @@ wea_t.register_tool("multiwand", {
 		local player_name = player:get_player_name()
 		wea_c.pos.compat_worldedit_get(player_name)
 		-- print("[farwand] on_use", player_name)
-		local looking_pos, node_id = wea.farwand.do_raycast(player)
+		local looking_pos, node_id = wea_t.do_raycast(player)
 		push_pos(player_name, looking_pos)
 	end,
 	
