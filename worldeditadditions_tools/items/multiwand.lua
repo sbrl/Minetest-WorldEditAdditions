@@ -34,7 +34,6 @@ wea_t.register_tool("multiwand", {
 		-- Right click when pointing at something
 		-- Pointed thing: https://rubenwardy.com/minetest_modding_book/lua_api.html#pointed_thing
 		local player_name = player:get_player_name()
-		wea_c.pos.compat_worldedit_get(player_name)
 		-- print("[farwand] on_place", player_name)
 		pop_pos(player_name)
 	end,
@@ -42,7 +41,6 @@ wea_t.register_tool("multiwand", {
 	on_use = function(itemstack, player, pointed_thing)
 		-- Left click when pointing at something or nothing
 		local player_name = player:get_player_name()
-		wea_c.pos.compat_worldedit_get(player_name)
 		-- print("[farwand] on_use", player_name)
 		local looking_pos, node_id = wea_t.do_raycast(player)
 		push_pos(player_name, looking_pos)
@@ -52,8 +50,6 @@ wea_t.register_tool("multiwand", {
 		-- Right click when pointing at nothing
 		local player_name = player:get_player_name()
 		-- print("[farwand] on_secondary_use", player_name)
-		wea_c.pos.compat_worldedit_get(player_name)
-		-- local looking_pos, node_id = do_raycast(player)
 		pop_pos(player_name)
 	end
 })
