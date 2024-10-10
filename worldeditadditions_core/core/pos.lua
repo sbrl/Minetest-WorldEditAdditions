@@ -84,6 +84,7 @@ local function compat_worldedit_pos2_get(player_name)
 end
 
 --- Sets pos1/pos2 in worldedit for compatibility.
+-- @internal
 -- @param	player_name		string	The name of the player to set the position for.
 -- @param	i				number	The index of the position to set.
 -- @param	pos				Vector3	The position to set.
@@ -106,6 +107,7 @@ local function compat_worldedit_set(player_name, i, pos, do_update)
 end
 
 --- Fetches pos1/pos2 from WorldEdit (if available) and sets them in WorldEditAdditions' postional subsystem
+-- @internal
 -- @param	player_name		string	The name of the player to sync the positions for.
 local function compat_worldedit_get(player_name)
 	compat_worldedit_pos1_get(player_name)
@@ -334,7 +336,6 @@ anchor = wea_c.EventEmitter.new({
 	set_all = set_all,
 	unmark = unmark,
 	mark = mark,
-	compat_worldedit_get = compat_worldedit_get,
 })
 anchor.debug = false
 
