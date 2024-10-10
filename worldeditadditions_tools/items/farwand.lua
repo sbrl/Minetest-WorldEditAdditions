@@ -32,14 +32,14 @@ wea_t.register_tool("farwand", {
 		-- print("[farwand] on_place", name)
 		-- Right click when pointing at something
 		-- Pointed thing: https://rubenwardy.com/minetest_modding_book/lua_api.html#pointed_thing
-		local looking_pos, node_id = worldeditadditions_tools.do_raycast(player)
+		local looking_pos, node_id = wea_t.do_raycast(player)
 		set_pos2(name, looking_pos)
 	end,
 	
 	on_use = function(itemstack, player, pointed_thing)
 		local name = player:get_player_name()
 		-- print("[farwand] on_use", name)
-		local looking_pos, node_id = worldeditadditions_tools.do_raycast(player)
+		local looking_pos, node_id = wea_t.do_raycast(player)
 		set_pos1(name, looking_pos)
 		-- Left click when pointing at something or nothing
 	end,
@@ -49,7 +49,7 @@ wea_t.register_tool("farwand", {
 		-- Right click when pointing at nothing
 		-- print("[farwand] on_secondary_use", name)
 		
-		local looking_pos, node_id = worldeditadditions_tools.do_raycast(player)
+		local looking_pos, node_id = wea_t.do_raycast(player)
 		set_pos2(name, looking_pos)
 	end
 })
