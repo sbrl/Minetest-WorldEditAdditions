@@ -1,4 +1,5 @@
 local wea_c = worldeditadditions_core
+local wea_t = worldeditadditions_tools
 local wea = worldeditadditions
 local Vector3 = wea_c.Vector3
 
@@ -25,7 +26,7 @@ local function pop_pos(player_name)
 end
 
 
-minetest.register_tool(":worldeditadditions:multiwand", {
+wea_t.register_tool("multiwand", {
 	description = "WorldEditAdditions multi-point wand",
 	inventory_image = "worldeditadditions_multiwand.png",
 	

@@ -1,7 +1,8 @@
 local wea = worldeditadditions
 local wea_c = worldeditadditions_core
+local wea_t = worldeditadditions_tools
 
-minetest.register_tool(":worldeditadditions:cloudwand", {
+wea_t.register_tool("cloudwand", {
 	description = "WorldEditAdditions far-reaching additive selector wand",
 	inventory_image = "worldeditadditions_cloudwand.png",
 	
@@ -16,7 +17,7 @@ minetest.register_tool(":worldeditadditions:cloudwand", {
 	on_use = function(itemstack, player, pointed_thing)
 		local name = player:get_player_name()
 		-- print("[farwand] on_use", name)
-		local looking_pos, node_id = worldeditadditions.farwand.do_raycast(player)
+		local looking_pos, node_id = worldeditadditions_tools.do_raycast(player)
 		wea.selection.add_point(name, looking_pos)
 		-- Left click when pointing at something or nothing
 	end,

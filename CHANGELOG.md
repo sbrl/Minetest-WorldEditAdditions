@@ -12,7 +12,7 @@ Note to self: See the bottom of this file for the release template text.
 - Added [`//ngroups`](https://worldeditadditions.mooncarrot.space/Reference/#ngroups), which lists the groups that a given node is a member of. Useful when paired with [`//nodeapply`](https://worldeditadditions.mooncarrot.space/Reference/#nodeapply)!
 - Added [`//rotate+`](https://worldeditadditions.mooncarrot.space/Reference/#rotate) to rotate regions through arbitrary series of potentially non-axis-aligned rotations. **Does not support slabs/stairs yet,** but this is on the todo list!
 - Added [`//speed`](https://worldeditadditions.mooncarrot.space/Reference/#speed) to adjust your own movement speed
-	- Also added an associated [movement speed adjustment tool](https://worldeditadditions.mooncarrot.space/Reference/#movement), which looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_farwand/textures/worldeditadditions_movement.png)
+	- Also added an associated [movement speed adjustment tool](https://worldeditadditions.mooncarrot.space/Reference/#movement), which looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_tools/textures/worldeditadditions_movement.png)
 - Added [`//set+`](https://worldeditadditions.mooncarrot.space/Reference/#set) for setting nodes and param2/light levels quickly.
 	- NOTE TO SELF: Setting light values doesn't appear to be working very well for some reason
 - Added [`//ndef`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) to print a given node's definition table. This is for debugging and development purposes.
@@ -63,7 +63,7 @@ Note to self: See the bottom of this file for the release template text.
  - Add `//dome+`, which allows you to change the direction the dome is pointing in, and also create multiple domes at once
  - Add `//metaball`, which renders 2 or more [metaballs](https://en.wikipedia.org/wiki/Metaballs) in Minetest
  - Significant backend refactoring to tidy things up
- - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png) to select many points at once.
+ - Add new multi-point selection wand ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_tools/textures/worldeditadditions_multiwand.png) to select many points at once.
  - Implement custom region boxing UI, which replaces the WorldEdit region box when using WorldEditAdditions wands.
  	- Is backwards compatible with regular WorldEdit wands and tools, as WorldEditAdditions keeps the new positioning system in sync with WorldEdit's.
 	- The new multipoint wand required this as a prerequisite

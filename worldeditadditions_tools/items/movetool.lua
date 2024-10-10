@@ -1,7 +1,8 @@
-local weac = worldeditadditions_core
+local wea_c = worldeditadditions_core
+local wea_t = worldeditadditions_tools
 
 local function adjust_speed_relative(player, offset)
-	local overrides = weac.player_get_physics_override(
+	local overrides = wea_c.player_get_physics_override(
 		player, "worldeditadditions_movetool"
 	)
 	if overrides == nil then overrides = {} end
@@ -10,7 +11,7 @@ local function adjust_speed_relative(player, offset)
 	local src_speed = overrides.speed or 1
 	local src_climb_speed = overrides.climb_speed or 1
 	
-	weac.player_set_physics_override(
+	wea_c.player_set_physics_override(
 		player, "worldeditadditions_movetool", {
 			speed = math.max(src_speed + offset, 0.5),
 			climb_speed = math.max(src_climb_speed + offset, 0.5)
@@ -20,7 +21,7 @@ local function adjust_speed_relative(player, offset)
 	-- })
 	
 	-- Completely paranoid is me
-	local overrides_after = weac.player_get_physics_override(
+	local overrides_after = wea_c.player_get_physics_override(
 		player, "worldeditadditions_movetool"
 	)
 	worldedit.player_notify(player:get_player_name(), "Movement speed is now x" .. tostring(overrides_after.speed))
@@ -36,7 +37,7 @@ local function use_secondary(player)
 end
 
 
-minetest.register_tool(":worldeditadditions:movetool", {
+wea_t.register_tool("movetool", {
 	description = "WorldEditAdditions movement speed adjustment tool",
 	inventory_image = "worldeditadditions_movement.png",
 	

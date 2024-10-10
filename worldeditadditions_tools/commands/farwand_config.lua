@@ -1,5 +1,5 @@
 local wea_c = worldeditadditions_core
-local farwand = worldeditadditions.farwand -- Convenience shurtcut
+local farwand = worldeditadditions_tools -- Convenience shurtcut
 
 local function parse_params_farwand(params_text)
 	if params_text == nil then

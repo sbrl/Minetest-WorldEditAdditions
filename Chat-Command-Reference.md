@@ -1897,7 +1897,7 @@ Prevents the execution of a command if it could potentially affect a large numbe
 -->
 
 ### Movement speed adjustment tool
-The movement speed adjustment tool, as the name suggests, adjusts your local player movement speed. It looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_farwand/textures/worldeditadditions_movement.png).
+The movement speed adjustment tool, as the name suggests, adjusts your local player movement speed. It looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_tools/textures/worldeditadditions_movement.png).
 
 Primary (left) clicking will increase your movement speed, and secondary (right) clicking will decrease it in x0.5 increments, down to a minimum of x0.5.
 
@@ -1908,7 +1908,7 @@ See also [`//speed`](#speed).
 ### Far Wand
 > Added in v1.7
 
-The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_farwand.png)
+The far wand (`worldeditadditions:farwand`) is a variant on the traditional WorldEdit wand (`worldedit:wand`). It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_tools/textures/worldeditadditions_tools.png)
 
 It functions very similarly to the regular WorldEdit wand, except that it has a _much_ longer range - which can be very useful for working on large-scale terrain for example. It also comes with an associated command to control it.
 
@@ -1941,7 +1941,7 @@ Note that the number there isn't in blocks (because hard maths). It is however p
 ### Cloud Wand
 > Added in v1.11
 
-The cloud wand (`worldeditadditions:cloudwand`) is a another variant the above _Far Wand_. It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_cloudwand.png)
+The cloud wand (`worldeditadditions:cloudwand`) is a another variant the above _Far Wand_. It looks like this: ![A picture of the far wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_tools/textures/worldeditadditions_cloudwand.png)
 
 Unlike the other 2 wands, this wand functions in an additive manner. Left-click on a node to expand the currently defined region (creating a new one if one isn't defined already) to include that node. Right click to clear the currently defined region.
 
@@ -1953,7 +1953,7 @@ Note that punching out the positions **does not unset them**. Use `//reset` to r
 ### MultiPoint Wand
 > Added in v1.14
 
-The third type of wand provided by WorldEditAdditions is completely different, in that it allows you to select up to **999 points** at once! It looks like this: ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_farwand/textures/worldeditadditions_multiwand.png)
+The third type of wand provided by WorldEditAdditions is completely different, in that it allows you to select up to **999 points** at once! It looks like this: ![A picture of the multi-point wand](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/main/worldeditadditions_tools/textures/worldeditadditions_multiwand.png)
 
 It is important to note that (at present) the points selected by this wand **are not compatible with normal points**. This will change in the future, but requires a lot of work to implement.
 
