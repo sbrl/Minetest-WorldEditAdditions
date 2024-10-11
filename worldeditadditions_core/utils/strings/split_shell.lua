@@ -1,5 +1,8 @@
 -- worldeditadditions_core = { modpath="/home/sbrl/.minetest/worlds/Mod-Sandbox/worldmods/WorldEditAdditions/worldeditadditions_core/" }
 
+---
+-- @module worldeditadditions_core
+
 local table_map, polyfill
 
 if minetest then
@@ -10,11 +13,30 @@ else
 	table_map = require("worldeditadditions_core.utils.table.table_map")
 	polyfill = require("worldeditadditions_core.utils.strings.polyfill")
 end
-	
+
 local function is_whitespace(char)
 	return char:match("%s")
 end
 
+--- Splits a string into an array of arguments, respecting quoted sections.
+-- This function mimics shell-like argument parsing, handling both single and double quotes, as well as escaped characters within quotes.
+-- 
+-- @param	text	string	The input string to be split into arguments.
+-- @return	table	An array of strings, each representing a parsed argument.
+--
+-- Behaviour:
+-- - Whitespace outside quotes is used as a delimiter between arguments.
+-- - Both single (') and double (") quotes are recognized and respected.
+-- - Quotes can be escaped with a backslash (\) inside quoted sections.
+-- - Backslashes are preserved if they don't escape a quote or another backslash.
+-- - Unclosed quotes are treated as lasting until the end of the string.
+-- - Empty arguments (i.e., consecutive whitespaces) are ignored.
+--
+-- Examples:
+-- split_shell("arg1 arg2 arg3") --> {"arg1", "arg2", "arg3"}
+-- split_shell("arg1 \"arg2 with spaces\" arg3") --> {"arg1", "arg2 with spaces", "arg3"}
+-- split_shell("arg1 'arg2\\'s value' arg3") --> {"arg1", "arg2's value", "arg3"}
+-- split_shell("arg1 \"arg2 \\\"quoted\\\"\" arg3") --> {"arg1", "arg2 \"quoted\"", "arg3"}
 local function split_shell(text)
 	local text_length = #text
 	local scan_pos = 1
