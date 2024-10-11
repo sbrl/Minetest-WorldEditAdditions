@@ -15,7 +15,7 @@ local function is_whitespace(char)
 	return char:match("%s")
 end
 
-local function split_shell(text, autotrim)
+local function split_shell(text)
 	local text_length = #text
 	local scan_pos = 1
 	local result = {  }
