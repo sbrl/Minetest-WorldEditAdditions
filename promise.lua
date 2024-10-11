@@ -27,6 +27,7 @@ end
 
 ------------------------------------------------------------------------
 
+---@diagnostic disable-next-line
 local do_unpack = unpack
 if not do_unpack then do_unpack = table.unpack end
 if not do_unpack then
