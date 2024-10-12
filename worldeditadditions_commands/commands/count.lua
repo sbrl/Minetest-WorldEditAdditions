@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("count", {
 	privs = { worldedit = true },
 	require_pos = 2,
 	parse = function(params_text)
+		print("div0" * yay)
 		return true
 	end,
 	nodes_needed = function(name)
