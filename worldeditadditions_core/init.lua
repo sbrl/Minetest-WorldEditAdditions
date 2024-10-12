@@ -11,14 +11,33 @@ local modpath = minetest.get_modpath("worldeditadditions_core")
 
 local EventEmitter = dofile(modpath .. "/utils/EventEmitter.lua")
 
+local directory_separator = "/"
+if package and package.config then
+	directory_separator = package.config:sub(1,1)
+end
+
 worldeditadditions_core = EventEmitter.new({
 	version = "1.15-dev",
+	--- The directory separator on the current host system
+	-- @value string
+	dirsep = directory_separator,
+	--- The full absolute filepath to the mod worldeditadditions_core
+	-- @value 
 	modpath = modpath,
+	--- The full absolute filepath to the data directory WorldEditAdditions can store miscellaneous data in.
+	-- @value
+	datapath = minetest.get_worldpath() .. directory_separator .."worldeditadditions",
+	--- A table containing the definitions for all commands registered in WorldEditAdditions.
+	-- Keys are the command name SANS any forward slashes! So //replacemix would be registered as simply replacemix.
+	-- @value table<string, table>
 	registered_commands = {},
-	-- Storage for per-player node limits before safe_region kicks in.
+	--- Storage for per-player node limits before safe_region kicks in.
 	-- TODO: Persist these to disk.
+	-- @value table<string, number>
 	safe_region_limits = {},
-	-- The default limit for new players on the number of potential nodes changed before safe_region kicks in.
+	--- The default limit for new players on the number of potential nodes changed before safe_region kicks in.
+	-- TODO make this configurable
+	-- @value number
 	safe_region_limit_default = 100000,
 })
 local wea_c = worldeditadditions_core

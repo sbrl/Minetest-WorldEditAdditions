@@ -8,7 +8,7 @@ local human_size = wea_c.format.human_size
 
 -- TODO: Reimplement worldedit.player_notify(player_name, msg_text)
 
---- Actually runs the command in question.
+--- Actually runs the command in question. [HIDDEN]
 -- Unfortunately needed to keep the codebase clena because Lua sucks.
 -- @internal
 -- @param	player_name	string		The name of the player executing the function. 
@@ -32,6 +32,51 @@ local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	tbl_event.success = success
 	tbl_event.result = result_message
 	wea_c:emit("post-execute", tbl_event)
+end
+
+local function send_error(player_name, cmdname, msg, stack_trace)
+	print("DEBUG:HAI SEND_ERROR")
+	local msg_compiled = table.concat({
+		"[//", cmdname, "] Error: ",
+		msg,
+		"\n",
+		"Please report this by opening an issue on GitHub! Bug report link:\n",
+		"https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new?title=",
+		wea_c.format.escape(stack_trace:match("^[^\n]+")), -- extract 1st line & escape
+		"&body=",
+		wea_c.format.escape([[## Describe the bug
+What's the bug? Be clear and detailed but concise in our explanation. Don't forget to include any context, error messages, logs, and screenshots required to understand the issue if applicable.
+
+## Reproduction steps
+Steps to reproduce the behaviour:
+1. Go to '...'
+2. Click on '....'
+3. Enter this command to '....'
+4. See error
+
+## System information (please complete the following information)
+- **Operating system and version:** [e.g. iOS]
+- **Minetest version:** [e.g. 5.8.0]
+- **WorldEdit version:**
+- **WorldEditAdditions version:**
+
+Please add any other additional specific system information here too if you think it would help.
+
+## Stack trace
+- Command name: ]]),
+		wea_c.format.escape(cmdname),
+		wea_c.format.escape("```\n"),
+		wea_c.format.escape(stack_trace),
+		wea_c.format.escape("\n```"),
+		"-------------------------------------\n",
+		"*** Stack trace ***\n",
+		stack_trace,
+		"\n",
+		"-------------------------------------"
+	}, "")
+	
+	print("DEBUG:player_notify player_name", player_name, "msg_compiled", msg_compiled)
+	worldedit.player_notify(player_name, msg_compiled)
 end
 
 --- Command execution pipeline: before `paramtext` parsing but after validation.
@@ -112,7 +157,22 @@ local function run_command(cmdname, options, player_name, paramtext)
 	
 	wea_c:emit("pre-parse", tbl_event)
 	
-	local parse_result = { options.parse(paramtext) }
+	local parse_result, error_message
+	local did_error = false
+	xpcall(function()
+		parse_result = { options.parse(paramtext)}
+	end, function(error_raw)
+		did_error = true
+		error_message = error_raw
+		print("DEBUG:parse_result>>error", error_raw, "stack trace", debug.traceback())
+	end)
+	if did_error then
+		print("DEBUG:parse_result EXIT_DUE_TO_ERROR")
+		send_error(player_name, cmdname, "The command crashed when parsing the arguments.", error_message)
+		print("DEBUG:parse_result EXIT_DUE_TO_ERROR __final_call__")
+		return false
+	end -- handling is wrapped with xpcall()
+	
 	local success = table.remove(parse_result, 1)
 	if not success then
 		worldedit.player_notify(player_name, ("[//"..tostring(cmdname).."] "..tostring(parse_result[1])) or "Invalid usage (no further error message was provided by the command. This is probably a bug.)")

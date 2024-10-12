@@ -4,10 +4,10 @@ local wea_c = worldeditadditions_core
 wea_c.settings = {}
 
 -- Initialize wea world folder if not already existing
-local path = minetest.get_worldpath() .. "/worldeditadditions"
+local path = minetest.get_worldpath() .. wea_c.dirsep .. "worldeditadditions"
 minetest.mkdir(path)
 
---- A wrapper to simultaniously handle global and world settings.
+--- A wrapper to simultaneously handle global and world settings.
 -- @namespace worldeditadditions_core.setting_handler
 local setting_handler = {}
 
