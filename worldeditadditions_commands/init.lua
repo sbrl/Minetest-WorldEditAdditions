@@ -63,6 +63,9 @@ dofile(wea_cmd.modpath.."/commands/extra/basename.lua")
 dofile(wea_cmd.modpath.."/commands/extra/sculptlist.lua")
 dofile(wea_cmd.modpath.."/commands/extra/speed.lua")
 
+-- Test command
+dofile(wea_cmd.modpath.."/commands/test/test.lua")
+
 
 -- Don't register the //bonemeal command if the bonemeal mod isn't present
 if minetest.global_exists("bonemeal") then
