@@ -26,7 +26,7 @@ validate.all = function(name, message, colour)
 		validate.colour(colour)
 end
 
-local send = function(name, message, colour, message_coloured)
+local send = function(name, ntype, message, colour, message_coloured)
 	-- Do validation
 	if not validate.all(name, message, colour) then
 		return false
@@ -37,8 +37,8 @@ local send = function(name, message, colour, message_coloured)
 	end
 	-- Create the notification
 	local ret = table.concat({
-		"[--",set_colour(colour, "WEA"),"--]",message
-	}, " ")
+		"[--",set_colour(colour, "WEA :: " .. ntype),
+		"--]",message }, " ")
 	-- Send the notification
 	minetest.chat_send_player(name, ret)
 	return true
@@ -69,9 +69,9 @@ end
 -- @param colour <string> (optional): The colour of the notification.
 -- @param message_coloured <boolean> (optional): Whether the message should be coloured.
 -- @return <boolean>: True if all parameters are valid, false otherwise.
-function Notify.custom(name, message, colour, message_coloured)
+function Notify.custom(name, ntype, message, colour, message_coloured)
 	if not colour then colour = "#FFFFFF" end
-	return send(name, message, colour, message_coloured)
+	return send(name, ntype, message, colour, message_coloured)
 end
 
 --- Register predefined notification types.
@@ -89,7 +89,7 @@ do
 	}
 	for k, v in pairs(type_colours) do
 		Notify[k] = function(name, message)
-			return send(name, message, v[1], v[2])
+			return send(name, k, message, v[1], v[2])
 		end
 	end
 end
