@@ -24,6 +24,7 @@ worldeditadditions_core = EventEmitter.new({
 local wea_c = worldeditadditions_core
 wea_c.EventEmitter = EventEmitter
 
+wea_c.notify = dofile(wea_c.modpath.."/utils/notify.lua") -- BEFORE anything that could use this
 
 wea_c.Set = dofile(wea_c.modpath.."/utils/set.lua")
 
