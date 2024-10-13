@@ -1,5 +1,6 @@
 -- Test registry
 local test_id_paths = {
+	"credits.test.lua",
 	"notify.test.lua",
 	-- "stacktrace.test.lua",
 }
