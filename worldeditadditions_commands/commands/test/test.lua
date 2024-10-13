@@ -24,12 +24,11 @@ wea_c.register_command("test", {
 		local ret = wea_c.split(params_text)
 		if #ret < 1 then
 			return false, "Error: No params found!"
-		elseif ret[1] ~= "list" and #ret < 2 then
-			if ret[1] == "help" then
-				return false, "Error: No test found!"
-			else return false, "Error: No arguments found!" end
+		elseif ret[1] == "help" and #ret < 2 then
+			return false, "Error: No test found!"
 		end
-		if not tests[ ret[1] == "help" and ret[2] or ret[1] ] then
+		if (ret[1] ~= "list" and
+		not tests[ ret[1] == "help" and ret[2] or ret[1] ]) then
 			return false, "Error: Test '"..ret[1].."' not found!"
 		end
 		return true, table.remove(ret, 1), ret

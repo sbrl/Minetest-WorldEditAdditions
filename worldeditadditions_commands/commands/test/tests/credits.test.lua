@@ -1,13 +1,27 @@
+-- Helper functions
+local set_colour = function(colour, text)
+	return minetest.colorize(colour, text)
+end
+
+local credits = {
+	"=== WorldEditAdditions ===", "",
+	"Made by",
+	"  - "..set_colour("#ff00d7", "Starbeamrainbowlabs").." (https://github.com/sbrl)",
+	"  - "..set_colour("#ffd700", "VorTechnix").." (https://github.com/VorTechnix)",
+	"","With thanks to our discord members and everyone who has reported issues or contributed!",
+}
+
 local Notify = worldeditadditions_core.notify
-return worldeditadditions.normalize_test("notify", {
-	params = "<message>",
-	description = "Sends message to player in all main notification formats (error, warn, ok, info).",
+return worldeditadditions.normalize_test("credits", {
+	params = "N\\A",
+	description = "Sends WEA credits to player in info notification format.",
 	func = function(name, params_table)
-		local message = table.concat(params_table, " ")
-		Notify.error(name, message)
-		Notify.warn(name, message)
-		Notify.ok(name, message)
-		Notify.info(name, message)
-		Notify.custom(name, "@" .. name, "Good Job", "#FF00D7")
+		local function send_credits(i)
+			Notify.info(name, credits[i])
+			if #credits > i then
+				minetest.after(1, send_credits, i+1)
+			end
+		end
+		send_credits(1)
 	end
 })
