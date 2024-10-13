@@ -72,6 +72,8 @@ dofile(wea.modpath.."/lib/wireframe/corner_set.lua")
 dofile(wea.modpath.."/lib/wireframe/make_compass.lua")
 dofile(wea.modpath.."/lib/wireframe/wire_box.lua")
 
+wea.normalize_test = dofile(wea.modpath.."/lib/normalize_test.lua") -- For Test command
+
 
 
 ---
