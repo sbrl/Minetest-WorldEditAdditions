@@ -40,11 +40,13 @@ local function send_error(player_name, cmdname, msg, stack_trace)
 		"[//", cmdname, "] Error: ",
 		msg,
 		"\n",
-		"Please report this by opening an issue on GitHub! Bug report link:\n",
+		"Please report this by opening an issue on GitHub! Bug report link (ctrl + click):\n",
+		
 		"https://github.com/sbrl/Minetest-WorldEditAdditions/issues/new?title=",
 		wea_c.format.escape(stack_trace:match("^[^\n]+")), -- extract 1st line & escape
 		"&body=",
-		wea_c.format.escape([[## Describe the bug
+		wea_c.format.escape(table.concat({
+			[[## Describe the bug
 What's the bug? Be clear and detailed but concise in our explanation. Don't forget to include any context, error messages, logs, and screenshots required to understand the issue if applicable.
 
 ## Reproduction steps
@@ -63,16 +65,20 @@ Steps to reproduce the behaviour:
 Please add any other additional specific system information here too if you think it would help.
 
 ## Stack trace
-- Command name: ]]),
-		wea_c.format.escape(cmdname),
-		wea_c.format.escape("```\n"),
-		wea_c.format.escape(stack_trace),
-		wea_c.format.escape("\n```"),
+- **Command name:** ]],
+			cmdname,
+			"\n",
+			"```\n",
+			stack_trace,
+			"```\n",
+		}, "")),
+		
+		"\n",
 		"-------------------------------------\n",
 		"*** Stack trace ***\n",
 		stack_trace,
 		"\n",
-		"-------------------------------------"
+		"-------------------------------------\n"
 	}, "")
 	
 	print("DEBUG:player_notify player_name", player_name, "msg_compiled", msg_compiled)
@@ -157,21 +163,25 @@ local function run_command(cmdname, options, player_name, paramtext)
 	
 	wea_c:emit("pre-parse", tbl_event)
 	
-	local parse_result, error_message
-	local did_error = false
-	xpcall(function()
-		parse_result = { options.parse(paramtext)}
-	end, function(error_raw)
+	local parse_result
+	-- local did_error = false
+	local success_xpcall, error_message = xpcall(function()
+		parse_result = { options.parse(paramtext) }
+	end, debug.traceback
+	
+	--[[function(error_raw)
 		did_error = true
 		error_message = error_raw
 		print("DEBUG:parse_result>>error", error_raw, "stack trace", debug.traceback())
-	end)
-	if did_error then
+	end]]-- 
+	)
+	
+	if not success_xpcall then
 		print("DEBUG:parse_result EXIT_DUE_TO_ERROR")
 		send_error(player_name, cmdname, "The command crashed when parsing the arguments.", error_message)
 		print("DEBUG:parse_result EXIT_DUE_TO_ERROR __final_call__")
 		return false
-	end -- handling is wrapped with xpcall()
+	end
 	
 	local success = table.remove(parse_result, 1)
 	if not success then
