@@ -70,7 +70,7 @@ end
 -- @param	string		error_msg		The error message to send when `fn` inevitably crashes.
 -- @param	string|nil		cmdname		Optional. The name of the command being run.
 -- @returns	bool,any,...	A success bool (true == success), and then if success == true the rest of the arguments are the (unpacked) return values from the function called. If success == false, then the 2nd argument will be the stack trace.
-function safe_function(fn, args, player_name, error_msg, cmdname)
+local function safe_function(fn, args, player_name, error_msg, cmdname)
 	local retvals
 	local success_xpcall, stack_trace = xpcall(function()
 		retvals = { fn(weac.table.unpack(args)) }
