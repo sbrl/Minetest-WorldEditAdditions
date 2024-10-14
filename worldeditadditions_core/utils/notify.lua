@@ -65,6 +65,7 @@ end
 
 --- Send a custom notification.
 -- @param name <string>: The name of the player to send the notification to.
+-- @param ntype <string>: The type of notification.
 -- @param message <string>: The message to send.
 -- @param colour <string> (optional): The colour of the notification.
 -- @param message_coloured <boolean> (optional): Whether the message should be coloured.
