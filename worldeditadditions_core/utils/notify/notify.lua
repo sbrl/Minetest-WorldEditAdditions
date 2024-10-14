@@ -5,30 +5,38 @@ local set_colour = function(colour, text)
 	return minetest.colorize(colour, text)
 end
 
-local validate = {
-	name = function(name)
-		-- Very paranoid is me
-		if not minetest.get_player_by_name then return false end
-		local player = minetest.get_player_by_name(name)
-		return (player and player:is_player()) or false -- Paranoid is me
-	end,
-	message = function(message) return type(message) == "string" end,
-	colour = function(colour)
-		return ( type(colour) == "string" and
-			colour:match("^#%x+$") and
-			(#colour == 4 or #colour == 7) )
-	end
+local globalstate = {
+	-- Remember to connect Notify.get_player_suppressed in
+	-- ..\worldeditadditions_commands\player_notify_suppress.lua
+	suppressed_players = {},
+	on_error_send_all = false,
 }
 
-validate.all = function(name, message, colour)
-	return validate.name(name) and
-		validate.message(message) and
-		validate.colour(colour)
-end
+local validate = dofile(worldeditadditions_core.modpath ..
+	"/utils/notify/validate.lua")
 
+
+-- @class	worldeditadditions_core.notify
+local Notify = {}
+
+-- Local send handler
 local send = function(name, ntype, message, colour, message_coloured)
 	-- Do validation
-	if not validate.all(name, message, colour) then
+	local sucess, details = validate.all(name, message, colour)
+	-- Report errors if any
+	if not sucess then
+		if not details.name then
+			-- Send error to all players or log it
+			if globalstate.on_error_send_all then
+				minetest.chat_send_all(details.name_err)
+			else minetest.log("error", details.name_err) end
+		elseif not details.message then
+			Notify.error(name, "Invalid message: " .. tostring(message) ..
+			" is not a string. " .. debug.traceback())
+		elseif not details.colour then
+			Notify.error(name, "Invalid colour: " .. tostring(colour) .. ".\n" ..
+			"Message: " .. message .. "\n" .. debug.traceback())
+		end
 		return false
 	end
 	-- Colour the message if applicable
@@ -43,9 +51,6 @@ local send = function(name, ntype, message, colour, message_coloured)
 	minetest.chat_send_player(name, ret)
 	return true
 end
-
--- @class	worldeditadditions_core.notify
-local Notify = {}
 
 --- Send a notification of type `ntype`.
 --  (Same as `Notify[ntype](name, message)`)
