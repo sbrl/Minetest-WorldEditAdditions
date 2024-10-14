@@ -115,7 +115,7 @@ wea_c.register_command("maze3d", {
 	end,
 	func = function(name, replace_node, seed, path_length, path_width, path_depth)
 		local start_time = wea_c.get_ms_time()
-		local pos1, pos2 = Vector3.sort(weac.pos.get12(name))
+		local pos1, pos2 = Vector3.sort(wea_c.pos.get12(name))
 		local replaced = wea.maze3d(
 			pos1, pos2,
 			replace_node,
