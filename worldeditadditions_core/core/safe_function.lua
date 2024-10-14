@@ -86,10 +86,10 @@ function safe_function(fn, args, player_name, error_msg, cmdname)
 			stack_trace = stack_trace,
 			error_msg = error_msg
 		})
+		minetest.log("error", "[//"..tostring(cmdname).."] Caught error from running function ", fn, "with args", weac.inspect(args), "for player ", player_name, "with provided error message", error_msg, ". Stack trace: ", stack_trace)
 		return false, stack_trace
 	end
 	
-	minetest.log("error", "[//"..tostring(cmdname).."] Caught error from running function ", fn, "with args", weac.inspect(args), "for player ", player_name, "with provided error message", error_msg, ". Stack trace: ", stack_trace)
 	
 	return true, retvals
 end
