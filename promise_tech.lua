@@ -53,7 +53,9 @@ local f = function(val) end
 -- Table tweaks (because this is for Minetest)
 --- @class	table
 local table = table
+-- @diagnostic disable-next-line
 if not table.unpack then table.unpack = unpack end
+-- @diagnostic disable-next-line
 table.join = function(tbl, sep)
 	local function fn_iter(tbl,sep,i)
 		if i < #tbl then
