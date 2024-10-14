@@ -10,7 +10,6 @@
 -- TODO this doesn't work. It replaces \n with %A instead of %0A, though we don't know if that's a problem or not
 -- it also doesn't handle quotes even though we've clearly got them in the Lua pattern
 local function _escape_char(char)
-	print("_escape_char char", char, "result", string.format('%%%02X', string.byte(char)))
 	return string.format('%%%02X', string.byte(char))
 end
 

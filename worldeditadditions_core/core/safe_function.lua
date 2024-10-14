@@ -69,7 +69,7 @@ end
 -- @param	string|nil	player_name		The name of the player affected. If nil then no message is sent to the player.
 -- @param	string		error_msg		The error message to send when `fn` inevitably crashes.
 -- @param	string|nil		cmdname		Optional. The name of the command being run.
--- @returns	bool,any,...	A success bool (true == success), and then if success == true the rest of the arguments are the (unpacked) return values from the function called.
+-- @returns	bool,any,...	A success bool (true == success), and then if success == true the rest of the arguments are the (unpacked) return values from the function called. If success == false, then the 2nd argument will be the stack trace.
 function safe_function(fn, args, player_name, error_msg, cmdname)
 	local retvals
 	local success_xpcall, stack_trace = xpcall(function()
@@ -78,10 +78,20 @@ function safe_function(fn, args, player_name, error_msg, cmdname)
 	
 	if not success_xpcall then
 		send_error(player_name, cmdname, error_msg, stack_trace)
-		return false
+		weac:emit("error", {
+			fn = fn,
+			args = args,
+			player_name = player_name,
+			cmdname = cmdname,
+			stack_trace = stack_trace,
+			error_msg = error_msg
+		})
+		return false, stack_trace
 	end
 	
-	return true, weac.table.unpack(retvals)
+	minetest.log("error", "[//"..tostring(cmdname).."] Caught error from running function ", fn, "with args", weac.inspect(args), "for player ", player_name, "with provided error message", error_msg, ". Stack trace: ", stack_trace)
+	
+	return true, retvals
 end
 
 
