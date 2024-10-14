@@ -13,7 +13,7 @@
 -- Metatable for tests
 local metatable = {
 	__call = function(self,name, ...)
-		return pcall(self.func, name, ...)
+		return xpcall(self.func, debug.traceback, name, ...)
 	end,
 	help = function(self)
 		return "Params: " .. self.params .. "\n" .. self.description
