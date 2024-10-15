@@ -8,5 +8,6 @@ wea_c.format = {
 	node_distribution = dofile(wea_c.modpath.."/utils/format/node_distribution.lua"),
 	make_ascii_table = dofile(wea_c.modpath.."/utils/format/make_ascii_table.lua"),
 	map = dofile(wea_c.modpath.."/utils/format/map.lua"),
+	escape = dofile(wea_c.modpath.."/utils/format/escape.lua")
 }
 

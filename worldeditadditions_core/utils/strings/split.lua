@@ -62,7 +62,7 @@ end
 -- @param	plain	boolean	If true (or truthy), pattern is interpreted as a
 -- 							plain string, not a Lua pattern
 -- @returns	table	A sequence table containing the substrings
-local function split(str,dlm,plain)
+local function split(str, dlm, plain)
 	if not dlm then dlm = "%s+" end
 	local pos, ret = 0, {}
 	local ins, i = str:find(dlm,pos,plain)

@@ -71,13 +71,14 @@ wea_c.register_command("maze", {
 		return success, replace_node, seed, path_length, path_width
 	end,
 	nodes_needed = function(name)
-		-- Note that we could take in additional parameters from the return value of parse (minue the success bool there), but we don't actually need them here
-		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
+		-- Note that we could take in additional parameters from the return value of parse (minus the success bool there), but we don't actually need them here
+		local pos1, pos2 = wea_c.pos.get12(name)
+		return worldedit.volume(pos1, pos2)
 	end,
 	func = function(name, replace_node, seed, path_length, path_width)
 		local start_time = wea_c.get_ms_time()
 		
-		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		local pos1, pos2 = wea_c.pos.get12(name)
 		local replaced = wea.maze2d(
 			pos1, pos2,
 			replace_node,
@@ -114,7 +115,7 @@ wea_c.register_command("maze3d", {
 	end,
 	func = function(name, replace_node, seed, path_length, path_width, path_depth)
 		local start_time = wea_c.get_ms_time()
-		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
+		local pos1, pos2 = Vector3.sort(wea_c.pos.get12(name))
 		local replaced = wea.maze3d(
 			pos1, pos2,
 			replace_node,

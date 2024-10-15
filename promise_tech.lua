@@ -53,12 +53,14 @@ local f = function(val) end
 -- Table tweaks (because this is for Minetest)
 --- @class	table
 local table = table
-if not table.unpack then table.unpack = unpack end
-table.join = function(tbl, sep)
-	local function fn_iter(tbl,sep,i)
-		if i < #tbl then
-			return (tostring(tbl[i]) or "").. sep .. fn_iter(tbl,sep,i+1)
-		else return (tostring(tbl[i]) or "") end
+-- @diagnostic disable-next-line
+if not table.unpack then table.unpack = unpack end --luacheck: ignore
+-- @diagnostic disable-next-line
+table.join = function(tbl, sep) --luacheck: ignore
+	local function fn_iter(tbl_inner,sep_inner,i)
+		if i < #tbl_inner then
+			return (tostring(tbl_inner[i]) or "").. sep_inner .. fn_iter(tbl_inner,sep_inner,i+1)
+		else return (tostring(tbl_inner[i]) or "") end
 	end
 	return fn_iter(tbl,sep,1)
 end
@@ -93,7 +95,7 @@ local function_type_warn = function(called_from, position, arg_name, must_be, se
 end
 
 local type_enforce = function(called_from, args)
-	local err_str = nil
+	local err_str
 	for i, arg in ipairs(args) do
 		local is_err = true
 		for _, should_be in ipairs(arg.should_be) do
@@ -105,7 +107,7 @@ local type_enforce = function(called_from, args)
 			end
 		end
 		if is_err then
-			err_str = function_type_warn(called_from, i, arg.name, table.join(arg.should_be, " or "), arg.name == "self" and true or false)
+			err_str = function_type_warn(called_from, i, arg.name, table.join(arg.should_be, " or "), arg.name == "self" and true or false) --luacheck: ignore
 			if arg.error then error(err_str)
 			else warn(err_str) end
 		end
