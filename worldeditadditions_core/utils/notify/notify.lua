@@ -16,8 +16,8 @@ local globalstate = {
 local validate = dofile(wea_c.modpath .. "/utils/notify/validate.lua")
 local split = dofile(wea_c.modpath .. "/utils/strings/split.lua")
 
-
--- @class	worldeditadditions_core.notify
+--- WorldEditAdditions player notification system.
+-- @namespace	worldeditadditions_core.notify
 local Notify = {}
 
 -- Local send handler
@@ -57,10 +57,10 @@ end
 
 --- Send a notification of type `ntype`.
 --  (Same as `Notify[ntype](name, message)`)
--- @param name <string>: The name of the player to send the notification to.
--- @param ntype <string>: The type of notification.
--- @param message <string>: The message to send.
--- @return <table>: The Notify instance.
+-- @param string	name	The name of the player to send the notification to.
+-- @param string	ntype	The type of notification.
+-- @param string	message	The message to send.
+-- @return	table	The Notify instance.
 function Notify.__call(name, ntype, message)
 	if ntype ~= "__call" and not Notify[ntype] then
 		Notify.error(name, "Invalid notification type: " .. ntype)
@@ -72,25 +72,26 @@ function Notify.__call(name, ntype, message)
 end
 
 --- Send a custom notification.
--- @param name <string>: The name of the player to send the notification to.
--- @param ntype <string>: The type of notification.
--- @param message <string>: The message to send.
--- @param colour <string> (optional): The colour of the notification.
--- @param message_coloured <boolean> (optional): Whether the message should be coloured.
--- @return <boolean>: True if all parameters are valid, false otherwise.
-function Notify.custom(name, ntype, message, colour, message_coloured)
-	if not colour then colour = "#FFFFFF" end
-	return send(name, ntype, message, colour, message_coloured)
-end
-
---- Register predefined notification types.
--- @usage
+-- @param string	name	The name of the player to send the notification to.
+-- @param string	ntype	The type of notification.
+-- @param string	message	The message to send.
+-- @param string	colour	optional): The colour of the notification.
+-- @param message_coloured	boolean?	Optional. Whether the message should be coloured.
+-- @return	boolean			True if all parameters are valid, false otherwise.
+-- @example		Predefined notification types
 -- Notify.error(name, message)
 -- Notify.errinfo(name, message) -- For verbose errors and stack traces
 -- Notify.warn(name, message)
 -- Notify.wrninfo(name, message)  -- For verbose warnings and stack traces
 -- Notify.ok(name, message)
 -- Notify.info(name, message)
+function Notify.custom(name, ntype, message, colour, message_coloured)
+	if not colour then colour = "#FFFFFF" end
+	return send(name, ntype, message, colour, message_coloured)
+end
+
+
+--- Register the aforementioned predefined notification types.
 do
 	local type_colours = {
 		error = {"#FF5555", true},

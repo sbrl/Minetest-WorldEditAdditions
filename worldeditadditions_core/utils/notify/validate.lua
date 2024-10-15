@@ -1,4 +1,6 @@
 --- Validation functions for WorldEditAdditions notifications.
+-- @internal
+-- @namespace worldeditadditions_core.notify.validate
 
 -- Helper functions
 local log_error = function(message)
@@ -6,12 +8,13 @@ local log_error = function(message)
 		" " .. debug.traceback())
 end
 
+--- Collection of functions to validate various parts of WorldEditAdditions notifications to ensure proper input for player names, messages, and colors.
 -- @class	validate
 local validate = {}
 
 --- Validate name
--- - @param name <string>: The name of the player to validate.
--- - @returns <boolean>: True if the name is valid, false otherwise. 
+-- @param	string	name	The name of the player to validate.
+-- @returns	boolean	True if the name is valid, false otherwise. 
 validate.name = function(name)
 	if type(name) ~= "string" then
 		log_error(tostring(name) .. " is a " .. type(name) .. " not a string.\n")
@@ -27,13 +30,13 @@ validate.name = function(name)
 end
 
 --- Validate message
--- - @param message <string>: The message to validate.
--- - @returns <boolean>: True if the message is a string, false otherwise.
+-- @param	string	message		The message to validate.
+-- @returns	boolean	True if the message is a string, false otherwise.
 validate.message = function(message) return type(message) == "string" end
 
 --- Validate colour
--- - @param colour <string>: The colour to validate.
--- - @returns <boolean>: True if the colour is valid, false otherwise.
+-- @param	string	colour	The colour to validate.
+-- @returns	boolean	True if the colour is valid, false otherwise.
 validate.colour = function(colour)
 	return ( type(colour) == "string" and
 		colour:match("^#%x+$") and
@@ -41,13 +44,14 @@ validate.colour = function(colour)
 end
 
 --- Validate all
--- - @param name <string>: The name of the player to validate.
--- - @param message <string>: The message to validate.
--- - @param colour <string>: The colour to validate.
--- - @returns <boolean>, <table|nil>:
---		- <boolean>: True if all parameters are valid, false otherwise.
---		- <table|nil>: A table containing the fail state of the parameters
---		-		or nil if player name is invalid.
+-- @param	string	name	The name of the player to validate.
+-- @param	string	message	The message to validate.
+-- @param	string	colour	The colour to validate.
+-- @returns	boolean, table|nil	Returns the validation status, followed by details of the failure if bool == false.
+-- | Return arg | Meaning |
+-- |------------|---------|
+-- | `boolean` | True if all parameters are valid, false otherwise. |
+-- | `table|nil` | A table containing the fail state of the parameters or nil if player name is invalid. |
 validate.all = function(name, message, colour)
 	local name_checked = validate.name(name)
 	local failed = {
