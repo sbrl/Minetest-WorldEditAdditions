@@ -2,7 +2,8 @@
 
 -- Helper functions
 local log_error = function(message)
-	minetest.log("error", "[-- WEA :: error --] " .. message)
+	minetest.log("error", "[-- WEA :: error --] " .. tostring(message) ..
+		" " .. debug.traceback())
 end
 
 -- @class	validate
@@ -13,8 +14,7 @@ local validate = {}
 -- - @returns <boolean>: True if the name is valid, false otherwise. 
 validate.name = function(name)
 	if type(name) ~= "string" then
-		log_error(tostring(name) .. " is a " .. type(name) ..
-			" not a string.\n" .. debug.traceback())
+		log_error(tostring(name) .. " is a " .. type(name) .. " not a string.\n")
 		return false
 	elseif not minetest.get_player_by_name then -- Very paranoid is me
 		log_error("minetest.get_player_by_name is not a function. THIS SHOULD NEVER HAPPEN.")
