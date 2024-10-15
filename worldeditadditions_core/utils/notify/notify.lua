@@ -1,4 +1,5 @@
 --- A player notification system for worldeditadditions.
+local wea_c = worldeditadditions_core
 
 -- Helper functions
 local set_colour = function(colour, text)
@@ -12,8 +13,8 @@ local globalstate = {
 	on_error_send_all = false,
 }
 
-local validate = dofile(worldeditadditions_core.modpath ..
-	"/utils/notify/validate.lua")
+local validate = dofile(wea_c.modpath .. "/utils/notify/validate.lua")
+local split = dofile(wea_c.modpath .. "/utils/strings/split.lua")
 
 
 -- @class	worldeditadditions_core.notify
@@ -25,23 +26,25 @@ local send = function(name, ntype, message, colour, message_coloured)
 	local sucess, details = validate.all(name, message, colour)
 	-- Report errors if any
 	if not sucess then
-		if not details.name then
+		if details.name_err then
 			-- Send error to all players or log it
 			if globalstate.on_error_send_all then
 				minetest.chat_send_all(details.name_err)
 			else minetest.log("error", details.name_err) end
 		elseif not details.message then
 			Notify.error(name, "Invalid message: " .. tostring(message) ..
-			" is not a string. " .. debug.traceback())
+				" is not a string.\n" .. debug.traceback())
 		elseif not details.colour then
-			Notify.error(name, "Invalid colour: " .. tostring(colour) .. ".\n" ..
-			"Message: " .. message .. "\n" .. debug.traceback())
+			Notify.error(name, "Invalid colour: " .. tostring(colour) ..
+				"\nMessage: " .. message .. "\n" .. debug.traceback())
 		end
 		return false
 	end
 	-- Colour the message if applicable
 	if message_coloured then
-		message = set_colour(colour, message)
+		local msg = split(message, "\n")
+		msg[1] = set_colour(colour, msg[1])
+		message = table.concat(msg, "\n")
 	end
 	-- Create the notification
 	local ret = table.concat({
@@ -83,7 +86,9 @@ end
 --- Register predefined notification types.
 -- @usage
 -- Notify.error(name, message)
+-- Notify.errinfo(name, message) -- For verbose errors and stack traces
 -- Notify.warn(name, message)
+-- Notify.wrninfo(name, message)  -- For verbose warnings and stack traces
 -- Notify.ok(name, message)
 -- Notify.info(name, message)
 do
