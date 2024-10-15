@@ -2,6 +2,7 @@
 local test_id_paths = {
 	"credits.test.lua",
 	"notify.test.lua",
+	"notify_bad.test.lua",
 	-- "stacktrace.test.lua",
 }
 
