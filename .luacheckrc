@@ -22,6 +22,7 @@ globals = {
 	"worldeditadditions",
 	"worldeditadditions_commands",
 	"worldeditadditions_core",
+	"worldeditadditions_tools"
 }
 -- Read-only globals
 read_globals = {
