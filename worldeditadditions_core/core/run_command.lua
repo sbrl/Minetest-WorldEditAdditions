@@ -26,10 +26,16 @@ local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	
 	local success, result_message = retvals[1], retvals[2]
 	print("DEBUG:run_command_stage2 SUCCESS", success, "RESULT_MESSAGE", result_message)
-	if not success then
-		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] "..result_message)
-	elseif result_message then
+	if success then
+		if not result_message then
+			result_message = "//"..tostring(tbl_event.cmdname).." successful"
+		end
 		weac.notify.ok(player_name, result_message)
+	else
+		if not result_messasge then
+			result_message = "An unspecified (likely user) error was returned by the command. It is a bug that a specific error message is not returned here. It is not necessarily a bug that an error was thrown: your command invocation could have contained invalid syntax, for example."
+		end
+		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] "..result_message)
 	end
 	tbl_event.success = success
 	tbl_event.result = result_message
