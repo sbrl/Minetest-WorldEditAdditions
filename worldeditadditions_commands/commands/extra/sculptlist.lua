@@ -53,6 +53,6 @@ minetest.register_chatcommand("/sculptlist", {
 			table.insert(msg, wea_c.format.make_ascii_table(display))
 		end
 		
-		worldedit.player_notify(name, table.concat(msg))
+		wea_c.notify.info(name, table.concat(msg))
 	end
 })

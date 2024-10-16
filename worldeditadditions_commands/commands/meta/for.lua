@@ -1,3 +1,5 @@
+local wea_c = worldeditadditions_core
+
 -- ███████  ██████  ██████
 -- ██      ██    ██ ██   ██
 -- █████   ██    ██ ██████
@@ -13,7 +15,6 @@
 -- ?Basename support for values
 -- ?Comma deliniation support for values
 
-local wea_c = worldeditadditions_core
 local function step(params)
 	-- Initialize additional params on first call
 	if not params.first then
@@ -38,7 +39,7 @@ local function step(params)
 		-- If we haven't run out of values call function again
 		minetest.after(0, step, params)
 	else
-		worldedit.player_notify(params.player_name, "For "..
+		wea_c.notify.ok(params.player_name, "For "..
 			table.concat(params.values,", ")..
 			", /"..params.cmd_name.." completed in " ..
 			wea_c.format.human_time(params.time))

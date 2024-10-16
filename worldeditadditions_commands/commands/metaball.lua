@@ -86,8 +86,7 @@ worldeditadditions_core.register_command("metaball", {
 			local success, value = wea.metaballs.volume(name)
 			
 			if not success then
-				worldedit.player_notify(name, value)
-				return -1
+				return false, value
 			end
 			
 			return value

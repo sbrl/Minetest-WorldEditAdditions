@@ -17,6 +17,8 @@ minetest.register_chatcommand("/saplingaliases", {
 		
 		local msg = {}
 		
+		local mode = "info"
+		
 		if params_text == "aliases" then
 			table.insert(msg, "Currently registered aliases:\n")
 			local aliases = wea_c.get_all_sapling_aliases()
@@ -32,10 +34,13 @@ minetest.register_chatcommand("/saplingaliases", {
 			local str = table.concat(results, "\n")
 			table.insert(msg, str)
 		else
+			mode = "error"
 			table.insert(msg, "Unknown mode '")
 			table.insert(msg, params_text)
 			table.insert(msg, "' (valid modes: aliases, all_saplings).")
 		end
-		worldedit.player_notify(name, table.concat(msg))
+		
+		-- Don't forget to update this 
+		wea_c.notify(name, mode, table.concat(msg))
 	end
 })

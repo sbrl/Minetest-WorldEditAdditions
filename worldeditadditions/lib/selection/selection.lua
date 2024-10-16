@@ -62,9 +62,9 @@ function selection.add_point(name, newpos)
 		
 		-- Done automatically
 		-- worldedit.marker_update(name)
-		worldedit.player_notify(name, msg)
+		wea_c.notify.ok(name, msg)
 	else
-		worldedit.player_notify(name, "Error. Too far away (try raising your maxdist with //farwand maxdist <number>)")
+		wea_c.notify.error(name, "Error. Too far away (try raising your maxdist with //farwand maxdist <number>)")
 		-- print("[set_pos1]", name, "nil")
 	end
 end
@@ -76,7 +76,7 @@ function selection.clear_points(name)
 	wea_c.pos.clear(name)
 	-- worldedit.marker_update(name)
 	
-	worldedit.player_notify(name, "Region cleared")
+	wea_c.notify.ok(name, "Region cleared")
 end
 
 --- Checks if a string is a valid axis.
