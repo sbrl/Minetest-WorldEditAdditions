@@ -32,7 +32,7 @@ end
 -- - Unclosed quotes are treated as lasting until the end of the string.
 -- - Empty arguments (i.e., consecutive whitespaces) are ignored.
 --
--- Examples:
+-- @example Different sample inputs / output pairs
 -- split_shell("arg1 arg2 arg3") --> {"arg1", "arg2", "arg3"}
 -- split_shell("arg1 \"arg2 with spaces\" arg3") --> {"arg1", "arg2 with spaces", "arg3"}
 -- split_shell("arg1 'arg2\\'s value' arg3") --> {"arg1", "arg2's value", "arg3"}
