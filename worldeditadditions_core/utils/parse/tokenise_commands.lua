@@ -94,11 +94,11 @@ end
 -- Also supports arbitrarily nested and complex curly braces { } for grouping
 -- commands together that would normally be split apart.
 -- 
--- Simple example:
+-- @example Simple example
 -- INPUT: //1 //2 //outset 25 //fixlight
 -- OUTPUT: { "//1", "//2", "//outset 25", "//fixlight" }
 -- 
--- Example with curly braces:
+-- @example Example with curly braces
 -- INPUT: //1 //2 //outset 50 {//many 5 //multi //fixlight //clearcut}
 -- OUTPUT: { "//1", "//2", "//outset 50", "//many 5 //multi //fixlight //clearcut"}
 -- 
