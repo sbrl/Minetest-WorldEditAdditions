@@ -7,8 +7,6 @@ local safe_region = dofile(weac.modpath.."/core/safe_region.lua")
 local human_size = weac.format.human_size
 local safe_function = weac.safe_function
 
--- TODO: Reimplement worldedit.player_notify(player_name, msg_text)
-
 --- Actually runs the command in question. [HIDDEN]
 -- Unfortunately needed to keep the codebase clena because Lua sucks.
 -- @internal
@@ -23,18 +21,15 @@ local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	if not success_safefn then return false end
 	
 	if #retvals ~= 2 then
-		worldedit.player_notify(player_name, "[//"..tostring(tbl_event.cmdname).."] The main execution function for this chat command returned "..tostring(#retvals).." arguments instead of the expected 2 (success, message), so it is unclear whether it succeeded or not. This is a bug!")
+		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] The main execution function for this chat command returned "..tostring(#retvals).." arguments instead of the expected 2 (success, message), so it is unclear whether it succeeded or not. This is a bug!")
 	end
 	
 	local success, result_message = retvals[1], retvals[2]
 	print("DEBUG:run_command_stage2 SUCCESS", success, "RESULT_MESSAGE", result_message)
 	if not success then
-		result_message = "[//"..tostring(tbl_event.cmdname).."] "..result_message
-	end
-	
-	if result_message then
-		-- TODO: If we were unsuccessful, then colour the message red
-		worldedit.player_notify(player_name, result_message)
+		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] "..result_message)
+	elseif result_message then
+		weac.notify.ok(player_name, result_message)
 	end
 	tbl_event.success = success
 	tbl_event.result = result_message
@@ -99,16 +94,16 @@ end
 -- @param	paramtext	string	The unparsed argument string to pass to the command when executing it.
 local function run_command(cmdname, options, player_name, paramtext)
 	if options.require_pos > 0 and not worldedit.pos1[player_name] and not weac.pos.get1(player_name) then
-		worldedit.player_notify(player_name, "Error: pos1 must be selected to use this command.")
+		weac.notify.error(player_name, "Error: pos1 must be selected to use this command.")
 		return false
 	end
 	if options.require_pos > 1 and not worldedit.pos2[player_name] and not weac.pos.get2(player_name) then
-		worldedit.player_notify(player_name, "Error: Both pos1 and pos2 must be selected (together making a region) to use this command.")
+		weac.notify.error(player_name, "Error: Both pos1 and pos2 must be selected (together making a region) to use this command.")
 		return false
 	end
 	local pos_count = weac.pos.count(player_name)
 	if options.require_pos > 2 and pos_count < options.require_pos then
-		worldedit.player_notify(player_name, "Error: At least "..options.require_pos.."positions must be defined to use this command, but you only have "..pos_count.." defined (try using the multiwand).")
+		weac.notify.error(player_name, "Error: At least "..options.require_pos.."positions must be defined to use this command, but you only have "..pos_count.." defined (try using the multiwand).")
 		return false
 	end
 	
@@ -128,13 +123,13 @@ local function run_command(cmdname, options, player_name, paramtext)
 	if not success_safefn then return false end -- error already sent to the player above
 	
 	if #parse_result == 0 then 
-		worldedit.player_notify(player_name, "[//"..tostring(cmdname).."] No return values at all were returned by the parsing function - not even a success boolean. This is a bug - please report it :D")
+		weac.notify.error(player_name, "[//"..tostring(cmdname).."] No return values at all were returned by the parsing function - not even a success boolean. This is a bug - please report it :D")
 		return false
 	end
 	
 	local success = table.remove(parse_result, 1)
 	if not success then
-		worldedit.player_notify(player_name, "[//"..tostring(cmdname).."] "..(tostring(parse_result[1]) or "Invalid usage (no further error message was provided by the command. This is probably a bug.)"))
+		weac.notify.error(player_name, "[//"..tostring(cmdname).."] "..(tostring(parse_result[1]) or "Invalid usage (no further error message was provided by the command. This is probably a bug.)"))
 		return false
 	end
 	
@@ -149,7 +144,7 @@ local function run_command(cmdname, options, player_name, paramtext)
 		if not success_xpcall_nn then return false end
 		
 		if #retvals_nn == 0 then
-			worldedit.player_notify(player_name, "[//"..tostring(cmdname).."] Error: The nodes_needed function didn't return any values. This is a bug!")
+			weac.notify.error(player_name, "[//"..tostring(cmdname).."] Error: The nodes_needed function didn't return any values. This is a bug!")
 			return false
 		end
 		local potential_changes = retvals_nn[1]
@@ -158,7 +153,7 @@ local function run_command(cmdname, options, player_name, paramtext)
 		weac:emit("post-nodesneeded", tbl_event)
 		
 		if type(potential_changes) ~= "number" then
-			worldedit.player_notify(player_name, "Error: The command '"..cmdname.."' returned a "..type(potential_changes).." instead of a number when asked how many nodes might be changed. Abort. This is a bug.")
+			weac.notify.error(player_name, "Error: The command '"..cmdname.."' returned a "..type(potential_changes).." instead of a number when asked how many nodes might be changed. Abort. This is a bug.")
 			return
 		end
 		
@@ -167,9 +162,9 @@ local function run_command(cmdname, options, player_name, paramtext)
 			limit = weac.safe_region_limits[player_name]
 		end
 		if type(potential_changes) == "string" then
-			worldedit.player_notify(player_name, "/"..cmdname.." "..paramtext.." "..potential_changes..". Type //y to continue, or //n to cancel (in this specific situation, your configured limit via the //saferegion command does not apply).")
+			weac.notify.warn(player_name, "/"..cmdname.." "..paramtext.." "..potential_changes..". Type //y to continue, or //n to cancel (in this specific situation, your configured limit via the //saferegion command does not apply).")
 		elseif potential_changes > limit then
-			worldedit.player_notify(player_name, "/"..cmdname.." "..paramtext.." may affect up to "..human_size(potential_changes).." nodes. Type //y to continue, or //n to cancel (see the //saferegion command to control when this message appears).")
+			weac.notify.warn(player_name, "/"..cmdname.." "..paramtext.." may affect up to "..human_size(potential_changes).." nodes. Type //y to continue, or //n to cancel (see the //saferegion command to control when this message appears).")
 			safe_region(player_name, cmdname, function()
 				run_command_stage2(player_name, options.func, parse_result, tbl_event)
 			end)
