@@ -21,7 +21,9 @@ local metatable = {
 }
 metatable.__index = metatable
 
-local normalize_test = function(test_name, def)
+local registered_tests = {}
+
+local register_test = function(test_name, def)
 	---
 	-- 1: Validation
 	---
@@ -45,8 +47,22 @@ local normalize_test = function(test_name, def)
 	-- 2: Normalisation
 	---
 	setmetatable(def, metatable)
-	
-	return test_name, def
+	registered_tests[test_name] = def
 end
 
-return normalize_test
+local normalize_test = {}
+normalize_test.__index = normalize_test
+
+normalize_test.__call = function(self, test_name, def)
+	register_test(test_name, def)
+end
+
+normalize_test.get_registered_tests = function()
+	local ret = {}
+	for k, v in pairs(registered_tests) do
+		ret[k] = v
+	end
+	return ret
+end
+
+return setmetatable({}, normalize_test)

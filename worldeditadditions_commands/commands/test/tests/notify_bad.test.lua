@@ -1,5 +1,5 @@
 local Notify = worldeditadditions_core.notify
-return worldeditadditions.normalize_test("notifybad", {
+worldeditadditions.normalize_test("notifybad", {
 	params = "N/A",
 	description = "Sends badly formed messages to player to test error handling.",
 	func = function(name, params_table)

@@ -1,5 +1,5 @@
 local Notify = worldeditadditions_core.notify
-return worldeditadditions.normalize_test("notify", {
+worldeditadditions.normalize_test("notify", {
 	params = "<message>",
 	description = "Sends message to player in all main notification formats (error, warn, ok, info).",
 	func = function(name, params_table)
