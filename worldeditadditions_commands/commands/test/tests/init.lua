@@ -3,6 +3,7 @@ local test_id_paths = {
 	"credits.test.lua",
 	"notify.test.lua",
 	"notify_bad.test.lua",
+	-- "notify_suppress.test.lua",
 	-- "stacktrace.test.lua",
 }
 
@@ -11,10 +12,7 @@ local update = function(a,k,v) a[k] = v end
 
 -- Test loader
 local test_loader = function (path)
-	local ret = {}
-	for _, v in ipairs(test_id_paths) do
-		update(ret, dofile(path .. v))
-	end
+	for _, v in ipairs(test_id_paths) do dofile(path .. v) end
 	return ret
 end
 

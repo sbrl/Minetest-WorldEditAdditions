@@ -12,7 +12,7 @@ local credits = {
 }
 
 local Notify = worldeditadditions_core.notify
-return worldeditadditions.normalize_test("credits", {
+worldeditadditions.normalize_test("credits", {
 	params = "N\\A",
 	description = "Sends WEA credits to player in info notification format.",
 	func = function(name, params_table)
