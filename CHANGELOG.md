@@ -20,6 +20,8 @@ Note to self: See the bottom of this file for the release template text.
 - Added Unified Axis Syntax (UAS) parser. - Implementation by @VorTechnix
 	- See [UAS System reference] for details. (Note to self hook up hyperlink)
 - Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
+- Added new player notification system with coloured output - thanks, @VorTechnix!
+	- Please be patient as we switch all usages over to the new system.
 
 ### Bugfixes and changes
 - When commands produce an error, the name of the command that produced the error is now also printed. Useful when using e.g. [`//multi`](https://worldeditadditions.mooncarrot.space/Reference/#multi) etc.
