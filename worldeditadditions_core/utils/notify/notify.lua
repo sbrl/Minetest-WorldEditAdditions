@@ -77,11 +77,11 @@ end
 setmetatable(Notify, {__call = call})
 
 --- Send a custom notification.
--- @param string	name	The name of the player to send the notification to.
--- @param string	ntype	The type of notification.
--- @param string	message	The message to send.
--- @param string	colour	optional): The colour of the notification.
--- @param message_coloured	boolean?	Optional. Whether the message should be coloured.
+-- @param string	name		The name of the player to send the notification to.
+-- @param string	ntype		The type of notification.
+-- @param string	message		The message to send.
+-- @param string?	colour		Optional. The colour of the notification.
+-- @param boolean?	message_coloured	Optional. Whether the message should be coloured.
 -- @return	boolean			True if all parameters are valid, false otherwise.
 -- @example		Predefined notification types
 -- Notify.custom(name, "custom", "This one is magenta!", "#FF00FF", true)
@@ -115,10 +115,10 @@ do
 end
 
 --- Local suppression status handler
--- - @param name <string>: The name of the player to check.
--- - @param suppress <table>: The table of suppressed players.
--- - @return <boolean>: True if the player is not suppressed or
--- - 		-		if the player is clear(ed), false otherwise.
+-- @param	string	name		The name of the player to check.
+-- @param	table	suppress	The table of suppressed players.
+-- @return	boolean		True if the player is not suppressed or
+--						if the player is clear(ed), false otherwise.
 local check_clear_suppressed = function(name, suppress)
 	if suppress[name] then
 		if type(suppress[name]) == "function" then return false end
@@ -130,9 +130,9 @@ local check_clear_suppressed = function(name, suppress)
 end
 
 --- Suppress a player's notifications.
--- - @param name <string>: The name of the player to suppress.
--- - @param time <number > 1>: The number of seconds to suppress notifications for.
--- -		-		number < 1 immediately removes the suppression.
+-- @param	string		name	The name of the player to suppress.
+-- @param	number > 1	time	The number of seconds to suppress notifications for.
+--								number < 1 immediately removes the suppression.
 function Notify.suppress_for_player(name, time)
 	local suppress = globalstate.suppress
 	-- If the player is already suppressed, cancel it unless it's a function
