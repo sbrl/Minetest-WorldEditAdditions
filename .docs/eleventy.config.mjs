@@ -37,8 +37,9 @@ async function shortcode_image(src, alt) {
 }
 
 async function shortcode_image_url(src) {
+	const target_dir = `./_site/img`;
 	const src_parsed = path.parse(src);
-	const target = path.join(`./_site/img`, src_parsed.base);
+	const target = path.join(target_dir, src_parsed.base);
 	if(!fs.existsSync(path.dirname(target)))
 	await fs.promises.mkdir(target_dir, { recursive: true });
 	await fs.promises.copyFile(src, target);
