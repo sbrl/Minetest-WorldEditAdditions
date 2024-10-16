@@ -21,6 +21,7 @@ export default function moondoc_runner(filepath_output) {
 		"build",
 		"--input", dirpath_root,
 		"--output", filepath_output,
-		"--branch", "dev"
+		"--branch", "dev",
+		"--name", "WorldEditAditions"
 	]);
 }
