@@ -60,11 +60,14 @@ end
 
 --- Send a notification of type `ntype` (for metatable).
 --  (Same as `Notify[ntype](name, message)`)
--- @param string	name	The name of the player to send the notification to.
--- @param string	ntype	The type of notification.
--- @param string	message	The message to send.
+-- @param	table	_self	Provided automatically by Lua. You do not need to set this automatically - see example.
+-- @param	string	name	The name of the player to send the notification to.
+-- @param	string	ntype	The type of notification.
+-- @param	string	message	The message to send.
 -- @return	table	The Notify instance.
-local call = function(name, ntype, message)
+-- @example Basic usage
+-- worldeditadditions_core.notify(player_name, "info", "All registered commands:\n....")
+local call = function(_self, name, ntype, message)
 	if ntype ~= "__call" and not Notify[ntype] then
 		Notify.error(name, "Invalid notification type: " .. ntype)
 		Notify.error(name, "Message: " .. message)
@@ -83,7 +86,7 @@ setmetatable(Notify, {__call = call})
 -- @param string?	colour		Optional. The colour of the notification.
 -- @param boolean?	message_coloured	Optional. Whether the message should be coloured.
 -- @return	boolean			True if all parameters are valid, false otherwise.
--- @example		Predefined notification types
+-- @example		Custom notification types
 -- Notify.custom(name, "custom", "This one is magenta!", "#FF00FF", true)
 -- Notify.custom(name, "custom", "This one is gold with white text!", "#FFC700")
 function Notify.custom(name, ntype, message, colour, message_coloured)
