@@ -23,5 +23,6 @@ worldeditadditions.normalize_test("credits", {
 			end
 		end
 		send_credits(1)
+		return true, "Thank you!"
 	end
 })

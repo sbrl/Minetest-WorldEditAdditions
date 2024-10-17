@@ -9,5 +9,6 @@ worldeditadditions.normalize_test("notify", {
 		Notify.ok(name, message)
 		Notify.info(name, message)
 		Notify.custom(name, "@" .. name, "Good Job", "#FF00D7")
+		return true
 	end
 })

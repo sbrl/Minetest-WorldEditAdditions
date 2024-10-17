@@ -12,9 +12,9 @@ worldeditadditions.normalize_test("suppress", {
 				return true
 			end)
 		if not result then
-			Notify.error(name, "Error: suppress_for_function did not call function.")
+			return false, "Error: suppress_for_function did not call function."
 		else
-			Notify.ok(name, "suppress_for_function called function.")
+			return true, "suppress_for_function called function."
 		end
 	end
 })

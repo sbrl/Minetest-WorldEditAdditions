@@ -11,7 +11,10 @@ local function handle_fn_result(...)
 	if #result > 1 then
 		ret = wea_c.table.tostring(result)
 	elseif #result == 1 then
-		ret = tostring(result[1])
+		if type(result[1]) == "table" then
+			ret = "Function returned table:\n" ..
+				wea_c.table.tostring(result[1])
+		else ret = tostring(result[1]) end
 	else
 		ret = table.concat({
 			"Function returned \"",

@@ -23,5 +23,6 @@ worldeditadditions.normalize_test("notifybad", {
 		
 		Notify.warn(name, "Invalid color test:")
 		Notify.custom(name, "bad", message, "#FF00") -- Bad colour
+		return true, "Test complete."
 	end
 })
