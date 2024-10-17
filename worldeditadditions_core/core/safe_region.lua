@@ -5,6 +5,7 @@
 --      ██ ██   ██ ██      ██          ██   ██ ██      ██    ██ ██ ██    ██ ██  ██ ██
 -- ███████ ██   ██ ██      ███████     ██   ██ ███████  ██████  ██  ██████  ██   ████
 
+local weac = worldeditadditions_core
 --- 
 -- @module worldeditadditions_core
 local worldedit_command_y, worldedit_command_n
@@ -41,7 +42,7 @@ minetest.override_chatcommand("/y", {
 			if minetest.global_exists("worldedit") and worldedit_command_y ~= nil then
 				worldedit_command_y(player_name)
 			else
-				worldedit.player_notify(player_name, "There aren't any pending operations at the moment.")
+				weac.notify.info(player_name, "There aren't any pending operations at the moment.")
 			end
 		else
 			pending_calls[player_name].func()
@@ -58,10 +59,10 @@ minetest.override_chatcommand("/n", {
 			if minetest.global_exists("worldedit") and worldedit_command_y ~= nil then
 				worldedit_command_n(player_name)
 			else
-				worldedit.player_notify(player_name, "There aren't any operations pending, so there's nothing to abort.")
+				weac.notify.info(player_name, "There aren't any operations pending, so there's nothing to abort.")
 			end
 		else
-			worldedit.player_notify(player_name, "Aborting captured command /"..pending_calls[player_name].cmdname..".")
+			weac.notify.info(player_name, "Aborting captured command /"..pending_calls[player_name].cmdname..".")
 			pending_calls[player_name] = nil
 		end
 	end

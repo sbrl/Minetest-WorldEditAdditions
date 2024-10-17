@@ -41,7 +41,7 @@ local function step(params)
 		-- If we haven't run out of values call function again
 		minetest.after(params.delay, step, params) -- Time is in seconds
 	else
-		worldedit.player_notify(params.player_name, "The macro \""..
+		wea_c.notify.ok(params.player_name, "The macro \""..
 			params.file.."\" was completed in " ..
 			wea_c.format.human_time(params.time))
 	end

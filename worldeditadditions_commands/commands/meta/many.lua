@@ -7,7 +7,7 @@ local function step(params)
 	local start_time = wea_c.get_ms_time()
 	
 	local full_cmd = params.cmd_name.." "..params.args
-	worldedit.player_notify(params.name, string.format("[ many | /%s ] %d / %d (~%.2f%%) complete | last: %s, average: %s, ETA: ~%s",
+	wea_c.notify.info(params.name, string.format("[ many | /%s ] %d / %d (~%.2f%%) complete | last: %s, average: %s, ETA: ~%s",
 		full_cmd,
 		(params.i + 1), params.count,
 		((params.i + 1) / params.count)*100,
@@ -53,7 +53,7 @@ local function step(params)
 			table.insert(done_message, table.concat(message_parts, ", "))
 		end
 		table.insert(done_message, ")")
-		worldedit.player_notify(params.name, table.concat(done_message, ""))
+		wea_c.notify.ok(params.name, table.concat(done_message, ""))
 	end
 end
 

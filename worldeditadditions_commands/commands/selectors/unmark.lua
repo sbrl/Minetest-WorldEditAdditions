@@ -28,7 +28,7 @@ local function do_unmark(name, params_text)
 	
 	if params_text == "all" then
 		local removed = do_unmark_all()
-		worldedit.player_notify(name, "Hidden "..removed.." marker entities")
+		weac.notify.info(name, "Hidden "..removed.." marker entities")
 	else
 		-- Hide the WorldEditAdditions marker
 		weac.pos.unmark(name)

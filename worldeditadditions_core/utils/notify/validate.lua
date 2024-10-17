@@ -13,8 +13,8 @@ end
 local validate = {}
 
 --- Validate name
--- @param	string	name	The name of the player to validate.
--- @returns	boolean	True if the name is valid, false otherwise. 
+-- @param	name	string	The name of the player to validate.
+-- @returns			boolean	True if the name is valid, false otherwise. 
 validate.name = function(name)
 	if type(name) ~= "string" then
 		log_error(tostring(name) .. " is a " .. type(name) .. " not a string.\n")
@@ -30,13 +30,13 @@ validate.name = function(name)
 end
 
 --- Validate message
--- @param	string	message		The message to validate.
--- @returns	boolean	True if the message is a string, false otherwise.
+-- @param	message	string	The message to validate.
+-- @returns			boolean	True if the message is a string, false otherwise.
 validate.message = function(message) return type(message) == "string" end
 
 --- Validate colour
--- @param	string	colour	The colour to validate.
--- @returns	boolean	True if the colour is valid, false otherwise.
+-- @param	colour	string	The colour to validate.
+-- @returns			boolean	True if the colour is valid, false otherwise.
 validate.colour = function(colour)
 	return ( type(colour) == "string" and
 		colour:match("^#%x+$") and
@@ -44,9 +44,9 @@ validate.colour = function(colour)
 end
 
 --- Validate all
--- @param	string	name	The name of the player to validate.
--- @param	string	message	The message to validate.
--- @param	string	colour	The colour to validate.
+-- @param	name	string		The name of the player to validate.
+-- @param	message	string		The message to validate.
+-- @param	colour	string		The colour to validate.
 -- @returns	boolean, table|nil	Returns the validation status, followed by details of the failure if bool == false.
 -- | Return arg | Meaning |
 -- |------------|---------|

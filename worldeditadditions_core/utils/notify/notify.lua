@@ -1,4 +1,5 @@
 --- A player notification system for worldeditadditions.
+-- @module	worldeditadditions_core.notify
 local wea_c = worldeditadditions_core
 
 -- Helper functions
@@ -60,10 +61,10 @@ end
 
 --- Send a notification of type `ntype` (for metatable).
 --  (Same as `Notify[ntype](name, message)`)
--- @param	table	_self	Provided automatically by Lua. You do not need to set this automatically - see example.
--- @param	string	name	The name of the player to send the notification to.
--- @param	string	ntype	The type of notification.
--- @param	string	message	The message to send.
+-- @param	_self	table	Provided automatically by Lua. You do not need to set this automatically - see example.
+-- @param	name	string	The name of the player to send the notification to.
+-- @param	ntype	string	The type of notification.
+-- @param	message	string	The message to send.
 -- @return	table	The Notify instance.
 -- @example Basic usage
 -- worldeditadditions_core.notify(player_name, "info", "All registered commands:\n....")
@@ -80,11 +81,11 @@ end
 setmetatable(Notify, {__call = call})
 
 --- Send a custom notification.
--- @param string	name		The name of the player to send the notification to.
--- @param string	ntype		The type of notification.
--- @param string	message		The message to send.
--- @param string?	colour		Optional. The colour of the notification.
--- @param boolean?	message_coloured	Optional. Whether the message should be coloured.
+-- @param	name	string		The name of the player to send the notification to.
+-- @param	ntype	string		The type of notification.
+-- @param	message	string		The message to send.
+-- @param	colour	string?		Optional. The colour of the notification.
+-- @param	message_coloured	boolean?	Optional. Whether the message should be coloured.
 -- @return	boolean			True if all parameters are valid, false otherwise.
 -- @example		Custom notification types
 -- Notify.custom(name, "custom", "This one is magenta!", "#FF00FF", true)
@@ -96,8 +97,8 @@ end
 
 
 --- Register the aforementioned predefined notification types.
--- @param string	name	The name of the player to send the notification to.
--- @param string	message	The message to send.
+-- @param	name	string	The name of the player to send the notification to.
+-- @param	message	string	The message to send.
 -- @example
 -- Notify.error(name, "multi-line error!\n" .. debug.traceback())
 -- Notify.warn(name, "This is the last coloured message type!")
@@ -118,8 +119,8 @@ do
 end
 
 --- Local suppression status handler
--- @param	string	name		The name of the player to check.
--- @param	table	suppress	The table of suppressed players.
+-- @param	name	string		The name of the player to check.
+-- @param	suppress	table	The table of suppressed players.
 -- @return	boolean		True if the player is not suppressed or
 --						if the player is clear(ed), false otherwise.
 local check_clear_suppressed = function(name, suppress)
@@ -133,8 +134,8 @@ local check_clear_suppressed = function(name, suppress)
 end
 
 --- Suppress a player's notifications.
--- @param	string		name	The name of the player to suppress.
--- @param	number > 1	time	The number of seconds to suppress notifications for.
+-- @param	name	string		The name of the player to suppress.
+-- @param	time	number > 1	The number of seconds to suppress notifications for.
 --								number < 1 immediately removes the suppression.
 function Notify.suppress_for_player(name, time)
 	local suppress = globalstate.suppressed_players
@@ -148,20 +149,25 @@ function Notify.suppress_for_player(name, time)
 end
 
 --- Suppress a player's notifications while function executes.
+-- @param	name	string		The name of the player to suppress.
+-- @param	func	function	The function to execute while the player is suppressed.
+-- @returns	bool, string		Success, result of the executed function.
 function Notify.suppress_for_function(name, func)
 	local suppress = globalstate.suppressed_players
 	-- If the player is already suppressed, cancel it unless it's a function
 	if not check_clear_suppressed(name, suppress) then return false end
 	suppress[name] = func
-	suppress[name]()
+	local result_table = { suppress[name]() }
 	suppress[name] = nil
+	return wea_c.table.unpack(result_table)
 end
 
 --- WorldEdit compatibility
--- if worldedit and type(worldedit.player_notify) == "function" then
--- 	worldedit.player_notify = function(name, message, ntype)
--- 		Notify(name, ntype, message)
--- 	end
--- end
+if worldedit and type(worldedit.player_notify) == "function" then
+	worldedit.player_notify = function(name, message, ntype)
+		if not ntype then ntype = "info" end
+		Notify(name, ntype, message)
+	end
+end
 
 return Notify
