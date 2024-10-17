@@ -137,7 +137,7 @@ end
 -- @param	number > 1	time	The number of seconds to suppress notifications for.
 --								number < 1 immediately removes the suppression.
 function Notify.suppress_for_player(name, time)
-	local suppress = globalstate.suppress
+	local suppress = globalstate.suppressed_players
 	-- If the player is already suppressed, cancel it unless it's a function
 	if not check_clear_suppressed(name, suppress) then return false end
 	if time < 1 then return end
@@ -149,7 +149,7 @@ end
 
 --- Suppress a player's notifications while function executes.
 function Notify.suppress_for_function(name, func)
-	local suppress = globalstate.suppress
+	local suppress = globalstate.suppressed_players
 	-- If the player is already suppressed, cancel it unless it's a function
 	if not check_clear_suppressed(name, suppress) then return false end
 	suppress[name] = func
