@@ -1,4 +1,5 @@
 --- A player notification system for worldeditadditions.
+-- @module	worldeditadditions_core.notify
 local wea_c = worldeditadditions_core
 
 -- Helper functions
@@ -162,10 +163,11 @@ function Notify.suppress_for_function(name, func)
 end
 
 --- WorldEdit compatibility
--- if worldedit and type(worldedit.player_notify) == "function" then
--- 	worldedit.player_notify = function(name, message, ntype)
--- 		Notify(name, ntype, message)
--- 	end
--- end
+if worldedit and type(worldedit.player_notify) == "function" then
+	worldedit.player_notify = function(name, message, ntype)
+		if not ntype then ntype = "info" end
+		Notify(name, ntype, message)
+	end
+end
 
 return Notify
