@@ -156,9 +156,9 @@ function Notify.suppress_for_function(name, func)
 	-- If the player is already suppressed, cancel it unless it's a function
 	if not check_clear_suppressed(name, suppress) then return false end
 	suppress[name] = func
-	local success, result = suppress[name]()
+	local result_table = { suppress[name]() }
 	suppress[name] = nil
-	return success, result
+	return wea_c.table.unpack(result_table)
 end
 
 --- WorldEdit compatibility
