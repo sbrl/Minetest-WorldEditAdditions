@@ -59,6 +59,8 @@ wea_c.register_command("test", {
 					tests[params_text[1]]:help()}, " ")
 			end
 		end
-		return tests[subcommand](name, params_text)
+		return wea_c.format.handle_fn_result(
+			tests[subcommand](name, params_text)
+		)
 	end
 })

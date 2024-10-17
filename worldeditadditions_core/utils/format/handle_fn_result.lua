@@ -17,7 +17,7 @@ local function handle_fn_result(...)
 			"Function returned \"",
 			tostring(success),
 			"\" with no other output."
-		}, " ")
+		}, "")
 	end
 	return success, ret
 end
