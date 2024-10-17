@@ -64,6 +64,12 @@ end
 --- Calls the given function `fn` with the UNPACKED arguments from `args`, catching errors and sending the calling player a nice error message with a report link.
 -- 
 -- WARNING: Do NOT nest `safe_function()` calls!!!
+-- 
+-- You do not need to call this function normally. For commands registered via `worldeditadditions_core.register_command`, your `parse()`, `nodes_needed()`, and `func()` functions are all protected with this function automatically.
+-- 
+-- You may need to call this function in an async function - NOT in the main `func()`, but inside every `minetest.after()` call. This is because an async jump like that provided by `minetest.after()` will cause the original function to end, thus ending the `safe_function()` sandbox.
+-- 
+-- TODO implement `wea_core.safe_after()`.
 -- @param	fn			function		The function to call
 -- @param	args		table			The table of args to unpack and send to `fn` as arguments
 -- @param	player_name	string|nil		The name of the player affected. If nil then no message is sent to the player.
