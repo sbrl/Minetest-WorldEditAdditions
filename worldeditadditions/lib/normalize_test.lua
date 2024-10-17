@@ -23,6 +23,11 @@ metatable.__index = metatable
 
 local registered_tests = {}
 
+--- Register a test
+-- @param string	test_name	The name of the test
+-- @param table		def			The definition of the test
+-- @return nil		No return. Adds the test to local registry
+--					accessable via get_registered_tests method
 local register_test = function(test_name, def)
 	---
 	-- 1: Validation
@@ -53,10 +58,17 @@ end
 local normalize_test = {}
 normalize_test.__index = normalize_test
 
-normalize_test.__call = function(self, test_name, def)
+--- Register a test
+-- @param string	test_name	The name of the test
+-- @param table		def			The definition of the test
+-- @return nil		No return. Adds the test to local registry
+--					accessable via get_registered_tests method
+normalize_test.__call = function(_self, test_name, def)
 	register_test(test_name, def)
 end
 
+--- Get all registered tests
+-- @return table	All registered tests
 normalize_test.get_registered_tests = function()
 	local ret = {}
 	for k, v in pairs(registered_tests) do
