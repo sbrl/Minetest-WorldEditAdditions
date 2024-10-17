@@ -7,9 +7,6 @@ local test_id_paths = {
 	"stacktrace.test.lua",
 }
 
--- Helper functions
-local update = function(a,k,v) a[k] = v end
-
 -- Test loader
 local test_loader = function (path)
 	for _, v in ipairs(test_id_paths) do dofile(path .. v) end
