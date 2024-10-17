@@ -1,6 +1,6 @@
 -- Lists all currently loaded entities.
 
-local weac = worldeditadditions_core
+local wea_c = worldeditadditions_core
 
 minetest.register_chatcommand("/listentities", {
 	params = "",
@@ -22,16 +22,16 @@ minetest.register_chatcommand("/listentities", {
 					obj_name = "[LuaEntity:__UNKNOWN__]"
 				end
 			end
-			local pos = weac.Vector3.clone(obj:get_pos())
+			local pos = wea_c.Vector3.clone(obj:get_pos())
 			table.insert(table_vals, {
 				id,
 				obj_name,
 				tostring(pos)
 			})
 		end
-		worldedit.player_notify(name, table.concat({
+		wea_c.notify.info(name, table.concat({
 			"Currently loaded entities:",
-			weac.format.make_ascii_table(table_vals),
+			wea_c.format.make_ascii_table(table_vals),
 			"",
 			"Total "..tostring(#table_vals).." objects"
 		}, "\n"))

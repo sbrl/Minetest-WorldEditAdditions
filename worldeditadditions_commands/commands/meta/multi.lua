@@ -29,7 +29,7 @@ minetest.register_chatcommand("/multi", {
 			if not args then args = "" end
 			-- print("command_name", command_name)
 			
-			worldedit.player_notify(name, "#"..i..": "..command)
+			wea_c.notify.info(name, "#"..i..": "..command)
 			
 			local cmd = minetest.registered_chatcommands[command_name]
 			if not cmd then
@@ -61,6 +61,6 @@ minetest.register_chatcommand("/multi", {
 		table.insert(done_message, table.concat(message_parts, ", "))
 		table.insert(done_message, ")")
 		
-		worldedit.player_notify(name, table.concat(done_message, ""))
+		wea_c.notify.ok(name, table.concat(done_message, ""))
 	end
 })

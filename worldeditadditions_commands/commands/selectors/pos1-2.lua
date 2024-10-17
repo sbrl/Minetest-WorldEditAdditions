@@ -53,7 +53,7 @@ minetest.register_chatcommand("//pos", {
 	func = function(name, params_text)
 		local i = tonumber(params_text)
 		if type(i) ~= "number" then
-			worldedit.player_notify(name, "Error: Invalid index number given.")
+			weac.notify.error(name, "Error: Invalid index number given.")
 			return
 		end
 		i = math.floor(i)

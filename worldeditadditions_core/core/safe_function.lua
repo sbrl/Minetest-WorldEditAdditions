@@ -57,7 +57,7 @@ Please add any other additional specific system information here too if you thin
 	}, "")
 
 	print("DEBUG:player_notify player_name", player_name, "msg_compiled", msg_compiled)
-	worldedit.player_notify(player_name, msg_compiled)
+	weac.notify.error(player_name, msg_compiled)
 end
 
 
