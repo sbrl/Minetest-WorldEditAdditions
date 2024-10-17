@@ -4,9 +4,9 @@
 local player_notify_suppressed = {}
 
 local orig_player_notify = worldedit.player_notify
-function worldedit.player_notify(name, message)
+function worldedit.player_notify(name, message, typ)
 	if not player_notify_suppressed[name] then
-		orig_player_notify(name, message)
+		orig_player_notify(name, message, typ)
 	end
 end
 
