@@ -19,7 +19,7 @@ local function handle_fn_result(...)
 			"\" with no other output."
 		}, "")
 	end
-	return success, ret
+	return success or false, ret
 end
 
 return handle_fn_result
