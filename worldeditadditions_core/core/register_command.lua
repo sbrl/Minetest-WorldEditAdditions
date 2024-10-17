@@ -28,7 +28,7 @@ end
 -- - `description` (string) A description of the command.
 -- - `privs` (`{someprivilege=true, ....}`) The privileges required to use the command.
 -- - `require_pos` (number) The number of positions required for the command.
--- - `async=false` (bool) Whether this function is async. See the note in the description of this function for more information.
+-- - `async=false` (bool) Whether this function is async. See the note in the description of this function for more information. *(since v1.15)*
 -- - `parse` (function) A function that parses the raw param_text into proper input arguments to be passed to `nodes_needed` and `func`.
 -- - `nodes_needed` (function) A function that returns the number of nodes the command could potential change given the parsed input arguments.
 -- - `func` (function) The function to execute when the command is run.
