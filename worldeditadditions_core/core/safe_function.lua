@@ -66,9 +66,9 @@ end
 -- WARNING: Do NOT nest `safe_function()` calls!!!
 -- @param	fn			function		The function to call
 -- @param	args		table			The table of args to unpack and send to `fn` as arguments
--- @param	string|nil	player_name		The name of the player affected. If nil then no message is sent to the player.
--- @param	string		error_msg		The error message to send when `fn` inevitably crashes.
--- @param	string|nil		cmdname		Optional. The name of the command being run.
+-- @param	player_name	string|nil		The name of the player affected. If nil then no message is sent to the player.
+-- @param	error_msg	string			The error message to send when `fn` inevitably crashes.
+-- @param	cmdname		string|nil		Optional. The name of the command being run.
 -- @returns	bool,any,...	A success bool (true == success), and then if success == true the rest of the arguments are the (unpacked) return values from the function called. If success == false, then the 2nd argument will be the stack trace.
 local function safe_function(fn, args, player_name, error_msg, cmdname)
 	local retvals
