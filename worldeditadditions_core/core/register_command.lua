@@ -15,12 +15,20 @@ end
 
 
 --- Registers a new WorldEditAdditions chat command.
+-- 
+-- **Async commands:** Set `async = true` in the definition table you pass to this function. THEN, to indicate you are doing an async thing return NO VALUES AT ALL from your main `func` that is passed the parsed arguments. When `async = true`, your main `func` will be passed a callback function as the 1st argument BEFORE all other arguments.
+--
+-- Call this function when you are done with all async work with the same variables you would return: success: bool, result_message: string.
+--
+-- **IMPORTANT:** You MUST NOT return `success, result_message` from the main function AND call the callback function in a single call of a command!
+-- An example of this in action can be seen in the implementation of `//for`.
 -- @param	cmdname		string	The name of the command to register.
 -- @param	options		table	A table of options for the command:
 -- - `params` (string) A textual description of the parameters the command takes.
 -- - `description` (string) A description of the command.
 -- - `privs` (`{someprivilege=true, ....}`) The privileges required to use the command.
 -- - `require_pos` (number) The number of positions required for the command.
+-- - `async=false` (bool) Whether this function is async. See the note in the description of this function for more information.
 -- - `parse` (function) A function that parses the raw param_text into proper input arguments to be passed to `nodes_needed` and `func`.
 -- - `nodes_needed` (function) A function that returns the number of nodes the command could potential change given the parsed input arguments.
 -- - `func` (function) The function to execute when the command is run.
@@ -56,6 +64,7 @@ local function register_command(cmdname, options)
 	---
 	-- 2: Normalisation
 	---
+	if options.async == nil then options.async = false end
 	if not options.privs then options.privs = {} end
 	if not options.require_pos then options.require_pos = 0 end
 	if not options.nodes_needed then options.nodes_needed = function() return 0 end end

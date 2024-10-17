@@ -15,7 +15,7 @@ local wea_c = worldeditadditions_core
 -- ?Basename support for values
 -- ?Comma deliniation support for values
 
-local function step(params)
+local function step(params, __callback)
 	-- Initialize additional params on first call
 	if not params.first then
 		params.i = 1 -- Iteration number
@@ -37,12 +37,9 @@ local function step(params)
 	
 	if params.i <= #params.values then
 		-- If we haven't run out of values call function again
-		minetest.after(0, step, params)
+		minetest.after(0, step, params, __callback)
 	else
-		wea_c.notify.ok(params.player_name, "For "..
-			table.concat(params.values,", ")..
-			", /"..params.cmd_name.." completed in " ..
-			wea_c.format.human_time(params.time))
+		__callback(true, "//for completed mapping values ["..table.concat(params.values, ", ").."] over /"..params.cmd_name.." "..tostring(params.args).." in "..wea_c.format.human_time(params.time))
 	end
 end
 
@@ -50,6 +47,7 @@ worldeditadditions_core.register_command("for", {
 	params = "<value1> <value2> <value3>... do //<command> <arg> %% <arg>",
 	description = "Executes a chat command for each value before \" do \" replacing any instances of \"%%\" with those values. The forward slashes at the beginning of the chat command must be the same as if you were executing it normally.",
 	privs = { worldedit = true },
+	async = true,
 	parse = function(params_text)
 		if not params_text:match("%sdo%s") then
 			return false, "Error: \"do\" argument is not present."
@@ -68,7 +66,9 @@ worldeditadditions_core.register_command("for", {
 		
 		return true, values, command, args
 	end,
-	func = function(name, values, command, args)
+	func = function(__callback, name, values, command, args)
+		print("DEBUG://for __callback", wea_c.inspect(__callback), "name", name)
+		
 		local cmd = minetest.registered_chatcommands[command]
 		if not cmd then
 			return false, "Error: "..command.." isn't a valid command."
@@ -77,13 +77,17 @@ worldeditadditions_core.register_command("for", {
 			return false, "Your privileges are insufficient to run /\""..command.."\"."
 		end
 		
+		
 		step({
 			player_name = name,
 			cmd_name = command,
 			values = values,
 			cmd = cmd,
 			args = args
-		})
+		}, __callback)
 		
+		-- Returning nothing + async = true means we're going async and we'll get back to `run_command` later. Until then, I'm going to have to put you on hold :P
+		-- * cue hold music *
+		-- ref https://youtu.be/3to4vaWl2dY
 	end
 })

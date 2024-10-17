@@ -7,6 +7,26 @@ local safe_region = dofile(weac.modpath.."/core/safe_region.lua")
 local human_size = weac.format.human_size
 local safe_function = weac.safe_function
 
+--- Handles the success bool and result message string that a command's main `func` returns.
+-- @param success	bool	Whether the command executed successfully or not.
+-- @param result_message	string	The message (as a string) to send to the player.
+local function handle_success_resultmsg(player_name, cmdname, success, result_message)
+	if success then
+		if not result_message then
+			result_message = "//" .. tostring(cmdname) .. " successful"
+		end
+		weac.notify.ok(player_name, result_message)
+	else
+		if not result_message then
+			result_message =
+			"An unspecified (likely user) error was returned by the command. It is a bug that a specific error message is not returned here. It is not necessarily a bug that an error was thrown: your command invocation could have contained invalid syntax, for example."
+		end
+		weac.notify.error(player_name, "[//" .. tostring(cmdname) .. "] " .. result_message)
+	end
+	
+	return success, result_message
+end
+
 --- Actually runs the command in question. [HIDDEN]
 -- Unfortunately needed to keep the codebase clena because Lua sucks.
 -- @internal
@@ -17,29 +37,52 @@ local safe_function = weac.safe_function
 -- @returns	nil
 local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	weac:emit("pre-execute", tbl_event)
-	local success_safefn, retvals = safe_function(func, { player_name, weac.table.unpack(parse_result) }, player_name, "The function crashed during execution.", tbl_event.cmdname)
+	
+	-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+	
+	local args = {}
+	-- If we're async, add the callback function as the 1st argument before everything else
+	if tbl_event.cmddef.async then
+		table.insert(args, function(success, result_message)
+			success, result_message = handle_success_resultmsg(player_name, tbl_event.cmdname, success, result_message)
+			
+			tbl_event.success = success
+			tbl_event.result = result_message
+			weac:emit("post-execute", tbl_event)
+		end)
+	end
+	-- Add player_name, unpack(args_from_parse_func).... afterwards 
+	table.insert(args, player_name)
+	for _,value in ipairs(parse_result) do
+		table.insert(args, value)
+	end
+	
+	-- Run the cmd itself and catch errors
+	local success_safefn, retvals = safe_function(func, args, player_name, "The function crashed during execution.", tbl_event.cmdname)
 	if not success_safefn then return false end
 	
-	if #retvals ~= 2 then
-		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] The main execution function for this chat command returned "..tostring(#retvals).." arguments instead of the expected 2 (success, message), so it is unclear whether it succeeded or not. This is a bug!")
+	-- BELOW: We handle the IMMEDIATE RETURN VALUE. For async commands this requires special handling as the actual exit of async commands is above.
+	
+	-- If a function is async (pass `async = true` in the table passed to weac.register_command()`), then if there are no return values then we assume it was successful.
+	if #retvals ~= 2 and not tbl_event.cmddef.async then
+		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] This command is not async and the main execution function for it returned "..tostring(#retvals).." arguments instead of the expected 2 (success, message), so it is unclear whether it succeeded or not. This is a bug!")
+	end
+	 
+	if #retvals == 2 then
+		local success, result_message = retvals[1], retvals[2]
+		success, result_message = handle_success_resultmsg(player_name, tbl_event.cmdname, success, result_message)
+		
+		tbl_event.success = success
+		tbl_event.result = result_message
+		
 	end
 	
-	local success, result_message = retvals[1], retvals[2]
-	print("DEBUG:run_command_stage2 SUCCESS", success, "RESULT_MESSAGE", result_message)
-	if success then
-		if not result_message then
-			result_message = "//"..tostring(tbl_event.cmdname).." successful"
-		end
-		weac.notify.ok(player_name, result_message)
-	else
-		if not result_messasge then
-			result_message = "An unspecified (likely user) error was returned by the command. It is a bug that a specific error message is not returned here. It is not necessarily a bug that an error was thrown: your command invocation could have contained invalid syntax, for example."
-		end
-		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] "..result_message)
+	-- This is outside the above before we need to fire post-execute even if `#retvals ~= 2` or something else happened
+	-- 
+	-- Don't fire the post-execute event if async = true unless we were explicitly told its fine. If async = false then just go right ahead anyway
+	if not tbl_event.cmddef.async or (tbl_event.cmddef.async and success) then
+		weac:emit("post-execute", tbl_event)
 	end
-	tbl_event.success = success
-	tbl_event.result = result_message
-	weac:emit("post-execute", tbl_event)
 end
 
 
@@ -93,7 +136,8 @@ end
 -- - `paramargs` (table): The parsed arguments returned by the parsing function. Available in `post-parse` and later.
 -- - `potential_changes` (number): The number of potential nodes that could be changed as a result of running the command. `post-nodesneeded` and later: remember not all commands have an associated `nodesneeded` function.
 -- - `success` (boolean): Whether the command executed successfully or not. Available only in `post-execute`.
--- - `result` (any): The `result` value returned by the command function. Value depends on the command executed. Available only in `post-execute`.
+-- - `result` (any): The `result` value returned by the command function. Value depends on the command executed. Available only in `post-execute`. SHOULD be a string but don't count on it.
+-- 
 -- @param	cmdname		string	The name of the command to run.
 -- @param	options		table	The table of options associated with the command. See worldeditadditions_core.register_command for more information.
 -- @param	player_name	string	The name of the player to execute the command for.
