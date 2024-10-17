@@ -64,12 +64,14 @@ local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	-- BELOW: We handle the IMMEDIATE RETURN VALUE. For async commands this requires special handling as the actual exit of async commands is above.
 	
 	-- If a function is async (pass `async = true` in the table passed to weac.register_command()`), then if there are no return values then we assume it was successful.
-	if #retvals ~= 2 and not tbl_event.cmddef.async then
+	if (#retvals > 2 or #retvals < 1) and not tbl_event.cmddef.async then
 		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] This command is not async and the main execution function for it returned "..tostring(#retvals).." arguments instead of the expected 2 (success, message), so it is unclear whether it succeeded or not. This is a bug!")
 	end
 	 
-	if #retvals == 2 then
-		local success, result_message = retvals[1], retvals[2]
+	if #retvals == 2 or #retvals == 1 then
+		local success = retvals[1]
+		local result_message
+		if #retvals == 2 then result_message = retvals[2] end
 		success, result_message = handle_success_resultmsg(player_name, tbl_event.cmdname, success, result_message)
 		
 		tbl_event.success = success
