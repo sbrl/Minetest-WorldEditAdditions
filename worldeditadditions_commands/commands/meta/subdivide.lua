@@ -36,6 +36,7 @@ worldeditadditions_core.register_command("subdivide", {
 	description = "Subdivides the given worldedit area into chunks and runs a worldedit command multiple times to cover the defined region. Note that the given command must NOT be prepended with any forward slashes - just like //cubeapply.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	async = true,
 	parse = function(params_text)
 		local parts = wea_c.split(params_text, "%s+", false)
 		
@@ -69,7 +70,7 @@ worldeditadditions_core.register_command("subdivide", {
 	nodes_needed = function(name)
 		return worldedit.volume(worldedit.pos1[name], worldedit.pos2[name])
 	end,
-	func = function(name, chunk_size, cmd_name, args)
+	func = function(callback, name, chunk_size, cmd_name, args)
 		local time_total = wea_c.get_ms_time()
 		
 		local pos1, pos2 = Vector3.sort(worldedit.pos1[name], worldedit.pos2[name])
@@ -106,7 +107,7 @@ worldeditadditions_core.register_command("subdivide", {
 					stats.chunk_size.y + 1,	-- y
 					stats.chunk_size.z + 1	-- z
 				)
-				worldedit.player_notify(name, string.format(
+				wea_c.notify.info(name, string.format(
 					"%sStarting - chunk size: %s, %d chunks total (%d nodes)",
 					msg_prefix,
 					tostring(chunk_size_display),
@@ -115,21 +116,24 @@ worldeditadditions_core.register_command("subdivide", {
 				))
 			end
 			
-			worldedit.player_notify_suppress(name)
-			wea_c.pos.set1(name, cpos1)
-			wea_c.pos.set2(name, cpos2)
-			-- worldedit.pos1[name] = cpos1
-			-- worldedit.pos2[name] = cpos2
-			-- worldedit.marker_update(name)
-			cmd.func(name, wea_c.table.unpack(cmd_args_parsed))
-			if will_trigger_saferegion(name, cmd_name, args) then
-				minetest.registered_chatcommands["/y"].func(name)
-			end
-			worldedit.player_notify_unsuppress(name)
+			wea_c.notify.suppress_for_function(name, function()
+				-- We still call `worldedit.player_notify_suppress` here because we may be subdividing a WorldEdit function as opposed to one from WEA
+				worldedit.player_notify_suppress(name)
+				wea_c.pos.set1(name, cpos1)
+				wea_c.pos.set2(name, cpos2)
+				-- worldedit.pos1[name] = cpos1
+				-- worldedit.pos2[name] = cpos2
+				-- worldedit.marker_update(name)
+				cmd.func(name, wea_c.table.unpack(cmd_args_parsed))
+				if will_trigger_saferegion(name, cmd_name, args) then
+					minetest.registered_chatcommands["/y"].func(name)
+				end
+				worldedit.player_notify_unsuppress(name)
+			end)
 			
 			-- Send updates every 2 seconds, and after the first 3 chunks are done
 			if wea_c.get_ms_time() - time_last_msg > 2 * 1000 or stats.chunks_completed == 3 or stats.chunks_completed == stats.chunks_total then
-				worldedit.player_notify(name,
+				wea_c.notify.info(name,
 					string.format("%s%d / %d (~%.2f%%) complete | last chunk: %s, average: %s, %.2f%% emerge overhead, ETA: ~%s",
 						msg_prefix,
 						stats.chunks_completed, stats.chunks_total,
@@ -143,6 +147,7 @@ worldeditadditions_core.register_command("subdivide", {
 				time_last_msg = wea_c.get_ms_time()
 			end
 		end, function(_, _, stats)
+			-- Called on completion
 			
 			wea_c.pos.set1(name, pos1)
 			wea_c.pos.set2(name, pos2)
@@ -150,7 +155,7 @@ worldeditadditions_core.register_command("subdivide", {
 			-- worldedit.pos2[name] = pos2
 			-- worldedit.marker_update(name)
 			
-			-- Called on completion
+			
 			minetest.log("action", string.format("%s used //subdivide at %s - %s, with %d chunks and %d total nodes in %s",
 				name,
 				tostring(pos1),
@@ -159,7 +164,7 @@ worldeditadditions_core.register_command("subdivide", {
 				stats.volume_nodes,
 				wea_c.format.human_time(stats.times.total)
 			))
-			worldedit.player_notify(name, string.format(
+			callback(true, string.format(
 				"%sComplete: %d chunks processed in %s (%.2f%% emerge overhead, emerge totals: %s)",
 				msg_prefix,
 				stats.chunks_completed,

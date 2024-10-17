@@ -22,6 +22,8 @@ Note to self: See the bottom of this file for the release template text.
 - Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
 - Added new player notification system with coloured output - thanks, @VorTechnix!
 	- Please be patient as we switch all usages over to the new system.
+- [internal] Added initial async command support. This means that WEA is now aware of when async commands like `//for`, `//subdivide` etc actually complete
+	- Macro support may be coming at some point in the future!
 
 ### Bugfixes and changes
 - When commands produce an error, the name of the command that produced the error is now also printed. Useful when using e.g. [`//multi`](https://worldeditadditions.mooncarrot.space/Reference/#multi) etc.
