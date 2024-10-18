@@ -67,7 +67,7 @@ local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	if (#retvals > 2 or #retvals < 1) and not tbl_event.cmddef.async then
 		weac.notify.error(player_name, "[//"..tostring(tbl_event.cmdname).."] This command is not async and the main execution function for it returned "..tostring(#retvals).." arguments instead of the expected 2 (success, message), so it is unclear whether it succeeded or not. This is a bug!")
 	end
-	 
+	
 	if #retvals == 2 or #retvals == 1 then
 		local success = retvals[1]
 		local result_message
