@@ -7,10 +7,10 @@
 local wea_c = worldeditadditions_core
 local wea_cmd = worldeditadditions_commands
 
-local test_dir = wea_cmd.modpath .. "/commands/test/tests/"
+local test_dir = wea_cmd.modpath .. "/commands/test/"
 
 -- Load tests with init function
-dofile(test_dir .. "init.lua")(test_dir)
+dofile(test_dir .. "tests/init.lua")(test_dir)
 local tests = worldeditadditions.normalize_test.get_registered_tests()
 
 -- Helper functions
@@ -18,6 +18,9 @@ local set_colour = function(colour, text)
 	return minetest.colorize(colour, text)
 end
 
+local handle_fn_result = dofile(test_dir .. "helpers/handle_fn_result.lua")
+
+-- Main command
 wea_c.register_command("test", {
 	params = "list || <testname> <args> || help <testname>",
 	description = "Run a test or list all tests",
@@ -59,7 +62,7 @@ wea_c.register_command("test", {
 					tests[params_text[1]]:help()}, " ")
 			end
 		end
-		return wea_c.format.handle_fn_result(
+		return handle_fn_result(
 			tests[subcommand](name, params_text)
 		)
 	end
