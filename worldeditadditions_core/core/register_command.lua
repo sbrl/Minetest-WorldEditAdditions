@@ -55,8 +55,8 @@ local function register_command(cmdname, options)
 		log_error(cmdname, "The func option is not a function.")
 		return false
 	end
-	if wea_c.registered_commands[cmdname] and options.override ~= true then
-		log_error(cmdname, "A WorldEditAdditions command with that name is registered, but the option override is not set to true.")
+	if minetest.registered_chatcommands["/"..cmdname] and options.override ~= true then
+		log_error(cmdname, "A chat command with that name is registered, but the option override is not set to true.")
 		return false
 	end
 	
@@ -72,7 +72,11 @@ local function register_command(cmdname, options)
 	---
 	-- 3: Registration
 	---
-	minetest.register_chatcommand("/"..cmdname, {
+	local register_chatcommand = minetest.register_chatcommand
+	if minetest.registered_chatcommands["/"..cmdname] and options.override == true then
+		register_chatcommand = minetest.override_chatcommand
+	end
+	register_chatcommand("/"..cmdname, {
 		params = options.params,
 		description = options.description,
 		privs = options.privs,
