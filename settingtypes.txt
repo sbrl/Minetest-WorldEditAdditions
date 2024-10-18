@@ -2,6 +2,3 @@
 
 # Will WorldEditAdditions override commands?
 worldeditadditions.override_commands (Override WorldEdit Commands) bool false
-
-# Will WorldEditAdditions wands be craftable?
-worldeditadditions.wand_craft (Craftable Wands) bool false
