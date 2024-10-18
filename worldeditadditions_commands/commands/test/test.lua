@@ -10,7 +10,7 @@ local wea_cmd = worldeditadditions_commands
 local test_dir = wea_cmd.modpath .. "/commands/test/"
 
 -- Load tests with init function
-dofile(test_dir .. "tests/init.lua")(test_dir)
+dofile(test_dir .. "tests/init.lua")(test_dir .. "tests/")
 local tests = worldeditadditions.normalize_test.get_registered_tests()
 
 -- Helper functions
