@@ -243,6 +243,7 @@ temp/
 # VorTechnix stuff
 .vdev/
 *.old.lua
+
 # Created by https://www.toptal.com/developers/gitignore/api/archives
 # Edit at https://www.toptal.com/developers/gitignore?templates=archives
 
