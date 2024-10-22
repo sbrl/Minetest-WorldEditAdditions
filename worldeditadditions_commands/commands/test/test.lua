@@ -21,7 +21,7 @@ end
 local handle_fn_result = dofile(test_dir .. "helpers/handle_fn_result.lua")
 
 -- Main command
-wea_c.register_command("test", {
+worldeditadditions_core.register_command("test", {
 	params = "list || <testname> <args> || help <testname>",
 	description = "Run a test or list all tests",
 	privs = {worldedit = true},

@@ -7,7 +7,7 @@ local Vector3 = wea_c.Vector3
 -- ██████  █████   ██████  ██      ███████ ██      █████   ██ ████ ██ ██   ███
 -- ██   ██ ██      ██      ██      ██   ██ ██      ██      ██  ██  ██ ██  ██ ██
 -- ██   ██ ███████ ██      ███████ ██   ██  ██████ ███████ ██      ██ ██ ██   ██
-wea_c.register_command("replacemix", {
+worldeditadditions_core.register_command("replacemix", {
 	params = "<target_node> [<chance>] <replace_node_a> [<chance_a>] [<replace_node_b> [<chance_b>]] [<replace_node_N> [<chance_N>]] ...",
 	description = "Replaces target_node with a mix of other nodes. Functions simmilarly to //mix. <chance> is optional and the chance to replace the target node at all. replace_node_a is the node to replace target_node with. If multiple nodes are specified in a space separated list, then when replacing an instance of target_node one is randomly chosen from the list. Just like with //mix, if a positive integer is present after a replace_node, that adds a weighting to that particular node making it more common.",
 	privs = { worldedit = true },
