@@ -4,6 +4,7 @@ local wea_c = worldeditadditions_core
 wea_c.format = {
 	array_2d = dofile(wea_c.modpath.."/utils/format/array_2d.lua"),
 	escape = dofile(wea_c.modpath.."/utils/format/escape.lua"),
+	file_path = dofile(wea_c.modpath.."/utils/format/file_path.lua"),
 	human_size = dofile(wea_c.modpath.."/utils/format/human_size.lua"),
 	human_time = dofile(wea_c.modpath.."/utils/format/human_time.lua"),
 	make_ascii_table = dofile(wea_c.modpath.."/utils/format/make_ascii_table.lua"),
