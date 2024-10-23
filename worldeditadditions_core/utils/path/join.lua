@@ -7,11 +7,11 @@ local wea_c = worldeditadditions_core
 --	@return		string	The joined path.
 --	@example	Basic usage
 --		local path = file_path("C:\\Users", "me", "/Documents/code.lua")
-local file_path = function( ... )
+local join = function( ... )
 	local path = { ... }
 	for i, v in ipairs(path) do path[i] = tostring(v) end
 	return ({table.concat(path, wea_c.dirsep)
 			:gsub("[/\\]+", wea_c.dirsep)})[1]
 end
 
-return file_path
+return join
