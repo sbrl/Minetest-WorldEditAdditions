@@ -4,9 +4,9 @@ local path = {}
 
 -- Helper functions
 local check = function( ... )
-	for _, v in ipairs( ... ) do
+	for _, v in ipairs( {...} ) do
 		if type(v) ~= "string" then
-			return false, v .. " is not a string."
+			return false, tostring(v) .. " is not a string."
 		end
 	end
 	return true
@@ -24,8 +24,8 @@ end
 --	@return		string|false, string?	The formatted path string or
 --				false and an error message.
 --	@example	Basic usage
---		local path = path.new("C:\\Users\\me\\".."/Documents//code.lua")
-path.new = function( str )
+--		local path = path.norm("C:\\Users\\me\\".."/Documents//code.lua")
+path.norm = function( str )
 	local ok, err = check(str)
 	if not ok then return false, err end
 	return ({str:gsub("[/\\]+", path.sep)})[1]
@@ -39,9 +39,9 @@ end
 --		local path = file_path("C:\\Users", "me", "/Documents/code.lua")
 path.join = function( ... )
 	local pathlets = { ... }
-	local ok, err = check(pathlets)
+	local ok, err = check( ... )
 	if not ok then return false, err end
-	return path.new(table.concat(pathlets, path.sep))
+	return path.norm(table.concat(pathlets, path.sep))
 end
 
 local Path = {}
