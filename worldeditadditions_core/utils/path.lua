@@ -38,9 +38,9 @@ end
 --	@example	Basic usage
 --		local path = file_path("C:\\Users", "me", "/Documents/code.lua")
 path.join = function( ... )
-	local pathlets = { ... }
 	local ok, err = check( ... )
 	if not ok then return false, err end
+	local pathlets = { ... }
 	return path.norm(table.concat(pathlets, path.sep))
 end
 
