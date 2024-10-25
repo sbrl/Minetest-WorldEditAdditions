@@ -18,7 +18,8 @@ end
 
 worldeditadditions_core = EventEmitter.new({
 	version = "1.15-dev",
-	--- The directory separator on the current host system
+	--- The directory separator on the current host system [[ DEPRECATED ]]
+	--- Use worldeditadditions_core.path.sep instead
 	-- @value string
 	dirsep = directory_separator,
 	--- The full absolute filepath to the mod worldeditadditions_core
@@ -44,6 +45,8 @@ local wea_c = worldeditadditions_core
 wea_c.EventEmitter = EventEmitter
 
 wea_c.notify = dofile(wea_c.modpath.."/utils/notify/notify.lua") -- BEFORE anything that could use this
+
+wea_c.Path = dofile(wea_c.modpath.."/utils/path.lua") -- BEFORE anything that could use this
 
 wea_c.Set = dofile(wea_c.modpath.."/utils/set.lua")
 
@@ -84,7 +87,7 @@ dofile(wea_c.modpath.."/utils/player.lua") -- Player info functions
 
 
 
-wea_c.setting_handler = dofile(wea_c.modpath.."/utils/setting_handler.lua") -- AFTER parser
+wea_c.settings = dofile(wea_c.modpath.."/utils/setting_handler.lua") -- AFTER parser
 
 wea_c.pos = dofile(modpath.."/core/pos.lua") -- AFTER EventEmitter
 wea_c.safe_function = dofile(modpath.."/core/safe_function.lua")
