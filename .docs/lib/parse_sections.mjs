@@ -2,7 +2,7 @@
 
 import crypto from "crypto";
 
-import htmlentities from "html-entities";
+import {encode} from "html-entities";
 import MarkdownIt from "markdown-it";
 import chroma from "chroma-js";
 
@@ -40,7 +40,7 @@ function make_section(acc, cat_current, cats) {
 			.set("hsl.s", 0.8)
 			.set("hsl.l", "*0.6")
 			.css("hsl"),
-		title: htmlentities.encode(title),
+		title: encode(title),
 		slug: title.toLowerCase().replace(/[^a-z0-9-_\s]+/gi, "")
 			.replace(/\s+/g, "-")
 			.replace(/-.*$/, ""),

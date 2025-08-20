@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 
-import phin from "phin";
+import phn from "phn";
 
 import a from "./Ansi.mjs";
 
@@ -47,7 +47,7 @@ class FileFetcher {
 		
 		const target_download = path.join(`_site/img`, path.basename(url));
 		
-		const response = await phin({
+		const response = await phn({
 			url,
 			headers: {
 				"user-agent": `WorldEditAdditionsStaticBuilder/${this.#pkg_obj.version} (Node.js/${process.version}; ${os.platform()} ${os.arch()}) eleventy/${this.#pkg_obj.dependencies["@11ty/eleventy"].replace(/\^/, "")}`

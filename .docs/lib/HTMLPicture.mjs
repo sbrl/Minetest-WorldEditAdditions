@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 import imagickal from 'imagickal'; 
-import htmlentities from "html-entities";
+import {encode} from "html-entities";
 import PQueue from "p-queue";
 import pMemoize from "p-memoize";
 import pretty_ms from "pretty-ms";
@@ -140,7 +140,7 @@ async function picture(source_image, alt, target_dir, urlpath, formats = "__AUTO
 	
 	let result = `<picture data-zoomable="true">\n\t`;
 	result += sources.map(source => `<source srcset="${source.srcset}" type="${source.mime}" />`).join(`\n\t`);
-	result += `\n\t<img loading="lazy" decoding="async" src="${urlpath}/${source_parsed.base}" alt="${htmlentities.encode(alt)}" />\n`;
+	result += `\n\t<img loading="lazy" decoding="async" src="${urlpath}/${source_parsed.base}" alt="${encode(alt)}" />\n`;
 	result += `</picture>\n`
 	return result;
 }

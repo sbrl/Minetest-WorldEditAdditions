@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 import columnify from "columnify";
-import htmlentities from "html-entities";
+import {decode} from "html-entities";
 
 import a from "./lib/Ansi.mjs";
 import parse_sections from "./lib/parse_sections.mjs";
@@ -26,7 +26,7 @@ sections.sort((a, b) => a.title.replace(/^\/+/g, "").localeCompare(
 console.log(`REFERENCE SECTION TITLES`)
 console.log(columnify(sections.map(s => { return {
 	category: `${a.hicol}${a.fyellow}${s.category}${a.reset}`,
-	command: `${a.hicol}${a.fmagenta}${htmlentities.decode(s.title)}${a.reset}`
+	command: `${a.hicol}${a.fmagenta}${decode(s.title)}${a.reset}`
 } })));
 // console.log(sections
 // 	.map(s => `${a.fyellow}${a.hicol}${s.category}${a.reset}\t${a.fmagenta}${a.hicol}${s.title}${a.reset}`).join(`\n`));

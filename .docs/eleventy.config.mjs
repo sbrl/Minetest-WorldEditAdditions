@@ -4,9 +4,7 @@ import os from "os";
 import fs from "fs";
 import path from "path";
 
-import debug from "debug";
-import htmlentities from "html-entities";
-import phin from "phin";
+import phn from "phn";
 import CleanCSS from "clean-css";
 import { minify as minify_html } from "html-minifier-terser";
 
@@ -70,7 +68,7 @@ async function shortcode_gallerybox(content, src) {
 }
 
 async function fetch(url) {
-	return (await phin({
+	return (await phn({
 		url,
 		headers: {
 			"user-agent": `WorldEditAdditionsStaticBuilder/${pkg_obj.version} (Node.js/${process.version}; ${os.platform()} ${os.arch()}) eleventy/${pkg_obj.devDependencies["@11ty/eleventy"].replace(/\^/, "")}`
