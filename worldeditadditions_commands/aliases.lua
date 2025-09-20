@@ -7,7 +7,11 @@ wea_c.register_alias("conv", "convolve")
 wea_c.register_alias("naturalise", "layers")
 wea_c.register_alias("naturalize", "layers")
 
-wea_c.register_alias("flora", "bonemeal")
+-- Only register the flora alias if the bonemeal command is available
+-- This depends on the bonemeal mod being present
+if minetest.global_exists("bonemeal") then
+	wea_c.register_alias("flora", "bonemeal")
+end
 
 -- Measure Tools
 wea_c.register_alias("mcount", "count")
