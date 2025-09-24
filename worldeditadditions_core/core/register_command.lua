@@ -68,6 +68,7 @@ local function register_command(cmdname, options)
 	if not options.privs then options.privs = {} end
 	if not options.require_pos then options.require_pos = 0 end
 	if not options.nodes_needed then options.nodes_needed = function() return 0 end end
+	options.name = cmdname
 	
 	---
 	-- 3: Registration
