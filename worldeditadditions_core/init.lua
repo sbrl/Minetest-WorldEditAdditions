@@ -61,8 +61,6 @@ wea_c.LRU = dofile(wea_c.modpath.."/utils/lru.lua")
 wea_c.NodeListMatcher = dofile(wea_c.modpath.."/utils/NodeListMatcher.lua")
 wea_c.inspect = dofile(wea_c.modpath.."/utils/inspect.lua")
 
--- I/O compatibility layer
-wea_c.io = dofile(wea_c.modpath.."/utils/io/init.lua")
 
 wea_c.bit = dofile(wea_c.modpath.."/utils/bit.lua")
 
@@ -77,6 +75,8 @@ dofile(wea_c.modpath.."/utils/format/init.lua")
 dofile(wea_c.modpath.."/utils/parse/init.lua")
 dofile(wea_c.modpath.."/utils/table/init.lua")
 
+-- I/O compatibility layer - has to be AFTER the parsing stuff
+wea_c.io = dofile(wea_c.modpath .. "/utils/io/init.lua")
 
 dofile(wea_c.modpath.."/utils/numbers.lua")
 dofile(wea_c.modpath.."/utils/nodes.lua")

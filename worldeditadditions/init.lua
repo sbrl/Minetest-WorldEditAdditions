@@ -54,6 +54,8 @@ wea.metaballs	= dofile(wea.modpath.."/lib/metaballs/init.lua")
 dofile(wea.modpath.."/lib/copy.lua")
 dofile(wea.modpath.."/lib/move.lua")
 
+dofile(wea.modpath.."/lib/save.lua")
+
 dofile(wea.modpath.."/lib/count.lua")
 
 dofile(wea.modpath.."/lib/bonemeal.lua")

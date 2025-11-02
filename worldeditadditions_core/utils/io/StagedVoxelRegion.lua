@@ -1,7 +1,8 @@
 local weac = worldeditadditions_core
 
-local weaschem = weac.parse.file.weaschem
-local voxeltools = dofile(weac.modpath.."utils/io/voxeltools.lua")
+local parse_weaschem = weac.parse.file.weaschem
+local voxeltools = dofile(weac.modpath.."/utils/io/voxeltools.lua")
+print("DEBUG:voxeltools", weac.inspect(voxeltools))
 
 --- A region of the world that is to be or has been saved to/from disk.
 -- This class exists to make moving things to/from disk easier and less complicated.
@@ -108,7 +109,7 @@ end
 -- @param	format="auto"	string		The format that the source data is in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information.
 -- @returns	bool,table	A success/failure bool, followed by TODO: The format of this table is still to be decided.
 function StagedVoxelRegion.Load(filepath, voxelarea, pos1, pos2, format)
-	
+	-- TODO call parse_weaschem ehre
 end
 
 --- Loads voxel data from disk, returning the raw UNPADDED arrays.
@@ -170,7 +171,11 @@ function StagedVoxelRegion.save(self, filepath, format)
 	-- ID map
 	---
 	local id_map, wid2sid = voxeltools.make_id_maps(self.tables.data)
-	table.insert(parts, minetest.write_json(id_map, false).."\n")
+	local json, err = minetest.write_json(id_map, false)
+	if json == nil and type(err) == "string" then
+		return false, err
+	end
+	table.insert(parts, json.."\n")
 	
 	---
 	-- Data tables
@@ -195,7 +200,7 @@ function StagedVoxelRegion.save(self, filepath, format)
 	handle:write(schematic)
 	handle:close()
 	
-	return true
+	return true, #schematic
 end
 
 --- Loads a file of the an array.

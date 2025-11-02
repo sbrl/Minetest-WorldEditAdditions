@@ -43,6 +43,10 @@ dofile(wea_cmd.modpath.."/commands/orient.lua")
 dofile(wea_cmd.modpath.."/commands/set.lua")
 dofile(wea_cmd.modpath.."/commands/uasparse.lua")
 
+-- Save/load i/o commands
+dofile(wea_cmd.modpath .. "/commands/save.lua")
+
+
 -- Meta Commands
 dofile(wea_cmd.modpath .. "/commands/meta/init.lua")
 

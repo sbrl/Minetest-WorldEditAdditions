@@ -113,9 +113,9 @@ local function runlength_decode(tbl)
 end
 
 return {
-	voxelmanip2raw,
-	make_id_maps,
+	voxelmanip2raw = voxelmanip2raw,
+	make_id_maps = make_id_maps,
 	
-	runlength_encode,
-	runlength_decode
+	runlength_encode = runlength_encode,
+	runlength_decode = runlength_decode
 }

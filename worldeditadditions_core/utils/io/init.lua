@@ -14,6 +14,7 @@ local io = {
 	scandir_dirs = function(dirpath)
 		return minetest.get_dir_list(dirpath, true)
 	end,
+	StagedVoxelRegion = dofile(weac.modpath .. "/utils/io/StagedVoxelRegion.lua")
 }
 
 
