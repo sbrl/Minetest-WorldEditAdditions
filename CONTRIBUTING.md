@@ -32,6 +32,19 @@ When actually implementing stuff, here are a few guidelines that I recommend to 
 
 ## FDT: Frequently Done Tasks
 
+### Shortcut aliases
+Given how long e.g. `worldeditadditions_core` is to type, we have a convention to help with this.
+
+The following aliases are defined at the top of most Lua files in WorldEditAdditions, as required:
+
+```lua
+local wea = worldeditadditions
+local weac = worldeditadditions_core
+local wea_cmd = worldeditadditions_commands
+```
+
+...then further down they can be referenced without having so much to type.
+
 ### Implementing a new command
 Many new contributors want to implement a new command. While there are a few steps to doing so, there's loads of resources to help ya out :D
 
@@ -45,7 +58,11 @@ Please do see other commands and functions in the mod already for example help o
 ### Parsing command arguments
 Parsing command-line arguments can be tricky, but WorldEditAdditions has a range of functions to help you out here.
 
-The one you probably want is [`worldeditadditions_core.split_shell`]()
+The one you probably want is [`worldeditadditions_core.split_shell`](https://worldeditadditions.mooncarrot.space/api/#worldeditadditions_core.split_shell), which can split `paramstext` into tokens which are much easier to parse.
+
+There's also a range of other parsing functions in the [`worldeditadditions_core.parse` namespace](https://worldeditadditions.mooncarrot.space/api/#worldeditadditions_core.parse) ([GitHub direct](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/dev/worldeditadditions_core/utils/parse/init.lua#L14-L32)).
+
+See e.g. [`//layers`](https://github.com/sbrl/Minetest-WorldEditAdditions/blob/dev/worldeditadditions_commands/commands/layers.lua) as an example of how the output of `worldeditadditions_core.split_shell` is used.
 
 
 ## Chat command template
