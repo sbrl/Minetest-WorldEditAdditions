@@ -5,9 +5,9 @@ Vector3.__index = Vector3
 Vector3.__name = "Vector3" -- A hack to allow identification in wea.inspect
 
 --- Creates a new Vector3 instance.
--- @param x		number	The x co-ordinate value.
--- @param y		number	The y co-ordinate value.
--- @param z		number	The z co-ordinate value.
+-- @param x		number?	The x co-ordinate value. Defaults to 0.
+-- @param y		number?	The y co-ordinate value. Defaults to 0.
+-- @param z		number?	The z co-ordinate value. Defaults to 0.
 function Vector3.new(x, y, z)
 	x = x or 0
 	y = y or 0
