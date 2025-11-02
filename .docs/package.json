@@ -33,9 +33,9 @@
 		"markdown-it-prism": "^3.0.0",
 		"moondoc": "^1.2.0",
 		"p-memoize": "^8.0.0",
-		"p-queue": "^8.1.0",
+		"p-queue": "^9.0.0",
 		"phn": "^0.2.8",
 		"photoswipe": "^5.4.4",
-		"pretty-ms": "^9.2.0"
+		"pretty-ms": "^9.3.0"
 	}
 }
