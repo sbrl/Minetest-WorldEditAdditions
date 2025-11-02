@@ -15,4 +15,9 @@ local io = {
 	end,
 }
 
+
+--- World-specific directory to store WorldEditAdditions data in.
+-- @value string
+worldeditadditions_core.data_dir = dofile(localpath .. "wea_data_dir.lua");
+
 return io

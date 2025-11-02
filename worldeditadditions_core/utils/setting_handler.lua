@@ -1,11 +1,7 @@
 
 -- Initialize settings container
-local wea_c = worldeditadditions_core
-wea_c.settings = {}
-
--- Initialize wea world folder if not already existing
-local path = minetest.get_worldpath() .. wea_c.dirsep .. "worldeditadditions"
-minetest.mkdir(path)
+local weac = worldeditadditions_core
+weac.settings = {}
 
 --- A wrapper to simultaneously handle global and world settings.
 -- @namespace worldeditadditions_core.setting_handler
@@ -13,7 +9,7 @@ local setting_handler = {}
 
 --- Reads world settings into WEA core settings object
 setting_handler.read = function()
-	local file, err = io.open(path .. "/settings.conf", "rb")
+	local file, err = io.open(weac.data_dir .. "/settings.conf", "rb")
 	if err then return false end
 	-- Split by newline
 	-- local settings = wea_c.split(file:read("*a"),"[\n\r]+")
@@ -22,7 +18,7 @@ end
 
 --- Write setting to world settings
 setting_handler.write = function(setting, state)
-	local writer, err = io.open(path .. "/settings.conf", "ab")
+	local writer, err = io.open(weac.data_dir .. "/settings.conf", "ab")
 	if not writer then
 		return false
 	elseif setting == "" and not state then
