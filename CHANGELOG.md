@@ -15,14 +15,15 @@ Note to self: See the bottom of this file for the release template text.
 	- Also added an associated [movement speed adjustment tool](https://worldeditadditions.mooncarrot.space/Reference/#movement), which looks like this: ![A picture of the move speed adjustment tool. It looks like a monarch butterfly.](https://raw.githubusercontent.com/sbrl/Minetest-WorldEditAdditions/dev/worldeditadditions_farwand/textures/worldeditadditions_movement.png)
 - Added [`//set+`](https://worldeditadditions.mooncarrot.space/Reference/#set) for setting nodes and param2/light levels quickly.
 	- NOTE TO SELF: Setting light values doesn't appear to be working very well for some reason
+	- When bugs are fixed in this command, it will be aliased over WorldEdit's `//set` command.
 - Added [`//ndef`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) to print a given node's definition table. This is for debugging and development purposes.
-- Added `//sgrow` and `//sshrink` commands to enlarge and shrink selection regions and aliased them over WorldEdit equivalents (`//expand`, `//outset` and `//contract`, `//inset` respectively).
+- Added [`//sgrow`](https://worldeditadditions.mooncarrot.space/Reference/#sgrow) and [`//sshrink`](https://worldeditadditions.mooncarrot.space/Reference/#sshift) commands to enlarge and shrink selection regions and aliased them over WorldEdit equivalents (`//expand`, `//outset` and `//contract`, `//inset` respectively).
 - Added Unified Axis Syntax (UAS) parser. - Implementation by @VorTechnix
-	- See [UAS System reference] for details. (Note to self hook up hyperlink)
-- Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
+	- See [UAS System reference](https://worldeditadditions.mooncarrot.space/Reference/#unified) for details.
+- Debug: Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
 - Added new player notification system with coloured output - thanks, @VorTechnix!
 	- Please be patient as we switch all usages over to the new system.
-- [internal] Added initial async command support. This means that WEA is now aware of when async commands like `//for`, `//subdivide` etc actually complete
+- [internal] Added initial async command support. This means that WEA is now aware of when async commands like [`//for`](https://worldeditadditions.mooncarrot.space/Reference/#for), [`//subdivide`](https://worldeditadditions.mooncarrot.space/Reference/#subdivide) etc actually complete
 	- Macro support may be coming at some point in the future!
 
 ### Bugfixes and changes
