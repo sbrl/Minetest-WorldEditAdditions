@@ -40,6 +40,7 @@ Note to self: See the bottom of this file for the release template text.
 
 ### Lua API changes
 - Add `core.pos.get12(player_name, sort=false)`
+- Add `core.data_dir : string` as path to world-specific WEA data dir
 
 
 ## v1.14.5: The multipoint update, hotfix 5 (1st August 2023)
