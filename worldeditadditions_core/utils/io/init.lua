@@ -1,3 +1,4 @@
+local weac = worldeditadditions_core
 
 --- Functions to abstract file I/O away.
 -- I'm very suspicious of Minetest's API changing from under our feet.
@@ -18,6 +19,6 @@ local io = {
 
 --- World-specific directory to store WorldEditAdditions data in.
 -- @value string
-worldeditadditions_core.data_dir = dofile(localpath .. "wea_data_dir.lua");
+weac.data_dir = dofile(weac.modpath .. "/utils/io/wea_data_dir.lua");
 
 return io
