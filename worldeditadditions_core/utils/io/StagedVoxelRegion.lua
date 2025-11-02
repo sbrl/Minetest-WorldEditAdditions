@@ -138,9 +138,9 @@ end
 
 --- Saves the StagedVoxelRegion to the filepath.
 -- @param	filepath		string	The filepath to save the StagedVoxelRegion to.
--- @param	format="auto"	string	The format to save in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information.
+-- @param	format="auto"	string	The format to save in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information. Currently, only weaschem is supported.
 -- @returns	bool			Whether the operation was successful or not.
-function StagedVoxelRegion.save(svr, filepath, format)
+function StagedVoxelRegion.save(self, filepath, format)
 	local handle = io.open(filepath, "w")
 	if handle == nil then return false, "Failed to open handle to filepath '"..filepath.."'" end
 	
@@ -155,28 +155,28 @@ function StagedVoxelRegion.save(svr, filepath, format)
 	-- Header
 	---
 	local header = {
-		name = svr.name,
-		size = (svr.pos2 - svr.pos1):abs(),
-		offset = svr.offset,
+		name = self.name,
+		size = (self.pos2 - self.pos1):abs(),
+		offset = self.offset,
 		
 		type = "full", -- TODO: Add delta support later
 		generator = "WorldEditAdditions/"..weac.version.." "..minetest.get_version().project.."/"..minetest.get_version().string,
 	}
-	if svr.description then header.description = svr.description end
+	if self.description then header.description = self.description end
 	table.insert(parts, minetest.write_json(header, false).."\n")
 	
 	---
 	-- ID map
 	---
-	local id_map, wid2sid = voxeltools.make_id_maps(svr.tables.data)
+	local id_map, wid2sid = voxeltools.make_id_maps(self.tables.data)
 	table.insert(parts, minetest.write_json(id_map, false).."\n")
 	
 	---
 	-- Data tables
 	---
-	local data, param2 = weac.table.map(svr.tables.data, function(val)
+	local data, param2 = weac.table.map(self.tables.data, function(val)
 		return wid2sid[val]
-	end), svr.tables.param2
+	end), self.tables.param2
 	
 	table.insert(parts, table.concat(voxeltools.runlength_encode(data), ","))
 	table.insert(parts, "\n")

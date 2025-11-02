@@ -17,7 +17,7 @@ end
 -- Most of these functions return 3 values rather than the usual 2. This might seem overcomplicated, but it enables a higher level of validation in automated testing. These 3 return values take the following form:
 -- 
 -- 1. bool: A success/failure bool. `true` means success, and `false`, means failure.
--- 2. string: The error code. "SUCCESS" if #1 (the bool) is `true`. Otherwise set to a code to indicate exactly which error ocurred.
+-- 2. string: The error code. "SUCCESS" if #1 (the bool) is `true`. Otherwise set to a code to indicate exactly which error occurred.
 -- 3. any|string: EITHER the expected return value, OR a string with a human-readable error message if `bool=false`.
 -- @namespace worldeditadditions_core.parse.file.weaschem
 local weaschem = {}
