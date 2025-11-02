@@ -3,6 +3,7 @@
 Hey there! So you like WorldEditAdditions enough to consider helping out? That's awesome! This guide should get you up and running in no time.
 
 **Lua API documentation:** <https://worldeditadditions.mooncarrot.space/api/>
+- Visit me to find handy functions for doing all kinds of things! It's like the batteries that weren't included with Lua and much much more :D
 
 ## Code structure
 The WorldEditAdditions codebase is split into 3 main submods:
@@ -28,6 +29,23 @@ When actually implementing stuff, here are a few guidelines that I recommend to 
  - If you think of something helpful to add to this guide, please open an issue / PR :D
  - Being excellent to everyone shouldn't have to be on this list, but it is
  - @sbrl has the final say
+
+## FDT: Frequently Done Tasks
+
+### Implementing a new command
+Many new contributors want to implement a new command. While there are a few steps to doing so, there's loads of resources to help ya out :D
+
+Firstly, the structure for commands is thus:
+
+1. The bit that does the thing your command should do goes in [`worldeditadditions/lib`](https://github.com/sbrl/Minetest-WorldEditAdditions/tree/main/worldeditadditions/lib)
+2. The bit that registers the chat command goes in [`worldeditadditions_commands`](https://github.com/sbrl/Minetest-WorldEditAdditions/tree/main/worldeditadditions_commands/commands)
+
+Please do see other commands and functions in the mod already for example help on doing this and to match style.
+
+### Parsing command arguments
+Parsing command-line arguments can be tricky, but WorldEditAdditions has a range of functions to help you out here.
+
+The one you probably want is [`worldeditadditions_core.split_shell`]()
 
 
 ## Chat command template
