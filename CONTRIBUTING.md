@@ -5,6 +5,9 @@ Hey there! So you like WorldEditAdditions enough to consider helping out? That's
 **Lua API documentation:** <https://worldeditadditions.mooncarrot.space/api/>
 - Visit me to find handy functions for doing all kinds of things! It's like the batteries that weren't included with Lua and much much more :D
 
+> [!IMPORTANT]
+> All pull requests **must** be against the `dev` branch, and NOT the `main` branch except in unusual and specific circumstances (e.g. making a release)!
+
 ## Code structure
 The WorldEditAdditions codebase is split into 3 main submods:
 
