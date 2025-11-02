@@ -6,6 +6,7 @@ local wea_c = worldeditadditions_core
 --- @param	...	any		The full output of the function call.
 local function handle_fn_result(...)
 	local result = { ... }
+	-- luacheck ignore W311
 	local ret = ""
 	local success = table.remove(result, 1)
 	if #result > 1 then

@@ -82,7 +82,7 @@ local function run_command_stage2(player_name, func, parse_result, tbl_event)
 	-- This is outside the above before we need to fire post-execute even if `#retvals ~= 2` or something else happened
 	-- 
 	-- Don't fire the post-execute event if async = true unless we were explicitly told its fine. If async = false then just go right ahead anyway
-	if not tbl_event.cmddef.async or (tbl_event.cmddef.async and success) then
+	if not tbl_event.cmddef.async or (tbl_event.cmddef.async and tbl_event.success) then
 		weac:emit("post-execute", tbl_event)
 	end
 end
