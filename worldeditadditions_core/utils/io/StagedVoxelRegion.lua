@@ -137,6 +137,7 @@ end
 ------------------------------------------------------------------------------
 
 --- Saves the StagedVoxelRegion to the filepath.
+-- TODO implement proper error checking+messages and stuff
 -- @param	filepath		string	The filepath to save the StagedVoxelRegion to.
 -- @param	format="auto"	string	The format to save in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information. Currently, only weaschem is supported.
 -- @returns	bool			Whether the operation was successful or not.
@@ -193,6 +194,8 @@ function StagedVoxelRegion.save(self, filepath, format)
 	
 	handle:write(schematic)
 	handle:close()
+	
+	return true
 end
 
 --- Loads a file of the an array.
