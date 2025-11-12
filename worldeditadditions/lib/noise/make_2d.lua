@@ -7,7 +7,7 @@ local wea_c = worldeditadditions_core
 -- ██  ██  ██ ██   ██ ██  ██  ██              ██      ██   ██
 -- ██      ██ ██   ██ ██   ██ ███████ ███████ ███████ ██████
 
--- Generate a flat array of 2D noise.
+--- Generate a flat array of 2D noise.
 -- Written with help from https://www.redblobgames.com/maps/terrain-from-noise/
 -- @param	size	Vector	An x/y vector representing the size of the noise area to generate.
 -- @param	params	table|table<table>	A table of noise params to use to generate the noise. Values that aren't specified are filled in automatically. If a table of tables is specified, it is interpreted as multiple octaves of noise to apply in sequence.
