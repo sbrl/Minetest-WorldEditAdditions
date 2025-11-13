@@ -1,6 +1,9 @@
 local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 
+---
+-- @module worldeditadditions.noise
+
 -- ███    ███  █████  ██   ██ ███████         ██████  ██████
 -- ████  ████ ██   ██ ██  ██  ██                   ██ ██   ██
 -- ██ ████ ██ ███████ █████   █████            █████  ██   ██
