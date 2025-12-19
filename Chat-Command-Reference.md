@@ -808,6 +808,8 @@ Usage examples:
 #### Algorithm: `3d`
 The 3d algorithm randomly selects and removes nodes that are exposed to air, with nodes with more faces exposed to air being more likely to be targeted.
 
+Inspired by [this feature](https://intellectualsites.gitbook.io/fastasyncvoxelsniper/default-commands/commands#the-random-erode-brush) in the Minecraft mod VoxelSniper.
+
 Parameter	| Default Value	| Description
 ------------|---------------|----------------------------------
 density		| `10%`			| Sets `max_steps` to be a percentage of the volume of the specified region instead of a static number like `max_steps`. Numbers are interpreted to be multipliers by default (e.g., 0.1 is 10% of the defined region), but a percentage sign `%` (e.g. `10%`) considers the density value provided to be a percentage (and hence divides by 100 to get a multiplier) instead.
