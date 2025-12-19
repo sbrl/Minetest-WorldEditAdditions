@@ -82,10 +82,10 @@ end
 --- Loads the area defined by the specified region using minetest.emerge_area.
 -- Unlike minetest.emerge_area, this command calls the specified callback only
 -- once upon completion.
--- @param	{Vector}	pos1		The first position defining the area to emerge.
--- @param	{Vector}	pos2		The second position defining the area to emerge.
--- @param	{function}	callback	The callback to call when the emerging process is complete.
--- @param	{any}		callback_state	A state object to pass to the callback as a 2nd parameter (the 1st parameter is the emerge_area progress tracking state object)
+-- @param	pos1		Vector3		The first position defining the area to emerge.
+-- @param	pos2		Vector3		The second position defining the area to emerge.
+-- @param	callback	function	The callback to call when the emerging process is complete.
+-- @param	callback_state	any		A state object to pass to the callback as a 2nd parameter (the 1st parameter is the emerge_area progress tracking state object)
 function wea_c.emerge_area(pos1, pos2, callback, callback_state)
 	local state = {
 		stats = { cancelled = 0, error = 0, from_memory = 0, from_disk = 0, generated = 0 },
