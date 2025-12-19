@@ -735,12 +735,12 @@ The list of nodes has a form similar to that of a chance list you might find in 
 ```
 
 
-### `//erode [<snowballs|river> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
+### `//erode [<snowballs|river|3d> [<key_1> [<value_1>]] [<key_2> [<value_2>]] ...]`
 > Added in v1.9
 
 Runs an erosion algorithm over the defined region, optionally passing a number of key - value pairs representing parameters that are passed to the chosen algorithm. This command is **experimental**, as the author is currently on-the-fence about the effects it produces.
 
-Works best if you run `//fillcaves` first, or otherwise have no air nodes below the top non-air node in each column.
+Works best if you run `//fillcaves` first, or otherwise have no air nodes below the top non-air node in each column - except for the `3d`  algorithm.
 
 Currently implemented algorithms:
 
@@ -748,6 +748,7 @@ Algorithm	| Mode	| Description
 ------------|-------|-------------------
 `snowballs`	| 2D	| The default - based on [this blog post](https://jobtalle.com/simulating_hydraulic_erosion.html). Simulates snowballs rolling across the terrain, eroding & depositing material. Then runs a 3x3 gaussian kernel over the result (i.e. like the `//conv` / `//smoothadv` command).
 `river`     | 2D    | Fills in potholes and lowers pillars using a cellular automata-like algorithm that analyses the height of neighbouring columns.
+`3d`		| 3D	| Randomly selects and deletes air-facing nodes. Nodes with more faces exposed to air are more likely to be chosen.
 
 Usage examples:
 
@@ -802,6 +803,24 @@ Usage examples:
 ```weacmd
 //erode river
 //erode river steps 10
+```
+
+#### Algorithm: `3d`
+The 3d algorithm randomly selects and removes nodes that are exposed to air, with nodes with more faces exposed to air being more likely to be targeted.
+
+Parameter	| Default Value	| Description
+------------|---------------|----------------------------------
+density		| `10%`			| Sets `max_steps` to be a percentage of the volume of the specified region instead of a static number like `max_steps`. Numbers are interpreted to be multipliers by default (e.g., 0.1 is 10% of the defined region), but a percentage sign `%` (e.g. `10%`) considers the density value provided to be a percentage (and hence divides by 100 to get a multiplier) instead.
+maxsteps	| none			| Overrides `density` if set. The number of blocks to remove. Aliases: `max_steps`
+attempts	| `25`			| The number of attempts to make per-block to find a surface-touching node.
+exposed		| `1`			| Min faces that must be exposed for a node to be eroded (aka removed). Valid range is 0 - 6.
+
+Usage examples:
+
+```weacmd
+//erode 3d
+//erode 3d density 40%
+//erode 3d 
 ```
 
 

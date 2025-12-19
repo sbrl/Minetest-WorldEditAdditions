@@ -76,7 +76,6 @@ end
 2D erosion algorithm based on snowballs
 Note that this *mutates* the given heightmap.
 @source https://jobtalle.com/simulating_hydraulic_erosion.html
-
 ]]--
 function wea.erode.snowballs(heightmap_initial, heightmap, heightmap_size, region_height, params_custom)
 	local params = {

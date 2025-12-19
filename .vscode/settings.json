@@ -26,6 +26,7 @@
 		"liquidlike",
 		"maxdiff",
 		"maxdist",
+		"maxsteps",
 		"mcount",
 		"meselamp",
 		"mfacing",

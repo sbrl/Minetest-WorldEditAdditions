@@ -18,6 +18,7 @@ Note to self: See the bottom of this file for the release template text.
 	- When bugs are fixed in this command, it will be aliased over WorldEdit's `//set` command.
 - Added [`//ndef`](https://worldeditadditions.mooncarrot.space/Reference/#ndef) to print a given node's definition table. This is for debugging and development purposes.
 - Added [`//sgrow`](https://worldeditadditions.mooncarrot.space/Reference/#sgrow) and [`//sshrink`](https://worldeditadditions.mooncarrot.space/Reference/#sshift) commands to enlarge and shrink selection regions and aliased them over WorldEdit equivalents (`//expand`, `//outset` and `//contract`, `//inset` respectively).
+- Added new algorithm `3d` to [`//erode`](https://worldeditadditions.mooncarrot.space/Reference/#erode), which randomly picks air-facing nodes to remove in the defined region
 - Added Unified Axis Syntax (UAS) parser. - Implementation by @VorTechnix
 	- See [UAS System reference](https://worldeditadditions.mooncarrot.space/Reference/#unified) for details.
 - Debug: Added `//uasparse` command to show the vectors produced by a given UAS expression. - Implementation by @VorTechnix
