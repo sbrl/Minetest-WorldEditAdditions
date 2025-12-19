@@ -108,7 +108,7 @@ fi
 # ██   ██ ██   ██ ██      ██   ██ ██  ██  ██  ██
 # ██   ██ ██   ██  ██████ ██   ██ ██   ████   ███████
 
-if [[ ! -z "${ARCHIVE}" ]]; then
+if [[ -n "${ARCHIVE}" ]]; then
 	log_msg "Archiving content";
 	check_command tar;
 	check_command gzip;
