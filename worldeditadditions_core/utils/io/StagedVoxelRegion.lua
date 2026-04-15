@@ -86,20 +86,6 @@ function StagedVoxelRegion.LoadIntoVoxelManip(filepath, pos1, pos2)
 	return svr.manip, svr.area
 end
 
---- Loads voxel data from disk, returning the raw UNPADDED arrays.
--- In other words, the tables returned by this function WILL NOT fit directly into a VoxelManipulator, because VoxelManipulator data/param2 tables also contain padding data (likely because VoxelManip load only chunks at a time).
--- 
--- **Note:** This function does NOT modify the world.
--- @static
--- @param	filepath		string	The filepath to load data from.
--- @param	pos1			Vector3	Position 1 in WORLD space to load the data into.
--- @param	pos2			Vector3	Position 2 in WORLD space to load the data into.
--- @param	format="auto"	string	The format that the source data is in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information.
--- @returns	bool,table		A success/failure bool, followed by TODO: The format of this table is still to be decided.
-function StagedVoxelRegion.LoadRaw(filepath, pos1, pos2, format)
-
-end
-
 
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
@@ -137,14 +123,6 @@ function StagedVoxelRegion.save(self, filepath)
 		return false, "Error: unrecognised file extension "..tostring(ext)..". possible file formats: .mts"
 	end
 end
-
---- Loads a file of the an array.
--- @param	filepath		string	The filepath to load the .weaschem file from.
--- @param	format="auto"	string	The format in which the target is written in.
-function StagedVoxelRegion.load(filepath, format)
-	
-end
-
 
 
 return StagedVoxelRegion
