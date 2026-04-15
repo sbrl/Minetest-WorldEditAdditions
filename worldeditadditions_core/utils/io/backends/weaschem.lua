@@ -1,5 +1,78 @@
 local weac = worldeditadditions_core
 local Vector3 = weac.Vector3
+local parse_weaschem = weac.parse.file.weaschem
+
+local function load(svr, filepath)
+	-- TODO use parse_weaschem here
+	return false, "Error: not implemented yet"
+end
+
+--- Serialises and saves the given StagedVoxelRegion to the given filepath.
+-- TODO implement proper error checking+messages and stuff
+-- @param	svr				StagedVoxelRegion	The `StagedVoxelRegion` instance to write to disk
+-- @param	filepath		string	The filepath to save the StagedVoxelRegion to.
+-- @returns	bool			Whether the operation was successful or not.
+local function save(svr, filepath)
+	local handle = io.open(filepath, "w")
+	if handle == nil then return false, "Failed to open handle to filepath '" .. filepath .. "'" end
+
+	local parts = {}
+
+	---
+	-- Magic bytes
+	---
+	table.insert(parts, "WEASCHEM 1\n")
+
+	---
+	-- Header
+	---
+	local header = {
+		name = svr.name,
+		size = (svr.pos2 - svr.pos1):abs(),
+		offset = svr.offset,
+
+		type = "full", -- TODO: Add delta support later
+		generator = "WorldEditAdditions/" ..
+		weac.version .. " " .. minetest.get_version().project .. "/" .. minetest.get_version().string,
+	}
+	if svr.description then header.description = svr.description end
+	table.insert(parts, minetest.write_json(header, false) .. "\n")
+
+	---
+	-- ID map
+	---
+	local id_map, wid2sid = voxeltools.make_id_maps(svr.tables.data)
+	local json, err = minetest.write_json(id_map, false)
+	if json == nil and type(err) == "string" then
+		return false, err
+	end
+	table.insert(parts, json .. "\n")
+
+	---
+	-- Data tables
+	---
+	local data, param2 = weac.table.map(svr.tables.data, function(val)
+		return wid2sid[val]
+	end), svr.tables.param2
+
+	table.insert(parts, table.concat(voxeltools.runlength_encode(data), ","))
+	table.insert(parts, "\n")
+	table.insert(parts, table.concat(voxeltools.runlength_encode(param2), ","))
+	table.insert(parts, "\n")
+
+
+	---
+	-- Writing
+	---
+
+	-- TODO: Implement compression here - maybe via minetest.compress(data, method, ...)
+	local schematic = table.concat(parts, "")
+
+	handle:write(schematic)
+	handle:close()
+
+	return true, #schematic
+end
 
 --- Converts data in a VoxelManip to a raw data array for serialisation.
 -- TODO: Figure out the specifics of how this fits into StagedVoxelRegion, and whether or not StagedVoxelRegion has too many overrides or not. Then implement the counterpart raw2voxelmanip & integrate into WEA + StagedVoxelRegion
@@ -113,9 +186,10 @@ local function runlength_decode(tbl)
 end
 
 return {
-	voxelmanip2raw = voxelmanip2raw,
-	make_id_maps = make_id_maps,
+	save = save,
+	load = load,
 	
+	-- nope, these don't belong in this file
 	runlength_encode = runlength_encode,
 	runlength_decode = runlength_decode
 }
