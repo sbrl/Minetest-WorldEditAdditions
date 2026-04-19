@@ -4,7 +4,7 @@ local Vector3 = weac.Vector3
 --- A region of the world that is to be or has been saved to/from disk.
 -- This class exists to make moving things to/from disk easier and less complicated.
 -- 
--- In short, use StagedVoxelRegion.NewFromVoxelManip or StagedVoxelRegion.NewFromTable to SAVE data, and StagedVoxelRegion.Load or StagedVoxelRegion.LoadIntoVoxelManip to LOAD data.
+-- In short, use StagedVoxelRegion.NewFromVoxelManip or StagedVoxelRegion.New to SAVE data, and StagedVoxelRegion.Load or StagedVoxelRegion.LoadIntoVoxelManip to LOAD data.
 -- @class worldeditadditions_core.io.StagedVoxelRegion
 
 local StagedVoxelRegion = {}
@@ -110,7 +110,7 @@ end
 -- @param	filepath		string	The filepath to save the StagedVoxelRegion to.
 -- @param	format="auto"	string	The format to save in. Default: automatic, determine from file extension. See worldeditadditions_core.io.FileFormats for more information. Currently, only .mts (Minetest Schematic) is supported.
 -- @returns	bool			Whether the operation was successful or not.
-function StagedVoxelRegion.save(self, filepath)
+function StagedVoxelRegion:save(filepath)
 	local ext = string.match(filepath, "%.([a-zA-Z]+)$")
 	if not ext then return false, "Error: Filepath '"..tostring(filepath).."' does not contain a file extension" end
 	ext = string.lower(ext)
@@ -123,6 +123,5 @@ function StagedVoxelRegion.save(self, filepath)
 		return false, "Error: unrecognised file extension "..tostring(ext)..". possible file formats: .mts"
 	end
 end
-
 
 return StagedVoxelRegion

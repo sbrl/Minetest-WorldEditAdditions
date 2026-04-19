@@ -68,6 +68,7 @@ dofile(wea.modpath.."/lib/noiseapply2d.lua")
 
 dofile(wea.modpath.."/lib/subdivide.lua")
 
+dofile(wea.modpath.."/lib/undo/init.lua") -- Undo system
 dofile(wea.modpath.."/lib/selection/init.lua") -- Helpers for selections
 
 dofile(wea.modpath.."/lib/wireframe/corner_set.lua")

@@ -41,6 +41,11 @@ worldeditadditions_core = EventEmitter.new({
 	-- @value number
 	safe_region_limit_default = 100000,
 })
+
+if not core.path_exists(worldeditadditions_core.datapath) then
+	core.mkdir(worldeditadditions_core.datapath)
+end
+
 local wea_c = worldeditadditions_core
 wea_c.EventEmitter = EventEmitter
 
