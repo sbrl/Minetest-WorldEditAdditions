@@ -2,6 +2,7 @@ local wea = worldeditadditions
 local weac = worldeditadditions_core
 local Vector3 = weac.Vector3
 local Action = wea.undo.Action
+local ConfigFile = weac.io.ConfigFile
 
 
 --- A stack of actions done by a SINGLE player recorded and saved to disk
@@ -40,6 +41,8 @@ local function load_action_stack(self)
 		core.mkdir(self.dirpath_root)
 	end
 	
+	self.meta = ConfigFile.New(self.dirpath_root.."state.cfg")
+	
 	local files = core.get_dir_list(self.dirpath_root, true)
 	for _, dirname in files do
 		local action_id = tonumber(dirname)
@@ -49,7 +52,12 @@ local function load_action_stack(self)
 		end
 		-- just in case the actions are not listed in order by `core.get_dir_list()`
 		self.action_id_newest = math.max(self.action_id_newest, action_id)
+		self.action_pointer = self.action_id_newest
 		self.action_id_oldest = math.min(self.action_id_oldest, action_id)
+	end
+	
+	if not self.meta:has("pointer") then
+		self.meta:set("pointer", tostring(self.action_pointer))
 	end
 end
 
@@ -67,9 +75,12 @@ function ActionsStack.Load(player)
 		--- The integer id of the oldest action in the stack.
 		-- @type	number
 		action_id_oldest = 0,
+		action_pointer = 0,
 		--- The root directory in which the actions stack is stored.
 		-- @type string
-		dirpath_root = weac.datapath .. weac.dirsep .. "ActionsStack" .. weac.dirsep .. player
+		dirpath_root = weac.datapath .. weac.dirsep .. "ActionsStack" .. weac.dirsep .. player,
+		--- The state data that needs to be saved in between server restarts
+		meta = nil
 	})
 	load_action_stack(inst)
 	return inst
@@ -88,14 +99,30 @@ end
 --- Create a new `Action` and add it to the stack.
 -- Don't forget to call `Action:attach_before()` and `Action:attach_after`!
 function ActionsStack:push(name)
+	-- delete actions after the action pointer if they exist
+	if self.action_pointer ~= self.action_id_newest then
+		for i=self.action_pointer + 1,self.action_id_newest do
+			self:get(i):delete()
+			self.actions[i] = nil
+		end
+		self.action_id_newest = self.action_pointer
+	end
 	local action_id = self.action_id_newest + 1
 	self.action_id_newest = action_id + 1
-	local dirpath_action = self.dirpath_root..weac.dirsep..tostring(action_id)
+	local dirpath_action = self.dirpath_root .. weac.dirsep .. tostring(action_id)
 	local action = Action.New(dirpath_action, name)
 	
+	-- now this is okay 'cause we deleted all the actions after this one
+	self:pointer(action_id)
 	-- TODO remove the oldest action in the stack IF we're over `max_actions` here
 	
 	return action
+end
+
+function ActionsStack:pointer(value)
+	if not value then return self.action_pointer end
+	self.action_pointer = value
+	self.meta:set("pointer", self.action_pointer)
 end
 
 --- Gets the action from the stack associated with the given id.
@@ -119,5 +146,6 @@ end
 function ActionsStack:newest()
 	return self:get(self.action_id_newest)
 end
+
 
 return ActionsStack

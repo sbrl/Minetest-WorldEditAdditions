@@ -64,6 +64,13 @@ function ConfigFile:set(key, value)
 	self.data[key] = tostring(value)
 end
 
+--- Whether the ConfigFile has a key with the given name or not
+-- @param	key		string	The key to check.
+-- @returns	boolean	true if the current `ConfigFile` has the givenn key, or false otherwise.
+function ConfigFile:has(key)
+	return self.data[key] ~= nil
+end
+
 return ConfigFile
 
 -- Example usage:
