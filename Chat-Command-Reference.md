@@ -343,6 +343,24 @@ The `origin` keyword's argument is optional, and if no position number is specif
 //rotate+ x 60 origin 5 z 20
 ```
 
+### `//orient+ <axis> <degrees> [<axis> <degrees> ...]`
+Reorients nodes in the currently defined region relatively to point in a different direction. Contrast with `//rotate+`, which reorients blocks of nodes as a whole.
+
+While any angle can be given, WEA rounds to 90-degree implements as no e.g. Minecraft armour stand mod for Minetest/Luanti is known to the developers of this mod (if you know of one with an API, get in touch!).
+
+Examples:
+
+1. Reorient nodes by 90° on the X axis.
+2. Reorient nodes by 180° on the Z axis and 90° on the Y axis.
+3. Reorient nodes by 2 radians on the X axis.
+4. Reorient nodes by 90° (80° rounded is 90°) on the Z axis.
+
+```weacmd
+//orient+ x 90
+//orient+ z 180 y 90
+//orient+ x 2rad
+//orient+ z 80
+```
 
 ### `//floodfill [<replace_node> [<radius>]]`
 Floods all connected nodes of the same type starting at _pos1_ with `<replace_node>` (which defaults to `water_source`), in a sphere with a radius of `<radius>` (which defaults to 50).
