@@ -36,7 +36,7 @@ worldeditadditions_core.register_command("move+", { -- TODO: Make this an overri
 	description = "Moves the defined region to another location - potentially across multiple axes at once.",
 	privs = { worldedit = true },
 	require_pos = 2,
-	category = "Region operation",
+	category = "Region operations",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		
