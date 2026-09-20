@@ -37,6 +37,7 @@ worldeditadditions_core.register_command("ellipsoid", {
 	description = "Creates a 3D ellipsoid with a radius of (rx, ry, rz) at pos1, filled with <replace_node>.",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		local values = {parse_params_ellipsoid(params_text)}
 		return wea_c.table.unpack(values)
@@ -61,6 +62,7 @@ worldeditadditions_core.register_command("hollowellipsoid", {
 	description = "Creates a 3D hollow ellipsoid with a radius of (rx, ry, rz) at pos1, made out of <replace_node>.",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		local values = {parse_params_ellipsoid(params_text)}
 		return wea_c.table.unpack(values)

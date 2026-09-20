@@ -20,7 +20,8 @@ end)
 worldeditadditions_core.register_command("scloud", {
 	params = "<0-6|stop|reset>",
 	description = "Set and add to WorldEdit region by punching up to six nodes that define the maximums of your target",
-	privs = {worldedit=true},
+	privs = { worldedit = true },
+	category = "Region operations",
 	parse = function(param)
 		return true, param
 	end,

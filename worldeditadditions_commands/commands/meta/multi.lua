@@ -6,6 +6,7 @@ minetest.register_chatcommand("/multi", {
 	params = "/<command_a> <args> //<command_b> <args> /<command_c> <args>.....",
 	description = "Executes multiple chat commands in sequence. Just prepend a list of space-separated chat commands with //multi, and you're good to go! The forward slashes at the beginning of each chat command must be the same as if you were executing it normally.",
 	privs = { worldedit = true },
+	category = "Meta",
 	func = function(name, params_text)
 		if not params_text then return false, "Error: No commands specified, so there's nothing to do." end
 		params_text = wea_c.trim(params_text)

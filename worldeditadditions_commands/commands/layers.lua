@@ -34,6 +34,7 @@ worldeditadditions_core.register_command("layers", {
 	description = "Replaces the topmost non-airlike nodes with layers of the given nodes from top to bottom. Like WorldEdit for MC's //naturalize command. Optionally takes a maximum or minimum and maximum slope value. If a column's slope value falls outside the defined range, then it's skipped. Default: dirt_with_grass dirt 3",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Terrain",
 	parse = function(params_text)
 		if not params_text or params_text == "" then
 			params_text = "dirt_with_grass dirt 3"

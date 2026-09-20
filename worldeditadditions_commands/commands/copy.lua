@@ -36,6 +36,7 @@ worldeditadditions_core.register_command("copy+", { -- TODO: Make this an overri
 	description = "Copies the defined region to another location - potentially across multiple axes at once.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		

@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("spline", {
 	description = "Draws a spline through the defined points. NOTE: Uses the NEW worldeditadditions position system, not the existing WorldEdit one!",
 	privs = { worldedit = true },
 	require_pos = 3,
+	category = "Geometry",
 	parse = function(params_text)
 		local parts = wea_c.split_shell(params_text)
 		

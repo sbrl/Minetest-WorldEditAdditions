@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("wcompass", {
 	description = "Creates a compass around pos1 with a single node bead pointing north (+Z).",
 	privs = {worldedit=true},
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		local parts = wea_c.split(params_text," ",true)
 		if not parts[1] then

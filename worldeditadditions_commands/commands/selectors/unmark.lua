@@ -39,6 +39,7 @@ if minetest.registered_chatcommands["/unmark"] then
 	minetest.override_chatcommand("/unmark", {
 		params = "[all]",
 		description = "Hide the markers for the defined region (and any other positions), but do not remove the points themselves. If the optional argument keyword 'all' is supplied, then all loaded markers are hidden, regardless of player ownership.",
+		category = "Region operations",
 		func = do_unmark
 	})
 else
@@ -46,6 +47,7 @@ else
 		params = "[all]",
 		description = "Hide the markers for the defined region (and any other positions), but do not remove the points themselves. If the optional argument keyword 'all' is supplied, then all loaded markers are hidden, regardless of player ownership.",
 		privs = { worldedit = true },
+		category = "Region operations",
 		func = do_unmark
 	})
 end

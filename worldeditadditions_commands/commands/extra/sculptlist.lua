@@ -10,6 +10,7 @@ minetest.register_chatcommand("/sculptlist", {
 	params = "[preview]",
 	description = "Lists all the currently registered sculpting brushes and their associated metadata. If the keyword preview is specified as an argument, a preview of each brush is also printed.",
 	privs = { worldedit = true },
+	category = "Terrain",
 	func = function(name, params_text)
 		if name == nil then return end
 		if not params_text then params_text = "" end

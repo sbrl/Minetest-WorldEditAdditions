@@ -39,6 +39,7 @@ worldeditadditions_core.register_command("nodeapply", {
 	description = "Executes the given command (automatically prepending '//'), but filters the output so only changes that affect the specified list of nodes are kept. Special node names: airlike, liquidlike.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Meta",
 	parse = function(params_text)
 		if params_text == "" then return false, "Error: No command specified." end
 		

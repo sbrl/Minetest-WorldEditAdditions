@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("metaball", {
 	description = "Defines and creates metaballs. After using the add subcommand to define 1 or more metaballs (uses pos1), the render subcommand can then be used to create the metaballs as nodes.",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		

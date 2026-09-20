@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("reset", {
 	description = "Clears all defined points and the currently defined region.",
 	privs = {worldedit=true},
 	override = true, -- Override the WorldEdit command
+	category = "Region operations",
 	parse = function(params_text)
 		return true, params_text
 	end,

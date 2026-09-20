@@ -31,6 +31,7 @@ worldeditadditions_core.register_command("scale", {
 	description = "Combined scale up / down. Takes either an axis name + a scale factor (e.g. y 3 or -z 2; negative values swap the anchor point for the scale operation), or 3 scale factor values for x, y, and z respectively. In the latter mode, a set of anchors can also be specified, which indicate which size the scale operation should be anchored to.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		

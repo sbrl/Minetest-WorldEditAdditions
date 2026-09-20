@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("wcorner", {
 	description = "Set the corners of the current selection to <replace_node>",
 	privs = {worldedit=true},
 	require_pos = 2,
+	category = "Geometry",
 	parse = function(params_text)
 		local node = worldedit.normalize_nodename(params_text)
 		if not node then

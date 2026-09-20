@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("ngroups", {
 	description =
 	"Lists the groups that a given node is a part of. If v or verbose are tagged on the end, then group values are also displayed. See also //nodeapply, which pairs well with this command.",
 	privs = {},
+	category = "Debug",
 	parse = function(params_text)
 		local parts = wea_c.split_shell(params_text)
 		if #parts == 0 or parts[1] == "" then

@@ -61,6 +61,7 @@ minetest.register_chatcommand("/many", {
 	params = "<times> /<command_a> <args>",
 	description = "Executes a single chat command multiple times. The number of times to repeat the command should be specified first. The command to execute follows, and the forward slashes at the beginning thereof must be the same as if you were executing it normally. Note that this command yields with minetest.after to allow other things to happen at the same time.",
 	privs = { worldedit = true },
+	category = "Meta",
 	func = function(name, params_text)
 		
 		local i = 1 -- For feedback only

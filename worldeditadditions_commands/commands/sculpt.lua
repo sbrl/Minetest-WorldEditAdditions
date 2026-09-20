@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("sculpt", {
 	description = "Applies a sculpting brush to the terrain with a given height. See //sculptlist to list all available brushes. Note that while the brush size is configurable, the actual brush size you end up with may be slightly different to that which you request due to brush size restrictions.",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Terrain",
 	parse = function(params_text)
 		if not params_text or params_text == "" then
 			params_text = "circle"

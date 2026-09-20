@@ -15,6 +15,7 @@ worldeditadditions_core.register_command("sshrink", {
 	description = "Shrink selection region",
 	privs = { worldedit = true },
 	require_pos = 0,
+	category = "Region operations",
 	parse = function(params_text)
 		local ret = wea_c.split(params_text)
 		if #ret < 1 then return false, "Error: No params found!"

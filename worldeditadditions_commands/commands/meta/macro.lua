@@ -52,6 +52,7 @@ worldeditadditions_core.register_command("macro", {
 	description = "Load commands from \"(world folder)/macros/<file>[.weamac | .wmac]\" with position 1 of the current WorldEdit region as the origin.",
 	privs = {worldedit=true},
 	require_pos = 0,
+	category = "Meta",
 	parse = function(params_text)
 		local parts = wea_c.split(params_text,"%s")
 		local file_name, delay -- = params_text:match("^(.-)%s*(%d*%.?%d*)$")

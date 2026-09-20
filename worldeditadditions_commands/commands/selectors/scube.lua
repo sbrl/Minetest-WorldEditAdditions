@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("scube", {
 	description = "DEPRECATED: please use //srel instead.",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Region operations",
 	parse = function(params_text)
 		return params_text
 	end,

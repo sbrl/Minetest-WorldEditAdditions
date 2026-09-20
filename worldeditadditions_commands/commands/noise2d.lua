@@ -1,4 +1,3 @@
-
 local wea = worldeditadditions
 local wea_c = worldeditadditions_core
 local Vector3 = wea_c.Vector3
@@ -8,6 +7,7 @@ worldeditadditions_core.register_command("noise2d", {
 	description = "Applies 2d random noise to the terrain as a 2d heightmap in the defined region. Optionally takes an arbitrary set of key - value pairs representing parameters that control the properties of the noise and how it's applied. See the full documentation for details of these parameters and what they do.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Terrain",
 	parse = function(params_text)
 		if not params_text then return true, {} end
 		params_text = wea_c.trim(params_text)

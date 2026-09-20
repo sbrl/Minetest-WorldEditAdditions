@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("count", {
 	description = "Counts all the nodes in the defined region.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Region operations",
 	parse = function(params_text)
 		return true
 	end,

@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("ellipsoidapply", {
 	description = "Executes the given command (automatically prepending '//'), clipping the result with an ellipse given by the defined region.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Meta",
 	parse = function(params_text)
 		if params_text == "" then return false, "Error: No command specified." end
 		

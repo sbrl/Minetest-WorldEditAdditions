@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("smake", {
 	description = "Make one or more axes of the current selection odd, even, or equal to another.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Region operations",
 	parse = function(params_text)
 		-- Split params_text, check for missing arguments and fill in empty spots
 		local parts = wea_c.split(params_text, "%s+", false)

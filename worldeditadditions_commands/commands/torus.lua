@@ -61,6 +61,7 @@ worldeditadditions_core.register_command("torus", {
 	description = "Creates a 3D torus with a major radius of <major_radius> and a minor radius of <minor_radius> at pos1, filled with <replace_node>, on axes <axes> (i.e. 2 axis names: xz, zy, etc).",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		local values = {parse_params_torus(params_text)}
 		return wea_c.table.unpack(values)
@@ -91,6 +92,7 @@ worldeditadditions_core.register_command("hollowtorus", {
 	description = "Creates a 3D hollow torus with a major radius of <major_radius> and a minor radius of <minor_radius> at pos1, made out of <replace_node>, on axes <axes> (i.e. 2 axis names: xz, zy, etc).",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		local values = {parse_params_torus(params_text)}
 		return wea_c.table.unpack(values)

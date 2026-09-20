@@ -13,7 +13,7 @@ local wea_c = worldeditadditions_core
 -- Specs:
 -- Command cluster support using ()
 -- ?Basename support for values
--- ?Comma deliniation support for values
+-- ?Comma delineation support for values
 
 local function step(params, __callback)
 	-- Initialize additional params on first call
@@ -48,6 +48,7 @@ worldeditadditions_core.register_command("for", {
 	description = "Executes a chat command for each value before \" do \" replacing any instances of \"%%\" with those values. The forward slashes at the beginning of the chat command must be the same as if you were executing it normally.",
 	privs = { worldedit = true },
 	async = true,
+	category = "Meta",
 	parse = function(params_text)
 		if not params_text:match("%sdo%s") then
 			return false, "Error: \"do\" argument is not present."

@@ -15,6 +15,7 @@ worldeditadditions_core.register_command("speed", {
 	description =
 	"Changes your movement speed. A value of 1 = normal speed. Prepend + or - to add or subtract a given amount from the current value.",
 	privs = { worldedit = true },
+	category = "Tools",
 	require_pos = 0,
 	parse = function(params_text)
 		if not params_text or params_text == "" then

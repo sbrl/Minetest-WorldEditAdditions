@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("orient+", {
 	description = "Rotates nodes in the defined region around the given axis by the given number of degrees. Angles are not limited to 90-degree increments, but rounding is done at the end of all calculations because rotating blocks by non-cardinal directions is not supported by the Minetest engine. When multiple axes and angles are specified, these transformations are applied in order. Note that some nodes do not have support for orientation.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function (params_text)
 		if not params_text then params_text = "" end
 		local parts = core.split_shell(params_text)

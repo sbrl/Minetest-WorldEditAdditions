@@ -14,6 +14,7 @@ core.register_command("set+", {
 	"Sets the node, param2, or light level to a fixed value in the defined region. Defaults to setting the node. If param2/p2 is specified, the param2 value associated with nodes is set instead. If light/l is specified, the light level is set.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function(params_text)
 		if not params_text or params_text == "" then
 			return false, "Error: No arguments specified"

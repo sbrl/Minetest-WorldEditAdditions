@@ -36,6 +36,7 @@ worldeditadditions_core.register_command("subdivide", {
 	description = "Subdivides the given worldedit area into chunks and runs a worldedit command multiple times to cover the defined region. Note that the given command must NOT be prepended with any forward slashes - just like //cubeapply.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Meta",
 	async = true,
 	parse = function(params_text)
 		local parts = wea_c.split(params_text, "%s+", false)

@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("bonemeal", {
 	description = "Bonemeals everything that's bonemeal-able that has an air node directly above it. Optionally takes a strength value to use (default: 1, maximum: 4), and a chance to actually bonemeal an eligible node (positive integer; nodes have a 1-in-<chance> chance to be bonemealed; higher values mean a lower chance; default: 1 - 100% chance).",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function(params_text)
 		if not params_text or params_text == "" then
 			params_text = "1"

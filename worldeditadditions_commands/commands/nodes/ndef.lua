@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("ndef", {
 	description =
 	"Prints the current definintion for the given node.",
 	privs = {},
+	category = "Debug",
 	parse = function(params_text)
 		params_text = core.trim(params_text)
 		if params_text == "" then return false, "No node name specified." end

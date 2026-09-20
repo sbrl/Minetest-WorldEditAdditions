@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("sshift", {
 	description = "Shift the WorldEdit region in 3 dimensions.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Region operations",
 	parse = function(params_text)
 		local ret = wea_c.split(params_text)
 		if #ret < 1 then return false, "Error: No params found!"

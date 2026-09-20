@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("airapply", {
 	description = "Executes the given command (automatically prepending '//'), but only on non-air nodes within the defined region.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Meta",
 	parse = function(params_text)
 		if params_text == "" then return false, "Error: No command specified." end
 		

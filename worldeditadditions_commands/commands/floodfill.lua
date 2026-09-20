@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("floodfill", {
 	description = "Floods all connected nodes of the same type starting at pos1 with <replace_node> (which defaults to `water_source`), in a sphere with a radius of <radius> (which defaults to 20).",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Node manipulation",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		local found, _, replace_node, radius = params_text:find("([a-z:_\\-]+)%s+([0-9]+)")

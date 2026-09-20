@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("forest", {
 	description = "Plants and grows trees in the defined region according to the given list of sapling names and chances and density factor. The density controls the relative density of the resulting forest, and defaults to 1 (floating-point numbers allowed). Higher chance numbers result in a lower relative chance with respect to other saplings in the list. Saplings that fail to grow are subsequently removed (this will affect pre-existing saplings too).",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function(params_text)
 		local density = 1
 		local match_start = params_text:match("^[%d.]+%s+")

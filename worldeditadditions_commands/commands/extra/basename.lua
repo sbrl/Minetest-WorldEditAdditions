@@ -7,6 +7,7 @@ worldeditadditions_core.register_command("basename", {
 	params = "<nodealias>",
 	description = "Returns the base name of nodes that use a given alias.",
 	privs = {worldedit = true},
+	category = "Debug",
 	parse = function(params_text)
 		if params_text == "" or not params_text then
 			return false, "Node not specified."

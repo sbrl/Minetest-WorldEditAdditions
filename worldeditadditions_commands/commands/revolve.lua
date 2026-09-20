@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("revolve", {
 	description = "Creates a number of copies of the defined region rotated at equal intervals.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function (params_text)
 		if not params_text then params_text = "" end
 		local parts = wea_c.split_shell(params_text)

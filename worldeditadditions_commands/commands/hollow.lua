@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("hollow", {
 	description = "Replaces nodes inside the defined region with air, but leaving a given number of nodes near the outermost edges alone. In other words, it makes the defined region hollow leaving walls of a given thickness (default: 1)",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Node manipulation",
 	parse = function(params_text)
 		if not params_text or #params_text == 0 then params_text = "1" end
 		

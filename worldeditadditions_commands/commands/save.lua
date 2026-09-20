@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("save+", {
 	"EXPERIMENTAL - DO NOT USE! Saves the currently defined region to disk.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Schematics",
 	parse = function(params_text)
 		if not params_text or params_text == "" then
 			return false, "Error: no filename specified."

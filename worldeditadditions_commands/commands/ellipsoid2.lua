@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("ellipsoid2", {
 	description = "Creates am optionally hollow 3D ellipsoid that fills the defined region, filled with <replace_node>.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Geometry",
 	parse = function(params_text)
 		if not params_text or params_text == "" then
 			params_text = "dirt"

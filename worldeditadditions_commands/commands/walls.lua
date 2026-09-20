@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("walls", {
 	description = "Creates vertical walls of <replace_node> around the inside edges of the defined region. Optionally specifies a thickness for the walls to be created (defaults to 1)",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Geometry",
 	parse = function(params_text)
 		if not params_text or params_text == "" then params_text = "dirt" end
 		local parts = wea_c.split_shell(params_text)

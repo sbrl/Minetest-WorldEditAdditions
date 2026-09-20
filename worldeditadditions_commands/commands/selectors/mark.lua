@@ -11,6 +11,7 @@ if minetest.registered_chatcommands["/mark"] then
 	minetest.override_chatcommand("/mark", {
 		params = "",
 		description = "Show the markers for the defined region (and any other positions) once more.",
+		category = "Region operations",
 		func = do_mark
 	})
 else
@@ -18,6 +19,7 @@ else
 		params = "",
 		description = "Show the markers for the defined region (and any other positions) once more.",
 		privs = { worldedit = true },
+		category = "Region operations",
 		func = do_mark
 	})
 end

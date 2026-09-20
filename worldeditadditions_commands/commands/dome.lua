@@ -31,6 +31,7 @@ worldeditadditions_core.register_command("dome+", { -- TODO: Make this an overri
 	description = "Creates a dome shape with a specified radius of the defined node, optionally specifying the direction it should be pointing in (defaults to the positive y direction).",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		

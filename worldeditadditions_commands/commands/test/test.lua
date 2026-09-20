@@ -24,7 +24,8 @@ local handle_fn_result = dofile(test_dir .. "helpers/handle_fn_result.lua")
 worldeditadditions_core.register_command("test", {
 	params = "list || <testname> <args> || help <testname>",
 	description = "Run a test or list all tests",
-	privs = {worldedit = true},
+	privs = { worldedit = true },
+	category = "Development",
 	parse = function(params_text)
 		local ret = wea_c.split(params_text)
 		if #ret < 1 then

@@ -19,6 +19,7 @@ if minetest.registered_chatcommands["/pos1"] then
 		params = "",
 		description =
 		"Sets pos1 to the current position of the calling player.",
+		category = "Region operations",
 		func = do_set1
 	})
 else
@@ -27,6 +28,7 @@ else
 		description =
 		"Sets pos1 to the current position of the calling player.",
 		privs = { worldedit = true },
+		category = "Region operations",
 		func = do_set1
 	})
 end
@@ -34,6 +36,7 @@ if minetest.registered_chatcommands["/pos2"] then
 	minetest.override_chatcommand("/pos2", {
 		params = "",
 		description = "Sets pos2 to the current position of the calling player.",
+		category = "Region operations",
 		func = do_set2 
 	})
 else
@@ -41,6 +44,7 @@ else
 		params = "",
 		description = "Sets pos2 to the current position of the calling player.",
 		privs = { worldedit = true },
+		category = "Region operations",
 		func = do_set2
 	})
 end
@@ -50,6 +54,7 @@ minetest.register_chatcommand("//pos", {
 	params = "<index>",
 	description = "Sets position <index> to the current position of the calling player.",
 	privs = { worldedit = true },
+	category = "Region operations",
 	func = function(name, params_text)
 		local i = tonumber(params_text)
 		if type(i) ~= "number" then

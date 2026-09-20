@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("line", {
 	description = "Draws a line of a given radius (default: 1) from pos1 to pos2 in the given node (default: dirt).",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Geometry",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		local found, _, replace_node, radius = params_text:find("([a-z:_\\-]+)%s+([0-9.]+)")

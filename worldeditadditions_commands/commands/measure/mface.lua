@@ -9,6 +9,7 @@ worldeditadditions_core.register_command("mface", {
 	description = "Return player facing axis.",
 	privs = { worldedit = true },
 	require_pos = 0,
+	category = "Measurement",
 	parse = function(params_text)
 		return true
 	end,

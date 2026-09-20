@@ -13,6 +13,7 @@ worldeditadditions_core.register_command("mtrig", {
 	description = "Return the length of and angles of an imginary line between pos1 and pos2 in the selection.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Measurement",
 	parse = function(params_text)
 		return true
 	end,

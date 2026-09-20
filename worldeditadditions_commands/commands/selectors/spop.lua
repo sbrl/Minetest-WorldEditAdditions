@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("spop", {
 	params = "",
 	description = "Pops a region off your (per-user) selection stack.",
 	privs = { worldedit = true },
+	category = "Region operations",
 	parse = function(params_text)
 		return true
 	end,

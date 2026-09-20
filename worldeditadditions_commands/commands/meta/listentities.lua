@@ -7,6 +7,7 @@ minetest.register_chatcommand("/listentities", {
 	description =
 	"Lists all currently loaded entities. This is a command for debugging and development. You will not need this unless you are developing a mod.",
 	privs = { worldedit = true },
+	category = "Debug",
 	func = function(name, params_text)
 		local table_vals = {
 			{ "ID", "Name", "Position" },

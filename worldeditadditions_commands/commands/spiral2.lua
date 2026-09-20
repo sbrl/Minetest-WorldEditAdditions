@@ -7,6 +7,7 @@ worldeditadditions_core.register_command("spiral2", {
 	description = "Generates a spiral that fills the defined region using the specified replace node. The spiral is either square (default) or circular in shape. The interval specifies the distance between the walls of the spiral, and the acceleration specifies how quickly this value should increase.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Geometry",
 	parse = function(params_text)
 		if not params_text then params_text = "" end
 		params_text = wea_c.trim(params_text)

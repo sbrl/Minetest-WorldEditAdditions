@@ -12,6 +12,7 @@ worldeditadditions_core.register_command("spush", {
 	description = "Pushes the currently defined region onto your (per-user) selection stack.",
 	privs = { worldedit = true },
 	require_pos = 1,
+	category = "Region operations",
 	parse = function(params_text)
 		return true
 	end,

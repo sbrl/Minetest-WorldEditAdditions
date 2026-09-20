@@ -11,6 +11,7 @@ worldeditadditions_core.register_command("fillcaves", {
 	description = "Fills in all airlike nodes beneath the first non-airlike node detected in each column.",
 	privs = { worldedit = true },
 	require_pos = 2,
+	category = "Terrain",
 	parse = function (params_text)
 		if params_text == "" then
 			params_text = "stone"
